@@ -25,11 +25,9 @@ build:
 	docker exec $$(docker-compose --project-name $(PROJECT_NAME) ps -q tests) sh -c "composer install"
 	echo "Done"
 
-test-clean:
-	docker exec $$(docker-compose --project-name $(PROJECT_NAME) ps -q tests) sh -c "vendor/bin/codecept clean"
+test:
+	docker exec $$(docker-compose ps -q workspace) sh -c "vendor/bin/phpunit"
 
-test-single:
-	echo ${group}
 down:
 	docker-compose down --volumes --remove-orphans
 
@@ -37,7 +35,7 @@ reload: pull down up
 
 up:
 	echo "Starting Containers"
-	docker-compose up -d mysql nginx
+	docker-compose up -d mysql nginx maildev
 #	sleep 10
 #	docker-compose up -d
 
@@ -59,7 +57,8 @@ update: down pull build
 root:
 	docker exec -it $$(docker-compose ps -q workspace) bash
 
-flaky-test-tool-ci:
-	wget https://s3.eu-central-1.amazonaws.com/maviance.public.apps/flaky
-	chmod +x flaky
-	./flaky integrationTests/tests/_output/ ${BUILD_NUMBER} tests https://hooks.slack.com/services/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
+clear:
+	docker exec $$(docker-compose ps -q workspace) sh -c "php artisan config:cache \
+	 && php artisan config:clear \
+	 && truncate -s 0 storage/logs/*.log \
+	 && composer dump-autoload -o"

@@ -8,7 +8,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Exceptions\InvalidRequestHeaderException;
+use App\Exceptions\Api\BadRequestException;
 use Closure;
 
 class AcceptHeaderMiddleware
@@ -19,7 +19,7 @@ class AcceptHeaderMiddleware
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure $next
      * @return mixed
-     * @throws InvalidRequestHeaderException
+     * @throws BadRequestException
      */
     public function handle($request, Closure $next)
     {
@@ -46,7 +46,7 @@ class AcceptHeaderMiddleware
 
             \Log::error('Invalid accept in header');
 
-            throw new InvalidRequestHeaderException('exceptions.api.request.header.invalid_accept');
+            throw new BadRequestException('exceptions.api.request.bad.invalid_accept');
         }
 
         /*

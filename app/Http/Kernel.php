@@ -44,7 +44,7 @@ class Kernel extends HttpKernel
         'api' => [
             'accept',
             'localization',
-            'throttle:0,1',
+            'throttle:30,1',
             'bindings',
         ],
 

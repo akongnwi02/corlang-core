@@ -90,7 +90,7 @@ return [
                 'created_pending'   => 'Your account was successfully created and is pending approval. An e-mail will be sent when your account is approved.',
                 'mismatch'          => 'Your confirmation code does not match.',
                 'not_found'         => 'That confirmation code does not exist.',
-                'pending'            => 'Your account is currently pending approval.',
+                'pending'           => 'Your account is currently pending approval.',
                 'resend'            => 'Your account is not confirmed. Please click the confirmation link in your e-mail, or <a href=":url">click here</a> to resend the confirmation e-mail.',
                 'success'           => 'Your account has been successfully confirmed!',
                 'resent'            => 'A new confirmation e-mail has been sent to the address on file.',
@@ -106,14 +106,23 @@ return [
 
             'registration_disabled' => 'Registration is currently closed.',
         ],
+
         'request' => [
-            'header' => [
+            'bad' => [
+                'too_much_attempts' => 'You are sending too many requests to our server',
                 'locale_unsupported' => 'Unsupported language in request header \'Content-Language\'',
                 'invalid_accept' => 'The header parameter \'Accept\' is invalid. It should be \'application/json\'',
+                'route_not_found' => 'This route does not exist or you may not have permission to view it',
+                'method_not_allowed' => 'This endpoint cannot be accessed with this method',
             ],
-            'bad' => [
-                'too_much' => 'You are sending too many requests to our server'
+
+            'validation' => [
+                'unprocessable_entity' => 'Some information provided could not be processed.'
+            ],
+
+            'general_error' => [
+                'message' => 'Oops something unexpected happened!'
             ]
-        ]
+        ],
     ],
 ];

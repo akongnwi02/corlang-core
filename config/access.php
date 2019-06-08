@@ -18,6 +18,11 @@ return [
     'registration' => env('ENABLE_REGISTRATION', true),
 
     /*
+     * Whether or not registration is enabled for api users
+     */
+    'api_registration' => env('ENABLE_API_REGISTRATION', true),
+
+    /*
      * Table names for access tables
      */
     'table_names' => [
@@ -32,7 +37,7 @@ return [
         /*
          * Whether or not the user has to confirm their email when signing up
          */
-        'confirm_email' => env('CONFIRM_EMAIL', false),
+        'confirm_email' => env('CONFIRM_EMAIL', true),
 
         /*
          * Whether or not the users email can be changed on the edit profile screen
