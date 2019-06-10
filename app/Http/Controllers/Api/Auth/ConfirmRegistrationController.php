@@ -44,7 +44,7 @@ class ConfirmRegistrationController
     {
         $this->user->confirm($code);
 
-        return new UserResource($this->user->findByConfirmationCode($code));
+        return response()->json(['message' => __('exceptions.api.auth.confirmation.success')]);
     }
 
     /**

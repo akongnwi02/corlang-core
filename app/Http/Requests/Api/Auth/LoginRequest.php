@@ -9,7 +9,28 @@
 namespace App\Http\Requests\Api\Auth;
 
 
-class LoginRequest
-{
+use Arcanedev\Support\Http\FormRequest;
 
+class LoginRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'email'        => ['required', 'string', 'email', 'min:5'],
+            'password'     => 'required|string|min:3',
+        ];
+    }
 }

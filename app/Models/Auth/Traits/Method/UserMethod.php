@@ -99,4 +99,9 @@ trait UserMethod
         return config('access.users.requires_approval') && ! $this->confirmed;
     }
 
+    public function isActiveAndConfirmed()
+    {
+        return $this->isActive() && $this->isConfirmed() && ! $this->isPending();
+    }
+
 }

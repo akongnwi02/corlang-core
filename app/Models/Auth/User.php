@@ -13,11 +13,12 @@ use App\Models\Auth\Traits\SendUserPasswordReset;
 use App\Models\Auth\Traits\Attribute\UserAttribute;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Auth\Traits\Relationship\UserRelationship;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Class User.
  */
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasRoles,
         Notifiable,

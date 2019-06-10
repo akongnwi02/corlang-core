@@ -37,11 +37,16 @@ class NotFoundHttpException extends Exception
             case 'exceptions.api.auth.confirmation.not_found':
                 $code = '4042';
                 break;
+
             /*
              * User not found
              */
             case 'exceptions.backend.access.users.not_found':
                 $code = '4043';
+                break;
+
+            case 'exceptions.api.auth.login.not_found':
+                $code = '4044';
                 break;
 
             default:

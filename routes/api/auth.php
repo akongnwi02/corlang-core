@@ -20,8 +20,11 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
    /*
     * These routes require the user to be logged in
     */
-   Route::group(['middleware' => 'jwt'], function () {
-
+   Route::group(['middleware' => 'jwt.auth'], function () {
+       Route::get('me', [LoginController::class, 'me'])->name('me');
+       Route::get('test', function(){
+           return response()->json(true);
+       });
    });
 
    /*
@@ -40,5 +43,6 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
 
        // Authentication Routes
        Route::post('login', [LoginController::class, 'login'])->name('login');
+       Route::get('refresh', [LoginController::class, 'refresh'])->name('refresh');
    });
 });

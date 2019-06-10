@@ -91,7 +91,7 @@ return [
                 'mismatch'          => 'Your confirmation code does not match.',
                 'not_found'         => 'That confirmation code does not exist.',
                 'pending'           => 'Your account is currently pending approval.',
-                'resend'            => 'Your account is not confirmed. Please click the confirmation link in your e-mail, or <a href=":url">click here</a> to resend the confirmation e-mail.',
+                'resend'            => 'Your account is not confirmed. Please click the confirmation link in your e-mail.',
                 'success'           => 'Your account has been successfully confirmed!',
                 'resent'            => 'A new confirmation e-mail has been sent to the address on file.',
             ],
@@ -105,15 +105,23 @@ return [
             ],
 
             'registration_disabled' => 'Registration is currently closed.',
+            'login' => [
+                'unauthorized' => 'You are not authorized.',
+                'not_found' => 'The email does not exist',
+                'refresh_error' => 'Your token could not be refreshed',
+                'general_error' => 'There was an authorization problem'
+            ]
         ],
-
         'request' => [
             'bad' => [
-                'too_much_attempts' => 'You are sending too many requests to our server',
-                'locale_unsupported' => 'Unsupported language in request header \'Content-Language\'',
-                'invalid_accept' => 'The header parameter \'Accept\' is invalid. It should be \'application/json\'',
-                'route_not_found' => 'This route does not exist or you may not have permission to view it',
-                'method_not_allowed' => 'This endpoint cannot be accessed with this method',
+                'too_much_attempts' => 'You are making too many requests to our server.',
+                'locale_unsupported' => 'Unsupported language in request header \'Content-Language\'.',
+                'invalid_accept' => 'The header parameter \'Accept\' is invalid. It should be \'application/json\'.',
+                'route_not_found' => 'This route does not exist or you may not have permission to view it.',
+                'method_not_allowed' => 'This endpoint cannot be accessed with this method.',
+                'token_expired' => 'Your Authorization token has expired',
+                'token_invalid' => 'Your token is invalid',
+                'token_error_unknown' => 'Unknown authentication error'
             ],
 
             'validation' => [

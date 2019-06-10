@@ -31,6 +31,13 @@ class ConflictException extends Exception
                 $code = '4092';
                 break;
 
+            /*
+             * Account not confirmed
+             */
+            case 'exceptions.api.auth.confirmation.resend':
+                $code = '4093';
+                break;
+
             default:
                 $code = '4090';
                 break;

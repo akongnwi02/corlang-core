@@ -102,7 +102,7 @@ class UserRegistrationTest extends TestCase
 
         $response = $this->withHeader('Accept', 'application/json')
             ->get('/api/auth/register/confirm/'.$user->confirmation_code);
-        $response->assertStatus(200)->assertJson(['confirmed' => true]);
+        $response->assertStatus(200)->assertJson(['message' => 'Your account has been successfully confirmed']);
     }
 
     /** @test */

@@ -63,6 +63,24 @@ class UserRepository extends BaseRepository
     }
 
     /**
+     * @param $email
+     *
+     * @return mixed
+     * @throws NotFoundHttpException
+     */
+    public function findByEmail($username)
+    {
+        $user = $this->model
+            ->where('email', $username)
+            ->first();
+        if($user instanceof $this->model) {
+            return $user;
+        }
+
+        throw new NotFoundHttpException('exceptions.api.auth.login.not_found');
+    }
+
+    /**
      * @param $code
      *
      * @return mixed

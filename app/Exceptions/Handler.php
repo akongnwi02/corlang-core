@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Exceptions\Api\GeneralErrorException;
+use App\Exceptions\Api\UnauthorizedException;
 use App\Exceptions\Api\ValidationException;
 use Exception;
 use App\Exceptions\Api\BadRequestException;
@@ -55,49 +56,58 @@ class Handler extends ExceptionHandler
      * @throws NotFoundHttpException
      * @throws ValidationException
      * @throws GeneralErrorException
+     * @throws UnauthorizedException
      */
     public function render($request, Exception $exception)
     {
-        if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
-            return redirect()
-                ->route(home_route())
-                ->withFlashDanger(__('auth.general_error'));
-        }
 
-        /**
-         *
-         *
-         * API exceptions handling
-         *
-         *
-         */
         if($request->expectsJson()) {
-            /**
-             * All exceptions are returned in a standard format
-             *
-             * Uncaught exceptions throw the general exception
-             * To catch a particular exception, add the exception to this list
-             *
-             * Exception name can be seen in debug property of error response
-             */
-            if ($exception instanceof \Illuminate\Http\Exceptions\ThrottleRequestsException) {
+
+
+            if($exception instanceof \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException)
+            {
+                if(method_exists($exception, 'getPrevious'))
+                {
+                    $exception = $exception->getPrevious();
+
+                    if($exception instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException)
+                    {
+                        \Log::error('Expired token');
+                        throw new UnauthorizedException('exceptions.api.request.bad.token_expired');
+                    }
+
+                    if($exception instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException)
+                    {
+                        \Log::error('Invalid token');
+                        throw new UnauthorizedException('exceptions.api.request.bad.token_expired');
+                    }
+                }
+
+                throw new UnauthorizedException('exceptions.api.request.bad.token_invalid');
+            }
+
+            if ($exception instanceof \Illuminate\Http\Exceptions\ThrottleRequestsException)
+            {
                 \Log::error('Too many requests', ['ip' => $request->getClientIp(), 'route' => $request->getRequestUri()]);
                 throw new BadRequestException('exceptions.api.request.bad.too_much_attempts', $exception);
             }
 
-            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
+            {
                 \Log::error('Route Not found', ['ip' => $request->getClientIp(), 'route' => $request->getRequestUri()]);
                 throw new NotFoundHttpException('exceptions.api.request.bad.route_not_found', $exception);
             }
 
-            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException) {
+            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException)
+            {
                 \Log::error('Method not allowed', ['method' => $request->method(), 'route' => $request->getRequestUri()]);
                 throw new BadRequestException('exceptions.api.request.bad.method_not_allowed');
 
             }
 
-            if($exception instanceof \Illuminate\Validation\ValidationException) {
-                \Log::error('Validation', ['debug' => (string)$exception, 'method' => $request->method(), 'route' => $request->getRequestUri()]);
+            if($exception instanceof \Illuminate\Validation\ValidationException)
+            {
+                \Log::error('Validation error', $exception->errors());
                 throw new ValidationException('exceptions.api.request.validation.unprocessable_entity', $exception);
             }
 
