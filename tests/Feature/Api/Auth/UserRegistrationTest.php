@@ -102,7 +102,7 @@ class UserRegistrationTest extends TestCase
 
         $response = $this->withHeader('Accept', 'application/json')
             ->get('/api/auth/register/confirm/'.$user->confirmation_code);
-        $response->assertStatus(200)->assertJson(['message' => 'Your account has been successfully confirmed']);
+        $response->assertStatus(200)->assertJson(['message' => 'Your account has been successfully confirmed!']);
     }
 
     /** @test */
@@ -121,6 +121,14 @@ class UserRegistrationTest extends TestCase
     public function if_requires_approval_is_active_the_user_cant_login()
     {
 
+        config(['access.users.requires_approval' => true]);
+
+        $this->registerUser();
+
+        $response = $this->withHeader('Accept', 'application/json')
+            ->post('api/auth/login', ['email' => 'john@example.com', 'password' => 'password'])
+            ->assertStatus(401)
+            ->assertSee('You can\'t log in at the moment. Your account may require approval or needs confirmation');
     }
 
     /** @test */

@@ -45,6 +45,10 @@ class UnauthorizedException extends Exception
                 $code = '4016';
                 break;
 
+            case 'exceptions.api.auth.login.require_confirmation_or_approval':
+                $code = '4017';
+                break;
+
             default:
                 $this->message = 'exceptions.api.auth.login.general_error';
                 $code = '4010';

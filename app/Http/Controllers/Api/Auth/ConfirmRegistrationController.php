@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Exceptions\Api\ConflictException;
 use App\Exceptions\Api\NotFoundHttpException;
-use App\Http\Resources\Api\Auth\UserResource;
 use App\Notifications\Api\Auth\UserNeedsConfirmation;
 use App\Repositories\Api\Auth\UserRepository;
 

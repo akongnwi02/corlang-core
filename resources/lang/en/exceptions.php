@@ -109,7 +109,8 @@ return [
                 'unauthorized' => 'You are not authorized.',
                 'not_found' => 'The email does not exist',
                 'refresh_error' => 'Your token could not be refreshed',
-                'general_error' => 'There was an authorization problem'
+                'general_error' => 'There was an authorization problem',
+                'require_confirmation_or_approval' => 'You can\'t log in at the moment. Your account may require approval or needs confirmation',
             ]
         ],
         'request' => [

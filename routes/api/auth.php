@@ -22,6 +22,7 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
     */
    Route::group(['middleware' => 'jwt.auth'], function () {
        Route::get('me', [LoginController::class, 'me'])->name('me');
+       Route::get('logout', [LoginController::class, 'logout'])->name('logout');
        Route::get('test', function(){
            return response()->json(true);
        });

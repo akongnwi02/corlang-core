@@ -58,7 +58,7 @@ class LoginController
 
             auth('api')->logout();
 
-            throw new UnauthorizedException('exceptions.api.auth.login.general_error');
+            throw new UnauthorizedException('exceptions.api.auth.login.require_confirmation_or_approval');
         }
 
         event(new UserLoggedIn($user));
@@ -101,14 +101,12 @@ class LoginController
          */
         auth('api')->logout();
 
-        $request->session()->invalidate();
-
         /*
          * Fire event, Log out user, Redirect
          */
         event(new UserLoggedOut($request->user()));
 
-        return response()->json(['message' => 'alerts.api.users.logged_out']);
+        return response()->json(['message' => __('alerts.api.users.logged_out')]);
     }
 
     /**
@@ -125,9 +123,7 @@ class LoginController
             throw new UnauthorizedException('exceptions.api.auth.login.refresh_error');
         }
 
-        $user = auth('api')->setToken($token)->user();
-
-        event(new UserTokenRefreshed($user));
+        \Log::info('Token refreshed');
 
         return $this->respondWithToken($token);
     }

@@ -73,13 +73,13 @@ class Handler extends ExceptionHandler
                     if($exception instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException)
                     {
                         \Log::error('Expired token');
-                        throw new UnauthorizedException('exceptions.api.request.bad.token_expired');
+                        throw new UnauthorizedException('exceptions.api.request.bad.token_expired', $exception);
                     }
 
                     if($exception instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException)
                     {
                         \Log::error('Invalid token');
-                        throw new UnauthorizedException('exceptions.api.request.bad.token_expired');
+                        throw new UnauthorizedException('exceptions.api.request.bad.token_invalid', $exception);
                     }
                 }
 
@@ -124,6 +124,11 @@ class Handler extends ExceptionHandler
             throw new GeneralErrorException('exceptions.api.request.general_error.message', $exception);
         }
 
+        if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
+            return redirect()
+                ->route(home_route())
+                ->withFlashDanger(__('auth.general_error'));
+        }
         /**
          *
          * General purpose exception handling for both WEB and API
