@@ -10,6 +10,7 @@ namespace Test\Feature\Api\Auth;
 
 
 use App\Events\Api\Auth\UserLoggedIn;
+use App\Events\Api\Auth\UserLoggedOut;
 use App\Exceptions\Api\UnauthorizedException;
 use App\Models\Auth\Role;
 use App\Models\Auth\User;
@@ -103,7 +104,6 @@ class UserLoginTest extends TestCase
         $this->assertFalse($this->isAuthenticated());
     }
 
-
     /** @test */
     public function password_is_required()
     {
@@ -145,7 +145,7 @@ class UserLoginTest extends TestCase
     /** @test */
     public function a_user_can_logout()
     {
-        $user = factory(User::class)->create([
+        factory(User::class)->create([
             'email' => 'john@example.com',
             'password' => 'password',
         ]);
@@ -158,6 +158,10 @@ class UserLoginTest extends TestCase
 
         $token = json_decode($response->getContent())->access_token;
 
+        $this->assertTrue($this->isAuthenticated('api'));
+
+        Event::fake();
+
         $this->withHeaders([
             'Accept' => 'application/json',
             'Authorization' => "Bearer $token"
@@ -165,6 +169,10 @@ class UserLoginTest extends TestCase
             ->get('/api/auth/logout')
             ->assertStatus(200)
             ->assertSee('User logged out successfully.');
+
+        Event::assertDispatched(UserLoggedOut::class);
+
+        $this->assertFalse($this->isAuthenticated('api'));
     }
 
     /** @test */
@@ -191,6 +199,7 @@ class UserLoginTest extends TestCase
             ->assertStatus(200)
             ->assertSee('User logged out successfully.');
 
+
         $this->withHeaders([
             'Accept' => 'application/json',
             'Authorization' => "Bearer $token"
@@ -200,11 +209,10 @@ class UserLoginTest extends TestCase
             ->assertSee('Your token is invalid');
     }
 
-
     /** @test */
     public function a_user_can_refresh_his_token()
     {
-        $user = factory(User::class)->create([
+        factory(User::class)->create([
             'email' => 'john@example.com',
             'password' => 'password',
         ]);
@@ -220,6 +228,52 @@ class UserLoginTest extends TestCase
         ])
             ->get('/api/auth/refresh')
             ->assertStatus(200);
+    }
+
+    /** @test */
+    public function a_user_can_get_his_profile(){
+        factory(User::class)->create([
+            'email' => 'john@example.com',
+            'password' => 'password',
+            'first_name' => 'Akong',
+            'last_name' => 'Devert',
+        ]);
+
+        $response = $this->withHeader('Accept', 'application/json')
+            ->post('/api/auth/login', [
+                'email' => 'john@example.com',
+                'password' => 'password'
+            ]);
+
+        $token = json_decode($response->getContent())->access_token;
+
+        $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => "Bearer $token"
+        ])
+            ->get('/api/auth/me')
+            ->assertStatus(200)
+            ->assertJson([
+                'first_name' => 'Akong',
+                'last_name' => 'Devert',
+                'email' => 'john@example.com',
+            ]);
+    }
+
+    /** @test */
+    public function unauthenticated_user_get_profile()
+    {
+        factory(User::class)->create([
+            'email' => 'john@example.com',
+            'password' => 'password',
+        ]);
+
+        $this->withHeaders([
+            'Accept' => 'application/json',
+        ])
+            ->get('/api/auth/me')
+            ->assertStatus(401)
+            ->assertSee('Your token is invalid');
     }
 
 }

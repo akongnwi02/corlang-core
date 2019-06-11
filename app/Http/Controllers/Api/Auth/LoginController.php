@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Events\Api\Auth\UserLoggedIn;
 use App\Events\Api\Auth\UserLoggedOut;
-use App\Events\Api\Auth\UserTokenRefreshed;
 use App\Exceptions\Api\ConflictException;
 use App\Exceptions\Api\UnauthorizedException;
 use App\Helpers\Auth\Auth;
