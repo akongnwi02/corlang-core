@@ -117,7 +117,7 @@ return [
             'bad' => [
                 'too_much_attempts' => 'You are making too many requests to our server.',
                 'locale_unsupported' => 'Unsupported language in request header \'Content-Language\'.',
-                'invalid_accept' => 'The header parameter \'Accept\' is invalid. It should be \'application/json\'.',
+                'invalid_accept' => 'The required accept header parameter application/json is missing in your request.',
                 'route_not_found' => 'This route does not exist or you may not have permission to view it.',
                 'method_not_allowed' => 'This endpoint cannot be accessed with this method.',
                 'token_expired' => 'Your Authorization token has expired',

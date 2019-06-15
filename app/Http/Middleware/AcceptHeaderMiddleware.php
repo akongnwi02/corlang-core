@@ -27,12 +27,15 @@ class AcceptHeaderMiddleware
         /*
          *  check header and determin accept
          */
-        $accept = $request->header('Accept');
+        $accepts = $request->header('Accept');
+
+        $accepts = explode(',', $accepts);
 
         /*
          * check if the header is missed and provide it
          */
-        if (! $accept || $accept == '*/*') {
+        if (empty($accepts) || $accepts[0] == '*/*')
+        {
 
             $accept = 'application/json';
 
@@ -40,11 +43,11 @@ class AcceptHeaderMiddleware
         }
 
         /*
-         * check verify the accept header
+         * verify the accept header
          */
-        if ($accept !== 'application/json') {
+        if (! in_array('application/json', $accepts)) {
 
-            \Log::error('Invalid accept in header');
+            \Log::error('A required accept parameter is not present application/json');
 
             throw new BadRequestException('exceptions.api.request.bad.invalid_accept');
         }
@@ -52,7 +55,7 @@ class AcceptHeaderMiddleware
         /*
          * Set the request accept header
          */
-        $request->headers->set('Accept', $accept);
+        $request->headers->set('Accept', 'application/json');
 
         \Log::debug('Request header accept set');
 
@@ -64,7 +67,7 @@ class AcceptHeaderMiddleware
         /*
          * Set the accept type header in the response
          */
-        $response->headers->set('Accept', $accept);
+        $response->headers->set('Accept', 'application/json');
 
         return $response;
     }

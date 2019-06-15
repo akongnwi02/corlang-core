@@ -42,6 +42,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            'cors',
             'accept',
             'localization',
             'throttle:30,1',
@@ -79,6 +80,7 @@ class Kernel extends HttpKernel
         'jwt.refresh' => \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
         'localization' => \App\Http\Middleware\LocalizationMiddleWare::class,
         'accept' => \App\Http\Middleware\AcceptHeaderMiddleware::class,
+        'cors' => \Barryvdh\Cors\HandleCors::class,
     ];
 
     /**
