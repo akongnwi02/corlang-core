@@ -261,7 +261,7 @@ class UserLoginTest extends TestCase
     }
 
     /** @test */
-    public function unauthenticated_user_get_profile()
+    public function unauthenticated_user_cannot_get_profile()
     {
         factory(User::class)->create([
             'email' => 'john@example.com',

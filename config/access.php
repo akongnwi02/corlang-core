@@ -84,6 +84,25 @@ return [
          * false is off which doesn't log password changes or check against them
          */
         'password_history' => env('PASSWORD_HISTORY', true),
+
+
+        /*
+         * Confirmation code
+         * Defines settings for the confirmation code by otp users
+         */
+        'confirmation_code' => [
+
+            /*
+             * length of the confirmation code
+             */
+            'length' => 6,
+
+            /*
+             * confirmation code expiration time in minutes
+             */
+            'expiration_time' => 1
+
+        ]
     ],
 
     /*
@@ -102,4 +121,9 @@ return [
      * Makes it so social logins can not change passwords, etc.
      */
     'socialite_session_name' => 'socialite_provider',
+
+    /*
+     * Confirmation code
+     */
+
 ];

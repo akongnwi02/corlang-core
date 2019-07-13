@@ -43,7 +43,7 @@ class LoginController
      */
     public function login(LoginRequest $request)
     {
-        $credentials = request([$this->username(), 'password']);
+        $credentials = request(['email', 'password']);
 
         if (! $token = auth('api')->attempt($credentials)) {
 
@@ -51,7 +51,7 @@ class LoginController
         }
 
          // At this stage, user exists. Check if user is confirmed
-        $user = $this->userRepository->findByEmail($credentials[$this->username()]);
+        $user = $this->userRepository->findByEmail($credentials['email']);
 
         if (! $user->isActiveAndConfirmed()) {
 
@@ -66,16 +66,6 @@ class LoginController
     }
 
     /**
-     * Get the login username to be used by the controller.
-     *
-     * @return string
-     */
-    public function username()
-    {
-        return 'email';
-    }
-
-    /**
      * Log the user out of the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -87,7 +77,9 @@ class LoginController
          * Remove the socialite session variable if exists
          */
         if (app('session')->has(config('access.socialite_session_name'))) {
+
             app('session')->forget(config('access.socialite_session_name'));
+
         }
 
         /*

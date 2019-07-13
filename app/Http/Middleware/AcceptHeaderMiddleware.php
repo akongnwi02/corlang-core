@@ -37,7 +37,7 @@ class AcceptHeaderMiddleware
         if (empty($accepts) || $accepts[0] == '*/*')
         {
 
-            $accept = 'application/json';
+            $accepts[] = 'application/json';
 
             \Log::debug('request accept type has been derived automatically');
         }

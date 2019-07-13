@@ -62,3 +62,9 @@ clear:
 	 && php artisan config:clear \
 	 && truncate -s 0 storage/logs/*.log \
 	 && composer dump-autoload -o"
+
+migrate:
+	docker exec $$(docker-compose ps -q workspace) sh -c "php artisan migrate"
+
+seed:
+	docker exec $$(docker-compose ps -q workspace) sh -c "php artisan db:seed --force"
