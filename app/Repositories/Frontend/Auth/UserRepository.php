@@ -95,11 +95,14 @@ class UserRepository extends BaseRepository
             $user = parent::create([
                 'first_name'        => $data['first_name'],
                 'last_name'         => $data['last_name'],
-                'email'             => $data['email'],
+                'username'          => $data['username'],
+                // Username should be a phone or email
+                'email'             => preg_match('/^(237|00237|\+237)?[6|2|3]{1}\d{8}$/', $data['username']) ? null : $data['username'],
+                'phone'             => preg_match('/^(237|00237|\+237)?[6|2|3]{1}\d{8}$/', $data['username']) ? $data['username'] : null,
                 'confirmation_code' => md5(uniqid(mt_rand(), true)),
                 'active'            => 1,
                 'password'          => $data['password'],
-                                    // If users require approval or needs to confirm email
+                // If users require approval or needs to confirm email
                 'confirmed'         => config('access.users.requires_approval') || config('access.users.confirm_email') ? 0 : 1,
             ]);
 
@@ -164,31 +167,67 @@ class UserRepository extends BaseRepository
             }
         }
 
-        if ($user->canChangeEmail()) {
-            //Address is not current address so they need to reconfirm
+        // username check
+        if (isset($input['username'])) {
+            if ($user->username != $input['username']) {
+                //cannot change username
+                throw new GeneralException(__('exceptions.frontend.auth.cannot_change_username'));
+            }
+        }
+
+        // E-mail check
+        if (isset($input['email'])) {
+            // cannot change email if it's default notification channel
+            if ($user->notification_channel == 'mail') {
+                throw new GeneralException(__('exceptions.frontend.auth.cannot_change_email'));
+            }
+
             if ($user->email != $input['email']) {
-                //Emails have to be unique
+                //cannot change email if it's already taken
                 if ($this->getByColumn($input['email'], 'email')) {
                     throw new GeneralException(__('exceptions.frontend.auth.email_taken'));
                 }
-
-                // Force the user to re-verify his email address if config is set
-                if (config('access.users.confirm_email')) {
-                    $user->confirmation_code = md5(uniqid(mt_rand(), true));
-                    $user->confirmed = 0;
-                    $user->notify(new UserNeedsConfirmation($user->confirmation_code));
-                }
-                $user->email = $input['email'];
-                $updated = $user->save();
-
-                // Send the new confirmation e-mail
-
-                return [
-                    'success' => $updated,
-                    'email_changed' => true,
-                ];
             }
+
+            $user->email = $input['email'];
         }
+        // Phone number check
+        $input['phone'] = substr_replace($input['phone'], '237', 0, -9);
+        if (isset($input['phone'])) {
+            // cannot change phone if it's default notification channel
+            if ($user->notification_channel == 'sms') {
+                throw new GeneralException(__('exceptions.frontend.auth.cannot_change_phone'));
+            }
+
+            if ($user->phone != $input['phone']) {
+                //cannot change phone if it's already taken
+                if ($this->getByColumn($input['phone'], 'phone')) {
+                    throw new GeneralException(__('exceptions.frontend.auth.phone_taken'));
+                }
+            }
+
+            $user->phone = $input['phone'];
+        }
+
+
+
+
+//            // Force the user to re-verify his account if config is set
+//            if (config('access.users.confirm_account')) {
+//                $user->confirmation_code = md5(uniqid(mt_rand(), true));
+//                $user->confirmed = 0;
+//                $user->notify(new UserNeedsConfirmation($user->confirmation_code));
+//            }
+//
+//            $updated = $user->save();
+
+//            // Send the new confirmation e-mail
+//
+//            return [
+//                'success' => $updated,
+//                'email_changed' => true,
+//            ];
+////        }
 
         return $user->save();
     }

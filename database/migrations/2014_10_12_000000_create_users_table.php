@@ -21,13 +21,16 @@ class CreateUsersTable extends Migration
             $table->uuid('uuid');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('email')->unique();
+            $table->string('username')->unique();
+            $table->string('email')->unique()->nullable();
+            $table->string('phone')->unique()->nullable();
             $table->string('avatar_type')->default('gravatar');
             $table->string('avatar_location')->nullable();
             $table->string('password')->nullable();
             $table->timestamp('password_changed_at')->nullable();
             $table->tinyInteger('active')->default(1)->unsigned();
             $table->string('confirmation_code')->nullable();
+            $table->enum('notification_channel', ['mail', 'sms']);
             $table->boolean('confirmed')->default(config('access.users.confirm_email') ? false : true);
             $table->string('timezone')->nullable();
             $table->timestamp('last_login_at')->nullable();

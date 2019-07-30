@@ -266,4 +266,5 @@ class UserRegistrationTest extends TestCase
         ]);
     }
 
+
 }

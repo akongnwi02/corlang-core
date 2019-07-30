@@ -59,8 +59,8 @@ return [
             'confirmation' => [
                 'already_confirmed' => 'Votre compte est déjà confirmé.',
                 'confirm'           => 'Confirmez votre compte !',
-                'created_confirm'   => 'Votre compte a été créé avec succès.  Un email de confirmation vous a été envoyé.',
-                'created_pending'   => 'Votre compte a été créé avec succès et est en attente de validation. Un email vous sera envoyé quand votre compte sera validé.',
+                'created_confirm'   => 'Votre compte a été créé avec succès.  Un message de confirmation vous a été envoyé.',
+                'created_pending'   => 'Votre compte a été créé avec succès et est en attente de validation. Un message vous sera envoyé quand votre compte sera validé.',
                 'mismatch'          => 'Votre code de confirmation est invalide.',
                 'not_found'         => "Votre code de confirmation n'existe pas.",
                 'pending'            => 'Votre compte est actuellement en attente de validation.',
@@ -86,8 +86,8 @@ return [
             'confirmation' => [
                 'already_confirmed' => 'Votre compte est déjà confirmé.',
                 'confirm'           => 'Confirmez votre compte !',
-                'created_confirm'   => 'Votre compte a été créé avec succès.  Un email de confirmation vous a été envoyé.',
-                'created_pending'   => 'Votre compte a été créé avec succès et est en attente de validation. Un email vous sera envoyé quand votre compte sera validé.',
+                'created_confirm'   => 'Votre compte a été créé avec succès.  Un message de confirmation vous a été envoyé.',
+                'created_pending'   => 'Votre compte a été créé avec succès et est en attente de validation. Un message vous sera envoyé quand votre compte sera validé.',
                 'mismatch'          => 'Votre code de confirmation est invalide.',
                 'not_found'         => "Votre code de confirmation n'existe pas.",
                 'pending'            => 'Votre compte est actuellement en attente de validation.',

@@ -68,12 +68,15 @@ class UserController extends Controller
         $this->userRepository->create($request->only(
             'first_name',
             'last_name',
+            'username',
+            'phone',
             'email',
             'password',
             'active',
             'confirmed',
-            'confirmation_email',
+            'confirmation_message',
             'roles',
+            'notification_channel',
             'permissions'
         ));
 
@@ -123,6 +126,9 @@ class UserController extends Controller
         $this->userRepository->update($user, $request->only(
             'first_name',
             'last_name',
+            'username',
+            'phone',
+            'notification_channel',
             'email',
             'roles',
             'permissions'

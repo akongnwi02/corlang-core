@@ -36,16 +36,16 @@ class ProfileController extends Controller
     {
         $output = $this->userRepository->update(
             $request->user()->id,
-            $request->only('first_name', 'last_name', 'email', 'avatar_type', 'avatar_location'),
+            $request->only('first_name', 'last_name', 'email', 'phone', 'avatar_type', 'avatar_location'),
             $request->has('avatar_location') ? $request->file('avatar_location') : false
         );
 
-        // E-mail address was updated, user has to reconfirm
-        if (is_array($output) && $output['email_changed']) {
-            auth()->logout();
-
-            return redirect()->route('frontend.auth.login')->withFlashInfo(__('strings.frontend.user.email_changed_notice'));
-        }
+//        // E-mail address was updated, user has to reconfirm
+//        if (is_array($output) && $output['email_changed']) {
+//            auth()->logout();
+//
+//            return redirect()->route('frontend.auth.login')->withFlashInfo(__('strings.frontend.user.email_changed_notice'));
+//        }
 
         return redirect()->route('frontend.user.account')->withFlashSuccess(__('strings.frontend.user.profile_updated'));
     }

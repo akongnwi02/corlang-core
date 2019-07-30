@@ -26,7 +26,7 @@ class UpdateUserTest extends TestCase
     }
 
     /** @test  */
-    public function an_admin_can_resend_users_confirmation_email()
+    public function an_admin_can_resend_users_confirmation_message()
     {
         $this->loginAsAdmin();
         $user = factory(User::class)->states('unconfirmed')->create();

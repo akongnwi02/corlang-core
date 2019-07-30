@@ -29,6 +29,16 @@ trait UserAttribute
     }
 
     /**
+     * @param $phone
+     */
+    public function setPhoneAttribute($phone) : void
+    {
+        // reinforce the phone format.
+        $phone = substr_replace($phone, '237', 0, -9);
+        $this->attributes['phone'] = $phone;
+    }
+
+    /**
      * @return string
      */
     public function getStatusLabelAttribute()

@@ -179,7 +179,7 @@ return [
                     'other_permissions'       => 'Autres permissions',
                     'password'                => 'Mot de passe',
                     'password_confirmation'   => 'Confirmation du mot de passe',
-                    'send_confirmation_email' => 'Envoyer un email de confirmation',
+                    'send_confirmation_message' => 'Envoyer un message de confirmation',
                 ],
             ],
         ],

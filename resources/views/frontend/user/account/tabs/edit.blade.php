@@ -25,6 +25,21 @@
     <div class="row">
         <div class="col">
             <div class="form-group">
+                {{ html()->label(__('validation.attributes.frontend.username'))->for('username') }}
+
+                {{ html()->text('username')
+                    ->class('form-control')
+                    ->placeholder(__('validation.attributes.frontend.username'))
+                    ->attribute('maxlength', 191)
+                    ->required()
+                    ->disabled()}}
+            </div><!--form-group-->
+        </div><!--col-->
+    </div><!--row-->
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
                 {{ html()->label(__('validation.attributes.frontend.first_name'))->for('first_name') }}
 
                 {{ html()->text('first_name')
@@ -51,25 +66,45 @@
         </div><!--col-->
     </div><!--row-->
 
-    @if ($logged_in_user->canChangeEmail())
-        <div class="row">
-            <div class="col">
+    <div class="row">
+        <div class="col">
+            @if($logged_in_user->notification_channel=='mail')
                 <div class="alert alert-info">
-                    <i class="fas fa-info-circle"></i> @lang('strings.frontend.user.change_email_notice')
+                    <i class="fas fa-info-circle"></i> @lang('strings.frontend.user.cannot_change_email_notice')
                 </div>
+            @endif
+            <div class="form-group">
+                {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
 
-                <div class="form-group">
-                    {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
+                {{ html()->email('email')
+                    ->class('form-control')
+                    ->placeholder(__('validation.attributes.frontend.email'))
+                    ->attribute('maxlength', 191)
+                    ->required()
+                    ->disabled($logged_in_user->notification_channel=='mail')}}
+            </div><!--form-group-->
+        </div><!--col-->
+    </div><!--row-->
 
-                    {{ html()->email('email')
-                        ->class('form-control')
-                        ->placeholder(__('validation.attributes.frontend.email'))
-                        ->attribute('maxlength', 191)
-                        ->required() }}
-                </div><!--form-group-->
-            </div><!--col-->
-        </div><!--row-->
-    @endif
+    <div class="row">
+        <div class="col">
+            @if($logged_in_user->notification_channel=='sms')
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> @lang('strings.frontend.user.cannot_change_phone_notice')
+                </div>
+            @endif
+            <div class="form-group">
+                {{ html()->label(__('validation.attributes.frontend.phone'))->for('phone') }}
+
+                {{ html()->text('phone')
+                    ->class('form-control')
+                    ->placeholder(__('validation.attributes.frontend.phone'))
+                    ->attribute('maxlength', 191)
+                    ->required()
+                    ->disabled($logged_in_user->notification_channel=='sms')}}
+            </div><!--form-group-->
+        </div><!--col-->
+    </div><!--row-->
 
     <div class="row">
         <div class="col">

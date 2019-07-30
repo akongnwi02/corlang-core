@@ -40,6 +40,11 @@ return [
         'confirm_email' => env('CONFIRM_EMAIL', true),
 
         /*
+         * Whether or not the user has to confirm their account when signing up
+         */
+        'confirm_account' => env('CONFIRM_ACCOUNT', true),
+
+        /*
          * Whether or not the users email can be changed on the edit profile screen
          */
         'change_email' => env('CHANGE_EMAIL', false),
@@ -63,7 +68,7 @@ return [
         /*
          * Login username to be used by the controller.
          */
-        'username' => 'email',
+        'username' => 'username',
 
         /*
          * Session Database Driver Only

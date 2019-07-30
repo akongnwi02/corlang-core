@@ -22,7 +22,7 @@ return [
 
         'users' => [
             'cant_resend_confirmation' => "L'application est actuellement paramétrée avec une validation manuelle des utilisateurs.",
-            'confirmation_email'  => "Un email de confirmation a été adressé à l'adresse indiquée.",
+            'confirmation_message'  => "Un message de confirmation a été adressé à l'adresse indiquée.",
             'confirmed'              => "Le compte de l'utilisateur a été confirmé avec succès.",
             'created'             => 'Utilisateur créé avec succès.',
             'deleted'             => 'Utilisateur supprimé avec succès.',

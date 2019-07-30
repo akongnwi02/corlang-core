@@ -50,7 +50,7 @@ class CreateUserTest extends TestCase
                 'active' => '1',
                 'confirmed' => '0',
                 'timezone' => 'UTC',
-                'confirmation_email' => '1',
+                'confirmation_message' => '1',
                 'roles' => [1 => 'executive', 2 => 'user'],
             ]);
 
@@ -76,7 +76,7 @@ class CreateUserTest extends TestCase
             'active' => '1',
             'confirmed' => '1',
             'timezone' => 'UTC',
-            'confirmation_email' => '1',
+            'confirmation_message' => '1',
             'roles' => [1 => 'administrator'],
         ]);
 
@@ -110,7 +110,7 @@ class CreateUserTest extends TestCase
             'active' => '1',
             'confirmed' => '0',
             'timezone' => 'UTC',
-            'confirmation_email' => '1',
+            'confirmation_message' => '1',
             'roles' => [1 => 'administrator'],
         ]);
 

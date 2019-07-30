@@ -124,8 +124,11 @@ return [
         ],
 
         'user' => [
-            'change_email_notice' => 'If you change your e-mail you will be logged out until you confirm your new e-mail address.',
+            'change_email_notice' => 'If you change your e-mail you will have to confirm your new e-mail address.',
+            'change_phone_notice' => 'If you change your phone number, you will have to confirm your new phone number',
             'email_changed_notice' => 'You must confirm your new e-mail address before you can log in again.',
+            'cannot_change_email_notice' => 'You cannot change your e-mail address. This is your default notification means',
+            'cannot_change_phone_notice' => 'You cannot change your phone number. This is your default notification means',
             'profile_updated'  => 'Profile successfully updated.',
             'password_updated' => 'Password successfully updated.',
         ],

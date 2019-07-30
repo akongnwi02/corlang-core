@@ -5,8 +5,16 @@
             <td><img src="{{ $logged_in_user->picture }}" class="user-profile-image" /></td>
         </tr>
         <tr>
+            <th>@lang('labels.frontend.user.profile.username')</th>
+            <td>{{ $logged_in_user->username }}</td>
+        </tr>
+        <tr>
             <th>@lang('labels.frontend.user.profile.name')</th>
             <td>{{ $logged_in_user->name }}</td>
+        </tr>
+        <tr>
+            <th>@lang('labels.frontend.user.profile.phone')</th>
+            <td>{{ $logged_in_user->phone }}</td>
         </tr>
         <tr>
             <th>@lang('labels.frontend.user.profile.email')</th>

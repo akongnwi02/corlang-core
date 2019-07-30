@@ -35,7 +35,7 @@ class UserRepository extends BaseRepository
     /**
      * @return mixed
      */
-    public function getUnconfirmedCount() : int
+    public function getUnconfirmedCount(): int
     {
         return $this->model
             ->where('confirmed', 0)
@@ -43,13 +43,13 @@ class UserRepository extends BaseRepository
     }
 
     /**
-     * @param int    $paged
+     * @param int $paged
      * @param string $orderBy
      * @param string $sort
      *
      * @return mixed
      */
-    public function getActivePaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator
+    public function getActivePaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc'): LengthAwarePaginator
     {
         return $this->model
             ->with('roles', 'permissions', 'providers')
@@ -59,13 +59,13 @@ class UserRepository extends BaseRepository
     }
 
     /**
-     * @param int    $paged
+     * @param int $paged
      * @param string $orderBy
      * @param string $sort
      *
      * @return LengthAwarePaginator
      */
-    public function getInactivePaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator
+    public function getInactivePaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc'): LengthAwarePaginator
     {
         return $this->model
             ->with('roles', 'permissions', 'providers')
@@ -75,13 +75,13 @@ class UserRepository extends BaseRepository
     }
 
     /**
-     * @param int    $paged
+     * @param int $paged
      * @param string $orderBy
      * @param string $sort
      *
      * @return LengthAwarePaginator
      */
-    public function getDeletedPaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator
+    public function getDeletedPaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc'): LengthAwarePaginator
     {
         return $this->model
             ->with('roles', 'permissions', 'providers')
@@ -97,27 +97,30 @@ class UserRepository extends BaseRepository
      * @throws \Exception
      * @throws \Throwable
      */
-    public function create(array $data) : User
+    public function create(array $data): User
     {
         return DB::transaction(function () use ($data) {
             $user = parent::create([
-                'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
-                'email' => $data['email'],
-                'password' => $data['password'],
-                'active' => isset($data['active']) && $data['active'] == '1' ? 1 : 0,
-                'confirmation_code' => md5(uniqid(mt_rand(), true)),
-                'confirmed' => isset($data['confirmed']) && $data['confirmed'] == '1' ? 1 : 0,
+                'first_name'           => $data['first_name'],
+                'last_name'            => $data['last_name'],
+                'username'             => $data['username'],
+                'phone'                => $data['phone'],
+                'email'                => $data['email'],
+                'password'             => $data['password'],
+                'active'               => isset($data['active']) && $data['active'] == '1' ? 1 : 0,
+                'confirmation_code'    => md5(uniqid(mt_rand(), true)),
+                'notification_channel' => $data['notification_channel'],
+                'confirmed'            => isset($data['confirmed']) && $data['confirmed'] == '1' ? 1 : 0,
             ]);
 
             // See if adding any additional permissions
-            if (! isset($data['permissions']) || ! count($data['permissions'])) {
+            if (!isset($data['permissions']) || !count($data['permissions'])) {
                 $data['permissions'] = [];
             }
 
             if ($user) {
                 // User must have at least one role
-                if (! count($data['roles'])) {
+                if (!count($data['roles'])) {
                     throw new GeneralException(__('exceptions.backend.access.users.role_needed_create'));
                 }
 
@@ -126,7 +129,7 @@ class UserRepository extends BaseRepository
                 $user->syncPermissions($data['permissions']);
 
                 //Send confirmation email if requested and account approval is off
-                if (isset($data['confirmation_email']) && $user->confirmed == 0 && ! config('access.users.requires_approval')) {
+                if (isset($data['confirmation_message']) && $user->confirmed == 0 && !config('access.users.requires_approval')) {
                     $user->notify(new UserNeedsConfirmation($user->confirmation_code));
                 }
 
@@ -140,7 +143,7 @@ class UserRepository extends BaseRepository
     }
 
     /**
-     * @param User  $user
+     * @param User $user
      * @param array $data
      *
      * @return User
@@ -148,20 +151,23 @@ class UserRepository extends BaseRepository
      * @throws \Exception
      * @throws \Throwable
      */
-    public function update(User $user, array $data) : User
+    public function update(User $user, array $data): User
     {
-        $this->checkUserByEmail($user, $data['email']);
+        $this->checkUniqueAttributes($user, $data);
 
         // See if adding any additional permissions
-        if (! isset($data['permissions']) || ! count($data['permissions'])) {
+        if (!isset($data['permissions']) || !count($data['permissions'])) {
             $data['permissions'] = [];
         }
 
         return DB::transaction(function () use ($user, $data) {
             if ($user->update([
-                'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
-                'email' => $data['email'],
+                'first_name'           => $data['first_name'],
+                'last_name'            => $data['last_name'],
+                'username'             => $data['username'],
+                'phone'                => $data['phone'],
+                'email'                => $data['email'],
+                'notification_channel' => $data['notification_channel'],
             ])) {
                 // Add selected roles/permissions
                 $user->syncRoles($data['roles']);
@@ -183,7 +189,7 @@ class UserRepository extends BaseRepository
      * @return User
      * @throws GeneralException
      */
-    public function updatePassword(User $user, $input) : User
+    public function updatePassword(User $user, $input): User
     {
         if ($user->update(['password' => $input['password']])) {
             event(new UserPasswordChanged($user));
@@ -201,7 +207,7 @@ class UserRepository extends BaseRepository
      * @return User
      * @throws GeneralException
      */
-    public function mark(User $user, $status) : User
+    public function mark(User $user, $status): User
     {
         if (auth()->id() == $user->id && $status == 0) {
             throw new GeneralException(__('exceptions.backend.access.users.cant_deactivate_self'));
@@ -212,11 +218,11 @@ class UserRepository extends BaseRepository
         switch ($status) {
             case 0:
                 event(new UserDeactivated($user));
-            break;
+                break;
 
             case 1:
                 event(new UserReactivated($user));
-            break;
+                break;
         }
 
         if ($user->save()) {
@@ -232,14 +238,14 @@ class UserRepository extends BaseRepository
      * @return User
      * @throws GeneralException
      */
-    public function confirm(User $user) : User
+    public function confirm(User $user): User
     {
         if ($user->confirmed) {
             throw new GeneralException(__('exceptions.backend.access.users.already_confirmed'));
         }
 
         $user->confirmed = 1;
-        $confirmed = $user->save();
+        $confirmed       = $user->save();
 
         if ($confirmed) {
             event(new UserConfirmed($user));
@@ -261,9 +267,9 @@ class UserRepository extends BaseRepository
      * @return User
      * @throws GeneralException
      */
-    public function unconfirm(User $user) : User
+    public function unconfirm(User $user): User
     {
-        if (! $user->confirmed) {
+        if (!$user->confirmed) {
             throw new GeneralException(__('exceptions.backend.access.users.not_confirmed'));
         }
 
@@ -278,7 +284,7 @@ class UserRepository extends BaseRepository
         }
 
         $user->confirmed = 0;
-        $unconfirmed = $user->save();
+        $unconfirmed     = $user->save();
 
         if ($unconfirmed) {
             event(new UserUnconfirmed($user));
@@ -297,7 +303,7 @@ class UserRepository extends BaseRepository
      * @throws \Exception
      * @throws \Throwable
      */
-    public function forceDelete(User $user) : User
+    public function forceDelete(User $user): User
     {
         if (is_null($user->deleted_at)) {
             throw new GeneralException(__('exceptions.backend.access.users.delete_first'));
@@ -325,7 +331,7 @@ class UserRepository extends BaseRepository
      * @return User
      * @throws GeneralException
      */
-    public function restore(User $user) : User
+    public function restore(User $user): User
     {
         if (is_null($user->deleted_at)) {
             throw new GeneralException(__('exceptions.backend.access.users.cant_restore'));
@@ -346,13 +352,29 @@ class UserRepository extends BaseRepository
      *
      * @throws GeneralException
      */
-    protected function checkUserByEmail(User $user, $email)
+    protected function checkUniqueAttributes(User $user, $data)
     {
-        //Figure out if email is not the same
-        if ($user->email != $email) {
+        //Figure out if unique attributes are not the same
+        if ($user->username != $data['username']) {
+            //Check to see if username exists
+            if ($this->model->where('username', '=', $data['username'])->first()) {
+                throw new GeneralException(trans('exceptions.backend.access.users.username_error'));
+            }
+        }
+
+        if ($user->email != $data['email']) {
             //Check to see if email exists
-            if ($this->model->where('email', '=', $email)->first()) {
+            if ($this->model->where('email', '=', $data['email'])->first()) {
                 throw new GeneralException(trans('exceptions.backend.access.users.email_error'));
+            }
+
+        }
+
+        if ($user->phone != $data['phone']) {
+            $phone = substr_replace($data['phone'], '237', 0, -9);
+            //Check to see if phone number exists
+            if ($this->model->where('phone', '=', $phone)->first()) {
+                throw new GeneralException(trans('exceptions.backend.access.users.phone_error'));
             }
         }
     }

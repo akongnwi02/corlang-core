@@ -49,6 +49,30 @@
                         </div><!--form-group-->
 
                         <div class="form-group row">
+                            {{ html()->label(__('validation.attributes.backend.access.users.username'))->class('col-md-2 form-control-label')->for('username') }}
+
+                            <div class="col-md-10">
+                                {{ html()->text('username')
+                                    ->class('form-control')
+                                    ->placeholder(__('validation.attributes.backend.access.users.username'))
+                                    ->attribute('maxlength', 191)
+                                    ->required() }}
+                            </div><!--col-->
+                        </div><!--form-group-->
+
+                        <div class="form-group row">
+                            {{ html()->label(__('validation.attributes.backend.access.users.phone'))->class('col-md-2 form-control-label')->for('phone') }}
+
+                            <div class="col-md-10">
+                                {{ html()->text('phone')
+                                    ->class('form-control')
+                                    ->placeholder(__('validation.attributes.backend.access.users.phone'))
+                                    ->attribute('maxlength', 191)
+                                    ->required() }}
+                            </div><!--col-->
+                        </div><!--form-group-->
+
+                        <div class="form-group row">
                             {{ html()->label(__('validation.attributes.backend.access.users.email'))->class('col-md-2 form-control-label')->for('email') }}
 
                             <div class="col-md-10">
@@ -82,6 +106,33 @@
                             </div><!--col-->
                         </div><!--form-group-->
 
+                        <div class="form-group row ">
+                            {{ html()->label(__('validation.attributes.backend.access.users.notification_channel'))->class('col-md-2 form-control-label')->for('notification_channel') }}
+
+                            <div class="col-md-10">
+                                <div class="custom-control custom-radio custom-control-inline">
+
+                                    {{ html()->radio('notification_channel', 1, 'mail')
+                                        ->class('custom-control-input')
+                                        ->id('mail')
+                                        ->checked()
+                                        ->required()
+                                     }}
+                                    {{ html()->label(__('validation.attributes.backend.access.users.mail'))->for('mail')->class('custom-control-label') }}
+                                </div>
+
+                                <div class="custom-control custom-radio custom-control-inline">
+
+                                    {{ html()->radio('notification_channel', 0, 'sms')
+                                        ->class('custom-control-input')
+                                        ->id('sms')
+                                        ->required()
+                                     }}
+                                    {{ html()->label(__('validation.attributes.backend.access.users.sms'))->for('sms')->class('custom-control-label') }}
+                                </div>
+                            </div>
+                        </div><!--form-group-->
+
                         <div class="form-group row">
                             {{ html()->label(__('validation.attributes.backend.access.users.active'))->class('col-md-2 form-control-label')->for('active') }}
 
@@ -106,11 +157,11 @@
 
                         @if(! config('access.users.requires_approval'))
                             <div class="form-group row">
-                                {{ html()->label(__('validation.attributes.backend.access.users.send_confirmation_email') . '<br/>' . '<small>' .  __('strings.backend.access.users.if_confirmed_off') . '</small>')->class('col-md-2 form-control-label')->for('confirmation_email') }}
+                                {{ html()->label(__('validation.attributes.backend.access.users.send_confirmation_message') . '<br/>' . '<small>' .  __('strings.backend.access.users.if_confirmed_off') . '</small>')->class('col-md-2 form-control-label')->for('confirmation_message') }}
 
                                 <div class="col-md-10">
                                     <label class="switch switch-label switch-pill switch-primary">
-                                        {{ html()->checkbox('confirmation_email', true, '1')->class('switch-input') }}
+                                        {{ html()->checkbox('confirmation_message', true, '1')->class('switch-input') }}
                                         <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
                                     </label>
                                 </div><!--col-->

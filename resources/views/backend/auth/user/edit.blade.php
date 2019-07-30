@@ -48,6 +48,30 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.access.users.username'))->class('col-md-2 form-control-label')->for('username') }}
+
+                        <div class="col-md-10">
+                            {{ html()->text('username')
+                                ->class('form-control')
+                                ->placeholder(__('validation.attributes.backend.access.users.username'))
+                                ->attribute('maxlength', 191)
+                                ->required() }}
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.access.users.phone'))->class('col-md-2 form-control-label')->for('phone') }}
+
+                        <div class="col-md-10">
+                            {{ html()->text('phone')
+                                ->class('form-control')
+                                ->placeholder(__('validation.attributes.backend.access.users.phone'))
+                                ->attribute('maxlength', 191)
+                                ->required() }}
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.access.users.email'))->class('col-md-2 form-control-label')->for('email') }}
 
                         <div class="col-md-10">
@@ -57,6 +81,33 @@
                                 ->attribute('maxlength', 191)
                                 ->required() }}
                         </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row ">
+                        {{ html()->label(__('validation.attributes.backend.access.users.notification_channel'))->class('col-md-2 form-control-label')->for('notification_channel') }}
+
+                        <div class="col-md-10">
+                            <div class="custom-control custom-radio custom-control-inline">
+
+                                {{ html()->radio('notification_channel', 1, 'mail')
+                                    ->class('custom-control-input')
+                                    ->id('mail')
+                                    ->checked()
+                                    ->required()
+                                 }}
+                                {{ html()->label(__('validation.attributes.backend.access.users.mail'))->for('mail')->class('custom-control-label') }}
+                            </div>
+
+                            <div class="custom-control custom-radio custom-control-inline">
+
+                                {{ html()->radio('notification_channel', 0, 'sms')
+                                    ->class('custom-control-input')
+                                    ->id('sms')
+                                    ->required()
+                                 }}
+                                {{ html()->label(__('validation.attributes.backend.access.users.sms'))->for('sms')->class('custom-control-label') }}
+                            </div>
+                        </div>
                     </div><!--form-group-->
 
                     <div class="form-group row">
