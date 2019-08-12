@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Frontend\Auth;
 use App\Http\Controllers\Controller;
 use App\Repositories\Frontend\Auth\UserRepository;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
+use App\Rules\Auth\ActiveCode;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 /**
  * Class ConfirmAccountController.
@@ -14,29 +17,35 @@ class ConfirmAccountController extends Controller
     /**
      * @var UserRepository
      */
-    protected $user;
+    protected $userRepository;
 
     /**
      * ConfirmAccountController constructor.
      *
-     * @param UserRepository $user
+     * @param UserRepository $userRepository
      */
-    public function __construct(UserRepository $user)
+    public function __construct(UserRepository $userRepository)
     {
-        $this->user = $user;
+        $this->userRepository = $userRepository;
     }
 
     /**
-     * @param $token
-     *
+     * @param Request $request
+     * @param $uuid
      * @return mixed
      * @throws \App\Exceptions\GeneralException
      */
-    public function confirm($token)
+    public function confirm(Request $request, $uuid)
     {
-        $this->user->confirm($token);
+        $this->validate($request, ['code' => ['required', 'string', new ActiveCode($uuid)]]);
 
-        return redirect()->route('frontend.auth.login')->withFlashSuccess(__('exceptions.frontend.auth.confirmation.success'));
+        $user = $this->userRepository->findByUuid($uuid);
+
+        $this->userRepository->confirm($request['code'], $user);
+
+        auth()->login($user);
+
+        return redirect()->route(home_route())->withFlashSuccess(__('exceptions.frontend.auth.confirmation.success'));
     }
 
     /**
@@ -45,16 +54,32 @@ class ConfirmAccountController extends Controller
      * @return mixed
      * @throws \App\Exceptions\GeneralException
      */
-    public function sendConfirmationEmail($uuid)
+    public function sendConfirmationCode($uuid)
     {
-        $user = $this->user->findByUuid($uuid);
+        $user = $this->userRepository->findByUuid($uuid);
 
         if ($user->isConfirmed()) {
-            return redirect()->route('frontend.auth.login')->withFlashSuccess(__('exceptions.frontend.auth.confirmation.already_confirmed'));
+            return redirect()->route(home_route())->withFlashSuccess(__('exceptions.frontend.auth.confirmation.already_confirmed'));
         }
 
-        $user->notify(new UserNeedsConfirmation($user->confirmation_code));
+        $user->updateConfirmationCode();
 
-        return redirect()->route('frontend.auth.login')->withFlashSuccess(__('exceptions.frontend.auth.confirmation.resent'));
+        $user->save();
+
+        $user->notify(new UserNeedsConfirmation());
+
+        return redirect()->back()
+            ->withFlashSuccess(__('exceptions.frontend.auth.confirmation.code_resent', [
+                'account' => $user->getNotificationAccount(),
+                'url' => route('frontend.auth.account.confirm.resend',
+                    $user->{$user->getUuidName()})
+            ]));
     }
+
+    public function showConfirmationForm($uuid)
+    {
+        return view('frontend.auth.confirm.confirm')
+            ->withUuid($uuid);
+    }
+
 }

@@ -17,6 +17,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Class User.
+ * @property mixed confirmation_code
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -45,13 +46,17 @@ class User extends Authenticatable implements JWTSubject
         'phone',
         'avatar_type',
         'avatar_location',
+        'user_agent',
         'password',
         'password_changed_at',
         'active',
         'confirmation_code',
+        'code_sent_at',
         'notification_channel',
         'confirmed',
-        'timezone',
+        'reset_confirmed',
+        'to_be_logged_out',
+        'location',
         'last_login_at',
         'last_login_ip',
     ];
@@ -66,7 +71,11 @@ class User extends Authenticatable implements JWTSubject
     /**
      * @var array
      */
-    protected $dates = ['last_login_at', 'deleted_at'];
+    protected $dates = [
+        'last_login_at',
+        'deleted_at',
+        'code_sent_at',
+    ];
 
     /**
      * The dynamic attributes from mutators that should be returned with the user object.
@@ -80,7 +89,9 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $casts = [
-        'active' => 'boolean',
-        'confirmed' => 'boolean',
+        'active'           => 'boolean',
+        'confirmed'        => 'boolean',
+        'to_be_logged_out' => 'boolean',
+        'reset_confirmed'  => 'boolean',
     ];
 }

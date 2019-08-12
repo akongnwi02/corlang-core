@@ -20,15 +20,15 @@
                         </div>
                     @endif
 
-                    {{ html()->form('POST', route('frontend.auth.password.email.post'))->open() }}
+                    {{ html()->form('POST', route('frontend.auth.password.reset.init.initiate'))->open() }}
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
+                                    {{ html()->label(__('validation.attributes.frontend.phone_or_email'))->for('username') }}
 
-                                    {{ html()->email('email')
+                                    {{ html()->text('username')
                                         ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.email'))
+                                        ->placeholder(__('validation.attributes.frontend.phone_or_email'))
                                         ->attribute('maxlength', 191)
                                         ->required()
                                         ->autofocus() }}
@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group mb-0 clearfix">
-                                    {{ form_submit(__('labels.frontend.passwords.send_password_reset_link_button')) }}
+                                    {{ form_submit(__('labels.frontend.passwords.send_password_reset_code')) }}
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->

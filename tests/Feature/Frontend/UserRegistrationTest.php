@@ -31,7 +31,7 @@ class UserRegistrationTest extends TestCase
         return $this->post('/register', array_merge([
             'first_name' => 'John',
             'last_name' => 'Doe',
-            'email' => 'john@example.com',
+            'username' => 'john@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
         ], $userData));
@@ -68,9 +68,9 @@ class UserRegistrationTest extends TestCase
     }
 
     /** @test */
-    public function if_email_confirmation_is_active_an_notification_gets_sent()
+    public function if_account_confirmation_is_active_a_notification_gets_sent()
     {
-        config(['access.users.confirm_email' => true]);
+        config(['access.users.confirm_account' => true]);
         Notification::fake();
 
         $this->registerUser(['email' => 'john@example.com']);
@@ -80,12 +80,12 @@ class UserRegistrationTest extends TestCase
     }
 
     /** @test */
-    public function a_user_account_can_confirm_his_email()
+    public function a_user_can_confirm_his_account()
     {
         $user = factory(User::class)->states('unconfirmed')->create();
         Event::fake();
 
-        $response = $this->get('/account/confirm/'.$user->confirmation_code);
+        $response = $this->post('/account/confirm/'.$user->uuid, ['code' => $user->confirmation_code]);
 
         $response->assertSessionHas(['flash_success' => __('exceptions.frontend.auth.confirmation.success')]);
         $this->assertEquals(1, $user->fresh()->confirmed);
@@ -99,9 +99,12 @@ class UserRegistrationTest extends TestCase
 
         $user = factory(User::class)->states('unconfirmed')->create();
 
-        $response = $this->get('/account/confirm/resend/'.$user->uuid);
+        $response = $this->followingRedirects()
+            ->get('/account/confirm/resend/'.$user->uuid);
 
-        $response->assertSessionHas(['flash_success' => __('exceptions.frontend.auth.confirmation.resent')]);
+        $this->assertContains(__('exceptions.frontend.auth.confirmation.code_resent', [
+            'account' => $user->email,
+            'url' => route('frontend.auth.account.confirm.resend', $user->uuid)]), $response->getContent());
 
         Notification::assertSentTo($user, UserNeedsConfirmation::class);
     }
@@ -114,7 +117,7 @@ class UserRegistrationTest extends TestCase
         $response = $this->registerUser();
         $response->assertSessionHas(['flash_success' => __('exceptions.frontend.auth.confirmation.created_pending')]);
 
-        $response = $this->post('/login', ['email' => 'john@example.com', 'password' => 'password']);
+        $response = $this->post('/login', ['username' => 'john@example.com', 'password' => 'password']);
 
         $response->assertSessionHas(['flash_danger' => __('exceptions.frontend.auth.confirmation.pending')]);
     }
@@ -158,7 +161,7 @@ class UserRegistrationTest extends TestCase
     }
 
     /** @test */
-    public function email_is_required()
+    public function username_is_required()
     {
         $response = $this->post('/register', [
             'first_name' => 'John',
@@ -167,23 +170,23 @@ class UserRegistrationTest extends TestCase
             'password_confirmation' => 'password',
         ]);
 
-        $response->assertSessionHasErrors('email');
+        $response->assertSessionHasErrors('username');
     }
 
     /** @test */
-    public function email_must_be_unique()
+    public function username_must_be_unique()
     {
         factory(User::class)->create(['email' => 'john@example.com']);
 
         $response = $this->post('/register', [
             'first_name' => 'John',
             'last_name' => 'Doe',
-            'email' => 'john@example.com',
+            'username' => 'john@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
 
-        $response->assertSessionHasErrors('email');
+        $response->assertSessionHasErrors('username');
     }
 
     /** @test */
@@ -216,7 +219,7 @@ class UserRegistrationTest extends TestCase
     /** @test */
     public function it_redirects_to_dashboard_after_successful_registration()
     {
-        config(['access.users.confirm_email' => false]);
+        config(['access.users.confirm_account' => false]);
 
         $response = $this->registerUser();
 

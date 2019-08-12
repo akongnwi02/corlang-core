@@ -34,8 +34,19 @@ trait UserAttribute
     public function setPhoneAttribute($phone) : void
     {
         // reinforce the phone format.
-        $phone = substr_replace($phone, '237', 0, -9);
-        $this->attributes['phone'] = $phone;
+        if (!is_null($phone)) {
+
+            $phone = substr_replace($phone, '237', 0, -9);
+            $this->attributes['phone'] = $phone;
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhoneNumberAttribute()
+    {
+        return '+' . $this->phone;
     }
 
     /**
@@ -310,4 +321,5 @@ trait UserAttribute
 		  </div>
 		</div>';
     }
+
 }

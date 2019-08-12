@@ -2,7 +2,10 @@
 
 namespace App\Notifications\Frontend\Auth;
 
+use App\Channels\SmsChannel;
+use App\Services\Notifications\Sms\SmsMessage;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\NexmoMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 
@@ -14,21 +17,6 @@ class UserNeedsConfirmation extends Notification
     use Queueable;
 
     /**
-     * @var
-     */
-    protected $confirmation_code;
-
-    /**
-     * UserNeedsConfirmation constructor.
-     *
-     * @param $confirmation_code
-     */
-    public function __construct($confirmation_code)
-    {
-        $this->confirmation_code = $confirmation_code;
-    }
-
-    /**
      * Get the notification's delivery channels.
      *
      * @param mixed $notifiable
@@ -37,7 +25,10 @@ class UserNeedsConfirmation extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'sms'];
+        if ($notifiable->notification_channel == 'sms') {
+            return [SmsChannel::class];
+        }
+        return [$notifiable->notification_channel];
     }
 
     /**
@@ -51,8 +42,36 @@ class UserNeedsConfirmation extends Notification
     {
         return (new MailMessage())
             ->subject(app_name().': '.__('exceptions.frontend.auth.confirmation.confirm'))
-            ->line(__('strings.emails.auth.click_to_confirm'))
-            ->action(__('buttons.emails.auth.confirm_account'), route('frontend.auth.account.confirm', $this->confirmation_code))
+            ->greeting(__('strings.emails.auth.user_greeting', ['first_name' => $notifiable->first_name]))
+            ->line(__('strings.emails.auth.use_code_to_confirm'))
+            ->line($notifiable->confirmation_code)
             ->line(__('strings.emails.auth.thank_you_for_using_app'));
+    }
+
+    /**
+     * @param  mixed $notifiable
+     *
+     * @return NexmoMessage
+     */
+    public function toNexmo($notifiable)
+    {
+        return (new NexmoMessage())
+            ->content(__('strings.emails.auth.use_code_to_confirm_sms', [
+                'first_name' => $notifiable->first_name,
+                'code' => $notifiable->confirmation_code,
+                'app_name' => app_name(),
+            ]))
+            ->unicode();
+    }
+
+    public function toSms($notifiable)
+    {
+        return (new SmsMessage())
+            ->content(__('strings.emails.auth.use_code_to_confirm_sms', [
+                'first_name' => $notifiable->first_name,
+                'code' => $notifiable->confirmation_code,
+                'app_name' => app_name(),
+            ]))
+            ->to($notifiable->phone_number);
     }
 }

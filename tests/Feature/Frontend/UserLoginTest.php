@@ -21,16 +21,16 @@ class UserLoginTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_login_with_email_and_password()
+    public function a_user_can_login_with_username_and_password()
     {
         $user = factory(User::class)->create([
-            'email' => 'john@example.com',
+            'username' => 'john@example.com',
             'password' => 'secret',
         ]);
         Event::fake();
 
         $this->post('/login', [
-            'email' => 'john@example.com',
+            'username' => 'john@example.com',
             'password' => 'secret',
         ]);
 
@@ -42,12 +42,12 @@ class UserLoginTest extends TestCase
     public function inactive_users_cant_login()
     {
         factory(User::class)->states('inactive')->create([
-            'email' => 'john@example.com',
+            'username' => 'john@example.com',
             'password' => 'secret',
         ]);
 
         $response = $this->post('/login', [
-            'email' => 'john@example.com',
+            'username' => 'john@example.com',
             'password' => 'secret',
         ]);
 
@@ -59,12 +59,12 @@ class UserLoginTest extends TestCase
     public function unconfirmed_user_cant_login()
     {
         factory(User::class)->states('unconfirmed')->create([
-            'email' => 'john@example.com',
+            'username' => 'john@example.com',
             'password' => 'secret',
         ]);
 
         $response = $this->post('/login', [
-            'email' => 'john@example.com',
+            'username' => 'john@example.com',
             'password' => 'secret',
         ]);
 
@@ -73,21 +73,21 @@ class UserLoginTest extends TestCase
     }
 
     /** @test */
-    public function email_is_required()
+    public function username_is_required()
     {
         $response = $this->post('/login', [
-            'email' => '',
+            'username' => '',
             'password' => '12345',
         ]);
 
-        $response->assertSessionHasErrors('email');
+        $response->assertSessionHasErrors('username');
     }
 
     /** @test */
     public function password_is_required()
     {
         $response = $this->post('/login', [
-            'email' => 'john@example.com',
+            'username' => 'john@example.com',
             'password' => '',
         ]);
 
@@ -101,8 +101,8 @@ class UserLoginTest extends TestCase
 
         $this->expectException(ValidationException::class);
 
-        $this->post('/login', [
-            'email' => 'not-existend@user.com',
+        $this->post('/login',[
+            'username' => 'not-existend@user.com',
             'password' => '9s8gy8s9diguh4iev',
         ]);
     }

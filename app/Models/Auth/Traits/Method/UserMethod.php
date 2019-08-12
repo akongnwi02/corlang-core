@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models\Auth\Traits\Method;
+use Carbon\Carbon;
 
 /**
  * Trait UserMethod.
@@ -24,6 +25,17 @@ trait UserMethod
     }
 
     /**
+     * @return string
+     */
+    public function getNotificationAccount()
+    {
+        if ($this->notification_channel == 'sms') {
+            return $this->phone;
+        }
+        return $this->email;
+    }
+
+    /**
      * @param bool $size
      *
      * @return bool|\Illuminate\Contracts\Routing\UrlGenerator|mixed|string
@@ -36,7 +48,9 @@ trait UserMethod
                 if (! $size) {
                     $size = config('gravatar.default.size');
                 }
-
+                if (is_null($this->email)) {
+                    return url('storage/avatars/default.png');
+                }
                 return gravatar()->get($this->email, ['size' => $size]);
 
             case 'storage':
@@ -104,4 +118,12 @@ trait UserMethod
         return $this->isActive() && $this->isConfirmed() && ! $this->isPending();
     }
 
+    public function updateConfirmationCode()
+    {
+        $length = config('access.users.confirmation_code.length');
+
+        $this->confirmation_code =  rand(pow(10, $length-1), pow(10, $length)-1);
+
+        $this->code_sent_at = Carbon::now()->toDateTimeString();
+    }
 }

@@ -48,6 +48,7 @@ class RegisterController extends Controller
         $user = $this->userRepository->create($request->only(
             'first_name',
             'last_name',
+            'phone',
             'email',
             'password'
         ));

@@ -52,10 +52,12 @@ class UpdateUserTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
-            'timezone' => 'UTC',
+            'username' => 'john.doe',
+            'phone' => '653754334',
+            'notification_channel' => 'sms',
+            'location' => 'Douala / Cameroon',
             'roles' => ['administrator'],
         ]);
-
         $this->assertEquals('John', $user->fresh()->first_name);
         $this->assertEquals('Doe', $user->fresh()->last_name);
         $this->assertEquals('john@example.com', $user->fresh()->email);

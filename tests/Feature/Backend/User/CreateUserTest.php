@@ -44,7 +44,10 @@ class CreateUserTest extends TestCase
         $response = $this->post('/admin/auth/user', [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
+                'phone' => '237653754334',
+                'username' => 'john.doe',
                 'email' => 'john@example.com',
+                'notification_channel' => 'mail',
                 'password' => 'password',
                 'password_confirmation' => 'password',
                 'active' => '1',
@@ -55,6 +58,56 @@ class CreateUserTest extends TestCase
             ]);
 
         $response->assertSessionHasErrors('email');
+    }
+
+    /** @test */
+    public function user_username_needs_to_be_unique()
+    {
+        $this->loginAsAdmin();
+        factory(User::class)->create(['username' => 'john.doe']);
+
+        $response = $this->post('/admin/auth/user', [
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'username' => 'john.doe',
+                'email' => 'john@example.com',
+                'phone' => '237653754334',
+                'notification_channel' => 'mail',
+                'password' => 'password',
+                'password_confirmation' => 'password',
+                'active' => '1',
+                'confirmed' => '0',
+                'timezone' => 'UTC',
+                'confirmation_message' => '1',
+                'roles' => [1 => 'executive', 2 => 'user'],
+            ]);
+
+        $response->assertSessionHasErrors('username');
+    }
+
+    /** @test */
+    public function user_phone_number_needs_to_be_unique()
+    {
+        $this->loginAsAdmin();
+        factory(User::class)->create(['phone' => '237653754334']);
+
+        $response = $this->post('/admin/auth/user', [
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'username' => 'john.doe',
+                'email' => 'john@example.com',
+                'phone' => '237653754334',
+                'notification_channel' => 'mail',
+                'password' => 'password',
+                'password_confirmation' => 'password',
+                'active' => '1',
+                'confirmed' => '0',
+                'timezone' => 'UTC',
+                'confirmation_message' => '1',
+                'roles' => [1 => 'executive', 2 => 'user'],
+            ]);
+
+        $response->assertSessionHasErrors('phone');
     }
 
     /** @test */
@@ -70,12 +123,15 @@ class CreateUserTest extends TestCase
         $response = $this->post('/admin/auth/user', [
             'first_name' => 'John',
             'last_name' => 'Doe',
+            'username' => 'john.doe',
             'email' => 'john@example.com',
+            'notification_channel' => 'mail',
+            'phone' => '237653754334',
             'password' => 'password',
             'password_confirmation' => 'password',
             'active' => '1',
             'confirmed' => '1',
-            'timezone' => 'UTC',
+            'location' => 'Douala / Cameroon',
             'confirmation_message' => '1',
             'roles' => [1 => 'administrator'],
         ]);
@@ -85,6 +141,8 @@ class CreateUserTest extends TestCase
             [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
+                'username' => 'john.doe',
+                'phone' => '237653754334',
                 'email' => 'john@example.com',
                 'active' => 1,
                 'confirmed' => 1,
@@ -105,6 +163,9 @@ class CreateUserTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
+            'phone' => '237653754334',
+            'username' => 'john.doe',
+            'notification_channel' => 'mail',
             'password' => 'password',
             'password_confirmation' => 'password',
             'active' => '1',
@@ -113,7 +174,6 @@ class CreateUserTest extends TestCase
             'confirmation_message' => '1',
             'roles' => [1 => 'administrator'],
         ]);
-
         $response->assertSessionHas(['flash_success' => __('alerts.backend.users.created')]);
 
         $user = User::where('email', 'john@example.com')->first();

@@ -55,15 +55,18 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
             Route::post('register', [RegisterController::class, 'register'])->name('register.post');
         }
 
-        // Confirm Account Routes
-        Route::get('account/confirm/{token}', [ConfirmAccountController::class, 'confirm'])->name('account.confirm');
-        Route::get('account/confirm/resend/{uuid}', [ConfirmAccountController::class, 'sendConfirmationEmail'])->name('account.confirm.resend');
+        Route::post('account/confirm/{uuid}', [ConfirmAccountController::class, 'confirm'])->name('account.confirm');
+        Route::get('account/confirm/{uuid}', [ConfirmAccountController::class, 'showConfirmationForm'])->name('confirm');
+        Route::get('account/confirm/resend/{uuid}', [ConfirmAccountController::class, 'sendConfirmationCode'])->name('account.confirm.resend');
 
         // Password Reset Routes
-        Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.email');
-        Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email.post');
+        Route::get('password/reset/init', [ForgotPasswordController::class, 'showPasswordResetRequestForm'])->name('password.reset.init.form');
+        Route::post('password/reset/init', [ForgotPasswordController::class, 'initiatePasswordReset'])->name('password.reset.init.initiate');
+        Route::get('password/code/send/{uuid}', [ForgotPasswordController::class, 'sendPasswordResetCode'])->name('password.reset.code.send');
+        Route::get('password/code/confirm/{uuid}', [ForgotPasswordController::class, 'showPasswordRestCodeForm'])->name('password.reset.code.form');
+        Route::post('password/code/confirm/{uuid}', [ForgotPasswordController::class, 'confirmPasswordResetCode'])->name('password.reset.code.confirm');
 
-        Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset.form');
-        Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset');
+        Route::get('password/reset/{uuid}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset.form');
+        Route::post('password/reset/{uuid}', [ResetPasswordController::class, 'reset'])->name('password.reset');
     });
 });

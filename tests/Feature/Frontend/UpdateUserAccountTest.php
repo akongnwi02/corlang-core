@@ -14,22 +14,6 @@ class UpdateUserAccountTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * helper method for valid user data with option to override.
-     * @param array $userData
-     * @return array
-     */
-    protected function getValidUserData($userData = [])
-    {
-        return array_merge([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'email' => 'john@example.com',
-            'timezone' => 'UTC',
-            'avatar_type' => 'gravatar',
-        ], $userData);
-    }
-
     /** @test */
     public function only_authenticated_users_can_access_their_account()
     {
@@ -37,18 +21,19 @@ class UpdateUserAccountTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_update_his_profile()
+    public function a_user_can_update_his_profile_with_email()
     {
-        $user = factory(User::class)->create();
-        config(['access.users.change_email' => true]);
+        $user = factory(User::class)->create([
+            'notification_channel' => 'sms'
+        ]);
 
         $this->actingAs($user)
-            ->patch('/profile/update', $this->getValidUserData([
+            ->patch('/profile/update', [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
                 'email' => 'john@example.com',
                 'avatar_type' => 'gravatar',
-            ]));
+            ]);
         $user = $user->fresh();
 
         $this->assertEquals($user->first_name, 'John');
@@ -58,14 +43,64 @@ class UpdateUserAccountTest extends TestCase
     }
 
     /** @test */
-    public function the_email_is_required()
+    public function a_user_can_update_his_profile_with_phone()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create([
+            'notification_channel' => 'mail',
+        ]);
+
+        $this->actingAs($user)
+            ->patch('/profile/update',[
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'phone' => '653754334',
+                'avatar_type' => 'gravatar',
+            ]);
+        $user = $user->fresh();
+
+        $this->assertEquals($user->first_name, 'John');
+        $this->assertEquals($user->last_name, 'Doe');
+        $this->assertEquals($user->phone, '237653754334');
+        $this->assertEquals($user->avatar_type, 'gravatar');
+    }
+
+    /** @test */
+    public function the_email_cannot_be_changed_if_notification_channel_is_mail()
+    {
+        $user = factory(User::class)->create([
+            'notification_channel' => 'mail',
+        ]);
 
         $response = $this->actingAs($user)
-            ->patch('/profile/update', $this->getValidUserData(['email' => '']));
+            ->followingRedirects()
+            ->patch('/profile/update', [
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'email' => 'john@example.com',
+                'avatar_type' => 'gravatar',
+            ]);
 
-        $response->assertSessionHasErrors(['email']);
+        $this->assertContains(__('exceptions.frontend.auth.cannot_change_email'), $response->getContent());
+    }
+
+    /** @test */
+    public function the_phone_number_cannot_be_changed_if_notification_channel_is_sms()
+    {
+        $user = factory(User::class)->create([
+            'notification_channel' => 'sms',
+        ]);
+
+        $response = $this->actingAs($user)
+            ->followingRedirects()
+            ->patch('/profile/update', [
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'phone' => '653754334',
+                'avatar_type' => 'gravatar',
+            ]);
+
+        $this->assertContains(__('exceptions.frontend.auth.cannot_change_phone'), $response->getContent());
+
     }
 
     /** @test */
@@ -74,8 +109,9 @@ class UpdateUserAccountTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)
-            ->patch('/profile/update', $this->getValidUserData(['first_name' => '']));
-
+            ->patch('/profile/update', [
+                'first_name' => '',
+        ]);
         $response->assertSessionHasErrors(['first_name']);
     }
 
@@ -85,7 +121,9 @@ class UpdateUserAccountTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)
-            ->patch('/profile/update', $this->getValidUserData(['last_name' => '']));
+            ->patch('/profile/update', [
+                'last_name' => '',
+            ]);
 
         $response->assertSessionHasErrors(['last_name']);
     }
@@ -96,7 +134,9 @@ class UpdateUserAccountTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)
-            ->patch('/profile/update', $this->getValidUserData(['avatar_type' => '']));
+            ->patch('/profile/update', [
+                'avatar_type' => ''
+            ]);
 
         $response->assertSessionHasErrors(['avatar_type']);
     }
@@ -108,42 +148,15 @@ class UpdateUserAccountTest extends TestCase
         Storage::fake('public');
 
         $this->actingAs($user)
-            ->patch('/profile/update', $this->getValidUserData([
+            ->patch('/profile/update', [
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'phone' => '653754334',
                 'avatar_type' => 'storage',
                 'avatar_location' => UploadedFile::fake()->image('avatar.jpg'),
-            ]));
+            ]);
 
         Storage::disk('public')->assertExists("{$user->fresh()->avatar_location}");
     }
 
-    /** @test */
-    public function the_email_needs_to_be_confirmed_if_confirm_email_is_true()
-    {
-        $user = factory(User::class)->create();
-        config(['access.users.confirm_email' => true]);
-        config(['access.users.change_email' => true]);
-        Notification::fake();
-
-        $this->assertEquals($user->confirmed, 1);
-
-        $this->actingAs($user)
-            ->patch('/profile/update', $this->getValidUserData());
-
-        $this->assertEquals($user->fresh()->confirmed, 0);
-        Notification::assertSentTo($user, UserNeedsConfirmation::class);
-    }
-
-    /** @test */
-    public function the_email_needs_not_to_be_confirmed_if_confirm_email_is_false()
-    {
-        $user = factory(User::class)->create();
-        config(['access.users.confirm_email' => false]);
-
-        $this->assertEquals($user->confirmed, 1);
-
-        $this->actingAs($user)
-            ->patch('/profile/update', $this->getValidUserData());
-
-        $this->assertEquals($user->fresh()->confirmed, 1);
-    }
 }

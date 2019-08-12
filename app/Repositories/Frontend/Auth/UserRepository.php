@@ -12,6 +12,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Events\Frontend\Auth\UserConfirmed;
+use App\Events\Frontend\Auth\UserResetConfirmed;
 use App\Events\Frontend\Auth\UserProviderRegistered;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
 
@@ -91,19 +92,28 @@ class UserRepository extends BaseRepository
      */
     public function create(array $data)
     {
+        // Username is phone or email
+        if ($this->isPhoneNumber($data['username'])) {
+            $data['phone'] = $this->cleanPhoneNumber($data['username']);
+            // assign cleaned phone number to username
+            $data['username'] = $data['phone'];
+        } else {
+            $data['email'] = $data['username'];
+        }
+
         return DB::transaction(function () use ($data) {
             $user = parent::create([
-                'first_name'        => $data['first_name'],
-                'last_name'         => $data['last_name'],
-                'username'          => $data['username'],
-                // Username should be a phone or email
-                'email'             => preg_match('/^(237|00237|\+237)?[6|2|3]{1}\d{8}$/', $data['username']) ? null : $data['username'],
-                'phone'             => preg_match('/^(237|00237|\+237)?[6|2|3]{1}\d{8}$/', $data['username']) ? $data['username'] : null,
-                'confirmation_code' => md5(uniqid(mt_rand(), true)),
-                'active'            => 1,
-                'password'          => $data['password'],
+                'first_name'           => $data['first_name'],
+                'last_name'            => $data['last_name'],
+                'username'             => $data['username'],
+                'phone'                => @$data['phone'] ?: null,
+                'email'                => @$data['email'] ?: null,
+                'confirmation_code'    => md5(uniqid(mt_rand(), true)),
+                'notification_channel' => isset($data['phone']) ? 'sms' : 'mail',
+                'active'               => 1,
+                'password'             => $data['password'],
                 // If users require approval or needs to confirm email
-                'confirmed'         => config('access.users.requires_approval') || config('access.users.confirm_email') ? 0 : 1,
+                'confirmed'            => config('access.users.requires_approval') || config('access.users.confirm_account') ? 0 : 1,
             ]);
 
             if ($user) {
@@ -120,9 +130,14 @@ class UserRepository extends BaseRepository
              *
              * If this is a social account they are confirmed through the social provider by default
              */
-            if (config('access.users.confirm_email')) {
-                // Pretty much only if account approval is off, confirm email is on, and this isn't a social account.
-                $user->notify(new UserNeedsConfirmation($user->confirmation_code));
+            if (config('access.users.confirm_account')) {
+                // Pretty much only if account approval is off, confirm account is on, and this isn't a social account.
+
+                $user->updateConfirmationCode();
+
+                $user->save();
+
+                $user->notify(new UserNeedsConfirmation());
             }
 
             /*
@@ -135,16 +150,16 @@ class UserRepository extends BaseRepository
     /**
      * @param       $id
      * @param array $input
-     * @param bool|UploadedFile  $image
+     * @param bool|UploadedFile $image
      *
      * @return array|bool
      * @throws GeneralException
      */
     public function update($id, array $input, $image = false)
     {
-        $user = $this->getById($id);
-        $user->first_name = $input['first_name'];
-        $user->last_name = $input['last_name'];
+        $user              = $this->getById($id);
+        $user->first_name  = $input['first_name'];
+        $user->last_name   = $input['last_name'];
         $user->avatar_type = $input['avatar_type'];
 
         // Upload profile image if necessary
@@ -154,7 +169,7 @@ class UserRepository extends BaseRepository
             // No image being passed
             if ($input['avatar_type'] == 'storage') {
                 // If there is no existing image
-                if (! strlen(auth()->user()->avatar_location)) {
+                if (!strlen(auth()->user()->avatar_location)) {
                     throw new GeneralException('You must supply a profile image.');
                 }
             } else {
@@ -164,14 +179,6 @@ class UserRepository extends BaseRepository
                 }
 
                 $user->avatar_location = null;
-            }
-        }
-
-        // username check
-        if (isset($input['username'])) {
-            if ($user->username != $input['username']) {
-                //cannot change username
-                throw new GeneralException(__('exceptions.frontend.auth.cannot_change_username'));
             }
         }
 
@@ -192,8 +199,9 @@ class UserRepository extends BaseRepository
             $user->email = $input['email'];
         }
         // Phone number check
-        $input['phone'] = substr_replace($input['phone'], '237', 0, -9);
         if (isset($input['phone'])) {
+            $input['phone'] = $this->cleanPhoneNumber($input['phone']);
+
             // cannot change phone if it's default notification channel
             if ($user->notification_channel == 'sms') {
                 throw new GeneralException(__('exceptions.frontend.auth.cannot_change_phone'));
@@ -205,18 +213,14 @@ class UserRepository extends BaseRepository
                     throw new GeneralException(__('exceptions.frontend.auth.phone_taken'));
                 }
             }
-
             $user->phone = $input['phone'];
         }
-
-
-
 
 //            // Force the user to re-verify his account if config is set
 //            if (config('access.users.confirm_account')) {
 //                $user->confirmation_code = md5(uniqid(mt_rand(), true));
 //                $user->confirmed = 0;
-//                $user->notify(new UserNeedsConfirmation($user->confirmation_code));
+//                $user->notify(new UserNeedsConfirmation());
 //            }
 //
 //            $updated = $user->save();
@@ -257,18 +261,19 @@ class UserRepository extends BaseRepository
     /**
      * @param $code
      *
+     * @param $user
      * @return bool
      * @throws GeneralException
      */
-    public function confirm($code)
+    public function confirm($code, $user)
     {
-        $user = $this->findByConfirmationCode($code);
 
         if ($user->confirmed == 1) {
             throw new GeneralException(__('exceptions.frontend.auth.confirmation.already_confirmed'));
         }
 
         if ($user->confirmation_code == $code) {
+
             $user->confirmed = 1;
 
             event(new UserConfirmed($user));
@@ -277,6 +282,26 @@ class UserRepository extends BaseRepository
         }
 
         throw new GeneralException(__('exceptions.frontend.auth.confirmation.mismatch'));
+    }
+
+    /**
+     * @param $code
+     * @param $user
+     * @return mixed
+     * @throws GeneralException
+     */
+    public function confirmResetCode($code, $user)
+    {
+        if ($user->confirmation_code == $code) {
+
+            event(new UserResetConfirmed($user));
+
+            $user->reset_confirmed = 1;
+
+            return $user->save();
+        }
+
+        throw new GeneralException(__('exceptions.frontend.auth.confirmation.code_reset_not_found'));
     }
 
     /**
@@ -299,9 +324,9 @@ class UserRepository extends BaseRepository
          * The true flag indicate that it is a social account
          * Which triggers the script to use some default values in the create method
          */
-        if (! $user) {
+        if (!$user) {
             // Registration is not enabled
-            if (! config('access.registration')) {
+            if (!config('access.registration')) {
                 throw new GeneralException(__('exceptions.frontend.auth.registration_disabled'));
             }
 
@@ -310,11 +335,11 @@ class UserRepository extends BaseRepository
 
             $user = parent::create([
                 'first_name'  => $nameParts['first_name'],
-                'last_name'  => $nameParts['last_name'],
-                'email' => $user_email,
-                'active' => 1,
-                'confirmed' => 1,
-                'password' => null,
+                'last_name'   => $nameParts['last_name'],
+                'email'       => $user_email,
+                'active'      => 1,
+                'confirmed'   => 1,
+                'password'    => null,
                 'avatar_type' => $provider,
             ]);
 
@@ -322,7 +347,7 @@ class UserRepository extends BaseRepository
         }
 
         // See if the user has logged in with this social account before
-        if (! $user->hasProvider($provider)) {
+        if (!$user->hasProvider($provider)) {
             // Gather the provider data for saving and associate it with the user
             $user->providers()->save(new SocialAccount([
                 'provider'    => $provider,
@@ -333,8 +358,8 @@ class UserRepository extends BaseRepository
         } else {
             // Update the users information, token and avatar can be updated.
             $user->providers()->update([
-                'token'       => $data->token,
-                'avatar'      => $data->avatar,
+                'token'  => $data->token,
+                'avatar' => $data->avatar,
             ]);
 
             $user->avatar_type = $provider;
@@ -352,25 +377,53 @@ class UserRepository extends BaseRepository
      */
     protected function getNameParts($fullName)
     {
-        $parts = array_values(array_filter(explode(' ', $fullName)));
-        $size = count($parts);
+        $parts  = array_values(array_filter(explode(' ', $fullName)));
+        $size   = count($parts);
         $result = [];
 
         if (empty($parts)) {
             $result['first_name'] = null;
-            $result['last_name'] = null;
+            $result['last_name']  = null;
         }
 
-        if (! empty($parts) && $size == 1) {
+        if (!empty($parts) && $size == 1) {
             $result['first_name'] = $parts[0];
-            $result['last_name'] = null;
+            $result['last_name']  = null;
         }
 
-        if (! empty($parts) && $size >= 2) {
+        if (!empty($parts) && $size >= 2) {
             $result['first_name'] = $parts[0];
-            $result['last_name'] = $parts[1];
+            $result['last_name']  = $parts[1];
         }
 
         return $result;
     }
+
+    public function isPhoneNumber($username)
+    {
+        return preg_match('/^(237|00237|\+237)?[6|2|3]{1}\d{8}$/', $username);
+    }
+
+    public function cleanPhoneNumber($phone)
+    {
+        return substr_replace($phone, '237', 0, -9);
+    }
+
+    /**
+     * @param $username
+     * @return mixed
+     * @throws GeneralException
+     */
+    public function findByUsername($username)
+    {
+        $user = $this->model
+            ->where('username', $username)
+            ->first();
+        if ($user instanceof $this->model) {
+            return $user;
+        }
+
+        throw new GeneralException(__('exceptions.backend.access.users.not_found'));
+    }
+
 }

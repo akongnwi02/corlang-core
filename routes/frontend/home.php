@@ -19,7 +19,7 @@ Route::post('contact/send', [ContactController::class, 'send'])->name('contact.s
  * All route names are prefixed with 'frontend.'
  * These routes can not be hit if the password is expired
  */
-Route::group(['middleware' => ['auth', 'password_expires']], function () {
+Route::group(['middleware' => ['auth', 'password_expires', ]], function () {
     Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
         /*
          * User Dashboard Specific

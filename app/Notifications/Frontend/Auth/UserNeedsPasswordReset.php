@@ -2,7 +2,10 @@
 
 namespace App\Notifications\Frontend\Auth;
 
+use App\Channels\SmsChannel;
+use App\Services\Notifications\Sms\SmsMessage;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\NexmoMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 
@@ -12,22 +15,6 @@ use Illuminate\Notifications\Messages\MailMessage;
 class UserNeedsPasswordReset extends Notification
 {
     use Queueable;
-    /**
-     * The password reset token.
-     *
-     * @var string
-     */
-    public $token;
-
-    /**
-     * UserNeedsPasswordReset constructor.
-     *
-     * @param $token
-     */
-    public function __construct($token)
-    {
-        $this->token = $token;
-    }
 
     /**
      * Get the notification's channels.
@@ -38,7 +25,10 @@ class UserNeedsPasswordReset extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'sms'];
+        if ($notifiable->notification_channel == 'sms') {
+            return [SmsChannel::class];
+        }
+        return [$notifiable->notification_channel];
     }
 
     /**
@@ -52,8 +42,42 @@ class UserNeedsPasswordReset extends Notification
     {
         return (new MailMessage())
             ->subject(app_name().': '.__('strings.emails.auth.password_reset_subject'))
+            ->greeting(__('strings.emails.auth.user_greeting', ['first_name' => $notifiable->first_name]))
             ->line(__('strings.emails.auth.password_cause_of_email'))
-            ->action(__('buttons.emails.auth.reset_password'), route('frontend.auth.password.reset.form', $this->token))
+            ->line(__('strings.emails.auth.use_code_to_reset_email'))
+            ->line($notifiable->confirmation_code)
             ->line(__('strings.emails.auth.password_if_not_requested'));
+    }
+
+    /**
+     * @param  mixed $notifiable
+     *
+     * @return NexmoMessage
+     */
+    public function toNexmo($notifiable)
+    {
+        return (new NexmoMessage())
+            ->content(__('strings.emails.auth.use_code_to_confirm_sms', [
+                'first_name' => $notifiable->first_name,
+                'code' => $notifiable->confirmation_code,
+                'app_name' => app_name(),
+            ]))
+            ->unicode();
+    }
+
+    /**
+     * @param $notifiable
+     *
+     * @return SmsMessage
+     */
+    public function toSms($notifiable)
+    {
+        return (new SmsMessage())
+            ->content(__('use_code_to_reset_sms', [
+                'first_name' => $notifiable->first_name,
+                'code' => $notifiable->confirmation_code,
+                'app_name' => app_name(),
+            ]))
+            ->to($notifiable->phone_number);
     }
 }

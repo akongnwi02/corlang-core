@@ -32,9 +32,10 @@ class UnusedPassword implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param  string $attribute
+     * @param  mixed $value
      * @return bool
+     * @throws \App\Exceptions\GeneralException
      */
     public function passes($attribute, $value)
     {
@@ -47,7 +48,7 @@ class UnusedPassword implements Rule
             if (is_numeric($this->user)) {
                 $this->user = resolve(BackendUserRepository::class)->getById($this->user);
             } else {
-                $this->user = resolve(FrontendUserRepository::class)->findByPasswordResetToken($this->user);
+                $this->user = resolve(FrontendUserRepository::class)->findByUuid($this->user);
             }
         }
 

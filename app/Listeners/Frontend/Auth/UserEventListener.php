@@ -20,17 +20,18 @@ class UserEventListener
         $event->user->fill([
             'last_login_at' => Carbon::now()->toDateTimeString(),
             'last_login_ip' => $ip_address,
+            'user_agent' => request()->header('User-Agent'),
         ]);
 
         // Update the timezone via IP address
         $geoip = geoip($ip_address);
 
-        if ($event->user->timezone !== $geoip['timezone']) {
-            // Update the users timezone
-            $event->user->fill([
-                'timezone' => $geoip['timezone'],
-            ]);
-        }
+        $event->user->fill([
+            'location' => $geoip['city'] . ' / ' . $geoip['country'],
+        ]);
+
+        // Do some cleanup
+        $event->user->reset_confirmed = 0;
 
         $event->user->save();
 
@@ -70,6 +71,14 @@ class UserEventListener
     }
 
     /**
+     * @param $event
+     */
+    public function onResetConfirmed($event)
+    {
+        \Log::info('User Password Reset Confirmed: '.$event->user->full_name);
+    }
+
+    /**
      * Register the listeners for the subscriber.
      *
      * @param \Illuminate\Events\Dispatcher $events
@@ -99,6 +108,11 @@ class UserEventListener
         $events->listen(
             \App\Events\Frontend\Auth\UserConfirmed::class,
             'App\Listeners\Frontend\Auth\UserEventListener@onConfirmed'
+        );
+
+        $events->listen(
+            \App\Events\Frontend\Auth\UserResetConfirmed::class,
+            'App\Listeners\Frontend\Auth\UserEventListener@onResetConfirmed'
         );
     }
 }

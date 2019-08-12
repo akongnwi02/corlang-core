@@ -100,6 +100,7 @@ return [
                             'last_name'    => 'Nom',
                             'status'       => 'Statut',
                             'timezone'     => 'Timezone',
+                            'location'     => 'Location',
                         ],
                     ],
                 ],

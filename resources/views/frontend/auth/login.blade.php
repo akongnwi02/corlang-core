@@ -62,7 +62,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group text-right">
-                                    <a href="{{ route('frontend.auth.password.reset') }}">@lang('labels.frontend.passwords.forgot_password')</a>
+                                    <a href="{{ route('frontend.auth.password.reset.init.form') }}">@lang('labels.frontend.passwords.forgot_password')</a>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->

@@ -30,11 +30,15 @@ class CreateUsersTable extends Migration
             $table->timestamp('password_changed_at')->nullable();
             $table->tinyInteger('active')->default(1)->unsigned();
             $table->string('confirmation_code')->nullable();
+            $table->string('code_sent_at')->nullable();
             $table->enum('notification_channel', ['mail', 'sms']);
-            $table->boolean('confirmed')->default(config('access.users.confirm_email') ? false : true);
-            $table->string('timezone')->nullable();
+            $table->boolean('confirmed')->default(config('access.users.confirm_account') ? false : true);
+            $table->boolean('to_be_logged_out')->default(false);
+            $table->string('location')->nullable();
+            $table->boolean('reset_confirmed')->default(false);
             $table->timestamp('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
+            $table->string('user_agent')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

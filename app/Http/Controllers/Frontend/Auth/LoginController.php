@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Auth;
 
 use App\Helpers\Auth\Auth;
+use App\Repositories\Frontend\Auth\UserRepository;
 use Illuminate\Http\Request;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
@@ -71,8 +72,9 @@ class LoginController extends Controller
             }
 
             // Otherwise see if they want to resent the confirmation e-mail
+            return redirect()->route('frontend.auth.confirm', [$user->{$user->getUuidName()}])
+                ->withFlashDanger(__('exceptions.frontend.auth.confirmation.confirm_pending', ['account' => $user->getNotificationAccount(),'url' => route('frontend.auth.account.confirm.resend', $user->{$user->getUuidName()})]));
 
-            throw new GeneralException(__('exceptions.frontend.auth.confirmation.resend', ['url' => route('frontend.auth.account.confirm.resend', $user->{$user->getUuidName()})]));
         } elseif (! $user->isActive()) {
             auth()->logout();
             throw new GeneralException(__('exceptions.frontend.auth.deactivated'));
@@ -86,6 +88,38 @@ class LoginController extends Controller
         }
 
         return redirect()->intended($this->redirectPath());
+    }
+
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param UserRepository $userRepository
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function login(Request $request, UserRepository $userRepository)
+    {
+        $this->validateLogin($request);
+
+        if ($userRepository->isPhoneNumber($request['username'])) {
+            $request['username'] = $userRepository->cleanPhoneNumber($request['username']);
+        }
+
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
     }
 
     /**

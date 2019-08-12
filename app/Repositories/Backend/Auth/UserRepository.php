@@ -130,7 +130,7 @@ class UserRepository extends BaseRepository
 
                 //Send confirmation email if requested and account approval is off
                 if (isset($data['confirmation_message']) && $user->confirmed == 0 && !config('access.users.requires_approval')) {
-                    $user->notify(new UserNeedsConfirmation($user->confirmation_code));
+                    $user->notify(new UserNeedsConfirmation());
                 }
 
                 event(new UserCreated($user));
@@ -245,6 +245,7 @@ class UserRepository extends BaseRepository
         }
 
         $user->confirmed = 1;
+        $user->to_be_logged_out = false;
         $confirmed       = $user->save();
 
         if ($confirmed) {
@@ -284,6 +285,7 @@ class UserRepository extends BaseRepository
         }
 
         $user->confirmed = 0;
+        $user->to_be_logged_out = true;
         $unconfirmed     = $user->save();
 
         if ($unconfirmed) {
@@ -378,4 +380,5 @@ class UserRepository extends BaseRepository
             }
         }
     }
+
 }

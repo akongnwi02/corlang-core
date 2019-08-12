@@ -15,13 +15,13 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
+        'domain'   => env('MAILGUN_DOMAIN'),
+        'secret'   => env('MAILGUN_SECRET'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
     ],
 
     'ses' => [
-        'key' => env('SES_KEY'),
+        'key'    => env('SES_KEY'),
         'secret' => env('SES_SECRET'),
         'region' => env('SES_REGION', 'us-east-1'),
     ],
@@ -30,9 +30,9 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
-    'stripe' => [
-        'model' => App\Models\Auth\User::class,
-        'key' => env('STRIPE_KEY'),
+    'stripe'    => [
+        'model'  => App\Models\Auth\User::class,
+        'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
 
@@ -84,7 +84,7 @@ return [
          * Default scopes array also has: 'https://www.googleapis.com/auth/plus.login'
          * https://medium.com/@njovin/fixing-laravel-socialite-s-google-permissions-2b0ef8c18205
          */
-        'scopes' => [
+        'scopes'        => [
             'https://www.googleapis.com/auth/plus.me',
             'https://www.googleapis.com/auth/plus.profile.emails.read',
         ],
@@ -109,5 +109,18 @@ return [
         'redirect'      => env('TWITTER_REDIRECT'),
         'scopes'        => [],
         'with'          => [],
+    ],
+
+    'nexmo' => [
+        'key'      => env('NEXMO_CLIENT_KEY'),
+        'secret'   => env('NEXMO_CLIENT_SECRET'),
+        'sms_from' => env('NEXMO_CLIENT_SMS_FROM'),
+    ],
+
+    'sms' => [
+        'key'     => env('SMS_CLIENT_KEY'),
+        'secret'  => env('SMS_CLIENT_SECRET'),
+        'from'    => env('SMS_CLIENT_SMS_FROM'),
+        'api_url' => env('SMS_CLIENT_API_URL'),
     ],
 ];

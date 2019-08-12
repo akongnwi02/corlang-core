@@ -17,16 +17,19 @@ use App\Models\Auth\User;
 
 $factory->define(User::class, function (Generator $faker) {
     return [
-        'uuid' 			    => Uuid::generate(4)->string,
-        'first_name'        => $faker->firstName,
-        'last_name'         => $faker->lastName,
-        'email'             => $faker->safeEmail,
-        'password'          => 'secret',
-        'password_changed_at' => null,
-        'remember_token'    => str_random(10),
-        'confirmation_code' => md5(uniqid(mt_rand(), true)),
-        'active' => 1,
-        'confirmed' => 1,
+        'uuid'                 => $faker->uuid,
+        'first_name'           => $faker->firstName,
+        'last_name'            => $faker->lastName,
+        'email'                => $faker->safeEmail,
+        'phone'                => $faker->phoneNumber,
+        'username'             => $faker->userName,
+        'notification_channel' => 'mail',
+        'password'             => 'secret',
+        'password_changed_at'  => null,
+        'remember_token'       => str_random(10),
+        'confirmation_code'    => md5(uniqid(mt_rand(), true)),
+        'active'               => 1,
+        'confirmed'            => 1,
     ];
 });
 
@@ -45,6 +48,18 @@ $factory->state(User::class, 'inactive', function () {
 $factory->state(User::class, 'confirmed', function () {
     return [
         'confirmed' => 1,
+    ];
+});
+
+$factory->state(User::class, 'resetUnconfirmed', function () {
+    return [
+        'reset_confirmed' => 0,
+    ];
+});
+
+$factory->state(User::class, 'resetConfirmed', function () {
+    return [
+        'reset_confirmed' => 1,
     ];
 });
 

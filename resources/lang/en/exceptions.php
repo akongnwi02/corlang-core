@@ -59,16 +59,20 @@ return [
     'frontend' => [
         'auth' => [
             'confirmation' => [
-                'already_confirmed' => 'Your account is already confirmed.',
-                'confirm'           => 'Confirm your account!',
-                'created_confirm'   => 'Your account was successfully created. We have sent you a message to confirm your account.',
-                'created_pending'   => 'Your account was successfully created and is pending approval. A message will be sent when your account is approved.',
-                'mismatch'          => 'Your confirmation code does not match.',
-                'not_found'         => 'That confirmation code does not exist.',
-                'pending'           => 'Your account is currently pending approval.',
-                'resend'            => 'Your account is not confirmed. Please click the confirmation link in your e-mail, or <a href=":url">click here</a> to resend the confirmation e-mail.',
-                'success'           => 'Your account has been successfully confirmed!',
-                'resent'            => 'A new confirmation e-mail has been sent to the address on file.',
+                'already_confirmed'    => 'Your account is already confirmed.',
+                'confirm'              => 'Confirm your account!',
+                'created_confirm'      => 'Your account was successfully created. We have sent a code to :account to confirm your account.',
+                'created_pending'      => 'Your account was successfully created and is pending approval. A message will be sent when your account is approved.',
+                'mismatch'             => 'Your confirmation code does not match.',
+                'not_found'            => 'That confirmation code does not exist.',
+                'pending'              => 'Your account is currently pending approval.',
+                'resend'               => 'Your account is not confirmed. Please click the confirmation link in your e-mail, or <a href=":url">click here</a> to resend the confirmation e-mail.',
+                'confirm_pending'      => 'Please confirm your account. Enter the code sent to :account, or <a href=":url">click here</a> to resend the code.',
+                'success'              => 'Your account has been successfully confirmed!',
+                'resent'               => 'A new confirmation e-mail has been sent to the address on file.',
+                'code_resent'          => 'A new confirmation code has been sent to :account. <a href=":url">Resend</a>',
+                'code_reset_resent'    => 'A new password reset code has been sent to :account. <a href=":url">Resend</a>',
+                'code_reset_not_found' => 'The password reset code does not exist',
             ],
 
             'deactivated'            => 'Your account has been deactivated.',
@@ -79,8 +83,11 @@ return [
             'cannot_change_username' => 'You cannot change your username. Please contact support',
 
             'password' => [
-                'change_mismatch' => 'That is not your old password.',
-                'reset_problem'   => 'There was a problem resetting your password. Please resend the password reset email.',
+                'change_mismatch'  => 'That is not your old password.',
+                'reset_successful' => 'Password reset successful',
+                'reset_code_confirmed' => 'Password reset confirmed successfully. Choose a new password',
+                'reset_problem'    => 'There was a problem resetting your password. Please resend the password reset email.',
+                'reset_not_confirmed'    => 'There was a problem resetting your password. Please resend the password reset code.',
             ],
 
             'registration_disabled' => 'Registration is currently closed.',

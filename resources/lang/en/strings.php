@@ -72,6 +72,7 @@ return [
             'account_confirmed' => 'Your account has been confirmed.',
             'error'                   => 'Whoops!',
             'greeting'                => 'Hello!',
+            'user_greeting'                => 'Hello :first_name!',
             'regards'                 => 'Regards,',
             'trouble_clicking_button' => 'If you’re having trouble clicking the ":action_text" button, copy and paste the URL below into your web browser:',
             'thank_you_for_using_app' => 'Thank you for using our application!',
@@ -82,6 +83,10 @@ return [
             'reset_password'            => 'Click here to reset your password',
 
             'click_to_confirm' => 'Click here to confirm your account:',
+            'use_code_to_confirm' => 'Use the code below to confirm your account:',
+            'use_code_to_reset_email' => 'Use the code below to reset your password:',
+            'use_code_to_confirm_sms' => 'Hello :first_name! Use the code :code to confirm your account on :app_name.',
+            'use_code_to_reset_sms' => 'Hello :first_name! Use the code :code to reset your password on :app_name.',
         ],
 
         'contact' => [

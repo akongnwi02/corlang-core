@@ -103,11 +103,12 @@ return [
             'length' => 6,
 
             /*
-             * confirmation code expiration time in minutes
+             * Confirmation code expiration time in minutes
+             *
+             * false for no expiration
              */
-            'expiration_time' => 1
-
-        ]
+            'expiration_time' => 1,
+        ],
     ],
 
     /*
@@ -126,9 +127,5 @@ return [
      * Makes it so social logins can not change passwords, etc.
      */
     'socialite_session_name' => 'socialite_provider',
-
-    /*
-     * Confirmation code
-     */
 
 ];

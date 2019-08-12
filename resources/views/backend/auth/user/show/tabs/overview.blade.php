@@ -37,8 +37,8 @@
             </tr>
 
             <tr>
-                <th>@lang('labels.backend.access.users.tabs.content.overview.timezone')</th>
-                <td>{{ $user->timezone }}</td>
+                <th>@lang('labels.backend.access.users.tabs.content.overview.location')</th>
+                <td>{{ $user->location }}</td>
             </tr>
 
             <tr>

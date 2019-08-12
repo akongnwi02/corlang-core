@@ -117,7 +117,7 @@ class UserRepository extends BaseRepository
                 'active'            => 1,
                 'password'          => $data['password'],
                 // If users require approval or needs to confirm email
-                'confirmed'         => config('access.users.requires_approval') || config('access.users.confirm_email') ? 0 : 1,
+                'confirmed'         => config('access.users.requires_approval') || config('access.users.confirm_account') ? 0 : 1,
             ]);
 
             if ($user) {
@@ -134,7 +134,7 @@ class UserRepository extends BaseRepository
              *
              * If this is a social account they are confirmed through the social provider by default
              */
-            if (config('access.users.confirm_email')) {
+            if (config('access.users.confirm_account')) {
                 // Pretty much only if account approval is off, confirm email is on, and this isn't a social account.
                 $user->notify(new UserNeedsConfirmation($user->confirmation_code));
             }
@@ -190,7 +190,7 @@ class UserRepository extends BaseRepository
                 }
 
                 // Force the user to re-verify his email address if config is set
-                if (config('access.users.confirm_email')) {
+                if (config('access.users.confirm_account')) {
                     $user->confirmation_code = md5(uniqid(mt_rand(), true));
                     $user->confirmed = 0;
                     $user->notify(new UserNeedsConfirmation($user->confirmation_code));

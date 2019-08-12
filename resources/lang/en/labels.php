@@ -109,6 +109,7 @@ return [
                             'phone'         => 'Telephone',
                             'status'        => 'Status',
                             'timezone'      => 'Timezone',
+                            'location'      => 'Location',
                         ],
                     ],
                 ],
@@ -134,6 +135,11 @@ return [
             'button'    => 'Send Information',
         ],
 
+        'confirm'   => [
+            'confirm_account_box_title' => 'Confirm Your Account',
+            'confirm_account_button'    => 'Confirm Account',
+        ]
+        ,
         'passwords' => [
             'expired_password_box_title'      => 'Your password has expired.',
             'forgot_password'                 => 'Forgot Your Password?',
@@ -141,6 +147,9 @@ return [
             'reset_password_button'           => 'Reset Password',
             'update_password_button'          => 'Update Password',
             'send_password_reset_link_button' => 'Send Password Reset Link',
+            'send_password_reset_code'        => 'Send Password Reset Code',
+            'confirm_code_button' => 'Confirm Code',
+
         ],
 
         'user' => [

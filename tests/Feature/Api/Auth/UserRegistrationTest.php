@@ -85,7 +85,7 @@ class UserRegistrationTest extends TestCase
     /** @test */
     public function if_email_confirmation_is_enabled_then_user_gets_notified()
     {
-        config(['access.users.confirm_email' => true]);
+        config(['access.users.confirm_account' => true]);
         Notification::fake();
 
         $this->registerUser(['email' => 'don@example.com']);

@@ -126,19 +126,19 @@ return [
     */
 
     'default_location' => [
-        'ip' => '127.0.0.0',
-        'iso_code' => 'US',
-        'country' => 'United States',
-        'city' => 'New Haven',
-        'state' => 'CT',
-        'state_name' => 'Connecticut',
-        'postal_code' => '06510',
-        'lat' => 41.31,
-        'lon' => -72.92,
-        'timezone' => 'America/New_York',
-        'continent' => 'NA',
+        'ip' => '127.0.0.1',
+        'iso_code' => 'CMR',
+        'country' => 'Cameroon',
+        'city' => 'Douala',
+        'state' => 'LT',
+        'state_name' => 'Littoral',
+        'postal_code' => '00237',
+        'lat' => 4.05,
+        'lon' => 9.7,
+        'timezone' => 'Cameroon/Douala',
+        'continent' => 'Africa',
         'default' => true,
-        'currency' => 'USD',
+        'currency' => 'CFA',
     ],
 
 ];

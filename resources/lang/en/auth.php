@@ -17,8 +17,9 @@ return [
     'general_error'         => 'You do not have access to do that.',
     'password_rules'        => 'Your password must be more than 8 characters long, should contain at least 1 uppercase, 1 lowercase and 1 number.',
     'password_used'         => 'You can not set a password that you have previously used.',
+    'code_expired'          => 'The code provided has expired.',
     'phone_or_email'        => 'Please enter a valid phone number or e-mail address.',
-    'unique_phone_or_email' => 'The contact provided is linked to another account',
+    'unique_phone_or_email' => 'The contact :username provided is linked to a different account',
     'socialite'             => [
         'unacceptable' => ':provider is not an acceptable login type.',
     ],
