@@ -35,7 +35,7 @@ reload: pull down up
 
 up:
 	echo "Starting Containers"
-	docker-compose up -d mysql nginx maildev
+	docker-compose up -d
 #	sleep 10
 #	docker-compose up -d
 

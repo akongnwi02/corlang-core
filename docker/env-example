@@ -11,7 +11,7 @@ APP_CODE_PATH_HOST=../
 APP_CODE_PATH_CONTAINER=/var/www:cached
 
 # Choose storage path on your machine. For all storage systems
-DATA_PATH_HOST=~/.corlang/backend
+DATA_PATH_HOST=~/.hexcell/backend
 
 ### Drivers ################################################
 
@@ -55,7 +55,7 @@ DOCKER_HOST_IP=10.0.75.1
 ### Remote Interpreter ####################################
 
 # Choose a Remote Interpreter entry matching name. Default is `laradock`
-PHP_IDE_CONFIG=serverName=corlang
+PHP_IDE_CONFIG=serverName=hexcell
 
 ### Windows Path ##########################################
 
