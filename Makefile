@@ -20,9 +20,9 @@ build:
 	echo "Building Docker Images"
 
 	echo "Starting Docker Containers"
-	docker-compose --project-name $(PROJECT_NAME) up -d
+	docker-compose up -d --build
 	echo "Installing Composer Dependencies"
-	docker exec $$(docker-compose --project-name $(PROJECT_NAME) ps -q tests) sh -c "composer install"
+	docker exec $$(docker-compose ps -q tests) sh -c "composer install"
 	echo "Done"
 
 test:
@@ -31,7 +31,7 @@ test:
 down:
 	docker-compose down --volumes --remove-orphans
 
-reload: pull down up
+reload: down up
 
 up:
 	echo "Starting Containers"
@@ -43,22 +43,16 @@ up:
 	docker exec $$(docker-compose ps -q workspace) sh -c "composer install"
 	echo "Done"
 
-pull:
-	docker pull 190853051067....
-
-auth:
-	eval $$(aws ecr get-login --no-include-email)
-
-restart:
-	docker-compose restart
-
-update: down pull build
-
 root:
-	docker exec -it $$(docker-compose ps -q workspace) bash
+	docker exec -it -u root $$(docker-compose ps -q workspace) bash
 
 clear:
 	docker exec $$(docker-compose ps -q workspace) sh -c "composer clear-all"
+
+ide-helper:
+	docker exec $$(docker-compose ps -q workspace) sh -c "php artisan ide-helper:generate \
+		&& php artisan ide-helper:meta \
+		&& php artisan package:discover"
 
 migrate:
 	docker exec $$(docker-compose ps -q workspace) sh -c "php artisan migrate"
