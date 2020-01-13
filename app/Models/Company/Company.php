@@ -2,6 +2,7 @@
 
 namespace App\Models\Company;
 
+use App\Models\Company\Traits\Relationships\CompanyRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,16 +12,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Company extends Model
 {
-    use Uuid,
-        SoftDeletes;
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'companies';
-
+    use CompanyRelationship;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -40,8 +33,19 @@ class Company extends Model
         'is_active',
         'size',
         'type_id',
-        'user_owner_id',
+        'owner_id',
+        'deactivated_by_id',
     ];
+    
+    use Uuid,
+        SoftDeletes;
+    
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'companies';
 
     /**
      * The attributes that should be cast to native types.

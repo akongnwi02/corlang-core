@@ -88,6 +88,14 @@ trait UserMethod
     {
         return $this->hasRole(config('access.users.admin_role'));
     }
+    
+    /**
+     * @return mixed
+     */
+    public function isCompanyAdmin()
+    {
+        return $this->hasRole(config('access.users.company_admin_role'));
+    }
 
     /**
      * @return bool

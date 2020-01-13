@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company\CompanyType;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -21,8 +22,15 @@ class CreateCompanytypesTable extends Migration
             $table->string('code')->unique();
             $table->timestamps();
         });
+        
+        CompanyType::create([
+            'name_en' => 'Central Company',
+            'name_fr' => 'Company Centrale',
+            'code' => 'CENTRALCOMPANY'
+        ]);
     }
-
+    
+    
     /**
      * Reverse the migrations.
      *

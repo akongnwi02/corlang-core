@@ -86,4 +86,21 @@ return [
      */
 
     'log_registration_exception' => true,
+    
+    
+    /*
+     * Business Permissions
+     */
+
+    'permissions' => [
+    
+        'view_backend' => 'view backend',
+    
+        // companies
+        'create_companies' => 'create companies',
+        'read_companies' => 'read companies',
+        'update_companies' => 'update companies',
+        'delete_companies' => 'delete companies',
+    ],
+
 ];

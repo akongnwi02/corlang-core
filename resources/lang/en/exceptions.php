@@ -54,6 +54,10 @@ return [
                 'update_password_error'   => 'There was a problem changing this users password. Please try again.',
             ],
         ],
+        
+        'companies' => [
+            'create_error' => 'There was a problem creating this company. Please try again.',
+        ]
     ],
 
     'frontend' => [

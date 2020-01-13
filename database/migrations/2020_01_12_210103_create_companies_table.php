@@ -27,9 +27,10 @@ class CreateCompaniesTable extends Migration
             $table->string('website')->nullable();
             $table->string('email')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->boolean('deactivated_by_id')->default(true);
             $table->smallInteger('size')->nullable();
             $table->unsignedInteger('type_id');
-            $table->unsignedBigInteger('user_owner_id');
+            $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();

@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class SeedCompanyPermissions extends Migration
@@ -13,7 +11,25 @@ class SeedCompanyPermissions extends Migration
      */
     public function up()
     {
+        $permissions = [
+            config(['permission.permissions.create_companies']),
+            config(['permission.permissions.read_companies']),
+            config(['permission.permissions.update_companies']),
+            config(['permission.permissions.delete_companies']),
+        ];
 
+        foreach ($permissions as $permission) {
+            \Spatie\Permission\Models\Permission::create(['name' => $permission]);
+        }
+
+        $adminRole = \Spatie\Permission\Models\Role::findByName(config('access.users.admin_role'));
+        $companyAdminRole = \Spatie\Permission\Models\Role::findByName(config('access.users.company_admin_role'));
+
+        $adminRole->givePermissionTo($permissions);
+        $companyAdminRole->givePermissionTo([
+            config(['permission.permissions.read_companies']),
+            config(['permission.permissions.update_companies']),
+        ]);
     }
 
     /**
@@ -23,6 +39,6 @@ class SeedCompanyPermissions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_permissions');
+
     }
 }

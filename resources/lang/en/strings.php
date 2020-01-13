@@ -69,7 +69,7 @@ return [
 
     'emails' => [
         'auth' => [
-            'account_confirmed' => 'Your account has been confirmed.',
+            'account_confirmed' => 'Your account has been confirmed. ',
             'error'                   => 'Whoops!',
             'greeting'                => 'Hello!',
             'user_greeting'                => 'Hello :first_name!',
@@ -87,11 +87,33 @@ return [
             'use_code_to_reset_email' => 'Use the code below to reset your password:',
             'use_code_to_confirm_sms' => 'Hello :first_name! Use the code :code to confirm your account on :app_name.',
             'use_code_to_reset_sms' => 'Hello :first_name! Use the code :code to reset your password on :app_name.',
+
+            'login_sms' => 'Visit our website to log into your account.'
+        ],
+        
+        'company' => [
+            'company' => [
+                'sms' => [
+                    'company_created' => 'Hello :first_name! your company :account has been created successfully on :app_name. ',
+                    'login' => 'Visit our website to log into your account.'
+                ],
+                'mail' => [
+                    'company_created' => 'Company Created',
+                    'company_account_created' => 'Your company :account has been created successfully on :app_name.',
+                ],
+            ]
         ],
 
         'contact' => [
             'email_body_title' => 'You have a new contact form request: Below are the details:',
             'subject' => 'A new :app_name contact form submission!',
+        ],
+
+        'general' => [
+            'user_greeting' => 'Hello :first_name!',
+            'login' => 'Click here to login to your account:',
+            'regards' => 'Regards,',
+            'greeting' => 'Hello!',
         ],
     ],
 
