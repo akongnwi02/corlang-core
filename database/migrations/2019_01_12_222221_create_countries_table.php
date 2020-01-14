@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCompanytypesTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateCompanytypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companytypes', function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
+        Schema::create('countries', function (Blueprint $table) {
+            $table->increments('id');
             $table->uuid('uuid')->unique();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('code')->unique();
-            $table->timestamps();
+            $table->boolean('is_active')->default(true);
+            $table->boolean('is_default')->default(false);
         });
     }
-    
-    
+
     /**
      * Reverse the migrations.
      *
@@ -30,6 +30,6 @@ class CreateCompanytypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companytypes');
+        Schema::dropIfExists('countries');
     }
 }

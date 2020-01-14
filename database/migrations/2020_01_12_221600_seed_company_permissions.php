@@ -12,10 +12,10 @@ class SeedCompanyPermissions extends Migration
     public function up()
     {
         $permissions = [
-            config(['permission.permissions.create_companies']),
-            config(['permission.permissions.read_companies']),
-            config(['permission.permissions.update_companies']),
-            config(['permission.permissions.delete_companies']),
+            config('permission.permissions.create_companies'),
+            config('permission.permissions.read_companies'),
+            config('permission.permissions.update_companies'),
+            config('permission.permissions.delete_companies'),
         ];
 
         foreach ($permissions as $permission) {
@@ -27,8 +27,8 @@ class SeedCompanyPermissions extends Migration
 
         $adminRole->givePermissionTo($permissions);
         $companyAdminRole->givePermissionTo([
-            config(['permission.permissions.read_companies']),
-            config(['permission.permissions.update_companies']),
+            config('permission.permissions.read_companies'),
+            config('permission.permissions.update_companies'),
         ]);
     }
 

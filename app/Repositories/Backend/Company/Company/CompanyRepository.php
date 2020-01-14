@@ -34,7 +34,7 @@ class CompanyRepository
             $company = $this->model->create([
                 'name'          => $data['name'],
                 'address'       => $data['address'],
-                'country'       => $data['country'],
+                'country_id'    => $data['country_id'],
                 'state'         => $data['state'],
                 'city'          => $data['city'],
                 'phone'         => $data['phone'],

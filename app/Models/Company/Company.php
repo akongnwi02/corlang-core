@@ -22,7 +22,7 @@ class Company extends Model
     protected $fillable = [
         'name',
         'address',
-        'country',
+        'country_id',
         'street',
         'state',
         'postal_code',

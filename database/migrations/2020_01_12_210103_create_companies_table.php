@@ -18,7 +18,6 @@ class CreateCompaniesTable extends Migration
             $table->uuid('uuid')->unique();
             $table->string('name')->unique();
             $table->string('address')->nullable();
-            $table->string('country')->nullable();
             $table->string('street')->nullable();
             $table->string('state')->nullable();
             $table->string('postal_code')->nullable();
@@ -27,17 +26,20 @@ class CreateCompaniesTable extends Migration
             $table->string('website')->nullable();
             $table->string('email')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->boolean('deactivated_by_id')->default(true);
             $table->smallInteger('size')->nullable();
+            $table->unsignedBigInteger('country_id')->nullable();
             $table->unsignedInteger('type_id');
+            $table->unsignedBigInteger('deactivated_by_id')->nullable();
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_owner_id')->references('id')->on('users');
+            $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('deactivated_by_id')->references('id')->on('users');
             $table->foreign('type_id')->references('id')->on('companytypes');
+            $table->foreign('country_id')->references('id')->on('countries');
 
         });
     }

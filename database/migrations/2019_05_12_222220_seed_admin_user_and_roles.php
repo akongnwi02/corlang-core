@@ -12,7 +12,7 @@ class SeedAdminUserAndRoles extends Migration
      */
     public function up()
     {
-        $permission = \Spatie\Permission\Models\Permission::create(['name' => config(['permission.permissions.view_backend']),]);
+        $permission = \Spatie\Permission\Models\Permission::create(['name' => config('permission.permissions.view_backend')]);
         $adminRole = \Spatie\Permission\Models\Role::create(['name' => config('access.users.admin_role')]);
         $companyAdminRole = \Spatie\Permission\Models\Role::create(['name' => config('access.users.company_admin_role')]);
         $agentRole = \Spatie\Permission\Models\Role::create(['name' => config('access.users.agent_role')]);

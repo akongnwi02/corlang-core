@@ -2,6 +2,7 @@
 
 namespace App\Models\Company;
 
+use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CompanyType extends Model
 {
+    use Uuid;
+    
     /**
      * The database table used by the model.
      *
@@ -22,8 +25,7 @@ class CompanyType extends Model
      * @var array
      */
     protected $fillable = [
-        'name_en',
-        'name_fr',
+        'name',
         'code'
     ];
 

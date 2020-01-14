@@ -42,7 +42,7 @@ class StoreCompanyRequest extends FormRequest
         return [
             'name'          => 'required|max:191',
             'address'       => 'required|max:191',
-            'country'       => 'required|max:191',
+            'country_id'    => ['required', Rule::exists('countries', 'id')],
             'state'         => 'required|max:191',
             'city'          => 'required|max:191',
             'phone'         => 'required|max:191',
