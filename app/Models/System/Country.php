@@ -1,27 +1,23 @@
 <?php
 
-namespace App\Models\Company;
+namespace App\Models\System;
 
-use App\Models\Company\Traits\Scopes\CompanyTypeScope;
-use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Role.
+ * Class Session
+ * package App.
  */
-class CompanyType extends Model
+class Country extends Model
 {
     protected $primaryKey = 'uuid';
-    
-    use Uuid,
-        CompanyTypeScope;
     
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'companytypes';
+    protected $table = 'countries';
     
     /**
      * The attributes that should be cast to native types.

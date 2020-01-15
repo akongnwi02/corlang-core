@@ -41,18 +41,18 @@ class StoreCompanyRequest extends FormRequest
     {
         return [
             'name'          => 'required|max:191',
-            'address'       => 'required|max:191',
-            'country_id'    => ['required', Rule::exists('countries', 'id')],
-            'state'         => 'required|max:191',
-            'city'          => 'required|max:191',
-            'phone'         => 'required|max:191',
-            'user_owner_id' => ['required', Rule::exists('users', 'id')],
-            'type_id'       => ['required', Rule::exists('companytypes', 'id')],
             'email'         => 'email|max:191',
-            'street'        => 'string|max:191',
+            'phone'         => 'required|max:191',
+            'address'       => 'required|max:191',
             'website'       => 'string|max:191',
+            'street'        => 'string|max:191',
+            'city'          => 'required|max:191',
+            'state'         => 'required|max:191',
             'postal_code'   => 'string|max:191',
+            'country_id'    => ['required', Rule::exists('countries', 'id')],
             'size'          => 'integer|max:5',
+            'type_id'       => ['required', Rule::exists('companytypes', 'id')],
+//            'user_owner_id' => ['required', Rule::exists('users', 'id')],
         ];
     }
 }

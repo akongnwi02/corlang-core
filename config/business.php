@@ -4,10 +4,19 @@ return [
     
     'company' => [
         'type' => [
-            'central_company' => 'Central Company',
-            'formal_company' => 'Formal Company',
-            'informal_company' => 'Informal Company',
+            'central' => 'Central Company',
+            'formal' => 'Formal Company',
+            'informal' => 'Informal Company',
+        ]
+    ],
+    'system' => [
+        'country' => [
+            'name' => [
+                'cameroon' => 'Cameroon',
+            ],
+            'code' => [
+                'cameroon' => 'CM'
+            ]
         ]
     ]
-    
 ];

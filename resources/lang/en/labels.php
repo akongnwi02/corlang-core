@@ -117,6 +117,12 @@ return [
                 'view' => 'View User',
             ],
         ],
+        'companies' => [
+            'company' => [
+                'management' => 'Company Management',
+                'create' => 'Create Company',
+            ],
+        ]
     ],
 
     'frontend' => [

@@ -8,15 +8,15 @@
 
 
 /*
- * All route names are prefixed with 'admin.company'.
+ * All route names are prefixed with 'admin.companies'.
  */
 
 use App\Http\Controllers\Backend\Company\Company\CompanyController;
 
 Route::group([
-    'prefix'     => 'company',
-    'as'         => 'company.',
-    'namespace'  => 'Company',
+    'prefix'     => 'companies',
+    'as'         => 'companies.',
+    'namespace'  => 'Companies',
 ], function () {
 
     /*

@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class SeedDefaultCountry extends Migration
@@ -15,8 +13,8 @@ class SeedDefaultCountry extends Migration
     {
         \DB::table('countries')->insert([
             'uuid' => Uuid::generate(4)->string,
-            'name' => 'Cameroon',
-            'code' => 'CM',
+            'name' => config('business.system.country.name.cameroon'),
+            'code' => config('business.system.country.code.cameroon'),
             'is_default' => true,
         ]);
     }

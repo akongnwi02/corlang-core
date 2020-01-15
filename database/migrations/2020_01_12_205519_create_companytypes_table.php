@@ -14,14 +14,12 @@ class CreateCompanytypesTable extends Migration
     public function up()
     {
         Schema::create('companytypes', function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
-            $table->uuid('uuid')->unique();
+            $table->uuid('uuid')->primary()->unique();
             $table->string('name');
             $table->string('code')->unique();
             $table->timestamps();
         });
     }
-    
     
     /**
      * Reverse the migrations.

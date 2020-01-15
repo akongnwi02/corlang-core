@@ -49,6 +49,13 @@ return [
             'history'   => 'History',
             'system'    => 'System',
         ],
+        
+        'companies' => [
+            'company' => [
+                'management' => 'Company Management',
+                'create' => 'Create Company',
+            ]
+        ]
     ],
 
     'language-picker' => [

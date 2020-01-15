@@ -12,6 +12,8 @@ namespace App\Repositories\Backend\Company\Company;
 use App\Events\Backend\Company\Company\CompanyCreated;
 use App\Exceptions\GeneralException;
 use App\Models\Company\Company;
+use App\Models\Company\CompanyType;
+use App\Models\System\Country;
 
 class CompanyRepository
 {
@@ -29,8 +31,9 @@ class CompanyRepository
      */
     public function create(array $data)
     {
+        
         return \DB::transaction(function () use ($data) {
-            
+
             $company = $this->model->create([
                 'name'          => $data['name'],
                 'address'       => $data['address'],
@@ -38,7 +41,7 @@ class CompanyRepository
                 'state'         => $data['state'],
                 'city'          => $data['city'],
                 'phone'         => $data['phone'],
-                'user_owner_id' => $data['user_owner_id'],
+//                'user_owner_id' => $data['user_owner_id'],
                 'type_id'       => $data['type_id'],
                 'email'         => $data['email'],
                 'street'        => $data['street'],

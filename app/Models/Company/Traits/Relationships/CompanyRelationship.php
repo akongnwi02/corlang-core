@@ -15,11 +15,11 @@ trait CompanyRelationship
 {
     public function owner()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'uuid');
     }
     
     public function type()
     {
-        return $this->hasOne(CompanyType::class);
+        return $this->hasOne(CompanyType::class, 'uuid');
     }
 }

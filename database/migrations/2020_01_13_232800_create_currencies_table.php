@@ -14,8 +14,7 @@ class CreateCurrenciesTable extends Migration
     public function up()
     {
         Schema::create('currencies', function (Blueprint $table) {
-            $table->increments('id');
-            $table->uuid('uuid')->unique();
+            $table->uuid('uuid')->primary()->unique();
             $table->string('name')->nullable()->unique();
             $table->string('code')->unique();
             $table->double('rate');

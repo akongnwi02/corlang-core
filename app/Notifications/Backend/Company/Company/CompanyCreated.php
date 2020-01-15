@@ -48,9 +48,9 @@ class CompanyCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->subject(app_name().': '.__('strings.emails.company.company.mail.company_created'))
+            ->subject(app_name().': '.__('strings.emails.companies.companies.mail.company_created'))
             ->greeting(__('strings.emails.auth.user_greeting', ['first_name' => $notifiable->owner->first_name]))
-            ->line(__('strings.emails.company.company.mail.company_account_created', [
+            ->line(__('strings.emails.companies.companies.mail.company_account_created', [
                 'account' => $notifiable->name,
                 'app_name' => app_name(),
             ]))
@@ -61,11 +61,11 @@ class CompanyCreated extends Notification
     public function toSms($notifiable)
     {
         return (new SmsMessage())
-            ->content(__('strings.emails.company.company.sms.company_created', [
+            ->content(__('strings.emails.companies.companies.sms.company_created', [
                 'first_name' => $notifiable->owner->first_name,
                 'account' => $notifiable->name,
                 'app_name' => app_name(),
             ]))
-            ->content(__('strings.emails.company.company.sms.login'));
+            ->content(__('strings.emails.companies.companies.sms.login'));
     }
 }

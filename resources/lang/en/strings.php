@@ -91,15 +91,15 @@ return [
             'login_sms' => 'Visit our website to log into your account.'
         ],
         
-        'company' => [
-            'company' => [
+        'companies' => [
+            'companies' => [
                 'sms' => [
-                    'company_created' => 'Hello :first_name! your company :account has been created successfully on :app_name. ',
+                    'company_created' => 'Hello :first_name! your companies :account has been created successfully on :app_name. ',
                     'login' => 'Visit our website to log into your account.'
                 ],
                 'mail' => [
                     'company_created' => 'Company Created',
-                    'company_account_created' => 'Your company :account has been created successfully on :app_name.',
+                    'company_account_created' => 'Your companies :account has been created successfully on :app_name.',
                 ],
             ]
         ],

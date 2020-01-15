@@ -11,6 +11,9 @@ namespace App\Http\Controllers\Backend\Company\Company;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Auth\User\StoreCompanyRequest;
+use App\Models\Auth\User;
+use App\Models\Company\CompanyType;
+use App\Models\System\Country;
 use App\Repositories\Backend\Company\Company\CompanyRepository;
 
 class CompanyController extends Controller
@@ -29,7 +32,12 @@ class CompanyController extends Controller
 
     public function create()
     {
-
+        return view('backend.companies.company.create')
+            ->withCountries(Country::orderBy('is_default', 'desc')
+                    ->orderBy('name', 'asc')
+                ->pluck('name', 'uuid')
+                ->toArray())
+            ->withTypes(CompanyType::withoutCentral()->get());
     }
     
     /**
@@ -41,7 +49,7 @@ class CompanyController extends Controller
     {
         $this->companyRepository->create($request->input());
     
-        return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.users.created'));
+        return redirect()->route('admin.companies.company.index')->withFlashSuccess(__('alerts.backend.companies.company.created'));
     
     }
 

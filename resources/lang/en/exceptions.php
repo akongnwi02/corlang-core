@@ -56,7 +56,7 @@ return [
         ],
         
         'companies' => [
-            'create_error' => 'There was a problem creating this company. Please try again.',
+            'create_error' => 'There was a problem creating this companies. Please try again.',
         ]
     ],
 

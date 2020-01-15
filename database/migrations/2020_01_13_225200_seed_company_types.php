@@ -1,8 +1,6 @@
 <?php
 
 use App\Models\Company\CompanyType;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class SeedCompanyTypes extends Migration
@@ -14,19 +12,21 @@ class SeedCompanyTypes extends Migration
      */
     public function up()
     {
-    
-        CompanyType::create([
-            'name' => config('business.company.type.central_company'),
+        \DB::table('companytypes')->insert([
+            'uuid' => Uuid::generate(4)->string,
+            'name' => config('business.company.type.central'),
             'code' => 'CENTRALCOMPANY',
         ]);
-        
-        CompanyType::create([
-            'name' => config('business.company.type.formal_company'),
+    
+        DB::table('companytypes')->insert([
+            'uuid' => Uuid::generate(4)->string,
+            'name' => config('business.company.type.formal'),
             'code' => 'FORMALCOMPANY',
         ]);
-        
-        CompanyType::create([
-            'name' => config('business.company.type.informal_company'),
+    
+        DB::table('companytypes')->insert([
+            'uuid' => Uuid::generate(4)->string,
+            'name' => config('business.company.type.informal'),
             'code' => 'INFORMALCOMPANY',
         ]);
     }

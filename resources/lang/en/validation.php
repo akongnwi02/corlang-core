@@ -189,6 +189,23 @@ return [
                     'language'                  => 'Language',
                 ],
             ],
+            'companies' => [
+                'company' => [
+                    'name'          => 'Company Name',
+                    'address'       => 'Address',
+                    'country'       => 'Country',
+                    'state'         => 'State',
+                    'city'          => 'City',
+                    'phone'         => 'Company Phone',
+                    'owner'         => 'Owner',
+                    'type'          => 'Type',
+                    'email'         => 'Company Email',
+                    'street'        => 'Street',
+                    'website'       => 'Website',
+                    'postal_code'   => 'Postal Code',
+                    'size'          => 'Size',
+                ]
+            ]
         ],
 
         'frontend' => [

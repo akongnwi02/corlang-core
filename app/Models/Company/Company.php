@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Company extends Model
 {
+    protected $primaryKey = 'uuid';
+    
     use CompanyRelationship;
     
     /**
@@ -54,5 +56,6 @@ class Company extends Model
      */
     protected $casts = [
         'is_active'  => 'boolean',
+        'uuid' => 'string',
     ];
 }
