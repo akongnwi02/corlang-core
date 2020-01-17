@@ -29,7 +29,20 @@ class StoreCompanyRequest extends FormRequest
      */
     public function attributes()
     {
-    
+        return [
+            'name'          => __('validation.attributes.backend.companies.company.name'),
+            'email'         => __('validation.attributes.backend.companies.company.email'),
+            'phone'         => __('validation.attributes.backend.companies.company.phone'),
+            'address'       => __('validation.attributes.backend.companies.company.address'),
+            'website'       => __('validation.attributes.backend.companies.company.website'),
+            'street'        => __('validation.attributes.backend.companies.company.street'),
+            'city'          => __('validation.attributes.backend.companies.company.city'),
+            'state'         => __('validation.attributes.backend.companies.company.state'),
+            'postal_code'   => __('validation.attributes.backend.companies.company.postal_code'),
+            'country_id'    => __('validation.attributes.backend.companies.company.country'),
+            'size'          => __('validation.attributes.backend.companies.company.size'),
+            'type_id'       => __('validation.attributes.backend.companies.company.type'),
+        ];
     }
     
     /**
@@ -40,19 +53,18 @@ class StoreCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          => 'required|max:191',
-            'email'         => 'email|max:191',
+            'name'          => ['required', 'max:191', Rule::unique('companies', 'name')],
+            'email'         => 'max:191',
             'phone'         => 'required|max:191',
             'address'       => 'required|max:191',
-            'website'       => 'string|max:191',
-            'street'        => 'string|max:191',
+            'website'       => 'max:191',
+            'street'        => 'max:191',
             'city'          => 'required|max:191',
             'state'         => 'required|max:191',
-            'postal_code'   => 'string|max:191',
-            'country_id'    => ['required', Rule::exists('countries', 'id')],
-            'size'          => 'integer|max:5',
-            'type_id'       => ['required', Rule::exists('companytypes', 'id')],
-//            'user_owner_id' => ['required', Rule::exists('users', 'id')],
+            'postal_code'   => 'max:191',
+            'country_id'    => ['required', Rule::exists('countries', 'uuid')],
+            'size'          => 'max:5',
+            'type_id'       => ['required', Rule::exists('companytypes', 'uuid')],
         ];
     }
 }

@@ -20,11 +20,8 @@ class CompanyEventListener
         \Log::info('Company Created', [
             'name' => $event->company->name,
             'by' => $event->company->creator->username,
-            'type' => $event->company->type->name_en,
-            'owner' => $event->company->owner->username,
+            'type' => $event->company->type->name,
         ]);
-    
-        $event->user->notify(new CompanyCreated());
     }
     
     /**

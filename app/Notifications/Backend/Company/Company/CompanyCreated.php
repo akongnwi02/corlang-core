@@ -15,6 +15,9 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 /**
+ * Send a notification to the company owner when
+ * company is created
+ *
  * Class CompanyCreated
  * @package App\Notifications\Backend\Company\Company
  */

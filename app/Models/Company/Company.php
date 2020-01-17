@@ -6,6 +6,7 @@ use App\Models\Company\Traits\Relationships\CompanyRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Wildside\Userstamps\Userstamps;
 
 /**
  * Class Role.
@@ -14,7 +15,8 @@ class Company extends Model
 {
     protected $primaryKey = 'uuid';
     
-    use CompanyRelationship;
+    use CompanyRelationship,
+        Userstamps;
     
     /**
      * The attributes that are mass assignable.

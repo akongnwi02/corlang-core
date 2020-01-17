@@ -1,9 +1,17 @@
 {
-    "name": "rappasoft/laravel-5-boilerplate",
-    "description": "The Laravel Boilerplate Project.",
-    "keywords": ["framework", "laravel", "boilerplate"],
+    "name": "corlang/core",
+    "description": "The core application of the corlang platform",
+    "keywords": ["corlang", "core", "laravel"],
     "license": "MIT",
     "type": "project",
+    "authors": [
+        {
+            "name": "Akongnwi Devert",
+            "email": "akongnwi02@gmail.com",
+            "homepage": "https://www.corlang.com",
+            "role": "Project Manager"
+        }
+    ],
     "require": {
         "php": "^7.1.3",
         "appstract/laravel-blade-directives": "^0.4.4",
@@ -14,6 +22,7 @@
         "creativeorange/gravatar": "~1.0",
         "davejamesmiller/laravel-breadcrumbs": "^5.0",
         "divineomega/laravel-password-exposed-validation-rule": "^1.2",
+        "doctrine/dbal": "^2.6",
         "fideloper/proxy": "^4.0",
         "hieu-le/active": "^3.5",
         "laravel/framework": "5.7.*",
@@ -23,7 +32,8 @@
         "spatie/laravel-permission": "^2.5",
         "torann/geoip": "^1.0",
         "tymon/jwt-auth": "1.0.0-rc.4.1",
-        "webpatser/laravel-uuid": "^3.0"
+        "webpatser/laravel-uuid": "^3.0",
+        "wildside/userstamps": "^1.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.0",
