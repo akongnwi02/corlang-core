@@ -12,13 +12,19 @@
  */
 
 use App\Http\Controllers\Backend\Company\Company\CompanyController;
+use App\Http\Controllers\Backend\Company\Company\CompanyStatusController;
 
 Route::group([
     'prefix'     => 'companies',
     'as'         => 'companies.',
     'namespace'  => 'Companies',
 ], function () {
+    
+    /*
+     * Company Status'
+     */
 
+    
     /*
      * Company CRUD
      */
@@ -37,8 +43,9 @@ Route::group([
     /*
      * Specific Company
      */
-    Route::group(['prefix' => 'company/{uuid}'], function () {
-
+    Route::group(['prefix' => 'company/{company}'], function () {
+        
+        // Company
         Route::get('/', [CompanyController::class, 'show'])
             ->name('company.show')
             ->middleware('permission:'.config('permission.permissions.read_companies'));
@@ -54,6 +61,13 @@ Route::group([
         Route::delete('/', [CompanyController::class, 'destroy'])
             ->name('company.destroy')
             ->middleware('permission:'.config('permission.permissions.delete_companies'));
+    
+        // Status
+        Route::get('mark/{status}', [CompanyStatusController::class, 'mark'])
+            ->where(['status' => '[0,1]'])
+            ->name('company.mark')
+            ->middleware('permission:'.config('permission.permissions.deactivate_companies'));
+    
     });
 
 });

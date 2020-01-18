@@ -4,11 +4,11 @@ return [
     
     'company' => [
         'type' => [
-            'central' => 'Central Company',
             'formal' => 'Formal Company',
             'informal' => 'Informal Company',
         ]
     ],
+    
     'system' => [
         'country' => [
             'name' => [
@@ -18,5 +18,5 @@ return [
                 'cameroon' => 'CM'
             ]
         ]
-    ]
+    ],
 ];

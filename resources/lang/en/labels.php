@@ -121,6 +121,26 @@ return [
             'company' => [
                 'management' => 'Company Management',
                 'create' => 'Create Company',
+                'active' => 'Active Companies',
+                
+                'table' => [
+                    'name'          => 'Company Name',
+                    'address'       => 'Address',
+                    'country'       => 'Country',
+                    'state'         => 'State',
+                    'city'          => 'City',
+                    'phone'         => 'Company Phone',
+                    'type'          => 'Company Type',
+                    'email'         => 'Company Email',
+                    'street'        => 'Street',
+                    'website'       => 'Website',
+                    'postal_code'   => 'Postal Code',
+                    'size'          => 'Size',
+                    'last_updated'  => 'Size',
+                    'active'        => 'Active',
+                    'total'         => 'company|companies',
+
+                ]
             ],
         ]
     ],

@@ -2,7 +2,7 @@
     <nav class="sidebar-nav">
         <ul class="nav">
             <li class="nav-title">
-                @lang('menus.backend.sidebar.general')
+                <h6><b>@lang('menus.backend.sidebar.general')</b></h6>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ active_class(Active::checkUriPattern('admin/dashboard')) }}" href="{{ route('admin.dashboard') }}">
@@ -11,7 +11,7 @@
             </li>
 
             <li class="nav-title">
-                @lang('menus.backend.sidebar.system')
+                <h6><b>@lang('menus.backend.sidebar.system')</b></h6>
             </li>
 
             @if ($logged_in_user->isAdmin())
@@ -63,6 +63,28 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="divider"></li>
+
+            <li class="nav-title">
+                <h6><b>@lang('menus.backend.sidebar.business')</b></h6>
+            </li>
+
+            @can(config('permission.permissions.read_companies'))
+                <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/backend/companies*'), 'open') }}">
+                    <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/backend/companies*')) }}" href="#">
+                        <i class="nav-icon icon-organization"></i> @lang('menus.backend.companies.title')
+                    </a>
+
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/backend/companies/company*')) }}" href="{{ route('admin.companies.company.index') }}">
+                                @lang('labels.backend.companies.company.management')
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
         </ul>
     </nav>
 

@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth\Traits\Relationship;
 
+use App\Models\Company\Company;
 use App\Models\System\Session;
 use App\Models\Auth\SocialAccount;
 use App\Models\Auth\PasswordHistory;
@@ -33,5 +34,13 @@ trait UserRelationship
     public function passwordHistories()
     {
         return $this->hasMany(PasswordHistory::class);
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function company()
+    {
+        return $this->hasOne(Company::class, 'uuid', 'company_id');
     }
 }

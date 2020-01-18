@@ -12,12 +12,6 @@ class SeedCompanyTypes extends Migration
      */
     public function up()
     {
-        \DB::table('companytypes')->insert([
-            'uuid' => Uuid::generate(4)->string,
-            'name' => config('business.company.type.central'),
-            'code' => 'CENTRALCOMPANY',
-        ]);
-    
         DB::table('companytypes')->insert([
             'uuid' => Uuid::generate(4)->string,
             'name' => config('business.company.type.formal'),

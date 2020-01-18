@@ -134,4 +134,9 @@ trait UserMethod
 
         $this->code_sent_at = Carbon::now()->toDateTimeString();
     }
+    
+    public function canDeactivateCompanies()
+    {
+        return $this->can(config('permission.permissions.deactivate_companies'));
+    }
 }

@@ -56,7 +56,11 @@ return [
         ],
         
         'companies' => [
-            'create_error' => 'There was a problem creating this companies. Please try again.',
+            'company' => [
+                'create_error' => 'There was a problem creating this companies. Please try again.',
+                'mark_error'   => 'There was a problem updating the status of this company. Please try again.',
+                'mark_rights_error'   => 'There was a problem updating the status of this company. The company was deactivated by a higher role.',
+            ]
         ]
     ],
 

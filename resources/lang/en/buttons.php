@@ -29,6 +29,12 @@ return [
                 'unlink' => 'Unlink',
             ],
         ],
+        'companies' => [
+            'company' => [
+                'activate' => 'Activate Company',
+                'deactivate' => 'Deactivate Company',
+            ]
+        ]
     ],
 
     'emails' => [

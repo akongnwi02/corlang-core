@@ -48,11 +48,14 @@ return [
             'general'   => 'General',
             'history'   => 'History',
             'system'    => 'System',
+            'business'    => 'Business',
         ],
         
         'companies' => [
+            'title' => 'Company',
+            
             'company' => [
-                'management' => 'Company Management',
+                'management' => 'Companies',
                 'create' => 'Create Company',
             ]
         ]

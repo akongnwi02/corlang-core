@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Backend\Auth\User;
+namespace App\Http\Requests\Backend\Company\Company;
 
 use App\Rules\Auth\UniquePhoneNumber;
 use Illuminate\Validation\Rule;
@@ -11,17 +11,6 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 class StoreCompanyRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return $this->user()->isAdmin()
-            || $this->user()->isCompanyAdmin();
-    }
-    
     /**
      * Get custom attributes for validator errors.
      *

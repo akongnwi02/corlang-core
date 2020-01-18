@@ -25,6 +25,7 @@ class CreateCompaniesTable extends Migration
             $table->string('website')->nullable();
             $table->string('email')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_default')->default(false);
             $table->smallInteger('size')->nullable();
             $table->uuid('country_id')->nullable();
             $table->uuid('type_id');

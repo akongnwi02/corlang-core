@@ -15,7 +15,7 @@ class SeedCentralCompany extends Migration
      */
     public function up()
     {
-        Company::create([
+        $centralCompany = Company::create([
             'name' => 'Corlang Enterprise',
             'address' => 'Douala Bonaberi',
             'country_id' => Country::where('is_default', true)->firstOrFail()->uuid,
@@ -27,11 +27,16 @@ class SeedCentralCompany extends Migration
             'website' => 'www.corlang.como',
             'email' => 'contact@corlang.com',
             'is_active' => true,
+            'is_default' => true,
             'size' => 5,
-            'type_id' => CompanyType::where('name', config('business.company.type.central'))->firstOrFail()->uuid,
-            'owner_id' => User::where('id', 1)->firstOrFail()->uuid,
+            'type_id' => CompanyType::where('name', config('business.company.type.formal'))->firstOrFail()->uuid,
+            'owner_id' => User::find(1)->uuid,
             'deactivated_by_id' => null,
         ]);
+        
+        $centralCompany->is_default = true;
+        
+        $centralCompany->save();
     }
 
     /**

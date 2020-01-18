@@ -10,34 +10,39 @@ namespace App\Http\Controllers\Backend\Company\Company;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\Auth\User\StoreCompanyRequest;
-use App\Models\Auth\User;
+use App\Http\Requests\Backend\Company\Company\StoreCompanyRequest;
 use App\Models\Company\CompanyType;
-use App\Models\System\Country;
 use App\Repositories\Backend\Company\Company\CompanyRepository;
+use App\Repositories\Backend\System\CountryRepository;
 
 class CompanyController extends Controller
 {
     protected $companyRepository;
+    protected $countryRepository;
     
-    public function __construct(CompanyRepository $companyRepository)
+    public function __construct(
+        CompanyRepository $companyRepository,
+        CountryRepository $countryRepository
+    )
     {
         $this->companyRepository = $companyRepository;
+        $this->countryRepository = $countryRepository;
     }
     
     public function index()
     {
-
+        return view('backend.companies.company.index')
+            ->withCompanies($this->companyRepository->get()
+                ->paginate());
     }
 
     public function create()
     {
         return view('backend.companies.company.create')
-            ->withCountries(Country::orderBy('is_default', 'desc')
-                    ->orderBy('name', 'asc')
+            ->withCountries($this->countryRepository->get()
                 ->pluck('name', 'uuid')
                 ->toArray())
-            ->withTypes(CompanyType::withoutCentral()->get());
+            ->withTypes(CompanyType::get());
     }
     
     /**
@@ -50,7 +55,6 @@ class CompanyController extends Controller
         $this->companyRepository->create($request->input());
     
         return redirect()->route('admin.companies.company.index')->withFlashSuccess(__('alerts.backend.companies.company.created'));
-    
     }
 
     public function show()

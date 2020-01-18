@@ -14,10 +14,5 @@ namespace App\Models\Company\Traits\Scopes;
  */
 trait CompanyTypeScope
 {
-    public function scopeWithoutCentral($query, $withoutCentral = true)
-    {
-        if ($withoutCentral) {
-            $query->where('name', '!=', config('business.company.type.central'));
-        }
-    }
+
 }

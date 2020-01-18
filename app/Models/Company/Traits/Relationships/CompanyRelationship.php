@@ -10,6 +10,7 @@ namespace App\Models\Company\Traits\Relationships;
 
 use App\Models\Auth\User;
 use App\Models\Company\CompanyType;
+use App\Models\System\Country;
 
 trait CompanyRelationship
 {
@@ -18,8 +19,18 @@ trait CompanyRelationship
         return $this->hasOne(User::class, 'uuid', 'owner_id');
     }
     
+    public function deactivator()
+    {
+        return $this->hasOne(User::class, 'uuid', 'deactivated_by_id');
+    }
+    
     public function type()
     {
         return $this->hasOne(CompanyType::class, 'uuid', 'type_id');
+    }
+    
+    public function country()
+    {
+        return $this->hasOne(Country::class, 'uuid', 'country_id');
     }
 }

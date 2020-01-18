@@ -16,6 +16,7 @@ class SeedCompanyPermissions extends Migration
             config('permission.permissions.read_companies'),
             config('permission.permissions.update_companies'),
             config('permission.permissions.delete_companies'),
+            config('permission.permissions.deactivate_companies'),
         ];
 
         foreach ($permissions as $permission) {
@@ -29,6 +30,7 @@ class SeedCompanyPermissions extends Migration
         $companyAdminRole->givePermissionTo([
             config('permission.permissions.read_companies'),
             config('permission.permissions.update_companies'),
+            config('permission.permissions.deactivate_companies'),
         ]);
     }
 

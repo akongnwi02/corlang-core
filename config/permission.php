@@ -101,6 +101,7 @@ return [
         'read_companies' => 'read companies',
         'update_companies' => 'update companies',
         'delete_companies' => 'delete companies',
+        'deactivate_companies' => 'deactivate companies',
     ],
 
 ];
