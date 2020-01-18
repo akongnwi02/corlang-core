@@ -12,6 +12,10 @@ class Country extends Model
 {
     protected $primaryKey = 'uuid';
     
+    protected $keyType = 'string';
+    
+    public $incrementing = false;
+    
     /**
      * The database table used by the model.
      *

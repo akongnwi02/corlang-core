@@ -32,6 +32,23 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
+     * Create the admin role or return it if it already exists.
+     *
+     * @return mixed
+     */
+    protected function getCompanyAdminRole()
+    {
+        if ($role = Role::whereName(config('access.users.company_admin_role'))->first()) {
+            return $role;
+        }
+
+        $companyAdminRole = factory(Role::class)->create(['name' => config('access.users.company_admin_role')]);
+        $companyAdminRole->givePermissionTo(factory(Permission::class)->create(['name' => 'view backend']));
+
+        return $companyAdminRole;
+    }
+
+    /**
      * Create an administrator.
      *
      * @param array $attributes
@@ -45,6 +62,22 @@ abstract class TestCase extends BaseTestCase
         $admin->assignRole($adminRole);
 
         return $admin;
+    }
+    
+    /**
+     * Create a company administrator.
+     *
+     * @param array $attributes
+     *
+     * @return mixed
+     */
+    protected function createCompanyAdmin(array $attributes = [])
+    {
+        $companyAdminRole = $this->getCompanyAdminRole();
+        $companAdmin = factory(User::class)->create($attributes);
+        $companAdmin->assignRole($companyAdminRole);
+
+        return $companAdmin;
     }
 
     /**
@@ -60,8 +93,25 @@ abstract class TestCase extends BaseTestCase
             $admin = $this->createAdmin();
         }
 
-        $this->actingAs($admin);
+        $this->be($admin);
 
         return $admin;
+    }
+    
+    /**
+     * Login the given company administrator or create the first if none supplied.
+     *
+     * @param bool $companyAdmin
+     * @return bool|mixed
+     */
+    protected function loginAsCompanyAdmin($companyAdmin = false)
+    {
+        if (! $companyAdmin) {
+            $companyAdmin = $this->createCompanyAdmin();
+        }
+
+        $this->actingAs($companyAdmin);
+
+        return $companyAdmin;
     }
 }

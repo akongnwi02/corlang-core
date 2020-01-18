@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Frontend;
+namespace Tests\Feature\Frontend\Auth;
 
 use Carbon\Carbon;
 use Tests\TestCase;

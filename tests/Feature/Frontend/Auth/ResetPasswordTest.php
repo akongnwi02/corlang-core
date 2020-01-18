@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Frontend;
+namespace Tests\Feature\Frontend\Auth;
 
 use App\Events\Frontend\Auth\UserResetConfirmed;
 use Carbon\Carbon;

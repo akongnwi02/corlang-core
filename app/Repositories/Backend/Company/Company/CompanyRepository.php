@@ -72,10 +72,9 @@ class CompanyRepository
     public function mark($company, $status)
     {
         // if the company was deactivated by an administrator
-        // other roles cannot reactivate
+        // lesser roles cannot reactivate
         if (! $company->isActive()) {
-            if ($company->deactivator->isAdmin()
-                && ! auth()->user()->isAdmin()) {
+            if ($company->deactivator->isAdmin() && ! auth()->user()->isAdmin()) {
                 
                 throw new GeneralException(__('exceptions.backend.companies.company.mark_rights_error'));
             }

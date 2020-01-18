@@ -32,7 +32,7 @@ class CompanyStatusController
     public function mark(ChangeCompanyStatusRequest $request, Company $company, $status)
     {
         $this->companyRepository->mark($company, $status);
-    
+        
         return redirect()->route('admin.companies.company.index')
             ->withFlashSuccess(__('alerts.backend.companies.company.status_updated'));
     }

@@ -18,6 +18,10 @@ class Company extends Model
 {
     protected $primaryKey = 'uuid';
     
+    protected $keyType = 'string';
+    
+    public $incrementing = false;
+    
     use CompanyRelationship,
         CompanyScope,
         CompanyAttribute,

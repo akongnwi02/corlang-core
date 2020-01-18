@@ -33,7 +33,7 @@ trait Uuid
         parent::boot();
 
         static::creating(function ($model) {
-            $model->{$model->getUuidName()} = PackageUuid::generate(4)->string;
+            empty($model->{$model->getUuidName()}) && $model->{$model->getUuidName()} = PackageUuid::generate(4)->string;
         });
     }
 }

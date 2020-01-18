@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Frontend;
+namespace Tests\Feature\Frontend\Auth;
 
 use Tests\TestCase;
 use App\Models\Auth\User;

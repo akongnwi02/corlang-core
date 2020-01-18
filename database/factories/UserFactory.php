@@ -1,7 +1,6 @@
 <?php
 
 use Faker\Generator;
-use Webpatser\Uuid\Uuid;
 use App\Models\Auth\User;
 
 /*
