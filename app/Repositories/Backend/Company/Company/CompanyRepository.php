@@ -56,7 +56,8 @@ class CompanyRepository
             ->defaultSort( '-companies.is_active', '-companies.is_default', '-companies.created_at', 'companies.name');
     
         if (!auth()->user()->company->isDefault()) {
-            return $companies->where('users.id', auth()->user()->id)
+            return $companies->select('companies.*')
+                ->where('users.id', auth()->user()->id)
                 ->join('users', 'users.company_id', '=', 'companies.uuid');
         }
         

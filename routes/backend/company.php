@@ -21,11 +21,6 @@ Route::group([
 ], function () {
     
     /*
-     * Company Status'
-     */
-
-    
-    /*
      * Company CRUD
      */
     Route::get('company', [CompanyController::class, 'index'])
@@ -67,7 +62,6 @@ Route::group([
             ->where(['status' => '[0,1]'])
             ->name('company.mark')
             ->middleware('permission:'.config('permission.permissions.deactivate_companies'));
-    
     });
 
 });
