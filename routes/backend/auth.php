@@ -16,7 +16,6 @@ Route::group([
     'prefix'     => 'auth',
     'as'         => 'auth.',
     'namespace'  => 'Auth',
-    'middleware' => 'role:'.config('access.users.admin_role'),
 ], function () {
     /*
      * User Management
@@ -26,52 +25,106 @@ Route::group([
         /*
          * User Status'
          */
-        Route::get('user/deactivated', [UserStatusController::class, 'getDeactivated'])->name('user.deactivated');
-        Route::get('user/deleted', [UserStatusController::class, 'getDeleted'])->name('user.deleted');
+        Route::get('user/deactivated', [UserStatusController::class, 'getDeactivated'])
+            ->name('user.deactivated')
+            ->middleware('permission:'.config('permission.permissions.read_users'));
+    
+        Route::get('user/deleted', [UserStatusController::class, 'getDeleted'])
+            ->name('user.deleted')
+            ->middleware('permission:'.config('permission.permissions.read_users'));
 
         /*
          * User CRUD
          */
-        Route::get('user', [UserController::class, 'index'])->name('user.index');
-        Route::get('user/create', [UserController::class, 'create'])->name('user.create');
-        Route::post('user', [UserController::class, 'store'])->name('user.store');
-
+        Route::get('user', [UserController::class, 'index'])
+            ->name('user.index')
+            ->middleware('permission:'.config('permission.permissions.read_users'));
+        
+        Route::get('user/create', [UserController::class, 'create'])
+            ->name('user.create')
+            ->middleware('permission:'.config('permission.permissions.create_users'));
+        
+        Route::post('user', [UserController::class, 'store'])
+            ->name('user.store')
+            ->middleware('permission:'.config('permission.permissions.create_users'));
+    
         /*
          * Specific User
          */
         Route::group(['prefix' => 'user/{user}'], function () {
             // User
-            Route::get('/', [UserController::class, 'show'])->name('user.show');
-            Route::get('edit', [UserController::class, 'edit'])->name('user.edit');
-            Route::patch('/', [UserController::class, 'update'])->name('user.update');
-            Route::delete('/', [UserController::class, 'destroy'])->name('user.destroy');
-
+            Route::get('/', [UserController::class, 'show'])
+                ->name('user.show')
+                ->middleware('permission:'.config('permission.permissions.create_users'));
+    
+            Route::get('edit', [UserController::class, 'edit'])
+                ->name('user.edit')
+                ->middleware('permission:'.config('permission.permissions.update_users'));
+    
+            Route::patch('/', [UserController::class, 'update'])
+                ->name('user.update')
+                ->middleware('permission:'.config('permission.permissions.update_users'));
+    
+            Route::delete('/', [UserController::class, 'destroy'])
+                ->name('user.destroy')
+                ->middleware('permission:'.config('permission.permissions.delete_users'));
+    
             // Account
-            Route::get('account/confirm/resend', [UserConfirmationController::class, 'sendConfirmationEmail'])->name('user.account.confirm.resend');
-
+            Route::get('account/confirm/resend', [UserConfirmationController::class, 'sendConfirmationEmail'])
+                ->name('user.account.confirm.resend')
+                ->middleware('permission:'.config('permission.permissions.create_users'));
+            
             // Status
-            Route::get('mark/{status}', [UserStatusController::class, 'mark'])->name('user.mark')->where(['status' => '[0,1]']);
-
-            // Social
-            Route::delete('social/{social}/unlink', [UserSocialController::class, 'unlink'])->name('user.social.unlink');
-
+            Route::get('mark/{status}', [UserStatusController::class, 'mark'])
+                ->where(['status' => '[0,1]'])
+                ->name('user.mark')
+                ->middleware('permission:'.config('permission.permissions.deactivate_users'));
+            
             // Confirmation
-            Route::get('confirm', [UserConfirmationController::class, 'confirm'])->name('user.confirm');
-            Route::get('unconfirm', [UserConfirmationController::class, 'unconfirm'])->name('user.unconfirm');
-
+            Route::get('confirm', [UserConfirmationController::class, 'confirm'])
+                ->name('user.confirm')
+                ->middleware('permission:'.config('permission.permissions.deactivate_users'));
+    
+            Route::get('unconfirm', [UserConfirmationController::class, 'unconfirm'])
+                ->name('user.unconfirm')
+                ->middleware('permission:'.config('permission.permissions.deactivate_users'));
+    
             // Password
-            Route::get('password/change', [UserPasswordController::class, 'edit'])->name('user.change-password');
-            Route::patch('password/change', [UserPasswordController::class, 'update'])->name('user.change-password.post');
-
+            Route::get('password/change', [UserPasswordController::class, 'edit'])
+                ->name('user.change-password')
+                ->middleware('permission:'.config('permission.permissions.update_users'));
+    
+            Route::patch('password/change', [UserPasswordController::class, 'update'])
+                ->name('user.change-password.post')
+                ->middleware('permission:'.config('permission.permissions.update_users'));
+    
+            /*
+             * EXCLUSIVE FOR THE SYSTEM ADMINISTRATOR
+             */
+            
             // Access
-            Route::get('login-as', [UserAccessController::class, 'loginAs'])->name('user.login-as');
-
+            Route::get('login-as', [UserAccessController::class, 'loginAs'])
+                ->name('user.login-as')
+                ->middleware('role:'.config('access.users.admin_role'));
+            
             // Session
-            Route::get('clear-session', [UserSessionController::class, 'clearSession'])->name('user.clear-session');
-
+            Route::get('clear-session', [UserSessionController::class, 'clearSession'])
+                ->name('user.clear-session')
+                ->middleware('role:'.config('access.users.admin_role'));
+    
             // Deleted
-            Route::get('delete', [UserStatusController::class, 'delete'])->name('user.delete-permanently');
-            Route::get('restore', [UserStatusController::class, 'restore'])->name('user.restore');
+            Route::get('delete', [UserStatusController::class, 'delete'])
+                ->name('user.delete-permanently')
+                ->middleware('role:'.config('access.users.admin_role'));
+    
+            Route::get('restore', [UserStatusController::class, 'restore'])
+                ->name('user.restore')
+                ->middleware('role:'.config('access.users.admin_role'));
+    
+            // Social
+            Route::delete('social/{social}/unlink', [UserSocialController::class, 'unlink'])
+                ->name('user.social.unlink')
+                ->middleware('role:'.config('access.users.admin_role'));
         });
     });
 

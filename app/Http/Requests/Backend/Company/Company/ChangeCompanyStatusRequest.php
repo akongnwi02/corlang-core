@@ -17,8 +17,8 @@ class ChangeCompanyStatusRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->isAdmin()
-            || $this->user()->company == request()->company;
+        return $this->user()->company->isDefault()
+            || ($this->user()->company == request()->company);
     }
 
     /**

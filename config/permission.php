@@ -102,6 +102,13 @@ return [
         'update_companies' => 'update companies',
         'delete_companies' => 'delete companies',
         'deactivate_companies' => 'deactivate companies',
+        
+        //users
+        'create_users' => 'create users',
+        'read_users' => 'read users',
+        'update_users' => 'update users',
+        'delete_users' => 'delete users',
+        'deactivate_users' => 'deactivate users',
     ],
 
 ];

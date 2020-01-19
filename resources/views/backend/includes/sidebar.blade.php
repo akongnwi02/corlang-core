@@ -14,7 +14,7 @@
                 <h6><b>@lang('menus.backend.sidebar.system')</b></h6>
             </li>
 
-            @if ($logged_in_user->isAdmin())
+            @can(config('permission.permissions.read_users'))
                 <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/auth*'), 'open') }}">
                     <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/auth*')) }}" href="#">
                         <i class="nav-icon icon-user"></i> @lang('menus.backend.access.title')
@@ -34,14 +34,16 @@
                                 @endif
                             </a>
                         </li>
+                        @if ($logged_in_user->isAdmin())
                         <li class="nav-item">
                             <a class="nav-link {{ active_class(Active::checkUriPattern('admin/auth/role*')) }}" href="{{ route('admin.auth.role.index') }}">
                                 @lang('labels.backend.access.roles.management')
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li>
-            @endif
+            @endcan
 
             <li class="divider"></li>
 

@@ -13,6 +13,19 @@ class UserEventListener
     public function onCreated($event)
     {
         \Log::info('User Created');
+    
+        $user = $event->user;
+        // set the company owner to the first company admin created in the company
+        if ($user->hasRole(config('access.users.company_admin_role'))
+            && is_null($user->company->owner_id)) {
+            $user->company->owner_id = $user->uuid;
+            $user->company->save();
+            
+            \Log::info('Owner assigned to company', [
+                'owner_id' => $user->uuid,
+                'company_id' => $user->company->uuid,
+            ]);
+        }
     }
 
     /**

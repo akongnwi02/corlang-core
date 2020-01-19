@@ -8,6 +8,8 @@ use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
 use App\Events\Backend\Auth\Role\RoleCreated;
 use App\Events\Backend\Auth\Role\RoleUpdated;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 /**
  * Class RoleRepository.
@@ -102,7 +104,44 @@ class RoleRepository extends BaseRepository
             throw new GeneralException(trans('exceptions.backend.access.roles.update_error'));
         });
     }
-
+    
+    public function getAvailableRolesForCurrentUser()
+    {
+        $roles = QueryBuilder::for(Role::class)
+            ->allowedFilters([
+                AllowedFilter::scope('active'),
+            ])
+            ->allowedSorts('roles.id', 'roles.name')
+            ->defaultSort( '-roles.id', 'roles.name')
+            ->whereNotIn('name', [
+                config('access.users.guest_role'),
+            ]);
+        
+        if (auth()->user()->id == 1) {
+            return $roles;
+        }
+        
+        if (auth()->user()->hasRole(config('access.users.admin_role'))) {
+            return $roles->whereNotIn('name', [config('access.users.admin_role')]);
+        }
+        
+        if (auth()->user()->hasRole(config('access.users.company_admin_role'))) {
+            return $roles->whereNotIn('name', [
+                config('access.users.admin_role'),
+                config('access.users.company_admin_role'),
+            ]);
+        }
+        
+        if (auth()->user()->hasRole(config('access.users.branch_admin_role'))) {
+            return $roles->whereNotIn('name', [
+                config('access.users.admin_role'),
+                config('access.users.company_admin_role'),
+                config('access.users.branch_admin_role'),
+            ]);
+        }
+        
+    }
+    
     /**
      * @param $name
      *

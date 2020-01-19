@@ -18,6 +18,8 @@ use App\Events\Backend\Auth\User\UserPasswordChanged;
 use App\Notifications\Backend\Auth\UserAccountActive;
 use App\Events\Backend\Auth\User\UserPermanentlyDeleted;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 /**
  * Class UserRepository.
@@ -49,13 +51,23 @@ class UserRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function getActivePaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc'): LengthAwarePaginator
+    public function getUsers()
     {
-        return $this->model
-            ->with('roles', 'permissions', 'providers')
-            ->active()
-            ->orderBy($orderBy, $sort)
-            ->paginate($paged);
+        $users = QueryBuilder::for(User::class)
+            ->allowedFilters([
+                AllowedFilter::scope('active'),
+            ])
+            ->allowedSorts('users.active', 'users.created_at', 'users.username')
+            ->defaultSort('-users.active', '-users.confirmed', '-users.created_at', 'users.username')
+            ->with('roles');
+    
+        if (! auth()->user()->company->isDefault()) {
+            return $users->select('users.*')
+                ->where('users.company_id', auth()->user()->company->uuid)
+                ->join('companies', 'users.company_id', '=', 'companies.uuid');
+        }
+    
+        return $users;
     }
 
     /**
@@ -111,8 +123,8 @@ class UserRepository extends BaseRepository
                 'confirmation_code'    => md5(uniqid(mt_rand(), true)),
                 'notification_channel' => $data['notification_channel'],
                 'confirmed'            => isset($data['confirmed']) && $data['confirmed'] == '1' ? 1 : 0,
+                'company_id'           => $data['company_id'],
             ]);
-
             // See if adding any additional permissions
             if (!isset($data['permissions']) || !count($data['permissions'])) {
                 $data['permissions'] = [];

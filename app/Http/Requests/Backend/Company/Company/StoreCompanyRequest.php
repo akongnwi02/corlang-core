@@ -12,6 +12,16 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreCompanyRequest extends FormRequest
 {
     /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return $this->user()->company->isDefault();
+    }
+    
+    /**
      * Get custom attributes for validator errors.
      *
      * @return array

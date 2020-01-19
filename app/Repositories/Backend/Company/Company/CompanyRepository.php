@@ -46,7 +46,13 @@ class CompanyRepository
         });
     }
     
-    public function get()
+    /**
+     * Returns all the company the user can access.
+     * Users in the central company can see all other companies
+     *
+     * @return QueryBuilder
+     */
+    public function getCompaniesForCurrentUser()
     {
         $companies = QueryBuilder::for(Company::class)
             ->allowedFilters([
@@ -54,8 +60,8 @@ class CompanyRepository
             ])
             ->allowedSorts('companies.is_active', 'companies.created_at', 'companies.name')
             ->defaultSort( '-companies.is_active', '-companies.is_default', '-companies.created_at', 'companies.name');
-    
-        if (!auth()->user()->company->isDefault()) {
+        
+        if (! auth()->user()->company->isDefault()) {
             return $companies->select('companies.*')
                 ->where('users.id', auth()->user()->id)
                 ->join('users', 'users.company_id', '=', 'companies.uuid');
@@ -75,7 +81,7 @@ class CompanyRepository
         // if the company was deactivated by an administrator
         // lesser roles cannot reactivate
         if (! $company->isActive()) {
-            if ($company->deactivator->isAdmin() && ! auth()->user()->isAdmin()) {
+            if ($company->deactivator->company->isDefault() && ! auth()->user()->isAdmin()) {
                 
                 throw new GeneralException(__('exceptions.backend.companies.company.mark_rights_error'));
             }

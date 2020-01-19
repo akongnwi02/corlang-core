@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Backend\Auth\User;
 
+use App\Rules\Auth\RightRoleRule;
 use App\Rules\Auth\UniquePhoneNumber;
+use App\Rules\Company\RightCompanyRule;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -12,16 +14,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreUserRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return $this->user()->isAdmin();
-    }
-
-    /**
      * Get custom attributes for validator errors.
      *
      * @return array
@@ -29,7 +21,15 @@ class StoreUserRequest extends FormRequest
     public function attributes()
     {
         return [
-            'phone' => 'phone number',
+            'phone'                => __('validation.attributes.backend.access.users.phone'),
+            'first_name'           => __('validation.attributes.backend.access.users.first_name'),
+            'last_name'            => __('validation.attributes.backend.access.users.last_name'),
+            'username'             => __('validation.attributes.backend.access.users.username'),
+            'email'                => __('validation.attributes.backend.access.users.email'),
+            'notification_channel' => __('validation.attributes.backend.access.users.notification_channel'),
+            'password'             => __('validation.attributes.backend.access.users.password'),
+            'roles'                => __('validation.attributes.backend.access.users.associated_roles'),
+            'company_id'           => __('validation.attributes.backend.access.users.company'),
         ];
     }
 
@@ -48,7 +48,8 @@ class StoreUserRequest extends FormRequest
             'email'                => ['required', 'email', 'max:191', Rule::unique('users', 'email')],
             'notification_channel' => ['in:sms,mail', 'required',],
             'password'             => 'required|min:6|confirmed',
-            'roles'                => 'required|array',
+            'roles'                => ['required', 'array', new RightRoleRule()],
+            'company_id'           => ['required', Rule::exists('companies','uuid'), new RightCompanyRule()],
         ];
     }
 }

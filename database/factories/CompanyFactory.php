@@ -23,7 +23,7 @@ use Illuminate\Support\Str;
 
 $factory->define(Company::class, function (Generator $faker) {
     return [
-        'uuid'          => Str::uuid(),
+        'uuid'          => $faker->uuid,
         'name'          => $faker->name,
         'email'         => $faker->email,
         'phone'         => $faker->phoneNumber,
@@ -42,6 +42,7 @@ $factory->define(Company::class, function (Generator $faker) {
 $factory->state(Company::class, 'inactive', function () {
     return [
         'is_active' => 0,
+        'deactivated_by_id' => Uuid::generate(4)->string,
     ];
 });
 

@@ -50,24 +50,20 @@ return [
         'change_email' => env('CHANGE_EMAIL', false),
 
         /*
-         * The name of the super administrator role
+         * Business Roles
          */
         'admin_role' => 'administrator',
 
-        /*
-         * The default role all new registered users get added to
-         */
-        'default_role' => 'user',
-
-        /*
-         * Business Roles
-         */
         'company_admin_role' => 'company administrator',
-
-        'agent_role' => 'agent',
         
         'branch_admin_role' => 'branch administrator',
         
+        'agent_role' => 'agent',
+        
+        'guest_role' => 'guest',
+        
+        'default_role' => 'user',
+    
         /*
          * Whether or not new users need to be approved by an administrator before logging in
          * If this is set to true, then confirm_email is not in effect

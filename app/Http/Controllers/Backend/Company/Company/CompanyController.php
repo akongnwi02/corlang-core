@@ -32,7 +32,7 @@ class CompanyController extends Controller
     public function index()
     {
         return view('backend.companies.company.index')
-            ->withCompanies($this->companyRepository->get()
+            ->withCompanies($this->companyRepository->getCompaniesForCurrentUser()
                 ->paginate());
     }
 

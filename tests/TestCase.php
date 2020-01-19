@@ -4,6 +4,7 @@ namespace Tests;
 
 use App\Models\Auth\Role;
 use App\Models\Auth\User;
+use App\Models\Company\Company;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -87,10 +88,12 @@ abstract class TestCase extends BaseTestCase
      *
      * @return bool|mixed
      */
-    protected function loginAsAdmin($admin = false)
+    protected function loginAsAdmin($admin = false, $company_id = null)
     {
         if (! $admin) {
-            $admin = $this->createAdmin();
+            $admin = $this->createAdmin([
+                'company_id' => $company_id ?: Company::where('is_default', true)->first()->uuid
+            ]);
         }
 
         $this->be($admin);
@@ -104,10 +107,16 @@ abstract class TestCase extends BaseTestCase
      * @param bool $companyAdmin
      * @return bool|mixed
      */
-    protected function loginAsCompanyAdmin($companyAdmin = false)
+    protected function loginAsCompanyAdmin($companyAdmin = false, $company_id = null)
     {
+        if (! $company_id) {
+            $company_id = factory(Company::class)->create()->uuid;
+        }
+        
         if (! $companyAdmin) {
-            $companyAdmin = $this->createCompanyAdmin();
+            $companyAdmin = $this->createCompanyAdmin([
+                'company_id' => $company_id
+            ]);
         }
 
         $this->actingAs($companyAdmin);

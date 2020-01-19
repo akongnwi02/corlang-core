@@ -187,6 +187,7 @@ return [
                     'mail'                      => 'E-mail',
                     'timezone'                  => 'Timezone',
                     'language'                  => 'Language',
+                    'company'                   => 'Company'
                 ],
             ],
             'companies' => [

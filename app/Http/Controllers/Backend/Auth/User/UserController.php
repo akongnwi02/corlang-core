@@ -11,6 +11,7 @@ use App\Repositories\Backend\Auth\PermissionRepository;
 use App\Http\Requests\Backend\Auth\User\StoreUserRequest;
 use App\Http\Requests\Backend\Auth\User\ManageUserRequest;
 use App\Http\Requests\Backend\Auth\User\UpdateUserRequest;
+use App\Repositories\Backend\Company\Company\CompanyRepository;
 
 /**
  * Class UserController.
@@ -40,7 +41,8 @@ class UserController extends Controller
     public function index(ManageUserRequest $request)
     {
         return view('backend.auth.user.index')
-            ->withUsers($this->userRepository->getActivePaginated(25, 'id', 'asc'));
+            ->withUsers($this->userRepository->getUsers()
+                ->paginate());
     }
 
     /**
@@ -50,11 +52,14 @@ class UserController extends Controller
      *
      * @return mixed
      */
-    public function create(ManageUserRequest $request, RoleRepository $roleRepository, PermissionRepository $permissionRepository)
+    public function create(ManageUserRequest $request, RoleRepository $roleRepository, CompanyRepository $companyRepository)
     {
         return view('backend.auth.user.create')
-            ->withRoles($roleRepository->with('permissions')->get(['id', 'name']))
-            ->withPermissions($permissionRepository->get(['id', 'name']));
+            ->withRoles($roleRepository->with('permissions')->getAvailableRolesForCurrentUser()
+                ->get(['id', 'name']))
+            ->withCompanies($companyRepository->getCompaniesForCurrentUser()
+                ->pluck('name', 'uuid')
+                ->toArray());
     }
 
     /**
@@ -77,7 +82,8 @@ class UserController extends Controller
             'confirmation_message',
             'roles',
             'notification_channel',
-            'permissions'
+            'permissions',
+            'company_id'
         ));
 
         return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.users.created'));
