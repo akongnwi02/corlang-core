@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Backend\Auth\User;
 
+use App\Http\Requests\Backend\Auth\User\UpdateUserStatusRequest;
 use App\Models\Auth\User;
 use App\Helpers\Auth\Auth;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\Auth\User\ManageUserRequest;
+use App\Http\Requests\Backend\Auth\User\ShowUserRequest;
 
 /**
  * Class UserAccessController.
@@ -14,13 +15,13 @@ use App\Http\Requests\Backend\Auth\User\ManageUserRequest;
 class UserAccessController extends Controller
 {
     /**
-     * @param ManageUserRequest $request
+     * @param ShowUserRequest $request
      * @param User              $user
      *
      * @return \Illuminate\Http\RedirectResponse
      * @throws GeneralException
      */
-    public function loginAs(ManageUserRequest $request, User $user)
+    public function loginAs(UpdateUserStatusRequest $request, User $user)
     {
         // Overwrite who we're logging in as, if we're already logged in as someone else.
         if (session()->has('admin_user_id') && session()->has('temp_user_id')) {

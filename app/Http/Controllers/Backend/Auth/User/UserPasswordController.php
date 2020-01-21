@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Backend\Auth\User;
 
+use App\Http\Requests\Backend\Auth\User\UpdateUserRequest;
+use App\Http\Requests\Backend\Auth\User\UpdateUserStatusRequest;
 use App\Models\Auth\User;
 use App\Http\Controllers\Controller;
 use App\Repositories\Backend\Auth\UserRepository;
-use App\Http\Requests\Backend\Auth\User\ManageUserRequest;
+use App\Http\Requests\Backend\Auth\User\ShowUserRequest;
 use App\Http\Requests\Backend\Auth\User\UpdateUserPasswordRequest;
 
 /**
@@ -27,12 +29,12 @@ class UserPasswordController extends Controller
     }
 
     /**
-     * @param ManageUserRequest $request
+     * @param ShowUserRequest $request
      * @param User              $user
      *
      * @return mixed
      */
-    public function edit(ManageUserRequest $request, User $user)
+    public function edit(UpdateUserStatusRequest $request, User $user)
     {
         return view('backend.auth.user.change-password')
             ->withUser($user);

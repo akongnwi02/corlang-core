@@ -61,6 +61,16 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         /*
+         * Check to see if business user belongs to a company
+         */
+        if ($user->can(config('permission.permissions.view_backend')) || $user->isAgent()) {
+            if (! $user->company) {
+                auth()->logout();
+                throw new GeneralException(__('exceptions.frontend.auth.confirmation.no_company'));
+            }
+        }
+        
+        /*
          * Check to see if the users account is confirmed and active
          */
         if (! $user->isConfirmed()) {

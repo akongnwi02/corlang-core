@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Backend\Auth\User;
 
+use App\Http\Requests\Backend\Auth\User\UpdateUserRequest;
+use App\Http\Requests\Backend\Auth\User\UpdateUserStatusRequest;
 use App\Models\Auth\User;
 use App\Http\Controllers\Controller;
 use App\Repositories\Backend\Auth\UserRepository;
-use App\Http\Requests\Backend\Auth\User\ManageUserRequest;
+use App\Http\Requests\Backend\Auth\User\ShowUserRequest;
 
 /**
  * Class UserStatusController.
@@ -26,36 +28,36 @@ class UserStatusController extends Controller
     }
 
     /**
-     * @param ManageUserRequest $request
+     * @param ShowUserRequest $request
      *
      * @return mixed
      */
-    public function getDeactivated(ManageUserRequest $request)
+    public function getDeactivated(ShowUserRequest $request)
     {
         return view('backend.auth.user.deactivated')
             ->withUsers($this->userRepository->getInactivePaginated(25, 'id', 'asc'));
     }
 
     /**
-     * @param ManageUserRequest $request
+     * @param ShowUserRequest $request
      *
      * @return mixed
      */
-    public function getDeleted(ManageUserRequest $request)
+    public function getDeleted(ShowUserRequest $request)
     {
         return view('backend.auth.user.deleted')
             ->withUsers($this->userRepository->getDeletedPaginated(25, 'id', 'asc'));
     }
-
+    
     /**
-     * @param ManageUserRequest $request
-     * @param User              $user
+     * @param ShowUserRequest $request
+     * @param User $user
      * @param                   $status
      *
      * @return mixed
      * @throws \App\Exceptions\GeneralException
      */
-    public function mark(ManageUserRequest $request, User $user, $status)
+    public function mark(UpdateUserStatusRequest $request, User $user, $status)
     {
         $this->userRepository->mark($user, $status);
 
@@ -67,28 +69,28 @@ class UserStatusController extends Controller
     }
 
     /**
-     * @param ManageUserRequest $request
+     * @param ShowUserRequest $request
      * @param User              $deletedUser
      *
      * @return mixed
      * @throws \App\Exceptions\GeneralException
      * @throws \Throwable
      */
-    public function delete(ManageUserRequest $request, User $deletedUser)
+    public function delete(UpdateUserStatusRequest $request, User $deletedUser)
     {
         $this->userRepository->forceDelete($deletedUser);
 
         return redirect()->route('admin.auth.user.deleted')->withFlashSuccess(__('alerts.backend.users.deleted_permanently'));
     }
-
+    
     /**
-     * @param ManageUserRequest $request
-     * @param User              $deletedUser
+     * @param ShowUserRequest $request
+     * @param User $deletedUser
      *
      * @return mixed
      * @throws \App\Exceptions\GeneralException
      */
-    public function restore(ManageUserRequest $request, User $deletedUser)
+    public function restore(UpdateUserStatusRequest $request, User $deletedUser)
     {
         $this->userRepository->restore($deletedUser);
 

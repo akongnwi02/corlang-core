@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Auth\User;
 
+use App\Http\Requests\Backend\Auth\User\UpdateUserStatusRequest;
 use App\Models\Auth\User;
 use App\Http\Controllers\Controller;
 use App\Events\Backend\Auth\User\UserDeleted;
@@ -9,7 +10,7 @@ use App\Repositories\Backend\Auth\RoleRepository;
 use App\Repositories\Backend\Auth\UserRepository;
 use App\Repositories\Backend\Auth\PermissionRepository;
 use App\Http\Requests\Backend\Auth\User\StoreUserRequest;
-use App\Http\Requests\Backend\Auth\User\ManageUserRequest;
+use App\Http\Requests\Backend\Auth\User\ShowUserRequest;
 use App\Http\Requests\Backend\Auth\User\UpdateUserRequest;
 use App\Repositories\Backend\Company\Company\CompanyRepository;
 
@@ -34,11 +35,11 @@ class UserController extends Controller
     }
 
     /**
-     * @param ManageUserRequest $request
+     * @param ShowUserRequest $request
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(ManageUserRequest $request)
+    public function index()
     {
         return view('backend.auth.user.index')
             ->withUsers($this->userRepository->getUsers()
@@ -46,13 +47,13 @@ class UserController extends Controller
     }
 
     /**
-     * @param ManageUserRequest    $request
+     * @param ShowUserRequest    $request
      * @param RoleRepository       $roleRepository
      * @param PermissionRepository $permissionRepository
      *
      * @return mixed
      */
-    public function create(ManageUserRequest $request, RoleRepository $roleRepository, CompanyRepository $companyRepository)
+    public function create(RoleRepository $roleRepository, CompanyRepository $companyRepository)
     {
         return view('backend.auth.user.create')
             ->withRoles($roleRepository->with('permissions')->getAvailableRolesForCurrentUser()
@@ -88,35 +89,36 @@ class UserController extends Controller
 
         return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.users.created'));
     }
-
+    
     /**
-     * @param ManageUserRequest $request
-     * @param User              $user
+     * @param ShowUserRequest $request
+     * @param User $user
      *
      * @return mixed
      */
-    public function show(ManageUserRequest $request, User $user)
+    public function show(ShowUserRequest $request, User $user)
     {
         return view('backend.auth.user.show')
             ->withUser($user);
     }
-
+    
     /**
-     * @param ManageUserRequest    $request
-     * @param RoleRepository       $roleRepository
+     * @param ShowUserRequest $request
+     * @param RoleRepository $roleRepository
      * @param PermissionRepository $permissionRepository
-     * @param User                 $user
+     * @param User $user
      *
      * @return mixed
      */
-    public function edit(ManageUserRequest $request, RoleRepository $roleRepository, PermissionRepository $permissionRepository, User $user)
+    public function edit(ShowUserRequest $request, RoleRepository $roleRepository, CompanyRepository $companyRepository, User $user)
     {
         return view('backend.auth.user.edit')
             ->withUser($user)
             ->withRoles($roleRepository->get())
             ->withUserRoles($user->roles->pluck('name')->all())
-            ->withPermissions($permissionRepository->get(['id', 'name']))
-            ->withUserPermissions($user->permissions->pluck('name')->all());
+            ->withCompanies($companyRepository->getCompaniesForCurrentUser()
+                ->pluck('name', 'uuid')
+                ->toArray());
     }
 
     /**
@@ -144,13 +146,13 @@ class UserController extends Controller
     }
 
     /**
-     * @param ManageUserRequest $request
+     * @param ShowUserRequest $request
      * @param User              $user
      *
      * @return mixed
      * @throws \Exception
      */
-    public function destroy(ManageUserRequest $request, User $user)
+    public function destroy(UpdateUserStatusRequest $request, User $user)
     {
         $this->userRepository->deleteById($user->id);
 

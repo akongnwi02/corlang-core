@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Backend\Auth\User;
 
+use App\Rules\Auth\RightRoleRule;
+use App\Rules\Company\RightCompanyRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -17,7 +19,31 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->isAdmin();
+        if (auth()->user()->company->isDefault()
+            || auth()->user()->company == request()->user->company) {
+        
+            if (auth()->user()->id == 1) {
+                return true;
+            }
+        
+            if (auth()->user()->isAdmin()) {
+                return (! request()->user->isAdmin());
+            }
+        
+            if (auth()->user()->isCompanyAdmin()) {
+                return (! request()->user->isAdmin())
+                    && (! request()->user->isCompanyAdmin());
+            }
+        
+            if (auth()->user()->isBranchAdmin()) {
+                return (! request()->user->isAdmin())
+                    && (! request()->user->isCompanyAdmin())
+                    && (! request()->user->isBranchAdmin());
+            }
+        }
+    
+        \Log::error('You do not have enough rights to update this user');
+        return false;
     }
 
     /**
@@ -28,7 +54,13 @@ class UpdateUserRequest extends FormRequest
     public function attributes()
     {
         return [
-            'phone' => 'Phone Number',
+            'phone'                => __('validation.attributes.backend.access.users.phone'),
+            'first_name'           => __('validation.attributes.backend.access.users.first_name'),
+            'last_name'            => __('validation.attributes.backend.access.users.last_name'),
+            'username'             => __('validation.attributes.backend.access.users.username'),
+            'email'                => __('validation.attributes.backend.access.users.email'),
+            'notification_channel' => __('validation.attributes.backend.access.users.notification_channel'),
+            'roles'                => __('validation.attributes.backend.access.users.associated_roles'),
         ];
     }
 
@@ -46,7 +78,7 @@ class UpdateUserRequest extends FormRequest
             'username'             => 'required|max:191',
             'first_name'           => 'required|max:191',
             'last_name'            => 'required|max:191',
-            'roles'                => 'required|array',
+            'roles'                => ['required', 'array', new RightRoleRule()],
         ];
     }
 }
