@@ -34,12 +34,12 @@
                                 @endif
                             </a>
                         </li>
-                        @if ($logged_in_user->isAdmin())
-                        <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/auth/role*')) }}" href="{{ route('admin.auth.role.index') }}">
-                                @lang('labels.backend.access.roles.management')
-                            </a>
-                        </li>
+                        @if ($logged_in_user->id == 1)
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/auth/role*')) }}" href="{{ route('admin.auth.role.index') }}">
+                                    @lang('labels.backend.access.roles.management')
+                                </a>
+                            </li>
                         @endif
                     </ul>
                 </li>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Auth\Role\RoleController;
+use App\Http\Controllers\Backend\Auth\User\UserCompanyController;
 use App\Http\Controllers\Backend\Auth\User\UserController;
 use App\Http\Controllers\Backend\Auth\User\UserAccessController;
 use App\Http\Controllers\Backend\Auth\User\UserSocialController;
@@ -72,7 +73,7 @@ Route::group([
             // Account
             Route::get('account/confirm/resend', [UserConfirmationController::class, 'sendConfirmationEmail'])
                 ->name('user.account.confirm.resend')
-                ->middleware('permission:'.config('permission.permissions.create_users'));
+                ->middleware('permission:'.config('permission.permissions.deactivate_users'));
             
             // Status
             Route::get('mark/{status}', [UserStatusController::class, 'mark'])
@@ -98,6 +99,15 @@ Route::group([
                 ->name('user.change-password.post')
                 ->middleware('permission:'.config('permission.permissions.update_users'));
     
+            // Transfer
+            Route::get('transfer', [UserCompanyController::class, 'transfer'])
+                ->name('user.transfer')
+                ->middleware('permission:'.config('permission.permissions.transfer_users'));
+            
+            Route::patch('transfer', [UserCompanyController::class, 'send'])
+                ->name('user.transfer.post')
+                ->middleware('permission:'.config('permission.permissions.transfer_users'));
+            
             /*
              * EXCLUSIVE FOR THE SYSTEM ADMINISTRATOR
              */
