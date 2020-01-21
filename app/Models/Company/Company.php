@@ -2,10 +2,10 @@
 
 namespace App\Models\Company;
 
-use App\Models\Company\Traits\Attributes\CompanyAttribute;
-use App\Models\Company\Traits\Methods\CompanyMethod;
-use App\Models\Company\Traits\Relationships\CompanyRelationship;
-use App\Models\Company\Traits\Scopes\CompanyScope;
+use App\Models\Traits\Attributes\CompanyAttribute;
+use App\Models\Traits\Methods\CompanyMethod;
+use App\Models\Traits\Relationships\CompanyRelationship;
+use App\Models\Traits\Scopes\CompanyScope;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,6 +16,13 @@ use Wildside\Userstamps\Userstamps;
  */
 class Company extends Model
 {
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'companies';
+    
     protected $primaryKey = 'uuid';
     
     protected $keyType = 'string';
@@ -50,14 +57,8 @@ class Company extends Model
         'size',
         'type_id',
         'owner_id',
+        'logo_url',
     ];
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'companies';
 
     /**
      * The attributes that should be cast to native types.

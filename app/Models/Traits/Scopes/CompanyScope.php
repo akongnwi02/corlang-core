@@ -6,7 +6,7 @@
  * Time: 11:47 PM
  */
 
-namespace App\Models\Company\Traits\Scopes;
+namespace App\Models\Traits\Scopes;
 
 
 trait CompanyScope

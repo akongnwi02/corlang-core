@@ -2,7 +2,6 @@
 
 namespace App\Models\Company;
 
-use App\Models\Company\Traits\Scopes\CompanyTypeScope;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,8 +16,7 @@ class CompanyType extends Model
     
     public $incrementing = false;
     
-    use Uuid,
-        CompanyTypeScope;
+    use Uuid;
     
     /**
      * The database table used by the model.

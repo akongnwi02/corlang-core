@@ -26,15 +26,15 @@ class SeedAdminUserAndRoles extends Migration
         // Add the master administrator, user id of 1agent
 
         $admin = User::create([
-            'first_name'        => 'Administrator',
-            'last_name'         => 'System',
-            'email'             => 'akongnwi02@gmail.com',
-            'username'          => 'admin',
-            'phone'             => '653754332',
-            'password'          => 'secret',
-            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+            'first_name'           => 'Administrator',
+            'last_name'            => 'System',
+            'email'                => 'akongnwi02@gmail.com',
+            'username'             => 'admin',
+            'phone'                => '653754332',
+            'password'             => 'secret',
+            'confirmation_code'    => md5(uniqid(mt_rand(), true)),
             'notification_channel' => 'mail',
-            'confirmed'         => true,
+            'confirmed'            => true,
         ]);
 
         $admin->assignRole($adminRole);

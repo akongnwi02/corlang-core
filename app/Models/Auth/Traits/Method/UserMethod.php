@@ -96,6 +96,30 @@ trait UserMethod
     {
         return $this->hasRole(config('access.users.company_admin_role'));
     }
+    
+    /**
+     * @return mixed
+     */
+    public function isBranchAdmin()
+    {
+        return $this->hasRole(config('access.users.branch_admin_role'));
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function isGuest()
+    {
+        return $this->hasRole(config('access.users.guest_role'));
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function isAgent()
+    {
+        return $this->hasRole(config('access.users.agent_role'));
+    }
 
     /**
      * @return bool

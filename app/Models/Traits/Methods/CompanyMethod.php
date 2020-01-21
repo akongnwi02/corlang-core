@@ -6,7 +6,7 @@
  * Time: 12:04 PM
  */
 
-namespace App\Models\Company\Traits\Methods;
+namespace App\Models\Traits\Methods;
 
 
 trait CompanyMethod

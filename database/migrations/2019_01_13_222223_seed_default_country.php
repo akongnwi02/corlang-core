@@ -12,9 +12,9 @@ class SeedDefaultCountry extends Migration
     public function up()
     {
         \DB::table('countries')->insert([
-            'uuid' => Uuid::generate(4)->string,
-            'name' => config('business.system.country.name.cameroon'),
-            'code' => config('business.system.country.code.cameroon'),
+            'uuid'       => Uuid::generate(4)->string,
+            'name'       => config('business.system.country.name.cameroon'),
+            'code'       => config('business.system.country.code.cameroon'),
             'is_default' => true,
         ]);
     }

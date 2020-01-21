@@ -6,7 +6,7 @@
  * Time: 10:23 PM
  */
 
-namespace App\Models\Company\Traits\Relationships;
+namespace App\Models\Traits\Relationships;
 
 use App\Models\Auth\User;
 use App\Models\Company\CompanyType;

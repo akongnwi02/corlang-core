@@ -6,7 +6,7 @@
  * Time: 12:02 PM
  */
 
-namespace App\Models\Company\Traits\Attributes;
+namespace App\Models\Traits\Attributes;
 
 
 trait CompanyAttribute
@@ -33,5 +33,15 @@ trait CompanyAttribute
                 ]).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.backend.companies.company.activate').'" name="confirm_item"><span class="badge badge-danger" style="cursor:pointer">'.__('labels.general.no').'</span></a>';
         }
         return '<span class="badge badge-danger">'.__('labels.general.no').'</span>';
+    }
+    
+    public function getFullLogoAttribute()
+    {
+        return url($this->logo_url ?: 'img/backend/brand/logo/logo-company-profile.png');
+    }
+    
+    public function getMinimizedLogoAttribute()
+    {
+        return url($this->logo_url ?: 'img/backend/brand/logo/logo-main.png');
     }
 }

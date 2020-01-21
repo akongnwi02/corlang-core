@@ -19,6 +19,7 @@ class SeedUserPermissions extends Migration
             config('permission.permissions.update_users'),
             config('permission.permissions.delete_users'),
             config('permission.permissions.deactivate_users'),
+            config('permission.permissions.transfer_users'),
         ];
     
         foreach ($permissions as $permission) {
@@ -27,9 +28,16 @@ class SeedUserPermissions extends Migration
     
         $adminRole = \Spatie\Permission\Models\Role::findByName(config('access.users.admin_role'));
         $companyAdminRole = \Spatie\Permission\Models\Role::findByName(config('access.users.company_admin_role'));
+        $branchAdminRole = \Spatie\Permission\Models\Role::findByName(config('access.users.branch_admin_role'));
     
         $adminRole->givePermissionTo($permissions);
         $companyAdminRole->givePermissionTo([
+            config('permission.permissions.create_users'),
+            config('permission.permissions.read_users'),
+            config('permission.permissions.update_users'),
+            config('permission.permissions.deactivate_users'),
+        ]);
+        $branchAdminRole->givePermissionTo([
             config('permission.permissions.create_users'),
             config('permission.permissions.read_users'),
             config('permission.permissions.update_users'),
