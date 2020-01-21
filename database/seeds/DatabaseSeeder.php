@@ -5,7 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
-    use TruncateTable;
+    use DisableForeignKeys,
+        TruncateTable;
 
     /**
      * Seed the application's database.
@@ -14,16 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
-
-        $this->truncateMultiple([
-            'cache',
-            'jobs',
-            'sessions',
-        ]);
-
+       Model::unguard();
+        
+        $this->disableForeignKeys();
+    
+        $this->call(CompanyTableSeeder::class);
         $this->call(AuthTableSeeder::class);
-
+    
+        $this->enableForeignKeys();
+    
         Model::reguard();
     }
 }

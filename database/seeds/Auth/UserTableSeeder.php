@@ -1,61 +1,176 @@
 <?php
 
 use App\Models\Auth\User;
+use App\Models\Company\Company;
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 /**
  * Class UserTableSeeder.
  */
 class UserTableSeeder extends Seeder
 {
-    use DisableForeignKeys;
 
     /**
      * Run the database seed.
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        $this->disableForeignKeys();
-
-        // Add the master administrator, user id of 1
-        User::create([
-            'first_name'        => 'Admin',
-            'last_name'         => 'Istrator',
-            'email'             => 'admin@admin.com',
-            'username'          => 'admin',
-            'phone'             => '653754332',
-            'password'          => 'secret',
-            'confirmation_code' => md5(uniqid(mt_rand(), true)),
-            'notification_channel' => 'mail',
-            'confirmed'         => true,
-        ]);
-
-        User::create([
-            'first_name'        => 'Backend',
-            'last_name'         => 'User',
-            'username'          => 'executive',
-            'phone'             => '6897452145',
-            'email'             => 'executive@executive.com',
+        $user = User::create([
+            'first_name'        => $faker->firstName,
+            'last_name'         => $faker->lastName,
+            'username'          => $faker->userName,
+            'phone'             => $faker->numberBetween(600000000,699999999),
+            'email'             => $faker->email,
             'password'          => 'secret',
             'confirmation_code' => md5(uniqid(mt_rand(), true)),
             'notification_channel' => 'sms',
             'confirmed'         => true,
+            'company_id'        => Company::first()->uuid,
         ]);
+        $user->assignRole(config('access.users.company_admin_role'));
 
-        User::create([
-            'first_name'        => 'Default',
-            'last_name'         => 'User',
-            'username'          => 'user',
-            'phone'             => '6754878965',
-            'email'             => 'user@user.com',
+        $user = User::create([
+            'first_name'        => $faker->firstName,
+            'last_name'         => $faker->lastName,
+            'username'          => $faker->userName,
+            'phone'             => $faker->numberBetween(600000000,699999999),
+            'email'             => $faker->email,
             'password'          => 'secret',
             'confirmation_code' => md5(uniqid(mt_rand(), true)),
-            'notification_channel' => 'mail',
+            'notification_channel' => 'sms',
             'confirmed'         => true,
+            'company_id'        => Company::first()->uuid,
         ]);
+        $user->assignRole(config('access.users.company_admin_role'));
+        
+        $user = User::create([
+            'first_name'        => $faker->firstName,
+            'last_name'         => $faker->lastName,
+            'username'          => $faker->userName,
+            'phone'             => $faker->numberBetween(600000000,699999999),
+            'email'             => $faker->email,
+            'password'          => 'secret',
+            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+            'notification_channel' => 'sms',
+            'confirmed'         => true,
+            'company_id'        => Company::first()->uuid,
+        ]);
+        $user->assignRole(config('access.users.admin_role'));
 
-        $this->enableForeignKeys();
+        $user = User::create([
+            'first_name'        => $faker->firstName,
+            'last_name'         => $faker->lastName,
+            'username'          => $faker->userName,
+            'phone'             => $faker->numberBetween(600000000,699999999),
+            'email'             => $faker->email,
+            'password'          => 'secret',
+            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+            'notification_channel' => 'sms',
+            'confirmed'         => true,
+            'company_id'        => Company::first()->uuid,
+        ]);
+        $user->assignRole(config('access.users.admin_role'));
+
+        $user = User::create([
+            'first_name'        => $faker->firstName,
+            'last_name'         => $faker->lastName,
+            'username'          => $faker->userName,
+            'phone'             => $faker->numberBetween(600000000,699999999),
+            'email'             => $faker->email,
+            'password'          => 'secret',
+            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+            'notification_channel' => 'sms',
+            'confirmed'         => true,
+            'company_id'        => Company::first()->uuid,
+        ]);
+        $user->assignRole(config('access.users.admin_role'));
+
+        $user = User::create([
+            'first_name'        => $faker->firstName,
+            'last_name'         => $faker->lastName,
+            'username'          => $faker->userName,
+            'phone'             => $faker->numberBetween(600000000,699999999),
+            'email'             => $faker->email,
+            'password'          => 'secret',
+            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+            'notification_channel' => 'sms',
+            'confirmed'         => true,
+            'company_id'        => Company::first()->uuid,
+        ]);
+        $user->assignRole(config('access.users.agent_role'));
+        
+        $user = User::create([
+            'first_name'        => $faker->firstName,
+            'last_name'         => $faker->lastName,
+            'username'          => $faker->userName,
+            'phone'             => $faker->numberBetween(600000000,699999999),
+            'email'             => $faker->email,
+            'password'          => 'secret',
+            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+            'notification_channel' => 'sms',
+            'confirmed'         => true,
+            'company_id'        => Company::first()->uuid,
+        ]);
+        $user->assignRole(config('access.users.agent_role'));
+        
+        $user = User::create([
+            'first_name'        => $faker->firstName,
+            'last_name'         => $faker->lastName,
+            'username'          => $faker->userName,
+            'phone'             => $faker->numberBetween(600000000,699999999),
+            'email'             => $faker->email,
+            'password'          => 'secret',
+            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+            'notification_channel' => 'sms',
+            'confirmed'         => true,
+            'company_id'        => Company::first()->uuid,
+        ]);
+        $user->assignRole(config('access.users.agent_role'));
+        
+        $user = User::create([
+            'first_name'        => $faker->firstName,
+            'last_name'         => $faker->lastName,
+            'username'          => $faker->userName,
+            'phone'             => $faker->numberBetween(600000000,699999999),
+            'email'             => $faker->email,
+            'password'          => 'secret',
+            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+            'notification_channel' => 'sms',
+            'confirmed'         => true,
+            'company_id'        => Company::first()->uuid,
+        ]);
+        $user->assignRole(config('access.users.agent_role'));
+        
+        $user = User::create([
+            'first_name'        => $faker->firstName,
+            'last_name'         => $faker->lastName,
+            'username'          => $faker->userName,
+            'phone'             => $faker->numberBetween(600000000,699999999),
+            'email'             => $faker->email,
+            'password'          => 'secret',
+            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+            'notification_channel' => 'sms',
+            'confirmed'         => true,
+            'company_id'        => null,
+        ]);
+        $user->assignRole(config('access.users.guest_role'));
+        
+        $user = User::create([
+            'first_name'        => $faker->firstName,
+            'last_name'         => $faker->lastName,
+            'username'          => $faker->userName,
+            'phone'             => $faker->numberBetween(600000000,699999999),
+            'email'             => $faker->email,
+            'password'          => 'secret',
+            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+            'notification_channel' => 'sms',
+            'confirmed'         => true,
+            'company_id'        => null,
+        ]);
+        $user->assignRole(config('access.users.guest_role'));
+        
     }
 }
