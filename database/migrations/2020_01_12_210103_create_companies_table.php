@@ -31,6 +31,7 @@ class CreateCompaniesTable extends Migration
             $table->uuid('type_id');
             $table->uuid('deactivated_by_id')->nullable();
             $table->uuid('owner_id')->nullable();
+            $table->double('agentcommission_rate')->nullable();
             $table->string('logo_url')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

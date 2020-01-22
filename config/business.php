@@ -17,6 +17,11 @@ return [
             'code' => [
                 'cameroon' => 'CM'
             ]
+        ],
+        'setting' => [
+            'key' => [
+                'default_agent_commission' => 'Default Agent Commission Rate'
+            ]
         ]
     ],
 ];

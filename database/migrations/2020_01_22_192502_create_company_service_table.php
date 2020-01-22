@@ -18,7 +18,6 @@ class CreateCompanyServiceTable extends Migration
             $table->uuid('company_id');
             $table->uuid('service_id');
             $table->boolean('is_active')->default(true);
-            $table->uuid('agentcommission_id')->nullable();
             $table->uuid('companycommission_id')->nullable();
             $table->uuid('customercommission_id')->nullable();
     
@@ -31,7 +30,6 @@ class CreateCompanyServiceTable extends Migration
             $table->unique(['company_id', 'service_id']);
             $table->foreign('company_id')->references('uuid')->on('companies');
             $table->foreign('service_id')->references('uuid')->on('services');
-            $table->foreign('agentcommission_id')->references('uuid')->on('commissions');
             $table->foreign('companycommission_id')->references('uuid')->on('commissions');
             $table->foreign('customercommission_id')->references('uuid')->on('commissions');
         });

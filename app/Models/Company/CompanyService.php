@@ -25,7 +25,6 @@ class CompanyService extends Model
         'company_id',
         'service_id',
         'is_active',
-        'agentcommission_id',
         'companycommission_id',
         'custoemrcommission_id',
     ];

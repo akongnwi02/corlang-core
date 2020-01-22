@@ -40,7 +40,7 @@ class Service extends Model
         'api_url',
         'is_active',
         'code',
-        'agentcommission_id',
+        'providercommission_id',
         'companycommission_id',
         'customercommission_id',
         

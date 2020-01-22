@@ -22,7 +22,7 @@ class CreateServicesTable extends Migration
             $table->string('api_key')->nullable();
             $table->string('api_url')->nullable();
             $table->string('api_secret')->nullable();
-            $table->uuid('agentcommission_id')->nullable();
+            $table->uuid('providercommission_id')->nullable();
             $table->uuid('companycommission_id')->nullable();
             $table->uuid('customercommission_id')->nullable();
             
@@ -32,7 +32,7 @@ class CreateServicesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
     
-            $table->foreign('agentcommission_id')->references('uuid')->on('commissions');
+            $table->foreign('providercommission_id')->references('uuid')->on('commissions');
             $table->foreign('companycommission_id')->references('uuid')->on('commissions');
             $table->foreign('customercommission_id')->references('uuid')->on('commissions');
             $table->foreign('category_id')->references('uuid')->on('categories');
