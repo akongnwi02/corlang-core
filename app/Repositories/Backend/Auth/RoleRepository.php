@@ -34,7 +34,7 @@ class RoleRepository extends BaseRepository
     {
         // Make sure it doesn't already exist
         if ($this->roleExists($data['name'])) {
-            throw new GeneralException('A role already exists with the name '.$data['name']);
+            throw new GeneralException(__('exceptions.backend.access.roles.name_exists', ['name' => $data['name']]));
         }
 
         if (! isset($data['permissions']) || ! \count($data['permissions'])) {
@@ -77,7 +77,7 @@ class RoleRepository extends BaseRepository
         // If the name is changing make sure it doesn't already exist
         if ($role->name !== strtolower($data['name'])) {
             if ($this->roleExists($data['name'])) {
-                throw new GeneralException('A role already exists with the name '.$data['name']);
+                throw new GeneralException(__('exceptions.backend.access.roles.name_exists', ['name' => $data['name']]));
             }
         }
 
@@ -115,6 +115,7 @@ class RoleRepository extends BaseRepository
             ->defaultSort( '-roles.id', 'roles.name')
             ->whereNotIn('name', [
                 config('access.users.guest_role'),
+                config('access.users.branch_admin_role'),
             ]);
         
         if (auth()->user()->id == 1) {

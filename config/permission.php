@@ -109,6 +109,7 @@ return [
         'update_users' => 'update users',
         'delete_users' => 'delete users',
         'deactivate_users' => 'deactivate users',
+        'transfer_users' => 'transfer users',
     ],
 
 ];

@@ -24,6 +24,7 @@ return [
                 'needs_permission'  => 'You must select at least one permission for this role.',
                 'not_found'         => 'That role does not exist.',
                 'update_error'      => 'There was a problem updating this role. Please try again.',
+                'name_exists'       => 'A role already exists with the name :name.',
             ],
 
             'users' => [
@@ -51,6 +52,7 @@ return [
                 'session_wrong_driver'    => 'Your session driver must be set to database to use this feature.',
                 'social_delete_error'     => 'There was a problem removing the social account from the user.',
                 'update_error'            => 'There was a problem updating this user. Please try again.',
+                'transfer_error'          => 'There was a problem transferring this user. Please try again.',
                 'update_password_error'   => 'There was a problem changing this users password. Please try again.',
             ],
         ],
@@ -81,6 +83,7 @@ return [
                 'code_resent'          => 'A new confirmation code has been sent to :account. <a href=":url">Resend</a>',
                 'code_reset_resent'    => 'A new password reset code has been sent to :account. <a href=":url">Resend</a>',
                 'code_reset_not_found' => 'The password reset code does not exist',
+                'no_company'           => 'You have a business account which is not linked to any company at the moment.',
             ],
 
             'deactivated'            => 'Your account has been deactivated.',

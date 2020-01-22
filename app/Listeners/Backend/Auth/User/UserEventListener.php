@@ -16,11 +16,27 @@ class UserEventListener
     
         $user = $event->user;
         // set the company owner to the first company admin created in the company
-        if ($user->hasRole(config('access.users.company_admin_role'))
-            && is_null($user->company->owner_id)) {
-            $user->company->owner_id = $user->uuid;
+        if ($user->isCompanyAdmin() && $user->company) {
+            $user->company->owner_id = $user->company->owner_id ?: $user->uuid;
             $user->company->save();
             
+            \Log::info('Owner assigned to company', [
+                'owner_id' => $user->uuid,
+                'company_id' => $user->company->uuid,
+            ]);
+        }
+    }
+    
+    public function onTransferred($event)
+    {
+        \Log::info('User Transferred');
+    
+        $user = $event->user;
+        // set the company owner to the first company admin created in the company
+        if ($user->isCompanyAdmin() && $user->company) {
+            $user->company->owner_id = $user->company->owner_id ?: $user->uuid;
+            $user->company->save();
+        
             \Log::info('Owner assigned to company', [
                 'owner_id' => $user->uuid,
                 'company_id' => $user->company->uuid,
@@ -34,6 +50,19 @@ class UserEventListener
     public function onUpdated($event)
     {
         \Log::info('User Updated');
+    
+        $user = $event->user;
+        // set the company owner to the first company admin created in the company
+        if ($user->isCompanyAdmin() && $user->company) {
+            
+            $user->company->owner_id = $user->company->owner_id ?: $user->uuid;
+            $user->company->save();
+        
+            \Log::info('Owner assigned to company', [
+                'owner_id' => $user->uuid,
+                'company_id' => $user->company->uuid,
+            ]);
+        }
     }
 
     /**
@@ -168,6 +197,11 @@ class UserEventListener
         $events->listen(
             \App\Events\Backend\Auth\User\UserRestored::class,
             'App\Listeners\Backend\Auth\User\UserEventListener@onRestored'
+        );
+        
+        $events->listen(
+            \App\Events\Backend\Auth\User\UserTransferred::class,
+            'App\Listeners\Backend\Auth\User\UserEventListener@onTransferred'
         );
     }
 }

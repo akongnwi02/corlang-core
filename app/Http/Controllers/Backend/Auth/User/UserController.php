@@ -114,7 +114,8 @@ class UserController extends Controller
     {
         return view('backend.auth.user.edit')
             ->withUser($user)
-            ->withRoles($roleRepository->get())
+            ->withRoles($roleRepository->with('permissions')->getAvailableRolesForCurrentUser()
+                ->get(['id', 'name']))
             ->withUserRoles($user->roles->pluck('name')->all())
             ->withCompanies($companyRepository->getCompaniesForCurrentUser()
                 ->pluck('name', 'uuid')

@@ -19,7 +19,7 @@ return [
     'password_used'         => 'You can not set a password that you have previously used.',
     'code_expired'          => 'The code provided has expired.',
     'unauthorized_company'  => 'You are not authorized to create a user in this company.',
-    'unauthorized_role'     => 'You can only create a user with role lower than the :highest_role role',
+    'unauthorized_role'     => 'You can only assign a role lower than the :highest_role role to a user',
     'phone_or_email'        => 'Please enter a valid phone number or e-mail address.',
     'unique_phone_or_email' => 'The contact :username provided is linked to a different account',
     'socialite'             => [

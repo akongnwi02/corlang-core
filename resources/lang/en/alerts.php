@@ -32,6 +32,7 @@ return [
             'social_deleted'           => 'Social Account Successfully Removed',
             'unconfirmed'              => 'The user was successfully un-confirmed',
             'updated'                  => 'The user was successfully updated.',
+            'transferred'                 => 'The user was successfully transferred.',
             'updated_password'         => "The user's password was successfully updated.",
         ],
         

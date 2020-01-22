@@ -47,6 +47,7 @@ class RightRoleRule implements Rule
                 && (! in_array(config('access.users.company_admin_role'), $value))
                 && (! in_array(config('access.users.branch_admin_role'), $value));
         }
+        \Log::error('You have an invalid user role', auth()->user()->roles->toArray());
         return false;
     }
     

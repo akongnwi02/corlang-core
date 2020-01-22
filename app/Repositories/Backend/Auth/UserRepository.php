@@ -12,6 +12,7 @@ use App\Events\Backend\Auth\User\UserRestored;
 use App\Events\Backend\Auth\User\UserConfirmed;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Events\Backend\Auth\User\UserDeactivated;
+use App\Events\Backend\Auth\User\UserTransferred;
 use App\Events\Backend\Auth\User\UserReactivated;
 use App\Events\Backend\Auth\User\UserUnconfirmed;
 use App\Events\Backend\Auth\User\UserPasswordChanged;
@@ -392,5 +393,22 @@ class UserRepository extends BaseRepository
             }
         }
     }
-
+    
+    public function transfer(User $user, $data)
+    {
+        return DB::transaction(function () use ($user, $data) {
+            if ($user->update([
+                'company_id'           => $data['company_id'],
+            ])) {
+                // Add selected roles/permissions
+                $user->syncRoles($data['roles']);
+            
+                event(new UserTransferred($user));
+            
+                return $user;
+            }
+        
+            throw new GeneralException(__('exceptions.backend.access.users.transfer_error'));
+        });
+    }
 }

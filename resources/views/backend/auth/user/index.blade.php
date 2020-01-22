@@ -32,7 +32,7 @@
                             <th>@lang('labels.backend.access.users.table.username')</th>
                             <th>@lang('labels.backend.access.users.table.confirmed')</th>
                             <th>@lang('labels.backend.access.users.table.roles')</th>
-                            <th>@lang('labels.backend.access.users.table.other_permissions')</th>
+                            <th>@lang('labels.backend.access.users.table.company')</th>
                             <th>@lang('labels.backend.access.users.table.social')</th>
                             <th>@lang('labels.backend.access.users.table.last_updated')</th>
                             <th>@lang('labels.general.actions')</th>
@@ -46,7 +46,7 @@
                                 <td>{{ $user->username }}</td>
                                 <td>{!! $user->confirmed_label !!}</td>
                                 <td>{!! $user->roles_label !!}</td>
-                                <td>{!! $user->permissions_label !!}</td>
+                                <td>{{ @$user->company->name }}</td>
                                 <td>{!! $user->social_buttons !!}</td>
                                 <td>{{ $user->updated_at->diffForHumans() }}</td>
                                 <td>{!! $user->action_buttons !!}</td>

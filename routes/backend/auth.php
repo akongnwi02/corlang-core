@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Auth\Role\RoleController;
-use App\Http\Controllers\Backend\Auth\User\UserCompanyController;
+use App\Http\Controllers\Backend\Auth\User\TransferUserController;
 use App\Http\Controllers\Backend\Auth\User\UserController;
 use App\Http\Controllers\Backend\Auth\User\UserAccessController;
 use App\Http\Controllers\Backend\Auth\User\UserSocialController;
@@ -100,11 +100,11 @@ Route::group([
                 ->middleware('permission:'.config('permission.permissions.update_users'));
     
             // Transfer
-            Route::get('transfer', [UserCompanyController::class, 'transfer'])
+            Route::get('transfer', [TransferUserController::class, 'transfer'])
                 ->name('user.transfer')
                 ->middleware('permission:'.config('permission.permissions.transfer_users'));
             
-            Route::patch('transfer', [UserCompanyController::class, 'send'])
+            Route::patch('transfer', [TransferUserController::class, 'send'])
                 ->name('user.transfer.post')
                 ->middleware('permission:'.config('permission.permissions.transfer_users'));
             

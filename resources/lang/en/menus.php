@@ -28,6 +28,7 @@ return [
             'users' => [
                 'all'             => 'All Users',
                 'change-password' => 'Change Password',
+                'transfer-user'   => 'Transfer User',
                 'create'          => 'Create User',
                 'deactivated'     => 'Deactivated Users',
                 'deleted'         => 'Deleted Users',
