@@ -117,7 +117,6 @@ class CompanyRepository
      */
     public function update($company, $data, $logo = null)
     {
-        return \DB::transaction(function () use ($company, $data, $logo) {
         
         $company->fill($data);
         
@@ -131,14 +130,13 @@ class CompanyRepository
             
         }
     
-        if ($company->save()) {
+        if ($company->update()) {
             
             event(new CompanyUpdated($company));
             
             return $company;
         }
     
-            throw new GeneralException(__('exceptions.backend.companies.company.update_error'));
-        });
+        throw new GeneralException(__('exceptions.backend.companies.company.update_error'));
     }
 }
