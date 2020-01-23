@@ -19,11 +19,14 @@ class CreateSettingsTable extends Migration
             $table->boolean('is_visible')->default(false);
             $table->string('value');
             $table->string('description')->nullable();
-            
+            $table->string('options')->nullable();  //[{"name":"<name>","value":"<value>"}]
+            $table->integer('minimum')->nullable();
+            $table->integer('maximum')->nullable();
+            $table->enum('type', ['TEXT', 'NUMBER', 'CHOICE', 'BOOLEAN']);
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *
