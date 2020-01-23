@@ -12,7 +12,7 @@ namespace App\Models\Business;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
-class Pricing extends Model
+class Commission extends Model
 {
     use Uuid;
     /**
@@ -20,7 +20,7 @@ class Pricing extends Model
      *
      * @var string
      */
-    protected $table = 'pricings';
+    protected $table = 'commissions';
     
     protected $primaryKey = 'uuid';
     
@@ -29,17 +29,9 @@ class Pricing extends Model
     public $incrementing = false;
     
     protected $fillable = [
-        'commission_id',
-        'from',
-        'to',
-        'fixed',
-        'percentage',
+        'name',
+        'description',
+        'currency_id',
     ];
-    
-    protected $casts = [
-        'from' => 'double',
-        'to' => 'double',
-        'fixed' => 'double',
-        'percentage' => 'double',
-    ];
+
 }

@@ -9,10 +9,13 @@
 namespace App\Models\Service;
 
 
+use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    use Uuid;
+    
     /**
      * The database table used by the model.
      *

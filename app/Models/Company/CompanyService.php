@@ -9,10 +9,13 @@
 namespace App\Models\Company;
 
 
+use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 class CompanyService extends Model
 {
+    use Uuid;
+    
     protected $table = 'company_service';
     
     protected $primaryKey = 'uuid';

@@ -1,23 +1,16 @@
 <?php
 
-namespace App\Models\Company;
+namespace App\Models\System;
 
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Role.
+ * Class Session
+ * package App.
  */
-class CompanyType extends Model
+class Gateway extends Model
 {
-    use Uuid;
-    
-    protected $primaryKey = 'uuid';
-    
-    protected $keyType = 'string';
-    
-    public $incrementing = false;
-    
     use Uuid;
     
     /**
@@ -25,7 +18,13 @@ class CompanyType extends Model
      *
      * @var string
      */
-    protected $table = 'companytypes';
+    protected $table = 'gateways';
+    
+    protected $primaryKey = 'uuid';
+    
+    protected $keyType = 'string';
+    
+    public $incrementing = false;
     
     /**
      * The attributes that should be cast to native types.
@@ -41,5 +40,12 @@ class CompanyType extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'category_id',
+        'name',
+        'code',
+        'api_key',
+        'api_secret',
+        'api_url'
+    ];
 }

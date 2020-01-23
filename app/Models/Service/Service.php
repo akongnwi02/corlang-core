@@ -9,10 +9,12 @@
 namespace App\Models\Service;
 
 
+use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
+    use Uuid;
     
     /**
      * The database table used by the model.
@@ -35,9 +37,7 @@ class Service extends Model
     protected $fillable = [
         'name',
         'category_id',
-        'api_key',
-        'api_secret',
-        'api_url',
+        'gateway_id',
         'is_active',
         'code',
         'providercommission_id',
