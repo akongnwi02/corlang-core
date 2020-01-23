@@ -34,7 +34,7 @@ Route::group([
     Route::post('company', [CompanyController::class, 'store'])
         ->name('company.store')
         ->middleware('permission:'.config('permission.permissions.create_companies'));
-    
+
     /*
      * Specific Company
      */

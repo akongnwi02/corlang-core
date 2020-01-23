@@ -2,6 +2,7 @@
 
 namespace App\Models\System;
 
+use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,11 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Country extends Model
 {
-    protected $primaryKey = 'uuid';
-    
-    protected $keyType = 'string';
-    
-    public $incrementing = false;
+    use Uuid;
     
     /**
      * The database table used by the model.
@@ -23,6 +20,13 @@ class Country extends Model
      */
     protected $table = 'countries';
     
+    protected $primaryKey = 'uuid';
+    
+    protected $keyType = 'string';
+    
+    public $incrementing = false;
+    
+    public $timestamps = false;
     /**
      * The attributes that should be cast to native types.
      *

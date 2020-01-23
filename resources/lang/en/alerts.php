@@ -39,6 +39,7 @@ return [
         'companies' => [
             'company' => [
                 'created' => 'The company was successfully created.',
+                'updated' => 'The company was successfully updated.',
                 'status_updated' => 'The status was successfully updated',
             ]
         ]

@@ -24,6 +24,15 @@ class CompanyEventListener
         ]);
     }
     
+    public function onUpdated($event)
+    {
+        \Log::info('Company Updated', [
+            'name' => $event->company->name,
+            'by' => $event->company->editor->username,
+            'type' => $event->company->type->name,
+        ]);
+    }
+    
     public function onReactivated($event)
     {
         $event->company->deactivated_by_id = null;
@@ -70,6 +79,11 @@ class CompanyEventListener
         $events->listen(
             \App\Events\Backend\Company\Company\CompanyDeactivated::class,
             'App\Listeners\Backend\Company\CompanyEventListener@onDeactivated'
+        );
+        
+        $events->listen(
+            \App\Events\Backend\Company\Company\CompanyUpdated::class,
+            'App\Listeners\Backend\Company\CompanyEventListener@onUpdated'
         );
     }
 }

@@ -16,6 +16,7 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->uuid('uuid')->primary();
             $table->string('key')->unique();
+            $table->boolean('is_visible')->default(false);
             $table->string('value');
             $table->string('description')->nullable();
             

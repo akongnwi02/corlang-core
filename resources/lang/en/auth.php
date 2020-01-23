@@ -27,4 +27,6 @@ return [
     ],
     'throttle'              => 'Too many login attempts. Please try again in :seconds seconds.',
     'unknown'               => 'An unknown error occurred',
+    'cant_change_company_name' => 'You are not allowed to change the company name.',
+    'cant_change_company_type' => 'You are not allowed to change the company type.',
 ];

@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
        Model::unguard();
         
         $this->disableForeignKeys();
-    
+        $this->call(CountryTableSeeder::class);
         $this->call(CompanyTableSeeder::class);
         $this->call(AuthTableSeeder::class);
     

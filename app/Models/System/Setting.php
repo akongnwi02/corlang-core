@@ -30,6 +30,11 @@ class Setting extends Model
     
     protected $fillable = [
         'value',
+        'is_active',
         'description',
+    ];
+    
+    protected $casts = [
+        'is_active' => 'boolean',
     ];
 }

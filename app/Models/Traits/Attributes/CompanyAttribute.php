@@ -37,11 +37,49 @@ trait CompanyAttribute
     
     public function getFullLogoAttribute()
     {
-        return url($this->logo_url ?: 'img/backend/brand/logo/logo-company-profile.png');
+        return url($this->getCompanyLogo() ?: 'img/backend/brand/logo/logo-company-profile.png');
     }
     
     public function getMinimizedLogoAttribute()
     {
-        return url($this->logo_url ?: 'img/backend/brand/logo/logo-main.png');
+        return url($this->getCompanyLogo() ?: 'img/backend/brand/logo/logo-main.png');
     }
+    
+    public function getCompanyLogo()
+    {
+        if ($this->logo_url) {
+            return 'storage/'. $this->logo_url;
+        }
+        return false;
+    }
+    /**
+     * @return string
+     */
+    public function getShowButtonAttribute()
+    {
+        if (auth()->user()->can(config('permission.permissions.read_companies'))) {
+            return '<a href="'.route('admin.companies.company.show', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.view').'" class="btn btn-info"><i class="fas fa-eye"></i></a>';
+        }
+    }
+    
+    /**
+     * @return string
+     */
+    public function getEditButtonAttribute()
+    {
+        if (auth()->user()->can(config('permission.permissions.update_companies'))) {
+            return '<a href="'.route('admin.companies.company.edit', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.edit').'" class="btn btn-primary"><i class="fas fa-edit"></i></a>';
+        }
+    }
+    
+    
+    public function getActionButtonsAttribute()
+    {
+        return '
+    	<div class="btn-group" role="group" aria-label="'.__('labels.backend.access.users.user_actions').'">
+		  '.$this->show_button.'
+		  '.$this->edit_button.'
+		</div>';
+    }
+    
 }

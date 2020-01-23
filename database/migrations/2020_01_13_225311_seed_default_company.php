@@ -34,7 +34,7 @@ class SeedDefaultCompany extends Migration
             'type_id'           => CompanyType::where('name', config('business.company.type.formal'))->firstOrFail()->uuid,
             'owner_id'          => User::find(1)->uuid,
             'deactivated_by_id' => null,
-            'logo_url'          => 'img/backend/brand/logo/logo-company-profile.png',
+            'logo_url'          => null,
         ]);
         
         Company::reguard();

@@ -58,6 +58,7 @@ return [
             'company' => [
                 'management' => 'Companies',
                 'create' => 'Create Company',
+                'edit' => 'Edit Company',
             ]
         ]
     ],

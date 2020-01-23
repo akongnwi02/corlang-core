@@ -11,8 +11,10 @@ namespace App\Repositories\Backend\Company\Company;
 use App\Events\Backend\Company\Company\CompanyCreated;
 use App\Events\Backend\Company\Company\CompanyDeactivated;
 use App\Events\Backend\Company\Company\CompanyReactivated;
+use App\Events\Backend\Company\Company\CompanyUpdated;
 use App\Exceptions\GeneralException;
 use App\Models\Company\Company;
+use Illuminate\Support\Facades\Storage;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -105,5 +107,38 @@ class CompanyRepository
         }
     
         throw new GeneralException(__('exceptions.backend.companies.company.mark_error'));
+    }
+    
+    /**
+     * @param $company
+     * @param $data
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function update($company, $data, $logo = null)
+    {
+        return \DB::transaction(function () use ($company, $data, $logo) {
+        
+        $company->fill($data);
+        
+        if ($logo) {
+            // delete previous logo
+            if (strlen($company->logo_url)) {
+                Storage::disk('public')->delete($company->logo_url);
+            }
+            
+            $company->logo_url = $logo->store('/logos', 'public');
+            
+        }
+    
+        if ($company->save()) {
+            
+            event(new CompanyUpdated($company));
+            
+            return $company;
+        }
+    
+            throw new GeneralException(__('exceptions.backend.companies.company.update_error'));
+        });
     }
 }

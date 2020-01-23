@@ -59,7 +59,8 @@ return [
         
         'companies' => [
             'company' => [
-                'create_error' => 'There was a problem creating this companies. Please try again.',
+                'create_error' => 'There was a problem creating this company. Please try again.',
+                'update_error' => 'There was a problem updating this company. Please try again.',
                 'mark_error'   => 'There was a problem updating the status of this company. Please try again.',
                 'mark_rights_error'   => 'There was a problem updating the status of this company. The company was deactivated by a higher role.',
             ]
@@ -92,6 +93,7 @@ return [
             'cannot_change_email'    => 'You cannot change your e-mail address. This is you default notification means.',
             'cannot_change_phone'    => 'You cannot change your phone number. This is you default notification means.',
             'cannot_change_username' => 'You cannot change your username. Please contact support',
+            'no_picture'             => 'You must supply a profile image.',
 
             'password' => [
                 'change_mismatch'  => 'That is not your old password.',

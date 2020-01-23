@@ -51,7 +51,7 @@
                                     <td>{{ $company->type->name }}</td>
                                     <td>{!! $company->active_label !!}</td>
                                     <td>{{ $company->updated_at->diffForHumans() }}</td>
-                                    <td>{{ $company->action_buttons }}</td>
+                                    <td>{!! $company->action_buttons  !!}</td>
                                 </tr>
                             @endforeach
                             </tbody>

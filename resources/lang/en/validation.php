@@ -204,6 +204,8 @@ return [
                     'website'       => 'Website',
                     'postal_code'   => 'Postal Code',
                     'size'          => 'Size',
+                    'logo'          => 'Company Logo'
+                    
                 ]
             ]
         ],

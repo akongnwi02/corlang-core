@@ -124,6 +124,7 @@ return [
             'company' => [
                 'management' => 'Company Management',
                 'create' => 'Create Company',
+                'edit' => 'Edit Company',
                 'active' => 'Active Companies',
                 
                 'table' => [
@@ -143,6 +144,11 @@ return [
                     'active'        => 'Active',
                     'total'         => 'company|companies',
 
+                ],
+                'tabs' => [
+                    'titles' => [
+                        'profile' => 'Profile',
+                    ],
                 ]
             ],
         ]

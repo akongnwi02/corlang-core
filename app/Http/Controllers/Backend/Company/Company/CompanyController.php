@@ -10,8 +10,11 @@ namespace App\Http\Controllers\Backend\Company\Company;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Company\Company\UpdateCompanyRequest;
 use App\Http\Requests\Backend\Company\Company\StoreCompanyRequest;
+use App\Models\Company\Company;
 use App\Models\Company\CompanyType;
+use App\Models\System\Setting;
 use App\Repositories\Backend\Company\Company\CompanyRepository;
 use App\Repositories\Backend\System\CountryRepository;
 
@@ -54,7 +57,9 @@ class CompanyController extends Controller
     {
         $this->companyRepository->create($request->input());
     
-        return redirect()->route('admin.companies.company.index')->withFlashSuccess(__('alerts.backend.companies.company.created'));
+        return redirect()
+            ->route('admin.companies.company.index')
+            ->withFlashSuccess(__('alerts.backend.companies.company.created'));
     }
 
     public function show()
@@ -62,11 +67,35 @@ class CompanyController extends Controller
 
     }
 
-    public function edit()
+    public function edit(Company $company)
     {
-
+        return view('backend.companies.company.edit')
+            ->withCompany($company)
+            ->withSetting(Setting::where('key', config('business.system.setting.key.default_agent_commission')))
+            ->withCountries($this->countryRepository->get()
+                ->pluck('name', 'uuid')
+                ->toArray())
+            ->withTypes(CompanyType::get());
     }
-
+    
+    /**
+     * @param UpdateCompanyRequest $request
+     * @param Company $company
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function update(UpdateCompanyRequest $request, Company $company)
+    {
+  
+        $logo = $request->has('logo') ? $request->file('logo') : null;
+    
+        $this->companyRepository->update($company, $request->input(), $logo);
+    
+        return redirect()
+            ->route('admin.companies.company.index')
+            ->withFlashSuccess(__('alerts.backend.companies.company.updated'));
+    }
+    
     public function destroy()
     {
 
