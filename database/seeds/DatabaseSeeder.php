@@ -15,12 +15,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       Model::unguard();
+        $this->truncateMultiple([
+            'cache',
+            'jobs',
+            'sessions',
+            'categories',
+            'commissions',
+            'companies',
+            'company_service',
+            'companytypes',
+            'countries',
+            'currencies',
+            'pricings',
+            'services',
+            'settings',
+        ]);
+    
+        Model::unguard();
         
         $this->disableForeignKeys();
-        $this->call(CountryTableSeeder::class);
-        $this->call(CompanyTableSeeder::class);
-        $this->call(AuthTableSeeder::class);
+    
+        $this->call(DumpTableSeeder::class);
     
         $this->enableForeignKeys();
     

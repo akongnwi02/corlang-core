@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\System\Country;
+use App\Models\System\Currency;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 /**
@@ -10,15 +11,16 @@ use Faker\Generator as Faker;
  * Time: 1:53 PM
  */
 
-class CountryTableSeeder extends Seeder
+class CurrencyTableSeeder extends Seeder
 {
     public function run(Faker $faker)
     {
-        Country::unguard();
+        Currency::unguard();
         
-        Country::create([
-            'name' => $faker->country,
-            'code' => $faker->countryCode,
+        Currency::create([
+            'name' => 'Francs CFA',
+            'code' => 'XAF',
+            'rate' => 1,
             'is_active' => true,
         ]);
         

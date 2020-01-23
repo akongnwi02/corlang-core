@@ -19,14 +19,15 @@ class UserTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         $user = User::create([
-            'first_name'        => $faker->firstName,
-            'last_name'         => $faker->lastName,
-            'username'          => $faker->userName,
+            'id'                => 1,
+            'first_name'        => 'System',
+            'last_name'         => 'Administrator',
+            'username'          => 'admin',
             'phone'             => $faker->numberBetween(600000000,699999999),
             'email'             => $faker->email,
             'password'          => 'secret',
             'confirmation_code' => md5(uniqid(mt_rand(), true)),
-            'notification_channel' => 'sms',
+            'notification_channel' => 'mail',
             'confirmed'         => true,
             'company_id'        => Company::first()->uuid,
         ]);

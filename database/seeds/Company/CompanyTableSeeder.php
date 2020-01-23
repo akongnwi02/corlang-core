@@ -16,8 +16,11 @@ class CompanyTableSeeder extends Seeder
 {
     public function run(Faker $faker)
     {
+        
+        Company::unguard();
+        
         Company::create([
-            'name' => $faker->name,
+            'name' => 'Corlang Entreprise',
             'address' => $faker->address,
             'country_id' => Country::first()->uuid,
             'street' => $faker->streetAddress,
@@ -28,7 +31,7 @@ class CompanyTableSeeder extends Seeder
             'website' => $faker->url,
             'email' => $faker->companyEmail,
             'is_active' => true,
-            'is_default' => false,
+            'is_default' => true,
             'size' => $faker->randomDigit,
             'type_id' => CompanyType::first()->uuid,
             'owner_id' => null,
@@ -115,6 +118,8 @@ class CompanyTableSeeder extends Seeder
             'deactivated_by_id' => null,
             'logo_url' => $faker->imageUrl(),
         ]);
+    
+        Company::reguard();
     
     }
 }
