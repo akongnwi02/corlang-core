@@ -97,19 +97,26 @@ return [
         'view_backend' => 'view backend',
     
         // companies
-        'create_companies' => 'create companies',
-        'read_companies' => 'read companies',
-        'update_companies' => 'update companies',
-        'delete_companies' => 'delete companies',
+        'create_companies'     => 'create companies',
+        'read_companies'       => 'read companies',
+        'update_companies'     => 'update companies',
+        'delete_companies'     => 'delete companies',
         'deactivate_companies' => 'deactivate companies',
-        
+    
+        // services
+        'create_services'      => 'create services',
+        'read_services'        => 'read services',
+        'update_services'      => 'update services',
+        'delete_services'      => 'delete services',
+        'deactivate_services'  => 'deactivate services',
+    
         //users
-        'create_users' => 'create users',
-        'read_users' => 'read users',
-        'update_users' => 'update users',
-        'delete_users' => 'delete users',
-        'deactivate_users' => 'deactivate users',
-        'transfer_users' => 'transfer users',
+        'create_users'         => 'create users',
+        'read_users'           => 'read users',
+        'update_users'         => 'update users',
+        'delete_users'         => 'delete users',
+        'deactivate_users'     => 'deactivate users',
+        'transfer_users'       => 'transfer users',
     ],
 
 ];

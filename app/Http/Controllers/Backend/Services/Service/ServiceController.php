@@ -2,32 +2,31 @@
 /**
  * Created by PhpStorm.
  * User: devert
- * Date: 1/12/20
- * Time: 10:53 PM
+ * Date: 1/23/20
+ * Time: 1:52 PM
  */
 
-namespace App\Http\Controllers\Backend\Company\Company;
-
+namespace App\Http\Controllers\Backend\Services\Service;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\Company\Company\UpdateCompanyRequest;
-use App\Http\Requests\Backend\Company\Company\StoreCompanyRequest;
+use App\Http\Requests\Backend\Services\Service\UpdateServiceRequest;
+use App\Http\Requests\Backend\Services\Service\StoreServiceRequest;
 use App\Models\Company\Company;
 use App\Models\Company\CompanyType;
 use App\Models\System\Setting;
-use App\Repositories\Backend\Company\Company\CompanyRepository;
+use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Repositories\Backend\System\CountryRepository;
 
-class CompanyController extends Controller
+class ServiceController extends Controller
 {
-
-    public function index(CompanyRepository $companyRepository)
+    
+    public function index(ServiceRepository $companyRepository)
     {
         return view('backend.companies.company.index')
             ->withCompanies($companyRepository->getCompaniesForCurrentUser()
                 ->paginate());
     }
-
+    
     public function create(CountryRepository $countryRepository)
     {
         return view('backend.companies.company.create')
@@ -38,24 +37,24 @@ class CompanyController extends Controller
     }
     
     /**
-     * @param StoreCompanyRequest $request
+     * @param StoreServiceRequest $request
      * @return mixed
      * @throws \Throwable
      */
-    public function store(StoreCompanyRequest $request, CompanyRepository $companyRepository)
+    public function store(StoreServiceRequest $request, ServiceRepository $companyRepository)
     {
         $companyRepository->create($request->input());
-    
+        
         return redirect()
             ->route('admin.companies.company.index')
             ->withFlashSuccess(__('alerts.backend.companies.company.created'));
     }
-
+    
     public function show()
     {
-
+    
     }
-
+    
     public function edit(Company $company, CountryRepository $countryRepository)
     {
         return view('backend.companies.company.edit')
@@ -68,18 +67,18 @@ class CompanyController extends Controller
     }
     
     /**
-     * @param UpdateCompanyRequest $request
+     * @param UpdateServiceRequest $request
      * @param Company $company
      * @return mixed
      * @throws \Throwable
      */
-    public function update(UpdateCompanyRequest $request, Company $company, CompanyRepository $companyRepository)
+    public function update(UpdateServiceRequest $request, Company $company, ServiceRepository $companyRepository)
     {
-  
+        
         $logo = $request->has('logo') ? $request->file('logo') : null;
-    
+        
         $companyRepository->update($company, $request->input(), $logo);
-    
+        
         return redirect()
             ->route('admin.companies.company.index')
             ->withFlashSuccess(__('alerts.backend.companies.company.updated'));
@@ -87,6 +86,6 @@ class CompanyController extends Controller
     
     public function destroy()
     {
-
+    
     }
 }

@@ -63,8 +63,16 @@ return [
                 'update_error' => 'There was a problem updating this company. Please try again.',
                 'mark_error'   => 'There was a problem updating the status of this company. Please try again.',
                 'mark_rights_error'   => 'There was a problem updating the status of this company. The company was deactivated by a higher role.',
-            ]
-        ]
+            ],
+        ],
+        
+        'services' => [
+            'service' => [
+                'create_error' => 'There was a problem creating this service. Please try again.',
+                'update_error' => 'There was a problem updating this service. Please try again.',
+                'mark_error'   => 'There was a problem updating the status of this service. Please try again.',
+            ],
+        ],
     ],
 
     'frontend' => [

@@ -205,8 +205,20 @@ return [
                     'postal_code'   => 'Postal Code',
                     'size'          => 'Size',
                     'logo'          => 'Company Logo'
-                    
-                ]
+                ],
+            ],
+            'services' => [
+                'service' => [
+                    'name'               => 'Service Name',
+                    'category'           => 'Service Category',
+                    'gateway'            => 'Gateway Configuration',
+                    'active'             => 'Active',
+                    'code'               => 'Code',
+                    'providercommission' => 'Service Provider Commission',
+                    'companycommission'  => 'Company Commission',
+                    'customercommission' => 'Customer Commission',
+
+                ],
             ]
         ],
 

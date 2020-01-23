@@ -14,13 +14,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class CountryRepository
 {
-    protected $model;
-    
-    public function __construct(Country $country)
-    {
-        $this->model = $country;
-    }
-    
+
     public function get()
     {
         return QueryBuilder::for(Country::class)

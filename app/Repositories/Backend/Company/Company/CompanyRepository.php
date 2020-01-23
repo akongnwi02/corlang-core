@@ -20,13 +20,6 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class CompanyRepository
 {
-    protected $model;
-    
-    public function __construct(Company $company)
-    {
-        $this->model = $company;
-    }
-    
     /**
      * @param array $data
      * @return mixed
@@ -37,7 +30,7 @@ class CompanyRepository
         
         return \DB::transaction(function () use ($data) {
     
-            $company = $this->model->create($data);
+            $company = Company::create($data);
             
             if ($company) {
                 event(new CompanyCreated($company));
