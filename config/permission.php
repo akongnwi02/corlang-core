@@ -102,6 +102,12 @@ return [
         'update_companies'     => 'update companies',
         'delete_companies'     => 'delete companies',
         'deactivate_companies' => 'deactivate companies',
+        
+        // commissions
+        'create_commissions'     => 'create commissions',
+        'read_commissions'       => 'read commissions',
+        'update_commissions'     => 'update commissions',
+        'delete_commissions'     => 'delete commissions',
     
         // services
         'create_services'      => 'create services',

@@ -9,12 +9,16 @@
 namespace App\Models\Business;
 
 
+use App\Models\Traits\Attributes\CommissionAttribute;
+use App\Models\Traits\Relationships\CommissionRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 class Commission extends Model
 {
-    use Uuid;
+    use Uuid,
+        CommissionAttribute,
+        CommissionRelationship;
     /**
      * The database table used by the model.
      *

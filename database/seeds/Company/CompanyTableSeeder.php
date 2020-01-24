@@ -36,7 +36,6 @@ class CompanyTableSeeder extends Seeder
             'type_id' => CompanyType::first()->uuid,
             'owner_id' => null,
             'deactivated_by_id' => null,
-            'logo_url' => $faker->imageUrl(),
         ]);
         
         Company::create([

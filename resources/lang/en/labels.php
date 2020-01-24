@@ -122,10 +122,11 @@ return [
         ],
         'companies' => [
             'company' => [
-                'management' => 'Company Management',
-                'create' => 'Create Company',
-                'edit' => 'Edit Company',
-                'active' => 'Active Companies',
+                'management'      => 'Company Management',
+                'create'          => 'Create Company',
+                'edit'            => 'Edit Company',
+                'active'          => 'Active Companies',
+                'company_actions' => 'Company Actions',
                 
                 'table' => [
                     'name'          => 'Company Name',
@@ -153,19 +154,40 @@ return [
             ],
         ],
         'services' => [
-            'service' => [
-                'management' => 'Service Management',
-                'create' => 'Create Service',
-                'edit' => 'Edit Service',
-                'active' => 'Active Services',
+            'service'    => [
+                'management'      => 'Service Management',
+                'create'          => 'Create Service',
+                'edit'            => 'Edit Service',
+                'active'          => 'Active Services',
+                'service_actions' => 'Service Actions',
+        
+                'table' => [
+                    'name'     => 'Service Name',
+                    'code'     => 'Service Code',
+                    'active'   => 'Active',
+                    'gateway'  => 'Gateway',
+                    'category' => 'Category',
+                    'total'    => 'service|services',
+                ],
+            ],
+            'commission' => [
+                'management'         => 'Commission Management',
+                'create'             => 'Create Commission',
+                'edit'               => 'Edit Commission',
+                'commission_actions' => 'Commission Actions',
     
                 'table' => [
-                    'name'          => 'Service Name',
-                    'code'          => 'Service Code',
-                    'active'        => 'Active',
-                    'gateway'       => 'Gateway',
-                    'category'       => 'Category',
-                    'total'         => 'service|services',
+                    'name'        => 'Name',
+                    'description' => 'Description',
+                    'total'       => 'commission|commissions',
+                    'stack'       => [
+                        'title'      => 'Stack',
+                        'from'       => 'From',
+                        'to'         => 'To',
+                        'percentage' => 'Percentage',
+                        'fixed'      => 'Fixed',
+                        'currency'   => 'Currency',
+                    ],
                 ],
             ],
         ],
@@ -200,7 +222,7 @@ return [
             'update_password_button'          => 'Update Password',
             'send_password_reset_link_button' => 'Send Password Reset Link',
             'send_password_reset_code'        => 'Send Password Reset Code',
-            'confirm_code_button' => 'Confirm Code',
+            'confirm_code_button'             => 'Confirm Code',
 
         ],
 
@@ -208,7 +230,7 @@ return [
             'passwords' => [
                 'change' => 'Change Password',
             ],
-
+    
             'profile' => [
                 'avatar'             => 'Avatar',
                 'created_at'         => 'Created At',

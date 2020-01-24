@@ -76,7 +76,7 @@ trait CompanyAttribute
     public function getActionButtonsAttribute()
     {
         return '
-    	<div class="btn-group" role="group" aria-label="'.__('labels.backend.access.users.user_actions').'">
+    	<div class="btn-group" role="group" aria-label="'.__('labels.backend.companies.company.company_actions').'">
 		  '.$this->show_button.'
 		  '.$this->edit_button.'
 		</div>';

@@ -47,29 +47,34 @@ return [
         'sidebar' => [
             'dashboard' => 'Dashboard',
             'general'   => 'General',
-            'history'   => 'History',
-            'system'    => 'System',
-            'business'    => 'Business',
+            'history'  => 'History',
+            'system'   => 'System',
+            'business' => 'Business',
         ],
-        
+
         'companies' => [
             'title' => 'Company',
-            
+    
             'company' => [
                 'management' => 'Companies',
-                'create' => 'Create Company',
-                'edit' => 'Edit Company',
+                'create'     => 'Create Company',
+                'edit'       => 'Edit Company',
             ],
         ],
-        
+
         'services' => [
             'title' => 'Service',
-            
-            'service' => [
+    
+            'service'   => [
                 'management' => 'Services',
-                'create' => 'Create Service',
-                'edit' => 'Edit Service',
+                'create'     => 'Create Service',
+                'edit'       => 'Edit Service',
             ],
+            'commission' => [
+                'management' => 'Commissions',
+                'create'     => 'Create Commission',
+                'edit'       => 'Edit Commission',
+            ]
         ],
     ],
 

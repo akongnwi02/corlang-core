@@ -18,22 +18,27 @@ return [
             'users' => [
                 'activate'           => 'Activate',
                 'change_password'    => 'Change Password',
-                'clear_session'         => 'Clear Session',
-                'confirm'             => 'Confirm',
+                'clear_session'      => 'Clear Session',
+                'confirm'            => 'Confirm',
                 'deactivate'         => 'Deactivate',
                 'delete_permanently' => 'Delete Permanently',
                 'login_as'           => 'Login As :user',
                 'resend_email'       => 'Resend Confirmation E-mail',
                 'restore_user'       => 'Restore User',
-                'transfer_user'       => 'Transfer User',
-                'unconfirm'             => 'Un-confirm',
-                'unlink' => 'Unlink',
+                'transfer_user'      => 'Transfer User',
+                'unconfirm'          => 'Un-confirm',
+                'unlink'             => 'Unlink',
             ],
         ],
         'companies' => [
             'company' => [
-                'activate' => 'Activate Company',
+                'activate'   => 'Activate Company',
                 'deactivate' => 'Deactivate Company',
+            ],
+            'services' => [
+                'commission' => [
+                    'stack' => 'Stack',
+                ]
             ]
         ]
     ],
