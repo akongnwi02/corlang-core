@@ -4,15 +4,15 @@ return [
     
     'company' => [
         'type' => [
-            'formal' => 'Formal Company',
-            'informal' => 'Informal Company',
+            'formal' => 'informal company',
+            'informal' => 'informal company',
         ]
     ],
     
     'system' => [
         'country' => [
             'name' => [
-                'cameroon' => 'Cameroon',
+                'cameroon' => 'cameroon',
             ],
             'code' => [
                 'cameroon' => 'CM'
@@ -20,7 +20,7 @@ return [
         ],
         'setting' => [
             'key' => [
-                'default_agent_commission' => 'Default Agent Commission Rate'
+                'default_agent_commission' => 'default agent commission rate'
             ]
         ]
     ],

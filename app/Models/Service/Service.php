@@ -9,12 +9,18 @@
 namespace App\Models\Service;
 
 
+use App\Models\Traits\Attributes\ServiceAttribute;
+use App\Models\Traits\Methods\ServiceMethod;
+use App\Models\Traits\Relationships\ServiceRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-    use Uuid;
+    use Uuid,
+        ServiceRelationship,
+        ServiceMethod,
+        ServiceAttribute;
     
     /**
      * The database table used by the model.
@@ -40,6 +46,7 @@ class Service extends Model
         'gateway_id',
         'is_active',
         'code',
+        'logo_url',
         'providercommission_id',
         'companycommission_id',
         'customercommission_id',

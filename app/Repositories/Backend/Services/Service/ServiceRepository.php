@@ -47,22 +47,12 @@ class ServiceRepository
      *
      * @return QueryBuilder
      */
-    public function getCompaniesForCurrentUser()
+    public function getAllServices()
     {
-        $companies = QueryBuilder::for(Service::class)
-            ->allowedFilters([
-                AllowedFilter::scope('active'),
-            ])
+        $services = QueryBuilder::for(Service::class)
             ->allowedSorts('services.is_active', 'services.created_at', 'services.name')
-            ->defaultSort( '-services.is_active', '-services.is_default', '-services.created_at', 'services.name');
-        
-        if (! auth()->user()->service->isDefault()) {
-            return $companies->select('services.*')
-                ->where('users.id', auth()->user()->id)
-                ->join('users', 'users.company_id', '=', 'services.uuid');
-        }
-        
-        return $companies;
+            ->defaultSort( '-services.is_active', '-services.created_at', 'services.name');
+        return $services;
     }
     
     /**

@@ -73,15 +73,30 @@
             </li>
 
             @can(config('permission.permissions.read_companies'))
-                <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/backend/companies*'), 'open') }}">
-                    <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/backend/companies*')) }}" href="#">
+                <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/companies*'), 'open') }}">
+                    <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/companies*')) }}" href="{{ route('admin.companies.company.index') }}">
                         <i class="nav-icon icon-organization"></i> @lang('menus.backend.companies.title')
+                    </a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/companies/company*')) }}" href="{{ route('admin.companies.company.index') }}">
+                                @lang('labels.backend.companies.company.management')
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+
+            @can(config('permission.permissions.read_services'))
+                <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/services*'), 'open') }}">
+                    <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/services*')) }}" href="{{ route('admin.services.service.index') }}">
+                        <i class="nav-icon icon-grid"></i> @lang('menus.backend.services.title')
                     </a>
 
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/backend/companies/company*')) }}" href="{{ route('admin.companies.company.index') }}">
-                                @lang('labels.backend.companies.company.management')
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/services/service*')) }}" href="{{ route('admin.services.service.index') }}">
+                                @lang('labels.backend.services.service.management')
                             </a>
                         </li>
                     </ul>

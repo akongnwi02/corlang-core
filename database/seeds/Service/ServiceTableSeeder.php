@@ -25,7 +25,7 @@ class ServiceTableSeeder extends Seeder
             'is_active' => true,
             'category_id' => Category::first()->uuid,
             'gateway_id' => Gateway::first()->uuid,
-            'agentcommission_id' => Commission::first()->uuid,
+            'customercommission_id' => Commission::first()->uuid,
             'companycommission_id' => Commission::first()->uuid,
             'providercommission_id' => Commission::first()->uuid,
         ]);

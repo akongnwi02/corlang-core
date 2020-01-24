@@ -20,10 +20,10 @@ use App\Repositories\Backend\System\CountryRepository;
 class ServiceController extends Controller
 {
     
-    public function index(ServiceRepository $companyRepository)
+    public function index(ServiceRepository $serviceRepository)
     {
-        return view('backend.companies.company.index')
-            ->withCompanies($companyRepository->getCompaniesForCurrentUser()
+        return view('backend.services.service.index')
+            ->withServices($serviceRepository->getAllServices()
                 ->paginate());
     }
     

@@ -151,7 +151,24 @@ return [
                     ],
                 ]
             ],
-        ]
+        ],
+        'services' => [
+            'service' => [
+                'management' => 'Service Management',
+                'create' => 'Create Service',
+                'edit' => 'Edit Service',
+                'active' => 'Active Services',
+    
+                'table' => [
+                    'name'          => 'Service Name',
+                    'code'          => 'Service Code',
+                    'active'        => 'Active',
+                    'gateway'       => 'Gateway',
+                    'category'       => 'Category',
+                    'total'         => 'service|services',
+                ],
+            ],
+        ],
     ],
 
     'frontend' => [

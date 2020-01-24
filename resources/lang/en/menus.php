@@ -59,8 +59,18 @@ return [
                 'management' => 'Companies',
                 'create' => 'Create Company',
                 'edit' => 'Edit Company',
-            ]
-        ]
+            ],
+        ],
+        
+        'services' => [
+            'title' => 'Service',
+            
+            'service' => [
+                'management' => 'Services',
+                'create' => 'Create Service',
+                'edit' => 'Edit Service',
+            ],
+        ],
     ],
 
     'language-picker' => [

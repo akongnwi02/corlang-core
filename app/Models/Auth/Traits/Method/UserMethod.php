@@ -163,4 +163,9 @@ trait UserMethod
     {
         return $this->can(config('permission.permissions.deactivate_companies'));
     }
+    
+    public function canDeactivateServices()
+    {
+        return $this->can(config('permission.permissions.deactivate_services'));
+    }
 }
