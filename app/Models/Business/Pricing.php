@@ -9,12 +9,16 @@
 namespace App\Models\Business;
 
 
+use App\Models\Traits\Attributes\PricingAttribute;
+use App\Models\Traits\Relationships\PricingRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 class Pricing extends Model
 {
-    use Uuid;
+    use Uuid,
+        PricingAttribute,
+        PricingRelationship;
     /**
      * The database table used by the model.
      *

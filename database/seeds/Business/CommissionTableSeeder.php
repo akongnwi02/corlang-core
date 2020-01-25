@@ -24,6 +24,24 @@ class CommissionTableSeeder extends Seeder
             'description' => 'Default commission for everybody',
             'currency_id' => Currency::first()->uuid,
         ]);
+        
+        Commission::create([
+            'name' => 'MTN Commission',
+            'description' => 'The commission applied to all merchants in MTN',
+            'currency_id' => Currency::first()->uuid,
+        ]);
+        
+        Commission::create([
+            'name' => 'Camtel Commission',
+            'description' => 'The commission applied to all merchants in MTN',
+            'currency_id' => Currency::first()->uuid,
+        ]);
+        
+        Commission::create([
+            'name' => 'Orange Commission',
+            'description' => 'The commission applied to all merchants in Orange Topup',
+            'currency_id' => Currency::first()->uuid,
+        ]);
     
         Commission::reguard();
     }

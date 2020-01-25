@@ -27,7 +27,7 @@ class CreatePricingsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
     
-            $table->unique(['from', 'to']);
+            $table->unique(['from', 'to', 'commission_id']);
             $table->foreign('commission_id')->references('uuid')->on('commissions');
         });
     }

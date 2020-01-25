@@ -72,6 +72,10 @@ return [
                 'update_error' => 'There was a problem updating this service. Please try again.',
                 'mark_error'   => 'There was a problem updating the status of this service. Please try again.',
             ],
+            'commission' => [
+                'create_error'  => 'There was a problem creating this commission. Please try again.',
+                'update_error'  => 'There was a problem updating this commission. Please try again.',
+            ]
         ],
     ],
 

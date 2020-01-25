@@ -17,7 +17,7 @@ trait CommissionAttribute
     public function getEditButtonAttribute()
     {
         if (auth()->user()->can(config('permission.permissions.update_commissions'))) {
-            return '<a href="'.route('admin.services.commission.edit', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.edit').'" class="btn btn-primary"><i class="fas fa-edit"></i></a>';
+            return '<a href="'.route('admin.services.commission.edit', $this->uuid).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.edit').'" class="btn btn-primary"><i class="fas fa-edit"></i></a>';
         }
     }
     

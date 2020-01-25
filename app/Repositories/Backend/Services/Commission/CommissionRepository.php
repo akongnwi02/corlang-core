@@ -9,6 +9,7 @@
 namespace App\Repositories\Backend\Services\Commission;
 
 
+use App\Exceptions\GeneralException;
 use App\Models\Business\Commission;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -26,5 +27,25 @@ class CommissionRepository
             ->allowedSorts( 'commissions.name', 'commissions.created_at');
         
         return $commissions;
+    }
+    
+    /**
+     * @param $data
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function create($data)
+    {
+    
+        return \DB::transaction(function () use ($data) {
+        
+            $commission = Commission::create($data);
+        
+            if ($commission) {
+                return $commission;
+            }
+        
+            throw new GeneralException(__('exceptions.backend.companies.company.create_error'));
+        });
     }
 }

@@ -65,17 +65,17 @@ Route::group([
     });
     
     /*
-     * Service CRUD
+     * Commission CRUD
      */
     Route::get('commission', [CommissionController::class, 'index'])
         ->name('commission.index')
         ->middleware('permission:'.config('permission.permissions.read_commissions'));
     
-    Route::get('commission/create', [ServiceController::class, 'create'])
+    Route::get('commission/create', [CommissionController::class, 'create'])
         ->name('commission.create')
         ->middleware('permission:'.config('permission.permissions.create_commissions'));
     
-    Route::post('commission', [ServiceController::class, 'store'])
+    Route::post('commission', [CommissionController::class, 'store'])
         ->name('commission.store')
         ->middleware('permission:'.config('permission.permissions.create_commissions'));
     
@@ -85,19 +85,19 @@ Route::group([
     Route::group(['prefix' => 'commission/{commission}'], function () {
         
         // Company
-        Route::get('/', [ServiceController::class, 'show'])
+        Route::get('/', [CommissionController::class, 'show'])
             ->name('commission.show')
             ->middleware('permission:'.config('permission.permissions.read_commissions'));
         
-        Route::get('edit', [ServiceController::class, 'edit'])
+        Route::get('edit', [CommissionController::class, 'edit'])
             ->name('commission.edit')
             ->middleware('permission:'.config('permission.permissions.update_commissions'));
         
-        Route::put('/', [ServiceController::class, 'update'])
+        Route::put('/', [CommissionController::class, 'update'])
             ->name('commission.update')
             ->middleware('permission:'.config('permission.permissions.update_commissions'));
         
-        Route::delete('/', [ServiceController::class, 'destroy'])
+        Route::delete('/', [CommissionController::class, 'destroy'])
             ->name('commission.destroy')
             ->middleware('permission:'.config('permission.permissions.delete_commissions'));
     });

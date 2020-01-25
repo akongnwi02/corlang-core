@@ -32,6 +32,20 @@ class PricingTableSeeder extends Seeder
             'percentage' => 0.5,
         ]);
         
+        Pricing::create([
+            'commission_id' => Commission::get()[1]->uuid,
+            'from' => 100,
+            'to' => 1000,
+            'percentage' => 0.5,
+        ]);
+        
+        Pricing::create([
+            'commission_id' => Commission::get()[1]->uuid,
+            'from' => 1000,
+            'to' => 1500,
+            'percentage' => 0.5,
+        ]);
+        
         Pricing::reguard();
     }
 }

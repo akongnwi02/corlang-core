@@ -22,6 +22,7 @@ class CurrencyTableSeeder extends Seeder
             'code' => 'XAF',
             'rate' => 1,
             'is_active' => true,
+            'is_default' => true,
         ]);
         
         Country::reguard();

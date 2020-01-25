@@ -179,6 +179,8 @@ return [
                 'table' => [
                     'name'        => 'Name',
                     'description' => 'Description',
+                    'currency'    => 'Currency',
+
                     'total'       => 'commission|commissions',
                     'stack'       => [
                         'title'      => 'Stack',
@@ -186,7 +188,7 @@ return [
                         'to'         => 'To',
                         'percentage' => 'Percentage',
                         'fixed'      => 'Fixed',
-                        'currency'   => 'Currency',
+                        'no_result'  => 'No result',
                     ],
                 ],
             ],

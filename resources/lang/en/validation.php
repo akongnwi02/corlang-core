@@ -217,8 +217,12 @@ return [
                     'providercommission' => 'Service Provider Commission',
                     'companycommission'  => 'Company Commission',
                     'customercommission' => 'Customer Commission',
-
                 ],
+                'commission' => [
+                    'name'        => 'Name',
+                    'description' => 'Description',
+                    'currency'    => 'Currency',
+                ]
             ]
         ],
 
