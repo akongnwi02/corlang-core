@@ -10,8 +10,42 @@ namespace App\Http\Requests\Backend\Services\Service;
 
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateServiceRequest extends FormRequest
 {
-
+    public function authorize()
+    {
+        return auth()->user()->company->isDefault();
+    }
+    
+    public function attributes()
+    {
+        return [
+            'name'                  => __('validation.attributes.backend.services.service.name'),
+            'category_id'           => __('validation.attributes.backend.services.service.category'),
+            'gateway_id'            => __('validation.attributes.backend.services.service.gateway'),
+            'is_active'             => __('validation.attributes.backend.services.service.active'),
+            'code'                  => __('validation.attributes.backend.services.service.code'),
+            'providercommission_id' => __('validation.attributes.backend.services.service.providercommission'),
+            'companycommission_id'  => __('validation.attributes.backend.services.service.companycommission'),
+            'customercommission_id' => __('validation.attributes.backend.services.service.customercommission'),
+            'logo'                  => __('validation.attributes.backend.services.service.logo'),
+        ];
+    }
+    
+    public function rules()
+    {
+        return [
+            'name'                  => ['required', 'string', 'max:191', Rule::unique('services', 'name')->ignore(request()->service->uuid, 'uuid')],
+            'category_id'           => ['required', Rule::exists('categories', 'uuid')],
+            'gateway_id'            => ['sometimes', Rule::exists('gateways', 'uuid')],
+            'code'                  => ['required', 'string', 'max:191', Rule::unique('services', 'code')->ignore(request()->service->uuid, 'uuid')],
+            'providercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid')],
+            'companycommission_id'  => ['sometimes', Rule::exists('commissions', 'uuid')],
+            'customercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid')],
+            'logo'                  => 'sometimes|image|max:191',
+        
+        ];
+    }
 }

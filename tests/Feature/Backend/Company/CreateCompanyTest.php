@@ -9,7 +9,7 @@
 namespace Tests\Feature\Backend\Company;
 
 
-use App\Events\Backend\Company\Company\CompanyCreated;
+use App\Events\Backend\Companies\Company\CompanyCreated;
 use App\Models\Company\Company;
 use App\Models\Company\CompanyType;
 use App\Models\System\Country;

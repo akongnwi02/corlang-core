@@ -8,8 +8,6 @@
 
 namespace App\Listeners\Backend\Company;
 
-use App\Notifications\Backend\Company\Company\CompanyCreated;
-
 class CompanyEventListener
 {
     /**
@@ -67,22 +65,22 @@ class CompanyEventListener
     public function subscribe($events)
     {
         $events->listen(
-            \App\Events\Backend\Company\Company\CompanyCreated::class,
+            \App\Events\Backend\Companies\Company\CompanyCreated::class,
             'App\Listeners\Backend\Company\CompanyEventListener@onCreated'
         );
         
         $events->listen(
-            \App\Events\Backend\Company\Company\CompanyReactivated::class,
+            \App\Events\Backend\Companies\Company\CompanyReactivated::class,
             'App\Listeners\Backend\Company\CompanyEventListener@onReactivated'
         );
         
         $events->listen(
-            \App\Events\Backend\Company\Company\CompanyDeactivated::class,
+            \App\Events\Backend\Companies\Company\CompanyDeactivated::class,
             'App\Listeners\Backend\Company\CompanyEventListener@onDeactivated'
         );
         
         $events->listen(
-            \App\Events\Backend\Company\Company\CompanyUpdated::class,
+            \App\Events\Backend\Companies\Company\CompanyUpdated::class,
             'App\Listeners\Backend\Company\CompanyEventListener@onUpdated'
         );
     }

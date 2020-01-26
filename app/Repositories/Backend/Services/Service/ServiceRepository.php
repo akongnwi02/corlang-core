@@ -25,18 +25,27 @@ class ServiceRepository
      * @return mixed
      * @throws \Throwable
      */
-    public function create(array $data)
+    public function create(array $data, $logo)
     {
+        return \DB::transaction(function () use ($data, $logo) {
+    
+            $service = (new Service)->fill($data);
+    
+            if ($logo) {
+                // delete previous logo
+                if (strlen($service->logo_url)) {
+                    Storage::disk('public')->delete($service->logo_url);
+                }
         
-        return \DB::transaction(function () use ($data) {
-            
-            $service = Service::create($data);
-            
-            if ($service) {
+                $service->logo_url = $logo->store('/logos', 'public');
+        
+            }
+    
+            if ($service->save()) {
                 event(new ServiceCreated($service));
                 return $service;
             }
-            
+    
             throw new GeneralException(__('exceptions.backend.services.service.create_error'));
         });
     }
@@ -63,15 +72,6 @@ class ServiceRepository
      */
     public function mark($service, $status)
     {
-        // if the service was deactivated by an administrator
-        // lesser roles cannot reactivate
-        if (! $service->isActive()) {
-            if ($service->deactivator->service->isDefault() && ! auth()->user()->isAdmin()) {
-                
-                throw new GeneralException(__('exceptions.backend.services.service.mark_rights_error'));
-            }
-        }
-        
         $service->is_active = $status;
         
         if ($service->save()) {

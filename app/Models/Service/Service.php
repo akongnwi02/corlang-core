@@ -14,10 +14,12 @@ use App\Models\Traits\Methods\ServiceMethod;
 use App\Models\Traits\Relationships\ServiceRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Wildside\Userstamps\Userstamps;
 
 class Service extends Model
 {
     use Uuid,
+        Userstamps,
         ServiceRelationship,
         ServiceMethod,
         ServiceAttribute;

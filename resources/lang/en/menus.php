@@ -47,9 +47,10 @@ return [
         'sidebar' => [
             'dashboard' => 'Dashboard',
             'general'   => 'General',
-            'history'  => 'History',
-            'system'   => 'System',
-            'business' => 'Business',
+            'history'   => 'History',
+            'system'    => 'System',
+            'business'  => 'Business',
+            'access'    => 'Access',
         ],
 
         'companies' => [

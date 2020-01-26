@@ -8,10 +8,10 @@
 
 namespace App\Repositories\Backend\Company\Company;
 
-use App\Events\Backend\Company\Company\CompanyCreated;
-use App\Events\Backend\Company\Company\CompanyDeactivated;
-use App\Events\Backend\Company\Company\CompanyReactivated;
-use App\Events\Backend\Company\Company\CompanyUpdated;
+use App\Events\Backend\Companies\Company\CompanyCreated;
+use App\Events\Backend\Companies\Company\CompanyDeactivated;
+use App\Events\Backend\Companies\Company\CompanyReactivated;
+use App\Events\Backend\Companies\Company\CompanyUpdated;
 use App\Exceptions\GeneralException;
 use App\Models\Company\Company;
 use Illuminate\Support\Facades\Storage;

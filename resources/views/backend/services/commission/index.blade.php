@@ -27,7 +27,7 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th></th>
+                                <th>@lang('labels.backend.services.commission.table.view')</th>
                                 <th>@lang('labels.backend.services.commission.table.name')</th>
                                 <th>@lang('labels.backend.services.commission.table.description')</th>
                                 <th>@lang('labels.backend.services.commission.table.currency')</th>
@@ -36,8 +36,14 @@
                             </thead>
                             <tbody>
                             @foreach($commissions as $commission)
-                                <tr data-toggle="collapse" data-target="#pricings-{{ $commission->uuid }}" class="accordion-toggle">
-                                    <td><button class="btn btn-default btn-xs"><span class="fa fa-eye"></span></button></td>
+                                <tr>
+                                    <td
+                                        data-placement="top"
+                                        title="@lang('buttons.general.crud.view')"
+                                        data-toggle="collapse"
+                                        data-target="#pricings-{{ $commission->uuid }}"
+                                        class="accordion-toggle"><button class="btn btn-default btn-xs"><span class="fa fa-eye"></span></button>
+                                    </td>
                                     <td>{{ $commission->name }}</td>
                                     <td>{{ $commission->description }}</td>
                                     <td>{{ $commission->currency->name }}</td>

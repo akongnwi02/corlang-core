@@ -6,15 +6,15 @@
  * Time: 10:13 PM
  */
 
-namespace App\Events\Backend\Company\Company;
+namespace App\Events\Backend\Companies\Company;
 
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Class CompanyDeactivated
+ * Class CompanyCreated
  * @package App\Events\Backend\Company\Company
  */
-class CompanyDeactivated
+class CompanyCreated
 {
     use SerializesModels;
     

@@ -17,10 +17,10 @@
                 </div><!--col-->
 
                 <div class="col-sm-7">
-                    {{--@include('backend.services.service.includes.header-buttons')--}}
+                    @include('backend.services.service.includes.header-buttons')
                 </div><!--col-->
             </div><!--row-->
-
+-
             <div class="row mt-4">
                 <div class="col">
                     <div class="table-responsive">
@@ -29,6 +29,7 @@
                             <tr>
                                 <th>@lang('labels.backend.services.service.table.name')</th>
                                 <th>@lang('labels.backend.services.service.table.code')</th>
+                                <th>@lang('labels.backend.services.service.table.logo')</th>
                                 <th>@lang('labels.backend.services.service.table.active')</th>
                                 <th>@lang('labels.backend.services.service.table.gateway')</th>
                                 <th>@lang('labels.backend.services.service.table.category')</th>
@@ -40,6 +41,7 @@
                                 <tr>
                                     <td>{{ $service->name }}</td>
                                     <td>{{ $service->code }}</td>
+                                    <td>{!! $service->logo_label !!}</td>
                                     <td>{!! $service->active_label !!}</td>
                                     <td>{{ $service->gateway->name }}</td>
                                     <td>{{ $service->category->name }}</td>
