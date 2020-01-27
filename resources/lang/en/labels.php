@@ -191,7 +191,7 @@ return [
                         'to'         => 'To',
                         'percentage' => 'Percentage',
                         'fixed'      => 'Fixed',
-                        'no_result'  => 'No result',
+                        'empty'  => 'Empty',
                     ],
                 ],
             ],

@@ -20,7 +20,6 @@
                     @include('backend.services.commission.includes.header-buttons')
                 </div><!--col-->
             </div><!--row-->
-
             <div class="row mt-4">
                 <div class="col">
                     <div class="table-responsive">
@@ -77,7 +76,7 @@
                                                 <table class="table table-responsive table-borderless">
                                                     <tbody>
                                                     <tr>
-                                                        <td>@lang('labels.backend.services.commission.table.stack.no_result')</td>
+                                                        <td>@lang('labels.backend.services.commission.table.stack.empty')</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>

@@ -18,6 +18,7 @@ class CreateSettingsTable extends Migration
             $table->string('key')->unique();
             $table->boolean('is_visible')->default(false);
             $table->string('value');
+            $table->float('step')->nullable();
             $table->string('description')->nullable();
             $table->string('options')->nullable();  //[{"name":"<name>","value":"<value>"}]
             $table->integer('minimum')->nullable();
