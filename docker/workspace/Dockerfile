@@ -187,3 +187,63 @@ RUN apt-get clean && \
 
 # Set default work directory
 WORKDIR /var/www
+
+
+###########################################################################
+# Node / NVM:
+###########################################################################
+
+# Check if NVM needs to be installed
+ARG NODE_VERSION=node
+ENV NODE_VERSION ${NODE_VERSION}
+ARG INSTALL_NODE=false
+ARG INSTALL_NPM_GULP=false
+ARG INSTALL_NPM_BOWER=false
+ARG INSTALL_NPM_VUE_CLI=false
+ARG NPM_REGISTRY
+ENV NPM_REGISTRY ${NPM_REGISTRY}
+ENV NVM_DIR /home/laradock/.nvm
+
+RUN if [ ${INSTALL_NODE} = true ]; then \
+    # Install nvm (A Node Version Manager)
+    mkdir -p $NVM_DIR && \
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash \
+        && . $NVM_DIR/nvm.sh \
+        && nvm install ${NODE_VERSION} \
+        && nvm use ${NODE_VERSION} \
+        && nvm alias ${NODE_VERSION} \
+        && if [ ${NPM_REGISTRY} ]; then \
+        npm config set registry ${NPM_REGISTRY} \
+        ;fi \
+        && if [ ${INSTALL_NPM_GULP} = true ]; then \
+        npm install -g gulp \
+        ;fi \
+        && if [ ${INSTALL_NPM_BOWER} = true ]; then \
+        npm install -g bower \
+        ;fi \
+        && ln -s `npm bin --global` /home/laradock/.node-bin \
+;fi
+
+# Wouldn't execute when added to the RUN statement in the above block
+# Source NVM when loading bash since ~/.profile isn't loaded on non-login shell
+RUN if [ ${INSTALL_NODE} = true ]; then \
+    echo "" >> ~/.bashrc && \
+    echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc && \
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm' >> ~/.bashrc \
+;fi
+
+# Add NVM binaries to root's .bashrc
+USER root
+
+RUN if [ ${INSTALL_NODE} = true ]; then \
+    echo "" >> ~/.bashrc && \
+    echo 'export NVM_DIR="/home/laradock/.nvm"' >> ~/.bashrc && \
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm' >> ~/.bashrc \
+;fi
+
+# Add PATH for node
+ENV PATH $PATH:/home/laradock/.node-bin
+
+RUN if [ ${NPM_REGISTRY} ]; then \
+    . ~/.bashrc && npm config set registry ${NPM_REGISTRY} \
+;fi
