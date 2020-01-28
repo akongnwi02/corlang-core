@@ -247,3 +247,17 @@ ENV PATH $PATH:/home/laradock/.node-bin
 RUN if [ ${NPM_REGISTRY} ]; then \
     . ~/.bashrc && npm config set registry ${NPM_REGISTRY} \
 ;fi
+
+
+###########################################################################
+# PYTHON:
+###########################################################################
+
+ARG INSTALL_PYTHON=false
+
+RUN if [ ${INSTALL_PYTHON} = true ]; then \
+  apt-get update && apt-get -y install python python-pip python-dev build-essential  \
+  && python -m pip install --upgrade pip  \
+  && python -m pip install --upgrade virtualenv \
+;fi
+
