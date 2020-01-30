@@ -65,7 +65,7 @@ class StoreCompanyRequest extends FormRequest
             'country_id'    => ['required', Rule::exists('countries', 'uuid')],
             'size'          => 'max:5',
             'type_id'       => ['required', Rule::exists('companytypes', 'uuid')],
-            'is_provider'       => ['sometimes', 'boolean'],
+            'is_provider'   => ['sometimes', 'boolean'],
         ];
     }
 }

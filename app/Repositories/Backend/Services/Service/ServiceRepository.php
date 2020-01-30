@@ -28,9 +28,11 @@ class ServiceRepository
     public function create(array $data, $logo)
     {
         return \DB::transaction(function () use ($data, $logo) {
-    
+            
             $service = (new Service)->fill($data);
     
+            $service->is_paymentmethod = request()->has('is_paymentmethod') ? 1 : 0;
+            
             if ($logo) {
                 // delete previous logo
                 if (strlen($service->logo_url)) {
@@ -100,6 +102,7 @@ class ServiceRepository
      */
     public function update($service, $data, $logo = null)
     {
+        $service->is_paymentmethod = request()->has('is_paymentmethod') ? 1 : 0;
         
         $service->fill($data);
         

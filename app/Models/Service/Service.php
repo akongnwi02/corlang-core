@@ -53,7 +53,7 @@ class Service extends Model
         'customercommission_id',
         'providercompany_id',
         'is_paymentmethod',
-        'customer_rate',
+        'company_rate',
         'agent_rate',
 
     ];

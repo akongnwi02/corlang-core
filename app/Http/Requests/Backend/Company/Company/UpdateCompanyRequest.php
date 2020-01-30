@@ -37,6 +37,8 @@ class UpdateCompanyRequest extends FormRequest
             'size'          => __('validation.attributes.backend.companies.company.size'),
             'type_id'       => __('validation.attributes.backend.companies.company.type'),
             'logo'          => __('validation.attributes.backend.companies.company.logo'),
+            'is_provider'   => __('validation.attributes.backend.companies.company.provider'),
+
         ];
     }
     
@@ -63,6 +65,7 @@ class UpdateCompanyRequest extends FormRequest
             'country_id'    => ['required', Rule::exists('countries', 'uuid')],
             'size'          => 'max:5',
             'type_id'       => ['required', new UpdateCompanyTypeRule()],
+            'is_provider'   => ['sometimes', 'boolean'],
             'logo'          => 'sometimes|image|max:191',
         ];
     }

@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-{{ html()->modelForm($commission, 'PUT', route('admin.services.commission.update', $commission))->class('form-horizontal')->open() }}
+    {{ html()->modelForm($commission, 'PUT', route('admin.services.commission.update', $commission))->class('form-horizontal')->open() }}
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -59,19 +59,10 @@
                     </div><!--form-group-->
 
                     <div id="POItablediv">
-                        <input type="button" id="addPOIbutton" value="Add POIs" onclick="insRow()"/><br/><br/>
-                        {{--<table id="POITable" border="1">--}}
-                            {{--<tr>--}}
-                                {{--<td>From</td>--}}
-                                {{--<td>To</td>--}}
-                                {{--<td>Fixed</td>--}}
-                            {{--</tr>--}}
+                        <button type="button" id="addPOIbutton" value="Add POIs" onclick="insRow()"><span class="fa fa-plus"></span></button>
+                        <br/><br/>
 
-                        {{--</table>--}}
-
-
-
-                        <table class="table" id="POITable">
+                        <table class="table table-responsive" id="POITable">
                             <thead>
                             <tr>
                                 <th>@lang('validation.attributes.backend.services.commission.pricing.from')</th>
@@ -81,76 +72,117 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($commission->pricings as $pricing)
+                            @forelse($commission->pricings as $pricing)
                                 <tr>
-                                    <td><input size=25 type="text" id="latbox" class="form-control"/></td>
-                                    <td><input size=25 type="text" id="lngbox" /></td>
-                                    <td><input type="button" id="delPOIbutton" value="Delete" onclick="deleteRow(this)" /></td>
+                                    <td><input id="from" size=25 type="number" step="0.01" class="form-control" value="{{ $pricing->from }}" min="0" required/></td>
+                                    <td><input id="to" size=25 type="number" step="0.01" class="form-control" value="{{ $pricing->to }}" min="0" required/></td>
+                                    <td><input id="fixed" size=25 type="number" step="0.01" class="form-control" value="{{ $pricing->fixed }}" min="0" required/></td>
+                                    <td><input id="percentage" size=25 type="number" step="0.01" class="form-control" min="0" max="1" value="{{ $pricing->percentage }}" required/></td>
+                                    <td><button id="delPOIbutton" value="Delete" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></button></td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td><input id="from" size=25 type="number" step="0.01" class="form-control" required/></td>
+                                    <td><input id="to" size=25 type="number" step="0.01" class="form-control" required/></td>
+                                    <td><input id="fixed" size=25 type="number" step="0.01" class="form-control" required/></td>
+                                    <td><input id="percentage" size=25 type="number" step="0.01" class="form-control" min="0" max="1" required/></td>
+                                    <td><button id="delPOIbutton" value="Delete" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></button></td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
-
-                </div><!--col-->
-            </div><!--row-->
-        </div><!--card-body-->
-
-        <div class="card-footer">
-            <div class="row">
-                <div class="col">
-                    {{ form_cancel(route('admin.services.commission.index'), __('buttons.general.cancel')) }}
-                </div><!--col-->
-
-                <div class="col text-right">
-                    {{ form_submit(__('buttons.general.crud.update')) }}
+                    </div><!--col-->
                 </div><!--row-->
-            </div><!--row-->
-        </div><!--card-footer-->
-    </div><!--card-->
-{{ html()->closeModelForm() }}
-@endsection
-@push('after-styles')
-<style>
-    .required:after{
-        content:'*';
-        color:red;
-        padding-left:5px;
-    }
+            </div><!--card-body-->
 
-    table {
-        width: 70%;
-        font: 17px Calibri;
-    }
-    table, th, td {
-        border: solid 1px #DDD;
-        border-collapse: collapse;
-        padding: 2px 3px;
-        text-align: center;
-    }
-</style>
-@endpush
-@push('after-scripts')
-<script>
-    function deleteRow(row) {
-        let i = row.parentNode.parentNode.rowIndex;
-        document.getElementById('POITable').deleteRow(i);
-    }
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col">
+                        {{ form_cancel(route('admin.services.commission.index'), __('buttons.general.cancel')) }}
+                    </div><!--col-->
+
+                    <div class="col text-right">
+                        {{ form_submit(__('buttons.general.crud.update')) }}
+                    </div><!--row-->
+                </div><!--row-->
+            </div><!--card-footer-->
+        </div><!--card-->
+        {{ html()->closeModelForm() }}
+        @endsection
+        @push('after-styles')
+            <style>
+                .required:after {
+                    content: '*';
+                    color: red;
+                    padding-left: 5px;
+                }
+
+                table {
+                    width: 70%;
+                    font: 17px Calibri;
+                }
+
+                table, th, td {
+                    border: solid 1px #DDD;
+                    border-collapse: collapse;
+                    padding: 2px 3px;
+                    text-align: center;
+                }
+            </style>
+        @endpush
+        @push('after-scripts')
+            <script>
+                function deleteRow(row) {
+
+                    let x = document.getElementById('POITable');
+                    let len = x.rows.length;
+                    if (len <= 2) {
+                        event.preventDefault();
+                        return;
+                    }
+
+                    let i = row.parentNode.parentNode.rowIndex;
+                    document.getElementById('POITable').deleteRow(i);
+                }
 
 
-    function insRow() {
-        console.log('hi');
-        let x = document.getElementById('POITable');
-        let new_row = x.rows[1].cloneNode(true);
-        let len = x.rows.length;
-        new_row.cells[0].innerHTML = len;
+                function insRow() {
+                    let x = document.getElementById('POITable');
 
-        let inp1 = new_row.cells[1].getElementsByTagName('input')[0];
-        inp1.id += len;
-        inp1.value = '';
-        let inp2 = new_row.cells[2].getElementsByTagName('input')[0];
-        inp2.id += len;
-        inp2.value = '';
-        x.appendChild(new_row);
-    }
-    </script>
-@endpush
+                    let new_row = x.rows[1].cloneNode(true);
+
+                    let inp1 = new_row.cells[0].getElementsByTagName('input')[0];
+                    inp1.value = '';
+
+                    let inp2 = new_row.cells[1].getElementsByTagName('input')[0];
+                    inp2.value = '';
+
+                    let inp3 = new_row.cells[2].getElementsByTagName('input')[0];
+                    inp3.value = '';
+
+                    let inp4 = new_row.cells[3].getElementsByTagName('input')[0];
+                    inp4.value = '';
+
+                    x.appendChild(new_row);
+                }
+
+                function submit() {
+                    var myTab = document.getElementById('empTable');
+                    var values = new Array();
+
+                    // LOOP THROUGH EACH ROW OF THE TABLE.
+                    for (row = 1; row < myTab.rows.length - 1; row++) {
+                        for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
+
+                            var element = myTab.rows.item(row).cells[c];
+                            if (element.childNodes[0].getAttribute('type') === 'text') {
+                                values.push("'" + element.childNodes[0].value + "'");
+                            }
+                        }
+                    }
+
+                    // SHOW THE RESULT IN THE CONSOLE WINDOW.
+                    console.log(values);
+                }
+            </script>
+    @endpush

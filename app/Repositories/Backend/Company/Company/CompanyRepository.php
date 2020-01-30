@@ -32,6 +32,8 @@ class CompanyRepository
     
             $company = Company::create($data);
             
+            $company->is_provider = request()->has('is_provider') ? 1 : 0;
+    
             if ($company) {
                 event(new CompanyCreated($company));
                 return $company;
@@ -112,7 +114,7 @@ class CompanyRepository
     {
         
         $company->fill($data);
-        
+        $company->is_provider = request()->has('is_provider') ? 1 : 0;
         if ($logo) {
             // delete previous logo
             if (strlen($company->logo_url)) {

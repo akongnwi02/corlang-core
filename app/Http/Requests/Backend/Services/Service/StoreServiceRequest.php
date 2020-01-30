@@ -49,7 +49,7 @@ class StoreServiceRequest extends FormRequest
             'is_paymentmethod'      => ['sometimes', 'boolean'],
             'agent_rate'            => ['required', 'numeric', 'between:0,1'],
             'company_rate'          => ['required', 'numeric', 'between:0,1'],
-            'logo'                  => ['sometimes|image|max:191']
+            'logo'                  => 'sometimes|image|max:191',
         ];
     }
 }
