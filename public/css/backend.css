@@ -17047,14 +17047,3 @@ body {
   padding-bottom: 1rem;
 }
 
-.btn .btn-primary .active {
-  background-color: #20a8d8;
-  border-color: #20a8d8;
-}
-
-.btn .btn-primary {
-  background-color: #fff;
-  border-color: #20a8d8;
-  color: #c8ced3;
-}
-

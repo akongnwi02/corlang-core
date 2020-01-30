@@ -151,7 +151,7 @@
                     </div><!--form-group-->
 
                     <div class="form-group row ">
-                        {{ html()->label(__('validation.attributes.backend.companies.company.type'))->class('col-md-2 form-control-label required')->for('type_id') }}
+git gitmer                        {{ html()->label(__('validation.attributes.backend.companies.company.type'))->class('col-md-2 form-control-label required')->for('type_id') }}
 
                         <div class="col-md-10">
                             @foreach($types as $type)
