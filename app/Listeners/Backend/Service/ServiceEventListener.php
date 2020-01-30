@@ -20,7 +20,6 @@ class ServiceEventListener
         \Log::info('Service Created', [
             'name' => $event->service->name,
             'by'   => $event->service->creator->username,
-            'type' => $event->service->type->name,
         ]);
     }
     
@@ -29,7 +28,6 @@ class ServiceEventListener
         \Log::info('Service Updated', [
             'name' => $event->service->name,
             'by'   => $event->service->editor->username,
-            'type' => $event->service->type->name,
         ]);
     }
     
@@ -71,5 +69,4 @@ class ServiceEventListener
             'App\Listeners\Backend\Service\ServiceEventListener@onUpdated'
         );
     }
-    
 }

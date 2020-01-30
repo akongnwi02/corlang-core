@@ -21,10 +21,12 @@ class CreateServicesTable extends Migration
             $table->string('logo_url')->nullable();
             $table->uuid('gateway_id')->nullable();
             $table->uuid('category_id');
+            $table->uuid('providercompany_id')->nullable();
             $table->uuid('providercommission_id')->nullable();
-            $table->uuid('companycommission_id')->nullable();
             $table->uuid('customercommission_id')->nullable();
-            
+            $table->double('company_rate')->nullable();
+            $table->double('agent_rate')->nullable();
+            $table->boolean('is_paymentmethod')->nullable()->default(false);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
@@ -32,7 +34,6 @@ class CreateServicesTable extends Migration
             $table->timestamps();
     
             $table->foreign('providercommission_id')->references('uuid')->on('commissions');
-            $table->foreign('companycommission_id')->references('uuid')->on('commissions');
             $table->foreign('customercommission_id')->references('uuid')->on('commissions');
             $table->foreign('category_id')->references('uuid')->on('categories');
             $table->foreign('gateway_id')->references('uuid')->on('gateways');

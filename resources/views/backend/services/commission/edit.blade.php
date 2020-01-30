@@ -58,6 +58,39 @@
                         </div><!--col-->
                     </div><!--form-group-->
 
+                    <div id="POItablediv">
+                        <input type="button" id="addPOIbutton" value="Add POIs" onclick="insRow()"/><br/><br/>
+                        {{--<table id="POITable" border="1">--}}
+                            {{--<tr>--}}
+                                {{--<td>From</td>--}}
+                                {{--<td>To</td>--}}
+                                {{--<td>Fixed</td>--}}
+                            {{--</tr>--}}
+
+                        {{--</table>--}}
+
+
+
+                        <table class="table" id="POITable">
+                            <thead>
+                            <tr>
+                                <th>@lang('validation.attributes.backend.services.commission.pricing.from')</th>
+                                <th>@lang('validation.attributes.backend.services.commission.pricing.to')</th>
+                                <th>@lang('validation.attributes.backend.services.commission.pricing.fixed')</th>
+                                <th>@lang('validation.attributes.backend.services.commission.pricing.percentage')</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($commission->pricings as $pricing)
+                                <tr>
+                                    <td><input size=25 type="text" id="latbox" class="form-control"/></td>
+                                    <td><input size=25 type="text" id="lngbox" /></td>
+                                    <td><input type="button" id="delPOIbutton" value="Delete" onclick="deleteRow(this)" /></td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+
                 </div><!--col-->
             </div><!--row-->
         </div><!--card-body-->
@@ -76,11 +109,48 @@
     </div><!--card-->
 {{ html()->closeModelForm() }}
 @endsection
-
+@push('after-styles')
 <style>
     .required:after{
         content:'*';
         color:red;
         padding-left:5px;
     }
+
+    table {
+        width: 70%;
+        font: 17px Calibri;
+    }
+    table, th, td {
+        border: solid 1px #DDD;
+        border-collapse: collapse;
+        padding: 2px 3px;
+        text-align: center;
+    }
 </style>
+@endpush
+@push('after-scripts')
+<script>
+    function deleteRow(row) {
+        let i = row.parentNode.parentNode.rowIndex;
+        document.getElementById('POITable').deleteRow(i);
+    }
+
+
+    function insRow() {
+        console.log('hi');
+        let x = document.getElementById('POITable');
+        let new_row = x.rows[1].cloneNode(true);
+        let len = x.rows.length;
+        new_row.cells[0].innerHTML = len;
+
+        let inp1 = new_row.cells[1].getElementsByTagName('input')[0];
+        inp1.id += len;
+        inp1.value = '';
+        let inp2 = new_row.cells[2].getElementsByTagName('input')[0];
+        inp2.id += len;
+        inp2.value = '';
+        x.appendChild(new_row);
+    }
+    </script>
+@endpush

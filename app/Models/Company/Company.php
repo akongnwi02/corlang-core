@@ -58,6 +58,7 @@ class Company extends Model
         'type_id',
         'owner_id',
         'logo_url',
+        'is_provider',
     ];
 
     /**

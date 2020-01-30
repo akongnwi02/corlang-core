@@ -49,6 +49,30 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.service.agent_rate'))->class('col-md-2 form-control-label required')->for('agent_rate') }}
+
+                        <div class="col-md-10">
+                            {{ html()->text('agent_rate')
+                                ->class('form-control')
+                                ->required()
+                                ->attribute('maxlength', 191)
+                                ->placeholder(__('validation.attributes.backend.services.service.agent_rate'))}}
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.service.company_rate'))->class('col-md-2 form-control-label required')->for('company_rate') }}
+
+                        <div class="col-md-10">
+                            {{ html()->text('company_rate')
+                                ->class('form-control')
+                                ->required()
+                                ->attribute('maxlength', 191)
+                                ->placeholder(__('validation.attributes.backend.services.service.company_rate'))}}
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.services.service.category'))->class('col-md-2 form-control-label required')->for('category_id') }}
 
                         <div class="col-md-10">
@@ -78,22 +102,23 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.service.companycommission'))->class('col-md-2 form-control-label')->for('companycommission_id') }}
-
-                        <div class="col-md-10">
-                            {{ html()->select('companycommission_id', [null => ''] + $commissions)
-                                ->class('form-control')
-                                ->required()}}
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.services.service.customercommission'))->class('col-md-2 form-control-label')->for('customercommission_id') }}
 
                         <div class="col-md-10">
                             {{ html()->select('customercommission_id', [null => ''] + $commissions)
                                 ->class('form-control')
                                 ->required()}}
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.service.is_paymentmethod'))->class('col-md-2 form-control-label')->for('is_paymentmethod') }}
+
+                        <div class="col-md-10">
+                            <label class="switch switch-label switch-pill switch-primary">
+                                {{ html()->checkbox('is_paymentmethod', false, '0')->class('switch-input') }}
+                                <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
+                            </label>
                         </div><!--col-->
                     </div><!--form-group-->
 

@@ -41,6 +41,7 @@ class StoreCompanyRequest extends FormRequest
             'country_id'    => __('validation.attributes.backend.companies.company.country'),
             'size'          => __('validation.attributes.backend.companies.company.size'),
             'type_id'       => __('validation.attributes.backend.companies.company.type'),
+            'is_provider'   => __('validation.attributes.backend.companies.company.provider'),
         ];
     }
     
@@ -64,6 +65,7 @@ class StoreCompanyRequest extends FormRequest
             'country_id'    => ['required', Rule::exists('countries', 'uuid')],
             'size'          => 'max:5',
             'type_id'       => ['required', Rule::exists('companytypes', 'uuid')],
+            'is_provider'       => ['sometimes', 'boolean'],
         ];
     }
 }

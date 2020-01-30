@@ -27,8 +27,11 @@ class StoreServiceRequest extends FormRequest
             'gateway_id'            => __('validation.attributes.backend.services.service.gateway'),
             'code'                  => __('validation.attributes.backend.services.service.code'),
             'providercommission_id' => __('validation.attributes.backend.services.service.providercommission'),
-            'companycommission_id'  => __('validation.attributes.backend.services.service.companycommission'),
             'customercommission_id' => __('validation.attributes.backend.services.service.customercommission'),
+            'providercompany_id'    => __('validation.attributes.backend.services.service.providercompany'),
+            'is_paymentmethod'      => __('validation.attributes.backend.services.service.is_payment_method'),
+            'agent_rate'            => __('validation.attributes.backend.services.service.agent_rate'),
+            'company_rate'          => __('validation.attributes.backend.services.service.company_rate'),
             'logo'                  => __('validation.attributes.backend.services.service.logo'),
         ];
     }
@@ -41,9 +44,12 @@ class StoreServiceRequest extends FormRequest
             'gateway_id'            => ['sometimes', Rule::exists('gateways', 'uuid')],
             'code'                  => ['required', 'string', 'max:191', Rule::unique('services', 'code')],
             'providercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid')],
-            'companycommission_id'  => ['sometimes', Rule::exists('commissions', 'uuid')],
             'customercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid')],
-            'logo'                  => 'sometimes|image|max:191',
+            'providercompany_id'    => ['sometimes', Rule::exists('companies', 'uuid')],
+            'is_paymentmethod'      => ['sometimes', 'boolean'],
+            'agent_rate'            => ['required', 'numeric', 'between:0,1'],
+            'company_rate'          => ['required', 'numeric', 'between:0,1'],
+            'logo'                  => ['sometimes|image|max:191']
         ];
     }
 }

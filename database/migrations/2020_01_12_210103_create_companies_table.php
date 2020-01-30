@@ -29,6 +29,7 @@ class CreateCompaniesTable extends Migration
             $table->smallInteger('size')->nullable();
             $table->uuid('country_id')->nullable();
             $table->uuid('type_id');
+            $table->boolean('is_provider')->nullable()->default(false);
             $table->uuid('deactivated_by_id')->nullable();
             $table->uuid('owner_id')->nullable();
             $table->double('agentcommission_rate')->nullable();

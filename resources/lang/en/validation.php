@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
@@ -12,7 +12,7 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-
+    
     'accepted'             => 'The :attribute must be accepted.',
     'active_url'           => 'The :attribute is not a valid URL.',
     'after'                => 'The :attribute must be a date after :date.',
@@ -112,7 +112,7 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
-
+    
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -123,13 +123,13 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
+    
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
     ],
-
+    
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -140,34 +140,34 @@ return [
     | of "email". This simply helps us make messages a little cleaner.
     |
     */
-
+    
     'attributes' => [
-
+        
         'backend' => [
-            'access' => [
+            'access'    => [
                 'permissions' => [
                     'associated_roles' => 'Associated Roles',
                     'dependencies'     => 'Dependencies',
                     'display_name'     => 'Display Name',
                     'group'            => 'Group',
                     'group_sort'       => 'Group Sort',
-
+                    
                     'groups' => [
                         'name' => 'Group Name',
                     ],
-
+                    
                     'name'       => 'Name',
                     'first_name' => 'First Name',
                     'last_name'  => 'Last Name',
                     'system'     => 'System',
                 ],
-
+                
                 'roles' => [
                     'associated_permissions' => 'Associated Permissions',
                     'name'                   => 'Name',
                     'sort'                   => 'Sort',
                 ],
-
+                
                 'users' => [
                     'active'                    => 'Active',
                     'associated_roles'          => 'Associated Roles',
@@ -192,23 +192,24 @@ return [
             ],
             'companies' => [
                 'company' => [
-                    'name'          => 'Company Name',
-                    'address'       => 'Address',
-                    'country'       => 'Country',
-                    'state'         => 'State',
-                    'city'          => 'City',
-                    'phone'         => 'Company Phone',
-                    'type'          => 'Company Type',
-                    'email'         => 'Company Email',
-                    'street'        => 'Street',
-                    'website'       => 'Website',
-                    'postal_code'   => 'Postal Code',
-                    'size'          => 'Size',
-                    'logo'          => 'Company Logo'
+                    'name'        => 'Company Name',
+                    'address'     => 'Address',
+                    'country'     => 'Country',
+                    'state'       => 'State',
+                    'city'        => 'City',
+                    'phone'       => 'Company Phone',
+                    'type'        => 'Company Type',
+                    'email'       => 'Company Email',
+                    'street'      => 'Street',
+                    'website'     => 'Website',
+                    'postal_code' => 'Postal Code',
+                    'size'        => 'Size',
+                    'logo'        => 'Company Logo',
+                    'provider'    => 'Provider',
                 ],
             ],
-            'services' => [
-                'service' => [
+            'services'  => [
+                'service'    => [
                     'name'               => 'Service Name',
                     'category'           => 'Service Category',
                     'gateway'            => 'Gateway Configuration',
@@ -218,15 +219,26 @@ return [
                     'companycommission'  => 'Company Commission',
                     'customercommission' => 'Customer Commission',
                     'logo'               => 'Logo',
+                    'company_rate'       => 'Company Rate',
+                    'agent_rate'         => 'Agent Rate',
+                    'providercompany'    => 'Provider Company',
+                    'is_paymentmethod'   => 'Payment Method',
                 ],
                 'commission' => [
                     'name'        => 'Name',
                     'description' => 'Description',
                     'currency'    => 'Currency',
+                    'pricing'     => [
+                        'from'       => 'From',
+                        'to'         => 'To',
+                        'fixed'      => 'Fixed',
+                        'percentage' => 'Percentage',
+                    ]
+                    
                 ]
             ]
         ],
-
+        
         'frontend' => [
             'avatar'                    => 'Avatar Location',
             'email'                     => 'E-mail Address',
