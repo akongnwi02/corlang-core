@@ -37,6 +37,7 @@ class EventServiceProvider extends ServiceProvider
          * Backend Subscribers
          */
         \App\Listeners\Backend\Company\CompanyEventListener::class,
+        \App\Listeners\Backend\Service\ServiceEventListener::class,
         
         /*
          * Auth Subscribers

@@ -14,10 +14,12 @@ use App\Models\Traits\Methods\ServiceMethod;
 use App\Models\Traits\Relationships\ServiceRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Wildside\Userstamps\Userstamps;
 
 class Service extends Model
 {
     use Uuid,
+        Userstamps,
         ServiceRelationship,
         ServiceMethod,
         ServiceAttribute;
@@ -48,9 +50,12 @@ class Service extends Model
         'code',
         'logo_url',
         'providercommission_id',
-        'companycommission_id',
         'customercommission_id',
-        
+        'providercompany_id',
+        'is_paymentmethod',
+        'customer_rate',
+        'agent_rate',
+
     ];
     
     /**
@@ -59,6 +64,9 @@ class Service extends Model
      * @var array
      */
     protected $casts = [
-        'is_active'  => 'boolean',
+        'is_active'        => 'boolean',
+        'is_paymentmethod' => 'boolean',
+        'customer_rate'    => 'double',
+        'agent_rate'       => 'double',
     ];
 }

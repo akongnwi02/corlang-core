@@ -33,6 +33,7 @@ return [
         'create_new'         => 'Create New',
         'toolbar_btn_groups' => 'Toolbar with button groups',
         'more'               => 'More',
+        'select'             => 'Select One'
     ],
 
     'backend' => [
@@ -155,7 +156,7 @@ return [
         ],
         'services' => [
             'service'    => [
-                'management'      => 'Service Management',
+                'management'      => 'Services',
                 'create'          => 'Create Service',
                 'edit'            => 'Edit Service',
                 'active'          => 'Active Services',
@@ -165,13 +166,14 @@ return [
                     'name'     => 'Service Name',
                     'code'     => 'Service Code',
                     'active'   => 'Active',
+                    'logo'     => 'Logo',
                     'gateway'  => 'Gateway',
                     'category' => 'Category',
                     'total'    => 'service|services',
                 ],
             ],
             'commission' => [
-                'management'         => 'Commission Management',
+                'management'         => 'Commissions',
                 'create'             => 'Create Commission',
                 'edit'               => 'Edit Commission',
                 'commission_actions' => 'Commission Actions',
@@ -180,6 +182,7 @@ return [
                     'name'        => 'Name',
                     'description' => 'Description',
                     'currency'    => 'Currency',
+                    'view'        => 'View Stack',
 
                     'total'       => 'commission|commissions',
                     'stack'       => [
@@ -188,7 +191,7 @@ return [
                         'to'         => 'To',
                         'percentage' => 'Percentage',
                         'fixed'      => 'Fixed',
-                        'no_result'  => 'No result',
+                        'empty'  => 'Empty',
                     ],
                 ],
             ],

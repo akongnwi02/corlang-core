@@ -14,6 +14,7 @@ use App\Models\Auth\Traits\Attribute\UserAttribute;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Auth\Traits\Relationship\UserRelationship;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Wildside\Userstamps\Userstamps;
 
 /**
  * Class User.
@@ -30,7 +31,8 @@ class User extends Authenticatable implements JWTSubject
         UserRelationship,
         UserScope,
         Uuid,
-        Jwt;
+        Jwt,
+        Userstamps;
 
 
     /**

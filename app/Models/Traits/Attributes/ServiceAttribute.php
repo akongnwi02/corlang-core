@@ -55,6 +55,24 @@ trait ServiceAttribute
         }
     }
     
+    /**
+     * @return string
+     */
+    public function getLogoLabelAttribute()
+    {
+        $url = url($this->service_logo ?: 'img/backend/brand/logo/logo-company-profile.png');
+    
+        return "<img class='navbar-brand-full img-fluid' src='$url' width='30' height='30' style='border-radius: 50%' alt='Service'>";
+    }
+    
+    public function getServiceLogoAttribute()
+    {
+        if ($this->logo_url) {
+            return 'storage/'. $this->logo_url;
+        }
+        return false;
+    }
+    
     
     public function getActionButtonsAttribute()
     {

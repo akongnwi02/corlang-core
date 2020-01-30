@@ -18,12 +18,8 @@ help:
 
 build:
 	echo "Building Docker Images"
-
-	echo "Starting Docker Containers"
-	docker-compose up -d --build
-	echo "Installing Composer Dependencies"
-	docker exec $$(docker-compose ps -q tests) sh -c "composer install"
-	echo "Done"
+	docker-compose build
+	$(MAKE) up
 
 test:
 	docker exec $$(docker-compose ps -q workspace) sh -c "vendor/bin/phpunit"

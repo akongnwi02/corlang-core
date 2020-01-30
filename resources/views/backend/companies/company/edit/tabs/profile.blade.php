@@ -154,8 +154,10 @@
                     {{ html()->label(__('validation.attributes.backend.companies.company.logo'))->class('col-md-2 form-control-label')->for('logo') }}
 
                     <div class="col-md-10">
-                        {{ html()->file('logo')->class('form-control') }}
-
+                        {{ html()->file('logo')->id('logo')->class('form-control-file') }}
+                        <div>
+                            {{ html()->img($company->full_logo, __('validation.attributes.backend.companies.company.logo'))->style('width:100px;height:100px;')->id('preview') }}
+                        </div>
                     </div><!--col-->
                 </div><!--form-group-->
 
@@ -176,4 +178,23 @@
     </div><!--card-footer-->
 </div><!--card-->
 {{ html()->form()->close() }}
+@push('after-scripts')
 
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#preview').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#logo").change(function(){
+        readURL(this);
+    });
+</script>
+ @endpush

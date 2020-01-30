@@ -42,6 +42,13 @@ return [
                 'updated' => 'The company was successfully updated.',
                 'status_updated' => 'The status was successfully updated',
             ]
+        ],
+        'services' => [
+            'service' => [
+                'created' => 'The service was successfully created.',
+                'updated' => 'The service was successfully updated.',
+                'status_updated' => 'The status was successfully updated',
+            ]
         ]
     ],
 

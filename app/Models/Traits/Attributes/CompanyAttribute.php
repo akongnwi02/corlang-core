@@ -40,11 +40,6 @@ trait CompanyAttribute
         return url($this->getCompanyLogo() ?: 'img/backend/brand/logo/logo-company-profile.png');
     }
     
-    public function getMinimizedLogoAttribute()
-    {
-        return url($this->getCompanyLogo() ?: 'img/backend/brand/logo/logo-main.png');
-    }
-    
     public function getCompanyLogo()
     {
         if ($this->logo_url) {

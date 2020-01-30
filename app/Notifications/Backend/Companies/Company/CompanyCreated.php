@@ -6,7 +6,7 @@
  * Time: 10:38 PM
  */
 
-namespace App\Notifications\Backend\Company\Company;
+namespace App\Notifications\Backend\Companies\Company;
 
 use App\Channels\SmsChannel;
 use App\Services\Notifications\Sms\SmsMessage;
