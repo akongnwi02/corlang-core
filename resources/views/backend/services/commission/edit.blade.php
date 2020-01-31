@@ -74,18 +74,18 @@
                             <tbody>
                             @forelse($commission->pricings as $key => $pricing)
                                 <tr>
-                                    <td><input id="from" size=25 type="number" name="pricings[{{ $key }}][from]" step="0.01" class="form-control" value="{{ $pricing->from }}" min="0" required/></td>
-                                    <td><input id="to" size=25 type="number" name="pricings[{{ $key }}][to]" step="0.01" class="form-control" value="{{ $pricing->to }}" min="0" required/></td>
-                                    <td><input id="fixed" size=25 type="number" name="pricings[{{ $key }}][fixed]" step="0.01" class="form-control" value="{{ $pricing->fixed }}" min="0" required/></td>
+                                    <td><input id="from" style="min-width:100px" size=25 type="number" name="pricings[{{ $key }}][from]" step="0.01" class="form-control" value="{{ $pricing->from }}" min="0" required/></td>
+                                    <td><input id="to" style="min-width:100px" size=25 type="number" name="pricings[{{ $key }}][to]" step="0.01" class="form-control" value="{{ $pricing->to }}" min="0" required/></td>
+                                    <td><input id="fixed" style="min-width:100px" size=25 type="number" name="pricings[{{ $key }}][fixed]" step="0.01" class="form-control" value="{{ $pricing->fixed }}" min="0" required/></td>
                                     <td><input id="percentage" size=25 type="number" name="pricings[{{ $key }}][percentage]" step="0.01" class="form-control" min="0" max="1" value="{{ $pricing->percentage }}" required/></td>
                                     <td><button id="delPOIbutton" value="Delete" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></button></td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td><input id="from" size=25 type="number" name="pricings[0][from]" step="0.01" class="form-control" required/></td>
-                                    <td><input id="to" size=25 type="number" name="pricings[0][to]" step="0.01" class="form-control" required/></td>
-                                    <td><input id="fixed" size=25 type="number" name="pricings[0][fixed]" step="0.01" class="form-control" required/></td>
-                                    <td><input id="percentage" size=25 type="number" name="pricings[0][percentage]" step="0.01" class="form-control" min="0" max="1" required/></td>
+                                    <td><input id="from" style="min-width:100px" width="50px" type="number" name="pricings[0][from]" step="0.01" class="form-control" required/></td>
+                                    <td><input id="to" style="min-width:100px" type="number" name="pricings[0][to]" step="0.01" class="form-control" required/></td>
+                                    <td><input id="fixed" style="min-width:100px" type="number" name="pricings[0][fixed]" step="0.01" class="form-control" required/></td>
+                                    <td><input id="percentage" type="number" name="pricings[0][percentage]" step="0.01" class="form-control" min="0" max="1" required/></td>
                                     <td><button id="delPOIbutton" value="Delete" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></button></td>
                                 </tr>
                             @endforelse
