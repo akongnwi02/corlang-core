@@ -39,9 +39,12 @@ class CommissionController extends Controller
                 ->toArray());
     }
     
-    public function update(UpdateCommissionRequest $request, CommissionRepository $commissionRepository)
+    public function update(Commission $commission, UpdateCommissionRequest $request, CommissionRepository $commissionRepository)
     {
+        $commission = $commissionRepository->update($commission, $request->input());
     
+        return redirect()->route('admin.services.commission.edit', $commission)
+            ->withFlashSuccess(__('alerts.backend.services.commission.created'));
     }
     
     /**

@@ -228,6 +228,7 @@ return [
                     'name'        => 'Name',
                     'description' => 'Description',
                     'currency'    => 'Currency',
+                    'pricings'     => 'Pricings',
                     'pricing'     => [
                         'from'       => 'From',
                         'to'         => 'To',

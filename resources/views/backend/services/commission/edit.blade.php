@@ -72,20 +72,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($commission->pricings as $pricing)
+                            @forelse($commission->pricings as $key => $pricing)
                                 <tr>
-                                    <td><input id="from" size=25 type="number" step="0.01" class="form-control" value="{{ $pricing->from }}" min="0" required/></td>
-                                    <td><input id="to" size=25 type="number" step="0.01" class="form-control" value="{{ $pricing->to }}" min="0" required/></td>
-                                    <td><input id="fixed" size=25 type="number" step="0.01" class="form-control" value="{{ $pricing->fixed }}" min="0" required/></td>
-                                    <td><input id="percentage" size=25 type="number" step="0.01" class="form-control" min="0" max="1" value="{{ $pricing->percentage }}" required/></td>
+                                    <td><input id="from" size=25 type="number" name="pricings[{{ $key }}][from]" step="0.01" class="form-control" value="{{ $pricing->from }}" min="0" required/></td>
+                                    <td><input id="to" size=25 type="number" name="pricings[{{ $key }}][to]" step="0.01" class="form-control" value="{{ $pricing->to }}" min="0" required/></td>
+                                    <td><input id="fixed" size=25 type="number" name="pricings[{{ $key }}][fixed]" step="0.01" class="form-control" value="{{ $pricing->fixed }}" min="0" required/></td>
+                                    <td><input id="percentage" size=25 type="number" name="pricings[{{ $key }}][percentage]" step="0.01" class="form-control" min="0" max="1" value="{{ $pricing->percentage }}" required/></td>
                                     <td><button id="delPOIbutton" value="Delete" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></button></td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td><input id="from" size=25 type="number" step="0.01" class="form-control" required/></td>
-                                    <td><input id="to" size=25 type="number" step="0.01" class="form-control" required/></td>
-                                    <td><input id="fixed" size=25 type="number" step="0.01" class="form-control" required/></td>
-                                    <td><input id="percentage" size=25 type="number" step="0.01" class="form-control" min="0" max="1" required/></td>
+                                    <td><input id="from" size=25 type="number" name="pricings[0][from]" step="0.01" class="form-control" required/></td>
+                                    <td><input id="to" size=25 type="number" name="pricings[0][to]" step="0.01" class="form-control" required/></td>
+                                    <td><input id="fixed" size=25 type="number" name="pricings[0][fixed]" step="0.01" class="form-control" required/></td>
+                                    <td><input id="percentage" size=25 type="number" name="pricings[0][percentage]" step="0.01" class="form-control" min="0" max="1" required/></td>
                                     <td><button id="delPOIbutton" value="Delete" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></button></td>
                                 </tr>
                             @endforelse
@@ -147,42 +147,50 @@
 
 
                 function insRow() {
+
+
+
+                    //
+                    //
+                    // function insRow() {
+                    //     console.log('hi');
+                    //     let x = document.getElementById('POITable');
+                    //     let new_row = x.rows[1].cloneNode(true);
+                    //     let len = x.rows.length;
+                    //     new_row.cells[0].innerHTML = len;
+                    //
+                    //     let inp1 = new_row.cells[1].getElementsByTagName('input')[0];
+                    //     inp1.id += len;
+                    //     inp1.value = '';
+                    //     let inp2 = new_row.cells[2].getElementsByTagName('input')[0];
+                    //     inp2.id += len;
+                    //     inp2.value = '';
+                    //     x.appendChild(new_row);
+                    // }
+
+
                     let x = document.getElementById('POITable');
 
                     let new_row = x.rows[1].cloneNode(true);
-
+                    let len = x.rows.length;
                     let inp1 = new_row.cells[0].getElementsByTagName('input')[0];
                     inp1.value = '';
+                    inp1.name = `pricings[${len}][from]`;
 
                     let inp2 = new_row.cells[1].getElementsByTagName('input')[0];
                     inp2.value = '';
+                    inp2.name = `pricings[${len}][to]`;
 
                     let inp3 = new_row.cells[2].getElementsByTagName('input')[0];
                     inp3.value = '';
+                    inp2.name = `pricings[${len}][fixed]`;
 
                     let inp4 = new_row.cells[3].getElementsByTagName('input')[0];
                     inp4.value = '';
+                    inp2.name = `pricings[${len}][percentage]`;
 
                     x.appendChild(new_row);
                 }
 
-                function submit() {
-                    var myTab = document.getElementById('empTable');
-                    var values = new Array();
-
-                    // LOOP THROUGH EACH ROW OF THE TABLE.
-                    for (row = 1; row < myTab.rows.length - 1; row++) {
-                        for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
-
-                            var element = myTab.rows.item(row).cells[c];
-                            if (element.childNodes[0].getAttribute('type') === 'text') {
-                                values.push("'" + element.childNodes[0].value + "'");
-                            }
-                        }
-                    }
-
-                    // SHOW THE RESULT IN THE CONSOLE WINDOW.
-                    console.log(values);
-                }
             </script>
     @endpush

@@ -9,6 +9,7 @@
 namespace App\Repositories\Backend\Services\Commission;
 
 
+use App\Events\Backend\Services\Commission\CommissionCreated;
 use App\Exceptions\GeneralException;
 use App\Models\Business\Commission;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -46,6 +47,27 @@ class CommissionRepository
             }
         
             throw new GeneralException(__('exceptions.backend.companies.company.create_error'));
+        });
+    }
+    
+    /**
+     * @param Commission $commission
+     * @param $data
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function update(Commission $commission, $data)
+    {
+        return \DB::transaction(function () use ($commission, $data) {
+        // to be continued
+            $commission->fill($data);
+        
+            if ($commission->save()) {
+                event(new CommissionCreated($commission));
+                return $commission;
+            }
+        
+            throw new GeneralException(__('exceptions.backend.services.commission.create_error'));
         });
     }
 }

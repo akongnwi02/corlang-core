@@ -48,6 +48,9 @@ return [
                 'created' => 'The service was successfully created.',
                 'updated' => 'The service was successfully updated.',
                 'status_updated' => 'The status was successfully updated',
+            ],
+            'commission' => [
+                'created' => 'Success'
             ]
         ]
     ],

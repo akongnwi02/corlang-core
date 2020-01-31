@@ -19,7 +19,6 @@ class RightCompanyRule implements Rule
      * @param  string $attribute
      * @param  mixed $value
      * @return bool
-     * @throws \App\Exceptions\GeneralException
      */
     public function passes($attribute, $value)
     {

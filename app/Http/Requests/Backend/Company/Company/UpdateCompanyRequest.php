@@ -52,7 +52,7 @@ class UpdateCompanyRequest extends FormRequest
             'name'          => [
                 'required',
                 'max:191',
-                Rule::unique('companies', 'name')->ignore(request()->company->uuid, 'uuid'),
+                Rule::unique('companies', 'name')->ignore(request()->company, 'uuid'),
                 new UpdateCompanyNameRule()],
             'email'         => 'max:191',
             'phone'         => 'required|max:191',
