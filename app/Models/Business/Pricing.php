@@ -13,10 +13,12 @@ use App\Models\Traits\Attributes\PricingAttribute;
 use App\Models\Traits\Relationships\PricingRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Wildside\Userstamps\Userstamps;
 
 class Pricing extends Model
 {
     use Uuid,
+        Userstamps,
         PricingAttribute,
         PricingRelationship;
     /**

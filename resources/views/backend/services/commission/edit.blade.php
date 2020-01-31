@@ -145,34 +145,12 @@
                     document.getElementById('POITable').deleteRow(i);
                 }
 
-
                 function insRow() {
-
-
-
-                    //
-                    //
-                    // function insRow() {
-                    //     console.log('hi');
-                    //     let x = document.getElementById('POITable');
-                    //     let new_row = x.rows[1].cloneNode(true);
-                    //     let len = x.rows.length;
-                    //     new_row.cells[0].innerHTML = len;
-                    //
-                    //     let inp1 = new_row.cells[1].getElementsByTagName('input')[0];
-                    //     inp1.id += len;
-                    //     inp1.value = '';
-                    //     let inp2 = new_row.cells[2].getElementsByTagName('input')[0];
-                    //     inp2.id += len;
-                    //     inp2.value = '';
-                    //     x.appendChild(new_row);
-                    // }
-
-
                     let x = document.getElementById('POITable');
 
                     let new_row = x.rows[1].cloneNode(true);
                     let len = x.rows.length;
+
                     let inp1 = new_row.cells[0].getElementsByTagName('input')[0];
                     inp1.value = '';
                     inp1.name = `pricings[${len}][from]`;
@@ -183,11 +161,11 @@
 
                     let inp3 = new_row.cells[2].getElementsByTagName('input')[0];
                     inp3.value = '';
-                    inp2.name = `pricings[${len}][fixed]`;
+                    inp3.name = `pricings[${len}][fixed]`;
 
                     let inp4 = new_row.cells[3].getElementsByTagName('input')[0];
                     inp4.value = '';
-                    inp2.name = `pricings[${len}][percentage]`;
+                    inp4.name = `pricings[${len}][percentage]`;
 
                     x.appendChild(new_row);
                 }

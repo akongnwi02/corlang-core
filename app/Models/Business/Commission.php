@@ -8,15 +8,16 @@
 
 namespace App\Models\Business;
 
-
 use App\Models\Traits\Attributes\CommissionAttribute;
 use App\Models\Traits\Relationships\CommissionRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Wildside\Userstamps\Userstamps;
 
 class Commission extends Model
 {
     use Uuid,
+        Userstamps,
         CommissionAttribute,
         CommissionRelationship;
     /**

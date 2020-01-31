@@ -12,6 +12,7 @@ namespace App\Repositories\Backend\Services\Commission;
 use App\Events\Backend\Services\Commission\CommissionCreated;
 use App\Exceptions\GeneralException;
 use App\Models\Business\Commission;
+use App\Models\Business\Pricing;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class CommissionRepository
@@ -61,12 +62,20 @@ class CommissionRepository
         return \DB::transaction(function () use ($commission, $data) {
         // to be continued
             $commission->fill($data);
-        
+            
+            $commission->pricings()->delete();
+            
+            $pricingInput = $data['pricings'];
+    
+            foreach ($pricingInput as $pricing) {
+                $commission->pricings()->save(new Pricing($pricing));
+            }
+            
             if ($commission->save()) {
                 event(new CommissionCreated($commission));
                 return $commission;
             }
-        
+
             throw new GeneralException(__('exceptions.backend.services.commission.create_error'));
         });
     }

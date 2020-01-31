@@ -50,7 +50,7 @@ return [
                 'status_updated' => 'The status was successfully updated',
             ],
             'commission' => [
-                'created' => 'Success'
+                'created' => 'Pricings successfully attached',
             ]
         ]
     ],

@@ -26,15 +26,19 @@ class PricingRule implements Rule
     {
         // make sure all the keys are present in each array
         foreach ($value as $pricing) {
-            if (array_diff(['from', 'to', 'fixed', 'percentage'], array_keys($pricing))
+            if (
+                array_diff(['from', 'to', 'fixed', 'percentage'], array_keys($pricing))
                 // make sure the values are positive
-                && $pricing['from'] < 0
-                && $pricing['to'] < 0
-                && $pricing['fixed'] < 0
+                || $pricing['from'] < 0
+                || $pricing['to'] < 0
+                || $pricing['fixed'] < 0
                 // make sure the percentage is a percentage
-                && $pricing['percentage'] >= 1
-                && $pricing['percentage'] <= 0
+                || $pricing['percentage'] > 1
+                || $pricing['percentage'] < 0
+                //make sure from value is less than to
+                || $pricing['from'] > $pricing['to']
             ) {
+                \Log::error('Invalid pricing', $pricing);
                 return false;
             }
         }
