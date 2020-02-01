@@ -18,8 +18,6 @@ class CompanyType extends Model
     
     public $incrementing = false;
     
-    use Uuid;
-    
     /**
      * The database table used by the model.
      *

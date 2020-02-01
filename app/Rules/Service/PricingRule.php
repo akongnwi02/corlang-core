@@ -33,7 +33,7 @@ class PricingRule implements Rule
                 || $pricing['to'] < 0
                 || $pricing['fixed'] < 0
                 // make sure the percentage is a percentage
-                || $pricing['percentage'] > 1
+                || $pricing['percentage'] > 100
                 || $pricing['percentage'] < 0
                 //make sure from value is less than to
                 || $pricing['from'] > $pricing['to']

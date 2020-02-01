@@ -6,11 +6,11 @@
  * Time: 1:59 PM
  */
 
-namespace App\Rules\Company;
+namespace App\Rules\Auth;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class UpdateCompanyTypeRule implements Rule
+class RightCompanyRule implements Rule
 {
     
     /**
@@ -19,15 +19,11 @@ class UpdateCompanyTypeRule implements Rule
      * @param  string $attribute
      * @param  mixed $value
      * @return bool
-     * @throws \App\Exceptions\GeneralException
      */
     public function passes($attribute, $value)
     {
-        if (request()->company->type_id !== $value) {
-            return auth()->user()->company->isDefault() && auth()->user()->isAdmin();
-        }
-    
-        return true;
+        return auth()->user()->company->isDefault()
+            || auth()->user()->company->uuid == $value;
     }
     
     /**
@@ -37,6 +33,6 @@ class UpdateCompanyTypeRule implements Rule
      */
     public function message()
     {
-        return __('auth.cant_change_company_name');
+        return __('auth.unauthorized_company');
     }
 }

@@ -33,6 +33,8 @@ class CompanyRepository
             $company = Company::create($data);
             
             $company->is_provider = request()->has('is_provider') ? 1 : 0;
+            $company->is_provider = request()->has('agent_self_topup') ? 1 : 0;
+            $company->is_provider = request()->has('direct_polling') ? 1 : 0;
     
             if ($company) {
                 event(new CompanyCreated($company));
@@ -115,6 +117,8 @@ class CompanyRepository
         
         $company->fill($data);
         $company->is_provider = request()->has('is_provider') ? 1 : 0;
+        $company->is_provider = request()->has('agent_self_topup') ? 1 : 0;
+        $company->is_provider = request()->has('direct_polling') ? 1 : 0;
         if ($logo) {
             // delete previous logo
             if (strlen($company->logo_url)) {

@@ -8,7 +8,6 @@
 
 namespace App\Models\Traits\Attributes;
 
-
 trait CompanyAttribute
 {
     /**

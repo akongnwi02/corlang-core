@@ -142,6 +142,28 @@
                     </div><!--col-->
                 </div><!--form-group-->
 
+                <div class="form-group row">
+                    {{ html()->label(__('validation.attributes.backend.companies.company.agent_self_topup'))->class('col-md-2 form-control-label')->for('agent_self_topup') }}
+
+                    <div class="col-md-10">
+                        <label class="switch switch-label switch-pill switch-primary">
+                            {{ html()->checkbox('agent_self_topup', false, 1)->class('switch-input') }}
+                            <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
+                        </label>
+                    </div><!--col-->
+                </div><!--form-group-->
+
+                <div class="form-group row">
+                    {{ html()->label(__('validation.attributes.backend.companies.company.direct_polling'))->class('col-md-2 form-control-label')->for('direct_polling') }}
+
+                    <div class="col-md-10">
+                        <label class="switch switch-label switch-pill switch-primary">
+                            {{ html()->checkbox('direct_polling', false, 1)->class('switch-input') }}
+                            <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
+                        </label>
+                    </div><!--col-->
+                </div><!--form-group-->
+
                 <div class="form-group row ">
                     {{ html()->label(__('validation.attributes.backend.companies.company.type'))->class('col-md-2 form-control-label required')->for('type_id') }}
 

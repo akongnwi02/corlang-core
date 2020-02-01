@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Backend\Auth\User;
 
+use App\Rules\Auth\RightCompanyRule;
 use App\Rules\Auth\RightRoleRule;
 use App\Rules\Auth\UniquePhoneNumber;
-use App\Rules\Company\RightCompanyRule;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 

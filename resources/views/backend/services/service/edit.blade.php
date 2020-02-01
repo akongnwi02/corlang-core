@@ -74,7 +74,9 @@
                             {{ html()->text('agent_rate')
                                 ->class('form-control')
                                 ->required()
-                                ->attribute('maxlength', 191)
+                                ->attribute('min', 0)
+                                ->attribute('step', 0.01)
+                                ->attribute('max', 100)
                                 ->placeholder(__('validation.attributes.backend.services.service.agent_rate'))}}
                         </div><!--col-->
                     </div><!--form-group-->
@@ -86,7 +88,9 @@
                             {{ html()->text('company_rate')
                                 ->class('form-control')
                                 ->required()
-                                ->attribute('maxlength', 191)
+                                 ->attribute('min', 0)
+                                 ->attribute('step', 0.01)
+                                ->attribute('max', 100)
                                 ->placeholder(__('validation.attributes.backend.services.service.company_rate'))}}
                         </div><!--col-->
                     </div><!--form-group-->

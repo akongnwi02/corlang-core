@@ -39,6 +39,7 @@ class CompanyController extends Controller
     
     /**
      * @param StoreCompanyRequest $request
+     * @param CompanyRepository $companyRepository
      * @return mixed
      * @throws \Throwable
      */

@@ -11,10 +11,12 @@ namespace App\Models\Company;
 
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Wildside\Userstamps\Userstamps;
 
 class CompanyService extends Model
 {
-    use Uuid;
+    use Uuid,
+        Userstamps;
     
     protected $table = 'company_service';
     
@@ -28,11 +30,14 @@ class CompanyService extends Model
         'company_id',
         'service_id',
         'is_active',
-        'companycommission_id',
-        'custoemrcommission_id',
+        'company_rate',
+        'agent_rate',
+        'deactivated_by_id'
     ];
     
     protected $casts = [
-        'is_active' => 'boolean'
+        'is_active'    => 'boolean',
+        'company_rate' => 'double',
+        'agent_rate'   => 'double',
     ];
 }

@@ -26,6 +26,8 @@ class CreateCompaniesTable extends Migration
             $table->string('email')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_default')->default(false);
+            $table->boolean('agent_self_topup')->default(true);
+            $table->boolean('direct_polling')->default(true);
             $table->smallInteger('size')->nullable();
             $table->uuid('country_id')->nullable();
             $table->uuid('type_id');

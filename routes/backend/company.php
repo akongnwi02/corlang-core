@@ -62,6 +62,13 @@ Route::group([
             ->where(['status' => '[0,1]'])
             ->name('company.mark')
             ->middleware('permission:'.config('permission.permissions.deactivate_companies'));
-    });
+    
+        // Company Service
+        Route::group(['prefix' => 'service', 'namespace' => 'Service'], function () {
+            /*
+             * CRUD
+             */
 
+        });
+    });
 });

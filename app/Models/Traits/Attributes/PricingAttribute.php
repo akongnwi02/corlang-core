@@ -13,7 +13,7 @@ trait PricingAttribute
 {
     public function getPercentageLabelAttribute()
     {
-        return $this->percentage*100  . '%';
+        return $this->percentage  . '%';
     }
     
     public function getFromLabelAttribute()

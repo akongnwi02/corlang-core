@@ -24,11 +24,16 @@
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-expanded="true"><i class="fas fa-user"></i> @lang('labels.backend.companies.company.tabs.titles.profile')</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#setting" role="tab" aria-controls="setting" aria-expanded="true"><i class="fas fa-cog"></i> @lang('labels.backend.companies.company.tabs.titles.setting')</a>
+                        </li>
                     </ul>
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="profile" role="tabpanel" aria-expanded="true">
                             @include('backend.companies.company.edit.tabs.profile')
+                        </div><!--tab--><div class="tab-pane active" id="setting" role="tabpanel" aria-expanded="true">
+                            @include('backend.companies.company.edit.tabs.setting')
                         </div><!--tab-->
                     </div><!--tab-content-->
                 </div><!--col-->

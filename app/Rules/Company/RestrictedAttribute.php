@@ -10,7 +10,7 @@ namespace App\Rules\Company;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class UpdateCompanyNameRule implements Rule
+class RestrictedAttribute implements Rule
 {
     
     /**
@@ -19,11 +19,10 @@ class UpdateCompanyNameRule implements Rule
      * @param  string $attribute
      * @param  mixed $value
      * @return bool
-     * @throws \App\Exceptions\GeneralException
      */
     public function passes($attribute, $value)
     {
-        if (request()->company->name !== $value) {
+        if (request()->company->{$attribute} !== $value) {
             return auth()->user()->company->isDefault() && auth()->user()->isAdmin();
         }
         
@@ -37,6 +36,6 @@ class UpdateCompanyNameRule implements Rule
      */
     public function message()
     {
-        return __('auth.cant_change_company_name');
+        return __('exceptions.backend.companies.company.cant_change_attribute');
     }
 }

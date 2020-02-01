@@ -47,8 +47,8 @@ class StoreServiceRequest extends FormRequest
             'customercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid')],
             'providercompany_id'    => ['sometimes', Rule::exists('companies', 'uuid')],
             'is_paymentmethod'      => ['sometimes', 'boolean'],
-            'agent_rate'            => ['required', 'numeric', 'between:0,1'],
-            'company_rate'          => ['required', 'numeric', 'between:0,1'],
+            'agent_rate'            => ['required', 'numeric', 'between:0,100'],
+            'company_rate'          => ['required', 'numeric', 'between:0,100'],
             'logo'                  => 'sometimes|image|max:191',
         ];
     }

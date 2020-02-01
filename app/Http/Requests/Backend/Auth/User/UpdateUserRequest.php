@@ -3,9 +3,7 @@
 namespace App\Http\Requests\Backend\Auth\User;
 
 use App\Rules\Auth\RightRoleRule;
-use App\Rules\Company\RightCompanyRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 /**
  * Class UpdateUserRequest.

@@ -150,6 +150,7 @@ return [
                 'tabs' => [
                     'titles' => [
                         'profile' => 'Profile',
+                        'setting' => 'Setting'
                     ],
                 ]
             ],

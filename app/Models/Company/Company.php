@@ -59,6 +59,8 @@ class Company extends Model
         'owner_id',
         'logo_url',
         'is_provider',
+        'agent_self_topup',
+        'direct_polling',
     ];
 
     /**
