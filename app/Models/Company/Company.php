@@ -71,5 +71,8 @@ class Company extends Model
     protected $casts = [
         'is_active'  => 'boolean',
         'uuid' => 'string',
+        'is_provider' => 'boolean',
+        'agent_self_topup' => 'boolean',
+        'direct_polling' => 'boolean',
     ];
 }

@@ -30,13 +30,13 @@ class CompanyRepository
         
         return \DB::transaction(function () use ($data) {
     
-            $company = Company::create($data);
+            $company = (new Company())->fill($data);
             
             $company->is_provider = request()->has('is_provider') ? 1 : 0;
-            $company->is_provider = request()->has('agent_self_topup') ? 1 : 0;
-            $company->is_provider = request()->has('direct_polling') ? 1 : 0;
+            $company->agent_self_topup = request()->has('agent_self_topup') ? 1 : 0;
+            $company->direct_polling = request()->has('direct_polling') ? 1 : 0;
     
-            if ($company) {
+            if ($company->save()) {
                 event(new CompanyCreated($company));
                 return $company;
             }
@@ -112,13 +112,26 @@ class CompanyRepository
      * @return mixed
      * @throws \Throwable
      */
-    public function update($company, $data, $logo = null)
+    public function update(Company $company, $data, $logo = null)
     {
+        $company->is_provider = request()->has('is_provider') ? 1 : 0;
+        $company->agent_self_topup = request()->has('agent_self_topup') ? 1 : 0;
+        $company->direct_polling = request()->has('direct_polling') ? 1 : 0;
         
         $company->fill($data);
-        $company->is_provider = request()->has('is_provider') ? 1 : 0;
-        $company->is_provider = request()->has('agent_self_topup') ? 1 : 0;
-        $company->is_provider = request()->has('direct_polling') ? 1 : 0;
+
+        $restricted = array_intersect(['is_provider', 'agent_self_topup', 'direct_polling'], array_keys($company->getDirty()));
+
+        if ($restricted) {
+            if ( auth()->user()->company->isDefault() && auth()->user()->isAdmin()) {
+            
+            } else {
+                \Log::error('cannot update the following flags', $restricted);
+                
+                throw new GeneralException(__('exceptions.backend.companies.company.cant_change_check_box'));
+            }
+        }
+        
         if ($logo) {
             // delete previous logo
             if (strlen($company->logo_url)) {

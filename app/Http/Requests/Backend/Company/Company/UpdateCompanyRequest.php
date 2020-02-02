@@ -10,9 +10,7 @@ namespace App\Http\Requests\Backend\Company\Company;
 
 use App\Rules\Company\RestrictedAttribute;
 use Illuminate\Validation\Rule;
-use App\Rules\Company\UpdateCompanyTypeRule;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\Company\UpdateCompanyNameRule;
 
 class UpdateCompanyRequest extends FormRequest
 {
@@ -53,26 +51,26 @@ class UpdateCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => [
+            'name'             => [
                 'required',
                 'max:191',
                 Rule::unique('companies', 'name')->ignore(request()->company, 'uuid'),
                 new RestrictedAttribute()],
-            'email'       => 'max:191',
-            'phone'       => 'required|max:191',
-            'address'     => 'required|max:191',
-            'website'     => 'max:191',
-            'street'      => 'max:191',
-            'city'        => 'required|max:191',
-            'state'       => 'required|max:191',
-            'postal_code' => 'max:191',
-            'country_id'  => ['required', Rule::exists('countries', 'uuid')],
-            'size'        => 'max:5',
-            'type_id'     => ['required', new RestrictedAttribute()],
-            'is_provider' => ['sometimes', 'boolean', new RestrictedAttribute()],
-            'direct_polling'   => ['sometimes', 'boolean', new RestrictedAttribute()],
-            'agent_self_topup' => ['sometimes', 'boolean', new RestrictedAttribute()],
-            'logo'        => 'sometimes|image|max:191',
+            'email'            => 'max:191',
+            'phone'            => 'required|max:191',
+            'address'          => 'required|max:191',
+            'website'          => 'max:191',
+            'street'           => 'max:191',
+            'city'             => 'required|max:191',
+            'state'            => 'required|max:191',
+            'postal_code'      => 'max:191',
+            'country_id'       => ['required', Rule::exists('countries', 'uuid')],
+            'size'             => 'max:5',
+            'type_id'          => ['required', new RestrictedAttribute()],
+            'logo'             => 'sometimes|image|max:191',
+            'is_provider'      => ['sometimes', 'boolean'],
+            'direct_polling'   => ['sometimes', 'boolean'],
+            'agent_self_topup' => ['sometimes', 'boolean'],
         ];
     }
 }

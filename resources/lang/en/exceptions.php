@@ -64,6 +64,7 @@ return [
                 'mark_error'   => 'There was a problem updating the status of this company. Please try again.',
                 'mark_rights_error'   => 'There was a problem updating the status of this company. The company was deactivated by a higher role.',
                 'cant_change_attribute' => 'You are not permitted to change the :attribute',
+                'cant_change_check_box' => 'You are not allowed to change one of the checkbox values',
             ],
         ],
         
