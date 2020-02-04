@@ -60,22 +60,29 @@ class CommissionRepository
     public function update(Commission $commission, $data)
     {
         return \DB::transaction(function () use ($commission, $data) {
-        // to be continued
+        
             $commission->fill($data);
             
             $commission->pricings()->delete();
-            
-            $pricingInput = $data['pricings'];
-    
-            foreach ($pricingInput as $pricing) {
-                $commission->pricings()->save(new Pricing($pricing));
-            }
-            
-            if ($commission->save()) {
-                event(new CommissionCreated($commission));
-                return $commission;
-            }
 
+            $pricings = $data['pricings'];
+            
+            // sort the pricings in ASC
+            $from  = array_column($pricings, 'from');
+            $to  = array_column($pricings, 'to');
+    
+            if (array_multisort($from, SORT_ASC, $to, SORT_ASC, $pricings)) {
+                foreach ($pricings as $pricing) {
+                    $commission->pricings()->save(new Pricing($pricing));
+                }
+    
+                if ($commission->save()) {
+                    event(new CommissionCreated($commission));
+                    return $commission;
+                }
+    
+            }
+            
             throw new GeneralException(__('exceptions.backend.services.commission.create_error'));
         });
     }
