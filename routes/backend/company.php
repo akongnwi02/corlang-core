@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\Backend\Company\Company\CompanyController;
 use App\Http\Controllers\Backend\Company\Company\CompanyStatusController;
+use App\Http\Controllers\Backend\Company\Company\CompanyServiceController;
 
 Route::group([
     'prefix'     => 'companies',
@@ -64,11 +65,13 @@ Route::group([
             ->middleware('permission:'.config('permission.permissions.deactivate_companies'));
     
         // Company Service
-        Route::group(['prefix' => 'service', 'namespace' => 'Service'], function () {
+        Route::group(['namespace' => 'CompanyService'], function () {
             /*
              * CRUD
              */
-
+            Route::get('service/create', [CompanyServiceController::class, 'create'])
+                ->name('company.service.create');
+            
         });
     });
 });

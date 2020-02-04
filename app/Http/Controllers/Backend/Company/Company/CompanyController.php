@@ -71,6 +71,7 @@ class CompanyController extends Controller
     /**
      * @param UpdateCompanyRequest $request
      * @param Company $company
+     * @param CompanyRepository $companyRepository
      * @return mixed
      * @throws \Throwable
      */

@@ -18,7 +18,6 @@ class CreateCompanyServiceTable extends Migration
             $table->uuid('company_id');
             $table->uuid('service_id');
             $table->boolean('is_active')->default(true);
-            $table->uuid('deactivated_by_id')->nullable();
             $table->double('company_rate')->nullable();
             $table->double('agent_rate')->nullable();
     

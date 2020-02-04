@@ -59,8 +59,11 @@
                     </div><!--form-group-->
 
                     <div id="POItablediv">
-                        <button type="button" id="addPOIbutton" value="Add POIs" onclick="insRow()"><span class="fa fa-plus"></span></button>
-                        <br/><br/>
+                        <div class="btn-toolbar" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
+                            <a id="addPOIbutton" onclick="insRow()" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.add')"><i class="fas fa-plus-circle"></i></a>
+                        </div>
+
+                        <br/>
 
                         <table class="table table-responsive table-borderless" id="POITable">
                             <thead>

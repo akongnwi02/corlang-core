@@ -31,6 +31,7 @@ return [
         'show'               => 'Show',
         'toggle_navigation'  => 'Toggle Navigation',
         'create_new'         => 'Create New',
+        'add'                => 'Add',
         'toolbar_btn_groups' => 'Toolbar with button groups',
         'more'               => 'More',
         'select'             => 'Select One'

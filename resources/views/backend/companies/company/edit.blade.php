@@ -20,7 +20,7 @@
 
             <div class="row mt-4 mb-4">
                 <div class="col">
-                    <ul class="nav nav-tabs" role="tablist">
+                    <ul class="nav nav-tabs" role="tablist" id="companyTab">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-expanded="true"><i class="fas fa-user"></i> @lang('labels.backend.companies.company.tabs.titles.profile')</a>
                         </li>
@@ -32,8 +32,8 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="profile" role="tabpanel" aria-expanded="true">
                             @include('backend.companies.company.edit.tabs.profile')
-                        </div><!--tab--><div class="tab-pane active" id="setting" role="tabpanel" aria-expanded="true">
-                            @include('backend.companies.company.edit.tabs.setting')
+                        </div><!--tab--><div class="tab-pane fade" id="setting" role="tabpanel" aria-expanded="true">
+                                @include('backend.companies.company.edit.tabs.setting')
                         </div><!--tab-->
                     </div><!--tab-content-->
                 </div><!--col-->
@@ -49,3 +49,25 @@
         padding-left:5px;
     }
 </style>
+
+@push('after-scripts')
+    <script>
+
+        // switch to active tab on page reload
+        $('a[data-toggle="tab"]').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+            let id = $(e.target).attr("href");
+            localStorage.setItem('selectedTab', id)
+        });
+
+        let selectedTab = localStorage.getItem('selectedTab');
+        if (selectedTab != null) {
+            $('a[data-toggle="tab"][href="' + selectedTab + '"]').tab('show');
+        }
+
+    </script>
+@endpush

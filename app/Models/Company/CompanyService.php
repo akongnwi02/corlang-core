@@ -32,7 +32,6 @@ class CompanyService extends Model
         'is_active',
         'company_rate',
         'agent_rate',
-        'deactivated_by_id'
     ];
     
     protected $casts = [
