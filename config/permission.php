@@ -103,6 +103,10 @@ return [
         'delete_companies'     => 'delete companies',
         'deactivate_companies' => 'deactivate companies',
         
+        // company service
+        'manage_company_services' => 'manage company services',
+        'read_company_services' => 'read company services',
+        
         // commissions
         'create_commissions'     => 'create commissions',
         'read_commissions'       => 'read commissions',

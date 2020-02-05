@@ -10,10 +10,10 @@ namespace App\Models\Company;
 
 
 use App\Models\Traits\Uuid;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Wildside\Userstamps\Userstamps;
 
-class CompanyService extends Model
+class CompanyService extends Pivot
 {
     use Uuid,
         Userstamps;

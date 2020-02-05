@@ -69,8 +69,22 @@ Route::group([
             /*
              * CRUD
              */
+            Route::get('service', [CompanyServiceController::class, 'index',])
+                ->name('company.service.index')
+                ->middleware('permission:'.config('permission.permissions.read_company_services'));
+            
             Route::get('service/create', [CompanyServiceController::class, 'create'])
-                ->name('company.service.create');
+                ->name('company.service.create')
+                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+
+            Route::post('service', [CompanyServiceController::class, 'store'])
+                ->name('company.service.store')
+                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+            
+            /*
+             * Specific Company Service
+             */
+            
             
         });
     });
