@@ -15,9 +15,8 @@ class SeedDefaultCompany extends Migration
      */
     public function up()
     {
-        Company::unguard();
-        
-        Company::create([
+        DB::table('companies')->insert([
+            'uuid'              => Uuid::generate(4)->string,
             'name'              => 'Corlang Enterprise',
             'address'           => 'Douala Bonaberi',
             'country_id'        => Country::where('is_default', true)->firstOrFail()->uuid,
@@ -35,9 +34,9 @@ class SeedDefaultCompany extends Migration
             'owner_id'          => User::find(1)->uuid,
             'deactivated_by_id' => null,
             'logo_url'          => null,
+            'created_at'        => now()->toDateTimeString(),
+            'updated_at'        => now()->toDateTimeString(),
         ]);
-        
-        Company::reguard();
     }
 
     /**

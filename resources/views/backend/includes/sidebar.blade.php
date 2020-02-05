@@ -94,7 +94,7 @@
             <li class="nav-title">
                 <h6><b>@lang('menus.backend.sidebar.system')</b></h6>
             </li>
-            @if ($logged_in_user->isAdmin() || $logged_in_user->company->isDefault())
+            @if ($logged_in_user->isAdmin() && $logged_in_user->company->isDefault())
                 <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'open') }}">
                     <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/log-viewer*')) }}" href="#">
                         <i class="nav-icon icon-list"></i> @lang('menus.backend.log-viewer.main')

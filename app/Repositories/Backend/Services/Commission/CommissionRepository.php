@@ -18,14 +18,15 @@ use Spatie\QueryBuilder\QueryBuilder;
 class CommissionRepository
 {
     /**
-     * Returns all the service the user can access.
-     * Users in the central service can see all other services
-     *
      * @return QueryBuilder
      */
     public function getAllCommissions()
     {
         $commissions = QueryBuilder::for(Commission::class)
+            ->with(['pricings' => function ($query) {
+                $query->orderBy('from', 'asc')
+                    ->orderBy('to', 'asc');
+            }])
             ->allowedSorts( 'commissions.name', 'commissions.created_at');
         
         return $commissions;
@@ -38,7 +39,6 @@ class CommissionRepository
      */
     public function create($data)
     {
-    
         return \DB::transaction(function () use ($data) {
         
             $commission = Commission::create($data);
@@ -67,20 +67,13 @@ class CommissionRepository
 
             $pricings = $data['pricings'];
             
-            // sort the pricings in ASC
-            $from  = array_column($pricings, 'from');
-            $to  = array_column($pricings, 'to');
-    
-            if (array_multisort($from, SORT_ASC, $to, SORT_ASC, $pricings)) {
-                foreach ($pricings as $pricing) {
-                    $commission->pricings()->save(new Pricing($pricing));
-                }
-    
-                if ($commission->save()) {
-                    event(new CommissionCreated($commission));
-                    return $commission;
-                }
-    
+            foreach ($pricings as $pricing) {
+                $commission->pricings()->save(new Pricing($pricing));
+            }
+
+            if ($commission->save()) {
+                event(new CommissionCreated($commission));
+                return $commission;
             }
             
             throw new GeneralException(__('exceptions.backend.services.commission.create_error'));

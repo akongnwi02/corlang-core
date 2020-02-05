@@ -33,12 +33,22 @@ class CommissionController extends Controller
     public function edit(Commission $commission, CurrencyRepository $currencyRepository)
     {
         return view('backend.services.commission.edit')
-            ->withCommission($commission)
+            ->withCommission($commission->load(['pricings' => function ($query) {
+                $query->orderBy('from', 'asc')
+                    ->orderBy('to', 'asc');
+            }]))
             ->withCurrencies($currencyRepository->get()
                 ->pluck('name', 'uuid')
                 ->toArray());
     }
     
+    /**
+     * @param Commission $commission
+     * @param UpdateCommissionRequest $request
+     * @param CommissionRepository $commissionRepository
+     * @return mixed
+     * @throws \Throwable
+     */
     public function update(Commission $commission, UpdateCommissionRequest $request, CommissionRepository $commissionRepository)
     {
         $commission = $commissionRepository->update($commission, $request->input());

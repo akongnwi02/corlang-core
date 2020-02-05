@@ -20,7 +20,6 @@ return [
         ],
         'setting' => [
             'key' => [
-                'default_agent_commission' => 'default agent commission rate'
             ]
         ]
     ],
