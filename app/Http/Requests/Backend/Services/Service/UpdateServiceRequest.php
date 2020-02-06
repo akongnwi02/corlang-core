@@ -43,7 +43,7 @@ class UpdateServiceRequest extends FormRequest
             'name'                  => ['required', 'string', 'max:191', Rule::unique('services', 'name')->ignore(request()->service, 'uuid')],
             'category_id'           => ['required', Rule::exists('categories', 'uuid')],
             'gateway_id'            => ['sometimes', Rule::exists('gateways', 'uuid')],
-            'code'                  => ['required', 'string', 'max:191', Rule::unique('services', 'code')->ignore(request()->service, 'uuid')],
+            'code'                  => ['sometimes', 'string', 'max:191', Rule::unique('services', 'code')->ignore(request()->service, 'uuid')],
             'providercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid')],
             'customercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid')],
             'providercompany_id'    => ['sometimes', Rule::exists('companies', 'uuid')],

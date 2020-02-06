@@ -209,6 +209,12 @@ return [
                     'direct_polling' => 'Direct Polling',
                     'agent_self_topup' => 'Agent Self Topup',
                 ],
+                'service' => [
+                    'company_rate'       => 'Company Rate (%)',
+                    'agent_rate'         => 'Agent Rate (%)',
+                    'default'            => 'Use service default value',
+                    'custom'             => 'Set custom value'
+                ]
             ],
             'services'  => [
                 'service'    => [
@@ -221,8 +227,8 @@ return [
                     'companycommission'  => 'Company Commission',
                     'customercommission' => 'Customer Commission',
                     'logo'               => 'Logo',
-                    'company_rate'       => 'Company Rate (%)',
-                    'agent_rate'         => 'Agent Rate (%)',
+                    'company_rate'       => 'Default Company Rate (%)',
+                    'agent_rate'         => 'Default Agent Rate (%)',
                     'providercompany'    => 'Provider Company',
                     'is_paymentmethod'   => 'Payment Method',
                 ],

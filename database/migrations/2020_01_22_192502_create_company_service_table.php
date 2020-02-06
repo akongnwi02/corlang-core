@@ -20,10 +20,7 @@ class CreateCompanyServiceTable extends Migration
             $table->boolean('is_active')->default(true);
             $table->double('company_rate')->nullable();
             $table->double('agent_rate')->nullable();
-    
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
-            $table->unsignedBigInteger('deleted_by')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
     

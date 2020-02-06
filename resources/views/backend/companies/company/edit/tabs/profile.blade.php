@@ -1,7 +1,4 @@
 {{ html()->modelForm($company, 'PUT', route('admin.companies.company.update', $company))->class('form-horizontal')->attribute('enctype', 'multipart/form-data')->open() }}
-<div class="card">
-    <div class="card-body">
-
         <div class="row mt-4 mb-4">
             <div class="col">
 
@@ -196,9 +193,7 @@
 
             </div><!--col-->
         </div><!--row-->
-    </div><!--card-body-->
 
-    <div class="card-footer clearfix">
         <div class="row">
             <div class="col">
                 {{ form_cancel(route('admin.companies.company.index'), __('buttons.general.cancel')) }}
@@ -208,8 +203,7 @@
                 {{ form_submit(__('buttons.general.crud.update')) }}
             </div><!--col-->
         </div><!--row-->
-    </div><!--card-footer-->
-</div><!--card-->
+
 {{ html()->form()->close() }}
 @push('after-scripts')
 

@@ -151,9 +151,28 @@ return [
                 'tabs' => [
                     'titles' => [
                         'profile' => 'Profile',
-                        'setting' => 'Setting'
+                        'services' => 'Services'
                     ],
-                ]
+                    'content' => [
+                        'service' => [
+                            'management' => 'Service Rate',
+                            'edit' => 'Update service rate for :company',
+                            'add'  => 'Add services for :company',
+                            'default'            => 'Use service default',
+                            'custom'             => 'Set custom',
+                            'table' => [
+                                'name'               => 'Service Name',
+                                'category'           => 'Service Category',
+                                'gateway'            => 'Gateway Configuration',
+                                'active'             => 'Active',
+                                'code'               => 'Code',
+                                'logo'               => 'Logo',
+                                'company_rate'       => 'Specific Company Rate (%)',
+                                'agent_rate'         => 'Specific Agent Rate (%)',
+                            ]
+                        ]
+                    ]
+                ],
             ],
         ],
         'services' => [
@@ -165,13 +184,15 @@ return [
                 'service_actions' => 'Service Actions',
         
                 'table' => [
-                    'name'     => 'Service Name',
-                    'code'     => 'Service Code',
-                    'active'   => 'Active',
-                    'logo'     => 'Logo',
-                    'gateway'  => 'Gateway',
-                    'category' => 'Category',
-                    'total'    => 'service|services',
+                    'name'         => 'Service Name',
+                    'code'         => 'Service Code',
+                    'active'       => 'Active',
+                    'logo'         => 'Logo',
+                    'gateway'      => 'Gateway',
+                    'category'     => 'Category',
+                    'agent_rate'   => 'Agent Rate',
+                    'company_rate' => 'Company Rate',
+                    'total'        => 'service|services',
                 ],
             ],
             'commission' => [

@@ -20,4 +20,5 @@ trait CompanyMethod
     {
         return $this->is_default;
     }
+
 }

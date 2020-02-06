@@ -53,8 +53,22 @@ class CompanyEventListener
             'name' => $event->company->name,
             'by' => $event->company->editor->username,
         ]);
+    }
     
+    public function onServiceReactivated($event)
+    {
+        \Log::info('Company Service Reactivated', [
+            'company' => $event->company->name,
+            'service' => $event->service->name,
+        ]);
+    }
     
+    public function onServiceDeactivated($event)
+    {
+        \Log::info('Company Service Deactivated', [
+            'company' => $event->company->name,
+            'service' => $event->service->name,
+        ]);
     }
     
     /**
@@ -82,6 +96,15 @@ class CompanyEventListener
         $events->listen(
             \App\Events\Backend\Companies\Company\CompanyUpdated::class,
             'App\Listeners\Backend\Company\CompanyEventListener@onUpdated'
+        );
+        
+        $events->listen(
+            \App\Events\Backend\Companies\Service\ServiceDeactivated::class,
+            'App\Listeners\Backend\Company\CompanyEventListener@onServiceDeactivated'
+        );
+        $events->listen(
+            \App\Events\Backend\Companies\Service\ServiceReactivated::class,
+            'App\Listeners\Backend\Company\CompanyEventListener@onServiceReactivated'
         );
     }
 }

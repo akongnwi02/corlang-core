@@ -11,12 +11,12 @@ namespace App\Models\Company;
 
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Relations\Pivot;
-use Wildside\Userstamps\Userstamps;
+use App\Models\Traits\Attributes\CompanyServiceAttribute;
 
 class CompanyService extends Pivot
 {
     use Uuid,
-        Userstamps;
+        CompanyServiceAttribute;
     
     protected $table = 'company_service';
     

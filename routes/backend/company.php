@@ -69,22 +69,37 @@ Route::group([
             /*
              * CRUD
              */
-            Route::get('service', [CompanyServiceController::class, 'index',])
-                ->name('company.service.index')
-                ->middleware('permission:'.config('permission.permissions.read_company_services'));
-            
-            Route::get('service/create', [CompanyServiceController::class, 'create'])
-                ->name('company.service.create')
-                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+//            Route::get('service', [CompanyServiceController::class, 'index',])
+//                ->name('company.service.index')
+//                ->middleware('permission:'.config('permission.permissions.read_company_services'));
+//
+//            Route::get('service/create', [CompanyServiceController::class, 'create'])
+//                ->name('company.service.create')
+//                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+//
+//            Route::post('service', [CompanyServiceController::class, 'store'])
+//                ->name('company.service.store')
+//                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
 
-            Route::post('service', [CompanyServiceController::class, 'store'])
-                ->name('company.service.store')
-                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
-            
             /*
              * Specific Company Service
              */
-            
+            Route::group(['prefix' => 'service/{service}'], function () {
+                
+//                Route::get('edit', [CompanyServiceController::class, 'edit'])
+//                    ->name('company.service.edit')
+//                    ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+
+                Route::put('update', [CompanyServiceController::class, 'update'])
+                    ->name('company.service.update')
+                    ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+                
+                // Status
+                Route::get('mark/{status}', [CompanyServiceController::class, 'mark'])
+                    ->where(['status' => '[0,1]'])
+                    ->name('company.service.mark')
+                    ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+            });
             
         });
     });

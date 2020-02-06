@@ -66,6 +66,9 @@ return [
                 'cant_change_attribute' => 'You are not permitted to change the :attribute',
                 'cant_change_check_box' => 'You are not allowed to change one of the checkbox values',
             ],
+            'service' => [
+                'mark_error'   => 'There was a problem updating the status of this service for this company. Please try again.',
+            ]
         ],
         
         'services' => [

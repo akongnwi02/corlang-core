@@ -12,6 +12,7 @@ namespace App\Models\Service;
 use App\Models\Traits\Attributes\ServiceAttribute;
 use App\Models\Traits\Methods\ServiceMethod;
 use App\Models\Traits\Relationships\ServiceRelationship;
+use App\Models\Traits\Scopes\ServiceScope;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Wildside\Userstamps\Userstamps;
@@ -19,6 +20,7 @@ use Wildside\Userstamps\Userstamps;
 class Service extends Model
 {
     use Uuid,
+        ServiceScope,
         Userstamps,
         ServiceRelationship,
         ServiceMethod,

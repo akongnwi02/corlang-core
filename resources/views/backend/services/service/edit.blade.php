@@ -42,7 +42,7 @@
                         <div class="col-md-10">
                             {{ html()->text('code')
                                 ->class('form-control')
-                                ->required()
+                                ->disabled()
                                 ->attribute('maxlength', 191)
                                 ->placeholder(__('validation.attributes.backend.services.service.code'))}}
                         </div><!--col-->

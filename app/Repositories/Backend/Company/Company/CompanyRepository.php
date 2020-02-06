@@ -14,6 +14,7 @@ use App\Events\Backend\Companies\Company\CompanyReactivated;
 use App\Events\Backend\Companies\Company\CompanyUpdated;
 use App\Exceptions\GeneralException;
 use App\Models\Company\Company;
+use Codeception\Module\Db;
 use Illuminate\Support\Facades\Storage;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -150,5 +151,10 @@ class CompanyRepository
         }
     
         throw new GeneralException(__('exceptions.backend.companies.company.update_error'));
+    }
+    
+    public function getAvailableServices($company)
+    {
+        return $company->services()->where('services.is_active', true);
     }
 }

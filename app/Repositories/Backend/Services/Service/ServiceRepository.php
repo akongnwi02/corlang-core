@@ -125,4 +125,9 @@ class ServiceRepository
         
         throw new GeneralException(__('exceptions.backend.services.service.update_error'));
     }
+    
+    public function getAllActiveServices()
+    {
+        return Service::active();
+    }
 }

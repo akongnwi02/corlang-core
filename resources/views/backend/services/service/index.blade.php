@@ -31,6 +31,8 @@
                                 <th>@lang('labels.backend.services.service.table.code')</th>
                                 <th>@lang('labels.backend.services.service.table.logo')</th>
                                 <th>@lang('labels.backend.services.service.table.active')</th>
+                                <th>@lang('labels.backend.services.service.table.agent_rate')</th>
+                                <th>@lang('labels.backend.services.service.table.company_rate')</th>
                                 <th>@lang('labels.backend.services.service.table.gateway')</th>
                                 <th>@lang('labels.backend.services.service.table.category')</th>
                                 <th>@lang('labels.general.actions')</th>
@@ -43,6 +45,8 @@
                                     <td>{{ $service->code }}</td>
                                     <td>{!! $service->logo_label !!}</td>
                                     <td>{!! $service->active_label !!}</td>
+                                    <td>{!! $service->agent_rate_label !!}</td>
+                                    <td>{!! $service->company_rate_label !!}</td>
                                     <td>{{ $service->gateway->name }}</td>
                                     <td>{{ $service->category->name }}</td>
                                     <td>{!! $service->action_buttons  !!}</td>

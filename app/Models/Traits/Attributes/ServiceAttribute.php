@@ -55,6 +55,15 @@ trait ServiceAttribute
         }
     }
     
+    public function getActionButtonsAttribute()
+    {
+        return '
+    	<div class="btn-group" role="group" aria-label="'.__('labels.backend.services.service.service_actions').'">
+		  '.$this->show_button.'
+		  '.$this->edit_button.'
+		</div>';
+    }
+    
     /**
      * @return string
      */
@@ -72,15 +81,15 @@ trait ServiceAttribute
         }
         return false;
     }
-    
-    
-    public function getActionButtonsAttribute()
+
+    public function getAgentRateLabelAttribute()
     {
-        return '
-    	<div class="btn-group" role="group" aria-label="'.__('labels.backend.services.service.service_actions').'">
-		  '.$this->show_button.'
-		  '.$this->edit_button.'
-		</div>';
+        return $this->agent_rate . '%';
+    }
+    
+    public function getCompanyRateLabelAttribute()
+    {
+        return $this->company_rate . '%';
     }
     
 }

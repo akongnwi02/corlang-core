@@ -9,8 +9,10 @@
 namespace App\Models\Traits\Relationships;
 
 use App\Models\Auth\User;
-use App\Models\Company\CompanyType;
 use App\Models\System\Country;
+use App\Models\Service\Service;
+use App\Models\Company\CompanyType;
+use App\Models\Company\CompanyService;
 
 trait CompanyRelationship
 {
@@ -32,5 +34,18 @@ trait CompanyRelationship
     public function country()
     {
         return $this->hasOne(Country::class, 'uuid', 'country_id');
+    }
+    
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'company_service', 'company_id', 'service_id', 'uuid')
+            ->withTimestamps()
+            ->using(CompanyService::class)
+            ->as('specific')
+            ->withPivot([
+                'is_active',
+                'company_rate',
+                'agent_rate',
+            ]);
     }
 }
