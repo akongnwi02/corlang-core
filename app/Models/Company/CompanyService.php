@@ -15,14 +15,9 @@ use App\Models\Traits\Attributes\CompanyServiceAttribute;
 
 class CompanyService extends Pivot
 {
-    use Uuid,
-        CompanyServiceAttribute;
+    use CompanyServiceAttribute;
     
     protected $table = 'company_service';
-    
-    protected $primaryKey = 'uuid';
-    
-    protected $keyType = 'string';
     
     public $incrementing = false;
     

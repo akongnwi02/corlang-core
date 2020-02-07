@@ -14,7 +14,6 @@ class CreateCompanyServiceTable extends Migration
     public function up()
     {
         Schema::create('company_service', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
             $table->uuid('company_id');
             $table->uuid('service_id');
             $table->boolean('is_active')->default(true);

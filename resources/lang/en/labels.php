@@ -21,6 +21,7 @@ return [
         'custom'             => 'Custom',
         'actions'            => 'Actions',
         'active'             => 'Active',
+        'toggle'             => 'Toggle',
         'buttons'            => [
             'save'   => 'Save',
             'update' => 'Update',

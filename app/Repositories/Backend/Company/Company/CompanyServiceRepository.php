@@ -66,6 +66,24 @@ class CompanyServiceRepository
             return $company->services()->where('services.uuid', $service->uuid)->first()->specific;
         }
         
-        throw new GeneralException(__('exceptions.backend.companies.service.mark_error'));
+        throw new GeneralException(__('exceptions.backend.companies.service.update_error'));
+    }
+    
+    /**
+     * @param $company
+     * @param $data
+     * @return mixed
+     * @throws GeneralException
+     */
+    public function create($company, $data)
+    {
+        $saved = $company->services()->sync($data);
+    
+        if ($saved) {
+            return $company->services;
+        }
+    
+        throw new GeneralException(__('exceptions.backend.companies.service.update_error'));
+    
     }
 }

@@ -104,7 +104,9 @@ return [
         'deactivate_companies' => 'deactivate companies',
         
         // company service
-        'manage_company_services' => 'manage company services',
+        'deactivate_company_services' => 'deactivate company services',
+        'update_company_services' => 'update company services',
+        'create_company_services' => 'create company services',
         'read_company_services' => 'read company services',
         
         // commissions

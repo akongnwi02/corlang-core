@@ -17,7 +17,7 @@ trait CompanyServiceAttribute
     public function getActiveLabelAttribute()
     {
         if ($this->is_active) {
-            if (auth()->user()->canManageCompanyServices()) {
+            if (auth()->user()->canDeactivateCompanyServices()) {
                 return '<a href="'.route('admin.companies.company.service.mark', [
                         $this->company_id,
                         $this->service_id,
@@ -27,7 +27,7 @@ trait CompanyServiceAttribute
             return '<span class="badge badge-success">'.__('labels.general.yes').'</span>';
         }
         
-        if (auth()->user()->canManageCompanyServices()) {
+        if (auth()->user()->canDeactivateCompanyServices()) {
             return '<a href="'.route('admin.companies.company.service.mark', [
                     $this->company_id,
                     $this->service_id,
@@ -36,7 +36,6 @@ trait CompanyServiceAttribute
         }
         return '<span class="badge badge-danger">'.__('labels.general.no').'</span>';
     }
-    
     
     public function getAgentRateLabelAttribute()
     {

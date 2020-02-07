@@ -14,7 +14,9 @@ class SeedCompanyServicesPermissions extends Migration
     public function up()
     {
         $permissions = [
-            config('permission.permissions.manage_company_services'),
+            config('permission.permissions.create_company_services'),
+            config('permission.permissions.update_company_services'),
+            config('permission.permissions.deactivate_company_services'),
             config('permission.permissions.read_company_services'),
         ];
     
@@ -26,7 +28,11 @@ class SeedCompanyServicesPermissions extends Migration
         $companyAdminRole = \Spatie\Permission\Models\Role::findByName(config('access.users.company_admin_role'));
     
         $adminRole->givePermissionTo($permissions);
-        $companyAdminRole->givePermissionTo($permissions);
+        
+        $companyAdminRole->givePermissionTo([
+            config('permission.permissions.deactivate_company_services'),
+            config('permission.permissions.read_company_services'),
+        ]);
     }
 
     /**

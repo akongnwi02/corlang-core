@@ -77,9 +77,9 @@ Route::group([
 //                ->name('company.service.create')
 //                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
 //
-//            Route::post('service', [CompanyServiceController::class, 'store'])
-//                ->name('company.service.store')
-//                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+            Route::post('service', [CompanyServiceController::class, 'store'])
+                ->name('company.service.store')
+                ->middleware('permission:'.config('permission.permissions.create_company_services'));
 
             /*
              * Specific Company Service
@@ -92,13 +92,13 @@ Route::group([
 
                 Route::put('update', [CompanyServiceController::class, 'update'])
                     ->name('company.service.update')
-                    ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+                    ->middleware('permission:'.config('permission.permissions.update_company_services'));
                 
                 // Status
                 Route::get('mark/{status}', [CompanyServiceController::class, 'mark'])
                     ->where(['status' => '[0,1]'])
                     ->name('company.service.mark')
-                    ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+                    ->middleware('permission:'.config('permission.permissions.deactivate_company_services'));
             });
             
         });

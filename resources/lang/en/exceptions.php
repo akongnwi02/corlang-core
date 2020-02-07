@@ -65,9 +65,11 @@ return [
                 'mark_rights_error'   => 'There was a problem updating the status of this company. The company was deactivated by a higher role.',
                 'cant_change_attribute' => 'You are not permitted to change the :attribute',
                 'cant_change_check_box' => 'You are not allowed to change one of the checkbox values',
+                'invalid_service'       => 'An invalid service has been provided'
             ],
             'service' => [
                 'mark_error'   => 'There was a problem updating the status of this service for this company. Please try again.',
+                'update_error'   => 'There was a problem updating the this service for this company. Please try again.',
             ]
         ],
         

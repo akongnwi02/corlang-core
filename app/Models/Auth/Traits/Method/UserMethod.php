@@ -169,8 +169,18 @@ trait UserMethod
         return $this->can(config('permission.permissions.deactivate_services'));
     }
     
-    public function canManageCompanyServices()
+    public function canCreateCompanyServices()
     {
-        return $this->can(config('permission.permissions.manage_company_services'));
+        return $this->can(config('permission.permissions.create_company_services'));
+    }
+    
+    public function canUpdateCompanyServices()
+    {
+        return $this->can(config('permission.permissions.update_company_services'));
+    }
+    
+    public function canDeactivateCompanyServices()
+    {
+        return $this->can(config('permission.permissions.deactivate_company_services'));
     }
 }

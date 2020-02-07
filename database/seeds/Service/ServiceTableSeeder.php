@@ -25,8 +25,34 @@ class ServiceTableSeeder extends Seeder
             'is_active' => true,
             'category_id' => Category::first()->uuid,
             'gateway_id' => Gateway::first()->uuid,
-            'customer_rate' => 0.5,
-            'agent_rate' => 0.5,
+            'company_rate' => 50,
+            'agent_rate' => 50,
+            'customercommission_id' => Commission::first()->uuid,
+            'providercommission_id' => Commission::first()->uuid,
+        ]);
+        
+        Service::create([
+            'name' => 'Orange Mobile Money',
+            'code' => $faker->postcode,
+            'country_id' => Country::first()->uuid,
+            'is_active' => true,
+            'category_id' => Category::first()->uuid,
+            'gateway_id' => Gateway::first()->uuid,
+            'company_rate' => 25,
+            'agent_rate' => 30,
+            'customercommission_id' => Commission::first()->uuid,
+            'providercommission_id' => Commission::first()->uuid,
+        ]);
+        
+        Service::create([
+            'name' => 'Express Mobile Money',
+            'code' => $faker->postcode,
+            'country_id' => Country::first()->uuid,
+            'is_active' => true,
+            'category_id' => Category::first()->uuid,
+            'gateway_id' => Gateway::first()->uuid,
+            'company_rate' => 45,
+            'agent_rate' => 50,
             'customercommission_id' => Commission::first()->uuid,
             'providercommission_id' => Commission::first()->uuid,
         ]);

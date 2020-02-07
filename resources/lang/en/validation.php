@@ -213,7 +213,8 @@ return [
                     'company_rate'       => 'Company Rate (%)',
                     'agent_rate'         => 'Agent Rate (%)',
                     'default'            => 'Use service default value',
-                    'custom'             => 'Set custom value'
+                    'custom'             => 'Set custom value',
+                    'services'           => 'Services',
                 ]
             ],
             'services'  => [
