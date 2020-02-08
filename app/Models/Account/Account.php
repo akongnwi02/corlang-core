@@ -9,12 +9,14 @@
 namespace App\Models\Account;
 
 
+use App\Models\Traits\Methods\AccountMethod;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
-    use Uuid;
+    use Uuid,
+        AccountMethod;
     
     /**
      * The database table used by the model.
@@ -28,5 +30,11 @@ class Account extends Model
     protected $keyType = 'string';
     
     public $incrementing = false;
+    
+    protected $fillable = [
+        'owner_id',
+        'type_id',
+        'code',
+    ];
     
 }

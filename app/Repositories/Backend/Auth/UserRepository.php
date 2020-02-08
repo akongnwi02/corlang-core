@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Backend\Auth;
 
+use App\Models\Account\Account;
+use App\Models\Account\AccountType;
 use App\Models\Auth\User;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
@@ -140,15 +142,25 @@ class UserRepository extends BaseRepository
                 // Add selected roles/permissions
                 $user->syncRoles($data['roles']);
                 $user->syncPermissions($data['permissions']);
+    
+    
+                // create account for the user
+                $account = new Account();
+                $account->code = $account->generateCode();
+                $account->type_id = AccountType::where('name', config('business.account.type.agent'))->first()->uuid;
+                $account->owner_id = $user->uuid;
+    
+                if ($account->save()) {
+                    
+                    //Send confirmation email if requested and account approval is off
+                    if (isset($data['confirmation_message']) && $user->confirmed == 0 && !config('access.users.requires_approval')) {
+                        $user->notify(new UserNeedsConfirmation());
+                    }
+                    
+                    event(new UserCreated($user));
 
-                //Send confirmation email if requested and account approval is off
-                if (isset($data['confirmation_message']) && $user->confirmed == 0 && !config('access.users.requires_approval')) {
-                    $user->notify(new UserNeedsConfirmation());
+                    return $user;
                 }
-
-                event(new UserCreated($user));
-
-                return $user;
             }
 
             throw new GeneralException(__('exceptions.backend.access.users.create_error'));

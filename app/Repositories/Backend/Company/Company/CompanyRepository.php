@@ -13,6 +13,8 @@ use App\Events\Backend\Companies\Company\CompanyDeactivated;
 use App\Events\Backend\Companies\Company\CompanyReactivated;
 use App\Events\Backend\Companies\Company\CompanyUpdated;
 use App\Exceptions\GeneralException;
+use App\Models\Account\Account;
+use App\Models\Account\AccountType;
 use App\Models\Company\Company;
 use Codeception\Module\Db;
 use Illuminate\Support\Facades\Storage;
@@ -37,9 +39,19 @@ class CompanyRepository
             $company->agent_self_topup = request()->has('agent_self_topup') ? 1 : 0;
             $company->direct_polling = request()->has('direct_polling') ? 1 : 0;
     
+            // create account for the company
+            $account = new Account();
+            $account->code = $account->generateCode();
+            $account->type_id = AccountType::where('name', config('business.account.type.company'))->first()->uuid;
+            
             if ($company->save()) {
-                event(new CompanyCreated($company));
-                return $company;
+                $account->owner_id = $company->uuid;
+    
+                if ($account->save()) {
+                    event(new CompanyCreated($company));
+                    return $company;
+                }
+                
             }
     
             throw new GeneralException(__('exceptions.backend.companies.company.create_error'));
