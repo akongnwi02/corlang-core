@@ -1,10 +1,10 @@
 <?php
 
 use App\Models\Account\AccountType;
-use App\Models\Company\Company;
+use App\Models\Auth\User;
 use Illuminate\Database\Migrations\Migration;
 
-class SeedAccountForDefaultCompany extends Migration
+class SeedAccountForTheAdminUser extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,9 @@ class SeedAccountForDefaultCompany extends Migration
     {
         DB::table('accounts')->insert([
             'uuid' => Uuid::generate(4)->string,
-            'owner_id' => Company::where('is_default', true)->first()->uuid,
-            'type_id' => AccountType::where('name', config('business.account.type.company'))->first()->uuid,
-            'code' => '152012547',
+            'owner_id' => User::where('id', 1)->first()->uuid,
+            'type_id' => AccountType::where('name', config('business.account.type.agent'))->first()->uuid,
+            'code' => '152012548',
             'created_at' => now()->toDateTimeString(),
             'updated_at' => now()->toDateTimeString(),
         ]);
