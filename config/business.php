@@ -4,8 +4,26 @@ return [
     
     'company' => [
         'type' => [
-            'formal' => 'informal company',
+            'formal'   => 'informal company',
             'informal' => 'informal company',
+        ]
+    ],
+    
+    'account' => [
+        'type' => [
+            'agent'   => 'agent account',
+            'company' => 'company account',
+            'partner' => 'partner account',
+        ]
+    ],
+    
+    'movement' => [
+        'type' => [
+            'credit'     => 'credit',
+            'debit'      => 'debit',
+            'reversal'   => 'reversal',
+            'deposit'    => 'deposit',
+            'withdrawal' => 'withdrawal',
         ]
     ],
     

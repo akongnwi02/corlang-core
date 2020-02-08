@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Auth\User;
-use App\Models\Company\Company;
 use App\Models\Company\CompanyType;
 use App\Models\System\Country;
 use Illuminate\Database\Migrations\Migration;

@@ -20,6 +20,7 @@ class CreateGatewaysTable extends Migration
             $table->string('code')->unique();
             $table->string('api_key')->nullable();
             $table->string('api_url')->nullable();
+            $table->string('callback_url')->nullable();
             $table->string('api_secret')->nullable();
     
             $table->unsignedBigInteger('created_by')->nullable();
