@@ -146,7 +146,7 @@ class UserRepository extends BaseRepository
     
                 // create account for the user
                 $account = new Account();
-                $account->code = $account->generateCode();
+                $account->code = Account::generateCode();
                 $account->type_id = AccountType::where('name', config('business.account.type.agent'))->first()->uuid;
                 $account->owner_id = $user->uuid;
     

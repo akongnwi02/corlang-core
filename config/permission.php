@@ -122,13 +122,25 @@ return [
         'delete_services'      => 'delete services',
         'deactivate_services'  => 'deactivate services',
     
-        //users
+        // users
         'create_users'         => 'create users',
         'read_users'           => 'read users',
         'update_users'         => 'update users',
         'delete_users'         => 'delete users',
         'deactivate_users'     => 'deactivate users',
         'transfer_users'       => 'transfer users',
+        
+        // accounts
+        'float_accounts'       => 'float accounts',
+        
+        'debit_accounts'       => 'debit accounts',
+        'credit_accounts'      => 'credit accounts',
+        'freeze_accounts'      => 'freeze accounts',
+        
+        'request_payouts'      => 'request payouts',
+        'validate_payouts'     => 'validate payouts',
+        
+        'transfer_money'       => 'Transfer Money'
     ],
 
 ];

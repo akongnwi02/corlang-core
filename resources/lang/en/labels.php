@@ -33,6 +33,9 @@ return [
         'toggle_navigation'  => 'Toggle Navigation',
         'create_new'         => 'Create New',
         'add'                => 'Add',
+        'remove'             => 'Remove',
+        'credit'             => 'Credit',
+        'debit'              => 'Debit',
         'toolbar_btn_groups' => 'Toolbar with button groups',
         'more'               => 'More',
         'select'             => 'Select One'
@@ -219,6 +222,11 @@ return [
                     ],
                 ],
             ],
+        ],
+        'account' => [
+            'management' => 'Account',
+            'credit' => 'Credit Account',
+            'debit' => 'Debit Account',
         ],
     ],
 

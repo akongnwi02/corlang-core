@@ -15,23 +15,17 @@ use App\Repositories\Backend\Company\Company\CompanyRepository;
 
 class CompanyStatusController
 {
-    protected $companyRepository;
-    
-    public function __construct(CompanyRepository $companyRepository)
-    {
-        $this->companyRepository = $companyRepository;
-    }
-    
     /**
      * @param ChangeCompanyStatusRequest $request
      * @param Company $company
      * @param $status
+     * @param CompanyRepository $companyRepository
      * @return mixed
      * @throws \App\Exceptions\GeneralException
      */
-    public function mark(ChangeCompanyStatusRequest $request, Company $company, $status)
+    public function mark(ChangeCompanyStatusRequest $request, Company $company, $status, CompanyRepository $companyRepository)
     {
-        $this->companyRepository->mark($company, $status);
+        $companyRepository->mark($company, $status);
         
         return redirect()->route('admin.companies.company.index')
             ->withFlashSuccess(__('alerts.backend.companies.company.status_updated'));

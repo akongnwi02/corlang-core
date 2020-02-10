@@ -13,16 +13,16 @@ use App\Models\Account\Account;
 
 trait AccountMethod
 {
-    function generateCode() {
+    public static function generateCode() {
         $code = mt_rand(100000000, 999999999);
-        if ($this->codeExists($code)) {
-            $this->generateCode();
+        if (static::codeExists($code)) {
+            static::generateCode();
         }
         
         return $code;
     }
     
-    function codeExists($code) {
+    public static function codeExists($code) {
         return Account::where('code', $code)->exists();
     }
 }

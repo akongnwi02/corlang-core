@@ -27,12 +27,38 @@ return [
         'dashboard' => [
             'title'   => 'Dashboard',
             'welcome' => 'Welcome',
+            'company' => [
+                'agents' => 'Agents',
+                'users' => 'Users',
+                'balance' => 'Account Balance',
+                'commission' => 'Commission Balance',
+                'commission_today' => 'Today\'s Commission',
+                'commission_today_help' => 'Commission earned today',
+                'agents_balance' => 'Agents\' Balance',
+                'agents_commission' => 'Agents\' Commission',
+                'total_balance' => 'Total Balance',
+                'total_commission' => 'Total Commission',
+                'balance_help' => 'The company\'s account balance',
+                'agents_balance_help' => 'The balance in all agents account',
+                'agents_commission_help' => 'The commission for all the agents',
+                'total_balance_help' => 'Total agent plus company balance',
+                'commission_help' => 'The company\'s commission balance',
+                'total_commission_help' => 'Total agent plus company commission',
+            ],
+            'user' => [
+                'balance' => 'Your balance',
+                'balance_help' => 'Your available balance',
+                'commission' => 'Your commission',
+                'commission_help' => 'Your available commission'
+            ]
         ],
 
         'general' => [
             'all_rights_reserved' => 'All Rights Reserved.',
             'are_you_sure'        => 'Are you sure you want to do this?',
             'boilerplate_link'    => 'Laravel 5 Boilerplate',
+            'corlang_link'        => 'Corlang',
+            'powered_by'          => 'Powered by',
             'continue'            => 'Continue',
             'member_since'        => 'Member since',
             'minutes'             => ' minutes',

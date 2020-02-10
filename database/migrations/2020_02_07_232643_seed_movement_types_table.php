@@ -15,32 +15,34 @@ class SeedMovementTypesTable extends Migration
     {
         DB::table('movementtypes')->insert([
             'uuid' => Uuid::generate(4)->string,
-            'code' => 'CREDIT',
-            'name' => config('business.movement.type.credit'),
-        ]);
-
-        DB::table('movementtypes')->insert([
-            'uuid' => Uuid::generate(4)->string,
-            'code' => 'DEBIT',
-            'name' => config('business.movement.type.debit'),
+            'code' => 'SALE',
+            'name' => config('business.movement.type.sale'),
+            'created_at' => now()->toDateTimeString(),
+            'updated_at' => now()->toDateTimeString(),
         ]);
         
         DB::table('movementtypes')->insert([
             'uuid' => Uuid::generate(4)->string,
             'code' => 'REVERSAL',
             'name' => config('business.movement.type.reversal'),
+            'created_at' => now()->toDateTimeString(),
+            'updated_at' => now()->toDateTimeString(),
         ]);
         
         DB::table('movementtypes')->insert([
             'uuid' => Uuid::generate(4)->string,
             'code' => 'DEPOSIT',
             'name' => config('business.movement.type.deposit'),
+            'created_at' => now()->toDateTimeString(),
+            'updated_at' => now()->toDateTimeString(),
         ]);
-        
+
         DB::table('movementtypes')->insert([
             'uuid' => Uuid::generate(4)->string,
-            'code' => 'WITHDRAWAL',
-            'name' => config('business.movement.type.withdrawal'),
+            'code' => 'FLOAT',
+            'name' => config('business.movement.type.float'),
+            'created_at' => now()->toDateTimeString(),
+            'updated_at' => now()->toDateTimeString(),
         ]);
     }
 

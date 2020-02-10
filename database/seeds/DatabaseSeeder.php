@@ -29,6 +29,10 @@ class DatabaseSeeder extends Seeder
             'pricings',
             'services',
             'settings',
+            'accounttypes',
+            'accounts',
+            'movementtypes',
+            'movements',
         ]);
     
         Model::unguard();

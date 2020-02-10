@@ -41,7 +41,7 @@ class CompanyRepository
     
             // create account for the company
             $account = new Account();
-            $account->code = $account->generateCode();
+            $account->code = Account::generateCode();
             $account->type_id = AccountType::where('name', config('business.account.type.company'))->first()->uuid;
             
             if ($company->save()) {

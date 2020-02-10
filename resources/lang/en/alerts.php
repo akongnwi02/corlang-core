@@ -56,6 +56,9 @@ return [
             'commission' => [
                 'created' => 'Pricings successfully attached',
             ]
+        ],
+        'account' => [
+            'floated' => 'Float applied successfully',
         ]
     ],
 

@@ -40,6 +40,10 @@ return [
                     'stack' => 'Stack',
                 ]
             ]
+        ],
+        'account' => [
+            'credit' => 'Credit',
+            'debit' => 'Debit',
         ]
     ],
 

@@ -14,6 +14,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCompanyRequest extends FormRequest
 {
+    public function authorize()
+    {
+        return $this->user()->company->isDefault()
+            || $this->user()->company == request()->company;
+    }
     
     /**
      * Get custom attributes for validator errors.

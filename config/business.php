@@ -13,17 +13,15 @@ return [
         'type' => [
             'agent'   => 'agent account',
             'company' => 'company account',
-            'partner' => 'partner account',
         ]
     ],
     
     'movement' => [
         'type' => [
-            'credit'     => 'credit',
-            'debit'      => 'debit',
+            'sale'       => 'sale',
             'reversal'   => 'reversal',
             'deposit'    => 'deposit',
-            'withdrawal' => 'withdrawal',
+            'float'      => 'float',
         ]
     ],
     

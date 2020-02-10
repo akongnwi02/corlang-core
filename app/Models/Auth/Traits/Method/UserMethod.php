@@ -34,12 +34,12 @@ trait UserMethod
         }
         return $this->email;
     }
-
+    
     /**
      * @param bool $size
      *
      * @return bool|\Illuminate\Contracts\Routing\UrlGenerator|mixed|string
-     * @throws \Illuminate\Container\EntryNotFoundException
+     * @throws \Creativeorange\Gravatar\Exceptions\InvalidEmailException
      */
     public function getPicture($size = false)
     {

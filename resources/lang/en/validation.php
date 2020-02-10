@@ -244,8 +244,11 @@ return [
                         'fixed'      => 'Fixed',
                         'percentage' => 'Percentage',
                     ]
-                    
                 ]
+            ],
+            'account' => [
+                'amount' => 'Amount',
+                'currency' => 'Currency',
             ]
         ],
         

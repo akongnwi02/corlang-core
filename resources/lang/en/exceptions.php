@@ -73,6 +73,14 @@ return [
             ]
         ],
         
+        'account' => [
+            'mark_error' => 'There was an error freezing this account.'
+        ],
+        
+        'movement' => [
+            'create_error' => 'There was a problem performing this operation. Please try again.',
+        ],
+        
         'services' => [
             'service' => [
                 'create_error' => 'There was a problem creating this service. Please try again.',

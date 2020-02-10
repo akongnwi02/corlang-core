@@ -20,5 +20,10 @@ trait CompanyMethod
     {
         return $this->is_default;
     }
-
+    
+    public function getNumberOfUsers()
+    {
+        return $this->users()->count();
+    }
+    
 }
