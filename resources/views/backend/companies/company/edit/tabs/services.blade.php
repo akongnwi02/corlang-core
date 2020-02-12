@@ -18,7 +18,7 @@
 
 <div class="row mt-4">
     <div class="col">
-        <div class="table-responsive">
+        <div class="table-responsive-sm">
             <table class="table">
                 <thead>
                 <tr>
@@ -91,6 +91,13 @@
         </div>
     </div><!--col-->
 </div><!--row-->
+<div class="row">
+    <div class="col-12">
+        <div class="float-left">
+            {!! count($companyServices) !!} {{ trans_choice('labels.backend.companies.company.tabs.content.service.table.total', count($companyServices)) }}
+        </div>
+    </div><!--col-->
+</div><!--row-->
 
 
 
@@ -137,8 +144,16 @@
                             </div><!--col-->
                         </div><!--form-group-->
                     </div><!--col-->
+
                 </div><!--row-->
-            </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="float-left">
+                            {!! count($services) !!} {{ trans_choice('labels.backend.services.service.table.total', count($services)) }}
+                        </div>
+                    </div><!--col-->
+                </div><!--row-->
+            </div><!--modal-body-->
             <div class="modal-footer">
                 <button type="button" class="'btn btn-secondary btn-sm" data-dismiss="modal">@lang('buttons.general.cancel')</button>
                 {{ form_submit(__('buttons.general.crud.update')) }}

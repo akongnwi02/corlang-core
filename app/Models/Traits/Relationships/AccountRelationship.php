@@ -32,6 +32,6 @@ trait AccountRelationship
     
     public function type()
     {
-        return $this->hasOne(AccountType::class, 'type_id', 'uuid');
+        return $this->hasOne(AccountType::class, 'uuid', 'type_id');
     }
 }

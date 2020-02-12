@@ -54,7 +54,7 @@ return [
         ],
 
         'companies' => [
-            'title' => 'Company',
+            'title' => 'Companies',
     
             'company' => [
                 'management' => 'Companies',
@@ -64,7 +64,7 @@ return [
         ],
 
         'services' => [
-            'title' => 'Service',
+            'title' => 'Services',
     
             'service'   => [
                 'management' => 'Services',
@@ -77,6 +77,17 @@ return [
                 'edit'       => 'Edit Commission',
             ]
         ],
+        'accounts' => [
+            'title' => 'Accounts',
+            
+            'deposit' => [
+                'management' => 'Deposit Account',
+                'view' => 'View Account'
+            ],
+            'umbrella' => [
+                'management' => 'Umbrella Account',
+            ]
+        ]
     ],
 
     'language-picker' => [

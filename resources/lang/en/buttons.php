@@ -30,6 +30,12 @@ return [
                 'unlink'             => 'Unlink',
             ],
         ],
+        'services' => [
+            'service' => [
+                'activate' => 'Activate Service',
+                'deactivate' => 'Deactivate Service',
+            ],
+        ],
         'companies' => [
             'company' => [
                 'activate'   => 'Activate Company',
@@ -44,6 +50,11 @@ return [
         'account' => [
             'credit' => 'Credit',
             'debit' => 'Debit',
+            'float' => 'Float',
+            'payout' => 'Payout',
+            
+            'activate' => 'Unfreeze Account',
+            'deactivate' => 'Freeze Account'
         ]
     ],
 

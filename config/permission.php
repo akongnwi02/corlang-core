@@ -140,7 +140,11 @@ return [
         'request_payouts'      => 'request payouts',
         'validate_payouts'     => 'validate payouts',
         
-        'transfer_money'       => 'Transfer Money'
+        'transfer_money'       => 'transfer money',
+        
+        'read_accounts'        => 'read accounts',
+        'update_accounts'       => 'update accounts',
+        'drain_accounts'        => 'drain accounts',
     ],
 
 ];

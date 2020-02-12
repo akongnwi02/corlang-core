@@ -17,7 +17,7 @@ class AccountTypeTableSeeder extends Seeder
         AccountType::unguard();
         
         AccountType::create([
-            'name' => config('business.account.type.agent'),
+            'name' => config('business.account.type.user'),
             'code' => 'AGENTACCOUNT',
         ]);
     

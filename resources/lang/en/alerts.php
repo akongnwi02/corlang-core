@@ -59,6 +59,7 @@ return [
         ],
         'account' => [
             'floated' => 'Float applied successfully',
+            'status_updated' => 'The status was successfully updated.',
         ]
     ],
 

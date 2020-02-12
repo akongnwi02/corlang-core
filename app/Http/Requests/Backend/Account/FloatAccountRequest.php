@@ -26,6 +26,7 @@ class FloatAccountRequest extends FormRequest
             return true;
         }
         \Log::error('The request could not be performed', [
+            'company' =>request()->account->company->name,
             'account status' => request()->account->is_active,
             'company status' => request()->account->company->is_active,
         ]);

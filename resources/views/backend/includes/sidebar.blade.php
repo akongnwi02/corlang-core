@@ -91,6 +91,27 @@
                 </li>
             @endif
 
+            @can(config('permission.permissions.read_accounts'))
+                <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/accounts*'), 'open') }}">
+                    <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/accounts*')) }}" href="{{ route('admin.account.deposit.index') }}">
+                        <i class="nav-icon icon-drawer"></i> @lang('menus.backend.accounts.title')
+                    </a>
+
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/accounts/deposit*')) }}" href="{{ route('admin.account.deposit.index') }}">
+                                @lang('menus.backend.accounts.deposit.management')
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/accounts/umbrella*')) }}" href="{{ route('admin.account.umbrella.index') }}">
+                                @lang('menus.backend.accounts.umbrella.management')
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+
             <li class="nav-title">
                 <h6><b>@lang('menus.backend.sidebar.system')</b></h6>
             </li>

@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    
     /*
     |--------------------------------------------------------------------------
     | Labels Language Lines
@@ -12,7 +12,7 @@ return [
     | found in a intuitive way.
     |
     */
-
+    
     'general' => [
         'all'                => 'All',
         'yes'                => 'Yes',
@@ -40,14 +40,14 @@ return [
         'more'               => 'More',
         'select'             => 'Select One'
     ],
-
+    
     'backend' => [
-        'access' => [
+        'access'    => [
             'roles' => [
                 'create'     => 'Create Role',
                 'edit'       => 'Edit Role',
                 'management' => 'Role Management',
-
+                
                 'table' => [
                     'number_of_users' => 'Number of Users',
                     'permissions'     => 'Permissions',
@@ -56,7 +56,7 @@ return [
                     'total'           => 'role total|roles total',
                 ],
             ],
-
+            
             'users' => [
                 'active'              => 'Active Users',
                 'all_permissions'     => 'All Permissions',
@@ -73,7 +73,7 @@ return [
                 'no_roles'            => 'No Roles to set.',
                 'permissions'         => 'Permissions',
                 'user_actions'        => 'User Actions',
-
+                
                 'table' => [
                     'confirmed'         => 'Confirmed',
                     'created'           => 'Created',
@@ -94,13 +94,13 @@ return [
                     'social'            => 'Social',
                     'total'             => 'user total|users total',
                 ],
-
+                
                 'tabs' => [
                     'titles' => [
                         'overview' => 'Overview',
                         'history'  => 'History',
                     ],
-
+                    
                     'content' => [
                         'overview' => [
                             'avatar'        => 'Avatar',
@@ -122,7 +122,7 @@ return [
                         ],
                     ],
                 ],
-
+                
                 'view' => 'View User',
             ],
         ],
@@ -135,58 +135,59 @@ return [
                 'company_actions' => 'Company Actions',
                 
                 'table' => [
-                    'name'          => 'Company Name',
-                    'address'       => 'Address',
-                    'country'       => 'Country',
-                    'state'         => 'State',
-                    'city'          => 'City',
-                    'phone'         => 'Company Phone',
-                    'type'          => 'Company Type',
-                    'email'         => 'Company Email',
-                    'street'        => 'Street',
-                    'website'       => 'Website',
-                    'postal_code'   => 'Postal Code',
-                    'size'          => 'Size',
-                    'last_updated'  => 'Size',
-                    'active'        => 'Active',
-                    'total'         => 'company|companies',
-
+                    'name'         => 'Company Name',
+                    'address'      => 'Address',
+                    'country'      => 'Country',
+                    'state'        => 'State',
+                    'city'         => 'City',
+                    'phone'        => 'Company Phone',
+                    'type'         => 'Company Type',
+                    'email'        => 'Company Email',
+                    'street'       => 'Street',
+                    'website'      => 'Website',
+                    'postal_code'  => 'Postal Code',
+                    'size'         => 'Size',
+                    'last_updated' => 'Size',
+                    'active'       => 'Active',
+                    'total'        => 'company|companies',
+                
                 ],
-                'tabs' => [
-                    'titles' => [
-                        'profile' => 'Profile',
+                'tabs'  => [
+                    'titles'  => [
+                        'profile'  => 'Profile',
                         'services' => 'Services'
                     ],
                     'content' => [
                         'service' => [
                             'management' => 'Service Rate',
-                            'edit' => 'Update service rate for :company',
-                            'add'  => 'Add services for :company',
-                            'default'            => 'Use service default',
-                            'custom'             => 'Set custom',
-                            'table' => [
-                                'name'               => 'Service Name',
-                                'category'           => 'Service Category',
-                                'gateway'            => 'Gateway Configuration',
-                                'active'             => 'Active',
-                                'code'               => 'Code',
-                                'logo'               => 'Logo',
-                                'company_rate'       => 'Specific Company Rate (%)',
-                                'agent_rate'         => 'Specific Agent Rate (%)',
+                            'edit'       => 'Update service rate for :company',
+                            'add'        => 'Add services for :company',
+                            'default'    => 'Use service default',
+                            'custom'     => 'Set custom',
+                            'table'      => [
+                                'name'         => 'Service Name',
+                                'category'     => 'Service Category',
+                                'gateway'      => 'Gateway Configuration',
+                                'active'       => 'Active',
+                                'code'         => 'Code',
+                                'logo'         => 'Logo',
+                                'company_rate' => 'Specific Company Rate (%)',
+                                'agent_rate'   => 'Specific Agent Rate (%)',
+                                'total'        => 'service|services'
                             ]
                         ]
                     ]
                 ],
             ],
         ],
-        'services' => [
+        'services'  => [
             'service'    => [
-                'management'      => 'Services',
+                'management'      => 'Service Management',
                 'create'          => 'Create Service',
                 'edit'            => 'Edit Service',
                 'active'          => 'Active Services',
                 'service_actions' => 'Service Actions',
-        
+                
                 'table' => [
                     'name'         => 'Service Name',
                     'code'         => 'Service Code',
@@ -200,38 +201,78 @@ return [
                 ],
             ],
             'commission' => [
-                'management'         => 'Commissions',
+                'management'         => 'Service Charge',
                 'create'             => 'Create Commission',
                 'edit'               => 'Edit Commission',
                 'commission_actions' => 'Commission Actions',
-    
+                
                 'table' => [
                     'name'        => 'Name',
                     'description' => 'Description',
                     'currency'    => 'Currency',
                     'view'        => 'View Stack',
-
-                    'total'       => 'commission|commissions',
-                    'stack'       => [
+                    
+                    'total' => 'commission|commissions',
+                    'stack' => [
                         'title'      => 'Stack',
                         'from'       => 'From',
                         'to'         => 'To',
                         'percentage' => 'Percentage',
                         'fixed'      => 'Fixed',
-                        'empty'  => 'Empty',
+                        'empty'      => 'Empty',
                     ],
                 ],
             ],
         ],
-        'account' => [
+        'account'   => [
             'management' => 'Account',
-            'credit' => 'Credit Account',
-            'debit' => 'Debit Account',
+            'company_balance' => 'Company Current Balance',
+            'credit'     => 'Credit Account',
+            'debit'      => 'Debit Account',
+            'float'      => 'Add Float',
+            'payout'     => 'Request Payout',
+            'deposit'    => [
+                'management' => 'Deposit Accounts',
+                'view'       => 'View Account',
+                'table'      => [
+                    'code'    => 'Account Number',
+                    'type'    => 'Account Type',
+                    'owner'   => 'Owner',
+                    'active'  => 'Active',
+                    'balance' => 'Account Balance',
+                ],
+                'tabs'       => [
+                    'titles'  => [
+                        'overview'  => 'Overview',
+                        'movements' => 'Movements',
+                    ],
+                    'content' => [
+                        'overview'  => [
+                            'code'    => 'Account Number',
+                            'type'    => 'Account Type',
+                            'owner'   => 'Owner',
+                            'active'  => 'Active',
+                            'balance' => 'Account Balance',
+                        ],
+                        'movements' => [
+                            'table' => [
+                                'code'        => 'Transaction Number',
+                                'amount'      => 'Amount',
+                                'type'        => 'Type',
+                                'user'        => 'Executed By',
+                                'source'      => 'Source Account',
+                                'destination' => 'Destination Account',
+                                'date'        => 'Date',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
-
+    
     'frontend' => [
-
+        
         'auth' => [
             'login_box_title'    => 'Login',
             'login_button'       => 'Login',
@@ -240,12 +281,12 @@ return [
             'register_button'    => 'Register',
             'remember_me'        => 'Remember Me',
         ],
-
+        
         'contact' => [
             'box_title' => 'Contact Us',
             'button'    => 'Send Information',
         ],
-
+        
         'confirm'   => [
             'confirm_account_box_title' => 'Confirm Your Account',
             'confirm_account_button'    => 'Confirm Account',
@@ -260,14 +301,14 @@ return [
             'send_password_reset_link_button' => 'Send Password Reset Link',
             'send_password_reset_code'        => 'Send Password Reset Code',
             'confirm_code_button'             => 'Confirm Code',
-
+        
         ],
-
+        
         'user' => [
             'passwords' => [
                 'change' => 'Change Password',
             ],
-    
+            
             'profile' => [
                 'avatar'             => 'Avatar',
                 'created_at'         => 'Created At',
@@ -282,6 +323,6 @@ return [
                 'update_information' => 'Update Information',
             ],
         ],
-
+    
     ],
 ];

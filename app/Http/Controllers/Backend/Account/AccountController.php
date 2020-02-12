@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Backend\Account;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Account\FloatAccountRequest;
 use App\Models\Account\Account;
+use App\Repositories\Backend\Account\AccountRepository;
 use App\Repositories\Backend\Movement\MovementRepository;
 
 class AccountController extends Controller
@@ -30,5 +31,28 @@ class AccountController extends Controller
         return redirect()->route('admin.dashboard')
             ->withFlashSuccess(__('alerts.backend.account.floated'));
     
+    }
+    
+    public function depositIndex(AccountRepository $accountRepository)
+    {
+        return view('backend.accounts.deposit.index')
+            ->withAccounts($accountRepository->getAllDepositAccounts()->paginate());
+    }
+    
+    public function umbrellaIndex()
+    {
+    
+    }
+    
+    public function payout()
+    {
+    
+    }
+    
+    public function depositShow(Account $account, MovementRepository $movementRepository)
+    {
+        return view('backend.accounts.deposit.show')
+            ->withAccount($account)
+            ->withMovements($movementRepository->getAccountMovements($account)->paginate());
     }
 }

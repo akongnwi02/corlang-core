@@ -183,4 +183,9 @@ trait UserMethod
     {
         return $this->can(config('permission.permissions.deactivate_company_services'));
     }
+    
+    public function canFreezeAccounts()
+    {
+        return $this->can(config('permission.permissions.freeze_accounts'));
+    }
 }

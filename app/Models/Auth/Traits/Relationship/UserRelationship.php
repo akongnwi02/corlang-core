@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth\Traits\Relationship;
 
+use App\Models\Account\Account;
 use App\Models\Company\Company;
 use App\Models\System\Session;
 use App\Models\Auth\SocialAccount;
@@ -42,5 +43,10 @@ trait UserRelationship
     public function company()
     {
         return $this->hasOne(Company::class, 'uuid', 'company_id');
+    }
+    
+    public function account()
+    {
+        return $this->belongsTo(Account::class, 'uuid', 'owner_id');
     }
 }

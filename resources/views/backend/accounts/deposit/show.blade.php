@@ -1,10 +1,10 @@
 @extends('backend.layouts.app')
 
-@section('title', __('labels.backend.companies.company.management') . ' | ' . __('labels.backend.companies.company.create'))
+@section('title', app_name() . ' | ' . __('labels.backend.account.deposit.view'))
 
-@section('breadcrumb-links')
-    @include('backend.auth.user.includes.breadcrumb-links')
-@endsection
+{{--@section('breadcrumb-links')--}}
+    {{--@include('backend.services.service.includes.breadcrumb-links')--}}
+{{--@endsection--}}
 
 @section('content')
     <div class="card">
@@ -12,8 +12,8 @@
             <div class="row">
                 <div class="col-sm-5">
                     <h4 class="card-title mb-0">
-                        @lang('labels.backend.companies.company.management')
-                        <small class="text-muted">@lang('labels.backend.companies.company.edit')</small>
+                        @lang('labels.backend.account.deposit.management')
+                        <small class="text-muted">@lang('labels.backend.account.deposit.view')</small>
                     </h4>
                 </div><!--col-->
             </div><!--row-->
@@ -22,33 +22,28 @@
                 <div class="col">
                     <ul class="nav nav-tabs" role="tablist" id="companyTab">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-expanded="true"><i class="fas fa-info"></i> @lang('labels.backend.companies.company.tabs.titles.profile')</a>
+                            <a class="nav-link active" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-expanded="true"><i class="fas fa-info"></i> @lang('labels.backend.account.deposit.tabs.titles.overview')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#services" role="tab" aria-controls="services" aria-expanded="true"><i class="fas fa-cog"></i> @lang('labels.backend.companies.company.tabs.titles.services')</a>
+                            <a class="nav-link" data-toggle="tab" href="#movements" role="tab" aria-controls="movements" aria-expanded="true"><i class="fas fa-list"></i> @lang('labels.backend.account.deposit.tabs.titles.movements')</a>
                         </li>
                     </ul>
 
                     <div class="tab-content">
-                        <div class="tab-pane active" id="profile" role="tabpanel" aria-expanded="true">
-                            @include('backend.companies.company.edit.tabs.profile')
-                        </div><!--tab--><div class="tab-pane fade" id="services" role="tabpanel" aria-expanded="true">
-                            @include('backend.companies.company.edit.tabs.services')
+                        <div class="tab-pane active" id="overview" role="tabpanel" aria-expanded="true">
+                            @include('backend.accounts.deposit.show.overview')
+                        </div><!--tab-->
+                        <div class="tab-pane fade" id="movements" role="tabpanel" aria-expanded="true">
+                            @include('backend.accounts.deposit.show.movement')
                         </div><!--tab-->
                     </div><!--tab-content-->
+
                 </div><!--col-->
             </div><!--row-->
         </div><!--card-body-->
     </div><!--card-->
 @endsection
 
-<style>
-    .required:after{
-        content:'*';
-        color:red;
-        padding-left:5px;
-    }
-</style>
 
 @push('after-scripts')
     <script>

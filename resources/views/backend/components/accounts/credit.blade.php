@@ -3,15 +3,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalCenterTitle">
-                    @lang('labels.backend.account.management')
-                    <small class="text-muted">@lang('labels.backend.account.credit')</small>
+                    @lang('labels.backend.account.credit')
+                    <small class="text-muted">@lang('labels.backend.account.company_balance'): <strong>{{ $logged_in_user->company->account_balance_label }}</strong></small>
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="@lang('buttons.general.cancel')">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                {{ html()->form('PATCH', route('admin.account.float', [$account->uuid]))->class('form-horizontal')->open() }}
+                {{ html()->form('PATCH', route('admin.account.credit', [$account->uuid]))->class('form-horizontal')->open() }}
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -19,12 +19,11 @@
                     </div>
                     <input name="amount" type="number" step="0.01" min="0" class="form-control" placeholder="@lang('validation.attributes.backend.account.amount')" required>
                     <input name="currency_id" type="hidden" value="{{ $currency->uuid }}">
-
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="'btn btn-secondary btn-sm" data-dismiss="modal">@lang('buttons.general.cancel')</button>
-                    {{ form_submit(__('buttons.backend.account.credit')) }}
+                    {{ form_submit(__('buttons.backend.account.float')) }}
                 </div>
                 {{ html()->form()->close() }}
             </div>

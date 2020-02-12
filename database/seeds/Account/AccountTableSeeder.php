@@ -27,7 +27,7 @@ class AccountTableSeeder extends Seeder
     
         Account::create([
             'owner_id' => User::where('id', 1)->first()->uuid,
-            'type_id' => AccountType::where('name', config('business.account.type.agent'))->first()->uuid,
+            'type_id' => AccountType::where('name', config('business.account.type.user'))->first()->uuid,
             'code' => '152012548',
         ]);
         

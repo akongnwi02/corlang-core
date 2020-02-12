@@ -30,5 +30,7 @@ class DumpTableSeeder extends Seeder
         $this->call(AccountTableSeeder::class);
         $this->call(MovementTypeTableSeeder::class);
         $this->call(MovementTableSeeder::class);
+        $this->call(UserAccountSeeder::class);
+        $this->call(CompanyAccountSeeder::class);
     }
 }

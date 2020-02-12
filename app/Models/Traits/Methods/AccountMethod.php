@@ -25,4 +25,15 @@ trait AccountMethod
     public static function codeExists($code) {
         return Account::where('code', $code)->exists();
     }
+    
+    public function isActive()
+    {
+        return $this->is_active;
+    }
+    
+    public function isCompanyAccount()
+    {
+    
+    }
+    
 }

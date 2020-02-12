@@ -8,7 +8,9 @@
 
 namespace App\Models\Account;
 
+use App\Models\Traits\Attributes\MovementAttribute;
 use App\Models\Traits\Methods\MovementMethod;
+use App\Models\Traits\Relationships\MovementRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Wildside\Userstamps\Userstamps;
@@ -16,6 +18,8 @@ use Wildside\Userstamps\Userstamps;
 class Movement extends Model
 {
     use Uuid,
+        MovementAttribute,
+        MovementRelationship,
         Userstamps,
         MovementMethod;
     

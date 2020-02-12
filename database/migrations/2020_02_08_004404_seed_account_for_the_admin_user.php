@@ -16,7 +16,7 @@ class SeedAccountForTheAdminUser extends Migration
         DB::table('accounts')->insert([
             'uuid' => Uuid::generate(4)->string,
             'owner_id' => User::where('id', 1)->first()->uuid,
-            'type_id' => AccountType::where('name', config('business.account.type.agent'))->first()->uuid,
+            'type_id' => AccountType::where('name', config('business.account.type.user'))->first()->uuid,
             'code' => '152012548',
             'created_at' => now()->toDateTimeString(),
             'updated_at' => now()->toDateTimeString(),

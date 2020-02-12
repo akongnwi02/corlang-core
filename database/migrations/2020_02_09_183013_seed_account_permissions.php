@@ -23,6 +23,11 @@ class SeedAccountPermissions extends Migration
             
             config('permission.permissions.request_payouts'),
             config('permission.permissions.validate_payouts'),
+            
+            
+            config('permission.permissions.read_accounts'),
+            config('permission.permissions.drain_accounts'),
+            config('permission.permissions.update_accounts'),
         ];
     
         foreach ($permissions as $permission) {
@@ -38,6 +43,12 @@ class SeedAccountPermissions extends Migration
             config('permission.permissions.debit_accounts'),
             
             config('permission.permissions.request_payouts'),
+            config('permission.permissions.freeze_accounts'),
+
+
+            config('permission.permissions.read_accounts'),
+            config('permission.permissions.drain_accounts'),
+            config('permission.permissions.update_accounts'),
         ]);
     }
 

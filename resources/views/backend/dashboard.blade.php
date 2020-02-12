@@ -14,6 +14,8 @@
                             <div class="card">
                                 <div class="card-header bg-light content-center">
                                     <div class="text-value-lg">{{ @$logged_in_user->company->name }}</div>
+                                    <div>@lang('strings.backend.dashboard.company.number'): <strong>{{ @$logged_in_user->company->account->code }}</strong></div>
+
                                     <div class="c-icon c-icon-1xl text-white my-2">
                                         <img class="navbar-brand-minimized"
                                              src="{{ @$logged_in_user->company->full_logo }}"
@@ -28,7 +30,7 @@
                                     <div class="col">
                                         <div class="text-value-xl">{{ $numberOfUsers }}</div>
                                         <div
-                                            class="text-uppercase text-muted small">@lang('strings.backend.dashboard.company.users')</div>
+                                            class="text-uppercase text-muted small">{{trans_choice('strings.backend.dashboard.company.users', $numberOfUsers)}}</div>
                                     </div>
                                     <div class="c-vr"></div>
                                     {{--<div class="col">--}}
@@ -58,11 +60,13 @@
                         <div class="col-sm-4 col-lg-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="btn-group float-right">
-                                        <button class="btn btn-transparent" data-toggle="tooltip" data-placement="top" title="@lang('labels.general.debit')">
-                                            <a href="#"><img src="{{ url('img/backend/brand/arrow-circle-bottom.svg') }}" alt="@lang('labels.general.debit')"></a>
-                                        </button>
-                                    </div>
+                                    @can(config('permission.permissions.request_payouts'))
+                                        <div class="btn-group float-right">
+                                            <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#requestPayout" title="@lang('labels.backend.account.payout')">
+                                                <img src="{{ url('img/backend/brand/arrow-circle-bottom.svg') }}" alt="@lang('labels.backend.account.payout')">
+                                            </button>
+                                        </div>
+                                    @endcan
                                     <div class="text-value-lg">{{ $companyCommission . ' ' . $currency->code }}</div>
                                     <div>@lang('strings.backend.dashboard.company.commission')</div>
                                     {{--<div class="progress progress-xs my-2">--}}
@@ -78,8 +82,8 @@
                                 <div class="card-body">
                                     @can(config('permission.permissions.float_accounts'))
                                         <div class="btn-toolbar float-right" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
-                                            <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#creditAccount" title="@lang('labels.general.credit')">
-                                                <img src="{{ url('img/backend/brand/arrow-circle-top.svg') }}" alt="@lang('labels.general.credit')">
+                                            <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#floatAccount" title="@lang('labels.backend.account.float')">
+                                                <img src="{{ url('img/backend/brand/arrow-circle-top.svg') }}" alt="@lang('labels.backend.account.float')">
                                             </button>
                                         </div><!--btn-toolbar-->
                                     @endif
@@ -98,7 +102,13 @@
             </div><!--row-->
         </div>
     </div>
-    @component('backend.components.dashboard.credit', [
+    @component('backend.components.dashboard.float', [
+        'account' => $logged_in_user->company->account,
+        'currency' => $currency
+    ])
+    @endcomponent
+
+    @component('backend.components.dashboard.payout', [
         'account' => $logged_in_user->company->account,
         'currency' => $currency
     ])

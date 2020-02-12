@@ -8,11 +8,13 @@
 
 namespace App\Repositories\Backend\Movement;
 
-
 use App\Events\Backend\Movement\MovementCreated;
 use App\Exceptions\GeneralException;
+use App\Models\Account\Account;
 use App\Models\Account\Movement;
 use App\Models\Account\MovementType;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class MovementRepository
 {
@@ -79,5 +81,16 @@ class MovementRepository
     public function getCompanyTodaysCommission($company)
     {
         return 0;
+    }
+    
+    public function getAccountMovements($account)
+    {
+        $movements = QueryBuilder::for(Movement::class)
+            ->where('sourceaccount_id', $account->uuid)
+            ->orWhere('destinationaccount_id', $account->uuid)
+            ->whereNotIn('type_id', [MovementType::where('name', config('business.movement.type.sale'))->first()->uuid])
+            ->defaultSort('-movements.created_at');
+    
+        return $movements;
     }
 }

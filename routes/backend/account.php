@@ -23,20 +23,24 @@ Route::group([
     /*
      * Account RU
      */
-//    Route::get('/', [ServiceController::class, 'index'])
-//        ->name('account.index')
-//        ->middleware('permission:'.config('permission.permissions.read_accounts'));
+    Route::get('/deposit', [AccountController::class, 'depositIndex'])
+        ->name('deposit.index')
+        ->middleware('permission:'.config('permission.permissions.read_accounts'));
+    
+    Route::get('/umbrella', [AccountController::class, 'umbrellaIndex'])
+        ->name('umbrella.index')
+        ->middleware('permission:'.config('permission.permissions.read_accounts'));
     
     /*
      * Specific Account
      */
     Route::group(['prefix' => '{account}'], function () {
     
-//        // Company
-//        Route::get('/', [ServiceController::class, 'show'])
-//            ->name('show')
-//            ->middleware('permission:'.config('permission.permissions.read_services'));
-//
+        // Company
+        Route::get('/', [AccountController::class, 'depositShow'])
+            ->name('deposit.show')
+            ->middleware('permission:'.config('permission.permissions.read_accounts'));
+
 //        Route::get('edit', [ServiceController::class, 'edit'])
 //            ->name('edit')
 //            ->middleware('permission:'.config('permission.permissions.update_services'));
@@ -44,10 +48,11 @@ Route::group([
 //        Route::patch('/credit', [AccountController::class, 'credit'])
 //            ->name('credit')
 //            ->middleware('permission:'.config('permission.permissions.credit_accounts'));
-//
-//        Route::patch('/debit', [AccountController::class, 'debit'])
-//            ->name('debit')
-//            ->middleware('permission:'.config('permission.permissions.debit_accounts'));
+        
+        // to be continued when you implement the payment services
+        Route::patch('/payout', [AccountController::class, 'payout'])
+            ->name('payout')
+            ->middleware('permission:'.config('permission.permissions.request_payouts'));
         
         Route::patch('/float', [AccountController::class, 'float'])
             ->name('float')

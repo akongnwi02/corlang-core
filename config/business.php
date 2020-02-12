@@ -11,7 +11,7 @@ return [
     
     'account' => [
         'type' => [
-            'agent'   => 'agent account',
+            'user'   => 'user account',
             'company' => 'company account',
         ]
     ],
