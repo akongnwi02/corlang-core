@@ -11,11 +11,13 @@ namespace App\Http\Controllers\Backend\Account;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Account\FloatAccountRequest;
+use App\Http\Requests\Backend\Account\CreditAccountRequest;
+use App\Http\Requests\Backend\Account\ShowAccountRequest;
 use App\Models\Account\Account;
 use App\Repositories\Backend\Account\AccountRepository;
 use App\Repositories\Backend\Movement\MovementRepository;
 
-class AccountController extends Controller
+class DepositAccountController extends Controller
 {
     /**
      * @param FloatAccountRequest $request
@@ -33,26 +35,46 @@ class AccountController extends Controller
     
     }
     
-    public function depositIndex(AccountRepository $accountRepository)
+    /**
+     * @param AccountRepository $accountRepository
+     * @return mixed
+     */
+    public function index(AccountRepository $accountRepository)
     {
         return view('backend.accounts.deposit.index')
             ->withAccounts($accountRepository->getAllDepositAccounts()->paginate());
     }
-    
-    public function umbrellaIndex()
-    {
-    
-    }
-    
+
     public function payout()
     {
     
     }
     
-    public function depositShow(Account $account, MovementRepository $movementRepository)
+    /**
+     * @param ShowAccountRequest $request
+     * @param Account $account
+     * @param MovementRepository $movementRepository
+     * @return mixed
+     */
+    public function show(ShowAccountRequest $request, Account $account, MovementRepository $movementRepository)
     {
         return view('backend.accounts.deposit.show')
             ->withAccount($account)
             ->withMovements($movementRepository->getAccountMovements($account)->paginate());
+    }
+    
+    /**
+     * @param CreditAccountRequest $request
+     * @param Account $account
+     * @param MovementRepository $movementRepository
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function credit(CreditAccountRequest $request, Account $account, MovementRepository $movementRepository)
+    {
+        $movementRepository->creditAccount($account, $request->only(['amount', 'currency_id', 'direction']));
+        
+        return redirect()->route('admin.account.deposit.index')
+            ->withFlashSuccess(__('alerts.backend.account.transferred'));
     }
 }

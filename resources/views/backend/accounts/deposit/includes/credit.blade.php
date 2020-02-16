@@ -1,29 +1,31 @@
-<div class="modal fade" id="creditAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="creditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalCenterTitle">
-                    @lang('labels.backend.account.credit')
-                    <small class="text-muted">@lang('labels.backend.account.company_balance'): <strong>{{ $logged_in_user->company->account_balance_label }}</strong></small>
+                    <span class="title-text"></span>
+                    <br/>
+                    <small class="text-muted">@lang('labels.backend.account.company_balance'): <strong>{{ $logged_in_user->company->account->account_balance_label }}</strong></small>
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="@lang('buttons.general.cancel')">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                {{ html()->form('PATCH', route('admin.account.credit', [$account->uuid]))->class('form-horizontal')->open() }}
+                {{ html()->form('PATCH')->class('form-horizontal')->open() }}
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">{{ $currency->code }}</span>
+                        <span class="input-group-text" id="basic-addon1">{{ $default_currency->code }}</span>
                     </div>
                     <input name="amount" type="number" step="0.01" min="0" class="form-control" placeholder="@lang('validation.attributes.backend.account.amount')" required>
-                    <input name="currency_id" type="hidden" value="{{ $currency->uuid }}">
+                    <input name="currency_id" type="hidden" value="{{ $default_currency->uuid }}">
+                    <input name="direction" type="hidden">
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="'btn btn-secondary btn-sm" data-dismiss="modal">@lang('buttons.general.cancel')</button>
-                    {{ form_submit(__('buttons.backend.account.float')) }}
+                    {{ form_submit('') }}
                 </div>
                 {{ html()->form()->close() }}
             </div>

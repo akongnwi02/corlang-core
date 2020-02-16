@@ -226,13 +226,14 @@ return [
         ],
         'account'   => [
             'management' => 'Account',
-            'company_balance' => 'Company Current Balance',
+            'company_balance' => 'Company Balance',
             'credit'     => 'Credit Account',
             'debit'      => 'Debit Account',
             'float'      => 'Add Float',
             'payout'     => 'Request Payout',
             'deposit'    => [
                 'management' => 'Deposit Accounts',
+                'actions'    => 'Account Actions',
                 'view'       => 'View Account',
                 'table'      => [
                     'code'    => 'Account Number',
@@ -240,6 +241,7 @@ return [
                     'owner'   => 'Owner',
                     'active'  => 'Active',
                     'balance' => 'Account Balance',
+                    'total'   => 'account|accounts'
                 ],
                 'tabs'       => [
                     'titles'  => [
@@ -263,6 +265,9 @@ return [
                                 'source'      => 'Source Account',
                                 'destination' => 'Destination Account',
                                 'date'        => 'Date',
+                                'reversal'    => 'reversal',
+                                'cancelled'    => 'cancelled',
+                                'total'       => 'movement|movements'
                             ],
                         ],
                     ],
@@ -275,9 +280,14 @@ return [
         
         'auth' => [
             'login_box_title'    => 'Login',
+            'login_to_account'   => 'Sign in to your account',
+            'create_account'   => 'Create your account',
             'login_button'       => 'Login',
             'login_with'         => 'Login with :social_media',
             'register_box_title' => 'Register',
+            'register_now' => 'Register Now!',
+            'no_account' => 'Don\'t have an account?',
+            'quick' => ' It’s quick and easy.',
             'register_button'    => 'Register',
             'remember_me'        => 'Remember Me',
         ],
@@ -294,7 +304,7 @@ return [
         ,
         'passwords' => [
             'expired_password_box_title'      => 'Your password has expired.',
-            'forgot_password'                 => 'Forgot Your Password?',
+            'forgot_password'                 => 'Forgot Password?',
             'reset_password_box_title'        => 'Reset Password',
             'reset_password_button'           => 'Reset Password',
             'update_password_button'          => 'Update Password',

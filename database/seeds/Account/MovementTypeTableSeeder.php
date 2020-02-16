@@ -17,13 +17,18 @@ class MovementTypeTableSeeder extends Seeder
         MovementType::unguard();
     
         MovementType::create([
-            'code' => 'DEBIT',
+            'code' => 'SALE',
             'name' => config('business.movement.type.sale'),
         ]);
-    
+        
         MovementType::create([
-            'code' => 'REVERSAL',
-            'name' => config('business.movement.type.reversal'),
+            'code' => 'PURCHASE',
+            'name' => config('business.movement.type.purchase'),
+        ]);
+        
+        MovementType::create([
+            'code' => 'WITHDRAWAL',
+            'name' => config('business.movement.type.withdrawal'),
         ]);
     
         MovementType::create([

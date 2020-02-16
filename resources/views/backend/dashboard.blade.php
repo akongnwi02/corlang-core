@@ -48,7 +48,7 @@
                         <div class="col-sm-4 col-lg-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="text-value-lg">{{ $companyTodayCommission . ' ' .$currency->code }}</div>
+                                    <div class="text-value-lg">{{ $companyTodayCommission . ' ' .$default_currency->code }}</div>
                                     <div>@lang('strings.backend.dashboard.company.commission_today')</div>
                                     {{--<div class="progress progress-xs my-2">--}}
                                     {{--<div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>--}}
@@ -67,7 +67,7 @@
                                             </button>
                                         </div>
                                     @endcan
-                                    <div class="text-value-lg">{{ $companyCommission . ' ' . $currency->code }}</div>
+                                    <div class="text-value-lg">{{ $companyCommission . ' ' . $default_currency->code }}</div>
                                     <div>@lang('strings.backend.dashboard.company.commission')</div>
                                     {{--<div class="progress progress-xs my-2">--}}
                                         {{--<div class="progress-bar bg-warning" role="progressbar" style="width: 25%"--}}
@@ -87,7 +87,7 @@
                                             </button>
                                         </div><!--btn-toolbar-->
                                     @endif
-                                    <div class="text-value-lg">{{ $companyBalance . ' ' . $currency->code }}</div>
+                                    <div class="text-value-lg">{{ $companyBalance . ' ' . $default_currency->code }}</div>
                                     <div>@lang('strings.backend.dashboard.company.balance')</div>
                                     {{--<div class="progress progress-xs my-2">--}}
                                         {{--<div class="progress-bar bg-danger" role="progressbar" style="width: 25%"--}}
@@ -104,13 +104,13 @@
     </div>
     @component('backend.components.dashboard.float', [
         'account' => $logged_in_user->company->account,
-        'currency' => $currency
+        'currency' => $default_currency
     ])
     @endcomponent
 
     @component('backend.components.dashboard.payout', [
         'account' => $logged_in_user->company->account,
-        'currency' => $currency
+        'currency' => $default_currency
     ])
     @endcomponent
 

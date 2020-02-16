@@ -24,6 +24,7 @@
     </head>
     <body>
         <div id="app">
+            @include('includes.partials.logged-in-to-company')
             @include('includes.partials.logged-in-as')
             @include('frontend.includes.nav')
 

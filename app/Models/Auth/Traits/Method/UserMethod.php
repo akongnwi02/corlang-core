@@ -188,4 +188,9 @@ trait UserMethod
     {
         return $this->can(config('permission.permissions.freeze_accounts'));
     }
+    
+    public function isTemporalLoggedToCompany()
+    {
+        return $this->is_comp_temp;
+    }
 }

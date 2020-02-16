@@ -45,7 +45,7 @@ class FloatAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'amount' => ['required', 'numeric', 'min:0'],
+            'amount' => ['required', 'numeric', 'min:1000'],
             'currency_id' => ['required', Rule::exists('currencies', 'uuid')]
         ];
     }

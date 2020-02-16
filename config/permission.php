@@ -102,6 +102,7 @@ return [
         'update_companies'     => 'update companies',
         'delete_companies'     => 'delete companies',
         'deactivate_companies' => 'deactivate companies',
+        'login_to_companies'  => 'login to companies',
         
         // company service
         'deactivate_company_services' => 'deactivate company services',

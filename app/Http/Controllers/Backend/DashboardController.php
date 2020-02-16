@@ -22,6 +22,6 @@ class DashboardController extends Controller
             ->withCompanyBalance(number_format($movementRepository->getAccountBalance(auth()->user()->company->account),2))
             ->withCompanyCommission(number_format($movementRepository->getCompanyCommissionBalance(auth()->user()->company),2))
             ->withCompanyTodayCommission(number_format($movementRepository->getCompanyTodaysCommission(auth()->user()->company),2))
-            ->withCurrency(Currency::where('is_default', true)->firstOrFail());
+            ;
     }
 }

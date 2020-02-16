@@ -7,6 +7,9 @@
 @endsection
 
 @section('content')
+
+    @include('backend.accounts.deposit.includes.credit')
+
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -43,7 +46,19 @@
                                     <td>{{ $account->owner_label }}</td>
                                     <td>{!! $account->active_label !!}</td>
                                     <td>{{ $account->account_balance_label }}</td>
-                                    <td>{!! $account->action_buttons  !!}</td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="@lang('labels.backend.account.deposit.actions')">
+                                            @can(config('permission.permissions.read_accounts'))
+                                                <a href="{{ route('admin.account.deposit.show', $account->uuid) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.view')" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                            @endcan
+                                            @can(config('permission.permissions.credit_accounts'))
+                                                <button name="creditPopup" id="{{ $account->uuid }}" title="@lang('labels.backend.account.credit')" class="btn btn-success"><i class="fas fa-plus-circle"></i></button>
+                                            @endcan
+                                            @can(config('permission.permissions.debit_accounts'))
+                                                <button name="debitPopup" id="{{ $account->uuid }}" title="@lang('labels.backend.account.debit')" class="btn btn-danger"><i class="fas fa-minus-circle"></i></button>
+                                            @endcan
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -54,7 +69,7 @@
             <div class="row">
                 <div class="col-7">
                     <div class="float-left">
-                        {!! $accounts->total() !!} {{ trans_choice('labels.backend.services.service.table.total', $accounts->total()) }}
+                        {!! $accounts->total() !!} {{ trans_choice('labels.backend.account.deposit.table.total', $accounts->total()) }}
                     </div>
                 </div><!--col-->
 
@@ -67,3 +82,38 @@
         </div><!--card-body-->
     </div><!--card-->
 @endsection
+
+@push('after-scripts')
+    <script>
+
+        $(function () {
+            $("button[name='creditPopup']").click(function () {
+                let title = this.title;
+                let direction = "IN";
+                let id = this.id;
+
+                $("#creditModal .title-text").html(title);
+                $("#creditModal button[type='submit']").html(title);
+                $("#creditModal input[name='direction']").val(direction);
+                $("#creditModal form").attr('action', `/admin/account/${id}/credit`);
+
+                $("#creditModal").modal("show");
+            });
+
+            $("button[name='debitPopup']").click(function () {
+                let title = this.title;
+                let direction = "OUT";
+                let id = this.id;
+
+                $("#creditModal .title-text").html(title);
+                $("#creditModal button[type='submit']").html(title);
+                $("#creditModal input[name='direction']").val(direction);
+                $("#creditModal form").attr('action', `/admin/account/${id}/credit`);
+
+                $("#creditModal").modal("show");
+            });
+
+        });
+
+    </script>
+@endpush

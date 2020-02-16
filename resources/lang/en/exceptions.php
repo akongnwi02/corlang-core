@@ -65,7 +65,9 @@ return [
                 'mark_rights_error'   => 'There was a problem updating the status of this company. The company was deactivated by a higher role.',
                 'cant_change_attribute' => 'You are not permitted to change the :attribute',
                 'cant_change_check_box' => 'You are not allowed to change one of the checkbox values',
-                'invalid_service'       => 'An invalid service has been provided'
+                'invalid_service'       => 'An invalid service has been provided',
+                'login_error'           => 'There was a problem logging into this company. Please try again.',
+                'inactive'              => 'There was a problem processing the request. This company is inactive',
             ],
             'service' => [
                 'mark_error'   => 'There was a problem updating the status of this service for this company. Please try again.',
@@ -74,7 +76,9 @@ return [
         ],
         
         'account' => [
-            'mark_error' => 'There was an error freezing this account.'
+            'mark_error' => 'There was an error freezing this account.',
+            'inactive' => 'There was a problem authorizing the transaction. Either source or destination account is inactive.',
+            'insufficient_balance' => 'The was a problem authorizing the transaction. Either source or destination account has insufficient funds'
         ],
         
         'movement' => [

@@ -11,8 +11,9 @@
  * All route names are prefixed with 'admin.account'.
  */
 
-use App\Http\Controllers\Backend\Account\AccountController;
+use App\Http\Controllers\Backend\Account\DepositAccountController;
 use App\Http\Controllers\Backend\Account\AccountStatusController;
+use App\Http\Controllers\Backend\Account\UmbrellaAccountController;
 
 Route::group([
     'prefix'     => 'account',
@@ -23,11 +24,11 @@ Route::group([
     /*
      * Account RU
      */
-    Route::get('/deposit', [AccountController::class, 'depositIndex'])
+    Route::get('/deposit', [DepositAccountController::class, 'index'])
         ->name('deposit.index')
         ->middleware('permission:'.config('permission.permissions.read_accounts'));
     
-    Route::get('/umbrella', [AccountController::class, 'umbrellaIndex'])
+    Route::get('/umbrella', [UmbrellaAccountController::class, 'index'])
         ->name('umbrella.index')
         ->middleware('permission:'.config('permission.permissions.read_accounts'));
     
@@ -37,7 +38,7 @@ Route::group([
     Route::group(['prefix' => '{account}'], function () {
     
         // Company
-        Route::get('/', [AccountController::class, 'depositShow'])
+        Route::get('/', [DepositAccountController::class, 'show'])
             ->name('deposit.show')
             ->middleware('permission:'.config('permission.permissions.read_accounts'));
 
@@ -45,16 +46,16 @@ Route::group([
 //            ->name('edit')
 //            ->middleware('permission:'.config('permission.permissions.update_services'));
 //
-//        Route::patch('/credit', [AccountController::class, 'credit'])
-//            ->name('credit')
-//            ->middleware('permission:'.config('permission.permissions.credit_accounts'));
+        Route::patch('/credit', [DepositAccountController::class, 'credit'])
+            ->name('credit')
+            ->middleware('permission:'.config('permission.permissions.credit_accounts'));
         
         // to be continued when you implement the payment services
-        Route::patch('/payout', [AccountController::class, 'payout'])
+        Route::patch('/payout', [DepositAccountController::class, 'payout'])
             ->name('payout')
             ->middleware('permission:'.config('permission.permissions.request_payouts'));
         
-        Route::patch('/float', [AccountController::class, 'float'])
+        Route::patch('/float', [DepositAccountController::class, 'float'])
             ->name('float')
             ->middleware('permission:'.config('permission.permissions.float_accounts'));
         

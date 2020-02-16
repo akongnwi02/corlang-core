@@ -11,7 +11,7 @@ return [
     
     'account' => [
         'type' => [
-            'user'   => 'user account',
+            'user'    => 'user account',
             'company' => 'company account',
         ]
     ],
@@ -19,8 +19,9 @@ return [
     'movement' => [
         'type' => [
             'sale'       => 'sale',
-            'reversal'   => 'reversal',
+            'purchase'   => 'purchase',
             'deposit'    => 'deposit',
+            'withdrawal' => 'withdrawal',
             'float'      => 'float',
         ]
     ],

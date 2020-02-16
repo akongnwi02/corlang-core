@@ -54,6 +54,10 @@ class AccountRepository
                 AllowedFilter::scope('type_id'),
             ])
             ->defaultSort('-accounts.is_active', '-accounts.created_at')
+            ->whereHas('company', function ($query) {
+                $query->whereNotIn('is_default', [true]);
+            })
+            ->orWhereHas('user')
             ->with('type');
         
         if (! auth()->user()->company->isDefault()) {

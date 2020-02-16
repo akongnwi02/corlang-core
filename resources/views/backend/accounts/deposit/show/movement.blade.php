@@ -20,13 +20,12 @@
                     <tr>
                         <td>{{ $movement->code }}</td>
                         <td>{{ $movement->amount_label }}</td>
-                        <td><span class="badge badge-{{ $movement->getClass($account) }}">{{ $movement->type->name }}</span></td>
+                        <td><span class="badge badge-{{ $movement->class_label }}">{{ $movement->is_reversed ? __('labels.backend.account.deposit.tabs.content.movements.table.cancelled') : $movement->type->name }}</span></td>
                         <td>{{ $movement->user->full_name }}</td>
                         <td>{{ $movement->source_label }}</td>
                         <td>{{ $movement->destination_label }}</td>
                         <td>{{ $movement->created_at->toDatetimeString() }}</td>
-
-                        {{--<td>{!! $movement->action_buttons  !!}</td>--}}
+                        <td>{!! $movement->action_buttons  !!}</td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -37,7 +36,7 @@
 <div class="row">
     <div class="col-7">
         <div class="float-left">
-            {!! $movements->total() !!} {{ trans_choice('labels.backend.services.service.table.total', $movements->total()) }}
+            {!! $movements->total() !!} {{ trans_choice('labels.backend.account.deposit.tabs.content.movements.table.total', $movements->total()) }}
         </div>
     </div><!--col-->
 

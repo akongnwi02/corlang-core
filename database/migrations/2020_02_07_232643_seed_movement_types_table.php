@@ -23,8 +23,8 @@ class SeedMovementTypesTable extends Migration
         
         DB::table('movementtypes')->insert([
             'uuid' => Uuid::generate(4)->string,
-            'code' => 'REVERSAL',
-            'name' => config('business.movement.type.reversal'),
+            'code' => 'PURCHASE',
+            'name' => config('business.movement.type.purchase'),
             'created_at' => now()->toDateTimeString(),
             'updated_at' => now()->toDateTimeString(),
         ]);
@@ -33,6 +33,14 @@ class SeedMovementTypesTable extends Migration
             'uuid' => Uuid::generate(4)->string,
             'code' => 'DEPOSIT',
             'name' => config('business.movement.type.deposit'),
+            'created_at' => now()->toDateTimeString(),
+            'updated_at' => now()->toDateTimeString(),
+        ]);
+        
+        DB::table('movementtypes')->insert([
+            'uuid' => Uuid::generate(4)->string,
+            'code' => 'WITHDRAWAL',
+            'name' => config('business.movement.type.withdrawal'),
             'created_at' => now()->toDateTimeString(),
             'updated_at' => now()->toDateTimeString(),
         ]);

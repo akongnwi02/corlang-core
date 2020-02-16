@@ -15,7 +15,7 @@ class CreateMovementsTable extends Migration
     {
         Schema::create('movements', function (Blueprint $table) {
             $table->uuid('uuid')->primary()->unique();
-            $table->string('code')->unique();
+            $table->string('code');
             $table->double('amount');
             $table->uuid('type_id');
             $table->uuid('user_id')->nullable();
@@ -27,13 +27,16 @@ class CreateMovementsTable extends Migration
             $table->uuid('currency_id');
             $table->uuid('sourceaccount_id')->nullable();
             $table->uuid('destinationaccount_id')->nullable();
-            $table->uuid('parentmovement_id')->nullable();
+            $table->boolean('is_reversed')->default(false);
+            $table->dateTime('reversed_at')->nullable();
             
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
+            
+            $table->unique(['code', 'sourceaccount_id', 'type_id']);
     
             $table->foreign('type_id')->references('uuid')->on('movementtypes');
             $table->foreign('user_id')->references('uuid')->on('users');

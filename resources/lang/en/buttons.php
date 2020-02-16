@@ -40,6 +40,7 @@ return [
             'company' => [
                 'activate'   => 'Activate Company',
                 'deactivate' => 'Deactivate Company',
+                'login'      => 'Login to this company'
             ],
             'services' => [
                 'commission' => [
@@ -68,6 +69,7 @@ return [
     'general' => [
         'cancel' => 'Cancel',
         'continue' => 'Continue',
+        'submit'   => 'Submit',
 
         'crud' => [
             'create' => 'Create',

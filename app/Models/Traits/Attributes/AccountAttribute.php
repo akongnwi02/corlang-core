@@ -38,40 +38,40 @@ trait AccountAttribute
         return '<span class="badge badge-danger">'.__('labels.general.no').'</span>';
     }
     
-    /**
-     * @return string
-     */
-    public function getCreditButtonAttribute()
-    {
-        if (auth()->user()->can(config('permission.permissions.credit_accounts'))) {
-            return '<a href="'.route('admin.services.service.show', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.backend.account.credit').'" class="btn btn-success"><i class="fas fa-plus-circle"></i></a>';
-        }
-    }
+//    /**
+//     * @return string
+//     */
+//    public function getCreditButtonAttribute()
+//    {
+//        if (auth()->user()->can(config('permission.permissions.credit_accounts'))) {
+//            return '<button onclick="showModal()" id="'.$this->uuuid.'" title="'.__('labels.backend.account.credit').'" class="btn btn-success"><i class="fas fa-plus-circle"></i></button>';
+//        }
+//    }
     
-    /**
-     * @return string
-     */
-    public function getDebitButtonAttribute()
-    {
-        if (auth()->user()->can(config('permission.permissions.debit_accounts'))) {
-            return '<a href="'.route('admin.services.service.edit', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.backend.account.debit').'" class="btn btn-danger"><i class="fas fa-minus-circle"></i></a>';
-        }
-    }
+//    /**
+//     * @return string
+//     */
+//    public function getDebitButtonAttribute()
+//    {
+//        if (auth()->user()->can(config('permission.permissions.debit_accounts'))) {
+//            return '<a href="'.route('admin.services.service.edit', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.backend.account.debit').'" class="btn btn-danger"><i class="fas fa-minus-circle"></i></a>';
+//        }
+//    }
     
-    /**
-     * @return string
-     */
-    public function getShowButtonAttribute()
-    {
-        if (auth()->user()->can(config('permission.permissions.read_accounts'))) {
-            return '<a href="'.route('admin.account.deposit.show', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.view').'" class="btn btn-primary"><i class="fas fa-eye"></i></a>';
-        }
-    }
+//    /**
+//     * @return string
+//     */
+//    public function getShowButtonAttribute()
+//    {
+//        if (auth()->user()->can(config('permission.permissions.read_accounts'))) {
+//            return '<a href="'.route('admin.account.deposit.show', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.view').'" class="btn btn-primary"><i class="fas fa-eye"></i></a>';
+//        }
+//    }
     
     public function getActionButtonsAttribute()
     {
         return '
-    	<div class="btn-group" role="group" aria-label="'.__('labels.backend.services.service.service_actions').'">
+    	<div class="btn-group" role="group" aria-label="'.__('labels.backend.account.deposit.actions').'">
 		  '.$this->credit_button.'
 		  '.$this->debit_button.'
 		  '.$this->show_button.'
@@ -81,7 +81,7 @@ trait AccountAttribute
     public function getAccountBalanceLabelAttribute()
     {
         $movementRepository = new MovementRepository();
-        return number_format($movementRepository->getAccountBalance($this,2)) . ' ' . Currency::where('is_default', true)->firstOrFail()->code;
+        return number_format($movementRepository->getAccountBalance($this), 2) . ' ' . Currency::where('is_default', true)->first()->code;
     }
     
     public function getOwnerLabelAttribute()

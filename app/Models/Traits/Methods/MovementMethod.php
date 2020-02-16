@@ -24,11 +24,4 @@ trait MovementMethod
     public static function codeExists($code) {
         return Movement::where('code', $code)->exists();
     }
-    
-    public function getClass($account)
-    {
-        if ($this->source == $account)
-            return 'danger';
-        return 'success';
-    }
 }

@@ -15,6 +15,7 @@ use App\Events\Backend\Companies\Company\CompanyUpdated;
 use App\Exceptions\GeneralException;
 use App\Models\Account\Account;
 use App\Models\Account\AccountType;
+use App\Models\Auth\User;
 use App\Models\Company\Company;
 use Codeception\Module\Db;
 use Illuminate\Support\Facades\Storage;
@@ -30,32 +31,28 @@ class CompanyRepository
      */
     public function create(array $data)
     {
+        $company = (new Company())->fill($data);
         
-        return \DB::transaction(function () use ($data) {
-    
-            $company = (new Company())->fill($data);
-            
-            $company->is_provider = request()->has('is_provider') ? 1 : 0;
-            $company->agent_self_topup = request()->has('agent_self_topup') ? 1 : 0;
-            $company->direct_polling = request()->has('direct_polling') ? 1 : 0;
-    
-            // create account for the company
-            $account = new Account();
-            $account->code = Account::generateCode();
-            $account->type_id = AccountType::where('name', config('business.account.type.company'))->first()->uuid;
-            
-            if ($company->save()) {
-                $account->owner_id = $company->uuid;
-    
-                if ($account->save()) {
-                    event(new CompanyCreated($company));
-                    return $company;
-                }
-                
+        $company->is_provider = request()->has('is_provider') ? 1 : 0;
+        $company->agent_self_topup = request()->has('agent_self_topup') ? 1 : 0;
+        $company->direct_polling = request()->has('direct_polling') ? 1 : 0;
+
+        // create account for the company
+        $account = new Account();
+        $account->code = Account::generateCode();
+        $account->type_id = AccountType::where('name', config('business.account.type.company'))->first()->uuid;
+        
+        if ($company->save()) {
+            $account->owner_id = $company->uuid;
+
+            if ($account->save()) {
+                event(new CompanyCreated($company));
+                return $company;
             }
-    
-            throw new GeneralException(__('exceptions.backend.companies.company.create_error'));
-        });
+            
+        }
+
+        throw new GeneralException(__('exceptions.backend.companies.company.create_error'));
     }
     
     /**
@@ -168,5 +165,25 @@ class CompanyRepository
     public function getAvailableServices($company)
     {
         return $company->services()->where('services.is_active', true);
+    }
+    
+    /**
+     * @param User $user
+     * @param $company
+     * @return bool
+     * @throws GeneralException
+     */
+    public function changeCompany(User $user, $company)
+    {
+        $user->company_id = $company->uuid;
+    
+        $user->is_comp_temp = $company->isDefault() ? 0 : 1;
+    
+        if ($user->save()) {
+            
+            return true;
+        }
+    
+        throw new GeneralException(__('exceptions.backend.companies.company.login_error'));
     }
 }
