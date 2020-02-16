@@ -52,7 +52,7 @@ return [
             'credit' => 'Credit',
             'debit' => 'Debit',
             'float' => 'Float',
-            'payout' => 'Payout',
+            'payout' => 'PayoutType',
             
             'activate' => 'Unfreeze Account',
             'deactivate' => 'Freeze Account'

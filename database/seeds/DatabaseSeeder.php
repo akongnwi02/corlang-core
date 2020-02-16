@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
             'accounts',
             'movementtypes',
             'movements',
+            'payouttypes',
+            'payouts',
         ]);
     
         Model::unguard();

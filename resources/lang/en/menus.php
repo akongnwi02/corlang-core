@@ -72,9 +72,9 @@ return [
                 'edit'       => 'Edit Service',
             ],
             'commission' => [
-                'management' => 'Commissions',
-                'create'     => 'Create Commission',
-                'edit'       => 'Edit Commission',
+                'management' => 'Service Charges',
+                'create'     => 'Create Service Charge',
+                'edit'       => 'Edit Service Charge',
             ]
         ],
         'accounts' => [

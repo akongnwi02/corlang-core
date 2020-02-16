@@ -45,7 +45,6 @@ class AccountRepository
         throw new GeneralException(__('exceptions.backend.account.mark_error'));
     }
     
-    
     public function getAllDepositAccounts()
     {
         $accounts = QueryBuilder::for(Account::class)
@@ -54,16 +53,15 @@ class AccountRepository
                 AllowedFilter::scope('type_id'),
             ])
             ->defaultSort('-accounts.is_active', '-accounts.created_at')
-            ->whereHas('company', function ($query) {
-                $query->whereNotIn('is_default', [true]);
-            })
-            ->orWhereHas('user')
             ->with('type');
         
         if (! auth()->user()->company->isDefault()) {
             $accounts->whereHas('user', function ($query) {
-                $query->where('users.company_id', auth()->user()->company->uuid);
-            });
+                    $query->where('users.company_id', auth()->user()->company_id);
+                })
+            ->orWhereHas('company', function ($query) {
+                    $query->where('companies.uuid', auth()->user()->company_id);
+                });
         }
         
         return $accounts;

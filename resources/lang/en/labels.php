@@ -202,9 +202,9 @@ return [
             ],
             'commission' => [
                 'management'         => 'Service Charge',
-                'create'             => 'Create Commission',
-                'edit'               => 'Edit Commission',
-                'commission_actions' => 'Commission Actions',
+                'create'             => 'Create Service Charge',
+                'edit'               => 'Edit Service Charge',
+                'commission_actions' => 'Service Charge Actions',
                 
                 'table' => [
                     'name'        => 'Name',
@@ -212,7 +212,7 @@ return [
                     'currency'    => 'Currency',
                     'view'        => 'View Stack',
                     
-                    'total' => 'commission|commissions',
+                    'total' => 'service charge|service charges',
                     'stack' => [
                         'title'      => 'Stack',
                         'from'       => 'From',
@@ -230,7 +230,7 @@ return [
             'credit'     => 'Credit Account',
             'debit'      => 'Debit Account',
             'float'      => 'Add Float',
-            'payout'     => 'Request Payout',
+            'payout'     => 'Request PayoutType',
             'deposit'    => [
                 'management' => 'Deposit Accounts',
                 'actions'    => 'Account Actions',

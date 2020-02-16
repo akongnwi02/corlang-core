@@ -26,6 +26,13 @@ return [
         ]
     ],
     
+    'payout' => [
+        'type' => [
+            'commission' => 'commission',
+            'drain' => 'drain',
+        ]
+    ],
+    
     'system' => [
         'country' => [
             'name' => [
