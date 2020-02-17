@@ -45,7 +45,7 @@ class AccountRepository
         throw new GeneralException(__('exceptions.backend.account.mark_error'));
     }
     
-    public function getAllDepositAccounts()
+    public function getAllAccounts()
     {
         $accounts = QueryBuilder::for(Account::class)
             ->allowedFilters([

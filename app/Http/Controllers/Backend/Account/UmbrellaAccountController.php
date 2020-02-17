@@ -22,7 +22,8 @@ class UmbrellaAccountController extends Controller
 
     public function index(AccountRepository $accountRepository)
     {
-    
+        return view('backend.accounts.umbrella.index')
+            ->withAccounts($accountRepository->getAllAccounts()->paginate());
     }
 
     public function payout()

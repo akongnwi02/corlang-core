@@ -42,7 +42,7 @@ class DepositAccountController extends Controller
     public function index(AccountRepository $accountRepository)
     {
         return view('backend.accounts.deposit.index')
-            ->withAccounts($accountRepository->getAllDepositAccounts()->paginate());
+            ->withAccounts($accountRepository->getAllAccounts()->paginate());
     }
 
     public function payout()
