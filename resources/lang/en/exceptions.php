@@ -78,7 +78,8 @@ return [
         'account' => [
             'mark_error' => 'There was an error freezing this account.',
             'inactive' => 'There was a problem authorizing the transaction. Either source or destination account is inactive.',
-            'insufficient_balance' => 'The was a problem authorizing the transaction. Either source or destination account has insufficient funds'
+            'insufficient_balance' => 'The was a problem authorizing the transaction. Either source or destination account has insufficient funds',
+            'insufficient_drain' => 'Insufficient funds in umbrella account',
         ],
         
         'movement' => [
@@ -97,6 +98,9 @@ return [
                 'invalid_pricings' => 'The :attribute contain some invalid values',
             ]
         ],
+        'payout' => [
+            'drain_error' => 'There was an error draining the amount',
+        ]
     ],
 
     'frontend' => [

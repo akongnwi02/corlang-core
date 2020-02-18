@@ -80,8 +80,12 @@ trait AccountAttribute
     
     public function getAccountBalanceLabelAttribute()
     {
-        $movementRepository = new MovementRepository();
-        return number_format($movementRepository->getAccountBalance($this), 2) . ' ' . Currency::where('is_default', true)->first()->code;
+        return number_format($this->getBalance(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
+    }
+    
+    public function getUmbrellaBalanceLabelAttribute()
+    {
+        return number_format($this->getUmbrellaBalance(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
     }
     
     public function getOwnerLabelAttribute()

@@ -10,6 +10,10 @@ namespace App\Models\Traits\Methods;
 
 
 use App\Models\Account\Account;
+use App\Models\Account\Movement;
+use App\Models\Account\MovementType;
+use App\Models\Account\Payout;
+use App\Models\Account\PayoutType;
 
 trait AccountMethod
 {
@@ -36,4 +40,55 @@ trait AccountMethod
     
     }
     
+    public function getCredit()
+    {
+        return Movement::where('is_reversed', false)
+            ->where('destinationaccount_id', $this->uuid)
+            ->where(function ($query) {
+                $query->where('type_id', MovementType::where('name', config('business.movement.type.float'))->first()->uuid)
+                    ->orWhere('type_id', MovementType::where('name', config('business.movement.type.deposit'))->first()->uuid)
+                    ->orWhere('type_id', MovementType::where('name', config('business.movement.type.sale'))->first()->uuid);
+            })
+            ->sum('amount');
+    }
+    
+    public function getDebit()
+    {
+        return Movement::where('is_reversed', false)
+            ->where('destinationaccount_id', $this->uuid)
+            ->where(function ($query) {
+                $query->where('type_id', MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid)
+                    ->orWhere('type_id', MovementType::where('name', config('business.movement.type.withdrawal'))->first()->uuid);
+            })
+            ->sum('amount');
+    }
+    
+    public function getDrains()
+    {
+        return Payout::where('account_id', $this->uuid)
+            ->where(function ($query) {
+                $query->where('type_id', PayoutType::where('name', config('business.payout.type.drain'))->first()->uuid);
+            })
+            ->sum('amount');
+    }
+    
+    public function getSales()
+    {
+        return Movement::where('is_reversed', false)
+            ->where('destinationaccount_id', $this->uuid)
+            ->where(function ($query) {
+                $query->where('type_id', MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid);
+            })
+            ->sum('amount');
+    }
+    
+    public function getUmbrellaBalance()
+    {
+        return $this->getSales() - $this->getDrains();
+    }
+    
+    public function getBalance()
+    {
+        return $this->getCredit() - $this->getDebit();
+    }
 }

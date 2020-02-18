@@ -66,4 +66,27 @@ class AccountRepository
         
         return $accounts;
     }
+    
+    public function getUmbrellaAccounts()
+    {
+        $accounts = QueryBuilder::for(Account::class)
+            ->allowedFilters([
+                AllowedFilter::scope('is_active'),
+                AllowedFilter::scope('type_id'),
+            ])
+            ->defaultSort('-accounts.is_active', '-accounts.created_at')
+            ->with('type');
+    
+        if (! auth()->user()->company->isDefault()) {
+            $accounts->whereHas('user', function ($query) {
+                $query->where('users.company_id', auth()->user()->company_id);
+            })
+                ->orWhereHas('company', function ($query) {
+                    $query->where('companies.uuid', auth()->user()->company_id);
+                });
+        }
+    
+        return $accounts->whereHas('user');
+    }
+    
 }

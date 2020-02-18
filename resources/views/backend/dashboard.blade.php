@@ -28,9 +28,9 @@
                                 </div>
                                 <div class="card-body row text-center">
                                     <div class="col">
-                                        <div class="text-value-xl">{{ $numberOfUsers }}</div>
+                                        <div class="text-value-xl">{{ $number_of_users }}</div>
                                         <div
-                                            class="text-uppercase text-muted small">{{trans_choice('strings.backend.dashboard.company.users', $numberOfUsers)}}</div>
+                                            class="text-uppercase text-muted small">{{trans_choice('strings.backend.dashboard.company.users', $number_of_users)}}</div>
                                     </div>
                                     <div class="c-vr"></div>
                                     {{--<div class="col">--}}
@@ -48,7 +48,7 @@
                         <div class="col-sm-4 col-lg-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="text-value-lg">{{ $companyTodayCommission . ' ' .$default_currency->code }}</div>
+                                    <div class="text-value-lg">{{ $company_today_commission }}</div>
                                     <div>@lang('strings.backend.dashboard.company.commission_today')</div>
                                     {{--<div class="progress progress-xs my-2">--}}
                                     {{--<div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>--}}
@@ -62,12 +62,12 @@
                                 <div class="card-body">
                                     @can(config('permission.permissions.request_payouts'))
                                         <div class="btn-group float-right">
-                                            <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#requestPayout" title="@lang('labels.backend.account.payout')">
-                                                <img src="{{ url('img/backend/brand/arrow-circle-bottom.svg') }}" alt="@lang('labels.backend.account.payout')">
+                                            <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#requestPayout" title="@lang('labels.backend.account.request_payout')">
+                                                <img src="{{ url('img/backend/brand/arrow-circle-bottom.svg') }}" alt="@lang('labels.backend.account.request_payout')">
                                             </button>
                                         </div>
                                     @endcan
-                                    <div class="text-value-lg">{{ $companyCommission . ' ' . $default_currency->code }}</div>
+                                    <div class="text-value-lg">{{ $company_commission_balance }}</div>
                                     <div>@lang('strings.backend.dashboard.company.commission')</div>
                                     {{--<div class="progress progress-xs my-2">--}}
                                         {{--<div class="progress-bar bg-warning" role="progressbar" style="width: 25%"--}}
@@ -87,7 +87,7 @@
                                             </button>
                                         </div><!--btn-toolbar-->
                                     @endif
-                                    <div class="text-value-lg">{{ $companyBalance . ' ' . $default_currency->code }}</div>
+                                    <div class="text-value-lg">{{ $company_account_balance }}</div>
                                     <div>@lang('strings.backend.dashboard.company.balance')</div>
                                     {{--<div class="progress progress-xs my-2">--}}
                                         {{--<div class="progress-bar bg-danger" role="progressbar" style="width: 25%"--}}

@@ -84,46 +84,7 @@ class MovementRepository
             throw new GeneralException(__('exceptions.backend.movement.create_error'));
         });
     }
-    
-    public function getAccountBalance($account)
-    {
-        $credit = Movement::where('is_reversed', false)
-            ->where('destinationaccount_id', $account->uuid)
-            ->where(function ($query) {
-                $query->where('type_id', MovementType::where('name', config('business.movement.type.float'))->first()->uuid)
-                    ->orWhere('type_id', MovementType::where('name', config('business.movement.type.deposit'))->first()->uuid)
-                    ->orWhere('type_id', MovementType::where('name', config('business.movement.type.sale'))->first()->uuid);
-            })
-            ->sum('amount');
-    
-        $debit = Movement::where('is_reversed', false)
-            ->where('destinationaccount_id', $account->uuid)
-            ->where(function ($query) {
-                $query->where('type_id', MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid)
-                    ->orWhere('type_id', MovementType::where('name', config('business.movement.type.withdrawal'))->first()->uuid);
-            })
-            ->sum('amount');
-    
-        return ($credit-$debit);
-    }
-    
-    public function getCompanyCommissionBalance($company)
-    {
-        $commission = Movement::where('company_id', $company->uuid)
-            ->where('is_reversed', false)
-            ->where(function ($query) {
-                $query->where('type_id', MovementType::where('name', config('business.movement.type.sale'))->first()->uuid)
-                    ->orWhere('type_id', MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid);
-            })
-            ->sum('company_commission');
-        
-        return $commission;
-    }
-    
-    public function getCompanyTodaysCommission($company)
-    {
-        return 0;
-    }
+
     
     public function getAccountMovements($account)
     {

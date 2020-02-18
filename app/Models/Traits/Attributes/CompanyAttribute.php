@@ -8,6 +8,8 @@
 
 namespace App\Models\Traits\Attributes;
 
+use App\Models\System\Currency;
+
 trait CompanyAttribute
 {
     /**
@@ -101,4 +103,13 @@ trait CompanyAttribute
 		</div>';
     }
     
+    public function getCompanyCommissionBalanceLabelAttribute()
+    {
+        return number_format($this->getCompanyCommissionBalance(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
+    }
+    
+    public function getCompanyTodayCommissionLabelAttribute()
+    {
+        return number_format($this->getCompanyTodayCommission(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
+    }
 }

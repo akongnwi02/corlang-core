@@ -22,7 +22,7 @@ class CreatePayoutsTable extends Migration
             $table->uuid('type_id');
             $table->uuid('user_id')->nullable();
             $table->uuid('company_id')->nullable();
-            $table->uuid('comment')->nullable();
+            $table->string('comment')->nullable();
             $table->uuid('currency_id');
     
             $table->unsignedBigInteger('created_by')->nullable();

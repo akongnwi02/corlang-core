@@ -8,7 +8,6 @@
 
 namespace App\Rules\Account;
 
-use App\Repositories\Backend\Movement\MovementRepository;
 use Illuminate\Contracts\Validation\Rule;
 
 class SufficientBalanceRule implements Rule
@@ -29,7 +28,7 @@ class SufficientBalanceRule implements Rule
             $source = request()->account;
         }
     
-        $balance = (new MovementRepository())->getAccountBalance($source);
+        $balance = $source->getBalance();
         
         return $balance >= request()->amount;
     }

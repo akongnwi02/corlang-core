@@ -62,6 +62,7 @@ return [
             'floated' => 'Float applied successfully',
             'transferred' => 'Amount transferred successfully',
             'status_updated' => 'The status was successfully updated.',
+            'drained' => 'Amount drained successfully.',
         ]
     ],
 

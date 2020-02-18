@@ -30,10 +30,10 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>@lang('labels.backend.account.umbrella.table.code')</th>
-                                <th>@lang('labels.backend.account.umbrella.table.user')</th>
-                                {{--<th>@lang('labels.backend.account.umbrella.table.active')</th>--}}
-                                <th>@lang('labels.backend.account.umbrella.table.balance')</th>
+                                <th>@lang('labels.backend.account.payout.table.code')</th>
+                                <th>@lang('labels.backend.account.payout.table.user')</th>
+                                <th>@lang('labels.backend.account.payout.table.balance')</th>
+                                <th>@lang('labels.backend.account.payout.table.pending')</th>
                                 <th>@lang('labels.general.actions')</th>
                             </tr>
                             </thead>
@@ -43,7 +43,8 @@
                                     <td>{{ $account->code }}</td>
                                     <td>{{ $account->owner_label }}</td>
                                     {{--<td>{!! $account->active_label !!}</td>--}}
-                                    <td class="balance" id="{{ $account->uuid }}">{{ $account->umbrella_balance_label }}</td>
+                                    <td class="balance" id="{{ $account->uuid }}">{{ $account->commission_balance_label }}</td>
+                                    <td>{{ $account->pending_payouts }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="@lang('labels.backend.account.umbrella.actions')">
                                             @can(config('permission.permissions.read_accounts'))

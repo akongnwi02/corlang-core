@@ -249,6 +249,7 @@ return [
             'account' => [
                 'amount' => 'Amount',
                 'currency' => 'Currency',
+                'comment' => 'Comment (Optional)',
             ]
         ],
         

@@ -14,6 +14,7 @@
 use App\Http\Controllers\Backend\Account\DepositAccountController;
 use App\Http\Controllers\Backend\Account\AccountStatusController;
 use App\Http\Controllers\Backend\Account\UmbrellaAccountController;
+use App\Http\Controllers\Backend\Account\PayoutAccountController;
 
 Route::group([
     'prefix'     => 'account',
@@ -31,21 +32,29 @@ Route::group([
     Route::get('/umbrella', [UmbrellaAccountController::class, 'index'])
         ->name('umbrella.index')
         ->middleware('permission:'.config('permission.permissions.read_accounts'));
+        
+    Route::get('/payout', [PayoutAccountController::class, 'index'])
+        ->name('payout.index')
+        ->middleware('permission:'.config('permission.permissions.read_accounts'));
     
     /*
      * Specific Account
      */
     Route::group(['prefix' => '{account}'], function () {
     
-        // Company
-        Route::get('/', [DepositAccountController::class, 'show'])
+        // Account
+        Route::get('/deposit', [DepositAccountController::class, 'show'])
             ->name('deposit.show')
             ->middleware('permission:'.config('permission.permissions.read_accounts'));
+        
+        Route::get('/umbrella', [UmbrellaAccountController::class, 'show'])
+            ->name('umbrella.show')
+            ->middleware('permission:'.config('permission.permissions.read_accounts'));
 
-//        Route::get('edit', [ServiceController::class, 'edit'])
-//            ->name('edit')
-//            ->middleware('permission:'.config('permission.permissions.update_services'));
-//
+        Route::patch('/drain', [UmbrellaAccountController::class, 'drain'])
+            ->name('drain')
+            ->middleware('permission:'.config('permission.permissions.debit_accounts'));
+
         Route::patch('/credit', [DepositAccountController::class, 'credit'])
             ->name('credit')
             ->middleware('permission:'.config('permission.permissions.credit_accounts'));

@@ -108,6 +108,11 @@
                                 @lang('menus.backend.accounts.umbrella.management')
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/accounts/payout*')) }}" href="{{ route('admin.account.payout.index') }}">
+                                @lang('menus.backend.accounts.payout.management')
+                            </a>
+                        </li>
                     </ul>
                 </li>
             @endcan

@@ -86,8 +86,13 @@ return [
             ],
             'umbrella' => [
                 'management' => 'Umbrella Account',
+                'view' => 'View Account',
+            ],
+            'payout' => [
+                'management' => 'Payout Account',
+                'view' => 'View Account',
             ]
-        ]
+        ],
     ],
 
     'language-picker' => [

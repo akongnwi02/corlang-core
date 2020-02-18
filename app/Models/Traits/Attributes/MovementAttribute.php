@@ -8,10 +8,6 @@
 
 namespace App\Models\Traits\Attributes;
 
-
-use App\Models\System\Currency;
-use App\Repositories\Backend\Movement\MovementRepository;
-
 trait MovementAttribute
 {
     public function getAmountLabelAttribute()
