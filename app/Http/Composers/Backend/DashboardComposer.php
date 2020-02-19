@@ -17,7 +17,7 @@ class DashboardComposer
     /**
      * @param View $view
      *
-     * @return bool|mixed
+     * @return void
      */
     public function compose(View $view)
     {
