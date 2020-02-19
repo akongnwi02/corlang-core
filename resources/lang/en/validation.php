@@ -250,6 +250,8 @@ return [
                 'amount' => 'Amount',
                 'currency' => 'Currency',
                 'comment' => 'Comment (Optional)',
+                'number' => 'Account Number',
+                'payment_method' => 'Payment Method',
             ]
         ],
         

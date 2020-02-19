@@ -22,7 +22,18 @@
                     <input name="currency_id" type="hidden" value="{{ $default_currency->uuid }}">
                 </div>
                 <div>
+                    {{ html()->select('paymentmethod_id' , [null => __(config('business.system.service.name'))] + $paymentMethods)
+                        ->class('form-control')
+                        ->placeholder(__('validation.attributes.backend.account.payment_method'))
+                    }}
+                </div>
+                <br/>
+                <div>
                     <input name="comment" type="text" class="form-control" placeholder="@lang('validation.attributes.backend.account.comment')">
+                </div>
+                <br/>
+                <div>
+                    <input name="account_number" type="text" class="form-control" placeholder="@lang('validation.attributes.backend.account.number')">
                 </div>
 
                 <div class="modal-footer">

@@ -23,6 +23,8 @@ class CreatePayoutsTable extends Migration
             $table->uuid('user_id')->nullable();
             $table->uuid('company_id')->nullable();
             $table->string('comment')->nullable();
+            $table->uuid('paymentmethod_id')->nullable();
+            $table->string('account_number')->nullable();
             $table->uuid('currency_id');
     
             $table->unsignedBigInteger('created_by')->nullable();
@@ -33,6 +35,7 @@ class CreatePayoutsTable extends Migration
             
             $table->foreign('type_id')->references('uuid')->on('payouttypes');
             $table->foreign('user_id')->references('uuid')->on('users');
+            $table->foreign('paymentmethod_id')->references('uuid')->on('services');
             $table->foreign('company_id')->references('uuid')->on('companies');
             $table->foreign('currency_id')->references('uuid')->on('currencies');
             $table->foreign('account_id')->references('uuid')->on('accounts');

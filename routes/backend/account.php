@@ -64,7 +64,7 @@ Route::group([
             ->middleware('permission:'.config('permission.permissions.credit_accounts'));
         
         // to be continued when you implement the payment services
-        Route::patch('/payout', [DepositAccountController::class, 'payout'])
+        Route::patch('/payout', [PayoutAccountController::class, 'payout'])
             ->name('payout')
             ->middleware('permission:'.config('permission.permissions.request_payouts'));
         
@@ -77,4 +77,6 @@ Route::group([
             ->name('mark')
             ->middleware('permission:'.config('permission.permissions.freeze_accounts'));
     });
+    
+    
 });

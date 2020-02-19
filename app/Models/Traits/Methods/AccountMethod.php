@@ -95,8 +95,24 @@ trait AccountMethod
     public function getCommissionBalance()
     {
         if ($this->type->name == config('business.account.type.company')) {
+
             return $this->company->getCompanyCommissionBalance();
         }
         return $this->user->getUserCommissionBalance();
+    }
+    
+    public function getPayoutsTotal()
+    {
+        $total = Payout::where('account_id', $this->uuid)
+            ->whereIn('status', [
+                config('business.payout.status.approved'),
+                config('business.payout.status.pending'),
+            ])
+            ->where(function ($query) {
+                $query->where('type_id', PayoutType::where('name', config('business.payout.type.commission'))->first()->uuid);
+            })
+            ->sum('amount');
+
+        return $total;
     }
 }

@@ -63,6 +63,7 @@ return [
             'transferred' => 'Amount transferred successfully',
             'status_updated' => 'The status was successfully updated.',
             'drained' => 'Amount drained successfully.',
+            'paid_out' => 'The payout request was successful. The request is pending validation',
         ]
     ],
 

@@ -51,6 +51,9 @@ return [
         'setting' => [
             'key' => [
             ]
+        ],
+        'service' => [
+            'name' => 'Corlang'
         ]
     ],
 ];

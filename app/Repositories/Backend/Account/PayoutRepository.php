@@ -41,6 +41,35 @@ class PayoutRepository
         throw new GeneralException(__('exceptions.backend.movement.create_error'));
     }
     
+    /**
+     * @param $account
+     * @param $data
+     * @return bool
+     * @throws GeneralException
+     */
+    public function payout($account, $data)
+    {
+        $payout = new Payout();
+        $payout->code = Payout::generateCode();
+        $payout->amount = $data['amount'];
+        $payout->comment = $data['comment'];
+        $payout->account_number = $data['account_number'];
+        $payout->paymentmethod_id = $data['paymentmethod_id'];
+        $payout->currency_id = $data['currency_id'];
+        $payout->type_id = PayoutType::where('name', config('business.payout.type.commission'))->first()->uuid;
+        $payout->user_id = auth()->user()->uuid;
+        $payout->company_id = auth()->user()->company->uuid;
+        $payout->account_id = $account->uuid;
+        $payout->status = config('business.payout.status.pending');
+        
+    
+        if ($payout->save()) {
+            return true;
+        }
+    
+        throw new GeneralException(__('exceptions.backend.payout.payout_error'));
+    }
+    
     public function getAccountDrains($account)
     {
         return QueryBuilder::for(Payout::class)

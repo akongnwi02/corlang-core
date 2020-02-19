@@ -80,6 +80,7 @@ return [
             'inactive' => 'There was a problem authorizing the transaction. Either source or destination account is inactive.',
             'insufficient_balance' => 'The was a problem authorizing the transaction. Either source or destination account has insufficient funds',
             'insufficient_drain' => 'Insufficient funds in umbrella account',
+            'insufficient_commission' => 'Insufficient funds in commission account',
         ],
         
         'movement' => [
@@ -100,6 +101,7 @@ return [
         ],
         'payout' => [
             'drain_error' => 'There was an error draining the amount',
+            'payout_error' => 'There was a problem executing the payout. Please try again.'
         ]
     ],
 

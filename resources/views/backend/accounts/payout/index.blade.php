@@ -52,7 +52,7 @@
                                             @can(config('permission.permissions.read_accounts'))
                                                 <a href="{{ route('admin.account.payout.show', $account->uuid) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.view')" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                             @endcan
-                                            @can(config('permission.permissions.debit_accounts'))
+                                            @can(config('permission.permissions.request_payouts'))
                                                 <button name="payoutPopup" id="{{ $account->uuid }}" title="@lang('labels.backend.account.request_payout')" class="btn btn-danger"><i class="fas fa-arrow-down"></i></button>
                                             @endcan
                                         </div>
@@ -85,17 +85,17 @@
     <script>
 
         $(function () {
-            $("button[name='drainPopup']").click(function () {
+            $("button[name='payoutPopup']").click(function () {
                 let title = this.title;
                 let id = this.id;
                 let balance = $(`td[id='${id}']`).html();
 
-                $("#drainModal .title-text").html(title);
-                $("#drainModal button[type='submit']").html(title);
-                $("#drainModal strong[class='balance']").html(balance);
-                $("#drainModal form").attr('action', `/admin/account/${id}/drain`);
+                $("#payoutModal .title-text").html(title);
+                $("#payoutModal button[type='submit']").html(title);
+                $("#payoutModal strong[class='balance']").html(balance);
+                $("#payoutModal form").attr('action', `/admin/account/${id}/payout`);
 
-                $("#drainModal").modal("show");
+                $("#payoutModal").modal("show");
             });
         });
 

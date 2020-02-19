@@ -18,6 +18,9 @@ trait DrainAttribute
     
     public function getAccountLabelAttribute()
     {
-        return $this->account->user->name . ' | ' . $this->account->code;
+        if ($this->account->type->name == config('business.account.type.user')) {
+            return $this->account->user->name . ' | ' . $this->account->code;
+        }
+        return $this->account->company->name . ' | ' . $this->account->code;
     }
 }

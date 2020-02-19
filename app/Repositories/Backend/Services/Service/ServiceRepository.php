@@ -66,6 +66,11 @@ class ServiceRepository
         return $services;
     }
     
+    public function getPaymentMethods()
+    {
+        return Service::paymentMethods();
+    }
+    
     /**
      * @param $service
      * @param $status

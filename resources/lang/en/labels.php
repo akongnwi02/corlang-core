@@ -341,6 +341,8 @@ return [
                             'table' => [
                                 'code'    => 'Transaction Number',
                                 'amount'  => 'Amount',
+                                'method'  => 'Payout Method',
+                                'number'  => 'Account Number',
                                 'comment' => 'Comment',
                                 'account' => 'Account',
                                 'user'    => 'Executed by',

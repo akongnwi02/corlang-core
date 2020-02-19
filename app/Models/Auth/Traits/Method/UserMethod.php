@@ -198,14 +198,17 @@ trait UserMethod
     
     public function getUserCommissionBalance()
     {
-        $commission = Movement::where('user_id', $this->uuid)
+        return $this->getUserCommissionTotal() - $this->account->getPayoutsTotal();
+    }
+    
+    public function getUserCommissionTotal()
+    {
+        return Movement::where('user_id', $this->uuid)
             ->where('is_reversed', false)
             ->where(function ($query) {
                 $query->where('type_id', MovementType::where('name', config('business.movement.type.sale'))->first()->uuid)
                     ->orWhere('type_id', MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid);
             })
             ->sum('agent_commission');
-    
-        return $commission;
     }
 }

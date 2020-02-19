@@ -15,4 +15,9 @@ trait ServiceScope
     {
         return $query->where('is_active', $active);
     }
+    
+    public function scopePaymentMethods($query)
+    {
+        return $query->where('is_paymentmethod', true);
+    }
 }

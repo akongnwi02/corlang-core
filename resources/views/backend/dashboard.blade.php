@@ -62,7 +62,7 @@
                                 <div class="card-body">
                                     @can(config('permission.permissions.request_payouts'))
                                         <div class="btn-group float-right">
-                                            <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#requestPayout" title="@lang('labels.backend.account.request_payout')">
+                                            <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#payoutModal" title="@lang('labels.backend.account.request_payout')">
                                                 <img src="{{ url('img/backend/brand/arrow-circle-bottom.svg') }}" alt="@lang('labels.backend.account.request_payout')">
                                             </button>
                                         </div>
@@ -110,7 +110,9 @@
 
     @component('backend.components.dashboard.payout', [
         'account' => $logged_in_user->company->account,
-        'currency' => $default_currency
+        'currency' => $default_currency,
+        'paymentMethods' => $payment_methods,
+        'companyCommissionBalance' => $company_commission_balance,
     ])
     @endcomponent
 

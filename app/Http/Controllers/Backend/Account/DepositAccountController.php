@@ -45,11 +45,6 @@ class DepositAccountController extends Controller
             ->withAccounts($accountRepository->getAllAccounts()->paginate());
     }
 
-    public function payout()
-    {
-    
-    }
-    
     /**
      * @param ShowAccountRequest $request
      * @param Account $account

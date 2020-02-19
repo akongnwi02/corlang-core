@@ -11,6 +11,8 @@ namespace App\Models\Traits\Methods;
 
 use App\Models\Account\Movement;
 use App\Models\Account\MovementType;
+use App\Models\Account\Payout;
+use App\Models\Account\PayoutType;
 use Carbon\Carbon;
 
 trait CompanyMethod
@@ -32,15 +34,18 @@ trait CompanyMethod
     
     public function getCompanyCommissionBalance()
     {
-        $commission = Movement::where('company_id', $this->uuid)
+        return $this->getCompanyCommissionsTotal() - $this->account->getPayoutsTotal();
+    }
+    
+    public function getCompanyCommissionsTotal()
+    {
+        return Movement::where('company_id', $this->uuid)
             ->where('is_reversed', false)
             ->where(function ($query) {
                 $query->where('type_id', MovementType::where('name', config('business.movement.type.sale'))->first()->uuid)
                     ->orWhere('type_id', MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid);
             })
             ->sum('company_commission');
-    
-        return $commission;
     }
     
     public function getCompanyTodayCommission()
