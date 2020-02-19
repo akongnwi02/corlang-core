@@ -25,7 +25,7 @@
                         <td>{{ $payout->user->full_name }}</td>
                         <td>{{ $payout->account_label }}</td>
                         <td>{{ $payout->company->name }}</td>
-                        <td>{{ $payout->status_label }}</td>
+                        <td>{!! $payout->status_label !!}</td>
                         <td>{{ $payout->created_at->toDatetimeString() }}</td>
 
                         {{--<td>{!! $movement->action_buttons  !!}</td>--}}
