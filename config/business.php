@@ -30,7 +30,13 @@ return [
         'type' => [
             'commission' => 'commission',
             'drain' => 'drain',
-        ]
+        ],
+        'status' => [
+            'pending' => 'pending',
+            'approved' => 'approved',
+            'rejected' => 'rejected',
+            'cancelled' => 'cancelled',
+        ],
     ],
     
     'system' => [

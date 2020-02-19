@@ -1,11 +1,11 @@
-<div class="modal fade" id="drainModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="payoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalCenterTitle">
                     <span class="title-text"></span>
                     <br/>
-                    <small class="text-muted">@lang('labels.backend.account.umbrella_balance'): <strong class="balance"></strong></small>
+                    <small class="text-muted">@lang('labels.backend.account.commission_balance'): <strong class="balance"></strong></small>
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="@lang('buttons.general.cancel')">
                     <span aria-hidden="true">&times;</span>

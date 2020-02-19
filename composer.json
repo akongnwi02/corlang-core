@@ -26,6 +26,7 @@
         "fideloper/proxy": "^4.0",
         "hieu-le/active": "^3.5",
         "laravel/framework": "5.7.*",
+        "laravel/horizon": "^3.7",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "^1.0",
         "spatie/laravel-html": "^2.4",

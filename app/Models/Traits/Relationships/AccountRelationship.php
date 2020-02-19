@@ -11,6 +11,7 @@ namespace App\Models\Traits\Relationships;
 use App\Models\Account\Account;
 use App\Models\Account\AccountType;
 use App\Models\Account\Movement;
+use App\Models\Account\Payout;
 use App\Models\Auth\User;
 use App\Models\Company\Company;
 use App\Models\System\Country;
@@ -33,5 +34,10 @@ trait AccountRelationship
     public function type()
     {
         return $this->hasOne(AccountType::class, 'uuid', 'type_id');
+    }
+    
+    public function payouts()
+    {
+        return $this->hasMany(Payout::class, 'account_id', 'uuid');
     }
 }

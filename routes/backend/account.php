@@ -50,6 +50,10 @@ Route::group([
         Route::get('/umbrella', [UmbrellaAccountController::class, 'show'])
             ->name('umbrella.show')
             ->middleware('permission:'.config('permission.permissions.read_accounts'));
+        
+        Route::get('/payout', [PayoutAccountController::class, 'show'])
+            ->name('payout.show')
+            ->middleware('permission:'.config('permission.permissions.read_accounts'));
 
         Route::patch('/drain', [UmbrellaAccountController::class, 'drain'])
             ->name('drain')

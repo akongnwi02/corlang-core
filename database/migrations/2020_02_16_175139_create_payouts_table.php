@@ -16,7 +16,7 @@ class CreatePayoutsTable extends Migration
         Schema::create('payouts', function (Blueprint $table) {
             $table->uuid('uuid')->primary()->unique();
             $table->string('code')->unique();
-            $table->enum('status', ['pending', 'approved', 'rejected', 'canceled'])->nullable();
+            $table->enum('status', ['pending', 'approved', 'rejected', 'cancelled'])->nullable();
             $table->double('amount');
             $table->uuid('account_id')->nullable();
             $table->uuid('type_id');

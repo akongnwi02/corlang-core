@@ -138,7 +138,14 @@
                             </a>
                         </li>
                     </ul>
+
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ active_class(Active::checkUriPattern('admin/horizon')) }}" href="{{ route('admin.horizon') }}">
+                        <i class="nav-icon icon-speedometer"></i> @lang('menus.backend.sidebar.horizon')
+                    </a>
+                </li>
+
             @endif
             <li class="divider"></li>
 

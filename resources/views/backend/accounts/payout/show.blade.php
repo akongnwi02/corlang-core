@@ -12,8 +12,8 @@
             <div class="row">
                 <div class="col-sm-5">
                     <h4 class="card-title mb-0">
-                        @lang('labels.backend.account.umbrella.management')
-                        <small class="text-muted">@lang('labels.backend.account.umbrella.view')</small>
+                        @lang('labels.backend.account.payout.management')
+                        <small class="text-muted">@lang('labels.backend.account.payout.view')</small>
                     </h4>
                 </div><!--col-->
             </div><!--row-->
@@ -22,19 +22,19 @@
                 <div class="col">
                     <ul class="nav nav-tabs" role="tablist" id="companyTab">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-expanded="true"><i class="fas fa-info"></i> @lang('labels.backend.account.umbrella.tabs.titles.overview')</a>
+                            <a class="nav-link active" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-expanded="true"><i class="fas fa-info"></i> @lang('labels.backend.account.payout.tabs.titles.overview')</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#movements" role="tab" aria-controls="movements" aria-expanded="true"><i class="fas fa-list"></i> @lang('labels.backend.account.umbrella.tabs.titles.movements')</a>
+                            <a class="nav-link" data-toggle="tab" href="#movements" role="tab" aria-controls="movements" aria-expanded="true"><i class="fas fa-list"></i> @lang('labels.backend.account.payout.tabs.titles.movements')</a>
                         </li>
                     </ul>
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="overview" role="tabpanel" aria-expanded="true">
-                            @include('backend.accounts.umbrella.show.overview')
+                            @include('backend.accounts.payout.show.overview')
                         </div><!--tab-->
                         <div class="tab-pane fade" id="movements" role="tabpanel" aria-expanded="true">
-                            @include('backend.accounts.umbrella.show.movement')
+                            @include('backend.accounts.payout.show.movement')
                         </div><!--tab-->
                     </div><!--tab-content-->
 

@@ -91,4 +91,12 @@ trait AccountMethod
     {
         return $this->getCredit() - $this->getDebit();
     }
+    
+    public function getCommissionBalance()
+    {
+        if ($this->type->name == config('business.account.type.company')) {
+            return $this->company->getCompanyCommissionBalance();
+        }
+        return $this->user->getUserCommissionBalance();
+    }
 }

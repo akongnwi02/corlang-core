@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models\Auth\Traits\Method;
+use App\Models\Account\Movement;
+use App\Models\Account\MovementType;
 use Carbon\Carbon;
 
 /**
@@ -192,5 +194,18 @@ trait UserMethod
     public function isTemporalLoggedToCompany()
     {
         return $this->is_comp_temp;
+    }
+    
+    public function getUserCommissionBalance()
+    {
+        $commission = Movement::where('user_id', $this->uuid)
+            ->where('is_reversed', false)
+            ->where(function ($query) {
+                $query->where('type_id', MovementType::where('name', config('business.movement.type.sale'))->first()->uuid)
+                    ->orWhere('type_id', MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid);
+            })
+            ->sum('agent_commission');
+    
+        return $commission;
     }
 }

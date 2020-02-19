@@ -48,5 +48,12 @@ class PayoutRepository
             ->where('type_id', PayoutType::where('name', config('business.payout.type.drain'))->first()->uuid)
             ->defaultSort('-payouts.created_at');
     }
-
+    
+    public function getAllPayouts($account)
+    {
+        return QueryBuilder::for(Payout::class)
+            ->where('account_id', $account->uuid)
+            ->where('type_id', PayoutType::where('name', config('business.payout.type.commission'))->first()->uuid)
+            ->defaultSort('-payouts.created_at');
+    }
 }

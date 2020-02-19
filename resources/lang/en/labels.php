@@ -228,6 +228,7 @@ return [
             'management'       => 'Account',
             'company_balance'  => 'Company Balance',
             'umbrella_balance' => 'Umbrella Balance',
+            'commission_balance' => 'Commission Balance',
             'credit'           => 'Credit Account',
             'debit'            => 'Debit Account',
             'drain'            => 'Drain Account',
@@ -322,7 +323,8 @@ return [
                     'balance' => 'Commission Balance',
                     'pending' => 'Pending',
                     'total'   => 'account|accounts',
-                    'user'    => 'User',
+                    'owner'    => 'Owner',
+                    'type'    => 'Type',
                 ],
                 'tabs'       => [
                     'titles'  => [
@@ -332,7 +334,7 @@ return [
                     'content' => [
                         'overview'  => [
                             'code'    => 'Account Number',
-                            'user'    => 'User',
+                            'owner'    => 'Owner',
                             'balance' => 'Commission Balance',
                         ],
                         'movements' => [
@@ -344,6 +346,7 @@ return [
                                 'user'    => 'Executed by',
                                 'company' => 'Company',
                                 'date'    => 'Date',
+                                'status'    => 'Status',
                                 'total'   => 'movement|movements',
                             ],
                         ],

@@ -8,9 +8,7 @@
 
 namespace App\Models\Traits\Attributes;
 
-
 use App\Models\System\Currency;
-use App\Repositories\Backend\Movement\MovementRepository;
 
 trait AccountAttribute
 {
@@ -98,5 +96,15 @@ trait AccountAttribute
             return $this->company->name;
         }
         
+    }
+    
+    public function getPendingPayoutsAttribute()
+    {
+        return $this->payouts()->pending()->count();
+    }
+    
+    public function getCommissionBalanceLabelAttribute()
+    {
+        return number_format($this->getCommissionBalance(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
     }
 }
