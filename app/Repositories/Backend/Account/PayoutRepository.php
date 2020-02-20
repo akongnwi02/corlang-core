@@ -35,6 +35,7 @@ class PayoutRepository
         $drain->account_id = $account->uuid;
         
         if ($drain->save()) {
+//            event(new AccountDrained());
             return true;
         }
     
@@ -61,13 +62,45 @@ class PayoutRepository
         $payout->company_id = auth()->user()->company->uuid;
         $payout->account_id = $account->uuid;
         $payout->status = config('business.payout.status.pending');
-        
     
         if ($payout->save()) {
+            // event(new PayoutRequest());
             return true;
         }
     
         throw new GeneralException(__('exceptions.backend.payout.payout_error'));
+    }
+    
+    /**
+     * @param $payout
+     * @param $status
+     * @return mixed
+     * @throws GeneralException
+     */
+    public function mark($payout, $status)
+    {
+        $payout->status = $status;
+    
+        if ($payout->update()) {
+        
+//            switch ($status) {
+//                case config('business.payout.status.approved'):
+//                    event(new PayoutApproved($payout));
+//                    break;
+//
+//                case config('business.payout.status.rejected'):
+//                    event(new PayoutRejected($payout));
+//                    break;
+//
+//                case config('business.payout.status.cancelled'):
+//                    event(new PayoutCancelled($payout));
+//                    break;
+//            }
+        
+            return $payout;
+        }
+    
+        throw new GeneralException(__('exceptions.backend.payout.status_error'));
     }
     
     public function getAccountDrains($account)

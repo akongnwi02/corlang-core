@@ -139,7 +139,9 @@ return [
         'freeze_accounts'      => 'freeze accounts',
         
         'request_payouts'      => 'request payouts',
-        'validate_payouts'     => 'validate payouts',
+        'approve_payouts'     => 'approve payouts',
+        'reject_payouts'     => 'reject payouts',
+        'cancel_payouts'     => 'cancel payouts',
         
         'transfer_money'       => 'transfer money',
         

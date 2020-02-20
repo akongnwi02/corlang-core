@@ -78,6 +78,7 @@ class MovementRepository
         return \DB::transaction(function () use ($movement, $double) {
     
             if ($movement->save() && $double->save()) {
+//                event(Accountfdfs($movement, $double));
                 return true;
             }
             

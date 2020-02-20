@@ -56,6 +56,11 @@ return [
             
             'activate' => 'Unfreeze Account',
             'deactivate' => 'Freeze Account'
+        ],
+        'payout' => [
+            'cancel' => 'Cancel',
+            'approve' => 'Approve',
+            'reject' => 'Reject',
         ]
     ],
 

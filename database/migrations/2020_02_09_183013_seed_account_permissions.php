@@ -22,7 +22,9 @@ class SeedAccountPermissions extends Migration
             config('permission.permissions.transfer_money'),
             
             config('permission.permissions.request_payouts'),
-            config('permission.permissions.validate_payouts'),
+            config('permission.permissions.approve_payouts'),
+            config('permission.permissions.cancel_payouts'),
+            config('permission.permissions.reject_payouts'),
             
             
             config('permission.permissions.read_accounts'),

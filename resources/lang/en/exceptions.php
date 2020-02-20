@@ -101,7 +101,9 @@ return [
         ],
         'payout' => [
             'drain_error' => 'There was an error draining the amount',
-            'payout_error' => 'There was a problem executing the payout. Please try again.'
+            'payout_error' => 'There was a problem executing the payout. Please try again.',
+            'invalid_status' => 'Invalid payout status.',
+            'status_error' => 'There was a problem updating the status of the payout. Please try again.'
         ]
     ],
 

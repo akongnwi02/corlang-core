@@ -15,7 +15,7 @@
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.status')</th>
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.date')</th>
 
-                    {{--<th>@lang('labels.general.actions')</th>--}}
+                    <th>@lang('labels.general.actions')</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,8 +31,22 @@
                         <td>{{ $payout->company->name }}</td>
                         <td>{!! $payout->status_label !!}</td>
                         <td>{{ $payout->created_at->toDatetimeString() }}</td>
+                        <td>
+                            @if($payout->status == config('business.payout.status.pending'))
+                                <div class="btn-group" role="group" aria-label="@lang('labels.backend.account.payout.actions')">
+                                    @can(config('permission.permissions.cancel_payouts'))
+                                        <a href="{{ route('admin.payout.mark', [$payout, config('business.payout.status.cancelled')]) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.backend.payout.cancel')" class="btn btn-dark"><i class="fas fa-ban"></i></a>
+                                    @endcan
+                                    @can(config('permission.permissions.reject_payouts'))
+                                        <a href="{{ route('admin.payout.mark', [$payout, config('business.payout.status.rejected')]) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.backend.payout.reject')" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                    @endcan
+                                    @can(config('permission.permissions.approve_payouts'))
+                                        <a href="{{ route('admin.payout.mark', [$payout, config('business.payout.status.approved')]) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.backend.payout.approve')" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                    @endcan
+                                </div>
+                            @endif
+                        </td>
 
-                        {{--<td>{!! $movement->action_buttons  !!}</td>--}}
                     </tr>
                 @endforeach
                 </tbody>
