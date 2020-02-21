@@ -73,6 +73,7 @@ return [
 
     'general' => [
         'cancel' => 'Cancel',
+        'back'   => 'Back',
         'continue' => 'Continue',
         'submit'   => 'Submit',
 

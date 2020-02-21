@@ -50,7 +50,7 @@
                                 </tr>
                                 <tr class="child">
                                     <td colspan="5" align="center" class="hiddenRowtable collapse fade" id="pricings-{{ $commission->uuid }}">
-                                        <div >
+                                        <div class="table-responsive">
                                             @if($commission->pricings->count())
                                                 <table class="table">
                                                     <thead>

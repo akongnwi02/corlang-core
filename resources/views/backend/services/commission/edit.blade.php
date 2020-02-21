@@ -101,7 +101,7 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col">
-                        {{ form_cancel(route('admin.services.commission.index'), __('buttons.general.cancel')) }}
+                        {{ form_cancel(route('admin.services.commission.index'), __('buttons.general.back')) }}
                     </div><!--col-->
 
                     <div class="col text-right">
