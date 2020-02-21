@@ -23,6 +23,17 @@ class PayoutStatusRequest extends FormRequest
         if (request()->payout->status != config('business.payout.status.pending')) {
             throw new GeneralException(__('exceptions.backend.payout.invalid_status'));
         }
+    
+        if (request()->payout->account->type == config('business.account.type.user')) {
+            return (auth()->user()->isAdmin() && auth()->user()->company->isDefault())
+                || (auth()->user()->company == request()->payout->account->user->company && auth()->user()->isAdmin())
+                || (request()->account->user == auth()->user());
+        }
+        
+        if (request()->payout->account->type == config('business.account.type.company')) {
+            return (auth()->user()->company == request()->payout->account->company && auth()->user()->isAdmin());
+        }
+        
         switch (request()->status) {
             case config('business.payout.status.approved'):
                 return auth()->user()->can(config('permission.permissions.approve_payouts'));

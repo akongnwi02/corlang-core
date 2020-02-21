@@ -22,7 +22,7 @@ class SufficientCommissionBalanceRule implements Rule
      * @return bool
      */
     public function passes($attribute, $value)
-    {return true;
+    {
         return request()->account->getCommissionBalance() >= request()->amount;
     }
     
