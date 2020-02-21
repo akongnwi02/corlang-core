@@ -12,6 +12,7 @@
  */
 
 use App\Http\Controllers\Backend\Company\Company\CompanyController;
+use App\Http\Controllers\Backend\Company\Company\ChangeCompanyController;
 use App\Http\Controllers\Backend\Company\Company\CompanyStatusController;
 use App\Http\Controllers\Backend\Company\Company\CompanyServiceController;
 
@@ -57,6 +58,10 @@ Route::group([
         Route::delete('/', [CompanyController::class, 'destroy'])
             ->name('company.destroy')
             ->middleware('permission:'.config('permission.permissions.delete_companies'));
+
+        Route::get('/login', [ChangeCompanyController::class, 'login'])
+            ->name('company.login')
+            ->middleware('permission:'.config('permission.permissions.login_to_companies'));
     
         // Status
         Route::get('mark/{status}', [CompanyStatusController::class, 'mark'])

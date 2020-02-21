@@ -60,7 +60,7 @@
 
                     <div id="POItablediv">
                         <div class="btn-toolbar" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
-                            <a id="addPOIbutton" onclick="insRow()" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.add')"><i class="fas fa-plus-circle"></i></a>
+                            <button id="addPOIbutton" onclick="insRow()" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.add')"><i class="fas fa-plus-circle"></i></button>
                         </div>
 
                         <br/>
@@ -101,7 +101,7 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col">
-                        {{ form_cancel(route('admin.services.commission.index'), __('buttons.general.cancel')) }}
+                        {{ form_cancel(route('admin.services.commission.index'), __('buttons.general.back')) }}
                     </div><!--col-->
 
                     <div class="col text-right">

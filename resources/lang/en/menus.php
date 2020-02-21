@@ -46,6 +46,7 @@ return [
 
         'sidebar' => [
             'dashboard' => 'Dashboard',
+            'horizon' => 'Horizon',
             'general'   => 'General',
             'history'   => 'History',
             'system'    => 'System',
@@ -54,7 +55,7 @@ return [
         ],
 
         'companies' => [
-            'title' => 'Company',
+            'title' => 'Companies',
     
             'company' => [
                 'management' => 'Companies',
@@ -64,7 +65,7 @@ return [
         ],
 
         'services' => [
-            'title' => 'Service',
+            'title' => 'Services',
     
             'service'   => [
                 'management' => 'Services',
@@ -72,9 +73,25 @@ return [
                 'edit'       => 'Edit Service',
             ],
             'commission' => [
-                'management' => 'Commissions',
-                'create'     => 'Create Commission',
-                'edit'       => 'Edit Commission',
+                'management' => 'Service Charges',
+                'create'     => 'Create Service Charge',
+                'edit'       => 'Edit Service Charge',
+            ]
+        ],
+        'accounts' => [
+            'title' => 'Accounts',
+            
+            'deposit' => [
+                'management' => 'Deposit Account',
+                'view' => 'View Account'
+            ],
+            'umbrella' => [
+                'management' => 'Umbrella Account',
+                'view' => 'View Account',
+            ],
+            'payout' => [
+                'management' => 'Payout Account',
+                'view' => 'View Account',
             ]
         ],
     ],

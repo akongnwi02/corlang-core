@@ -8,6 +8,8 @@
 
 namespace App\Models\Traits\Attributes;
 
+use App\Models\System\Currency;
+
 trait CompanyAttribute
 {
     /**
@@ -66,6 +68,23 @@ trait CompanyAttribute
         }
     }
     
+    public function getLoginButtonAttribute()
+    {
+        /*
+ * If the admin is currently NOT spoofing a user
+ */
+        if (auth()->user()->isAdmin() && auth()->user()->company->isDefault()) {
+            //Won't break, but don't let them login to their company
+            if (auth()->user()->company_id != $this->uuid ) {
+                return '<a href="'.route(
+                        'admin.companies.company.login',
+                        $this
+                    ).'" class="dropdown-item">'.__('buttons.backend.companies.company.login').'</a>';
+            }
+        }
+    
+        return '';
+    }
     
     public function getActionButtonsAttribute()
     {
@@ -73,7 +92,24 @@ trait CompanyAttribute
     	<div class="btn-group" role="group" aria-label="'.__('labels.backend.companies.company.company_actions').'">
 		  '.$this->show_button.'
 		  '.$this->edit_button.'
+		  <div class="btn-group btn-group-sm" role="group">
+			<button id="userActions" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  '.__('labels.general.more').'
+			</button>
+			<div class="dropdown-menu" aria-labelledby="userActions">
+			  '.$this->login_button.'
+			</div>
+		  </div>
 		</div>';
     }
     
+    public function getCompanyCommissionBalanceLabelAttribute()
+    {
+        return number_format($this->getCompanyCommissionBalance(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
+    }
+    
+    public function getCompanyTodayCommissionLabelAttribute()
+    {
+        return number_format($this->getCompanyTodayCommission(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
+    }
 }

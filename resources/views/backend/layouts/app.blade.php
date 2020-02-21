@@ -31,6 +31,7 @@
         @include('backend.includes.sidebar')
 
         <main class="main">
+            @include('includes.partials.logged-in-to-company')
             @include('includes.partials.logged-in-as')
             {!! Breadcrumbs::render() !!}
 

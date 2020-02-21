@@ -16,7 +16,7 @@ class UpdateRoleRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->isAdmin();
+        return $this->user()->isAdmin() && $this->user()->company->isDefault();
     }
 
     /**

@@ -30,16 +30,37 @@ return [
                 'unlink'             => 'Unlink',
             ],
         ],
+        'services' => [
+            'service' => [
+                'activate' => 'Activate Service',
+                'deactivate' => 'Deactivate Service',
+            ],
+        ],
         'companies' => [
             'company' => [
                 'activate'   => 'Activate Company',
                 'deactivate' => 'Deactivate Company',
+                'login'      => 'Login to this company'
             ],
             'services' => [
                 'commission' => [
                     'stack' => 'Stack',
                 ]
             ]
+        ],
+        'account' => [
+            'credit' => 'Credit',
+            'debit' => 'Debit',
+            'float' => 'Float',
+            'payout' => 'Payout',
+            
+            'activate' => 'Unfreeze Account',
+            'deactivate' => 'Freeze Account'
+        ],
+        'payout' => [
+            'cancel' => 'Cancel',
+            'approve' => 'Approve',
+            'reject' => 'Reject',
         ]
     ],
 
@@ -52,7 +73,9 @@ return [
 
     'general' => [
         'cancel' => 'Cancel',
+        'back'   => 'Back',
         'continue' => 'Continue',
+        'submit'   => 'Submit',
 
         'crud' => [
             'create' => 'Create',

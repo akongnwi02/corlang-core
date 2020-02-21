@@ -49,8 +49,8 @@
                                     <td>{!! $commission->action_buttons  !!}</td>
                                 </tr>
                                 <tr class="child">
-                                    <td colspan="5" align="center" class="hiddenRowtable collapse" id="pricings-{{ $commission->uuid }}">
-                                        <div >
+                                    <td colspan="5" align="center" class="hiddenRowtable collapse fade" id="pricings-{{ $commission->uuid }}">
+                                        <div class="table-responsive">
                                             @if($commission->pricings->count())
                                                 <table class="table">
                                                     <thead>

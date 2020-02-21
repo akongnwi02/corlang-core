@@ -26,6 +26,7 @@
         "fideloper/proxy": "^4.0",
         "hieu-le/active": "^3.5",
         "laravel/framework": "5.7.*",
+        "laravel/horizon": "^3.7",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "^1.0",
         "spatie/laravel-html": "^2.4",
@@ -78,10 +79,8 @@
         "post-create-project-cmd": [
             "@php artisan key:generate"
         ],
-        "post-install-cmd": [
-            "@php artisan migrate"
-        ],
         "post-autoload-dump": [
+            "@php artisan migrate",
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:meta",

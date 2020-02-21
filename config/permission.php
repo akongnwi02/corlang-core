@@ -102,6 +102,7 @@ return [
         'update_companies'     => 'update companies',
         'delete_companies'     => 'delete companies',
         'deactivate_companies' => 'deactivate companies',
+        'login_to_companies'  => 'login to companies',
         
         // company service
         'deactivate_company_services' => 'deactivate company services',
@@ -122,13 +123,31 @@ return [
         'delete_services'      => 'delete services',
         'deactivate_services'  => 'deactivate services',
     
-        //users
+        // users
         'create_users'         => 'create users',
         'read_users'           => 'read users',
         'update_users'         => 'update users',
         'delete_users'         => 'delete users',
         'deactivate_users'     => 'deactivate users',
         'transfer_users'       => 'transfer users',
+        
+        // accounts
+        'float_accounts'       => 'float accounts',
+        
+        'debit_accounts'       => 'debit accounts',
+        'credit_accounts'      => 'credit accounts',
+        'freeze_accounts'      => 'freeze accounts',
+        
+        'request_payouts'      => 'request payouts',
+        'approve_payouts'     => 'approve payouts',
+        'reject_payouts'     => 'reject payouts',
+        'cancel_payouts'     => 'cancel payouts',
+        
+        'transfer_money'       => 'transfer money',
+        
+        'read_accounts'        => 'read accounts',
+        'update_accounts'       => 'update accounts',
+        'drain_accounts'        => 'drain accounts',
     ],
 
 ];

@@ -8,6 +8,7 @@
 
 namespace App\Models\Traits\Relationships;
 
+use App\Models\Account\Account;
 use App\Models\Auth\User;
 use App\Models\System\Country;
 use App\Models\Service\Service;
@@ -47,5 +48,15 @@ trait CompanyRelationship
                 'company_rate',
                 'agent_rate',
             ]);
+    }
+    
+    public function users()
+    {
+        return $this->hasMany(User::class, 'company_id', 'uuid');
+    }
+    
+    public function account()
+    {
+        return $this->hasOne(Account::class, 'owner_id', 'uuid');
     }
 }

@@ -224,9 +224,9 @@ return [
                     'gateway'            => 'Gateway Configuration',
                     'active'             => 'Active',
                     'code'               => 'Code',
-                    'providercommission' => 'Service Provider Commission',
-                    'companycommission'  => 'Company Commission',
-                    'customercommission' => 'Customer Commission',
+                    'providercommission' => 'Service Provider Service Charge',
+                    'companycommission'  => 'Company Service Charge',
+                    'customercommission' => 'Customer Service Charge',
                     'logo'               => 'Logo',
                     'company_rate'       => 'Default Company Rate (%)',
                     'agent_rate'         => 'Default Agent Rate (%)',
@@ -244,8 +244,14 @@ return [
                         'fixed'      => 'Fixed',
                         'percentage' => 'Percentage',
                     ]
-                    
                 ]
+            ],
+            'account' => [
+                'amount' => 'Amount',
+                'currency' => 'Currency',
+                'comment' => 'Comment (Optional)',
+                'number' => 'Account Number',
+                'payment_method' => 'Payment Method',
             ]
         ],
         

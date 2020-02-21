@@ -17,6 +17,7 @@ class SeedCompanyPermissions extends Migration
             config('permission.permissions.update_companies'),
             config('permission.permissions.delete_companies'),
             config('permission.permissions.deactivate_companies'),
+            config('permission.permissions.login_to_companies'),
         ];
 
         foreach ($permissions as $permission) {

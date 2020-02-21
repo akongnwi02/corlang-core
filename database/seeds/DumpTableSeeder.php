@@ -26,5 +26,12 @@ class DumpTableSeeder extends Seeder
         $this->call(GatewayTableSeeder::class);
         $this->call(ServiceTableSeeder::class);
         $this->call(CompanyServiceTableSeeder::class);
+        $this->call(AccountTypeTableSeeder::class);
+        $this->call(AccountTableSeeder::class);
+        $this->call(MovementTypeTableSeeder::class);
+        $this->call(MovementTableSeeder::class);
+        $this->call(UserAccountSeeder::class);
+        $this->call(CompanyAccountSeeder::class);
+        $this->call(PayoutTypeTableSeeder::class);
     }
 }

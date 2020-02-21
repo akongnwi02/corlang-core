@@ -40,12 +40,12 @@ class StoreServiceRequest extends FormRequest
     {
         return [
             'name'                  => ['required', 'string', 'max:191', Rule::unique('services', 'name')],
-            'category_id'           => ['required', Rule::exists('categories', 'uuid')],
-            'gateway_id'            => ['sometimes', Rule::exists('gateways', 'uuid')],
+            'category_id'           => ['required', Rule::exists('categories', 'uuid'), 'nullable'],
+            'gateway_id'            => ['sometimes', Rule::exists('gateways', 'uuid'), 'nullable'],
             'code'                  => ['required', 'string', 'max:191', Rule::unique('services', 'code')],
-            'providercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid')],
-            'customercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid')],
-            'providercompany_id'    => ['sometimes', Rule::exists('companies', 'uuid')],
+            'providercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid'), 'nullable'],
+            'customercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid'), 'nullable'],
+            'providercompany_id'    => ['sometimes', Rule::exists('companies', 'uuid'), 'nullable'],
             'is_paymentmethod'      => ['sometimes', 'boolean'],
             'agent_rate'            => ['required', 'numeric', 'between:0,100'],
             'company_rate'          => ['required', 'numeric', 'between:0,100'],

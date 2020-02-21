@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Auth\User;
-use App\Models\Company\Company;
 use App\Models\Company\CompanyType;
 use App\Models\System\Country;
 use Illuminate\Database\Migrations\Migration;
@@ -19,7 +18,7 @@ class SeedDefaultCompany extends Migration
             'uuid'              => Uuid::generate(4)->string,
             'name'              => 'Corlang Enterprise',
             'address'           => 'Douala Bonaberi',
-            'country_id'        => Country::where('is_default', true)->firstOrFail()->uuid,
+            'country_id'        => Country::where('is_default', true)->first()->uuid,
             'street'            => 'Deido',
             'state'             => 'Littoral',
             'postal_code'       => '00237',
@@ -30,7 +29,7 @@ class SeedDefaultCompany extends Migration
             'is_active'         => true,
             'is_default'        => true,
             'size'              => 5,
-            'type_id'           => CompanyType::where('name', config('business.company.type.formal'))->firstOrFail()->uuid,
+            'type_id'           => CompanyType::where('name', config('business.company.type.formal'))->first()->uuid,
             'owner_id'          => User::find(1)->uuid,
             'deactivated_by_id' => null,
             'logo_url'          => null,

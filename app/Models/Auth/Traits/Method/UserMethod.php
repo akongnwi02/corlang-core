@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models\Auth\Traits\Method;
+use App\Models\Account\Movement;
+use App\Models\Account\MovementType;
 use Carbon\Carbon;
 
 /**
@@ -34,12 +36,12 @@ trait UserMethod
         }
         return $this->email;
     }
-
+    
     /**
      * @param bool $size
      *
      * @return bool|\Illuminate\Contracts\Routing\UrlGenerator|mixed|string
-     * @throws \Illuminate\Container\EntryNotFoundException
+     * @throws \Creativeorange\Gravatar\Exceptions\InvalidEmailException
      */
     public function getPicture($size = false)
     {
@@ -182,5 +184,31 @@ trait UserMethod
     public function canDeactivateCompanyServices()
     {
         return $this->can(config('permission.permissions.deactivate_company_services'));
+    }
+    
+    public function canFreezeAccounts()
+    {
+        return $this->can(config('permission.permissions.freeze_accounts'));
+    }
+    
+    public function isTemporalLoggedToCompany()
+    {
+        return $this->is_comp_temp;
+    }
+    
+    public function getUserCommissionBalance()
+    {
+        return $this->getUserCommissionTotal() - $this->account->getPayoutsTotal();
+    }
+    
+    public function getUserCommissionTotal()
+    {
+        return Movement::where('user_id', $this->uuid)
+            ->where('is_reversed', false)
+            ->where(function ($query) {
+                $query->where('type_id', MovementType::where('name', config('business.movement.type.sale'))->first()->uuid)
+                    ->orWhere('type_id', MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid);
+            })
+            ->sum('agent_commission');
     }
 }

@@ -41,6 +41,7 @@ return [
                 'created' => 'The company was successfully created.',
                 'updated' => 'The company was successfully updated.',
                 'status_updated' => 'The status was successfully updated',
+                'logged_in'     => 'You have changed company successfully',
             ],
             'service' => [
                 'status_updated' => 'The status was successfully updated',
@@ -56,6 +57,16 @@ return [
             'commission' => [
                 'created' => 'Pricings successfully attached',
             ]
+        ],
+        'account' => [
+            'floated' => 'Float applied successfully',
+            'transferred' => 'Amount transferred successfully',
+            'status_updated' => 'The status was successfully updated.',
+            'drained' => 'Amount drained successfully.',
+            'paid_out' => 'The payout request was successful. The request is pending validation',
+        ],
+        'payout' => [
+            'status_updated' => 'Payout status updated successfully.'
         ]
     ],
 

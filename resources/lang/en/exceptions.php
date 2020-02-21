@@ -65,12 +65,26 @@ return [
                 'mark_rights_error'   => 'There was a problem updating the status of this company. The company was deactivated by a higher role.',
                 'cant_change_attribute' => 'You are not permitted to change the :attribute',
                 'cant_change_check_box' => 'You are not allowed to change one of the checkbox values',
-                'invalid_service'       => 'An invalid service has been provided'
+                'invalid_service'       => 'An invalid service has been provided',
+                'login_error'           => 'There was a problem logging into this company. Please try again.',
+                'inactive'              => 'There was a problem processing the request. This company is inactive',
             ],
             'service' => [
                 'mark_error'   => 'There was a problem updating the status of this service for this company. Please try again.',
                 'update_error'   => 'There was a problem updating the this service for this company. Please try again.',
             ]
+        ],
+        
+        'account' => [
+            'mark_error' => 'There was an error freezing this account.',
+            'inactive' => 'There was a problem authorizing the transaction. Either source or destination account is inactive.',
+            'insufficient_balance' => 'The was a problem authorizing the transaction. Either source or destination account has insufficient funds',
+            'insufficient_drain' => 'Insufficient funds in umbrella account',
+            'insufficient_commission' => 'Insufficient funds in commission account',
+        ],
+        
+        'movement' => [
+            'create_error' => 'There was a problem performing this operation. Please try again.',
         ],
         
         'services' => [
@@ -85,6 +99,12 @@ return [
                 'invalid_pricings' => 'The :attribute contain some invalid values',
             ]
         ],
+        'payout' => [
+            'drain_error' => 'There was an error draining the amount',
+            'payout_error' => 'There was a problem executing the payout. Please try again.',
+            'invalid_status' => 'Invalid payout status.',
+            'status_error' => 'There was a problem updating the status of the payout. Please try again.'
+        ]
     ],
 
     'frontend' => [

@@ -41,7 +41,7 @@ class RoleController extends Controller
      *
      * @return mixed
      */
-    public function index(ManageRoleRequest $request)
+    public function index()
     {
         return view('backend.auth.role.index')
             ->withRoles($this->roleRepository

@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Frontend\Auth;
 
+use App\Models\Account\Account;
+use App\Models\Account\AccountType;
 use Carbon\Carbon;
 use App\Models\Auth\User;
 use Illuminate\Http\UploadedFile;
@@ -117,10 +119,20 @@ class UserRepository extends BaseRepository
             ]);
 
             if ($user) {
+    
+    
+                // create account for the user
+                $account = new Account();
+                $account->code = Account::generateCode();
+                $account->type_id = AccountType::where('name', config('business.account.type.user'))->first()->uuid;
+                $account->owner_id = $user->uuid;
+                $account->save();
+                
+                
                 /*
                  * Add the default site role to the new user
                  */
-                $user->assignRole(config('access.users.default_role'));
+                $user->assignRole(config('access.users.guest_role'));
             }
 
             /*

@@ -3,8 +3,8 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="{{ @$logged_in_user->company->full_logo }}" width="50" height="50" style="border-radius: 50%" alt="Corlang">
-        <img class="navbar-brand-minimized" src="{{ @$logged_in_user->company->full_logo }}" width="30" height="30" style="border-radius: 50%" alt="Corlang">
+        <img class="navbar-brand-full" src="{{ @$logged_in_user->company->full_logo }}" width="50" height="50" style="border-radius: 50%" alt="{{ @$logged_in_user->company->name }}">
+        <img class="navbar-brand-minimized" src="{{ @$logged_in_user->company->full_logo }}" width="30" height="30" style="border-radius: 50%" alt="{{ @$logged_in_user->company->name }}">
     </a>
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
