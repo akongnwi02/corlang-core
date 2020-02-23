@@ -22,7 +22,7 @@
                     <input name="currency_id" type="hidden" value="{{ $default_currency->uuid }}">
                 </div>
                 <div>
-                    {{ html()->select('paymentmethod_id' , [null => __(config('business.system.service.name'))] + $paymentMethods)
+                    {{ html()->select('paymentmethod_id' , $paymentMethods)
                         ->class('form-control')
                         ->placeholder(__('validation.attributes.backend.account.payment_method'))
                     }}

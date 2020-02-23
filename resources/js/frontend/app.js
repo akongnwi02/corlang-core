@@ -1,24 +1,56 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-import '../bootstrap';
-import '../plugins';
+/*
+  Imports the routes and store and vue to use with the Vue module.
+*/
 import Vue from 'vue';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import router from './routes.js'
+import store from './store.js'
+import i18n from './i18n';
 
-window.Vue = Vue;
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
+/*
+    Use BootstrapVue in whole application
  */
+Vue.use(BootstrapVue);
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+/*
+    Use BootstrapVue icons component plugin in whole application
+ */
+Vue.use(IconsPlugin);
 
-const app = new Vue({
-    el: '#app'
-});
+/*
+    Register the components since we're currently using non SPA
+ */
+Vue.component('transactions', require('./pages/Transaction'));
+Vue.component('landlords', require('./pages/Landlord'));
+Vue.component('payments', require('./pages/Payment'));
+Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.component('list-filters', require('./components/ListFilters'));
+
+/*
+    Register the directives
+ */
+Vue.directive('can', require('./directives/Permission'));
+
+/*
+  Create a new Vue instance and mount the app element.
+*/
+new Vue({
+    router,
+    store,
+    i18n
+}).$mount('#app');
+
+// /*
+//   Send google analytics the current path.
+// */
+// ga('set', 'page', router.currentRoute.path);
+// ga('send', 'pageview');
+//
+// /*
+//   After each page navigation, send the path to Google analytics.
+// */
+// router.afterEach((to, from) => {
+//     ga('set', 'page', to.path);
+//     ga('send', 'pageview');
+// });
