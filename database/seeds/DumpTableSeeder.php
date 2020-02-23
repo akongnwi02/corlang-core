@@ -33,5 +33,6 @@ class DumpTableSeeder extends Seeder
         $this->call(UserAccountSeeder::class);
         $this->call(CompanyAccountSeeder::class);
         $this->call(PayoutTypeTableSeeder::class);
+        $this->call(PaymentMethodTableSeeder::class);
     }
 }

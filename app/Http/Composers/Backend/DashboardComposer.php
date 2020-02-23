@@ -8,16 +8,16 @@
 
 namespace App\Http\Composers\Backend;
 
-use App\Repositories\Backend\Services\Service\ServiceRepository;
+use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 use Illuminate\View\View;
 
 class DashboardComposer
 {
-    public $serviceRepository;
+    public $paymentMethodRepository;
     
-    public function __construct(ServiceRepository $serviceRepository)
+    public function __construct(PaymentMethodRepository $paymentMethodRepository)
     {
-        $this->serviceRepository = $serviceRepository;
+        $this->paymentMethodRepository = $paymentMethodRepository;
     }
     
     /**
@@ -30,7 +30,7 @@ class DashboardComposer
         $view->with('company_account_balance', auth()->user()->company->account->account_balance_label)
             ->with('company_commission_balance', auth()->user()->company->company_commission_balance_label)
             ->with('company_today_commission', auth()->user()->company->company_today_commission_label)
-            ->with('payment_methods', $this->serviceRepository->getPaymentMethods()->pluck('name', 'uuid')->toArray())
+            ->with('payment_methods', $this->paymentMethodRepository->getPaymentMethods()->pluck('name', 'uuid')->toArray())
             ->with('number_of_users', auth()->user()->company->getNumberOfUsers());
     }
 }

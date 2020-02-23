@@ -15,15 +15,15 @@ use App\Http\Requests\Backend\Account\ShowAccountRequest;
 use App\Models\Account\Account;
 use App\Repositories\Backend\Account\AccountRepository;
 use App\Repositories\Backend\Account\PayoutRepository;
-use App\Repositories\Backend\Services\Service\ServiceRepository;
+use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 
 class PayoutAccountController extends Controller
 {
-    public function index(AccountRepository $accountRepository, ServiceRepository $serviceRepository)
+    public function index(AccountRepository $accountRepository, PaymentMethodRepository $paymentMethodRepository)
     {
         return view('backend.accounts.payout.index')
             ->withAccounts($accountRepository->getAllAccounts()->paginate())
-            ->withPaymentMethods($serviceRepository->getPaymentMethods()->get()
+            ->withPaymentMethods($paymentMethodRepository->getPaymentMethods()->get()
                 ->pluck('name', 'uuid')
                 ->toArray());
     }

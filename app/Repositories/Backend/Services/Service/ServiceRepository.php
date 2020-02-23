@@ -30,8 +30,6 @@ class ServiceRepository
         return \DB::transaction(function () use ($data, $logo) {
             
             $service = (new Service)->fill($data);
-    
-            $service->is_paymentmethod = request()->has('is_paymentmethod') ? 1 : 0;
             
             if ($logo) {
                 // delete previous logo
@@ -64,11 +62,6 @@ class ServiceRepository
             ->allowedSorts('services.is_active', 'services.created_at', 'services.name')
             ->defaultSort( '-services.is_active', '-services.created_at', 'services.name');
         return $services;
-    }
-    
-    public function getPaymentMethods()
-    {
-        return Service::paymentMethods();
     }
     
     /**
@@ -107,8 +100,6 @@ class ServiceRepository
      */
     public function update($service, $data, $logo = null)
     {
-        $service->is_paymentmethod = request()->has('is_paymentmethod') ? 1 : 0;
-        
         $service->fill($data);
         
         if ($logo) {

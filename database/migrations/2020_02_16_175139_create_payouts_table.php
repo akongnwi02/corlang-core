@@ -35,7 +35,7 @@ class CreatePayoutsTable extends Migration
             
             $table->foreign('type_id')->references('uuid')->on('payouttypes');
             $table->foreign('user_id')->references('uuid')->on('users');
-            $table->foreign('paymentmethod_id')->references('uuid')->on('services');
+            $table->foreign('paymentmethod_id')->references('uuid')->on('paymentmethods');
             $table->foreign('company_id')->references('uuid')->on('companies');
             $table->foreign('currency_id')->references('uuid')->on('currencies');
             $table->foreign('account_id')->references('uuid')->on('accounts');

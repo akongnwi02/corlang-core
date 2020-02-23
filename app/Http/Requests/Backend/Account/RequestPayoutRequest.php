@@ -56,7 +56,7 @@ class RequestPayoutRequest extends FormRequest
             'amount'      => ['required', 'numeric', 'min:100', new SufficientCommissionBalanceRule()],
             'comment'   => ['max:191', 'string', 'nullable'],
             'currency_id' => ['required', Rule::exists('currencies', 'uuid')],
-            'paymentmethod_id' => ['sometimes', 'nullable', Rule::exists('services', 'uuid')->where('is_paymentmethod', true)],
+            'paymentmethod_id' => ['sometimes', 'nullable', Rule::exists('paymentmethods', 'uuid')],
             'account_number' => ['required', 'string', 'max:191'],
         ];
     }

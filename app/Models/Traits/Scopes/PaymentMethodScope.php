@@ -2,18 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: devert
- * Date: 1/17/20
- * Time: 11:47 PM
+ * Date: 2/23/20
+ * Time: 6:45 PM
  */
 
 namespace App\Models\Traits\Scopes;
 
 
-trait ServiceScope
+trait PaymentMethodScope
 {
     public function scopeActive($query, $active = true)
     {
         return $query->where('is_active', $active);
     }
-    
 }
