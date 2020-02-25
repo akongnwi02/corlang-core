@@ -9,7 +9,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('title', app_name())</title>
-        <meta name="description" content="@yield('meta_description', 'Corlang')">
+        <meta name="description" content="@yield('meta_description', 'Corlang Core')">
+        <link rel="icon" href="{!! asset('img/backend/brand/logo/logo-browser-icon.png') !!}"/>
         <meta name="author" content="@yield('meta_author', 'Che Devert')">
         <link rel="icon" href="{!! asset('img/backend/brand/logo/logo-browser-icon.png') !!}"/>
 

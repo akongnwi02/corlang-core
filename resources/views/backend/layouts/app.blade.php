@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', app_name())</title>
     <meta name="description" content="@yield('meta_description', 'Corlang Core')">
-    <meta name="author" content="@yield('meta_author', 'Corlang Enterprise')">
+    <meta name="author" content="@yield('meta_author', 'Che Devert')">
     <link rel="icon" href="{!! asset('img/backend/brand/logo/logo-browser-icon.png') !!}"/>
 @yield('meta')
 
