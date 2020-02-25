@@ -136,15 +136,6 @@ services:
       networks:
         - backend
 
-### Postgre Admin interface #####################################
-    adminer:
-      image: adminer
-      restart: always
-      ports:
-        - ${ADMINER_PORT}:8080
-      networks:
-        - backend
-
 ### Fake SMTP Server #############################################
     mailcatcher:
       image: schickling/mailcatcher
