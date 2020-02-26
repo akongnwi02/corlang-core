@@ -43,7 +43,6 @@ class StoreCompanyRequest extends FormRequest
             'type_id'          => __('validation.attributes.backend.companies.company.type'),
             'is_provider'      => __('validation.attributes.backend.companies.company.provider'),
             'direct_polling'   => __('validation.attributes.backend.companies.company.direct_polling'),
-            'agent_self_topup' => __('validation.attributes.backend.companies.company.agent_self_topup'),
         ];
     }
     
@@ -69,7 +68,6 @@ class StoreCompanyRequest extends FormRequest
             'type_id'          => ['required', Rule::exists('companytypes', 'uuid')],
             'is_provider'      => ['sometimes', 'boolean'],
             'direct_polling'   => ['sometimes', 'boolean'],
-            'agent_self_topup' => ['sometimes', 'boolean'],
         ];
     }
 }

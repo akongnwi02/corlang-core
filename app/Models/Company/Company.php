@@ -59,7 +59,6 @@ class Company extends Model
         'owner_id',
         'logo_url',
         'is_provider',
-        'agent_self_topup',
         'direct_polling',
     ];
 
@@ -72,7 +71,6 @@ class Company extends Model
         'is_active'  => 'boolean',
         'uuid' => 'string',
         'is_provider' => 'boolean',
-        'agent_self_topup' => 'boolean',
         'direct_polling' => 'boolean',
     ];
 }

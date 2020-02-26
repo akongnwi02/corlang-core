@@ -43,7 +43,6 @@ class UpdateCompanyRequest extends FormRequest
             'logo'             => __('validation.attributes.backend.companies.company.logo'),
             'is_provider'      => __('validation.attributes.backend.companies.company.provider'),
             'direct_polling'   => __('validation.attributes.backend.companies.company.direct_polling'),
-            'agent_self_topup' => __('validation.attributes.backend.companies.company.agent_self_topup'),
         
         ];
     }
@@ -75,7 +74,6 @@ class UpdateCompanyRequest extends FormRequest
             'logo'             => 'sometimes|image|max:191',
             'is_provider'      => ['sometimes', 'boolean'],
             'direct_polling'   => ['sometimes', 'boolean'],
-            'agent_self_topup' => ['sometimes', 'boolean'],
         ];
     }
 }

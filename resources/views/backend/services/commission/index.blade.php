@@ -52,7 +52,7 @@
                                     <td colspan="5" align="center" class="hiddenRowtable collapse fade" id="pricings-{{ $commission->uuid }}">
                                         <div>
                                             @if($commission->pricings->count())
-                                                <table class="table table-secondary">
+                                                <table class="table table-responsive-sm table-secondary">
                                                     <thead>
                                                     <tr>
                                                         <th>@lang('labels.backend.services.commission.table.stack.from')</th>
@@ -73,7 +73,7 @@
                                                     </tbody>
                                                 </table>
                                             @else
-                                                <table class="table table-responsive table-borderless">
+                                                <table class="table table-responsive-sm table-secondary table-borderless">
                                                     <tbody>
                                                     <tr>
                                                         <td>@lang('labels.backend.services.commission.table.stack.empty')</td>
