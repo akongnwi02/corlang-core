@@ -50,9 +50,9 @@
                                 </tr>
                                 <tr class="child">
                                     <td colspan="5" align="center" class="hiddenRowtable collapse fade" id="pricings-{{ $commission->uuid }}">
-                                        <div class="table-responsive">
+                                        <div>
                                             @if($commission->pricings->count())
-                                                <table class="table">
+                                                <table class="table table-secondary">
                                                     <thead>
                                                     <tr>
                                                         <th>@lang('labels.backend.services.commission.table.stack.from')</th>
