@@ -44,7 +44,7 @@
                                 <tr>
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->phone }}</td>
-                                    <td>{{ $company->address }}</td>
+                                    <td><address>{{ $company->address }}</address></td>
                                     <td>{{ $company->city }}</td>
                                     <td>{{ $company->state }}</td>
                                     <td>{{ $company->country->name }}</td>

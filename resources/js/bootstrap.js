@@ -9,6 +9,10 @@ import $ from 'jquery';
 import 'popper.js/dist/umd/popper'; // Required for BS4
 import 'bootstrap';
 
+
+// MD Bootstrap
+// import 'mdbvue/lib/css/mdb.min.css'
+
 /**
  * Font Awesome >=5.1
  *

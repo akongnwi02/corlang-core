@@ -6,11 +6,12 @@ import router from './routes.js'
 import store from './store.js'
 import i18n from './i18n';
 
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 /*
     Register the components since we're currently using non SPA
  */
-
+Vue.component('dashboard', require('./pages/Dashboard'));
 
 /*
     Register the directives
