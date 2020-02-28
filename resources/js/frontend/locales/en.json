@@ -1,94 +1,18 @@
 {
-  "business": {
-    "transaction": {
-      "list": {
-        "title": "Transactions",
-        "download": "DOWNLOAD",
-        "create_new": "Create New",
-        "toolbar_btn_groups": "Toolbar with button groups",
-        "table": {
-          "provider": "Provider",
-          "status": "Status",
-          "number": "No",
-          "created_by": "Created by",
-          "landlord": "Landlord",
-          "address": "Address",
-          "meter_code": "Meter Code",
-          "created_at": "Time created",
-          "energy": "Energy",
-          "tariff": "Tariff",
-          "token": "Token",
-          "amount": "Amount",
-          "tax": "Tax",
-          "confirmed_at": "Confirmed at",
-          "actions": "Actions",
-          "total": "No transactions | One transaction | {count} transactions"
-        }
-      },
-      "filters": {
-        "landlord": "Landlord",
-        "user": "User",
-        "start_date": "Start Date",
-        "end_date": "End Date",
-        "clear_filters": "Clear Filters",
-        "show_filters": "Show",
-        "hide_filters": "Hide"
+  "dashboard": {
+      "tabs": {
+          "titles":{
+            "purchase": "Purchase",
+            "transactions": "Transactions"
+          },
+          "panels": {
+              "titles": {
+                  "electricity": "Electricity"
+              },
+              "content": {
+
+              }
+          }
       }
-    },
-    "landlord":{
-      "list": {
-        "title": "Landlords",
-        "table": {
-          "name": "Name",
-          "tariff_type": "Tariff Type",
-          "tariff_price": "Tariff Price",
-          "tax": "Tax",
-          "commission": "Commission Rate",
-          "full_ownership": "Full Ownership",
-          "balance": "Account Balance",
-          "created_at": "Created at",
-          "action": "Actions",
-          "user_assigned": "Assigned",
-          "total": "No landlords | One landlord | {count} landlords"
-        }
-      },
-      "filters": {
-        "landlord": "Landlord",
-        "clear_filters": "Clear Filters",
-        "show_filters": "Show",
-        "hide_filters": "Hide"
-      }
-    },
-    "payment": {
-      "list": {
-        "title": "Payments",
-        "download": "DOWNLOAD",
-        "toolbar_btn_groups": "Toolbar with button groups",
-        "table": {
-          "confirmed_at": "Payment Date",
-          "status": "Status",
-          "meter_code": "Meter Code",
-          "account": "Account",
-          "provider": "Provider",
-          "name": "Name",
-          "amount": "Amount",
-          "currency": "Currency",
-          "country": "Country",
-          "number": "No",
-          "landlord": "Landlord",
-          "transaction_number": "Transaction No",
-          "total": "No payment | One payment | {count} payments"
-        }
-      },
-      "filters": {
-        "landlord": "Landlord",
-        "user": "User",
-        "start_date": "Start Date",
-        "end_date": "End Date",
-        "clear_filters": "Clear Filters",
-        "show_filters": "Show",
-        "hide_filters": "Hide"
-      }
-    }
   }
 }

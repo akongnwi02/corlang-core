@@ -1,70 +1,18 @@
 {
-  "business": {
-    "transaction": {
-      "list": {
-        "title": "Transactions",
-        "download": "TÉLÉCHARGER",
-        "create_new": "Créer",
-        "toolbar_btn_groups": "Barre d'outils avec des groupes de boutons",
-        "table": {
-          "provider": "Fournisseur",
-          "status": "Statut",
-          "number": "No",
-          "created_by": "Créé par",
-          "landlord": "Propriétaire",
-          "address": "Adresse",
-          "meter_code": "Code du compteur",
-          "created_at": "Temps créé",
-          "energy": "Énergie",
-          "tariff": "Tarif",
-          "token": "Token",
-          "amount": "Montant",
-          "tax": "Taxe",
-          "confirmed_at": "Confirmé à",
-          "actions": "Actions",
-          "total": "Aucune transactions | Une transaction | {count} transactions"
+    "dashboard": {
+        "tabs": {
+            "titles":{
+                "purchase": "Achat",
+                "transactions": "Transactions"
+            },
+            "panels": {
+                "titles": {
+                    "electricity": "Électricité"
+                },
+                "content": {
+
+                }
+            }
         }
-      },
-      "filters": {
-        "landlord": "Propriétaire",
-        "user": "Utilisateur",
-        "start_date": "Date de début",
-        "end_date": "Date de fin",
-        "clear_filters": "Effacer les filtres",
-        "show_filters": "Montrer",
-        "hide_filters": "Cacher"
-      }
-    },
-    "payment": {
-      "list": {
-        "title": "Paiements",
-        "download": "TÉLÉCHARGER",
-        "toolbar_btn_groups": "Barre d'outils avec des groupes de boutons",
-        "table": {
-          "confirmed_at": "Date de paiement",
-          "status": "Statut",
-          "meter_code": "Code du compteur",
-          "account": "Compte",
-          "provider": "Fournisseur",
-          "name": "Nom",
-          "amount": "Montant",
-          "currency": "Devise",
-          "country": "Pays",
-          "number": "No",
-          "landlord": "Propriétaire",
-          "transaction_number": "No",
-          "total": "Aucun paiements | Un paiement | {count} paiements"
-        }
-      },
-      "filters": {
-        "landlord": "Propriétaire",
-        "user": "Utilisateur",
-        "start_date": "Date de début",
-        "end_date": "Date de fin",
-        "clear_filters": "Effacer les filtres",
-        "show_filters": "Montrer",
-        "hide_filters": "Cacher"
-      }
     }
-  }
 }

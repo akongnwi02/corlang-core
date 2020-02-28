@@ -10,7 +10,7 @@ import 'popper.js/dist/umd/popper'; // Required for BS4
 import 'bootstrap';
 
 
-// MD Bootstrap
+// MD Bootstrap Vue
 // import 'mdbvue/lib/css/mdb.min.css'
 
 /**

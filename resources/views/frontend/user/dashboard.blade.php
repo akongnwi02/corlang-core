@@ -3,7 +3,7 @@
 @section('title', app_name() . ' | ' . __('navs.frontend.dashboard') )
 
 @section('content')
-    <div class="row mb-4">
+    <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-header">
@@ -14,10 +14,8 @@
 
                 <div class="card-body">
                     <div class="row">
-
-                        
-
-                    </div><!-- row -->
+                        <dashboard></dashboard>
+                    </div>
                 </div> <!-- card-body -->
             </div><!-- card -->
         </div><!-- row -->
