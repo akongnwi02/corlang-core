@@ -1,6 +1,6 @@
 <template>
 
-    <mdb-tab-pane class="active" key="show1" v-if="pillsActive===1">
+    <mdb-tab-pane key="show1">
         <mdb-row>
             <mdb-col md="3">
                 <mdb-tab pills color="primary" class="nav-pills" vertical>
@@ -17,6 +17,7 @@
             </mdb-col>
             <mdb-col md="9">
                 <mdb-tab-content vertical>
+                    <router-view></router-view>
                     <mdb-tab-pane class="active" key="pills1" v-if="verticalWithin===1"><router-view></router-view></mdb-tab-pane>
                     <mdb-tab-pane class="fade" key="pills2" v-if="verticalWithin===2"><h5 class="my-2 h5">Panel 2</h5></mdb-tab-pane>
                     <mdb-tab-pane class="fade" key="pills3" v-if="verticalWithin===3"><h5 class="my-2 h5">Panel 3</h5></mdb-tab-pane>
