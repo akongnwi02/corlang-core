@@ -24,5 +24,43 @@ Vue.use( VueRouter );
 */
 export default new VueRouter({
     routes: [
+        {
+            path: '/',
+            redirect: { name: 'purchase' },
+            name: 'layout',
+            component: Vue.component( 'Layout', require( './layouts/Layout' ) ),
+            children: [
+                {
+                    path: 'purchase',
+                    name: 'purchase',
+                    component: Vue.component( 'Purchase', require( './pages/Purchase' ) ),
+                    children: [
+                        {
+                            path: 'electricity',
+                            name: 'electricity',
+                            component: Vue.component( 'Electricity', require( './components/electricity/Search' ) ),
+                            // beforeEnter: requireAuth,
+                            // meta: {
+                            //     permission: 'user'
+                            // }
+                        },
+                    ]
+                },
+                {
+                    path: 'transactions',
+                    name: 'transactions',
+                    component: Vue.component( 'Transactions', require( './pages/Transactions' ) ),
+                    // beforeEnter: requireAuth,
+                    // meta: {
+                    //     permission: 'user'
+                    // }
+                },
+
+                /*
+                    Catch Alls
+                */
+                { path: '_=_', redirect: '/' }
+            ]
+        },
     ]
 });
