@@ -54,10 +54,9 @@ class Service extends Model
         'providercommission_id',
         'customercommission_id',
         'providercompany_id',
-        'is_paymentmethod',
+        'is_prepaid',
         'company_rate',
         'agent_rate',
-
     ];
     
     /**
@@ -67,8 +66,8 @@ class Service extends Model
      */
     protected $casts = [
         'is_active'        => 'boolean',
-        'is_paymentmethod' => 'boolean',
         'customer_rate'    => 'double',
         'agent_rate'       => 'double',
+        'is_prepaid'       => 'double',
     ];
 }

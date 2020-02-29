@@ -38,6 +38,11 @@ return [
             'cancelled' => 'cancelled',
         ],
     ],
+    'service' => [
+        'category' => [
+            'electricity' => 'Electricity'
+        ]
+    ],
     
     'system' => [
         'country' => [

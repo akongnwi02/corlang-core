@@ -30,6 +30,7 @@ class ServiceRepository
         return \DB::transaction(function () use ($data, $logo) {
             
             $service = (new Service)->fill($data);
+            $service->is_prepaid = request()->has('is_prepaid') ? 1 : 0;
             
             if ($logo) {
                 // delete previous logo
@@ -101,7 +102,9 @@ class ServiceRepository
     public function update($service, $data, $logo = null)
     {
         $service->fill($data);
-        
+        $service->is_prepaid = request()->has('is_prepaid') ? 1 : 0;
+    
+    
         if ($logo) {
             // delete previous logo
             if (strlen($service->logo_url)) {

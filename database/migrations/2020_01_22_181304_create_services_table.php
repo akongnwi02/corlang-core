@@ -26,7 +26,7 @@ class CreateServicesTable extends Migration
             $table->uuid('customercommission_id')->nullable();
             $table->double('company_rate')->nullable();
             $table->double('agent_rate')->nullable();
-            $table->boolean('is_paymentmethod')->nullable()->default(false);
+            $table->boolean('is_prepaid')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();

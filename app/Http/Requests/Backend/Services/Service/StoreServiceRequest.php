@@ -31,6 +31,7 @@ class StoreServiceRequest extends FormRequest
             'providercompany_id'    => __('validation.attributes.backend.services.service.providercompany'),
             'agent_rate'            => __('validation.attributes.backend.services.service.agent_rate'),
             'company_rate'          => __('validation.attributes.backend.services.service.company_rate'),
+            'is_prepaid'            => __('validation.attributes.backend.services.service.prepaid'),
             'logo'                  => __('validation.attributes.backend.services.service.logo'),
         ];
     }
@@ -47,6 +48,7 @@ class StoreServiceRequest extends FormRequest
             'providercompany_id'    => ['sometimes', Rule::exists('companies', 'uuid'), 'nullable'],
             'agent_rate'            => ['required', 'numeric', 'between:0,100'],
             'company_rate'          => ['required', 'numeric', 'between:0,100'],
+            'is_prepaid'           => ['sometimes', 'boolean'],
             'logo'                  => 'sometimes|image|max:191',
         ];
     }

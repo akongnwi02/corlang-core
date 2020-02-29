@@ -228,10 +228,10 @@ return [
                     'companycommission'  => 'Company Service Charge',
                     'customercommission' => 'Customer Service Charge',
                     'logo'               => 'Logo',
+                    'prepaid'            => 'Prepaid',
                     'company_rate'       => 'Default Company Rate (%)',
                     'agent_rate'         => 'Default Agent Rate (%)',
                     'providercompany'    => 'Provider Company',
-                    'is_paymentmethod'   => 'Payment Method',
                 ],
                 'commission' => [
                     'name'        => 'Name',

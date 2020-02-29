@@ -1,16 +1,20 @@
 {
   "dashboard": {
-      "tabs": {
+      "pages": {
           "titles":{
             "purchase": "Purchase",
             "transactions": "Transactions"
           },
-          "panels": {
+          "tabs": {
               "titles": {
                   "electricity": "Electricity"
               },
               "content": {
-
+                  "electricity": {
+                      "title": "Purchase Electricity",
+                      "prepaid": "Prepaid",
+                      "postpaid": "Postpaid"
+                  }
               }
           }
       }

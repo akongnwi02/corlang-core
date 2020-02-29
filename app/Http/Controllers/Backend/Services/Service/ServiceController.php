@@ -47,8 +47,8 @@ class ServiceController extends Controller
     
     /**
      * @param StoreServiceRequest $request
+     * @param ServiceRepository $serviceRepository
      * @return mixed
-     * @throws \Throwable-is_active',
      * @throws \Throwable
      */
     public function store(StoreServiceRequest $request, ServiceRepository $serviceRepository)
