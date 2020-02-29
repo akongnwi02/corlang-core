@@ -16,7 +16,7 @@
     import Navigation from '../components/global/Navigation';
 
     export default {
-
+        name: "Layout",
         mixins: [
             ChangeLanguage,
         ],

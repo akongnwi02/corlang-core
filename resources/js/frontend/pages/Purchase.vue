@@ -24,19 +24,9 @@
 </template>
 
 <script>
-    import { mdbTab, mdbTabItem, mdbTabContent, mdbTabPane, mdbCol, mdbRow, mdbIcon } from 'mdbvue';
 
     export default {
-        components: {
-            mdbTab,
-            mdbTabItem,
-            mdbTabContent,
-            mdbTabPane,
-            mdbCol,
-            mdbRow,
-            mdbIcon
-        },
-
+        name: "Purchase",
         data() {
             return {
                 tab: 'electricity'

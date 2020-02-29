@@ -5,13 +5,8 @@
 </template>
 
 <script>
-    import { mdbTabPane } from 'mdbvue';
 
     export default {
-
-        components: {
-            mdbTabPane,
-        },
 
         data() {
             return {

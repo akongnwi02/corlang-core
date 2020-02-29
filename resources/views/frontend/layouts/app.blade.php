@@ -46,4 +46,12 @@
 
         @include('includes.partials.ga')
     </body>
+    <style>
+        /*Override mdb bootstrap */
+        /*Fix issue with drop downs displacing content */
+        .navbar .dropdown-menu {
+            position: absolute !important;
+            margin-top: 0;
+        }
+    </style>
 </html>

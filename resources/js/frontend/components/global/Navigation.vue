@@ -11,15 +11,9 @@
 </template>
 
 <script>
-    import { mdbTab, mdbTabItem, mdbIcon } from 'mdbvue';
 
     export default {
-        components: {
-            mdbTab,
-            mdbTabItem,
-            mdbIcon,
-        },
-
+        name: "Navigation",
         data() {
             return {
                 pillsActive: 'purchase',

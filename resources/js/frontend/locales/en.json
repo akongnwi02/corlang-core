@@ -12,8 +12,15 @@
               "content": {
                   "electricity": {
                       "title": "Purchase Electricity",
+                      "description": "Fill in the form below to pay your electricity bill. It's quick and easy",
                       "prepaid": "Prepaid",
-                      "postpaid": "Postpaid"
+                      "postpaid": "Postpaid",
+                      "vendor": "Vendor",
+                      "amount": "Amount",
+                      "meter_code": "Meter Code",
+                      "bill_number": "Bill Number",
+                      "contract_number": "Contract Number",
+                      "next": "Next"
                   }
               }
           }

@@ -2,37 +2,49 @@
     <mdb-card>
         <mdb-card-body class="text-center">
             <mdb-card-title> {{ $t(`dashboard.pages.tabs.content.electricity.title`) }} </mdb-card-title>
-            <mdb-card-text>Some quick example text to build on the card title and make up the bulk of the card's content.</mdb-card-text>
+            <mdb-card-text> {{ $t(`dashboard.pages.tabs.content.electricity.description`) }} </mdb-card-text>
+            <div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample">
+                    <label class="custom-control-label" for="defaultInline1">{{ $t(`dashboard.pages.tabs.content.electricity.prepaid`) }}</label>
+                </div>
 
-            <mdb-form-inline>
-                <mdb-input type="radio" id="option5-1" name="groupOfMaterialRadios2" radioValue="1" v-model="radio5" label="1" />
-                <mdb-input type="radio" id="option5-2" name="groupOfMaterialRadios2" radioValue="2" v-model="radio5" label="2" />
-                <mdb-input type="radio" id="option5-3" name="groupOfMaterialRadios2" radioValue="3" v-model="radio5" label="3" />
-            </mdb-form-inline>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample">
+                    <label class="custom-control-label" for="defaultInline2">{{ $t(`dashboard.pages.tabs.content.electricity.postpaid`) }}</label>
+                </div>
+            </div>
 
-            <mdb-btn @click.native.prevent color="primary">Button</mdb-btn>
+            <mdb-row>
+                <mdb-col md="6">
+                    <mdb-input :label="$t(`dashboard.pages.tabs.content.electricity.meter_code`)" v-model="value" />
+                </mdb-col>
+                <mdb-col md="6">
+                    <mdb-input :label="$t(`dashboard.pages.tabs.content.electricity.amount`) + ' (XAF)'" v-model="value" />
+                </mdb-col>
+            </mdb-row>
+            <services></services>
+            <div>
+                <mdb-btn color="primary">{{ $t(`dashboard.pages.tabs.content.electricity.next`) }}</mdb-btn>
+            </div>
 
         </mdb-card-body>
     </mdb-card>
 </template>
 
 <script>
-    import { mdbCard, mdbCardBody, mdbCardTitle, mdbBtn, mdbBt, mdbCardText, mdbFormInline, mdbInput } from 'mdbvue';
 
+    import Services from '../services/Services'
     export default {
+        name: "Search",
         components: {
-            mdbCard,
-            mdbCardBody,
-            mdbCardTitle,
-            mdbCardText,
-            mdbBtn,
-            mdbInput,
-            mdbFormInline
+            Services
         },
-
         data() {
             return {
-                radio5: ''
+                radio5: '',
+                switchValue: true,
+                value: '',
             };
         },
         methods: {

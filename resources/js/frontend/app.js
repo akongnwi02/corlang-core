@@ -8,10 +8,14 @@ import i18n from './i18n';
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
+// Register mdbvue components globally
+import * as mdbvue from 'mdbvue'
+for (const component in mdbvue) {
+    Vue.component(component, mdbvue[component])
+}
 
-/*
-    Register the directives
- */
+import 'bootstrap-css-only/css/bootstrap.min.css'
+import 'mdbvue/lib/css/mdb.min.css'
 
 /*
   Create a new Vue instance and mount the app element.
