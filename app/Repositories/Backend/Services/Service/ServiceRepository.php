@@ -60,6 +60,7 @@ class ServiceRepository
     public function getAllServices()
     {
         $services = QueryBuilder::for(Service::class)
+            ->allowedFilters([AllowedFilter::exact('is_active')])
             ->allowedSorts('services.is_active', 'services.created_at', 'services.name')
             ->defaultSort( '-services.is_active', '-services.created_at', 'services.name');
         return $services;

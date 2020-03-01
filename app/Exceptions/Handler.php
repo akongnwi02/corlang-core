@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
             $rendered = parent::render($request, $exception);
 //            dd($rendered);
             $error['code']    = $rendered->getStatusCode();
-            $error['message'] = 'Internal Server Error';
+            $error['message'] = 'Unexpected Error';
             
             if ($exception instanceof \App\Exceptions\Api\BadRequestException) {
                 $error['message'] = $exception->getMessage();
@@ -84,15 +84,15 @@ class Handler extends ExceptionHandler
             }
             
             if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
-                $error['message'] = $exception->getMessage();
+                $error['message'] = 'Route Not Found';
             }
             
             if ($exception instanceof \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException) {
-                $error['message'] = $exception->getMessage();
+                $error['message'] = 'Unauthorized';
             }
     
             if ($exception instanceof \Illuminate\Http\Exceptions\ThrottleRequestsException) {
-                $error['message'] = $exception->getMessage();
+                $error['message'] = 'Too Many Attempts';
             }
     
             \Log::error('ExceptionHandler', array_merge($error, [

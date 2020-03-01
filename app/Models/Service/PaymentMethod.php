@@ -8,7 +8,7 @@
 
 namespace App\Models\Service;
 
-
+use App\Models\Traits\Relationships\PaymentMethodRelationship;
 use App\Models\Traits\Scopes\PaymentMethodScope;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentMethod extends Model
 {
     use Uuid,
+        PaymentMethodRelationship,
         PaymentMethodScope;
     
     /**

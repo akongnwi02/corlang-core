@@ -68,6 +68,6 @@ class Service extends Model
         'is_active'        => 'boolean',
         'customer_rate'    => 'double',
         'agent_rate'       => 'double',
-        'is_prepaid'       => 'double',
+        'is_prepaid'       => 'boolean',
     ];
 }
