@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\Api\BadRequestException;
+use App\Exceptions\GeneralException;
 use Closure;
 
 class LocalizationMiddleWare
@@ -13,7 +14,7 @@ class LocalizationMiddleWare
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure $next
      * @return mixed
-     * @throws BadRequestException
+     * @throws GeneralException
      */
     public function handle($request, Closure $next)
     {
@@ -46,7 +47,7 @@ class LocalizationMiddleWare
              */
             if (!array_key_exists($locale, config('locale.languages'))) {
 
-                throw new BadRequestException('exceptions.api.request.bad.locale_unsupported');
+                throw new GeneralException('Invalid \'Content-Language\' header');
             }
 
             /*

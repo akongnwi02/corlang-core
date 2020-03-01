@@ -8,9 +8,6 @@
 
 namespace App\Rules\Service;
 
-
-use App\Exceptions\Api\GeneralErrorException;
-use App\Exceptions\GeneralException;
 use Illuminate\Contracts\Validation\Rule;
 
 class PricingRule implements Rule

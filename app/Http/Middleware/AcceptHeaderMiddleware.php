@@ -9,6 +9,7 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\Api\BadRequestException;
+use App\Exceptions\GeneralException;
 use Closure;
 
 class AcceptHeaderMiddleware
@@ -49,7 +50,7 @@ class AcceptHeaderMiddleware
 
             \Log::error('A required accept parameter is not present application/json');
 
-            throw new BadRequestException('exceptions.api.request.bad.invalid_accept');
+            throw new GeneralException('Invalid \'Accept\' header');
         }
 
         /*
