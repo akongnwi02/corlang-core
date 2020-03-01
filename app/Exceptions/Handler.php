@@ -2,12 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Exceptions\Api\GeneralErrorException;
-use App\Exceptions\Api\UnauthorizedException;
-use App\Exceptions\Api\ValidationException;
 use Exception;
-use App\Exceptions\Api\BadRequestException;
-use App\Exceptions\Api\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 /**
@@ -52,76 +47,64 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Http\Request $request
      * @param  \Exception $exception
      * @return \Illuminate\Http\Response
-     * @throws BadRequestException
-     * @throws NotFoundHttpException
-     * @throws ValidationException
-     * @throws GeneralErrorException
-     * @throws UnauthorizedException
      */
     public function render($request, Exception $exception)
     {
 
         if($request->expectsJson()) {
-
-
-            if($exception instanceof \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException)
-            {
-                if(method_exists($exception, 'getPrevious'))
-                {
-                    $exception = $exception->getPrevious();
-
-                    if($exception instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException)
-                    {
-                        \Log::error('Expired token');
-                        throw new UnauthorizedException('exceptions.api.request.bad.token_expired', $exception);
-                    }
-
-                    if($exception instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException)
-                    {
-                        \Log::error('Invalid token');
-                        throw new UnauthorizedException('exceptions.api.request.bad.token_invalid', $exception);
-                    }
-                }
-
-                throw new UnauthorizedException('exceptions.api.request.bad.token_invalid');
+            
+            $rendered = parent::render($request, $exception);
+//            dd($rendered);
+            $error['code']    = $rendered->getStatusCode();
+            $error['message'] = 'Internal Server Error';
+            
+            if ($exception instanceof \App\Exceptions\Api\BadRequestException) {
+                $error['message'] = $exception->getMessage();
+                $error['errors']  = $exception->errors();
+                $error['code']    = $exception->getCode();
             }
-
-            if ($exception instanceof \Illuminate\Http\Exceptions\ThrottleRequestsException)
-            {
-                \Log::error('Too many requests', ['ip' => $request->getClientIp(), 'route' => $request->getRequestUri()]);
-                throw new BadRequestException('exceptions.api.request.bad.too_much_attempts', $exception);
+            
+            if ($exception instanceof \App\Exceptions\Api\NotFoundException) {
+                $error['message'] = $exception->getMessage();
+                $error['errors']  = $exception->errors();
+                $error['code']    = $exception->getCode();
             }
-
-            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
-            {
-                \Log::error('Route Not found', ['ip' => $request->getClientIp(), 'route' => $request->getRequestUri()]);
-                throw new NotFoundHttpException('exceptions.api.request.bad.route_not_found', $exception);
+            
+            if ($exception instanceof \Illuminate\Validation\ValidationException) {
+                $error['message'] = $exception->getMessage();
+                $error['errors']  = $exception->errors();
             }
-
-            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException)
-            {
-                \Log::error('Method not allowed', ['method' => $request->method(), 'route' => $request->getRequestUri()]);
-                throw new BadRequestException('exceptions.api.request.bad.method_not_allowed');
-
+            
+            if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
+                $error['message'] = $exception->getMessage();
             }
-
-            if($exception instanceof \Illuminate\Validation\ValidationException)
-            {
-                \Log::error('Validation error', $exception->errors());
-                throw new ValidationException('exceptions.api.request.validation.unprocessable_entity', $exception);
+            
+            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException) {
+                $error['message'] = 'Method Not Allowed';
             }
-
-            /**
-             * Catch all uncaught exceptions and report through general error exception class
-             */
-            if (method_exists($exception, 'render') && $response = $exception->render($request)) {
-                return \Illuminate\Routing\Router::toResponse($request, $response);
-            } elseif ($exception instanceof \Illuminate\Contracts\Support\Responsable) {
-                return $exception->toResponse($request);
+            
+            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+                $error['message'] = $exception->getMessage();
             }
-            $exception = $this->prepareException($exception);
-            \Log::error('Undocumented exception occured', ['debug' => (string)$exception]);
-            throw new GeneralErrorException('exceptions.api.request.general_error.message', $exception);
+            
+            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException) {
+                $error['message'] = $exception->getMessage();
+            }
+    
+            if ($exception instanceof \Illuminate\Http\Exceptions\ThrottleRequestsException) {
+                $error['message'] = $exception->getMessage();
+            }
+    
+            \Log::error('ExceptionHandler', array_merge($error, [
+                'exception' => (string)$exception,
+                'trace'     => $exception->getTrace(),
+                'previous'  => $exception->getPrevious()
+            ]));
+            
+            if (config('app.debug')) {
+                $error['debug'] = config('app.debug') ? (string)$exception : null;
+            }
+            return response()->json($error, $error['code']);
         }
 
         if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
