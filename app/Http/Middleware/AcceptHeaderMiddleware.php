@@ -8,7 +8,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Exceptions\Api\BadRequestException;
 use App\Exceptions\GeneralException;
 use Closure;
 
@@ -20,7 +19,7 @@ class AcceptHeaderMiddleware
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure $next
      * @return mixed
-     * @throws BadRequestException
+     * @throws GeneralException
      */
     public function handle($request, Closure $next)
     {
