@@ -8,9 +8,8 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-
-use App\Exceptions\Api\ConflictException;
-use App\Exceptions\Api\NotFoundHttpException;
+use App\Exceptions\Api\NotFoundException;
+use App\Exceptions\GeneralException;
 use App\Notifications\Api\Auth\UserNeedsConfirmation;
 use App\Repositories\Api\Auth\UserRepository;
 
@@ -31,13 +30,13 @@ class ConfirmRegistrationController
     {
         $this->user = $user;
     }
-
+    
     /**
      * @param $code
      *
      * @return mixed
-     * @throws ConflictException
-     * @throws NotFoundHttpException
+     * @throws NotFoundException
+     * @throws \App\Exceptions\Api\BadRequestException
      */
     public function confirm($code)
     {
@@ -45,13 +44,13 @@ class ConfirmRegistrationController
 
         return response()->json(['message' => __('exceptions.api.auth.confirmation.success')]);
     }
-
+    
     /**
      * @param $uuid
      *
      * @return mixed
-     * @throws ConflictException
-     * @throws NotFoundHttpException
+     * @throws GeneralException
+     * @throws NotFoundException
      */
     public function sendConfirmationEmail($uuid)
     {
@@ -60,7 +59,7 @@ class ConfirmRegistrationController
         if ($user->isConfirmed()) {
             \Log::error('Account already confirmed', ['email' => $user->email]);
 
-            throw new ConflictException('exceptions.api.auth.confirmation.already_confirmed');
+            throw new GeneralException('Account already confirmed');
         }
 
         $user->notify(new UserNeedsConfirmation($user->confirmation_code));

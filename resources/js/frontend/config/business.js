@@ -1,0 +1,6 @@
+export const BUSINESS_CONFIG = {
+
+    CACHE_EXPIRATION: 60 * 60 * 24 * 1000,
+
+    ELECTRICITY_CODE: 'CORELEC001',
+};

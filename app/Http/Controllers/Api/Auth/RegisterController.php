@@ -10,10 +10,9 @@ namespace App\Http\Controllers\Api\Auth;
 
 
 use App\Events\Api\Auth\UserRegistered;
-use App\Exceptions\Api\NotFoundHttpException;
+use App\Exceptions\Api\NotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
-use App\Http\Resources\Api\Auth\UserResource;
 use App\Repositories\Api\Auth\UserRepository;
 
 class RegisterController extends Controller
@@ -36,14 +35,14 @@ class RegisterController extends Controller
     /**
      * @param RegisterRequest $request
      *
-     * @return UserResource
+     * @return mixed
      * @throws \Throwable
      */
     public function register(RegisterRequest $request)
     {
         if(! config('access.api_registration')) {
 
-            throw new NotFoundHttpException('exceptions.api.request.bad.route_not_found');
+            throw new NotFoundException('route', request()->getRequestUri());
         }
         $user = $this->userRepository->create($request->only(
             'first_name',
@@ -55,6 +54,6 @@ class RegisterController extends Controller
 
         event(new UserRegistered($user));
 
-        return new UserResource($user);
+        return $user;
     }
 }

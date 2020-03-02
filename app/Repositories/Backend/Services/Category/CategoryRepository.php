@@ -15,7 +15,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 class CategoryRepository
 {
     
-    public function getAllCategories()
+    public function get()
     {
         return QueryBuilder::for(Category::class)
             ->allowedFilters([

@@ -10,7 +10,6 @@
 </template>
 
 <script>
-    import { mdbTabContent, mdbContainer } from 'mdbvue';
     import { ChangeLanguage }from '../mixins/local/ChangeLanguage'
 
     import Navigation from '../components/global/Navigation';
@@ -23,8 +22,6 @@
 
         components: {
             Navigation,
-            mdbTabContent,
-            mdbContainer,
         },
     }
 </script>

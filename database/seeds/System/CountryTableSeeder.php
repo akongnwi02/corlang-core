@@ -20,6 +20,7 @@ class CountryTableSeeder extends Seeder
             'name' => $faker->country,
             'code' => $faker->countryCode,
             'is_active' => true,
+            'is_default' => true,
         ]);
         
         Country::reguard();

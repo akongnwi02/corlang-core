@@ -23,7 +23,7 @@ import 'mdbvue/lib/css/mdb.min.css'
 new Vue({
     router,
     store,
-    i18n
+    i18n,
 }).$mount('#app');
 
 // /*

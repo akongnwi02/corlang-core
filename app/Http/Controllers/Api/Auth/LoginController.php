@@ -11,11 +11,9 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Events\Api\Auth\UserLoggedIn;
 use App\Events\Api\Auth\UserLoggedOut;
-use App\Exceptions\Api\ConflictException;
 use App\Exceptions\Api\UnauthorizedException;
 use App\Helpers\Auth\Auth;
 use App\Http\Requests\Api\Auth\LoginRequest;
-use App\Http\Resources\Api\Auth\UserResource;
 use App\Repositories\Api\Auth\UserRepository;
 use Illuminate\Http\Request;
 
@@ -38,8 +36,7 @@ class LoginController
      * @param LoginRequest $request
      * @return \Illuminate\Http\JsonResponse
      * @throws UnauthorizedException
-     * @throws \App\Exceptions\Api\NotFoundHttpException
-     * @throws ConflictException
+     * @throws \App\Exceptions\Api\NotFoundException
      */
     public function login(LoginRequest $request)
     {
@@ -122,11 +119,14 @@ class LoginController
     /**
      * Get the authenticated User.
      *
-     * @return UserResource
+     * @return mixed
      */
     public function me()
     {
-        return new UserResource(auth('api')->user());
+        return auth()->user()->with([
+            'company',
+            'account'
+        ]);
     }
 
     /**
@@ -155,6 +155,4 @@ class LoginController
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
-
-
 }

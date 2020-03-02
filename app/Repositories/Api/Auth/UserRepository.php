@@ -3,8 +3,8 @@
 namespace App\Repositories\Api\Auth;
 
 use App\Events\Api\Auth\UserConfirmed;
-use App\Exceptions\Api\ConflictException;
-use App\Exceptions\Api\NotFoundHttpException;
+use App\Exceptions\Api\BadRequestException;
+use App\Exceptions\Api\NotFoundException;
 use App\Models\Account\Account;
 use App\Models\Account\AccountType;
 use App\Models\Auth\User;
@@ -49,7 +49,7 @@ class UserRepository extends BaseRepository
      * @param $uuid
      *
      * @return mixed
-     * @throws NotFoundHttpException
+     * @throws NotFoundException
      */
     public function findByUuid($uuid)
     {
@@ -61,14 +61,14 @@ class UserRepository extends BaseRepository
             return $user;
         }
 
-        throw new NotFoundHttpException('exceptions.backend.access.users.not_found');
+        throw new NotFoundException('user', $uuid);
     }
 
     /**
-     * @param $email
+     * @param $username
      *
      * @return mixed
-     * @throws NotFoundHttpException
+     * @throws NotFoundException
      */
     public function findByEmail($username)
     {
@@ -79,14 +79,14 @@ class UserRepository extends BaseRepository
             return $user;
         }
 
-        throw new NotFoundHttpException('exceptions.api.auth.login.not_found');
+        throw new NotFoundException('user', $username);
     }
 
     /**
      * @param $code
      *
      * @return mixed
-     * @throws NotFoundHttpException
+     * @throws NotFoundException
      */
     public function findByConfirmationCode($code)
     {
@@ -98,7 +98,7 @@ class UserRepository extends BaseRepository
             return $user;
         }
 
-        throw new NotFoundHttpException('exceptions.api.auth.confirmation.not_found');
+        throw new NotFoundException('code', $code);
     }
 
     /**
@@ -241,13 +241,13 @@ class UserRepository extends BaseRepository
 
         throw new GeneralException(__('exceptions.frontend.auth.password.change_mismatch'));
     }
-
+    
     /**
      * @param $code
      *
      * @return bool
-     * @throws ConflictException
-     * @throws NotFoundHttpException
+     * @throws BadRequestException
+     * @throws NotFoundException
      */
     public function confirm($code)
     {
@@ -255,7 +255,7 @@ class UserRepository extends BaseRepository
 
         if ($user->confirmed == 1) {
             \Log::error('Account already confirmed', ['email' => $user->email]);
-            throw new ConflictException('exceptions.api.auth.confirmation.already_confirmed');
+            throw new BadRequestException('confirmed', 1);
         }
 
         if ($user->confirmation_code == $code) {
@@ -266,7 +266,7 @@ class UserRepository extends BaseRepository
             return $user->save();
         }
 
-        throw new ConflictException('exceptions.api.auth.confirmation.mismatch');
+        throw new BadRequestException('code', $code);
     }
 
     /**
