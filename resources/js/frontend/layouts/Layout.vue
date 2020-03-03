@@ -2,9 +2,9 @@
     <mdb-container>
         <navigation></navigation>
         <mdb-tab-content>
-            <transition name="slide">
+            <keep-alive>
                 <router-view></router-view>
-            </transition>
+            </keep-alive>
         </mdb-tab-content>
     </mdb-container>
 </template>

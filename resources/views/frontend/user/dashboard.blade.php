@@ -14,7 +14,7 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <router-view><router-view>
+                        <router-view></router-view>
                     </div>
                 </div> <!-- card-body -->
             </div><!-- card -->

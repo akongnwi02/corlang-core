@@ -33,11 +33,7 @@ class ServiceRepository
             $service->is_prepaid = request()->has('is_prepaid') ? 1 : 0;
             
             if ($logo) {
-                // delete previous logo
-                if (strlen($service->logo_url)) {
-                    Storage::disk('public')->delete($service->logo_url);
-                }
-        
+
                 $service->logo_url = $logo->store('/logos', 'public');
         
             }
@@ -109,7 +105,7 @@ class ServiceRepository
         if ($logo) {
             // delete previous logo
             if (strlen($service->logo_url)) {
-                Storage::disk('public')->delete($service->logo_url);
+//                Storage::disk('public')->delete($service->logo_url);
             }
             
             $service->logo_url = $logo->store('/logos', 'public');

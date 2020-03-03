@@ -15,6 +15,8 @@ export const configuration = {
     */
     state: {
         configurationLoadStatus: 0,
+        configuration: {},
+        selectedService: {}
     },
 
     /*
@@ -29,16 +31,37 @@ export const configuration = {
 
             commit( 'setConfigurationLoadStatus', 1 );
 
-            // load the default currency
-            ConfigurationApi.configuration()
-                .then( function( response ){
-                    commit( 'setConfiguration', response.data );
+            let configExist = false;
+
+            // load the config from cache
+            if (localStorage.getItem('configuration')) {
+                let configuration = JSON.parse(localStorage.getItem('configuration'));
+                if ((new Date()).getTime() > configuration.expiration) {
+                    localStorage.removeItem('configuration');
+                    configExist = false;
+                } else {
+                    commit('setConfiguration', configuration);
                     commit('setConfigurationLoadStatus', 2);
-                })
-                .catch( function(error){
-                    commit('setConfigurationLoadStatus', 3);
-                    helper.handleException(error);
-                });
+                    configExist = true;
+                }
+            }
+
+            if (! configExist) {
+                // load the config from the API
+                ConfigurationApi.configuration()
+                    .then( function( response ){
+                        let configuration = response.data;
+                        configuration.expiration = (new Date()).getTime() + BUSINESS_CONFIG.CACHE_EXPIRATION;
+                        localStorage.setItem('configuration', JSON.stringify(configuration));
+                        commit( 'setConfiguration', configuration );
+                        commit('setConfigurationLoadStatus', 2);
+                    })
+                    .catch( function(error){
+                        commit('setConfiguration', {});
+                        commit('setConfigurationLoadStatus', 3);
+                        helper.handleException(error);
+                    });
+            }
         },
     },
 
@@ -53,8 +76,7 @@ export const configuration = {
             state.quoteLoadStatus = status;
         },
         setConfiguration( state, configuration ){
-            configuration.expiration = (new Date()).getTime() + BUSINESS_CONFIG.CACHE_EXPIRATION;
-            localStorage.setItem('configuration', JSON.stringify(configuration));
+           state.configuration = configuration;
         },
     },
 
@@ -70,18 +92,7 @@ export const configuration = {
         },
 
         getConfiguration( state ) {
-            if (! localStorage.getItem('configuration')){
-                return false;
-            }
-
-            let configuration = JSON.parse(localStorage.getItem('configuration'));
-
-            if ((new Date()).getTime() > configuration.expiration) {
-                localStorage.removeItem('configuration');
-                return false
-            }
-
-            return configuration;
+            return state.configuration;
         }
 
     }

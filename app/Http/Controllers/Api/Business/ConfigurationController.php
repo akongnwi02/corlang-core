@@ -26,12 +26,27 @@ class ConfigurationController extends Controller
         return response()->json([
             'currency' => $currencyRepository->get()->where('is_default', true)->get(),
             'country' => $countryRepository->get()->where('is_default', true)->get(),
-            'methods' => $paymentMethodRepository->getPaymentMethods()->with(['service' => function ($query) {
-                $query->where('is_active', true);
-            }])->get(),
-            'categories' => $categoryRepository->get()
-                ->where('is_active', true)->with(['services' => function ($query) {
+            // get all payment methods
+            'methods' => $paymentMethodRepository->getPaymentMethods()
+                // with related service
+                ->with(['service' => function ($query) {
+                    // only active services
                     $query->where('is_active', true);
+                }])->get(),
+            // get all categories
+            'categories' => $categoryRepository->get()
+                // only active categories
+                ->where('is_active', true)
+                // get related services
+                ->with(['services' => function ($query) {
+                    // when the user belongs to a company
+                    $query->when(auth()->user()->company_id, function ($query) {
+                        // get only the company services
+                        $query->whereHas('companies', function ($query) {
+                            // which the user belongs to
+                            $query->where('companies.uuid', auth()->user()->company_id);
+                        });
+                    });
                 }])->get(),
         ]);
     }

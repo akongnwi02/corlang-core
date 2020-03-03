@@ -7,9 +7,7 @@
 
 use App\Http\Controllers\Api\Business\ConfigurationController;
 
-Route::group([
-//    'middleware' => request()->hasHeader('authorization') ? 'jwt.auth' : 'auth'
-], function () {
+Route::group(['middleware' => request()->hasHeader('authorization') ? 'jwt.auth' : 'auth'], function () {
     /*
      * Configuration
      */

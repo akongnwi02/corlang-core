@@ -1,17 +1,14 @@
 
 export const ConfigurationLoad = {
-    data() {
-        return {
-            configuration: null,
+    mounted() {
+        this.$store.dispatch('loadConfiguration');
+    },
+    computed: {
+        configurationLoadStatus() {
+            return this.$store.getters.getConfigurationLoadStatus;
+        },
+        configuration() {
+            return this.$store.getters.getConfiguration;
         }
     },
-    mounted() {
-
-        if (this.$store.getters.getConfiguration) {
-            this.configuration = this.$store.getters.getConfiguration;
-        } else {
-            this.$store.dispatch('loadConfiguration');
-        }
-        this.configuration = this.$store.getters.getConfiguration;
-    }
 };

@@ -18,6 +18,8 @@
                 <mdb-row>
                     <mdb-col md="6" v-if="is_prepaid">
                         <mdb-input :label="$t(`dashboard.pages.tabs.content.electricity.meter_code`)" v-model="destination"></mdb-input>
+                        <div class="invalid-feedback">
+                        Please provide a valid state.</div>
                     </mdb-col>
 
                     <mdb-col md="6" v-if="!is_prepaid">
@@ -28,20 +30,12 @@
                         <mdb-input :label="$t(`dashboard.pages.tabs.content.electricity.amount`) + ' (XAF)'" v-model="amount"></mdb-input>
                     </mdb-col>
                 </mdb-row>
-                <div class="row">
-                    <div v-for="service in services" class="col-md-4">
-                        <div class="thumbnail">
-                            <img :src="service.logo_url" :alt="service.name" style="width:50%">
-                            <div class="caption">
-                                <p>{{service.name}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div>
-                    <mdb-btn class="float-right" color="primary">{{ $t(`dashboard.pages.tabs.content.electricity.next`) }}</mdb-btn>
-                </div>
+                <services v-on:selected="serviceSelected" :services="services"></services>
+
+                <mdb-card-footer class="mt-4">
+                    <mdb-btn @click="requestQuote()" size="sm" class="float-right" color="primary">{{ $t(`dashboard.pages.tabs.content.electricity.next`) }}</mdb-btn>
+                </mdb-card-footer>
 
             </mdb-card-body>
         </mdb-card>
@@ -70,18 +64,35 @@
                 amount: '',
 
                 // Business Data
-                services: []
+                services: [],
+                selectedService: {},
             };
         },
         methods: {
             filterServices(){
                 if (this.configuration) {
                     let elecCategory = this.configuration.categories.filter(obj => {
-                        return obj.code === BUSINESS_CONFIG.ELECTRICITY_CODE;
+                        return obj.code == BUSINESS_CONFIG.CATEGORY_ELECTRICITY_CODE;
                     });
                     this.services = elecCategory[0].services.filter(obj => {
                         return obj.is_prepaid == this.is_prepaid;
                     });
+                }
+            },
+            serviceSelected: function(service) {
+                console.log('service from event', service);
+                this.selectedService = service;
+            },
+            requestQuote() {
+                if (this.validateData()) {
+
+                }
+            },
+            validateData() {
+                let valid = false;
+
+                if (!this.selectedService) {
+
                 }
             }
         },
@@ -92,7 +103,7 @@
             },
             is_prepaid() {
                 this.filterServices();
-            }
+            },
         },
     }
 

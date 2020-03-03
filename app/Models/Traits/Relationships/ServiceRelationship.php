@@ -9,6 +9,8 @@
 namespace App\Models\Traits\Relationships;
 
 use App\Models\Auth\User;
+use App\Models\Company\Company;
+use App\Models\Company\CompanyService;
 use App\Models\Service\Category;
 use App\Models\System\Gateway;
 
@@ -27,5 +29,18 @@ trait ServiceRelationship
     public function gateway()
     {
         return $this->hasOne(Gateway::class, 'uuid', 'gateway_id');
+    }
+    
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class, 'company_service', 'service_id', 'company_id', 'uuid')
+            ->withTimestamps()
+            ->using(CompanyService::class)
+            ->as('specific')
+            ->withPivot([
+                'is_active',
+                'company_rate',
+                'agent_rate',
+            ]);
     }
 }
