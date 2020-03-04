@@ -5,4 +5,6 @@ export const BUSINESS_CONFIG = {
     CATEGORY_ELECTRICITY_CODE: 'CORELEC001',
 
     SERVER_STORAGE_PATH: '/storage',
+
+    APP_REGEX_AMOUNT: /^\d+(?:\.\d{0,2})$/
 };

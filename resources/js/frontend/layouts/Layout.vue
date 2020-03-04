@@ -1,10 +1,25 @@
 <template>
     <mdb-container>
-        <navigation></navigation>
+        <mdb-tab tabs color="primary" justify>
+            <mdb-tab-item key="tab1" :active="page=='purchase'" @click.native.prevent="page='purchase'">
+                <mdb-icon icon="shopping-bag" class="ml-2"/> {{ $t(`dashboard.pages.titles.purchase`) }}
+            </mdb-tab-item>
+
+            <mdb-tab-item key="tab2" :active="page=='transactions'" @click.native.prevent="page='transactions'">
+                <mdb-icon icon="list" class="ml-2"/> {{ $t(`dashboard.pages.titles.transactions`) }}
+            </mdb-tab-item>
+        </mdb-tab>
         <mdb-tab-content>
-            <keep-alive>
-                <router-view></router-view>
-            </keep-alive>
+            <mdb-tab-pane class="active" v-if="page=='purchase'">
+                <keep-alive>
+
+                    <purchase></purchase>
+
+                </keep-alive>
+            </mdb-tab-pane>
+            <mdb-tab-pane class="fade" key="show2" v-if="page=='transactions'">
+                <br/>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. <br><br>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+            </mdb-tab-pane>
         </mdb-tab-content>
     </mdb-container>
 </template>
@@ -12,54 +27,20 @@
 <script>
     import { ChangeLanguage }from '../mixins/local/ChangeLanguage'
 
-    import Navigation from '../components/global/Navigation';
+    import Purchase from '../pages/Purchase';
 
     export default {
         name: "Layout",
         mixins: [
             ChangeLanguage,
         ],
-
         components: {
-            Navigation,
+            Purchase,
         },
+        data() {
+            return{
+                page: 'purchase',
+            }
+        }
     }
 </script>
-
-<style>
-    ul {
-        cursor: pointer;
-    }
-
-    .slide-enter-active {
-        -moz-transition-duration: 0.3s;
-        -webkit-transition-duration: 0.3s;
-        -o-transition-duration: 0.3s;
-        transition-duration: 0.3s;
-        -moz-transition-timing-function: ease-in;
-        -webkit-transition-timing-function: ease-in;
-        -o-transition-timing-function: ease-in;
-        transition-timing-function: ease-in;
-    }
-
-    .slide-leave-active {
-        -moz-transition-duration: 0.3s;
-        -webkit-transition-duration: 0.3s;
-        -o-transition-duration: 0.3s;
-        transition-duration: 0.3s;
-        -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-        -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-        -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-        transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-    }
-
-    .slide-enter-to, .slide-leave {
-        max-height: 100px;
-        overflow: hidden;
-    }
-
-    .slide-enter, .slide-leave-to {
-        overflow: hidden;
-        max-height: 0;
-    }
-</style>

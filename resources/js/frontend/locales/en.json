@@ -25,5 +25,15 @@
               }
           }
       }
-  }
+  },
+    "validations": {
+        "purchase": {
+            "electricity": {
+                "vendor": "Please select a service from the list",
+                "amount": "Please enter a valid amount",
+                "meter_code": "Please enter a valid meter code",
+                "bill_number": "Please enter a valid bill number"
+            }
+        }
+    }
 }
