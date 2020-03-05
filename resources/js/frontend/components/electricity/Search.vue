@@ -1,48 +1,27 @@
 <template>
-    <div style="height:100%">
-        <mdb-card>
-            <mdb-card-body flex layout="row" class="text-center">
-                <mdb-card-title> {{ $t(`dashboard.pages.tabs.content.electricity.title`) }} </mdb-card-title>
-                <mdb-card-text class="text-danger"> {{ invalid_text }} </mdb-card-text>
-                <div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="prepaid" :value='true' v-model="is_prepaid">
-                        <label class="custom-control-label" for="prepaid">{{ $t(`dashboard.pages.tabs.content.electricity.prepaid`) }}</label>
+        <div class="card">
+            <div class="text-center card-body">
+                <!--<div class="card-title"> {{ $t(`dashboard.pages.tabs.content.electricity.title`) }} </div>-->
+                <div class="card-text text-danger"> {{ invalid_text }} </div>
+
+                <div class="row">
+                    <div class="col-6" v-show="is_prepaid">
+                        <mdb-input size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.meter_code`)" v-model="destination"></mdb-input>
                     </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="postpaid" :value='false' v-model="is_prepaid">
-                        <label class="custom-control-label" for="postpaid">{{ $t(`dashboard.pages.tabs.content.electricity.postpaid`) }}</label>
+
+                    <div class="col-6" v-show="!is_prepaid">
+                        <mdb-input size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.bill_number`)" v-model="destination"></mdb-input>
+                    </div>
+
+                    <div class="col-6" v-show="is_prepaid">
+                        <!--put a v-if on the configuration.currency.code to avoid code not found error-->
+                        <mdb-input size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.amount`) +' '+ configuration.currency.code" v-model="amount"></mdb-input>
                     </div>
                 </div>
-                <mdb-row>
-                    <mdb-col md="6" v-show="is_prepaid">
-                        <mdb-input :label="$t(`dashboard.pages.tabs.content.electricity.meter_code`)" v-model="destination"></mdb-input>
-                        <div class="invalid-feedback">
-                        Please provide a valid state.</div>
-                    </mdb-col>
-
-                    <mdb-col md="6" v-show="!is_prepaid">
-                        <mdb-input :label="$t(`dashboard.pages.tabs.content.electricity.bill_number`)" v-model="destination"></mdb-input>
-                    </mdb-col>
-
-                    <mdb-col md="6" v-show="is_prepaid">
-                        <mdb-input :label="$t(`dashboard.pages.tabs.content.electricity.amount`) + ' (XAF)'" v-model="amount"></mdb-input>
-                    </mdb-col>
-                </mdb-row>
-
-                <keep-alive>
-
-                    <services v-on:selected="serviceSelected" :services="services"></services>
-
-                </keep-alive>
-
-                <mdb-card-footer class="mt-4">
-                    <mdb-btn @click="requestQuote()" size="sm" class="float-right" color="primary">{{ $t(`dashboard.pages.tabs.content.electricity.next`) }}</mdb-btn>
-                </mdb-card-footer>
-
-            </mdb-card-body>
-        </mdb-card>
-    </div>
+                    <services v-on:selected="selectService" :services="services"></services>
+                <search-button v-on:clicked="requestQuote" :status="quoteLoadStatus"></search-button>
+            </div>
+        </div>
 </template>
 
 <script>
@@ -50,10 +29,12 @@
     import Services from '../services/Services'
     import { ConfigurationLoad } from '../../mixins/Configuration/ConfigurationLoad'
     import { BUSINESS_CONFIG } from "../../config/business";
+    import SearchButton from "../global/SearchButton";
 
     export default {
         name: "Search",
         components: {
+            SearchButton,
             Services
         },
         mixins: [
@@ -62,59 +43,59 @@
         data() {
             return {
                 // Models Fields
-                is_prepaid: true,
                 destination: '',
                 amount: '',
-                services: [],
                 selectedService: null,
+                items: [], // not applicable
 
                 // Component Data
                 invalid_text: '',
             };
         },
-        methods: {
-            filterServices(){
-                if (this.configuration) {
-                    let elecCategory = this.configuration.categories.filter(obj => {
-                        return obj.code == BUSINESS_CONFIG.CATEGORY_ELECTRICITY_CODE;
-                    });
-                    this.services = elecCategory[0].services.filter(obj => {
-                        return obj.is_prepaid == this.is_prepaid;
-                    });
-                }
+        computed: {
+            quoteLoadStatus() {
+                return this.$store.getters.getQuoteLoadStatus;
             },
-            serviceSelected: function(service) {
-                console.log('service from event', service);
+            is_prepaid() {
+                if (this.selectedService) {
+                    return this.selectedService.is_prepaid;
+                }
+                return true
+            },
+            services(){
+                let elecCategory = this.configuration.categories.filter(obj => {
+                    return obj.code == BUSINESS_CONFIG.CATEGORY_ELECTRICITY_CODE;
+                });
+                return elecCategory[0].services
+            },
+        },
+        methods: {
+            selectService: function(service) {
+                console.log('selected', service);
                 this.selectedService = service;
             },
             requestQuote() {
                 if (this.validateData()) {
-
+                    this.$store.dispatch('loadQuote',{
+                        destination: this.destination,
+                        destination_code: this.selectedService.code,
+                        amount: this.amount,
+                        currency_code: this.configuration.currency.code,
+                    });
                 }
             },
 
             validateData() {
                 let invalid = 0;
 
-                if (!this.selectedService) {
-                    if (this.services.length === 1) {
-                        this.selectedService = services[0];
-                        console.log('Only one service in list. Hence selected');
-                    } else {
-                        console.log('No service selected');
-                        this.invalid_text = this.$t('validations.purchase.electricity.vendor');
-                        ++invalid;
-                    }
-                }
-
                 // this validation needs to be handled properly
                 if (this.destination.length < 6) {
                     ++invalid;
                     if (this.is_prepaid) {
                         this.invalid_text = this.$t('validations.purchase.electricity.meter_code');
-                        console.log('Invalid bill number');
-                    } else {
                         console.log('Invalid meter code');
+                    } else {
+                        console.log('Invalid bill number');
                         this.invalid_text = this.$t('validations.purchase.electricity.bill_number')
                     }
                 }
@@ -126,6 +107,23 @@
                         this.invalid_text = this.$t('validations.purchase.electricity.amount');
                     }
                 }
+
+
+                if (! this.selectedService) {
+                    if (this.services.length === 1) {
+                        this.selectedService = this.services[0];
+                        console.log('Only one service in list. Hence selected');
+                    } else if (this.services.length === 0) {
+                        console.log('No services available');
+                        ++invalid;
+                        this.invalid_text = this.$t('validations.purchase.electricity.vendor_empty');
+                    } else {
+                        console.log('No service selected');
+                        this.invalid_text = this.$t('validations.purchase.electricity.vendor');
+                        ++invalid;
+                    }
+                }
+
                 if (invalid === 0) {
                     this.invalid_text = '';
                     console.log('Validation complete. All inputs valid');
@@ -133,15 +131,6 @@
                 }
                 return false;
             }
-        },
-
-        watch: {
-            configuration() {
-                this.filterServices();
-            },
-            is_prepaid() {
-                this.filterServices();
-            },
         },
     }
 

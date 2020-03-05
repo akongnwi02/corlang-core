@@ -6,5 +6,5 @@ export const BUSINESS_CONFIG = {
 
     SERVER_STORAGE_PATH: '/storage',
 
-    APP_REGEX_AMOUNT: /^\d+(?:\.\d{0,2})$/
+    APP_REGEX_AMOUNT: /^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/
 };

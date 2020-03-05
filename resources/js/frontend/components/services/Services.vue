@@ -1,6 +1,6 @@
 <template>
     <div class="row ml-1 mr-1">
-        <div v-for="service in services" class="cc-selector-2">
+        <div v-for="service in services" class="cc-selector-2 hoverable" >
             <input :id="service.uuid" type="radio" name="service" :value="service.name" v-on:change="emitToParent(service)"/>
             <label class="drinkcard-cc visa mr-1" :for="service.uuid" :style="{ backgroundImage: 'url(\'' + getImageUrl(service.logo_url) + '\')' }" ></label>
         </div>
@@ -68,4 +68,16 @@
     a:visited{color:#888}
     a{color:#444;text-decoration:none;}
     p{margin-bottom:.3em;}
+
+    /*
+    TODO Assign this class to the selected services
+    */
+    .selected {
+        box-shadow: none;
+        transition: all 0.55s ease-in-out;
+        transition-property: all;
+        transition-duration: 0.55s;
+        transition-timing-function: ease-in-out;
+        transition-delay: 0s;
+    }
 </style>

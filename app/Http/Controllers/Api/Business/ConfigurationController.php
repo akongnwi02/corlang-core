@@ -24,8 +24,8 @@ class ConfigurationController extends Controller
         PaymentMethodRepository $paymentMethodRepository
     ){
         return response()->json([
-            'currency' => $currencyRepository->get()->where('is_default', true)->get(),
-            'country' => $countryRepository->get()->where('is_default', true)->get(),
+            'currency' => $currencyRepository->get()->where('is_default', true)->get()[0],
+            'country' => $countryRepository->get()->where('is_default', true)->get()[0],
             // get all payment methods
             'methods' => $paymentMethodRepository->getPaymentMethods()
                 // with related service

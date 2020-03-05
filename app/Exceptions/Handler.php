@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler
         if($request->expectsJson()) {
             
             $rendered = parent::render($request, $exception);
-//            dd($rendered);
+
             $error['code']    = $rendered->getStatusCode();
             $error['message'] = 'Unexpected Error';
             

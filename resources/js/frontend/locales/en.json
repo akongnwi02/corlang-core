@@ -20,7 +20,8 @@
                       "meter_code": "Meter Code",
                       "bill_number": "Bill Number",
                       "contract_number": "Contract Number",
-                      "next": "Next"
+                      "next": "Next",
+                      "loading": "Loading"
                   }
               }
           }
@@ -30,6 +31,7 @@
         "purchase": {
             "electricity": {
                 "vendor": "Please select a service from the list",
+                "vendor_empty": "No services available for this category at the moment",
                 "amount": "Please enter a valid amount",
                 "meter_code": "Please enter a valid meter code",
                 "bill_number": "Please enter a valid bill number"

@@ -73,7 +73,7 @@ export const configuration = {
           Sets the quote load status
         */
         setConfigurationLoadStatus( state, status ){
-            state.quoteLoadStatus = status;
+            state.configurationLoadStatus = status;
         },
         setConfiguration( state, configuration ){
            state.configuration = configuration;
