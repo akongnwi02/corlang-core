@@ -18,6 +18,11 @@ import 'bootstrap-css-only/css/bootstrap.min.css'
 import 'mdbvue/lib/css/mdb.min.css'
 
 /*
+   Register the main component
+ */
+Vue.component('layout', require('./layouts/Layout'));
+
+/*
   Create a new Vue instance and mount the app element.
 */
 new Vue({
