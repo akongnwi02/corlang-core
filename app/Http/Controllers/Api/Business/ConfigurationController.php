@@ -28,6 +28,11 @@ class ConfigurationController extends Controller
             'country' => $countryRepository->get()->where('is_default', true)->get()[0],
             // get all payment methods
             'methods' => $paymentMethodRepository->getPaymentMethods()
+                // when the user does not belong to a company
+                ->when(! auth()->user()->company_id, function ($query) {
+                    // don't return the default method
+                    $query->where('is_default', false);
+                })
                 // with related service
                 ->with(['service' => function ($query) {
                     // only active services

@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Exceptions\Api\BadRequestException;
 use App\Exceptions\GeneralException;
 use Closure;
 

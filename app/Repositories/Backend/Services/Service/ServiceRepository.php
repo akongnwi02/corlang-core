@@ -126,4 +126,9 @@ class ServiceRepository
     {
         return Service::active();
     }
+    
+    public function findByCode($code)
+    {
+        return Service::where('code', $code);
+    }
 }

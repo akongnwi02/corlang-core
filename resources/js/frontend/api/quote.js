@@ -11,7 +11,6 @@ export default {
         params.destination_code = data.destination_code; // identifier of destination
         params.amount = data.amount; // amount
         params.currency_code = data.currency_code; // currency code
-        params.is_prepaid = data.is_prepaid; // prepaid or post paid service
         params.items = data.items; // optional array of items
 
         return axios.post('/api/quote', params);

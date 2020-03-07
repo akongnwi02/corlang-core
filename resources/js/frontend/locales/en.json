@@ -1,32 +1,31 @@
 {
-  "dashboard": {
-      "pages": {
-          "titles":{
-            "purchase": "Purchase",
-            "transactions": "Transactions"
-          },
-          "tabs": {
-              "titles": {
-                  "electricity": "Electricity"
-              },
-              "content": {
-                  "electricity": {
-                      "title": "Purchase Electricity",
-                      "description": "Fill in the form below to pay your electricity bill. It's quick and easy",
-                      "prepaid": "Prepaid",
-                      "postpaid": "Postpaid",
-                      "vendor": "Vendor",
-                      "amount": "Amount",
-                      "meter_code": "Meter Code",
-                      "bill_number": "Bill Number",
-                      "contract_number": "Contract Number",
-                      "next": "Next",
-                      "loading": "Loading"
-                  }
-              }
-          }
-      }
-  },
+    "dashboard": {
+        "pages": {
+            "titles": {
+                "purchase": "Purchase",
+                "transactions": "Transactions"
+            },
+            "tabs": {
+                "titles": {
+                    "electricity": "Electricity"
+                },
+                "content": {
+                    "electricity": {
+                        "title": "Purchase Electricity",
+                        "prepaid": "Prepaid",
+                        "postpaid": "Postpaid",
+                        "vendor": "Vendor",
+                        "amount": "Amount",
+                        "meter_code": "Meter Code",
+                        "bill_number": "Bill Number",
+                        "contract_number": "Contract Number",
+                        "next": "Next",
+                        "loading": "Loading"
+                    }
+                }
+            }
+        }
+    },
     "validations": {
         "purchase": {
             "electricity": {
@@ -34,7 +33,21 @@
                 "vendor_empty": "No services available for this category at the moment",
                 "amount": "Please enter a valid amount",
                 "meter_code": "Please enter a valid meter code",
-                "bill_number": "Please enter a valid bill number"
+                "bill_number": "Please enter a valid bill number",
+                "server": {
+
+                }
+            }
+        },
+        "general": {
+            "unauthorized": "You are not authenticated. Please login and retry",
+            "server": "An internal server error occurred",
+            "not_found": "A resource or service you requested was not found",
+            "invalid_input": "Invalid inputs. ",
+            "business": {
+                "invalid": "The {{parameter}} is invalid.",
+                "insufficient_balance": "Your balance is insufficient",
+                "unauthorized": "You are not authorized to access {{resource}}"
             }
         }
     }

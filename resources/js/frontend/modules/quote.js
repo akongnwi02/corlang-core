@@ -6,7 +6,8 @@
 */
 
 import QuoteAPI from '../api/quote';
-import { helper} from "../helpers/helpers";
+import { helper} from '../helpers/helpers';
+import i18n from '../i18n';
 
 export const quote = {
     /*
@@ -15,6 +16,8 @@ export const quote = {
     state: {
         quote: {},
         quoteLoadStatus: 0,
+        quoteErrorMessage: '',
+        quoteErrorFields: [],
     },
 
     /*
@@ -33,9 +36,16 @@ export const quote = {
                     commit( 'setQuoteLoadStatus', 2 );
                 })
                 .catch( function( error ){
-                    helper.handleException(error);
-                    commit( 'setQuote', {} );
+                    if (error.response.data.code === 401) {
+                        window.alert(i18n.t('validations.general.unauthorized'));
+                        window.location.replace('/login');
+                    }
+                    let errorFields = Object.keys(error.response.data.errors);
+                    console.log(errorFields);
                     commit( 'setQuoteLoadStatus', 3 );
+                    commit( 'setQuoteErrorMessage', helper.handleException(error) );
+                    commit( 'setQuoteErrorFields',  Array.isArray(errorFields) && errorFields.length ? errorFields : []);
+                    commit( 'setQuote', {} );
                 });
         },
     },
@@ -57,6 +67,14 @@ export const quote = {
         setQuote( state, quote ){
             state.quote = quote;
         },
+
+        setQuoteErrorMessage( state, quoteErrorMessage ){
+            state.quoteErrorMessage = quoteErrorMessage;
+        },
+
+        setQuoteErrorFields( state, quoteErrorFields ){
+            state.quoteErrorFields = quoteErrorFields;
+        },
     },
 
     /*
@@ -74,7 +92,13 @@ export const quote = {
           Returns the quote
         */
         getQuote( state ){
-            return state.quote
+            return state.quote;
         },
+        getQuoteErrorMessage(state) {
+            return state.quoteErrorMessage;
+        },
+        getQuoteErrorFields(state) {
+            return state.quoteErrorFields;
+        }
     }
 };
