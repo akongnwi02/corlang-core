@@ -54,6 +54,7 @@
     },
     "dependencies": {
         "@vue/cli": "^4.2.2",
+        "buefy": "^0.8.12",
         "es6-promise": "^4.2.8",
         "mdbvue": "^6.5.0",
         "vue-i18n": "^8.15.4",

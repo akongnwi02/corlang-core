@@ -3,7 +3,7 @@ import i18n from '../i18n';
 export const helper = {
     handleException(error) {
         console.log('request failed', error.response.data);
-        if (error.response.data.code == 400) {
+        if (error.response.data.code == 400 || error.response.data.code == 419) {
             return i18n.t('validations.general.business.invalid', {parameter: 'tobe changed'});
         }
 

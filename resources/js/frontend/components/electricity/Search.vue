@@ -2,7 +2,6 @@
     <div class="card">
         <div class="text-center card-body">
             <div class="card-text text-danger"> {{ invalid_text }} </div>
-            <div class="card-text text-danger" v-if="quoteLoadStatus==3">{{ quote_error_message }} {{ error_fields }}</div>
             <div class="row">
                 <div class="col-6" v-show="is_prepaid">
                     <mdb-input key="meter_code" size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.meter_code`)" v-model="destination"></mdb-input>
@@ -17,8 +16,13 @@
                     <mdb-input key="amount" size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.amount`) +' '+ configuration.currency.code" v-model="amount"></mdb-input>
                 </div>
             </div>
-                <services v-on:selected="selectService" :services="services"></services>
+
+            <services v-on:selected="selectService" :services="services"></services>
+
             <search-button v-on:clicked="requestQuote" :status="quoteLoadStatus"></search-button>
+
+            <quote-modal v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
+
         </div>
     </div>
 </template>
@@ -29,10 +33,12 @@
     import { ConfigurationLoad } from '../../mixins/Configuration/ConfigurationLoad'
     import { BUSINESS_CONFIG } from "../../config/business";
     import SearchButton from "../global/SearchButton";
+    import QuoteModal from '../global/QuoteModal';
 
     export default {
         name: "Search",
         components: {
+            QuoteModal,
             SearchButton,
             Services,
         },
@@ -49,8 +55,7 @@
 
                 // Component Data
                 invalid_text: '',
-                quote_error_message: '',
-                error_fields: '',
+                show_quote_modal: false
             };
         },
         computed: {
@@ -136,7 +141,6 @@
         watch: {
             quoteLoadStatus(){
                 if (this.quoteLoadStatus == 3) {
-                    this.quote_error_message = this.$store.getters.getQuoteErrorMessage;
                     let errorFields = this.$store.getters.getQuoteErrorFields;
                     let myFields = [];
                     if (errorFields.includes('destination')) {
@@ -150,18 +154,25 @@
                     if (errorFields.includes('amount')) {
                         myFields.push(this.$t('dashboard.pages.tabs.content.electricity.amount'));
                     }
-                    this.error_fields = myFields.toString().replace(',', ' ');
+
+                    this.$buefy.toast.open({
+                        message: this.$store.getters.getQuoteErrorMessage + ' ' + myFields.toString().replace(',', ' '),
+                        type: 'is-danger'
+                    });
                 }
+
                 if (this.quoteLoadStatus == 2) {
                     let quote = this.$store.getters.getQuote;
                     console.log('quote', quote);
-                    if (this.is_prepaid) {
+
+
+
+                    this.show_quote_modal=true;
+                    if (this.is_prepaid){
 
                     }
-
                 }
             }
         }
     }
-
 </script>

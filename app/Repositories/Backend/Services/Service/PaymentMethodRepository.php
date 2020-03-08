@@ -15,6 +15,7 @@ class PaymentMethodRepository
 {
     public function getPaymentMethods()
     {
-        return PaymentMethod::active();
+        return PaymentMethod::active()
+            ->orderBy('is_default', 'desc');
     }
 }

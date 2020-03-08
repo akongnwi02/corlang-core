@@ -2,9 +2,10 @@
   Imports the routes and store and vue to use with the Vue module.
 */
 import Vue from 'vue';
-import router from './routes.js'
-import store from './store.js'
+import router from './routes.js';
+import store from './store.js';
 import i18n from './i18n';
+
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -14,8 +15,12 @@ for (const component in mdbvue) {
     Vue.component(component, mdbvue[component])
 }
 
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
 import 'bootstrap-css-only/css/bootstrap.min.css'
 import 'mdbvue/lib/css/mdb.min.css'
+
+Vue.use(Buefy);
 
 /*
    Register the main component

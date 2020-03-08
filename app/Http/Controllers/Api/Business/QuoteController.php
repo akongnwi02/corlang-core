@@ -16,7 +16,6 @@ class QuoteController
 {
     public function quote(QuoteRequest $request, ServiceRepository $serviceRepository)
     {
-        sleep(5);
         return response()->json([
             'destination' => $request->input('destination'),
             'amount' => $request->input('amount'),

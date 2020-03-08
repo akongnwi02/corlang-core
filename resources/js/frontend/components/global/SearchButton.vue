@@ -17,7 +17,7 @@
                 }
             },
             buttonText() {
-                return this.status == 1 ? this.$t(`dashboard.pages.tabs.content.electricity.loading`) : this.$t(`dashboard.pages.tabs.content.electricity.next`);
+                return this.status == 1 ? this.$t(`dashboard.pages.general.loading`) : this.$t(`dashboard.pages.general.next`);
             }
         }
     }

@@ -19,10 +19,17 @@
                         "meter_code": "Meter Code",
                         "bill_number": "Bill Number",
                         "contract_number": "Contract Number",
-                        "next": "Next",
-                        "loading": "Loading"
+                        "quote": {
+                            "title": "Meter Details"
+                        }
                     }
                 }
+            },
+            "general": {
+                "close": "Close",
+                "confirm": "Confirm",
+                "next": "Next",
+                "loading": "Loading"
             }
         }
     },
