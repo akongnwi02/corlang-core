@@ -58,7 +58,8 @@ return [
             ]
         ],
         'service' => [
-            'name' => 'Corlang'
+            'name' => 'Corlang',
+            'description' => 'Pay with your Corlang account'
         ]
     ],
 ];

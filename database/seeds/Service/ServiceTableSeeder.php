@@ -19,7 +19,8 @@ class ServiceTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         Service::create([
-            'name' => 'MTN Mobile Money',
+            'name' => 'Sample service 1',
+            'description' => 'Some quick example text to serve as the service description and make up the bulk of the service\'s content.',
             'code' => $faker->postcode,
             'country_id' => Country::first()->uuid,
             'is_active' => true,
@@ -32,7 +33,8 @@ class ServiceTableSeeder extends Seeder
         ]);
         
         Service::create([
-            'name' => 'Orange Mobile Money',
+            'name' => 'Sample service 2',
+            'description' => 'Some quick example text to serve as the service description and make up the bulk of the service\'s content.',
             'code' => $faker->postcode,
             'country_id' => Country::first()->uuid,
             'is_active' => true,
@@ -45,7 +47,8 @@ class ServiceTableSeeder extends Seeder
         ]);
         
         Service::create([
-            'name' => 'Express Mobile Money',
+            'name' => 'Sample service 3',
+            'description' => 'Some quick example text to serve as the service description and make up the bulk of the service\'s content.',
             'code' => $faker->postcode,
             'country_id' => Country::first()->uuid,
             'is_active' => true,

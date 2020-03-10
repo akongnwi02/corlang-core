@@ -18,9 +18,11 @@ class CreatePaymentMethodsTable extends Migration
             $table->uuid('service_id')->nullable();
             $table->boolean('is_default')->default(false);
             $table->boolean('is_active')->default(true);
+            $table->boolean('has_reference')->default(false);
             $table->string('accountregex')->nullable();
             $table->string('name')->nullable();
-            $table->string('description')->nullable();
+            $table->string('description_en')->nullable();
+            $table->string('description_fr')->nullable();
             $table->timestamps();
         });
     }

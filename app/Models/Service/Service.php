@@ -45,6 +45,8 @@ class Service extends Model
      * @var array
      */
     protected $fillable = [
+        'description_en',
+        'description_fr',
         'name',
         'category_id',
         'gateway_id',

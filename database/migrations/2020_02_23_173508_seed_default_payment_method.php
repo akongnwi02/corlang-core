@@ -14,16 +14,18 @@ class SeedDefaultPaymentMethod extends Migration
     public function up()
     {
         \DB::table('paymentmethods')->insert([
-            'uuid'       => Uuid::generate(4)->string,
-            'name'       => config('business.system.service.name'),
-            'is_default' => true,
-            'is_active' => true,
-            'service_id' => null,
-            'accountregex' => null,
-            'description' => null,
+            'uuid'          => Uuid::generate(4)->string,
+            'name'          => config('business.system.service.name'),
+            'is_default'    => true,
+            'is_active'     => true,
+            'has_reference' => false,
+            'service_id'    => null,
+            'accountregex'  => null,
+            'description_en'   => 'Pay with corlang account',
+            'description_fr'   => 'Payez avec votre compte Corlang',
         ]);
     }
-
+    
     /**
      * Reverse the migrations.
      *

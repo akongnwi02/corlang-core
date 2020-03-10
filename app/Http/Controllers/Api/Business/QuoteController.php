@@ -17,11 +17,18 @@ class QuoteController
     public function quote(QuoteRequest $request, ServiceRepository $serviceRepository)
     {
         return response()->json([
+            'id' => \Uuid::generate(4)->string,
             'destination' => $request->input('destination'),
+            'destination_code' => $request->input('destination_code'),
+            'asset' => $request->input('amount') / 100 . ' KWh',
             'amount' => $request->input('amount'),
-            'energy' => $request->input('amount') / 100 . ' KWh',
             'fee' => ($request->input('amount') / 100) * 0.025,
             'currency' => $request->input('currency_code'),
+            'items' => [],
+            'name' => 'Victor Uchenna',
+            'address' => '175 Dondle Street',
+            'email' => 'email@test.com',
+            'phone' => '653254778',
         ]);
     }
 }

@@ -80,7 +80,7 @@
                         {{ html()->label(__('validation.attributes.backend.services.service.category'))->class('col-md-2 form-control-label required')->for('category_id') }}
 
                         <div class="col-md-10">
-                            {{ html()->select('category_id', [null => ''] + $categories)
+                            {{ html()->select('category_id', [null => null] + $categories)
                                 ->class('form-control')
                                 ->required()}}
                         </div><!--col-->
@@ -90,7 +90,7 @@
                         {{ html()->label(__('validation.attributes.backend.services.service.gateway'))->class('col-md-2 form-control-label')->for('gateway_id') }}
 
                         <div class="col-md-10">
-                            {{ html()->select('gateway_id', [null => ''] + $gateways)
+                            {{ html()->select('gateway_id', [null => null] + $gateways)
                                 ->class('form-control')}}
                         </div><!--col-->
                     </div><!--form-group-->
@@ -99,7 +99,7 @@
                         {{ html()->label(__('validation.attributes.backend.services.service.providercommission'))->class('col-md-2 form-control-label')->for('providercommission_id') }}
 
                         <div class="col-md-10">
-                            {{ html()->select('providercommission_id' , [null => ''] + $commissions)
+                            {{ html()->select('providercommission_id' , [null => null] + $commissions)
                                 ->class('form-control')
                                 ->required()}}
                         </div><!--col-->
@@ -109,7 +109,7 @@
                         {{ html()->label(__('validation.attributes.backend.services.service.customercommission'))->class('col-md-2 form-control-label')->for('customercommission_id') }}
 
                         <div class="col-md-10">
-                            {{ html()->select('customercommission_id', [null => ''] + $commissions)
+                            {{ html()->select('customercommission_id', [null => null] + $commissions)
                                 ->class('form-control')
                                 ->required()}}
                         </div><!--col-->

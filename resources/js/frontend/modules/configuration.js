@@ -8,6 +8,7 @@
 import ConfigurationApi from '../api/configuration';
 import { BUSINESS_CONFIG } from "../config/business";
 import { helper } from "../helpers/helpers";
+import i18n from "../i18n";
 
 export const configuration = {
     /*
@@ -57,9 +58,12 @@ export const configuration = {
                         commit('setConfigurationLoadStatus', 2);
                     })
                     .catch( function(error){
+                        if (error.response.data.code == 401 || error.response.data.code == 419) {
+                            window.alert(i18n.t('validations.general.unauthorized'));
+                            window.location.replace('/login');
+                        }
                         commit('setConfiguration', {});
                         commit('setConfigurationLoadStatus', 3);
-                        helper.handleException(error);
                     });
             }
         },

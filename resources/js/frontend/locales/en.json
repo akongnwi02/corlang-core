@@ -15,9 +15,9 @@
                         "prepaid": "Prepaid",
                         "postpaid": "Postpaid",
                         "vendor": "Vendor",
-                        "amount": "Amount",
                         "meter_code": "Meter Code",
                         "bill_number": "Bill Number",
+                        "asset": "Units",
                         "contract_number": "Contract Number",
                         "quote": {
                             "title": "Meter Details"
@@ -29,7 +29,15 @@
                 "close": "Close",
                 "confirm": "Confirm",
                 "next": "Next",
-                "loading": "Loading"
+                "loading": "Loading",
+                "summary": "Order Details",
+                "amount": "Amount",
+                "method": "Payment Method",
+                "description": "Payment Description",
+                "customer": {
+                    "name": "Customer Name",
+                    "address": "Customer Address"
+                }
             }
         }
     },
@@ -38,7 +46,6 @@
             "electricity": {
                 "vendor": "Please select a service from the list",
                 "vendor_empty": "No services available for this category at the moment",
-                "amount": "Please enter a valid amount",
                 "meter_code": "Please enter a valid meter code",
                 "bill_number": "Please enter a valid bill number",
                 "server": {
@@ -52,6 +59,7 @@
             "not_found": "A resource or service you requested was not found",
             "invalid_input": "Invalid inputs. ",
             "business": {
+                "amount": "Please enter a valid amount",
                 "invalid": "The {{parameter}} is invalid.",
                 "insufficient_balance": "Your balance is insufficient",
                 "unauthorized": "You are not authorized to access {{resource}}"

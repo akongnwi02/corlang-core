@@ -36,7 +36,7 @@ export const quote = {
                     commit( 'setQuoteLoadStatus', 2 );
                 })
                 .catch( function( error ){
-                    if (error.response.data.code === 401) {
+                    if (error.response.data.code == 401 || error.response.data.code == 419) {
                         window.alert(i18n.t('validations.general.unauthorized'));
                         window.location.replace('/login');
                     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Service\PaymentMethod;
+use App\Models\Service\Service;
 use Illuminate\Database\Seeder;
 
 /**
@@ -17,12 +18,25 @@ class PaymentMethodTableSeeder extends Seeder
         PaymentMethod::unguard();
         
         PaymentMethod::create([
-            'name'       => config('business.system.service.name'),
-            'is_default' => true,
+            'name'       => 'Orange',
+            'is_default' => false,
             'is_active' => true,
-            'service_id' => null,
+            'service_id' => Service::first()->uuid,
             'accountregex' => null,
-            'description' => null,
+            'description_en' => 'Orange Money Payment. Dial *154# to receive a code to continue',
+            'description_fr' => 'Paiement par Orange. Composez *154# pour continuer',
+            'has_reference' => true,
+        ]);
+    
+        PaymentMethod::create([
+            'name'          => config('business.system.service.name'),
+            'is_default'    => true,
+            'is_active'     => true,
+            'has_reference' => false,
+            'service_id'    => null,
+            'accountregex'  => null,
+            'description_en'   => 'Pay with corlang account',
+            'description_fr'   => 'Payez avec votre compte Corlang',
         ]);
         
         PaymentMethod::reguard();

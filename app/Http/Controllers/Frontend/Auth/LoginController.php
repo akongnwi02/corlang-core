@@ -71,6 +71,16 @@ class LoginController extends Controller
         }
         
         /*
+         * Check to see if the user's company is active
+         */
+        if ($user->company) {
+            if (! $user->company->isActive()) {
+                auth()->logout();
+                throw new GeneralException(__('exceptions.frontend.auth.confirmation.deactivated_company'));
+            }
+        }
+        
+        /*
          * Check to see if the users account is confirmed and active
          */
         if (! $user->isConfirmed()) {

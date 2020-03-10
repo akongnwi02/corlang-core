@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card overflow-auto">
         <div class="text-center card-body">
             <div class="card-text text-danger"> {{ invalid_text }} </div>
             <div class="row">
@@ -13,7 +13,7 @@
 
                 <div class="col-6" v-show="is_prepaid">
                     <!--put a v-if on the configuration.currency.code to avoid code not found error-->
-                    <mdb-input key="amount" size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.amount`) +' '+ configuration.currency.code" v-model="amount"></mdb-input>
+                    <mdb-input key="amount" size="sm" :placeholder="$t(`dashboard.pages.general.amount`) +' '+ configuration.currency.code" v-model="amount"></mdb-input>
                 </div>
             </div>
 
@@ -21,7 +21,7 @@
 
             <search-button v-on:clicked="requestQuote" :status="quoteLoadStatus"></search-button>
 
-            <quote-modal v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
+            <quote-modal :service="selectedService" :quote="quote" v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
 
         </div>
     </div>
@@ -33,7 +33,7 @@
     import { ConfigurationLoad } from '../../mixins/Configuration/ConfigurationLoad'
     import { BUSINESS_CONFIG } from "../../config/business";
     import SearchButton from "../global/SearchButton";
-    import QuoteModal from '../global/QuoteModal';
+    import QuoteModal from './QuoteModal';
 
     export default {
         name: "Search",
@@ -74,6 +74,9 @@
                 });
                 return elecCategory[0].services
             },
+            quote() {
+                return this.$store.getters.getQuote;
+            }
         },
         methods: {
             selectService: function(service) {
@@ -110,7 +113,7 @@
                     if (this.is_prepaid) {
                         ++invalid;
                         console.log('Invalid amount');
-                        this.invalid_text = this.$t('validations.purchase.electricity.amount');
+                        this.invalid_text = this.$t('validations.general.business.amount');
                     }
                 }
 
@@ -152,7 +155,7 @@
                         }
                     }
                     if (errorFields.includes('amount')) {
-                        myFields.push(this.$t('dashboard.pages.tabs.content.electricity.amount'));
+                        myFields.push(this.$t('dashboard.pages.general.amount'));
                     }
 
                     this.$buefy.toast.open({
@@ -162,15 +165,11 @@
                 }
 
                 if (this.quoteLoadStatus == 2) {
-                    let quote = this.$store.getters.getQuote;
-                    console.log('quote', quote);
-
-
-
                     this.show_quote_modal=true;
-                    if (this.is_prepaid){
 
-                    }
+
+
+
                 }
             }
         }

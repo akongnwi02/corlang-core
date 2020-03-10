@@ -47,6 +47,7 @@ class PaymentMethod extends Model
     protected $casts = [
         'is_active'        => 'boolean',
         'is_default' => 'boolean',
+        'has_reference' => 'boolean',
     ];
     
 }

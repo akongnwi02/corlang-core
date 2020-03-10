@@ -33,10 +33,6 @@ class CompanyEventListener
     
     public function onReactivated($event)
     {
-        $event->company->deactivated_by_id = null;
-
-        $event->company->save();
-        
         \Log::info('Company Reactivated', [
             'name' => $event->company->name,
             'by' => $event->company->editor->username,
@@ -45,10 +41,6 @@ class CompanyEventListener
     
     public function onDeactivated($event)
     {
-        $event->company->deactivated_by_id = $event->company->editor->uuid;
-    
-        $event->company->save();
-    
         \Log::info('Company Deactivated', [
             'name' => $event->company->name,
             'by' => $event->company->editor->username,

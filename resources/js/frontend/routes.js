@@ -23,5 +23,11 @@ Vue.use( VueRouter );
 	for the app.
 */
 export default new VueRouter({
-    routes: []
+    routes: [
+        {
+            path: '/electricity/search',
+            name: 'electricity.search',
+            component: Vue.component( 'Search', require( './components/electricity/Search' ) ),
+        },
+    ]
 });

@@ -125,6 +125,7 @@ return [
                 'code_reset_resent'    => 'A new password reset code has been sent to :account. <a href=":url">Resend</a>',
                 'code_reset_not_found' => 'The password reset code does not exist',
                 'no_company'           => 'You have a business account which is not linked to any company at the moment.',
+                'deactivated_company'  => 'You have a business account and your company has been deactivated. Please contact your company administrator.',
             ],
 
             'deactivated'            => 'Your account has been deactivated.',

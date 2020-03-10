@@ -23,6 +23,8 @@ class UpdateServiceRequest extends FormRequest
     {
         return [
             'name'                  => __('validation.attributes.backend.services.service.name'),
+            'description_en'        => __('validation.attributes.backend.services.service.description_en'),
+            'description_fr'        => __('validation.attributes.backend.services.service.description_fr'),
             'category_id'           => __('validation.attributes.backend.services.service.category'),
             'gateway_id'            => __('validation.attributes.backend.services.service.gateway'),
             'is_active'             => __('validation.attributes.backend.services.service.active'),
@@ -40,12 +42,14 @@ class UpdateServiceRequest extends FormRequest
     {
         return [
             'name'                  => ['required', 'string', 'max:191', Rule::unique('services', 'name')->ignore(request()->service, 'uuid')],
+            'description_en'        => ['nullable', 'string', 'max:191'],
+            'description_fr'        => ['nullable', 'string', 'max:191'],
             'category_id'           => ['required', Rule::exists('categories', 'uuid')],
-            'gateway_id'            => ['sometimes', Rule::exists('gateways', 'uuid')],
-            'code'                  => ['sometimes', 'string', 'max:191', Rule::unique('services', 'code')->ignore(request()->service, 'uuid')],
-            'providercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid')],
-            'customercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid')],
-            'providercompany_id'    => ['sometimes', Rule::exists('companies', 'uuid')],
+            'gateway_id'            => ['nullable', Rule::exists('gateways', 'uuid')],
+//            'code'                  => ['sometimes', 'string', 'max:191', Rule::unique('services', 'code')->ignore(request()->service, 'uuid')],
+            'providercommission_id' => ['nullable', Rule::exists('commissions', 'uuid')],
+            'customercommission_id' => ['nullable', Rule::exists('commissions', 'uuid')],
+            'providercompany_id'    => ['nullable', Rule::exists('companies', 'uuid')],
             'agent_rate'            => ['required', 'numeric', 'between:0,100'],
             'company_rate'          => ['required', 'numeric', 'between:0,100'],
             'logo'                  => 'sometimes|image|max:191',

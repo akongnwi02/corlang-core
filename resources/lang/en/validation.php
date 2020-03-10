@@ -220,6 +220,8 @@ return [
             'services'  => [
                 'service'    => [
                     'name'               => 'Service Name',
+                    'description_en'     => 'English Description',
+                    'description_fr'     => 'French Description',
                     'category'           => 'Service Category',
                     'gateway'            => 'Gateway Configuration',
                     'active'             => 'Active',

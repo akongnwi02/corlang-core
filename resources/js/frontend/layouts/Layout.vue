@@ -39,6 +39,6 @@
             return{
                 page: 'purchase',
             }
-        }
+        },
     }
 </script>
