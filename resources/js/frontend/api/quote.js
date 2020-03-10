@@ -26,6 +26,5 @@ export default {
         params.reference = data.reference; // special reference provided by customer
         params.source = data.source; // payment method account number
         params.source_code = data.source_code; // identifier of payment method
-
     }
 }

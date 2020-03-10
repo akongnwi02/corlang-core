@@ -29,6 +29,7 @@ class QuoteController
             'address' => '175 Dondle Street',
             'email' => 'email@test.com',
             'phone' => '653254778',
+            'total' => ($request->input('amount') / 100) * 0.025 + $request->input('amount'),
         ]);
     }
 }

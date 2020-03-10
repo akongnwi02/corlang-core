@@ -33,6 +33,10 @@
                 "summary": "Order Details",
                 "amount": "Amount",
                 "method": "Payment Method",
+                "account": "Account Number",
+                "reference": "Reference",
+                "fee": "Fee",
+                "total": "Total",
                 "description": "Payment Description",
                 "customer": {
                     "name": "Customer Name",

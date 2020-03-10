@@ -67,7 +67,7 @@ class Handler extends ExceptionHandler
             if ($exception instanceof \App\Exceptions\Api\NotFoundException) {
                 $error['message'] = $exception->getMessage();
                 $error['errors']  = $exception->errors();
-                $error['code']    = $exception->getCode();
+                $error['code']    = $exception->status();
             }
             
             if ($exception instanceof \Illuminate\Validation\ValidationException) {

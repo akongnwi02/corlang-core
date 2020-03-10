@@ -40,8 +40,11 @@ export const quote = {
                         window.alert(i18n.t('validations.general.unauthorized'));
                         window.location.replace('/login');
                     }
-                    let errorFields = Object.keys(error.response.data.errors);
-                    console.log(errorFields);
+                    let errorFields = [];
+                    if (error.response.data.errors) {
+                        console.log(errorFields);
+
+                    }
                     commit( 'setQuoteLoadStatus', 3 );
                     commit( 'setQuoteErrorMessage', helper.handleException(error) );
                     commit( 'setQuoteErrorFields',  Array.isArray(errorFields) && errorFields.length ? errorFields : []);
