@@ -19,6 +19,7 @@ class PaymentMethodTableSeeder extends Seeder
         
         PaymentMethod::create([
             'name'       => 'Orange',
+            'code'       => 'ORANGE7487',
             'is_default' => false,
             'is_active' => true,
             'service_id' => Service::first()->uuid,
@@ -30,6 +31,7 @@ class PaymentMethodTableSeeder extends Seeder
     
         PaymentMethod::create([
             'name'          => config('business.system.service.name'),
+            'code'       => 'COR7487',
             'is_default'    => true,
             'is_active'     => true,
             'has_reference' => false,

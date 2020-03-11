@@ -24,13 +24,15 @@ class ConfigurationController extends Controller
         PaymentMethodRepository $paymentMethodRepository
     ){
         return response()->json([
+            // get default currency
             'currency' => $currencyRepository->get()->where('is_default', true)->get()[0],
+            // get default country
             'country' => $countryRepository->get()->where('is_default', true)->get()[0],
             // get all payment methods
             'methods' => $paymentMethodRepository->getPaymentMethods()
                 // when the user does not belong to a company
                 ->when(! auth()->user()->company_id, function ($query) {
-                    // don't return the default method
+                    // don't return the default payment method
                     $query->where('is_default', false);
                 })
                 // with related service
@@ -44,12 +46,16 @@ class ConfigurationController extends Controller
                 ->where('is_active', true)
                 // get related services
                 ->with(['services' => function ($query) {
-                    // when the user belongs to a company
-                    $query->when(auth()->user()->company_id, function ($query) {
+                    // only active services
+                    $query->where('is_active', true)
+                        // when the user belongs to a company
+                        ->when(auth()->user()->company_id, function ($query) {
                         // get only the company services
-                        $query->whereHas('companies', function ($query) {
-                            // which the user belongs to
-                            $query->where('companies.uuid', auth()->user()->company_id);
+                            $query->whereHas('companies', function ($query) {
+                                // which the company has access to
+                                $query->where('companies.uuid', auth()->user()->company_id)
+                                    // which are active
+                                    ->where('company_service.is_active', true);
                         });
                     });
                 }])->get(),

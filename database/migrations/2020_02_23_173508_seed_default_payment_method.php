@@ -16,6 +16,7 @@ class SeedDefaultPaymentMethod extends Migration
         \DB::table('paymentmethods')->insert([
             'uuid'          => Uuid::generate(4)->string,
             'name'          => config('business.system.service.name'),
+            'code'          => 'COR7487',
             'is_default'    => true,
             'is_active'     => true,
             'has_reference' => false,
