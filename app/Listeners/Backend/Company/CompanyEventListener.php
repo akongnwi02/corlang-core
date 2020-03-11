@@ -8,6 +8,8 @@
 
 namespace App\Listeners\Backend\Company;
 
+use App\Models\Auth\User;
+
 class CompanyEventListener
 {
     /**
@@ -41,6 +43,11 @@ class CompanyEventListener
     
     public function onDeactivated($event)
     {
+        // Logout all the users in the company when it is deactivated
+        User::where('company_id', $event->company->uuid)->update([
+            'to_be_logged_out' => true
+        ]);
+        
         \Log::info('Company Deactivated', [
             'name' => $event->company->name,
             'by' => $event->company->editor->username,
