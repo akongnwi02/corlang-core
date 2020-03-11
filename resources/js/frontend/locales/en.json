@@ -55,7 +55,9 @@
                 "server": {
 
                 }
-            }
+            },
+            "reference": "The reference is invalid",
+            "source": "The payment account number is invalid"
         },
         "general": {
             "unauthorized": "You are not authenticated. Please login and retry",

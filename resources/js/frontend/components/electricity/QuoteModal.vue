@@ -2,6 +2,7 @@
     <mdb-modal :show="showModal" @close="$emit('closed')" class="text-center">
         <mdb-modal-header>
             <mdb-modal-title>{{ $t('dashboard.pages.general.summary') }}</mdb-modal-title>
+            <span>{{ invalid_text }}</span>
         </mdb-modal-header>
         <mdb-modal-body>
             <mdb-row>
@@ -91,6 +92,9 @@
                 account: '',
                 reference: '',
                 selectedMethod: this.$store.getters.getConfiguration.methods[0],
+
+                // component data
+                invalid_text: ''
             }
         },
         props: [
@@ -114,13 +118,41 @@
             currencyFormat(amount) {
                 return currency.format(amount, this.quote.currency)
             },
-            validate() {
-                // validate the
-            },
             confirm() {
                 if (this.validate()) {
-                    this.$emit('', []);
+                    this.$emit('', {
+                        source_code: this.selectedMethod.code,
+                        reference: this.reference,
+                        account: this.account
+                    });
                 }
+            },
+            validate() {
+                let invalid = 0;
+
+                // this validation needs to be handled properly
+                if (this.reference.length < 3) {
+                    if (this.selectedMethod.has_reference) {
+                        ++invalid;
+                        this.invalid_text = this.$t('validations.purchase.reference');
+                        console.log('Invalid reference');
+                    }
+                }
+
+                if (this.account.length < 6) {
+                    if (! this.selectedMethod.is_default) {
+                        ++invalid;
+                        this.invalid_text = this.$t('validations.purchase.source');
+                        console.log('Invalid source');
+                    }
+                }
+
+                if (invalid === 0) {
+                    this.invalid_text = '';
+                    console.log('Validation complete. All inputs valid');
+                    return true;
+                }
+                return false;
             }
         }
     }
