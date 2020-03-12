@@ -22,9 +22,6 @@
                 </mdb-tab-pane>
             </mdb-tab-content>
         </mdb-col>
-        <div v-if="spinner_status==1" class="loading spinner-border text-primary" role="status">
-            <span id="busy" class="sr-only">{{ $t(`dashboard.pages.general.loading`) }}</span>
-        </div>
     </mdb-row>
 </template>
 
@@ -67,18 +64,3 @@
     }
 </script>
 
-<style>
-
-    .loading {
-        position: fixed;
-        height: 2em;
-        width: 2em;
-        overflow: visible;
-        margin: auto;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        z-index: 1000;
-    }
-</style>

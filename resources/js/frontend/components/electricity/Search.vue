@@ -4,24 +4,26 @@
             <div class="card-text text-danger"> {{ invalid_text }} </div>
             <div class="row">
                 <div class="col-6" v-show="is_prepaid">
-                    <mdb-input key="meter_code" size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.meter_code`)" v-model="destination"></mdb-input>
+                    <mdb-input v-bind:class="{disabled: paymentLoadStatus==1}" key="meter_code" size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.meter_code`)" v-model="destination"></mdb-input>
                 </div>
 
                 <div class="col-6" v-show="!is_prepaid">
-                    <mdb-input key="bill_number" size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.bill_number`)" v-model="destination"></mdb-input>
+                    <mdb-input v-bind:class="{disabled: paymentLoadStatus==1}" key="bill_number" size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.bill_number`)" v-model="destination"></mdb-input>
                 </div>
 
                 <div class="col-6" v-show="is_prepaid">
                     <!--put a v-if on the configuration.currency.code to avoid code not found error-->
-                    <mdb-input key="amount" size="sm" :placeholder="$t(`dashboard.pages.general.amount`) +' '+ configuration.currency.code" v-model="amount"></mdb-input>
+                    <mdb-input v-bind:class="{disabled: paymentLoadStatus==1}" key="amount" size="sm" :placeholder="$t(`dashboard.pages.general.amount`) +' '+ configuration.currency.code" v-model="amount"></mdb-input>
                 </div>
             </div>
 
-            <services v-on:selected="selectService" :services="services"></services>
+            <services v-bind:class="{disabled: paymentLoadStatus==1}" v-on:selected="selectService" :services="services"></services>
 
-            <search-button v-on:clicked="requestQuote"></search-button>
+            <search-button v-bind:class="{disabled: paymentLoadStatus==1}" v-on:clicked="requestQuote"></search-button>
 
             <quote-modal v-on:confirmed="confirm" :service="selectedService" :quote="quote" v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
+
+            <loader :status="paymentLoadStatus"></loader>
 
         </div>
     </div>
@@ -34,10 +36,12 @@
     import { BUSINESS_CONFIG } from "../../config/business";
     import SearchButton from "../global/SearchButton";
     import QuoteModal from './QuoteModal';
+    import Loader from "../global/Loader";
 
     export default {
         name: "Search",
         components: {
+            Loader,
             QuoteModal,
             SearchButton,
             Services,

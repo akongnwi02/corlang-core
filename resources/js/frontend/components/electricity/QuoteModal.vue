@@ -75,7 +75,7 @@
         </mdb-modal-body>
         <mdb-modal-footer>
             <mdb-btn size="sm" color="secondary" @click.native="$emit('closed')">{{ $t('dashboard.pages.general.close') }}</mdb-btn>
-            <mdb-btn size="sm" color="primary" @click.native="confirm()">{{ $t('dashboard.pages.general.confirm') }}</mdb-btn>
+            <mdb-btn v-bind:class="{disabled: paymentStatus==1}" size="sm" color="primary" @click.native="confirm()">{{ $t('dashboard.pages.general.confirm') }}</mdb-btn>
         </mdb-modal-footer>
     </mdb-modal>
 </template>
@@ -109,6 +109,9 @@
             },
             methods() {
                 return this.$store.getters.getConfiguration.methods;
+            },
+            paymentStatus() {
+                return this.$store.getters.getPaymentStatus;
             }
         },
         methods: {
