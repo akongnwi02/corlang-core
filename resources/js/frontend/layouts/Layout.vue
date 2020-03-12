@@ -20,6 +20,7 @@
             </mdb-tab-pane>
         </mdb-tab-content>
     </mdb-container>
+
 </template>
 
 <script>
@@ -42,3 +43,4 @@
         },
     }
 </script>
+

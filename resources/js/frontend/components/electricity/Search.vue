@@ -19,9 +19,9 @@
 
             <services v-on:selected="selectService" :services="services"></services>
 
-            <search-button v-on:clicked="requestQuote" :status="quoteLoadStatus"></search-button>
+            <search-button v-on:clicked="requestQuote"></search-button>
 
-            <quote-modal :service="selectedService" :quote="quote" v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
+            <quote-modal v-on:confirmed="confirm" :service="selectedService" :quote="quote" v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
 
         </div>
     </div>
@@ -55,12 +55,15 @@
 
                 // Component Data
                 invalid_text: '',
-                show_quote_modal: false
+                show_quote_modal: false,
             };
         },
         computed: {
             quoteLoadStatus() {
                 return this.$store.getters.getQuoteLoadStatus;
+            },
+            paymentLoadStatus() {
+                return this.$store.getters.getPaymentStatus;
             },
             is_prepaid() {
                 if (this.selectedService) {
@@ -117,7 +120,6 @@
                     }
                 }
 
-
                 if (! this.selectedService) {
                     if (this.services.length === 1) {
                         this.selectedService = this.services[0];
@@ -139,6 +141,16 @@
                     return true;
                 }
                 return false;
+            },
+            confirm: function (data) {
+                console.log('payment confirmed', data);
+                this.show_quote_modal = false;
+                this.$store.dispatch('performPayment', {
+                    id: this.quote.id,
+                    source: data.account,
+                    source_code: data.method.code,
+                    reference: data.reference,
+                });
             }
         },
         watch: {
@@ -166,10 +178,26 @@
 
                 if (this.quoteLoadStatus == 2) {
                     this.show_quote_modal=true;
-
-
-
-
+                }
+            },
+            paymentLoadStatus() {
+                if(this.paymentLoadStatus==3) {
+                    let errorFields = this.$store.getters.getPaymentErrorFields;
+                    let myFields = [];
+                    if (errorFields.includes('destination')) {
+                        if (this.is_prepaid) {
+                            myFields.push(this.$t('dashboard.pages.tabs.content.electricity.meter_code'));
+                        } else {
+                            myFields.push(this.$t('dashboard.pages.tabs.content.electricity.bill_number'));
+                        }
+                    }
+                    if (errorFields.includes('amount')) {
+                        myFields.push(this.$t('dashboard.pages.general.amount'));
+                    }
+                    this.$buefy.toast.open({
+                        message: this.$store.getters.getPaymentErrorMessage + ' ' + myFields.toString().replace(',', ' '),
+                        type: 'is-danger'
+                    });
                 }
             }
         }

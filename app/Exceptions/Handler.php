@@ -79,6 +79,10 @@ class Handler extends ExceptionHandler
                 $error['message'] = $exception->getMessage();
             }
             
+            if ($exception instanceof \Illuminate\Auth\Access\AuthorizationException) {
+                $error['message'] = $exception->getMessage();
+            }
+            
             if ($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException) {
                 $error['message'] = 'Method Not Allowed';
             }

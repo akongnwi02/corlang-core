@@ -2,12 +2,12 @@
     <mdb-modal :show="showModal" @close="$emit('closed')" class="text-center">
         <mdb-modal-header>
             <mdb-modal-title>{{ $t('dashboard.pages.general.summary') }}</mdb-modal-title>
-            <span>{{ invalid_text }}</span>
+            <span class="text-danger">{{ invalid_text }}</span>
         </mdb-modal-header>
         <mdb-modal-body>
             <mdb-row>
                 <mdb-col class="col-sm-3">
-                    <img :src="'/storage/' + service.logo_url" alt="Logo">
+                    <img :src="'/storage/' + service.logo_url" :alt="$t('dashboard.pages.general.logo')">
                 </mdb-col>
                 <mdb-col class="col-sm-9">
                     <strong>{{ service.name }}</strong>
@@ -75,7 +75,7 @@
         </mdb-modal-body>
         <mdb-modal-footer>
             <mdb-btn size="sm" color="secondary" @click.native="$emit('closed')">{{ $t('dashboard.pages.general.close') }}</mdb-btn>
-            <mdb-btn size="sm" color="primary" @click.native="$emit('confirmed')">{{ $t('dashboard.pages.general.confirm') }}</mdb-btn>
+            <mdb-btn size="sm" color="primary" @click.native="confirm()">{{ $t('dashboard.pages.general.confirm') }}</mdb-btn>
         </mdb-modal-footer>
     </mdb-modal>
 </template>
@@ -120,8 +120,8 @@
             },
             confirm() {
                 if (this.validate()) {
-                    this.$emit('', {
-                        source_code: this.selectedMethod.code,
+                    this.$emit('confirmed', {
+                        method: this.selectedMethod,
                         reference: this.reference,
                         account: this.account
                     });

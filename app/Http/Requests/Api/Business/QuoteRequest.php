@@ -18,7 +18,9 @@ class QuoteRequest extends FormRequest
 {
     public function authorize()
     {
-        return true;
+        if (auth()->user()->company_id) {
+            return auth()->user()->company->is_active;
+        }
     }
     
     public function rules()
@@ -29,9 +31,9 @@ class QuoteRequest extends FormRequest
                 'required',
                 new ServiceAccessRule(),
             ],
-            'amount' => ['sometimes', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/'],
+            'amount' => ['sometimes', 'nullable', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/'],
             'currency_code' => ['required', Rule::exists('currencies', 'code')],
-            'items' => ['sometimes', 'array']
+            'items' => ['sometimes', 'nullable', 'array']
         ];
     }
 }

@@ -23,7 +23,7 @@ Vue.use( Vuex );
 /*
 	Imports all of the modules used in the application to build the data store.
 */
-import { quote } from "./modules/quote";
+import { business } from "./modules/business";
 import { configuration } from "./modules/configuration";
 
 /*
@@ -31,7 +31,7 @@ import { configuration } from "./modules/configuration";
 */
 export default new Vuex.Store({
     modules: {
-        quote,
+        business,
         configuration,
     }
 });

@@ -28,6 +28,7 @@ class ServiceTableSeeder extends Seeder
             'gateway_id' => Gateway::first()->uuid,
             'company_rate' => 50,
             'agent_rate' => 50,
+            'is_prepaid' => false,
             'customercommission_id' => Commission::first()->uuid,
             'providercommission_id' => Commission::first()->uuid,
         ]);
@@ -42,6 +43,7 @@ class ServiceTableSeeder extends Seeder
             'gateway_id' => Gateway::first()->uuid,
             'company_rate' => 25,
             'agent_rate' => 30,
+            'is_prepaid' => true,
             'customercommission_id' => Commission::first()->uuid,
             'providercommission_id' => Commission::first()->uuid,
         ]);
@@ -56,6 +58,7 @@ class ServiceTableSeeder extends Seeder
             'gateway_id' => Gateway::first()->uuid,
             'company_rate' => 45,
             'agent_rate' => 50,
+            'is_prepaid' => true,
             'customercommission_id' => Commission::first()->uuid,
             'providercommission_id' => Commission::first()->uuid,
         ]);

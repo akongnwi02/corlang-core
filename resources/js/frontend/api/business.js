@@ -3,10 +3,9 @@
 */
 
 export default {
-    quote: function(data){
+    quote: function (data) {
 
         let params = {};
-
         params.destination = data.destination; // destination account number (e.g Mobile money number)
         params.destination_code = data.destination_code; // identifier of destination
         params.amount = data.amount; // amount
@@ -17,8 +16,8 @@ export default {
     },
 
     pay: function (data) {
-        let params = {};
 
+        let params = {};
         params.name = data.name; // customer name
         params.phone = data.phone; // customer phone
         params.email = data.email; // customer email
@@ -26,5 +25,8 @@ export default {
         params.reference = data.reference; // special reference provided by customer
         params.source = data.source; // payment method account number
         params.source_code = data.source_code; // identifier of payment method
+        params.quote_id = data.id; // id of the quote
+
+        return axios.post('/api/pay', params);
     }
 }

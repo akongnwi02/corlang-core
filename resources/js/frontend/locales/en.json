@@ -37,6 +37,7 @@
                 "reference": "Reference",
                 "fee": "Fee",
                 "total": "Total",
+                "logo": "Logo",
                 "description": "Payment Description",
                 "customer": {
                     "name": "Customer Name",
@@ -68,7 +69,7 @@
                 "amount": "Please enter a valid amount",
                 "invalid": "The {{parameter}} is invalid.",
                 "insufficient_balance": "Your balance is insufficient",
-                "unauthorized": "You are not authorized to access {{resource}}"
+                "unauthorized": "You are not authorized to make this request"
             }
         }
     }

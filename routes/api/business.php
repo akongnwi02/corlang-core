@@ -7,6 +7,7 @@
 
 use App\Http\Controllers\Api\Business\ConfigurationController;
 use App\Http\Controllers\Api\Business\QuoteController;
+use App\Http\Controllers\Api\Business\PayController;
 
 Route::group(['middleware' => request()->hasHeader('authorization') ? 'jwt.auth' : 'auth'], function () {
     /*
@@ -18,4 +19,9 @@ Route::group(['middleware' => request()->hasHeader('authorization') ? 'jwt.auth'
      * Quote
      */
     Route::post('quote', [QuoteController::class, 'quote']);
+    
+    /*
+     * Pay
+     */
+    Route::post('pay', [PayController::class, 'pay']);
 });

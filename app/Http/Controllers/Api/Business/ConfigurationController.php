@@ -58,7 +58,11 @@ class ConfigurationController extends Controller
                                     ->where('company_service.is_active', true);
                         });
                     });
-                }])->get(),
+                },
+//               Add items to the list of services
+//               Like airtime plans
+//              'items' => function () {}
+                ])->get(),
         ]);
     }
 }

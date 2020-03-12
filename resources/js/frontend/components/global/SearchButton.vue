@@ -8,7 +8,11 @@
 <script>
     export default {
         name: "SearchButton",
-        props: ['status'],
+        data() {
+            return {
+                status: 0,
+            }
+        },
         computed: {
             classObject: function(){
                 return{
@@ -18,7 +22,18 @@
             },
             buttonText() {
                 return this.status == 1 ? this.$t(`dashboard.pages.general.loading`) : this.$t(`dashboard.pages.general.next`);
+            },
+            quoteStatus() {
+                return this.$store.getters.getQuoteLoadStatus;
+            },
+            paymentStatus() {
+                return this.$store.getters.getPaymentStatus;
             }
+        },
+        watch: {
+            quoteStatus() {
+                this.status = this.quoteStatus;
+            },
         }
     }
 </script>

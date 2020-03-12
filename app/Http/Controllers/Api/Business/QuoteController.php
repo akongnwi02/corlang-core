@@ -9,13 +9,18 @@
 namespace App\Http\Controllers\Api\Business;
 
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Business\QuoteRequest;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 
-class QuoteController
+class QuoteController extends Controller
 {
     public function quote(QuoteRequest $request, ServiceRepository $serviceRepository)
     {
+        // send synchronous request to micro service
+        // if error exists, return to client immediately
+        // if no errors, save quote to cache generate a quote id
+        // return the response with quote id to client
         return response()->json([
             'id' => \Uuid::generate(4)->string,
             'destination' => $request->input('destination'),

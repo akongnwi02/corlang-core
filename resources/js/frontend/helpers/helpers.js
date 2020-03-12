@@ -12,7 +12,7 @@ export const helper = {
         }
 
         if (error.response.data.code == 403) {
-            return i18n.t('validations.general.business.unauthorized', {resource: 'tobe changed'});
+            return i18n.t('validations.general.business.unauthorized');
         }
 
         if (error.response.data.code == 404) {
