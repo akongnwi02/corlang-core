@@ -38,6 +38,7 @@ class CreateUsersTable extends Migration
             $table->boolean('reset_confirmed')->default(false);
             $table->timestamp('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
+            $table->string('pincode')->nullable();
             $table->string('user_agent')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

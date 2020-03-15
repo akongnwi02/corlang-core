@@ -12,6 +12,7 @@ use App\Models\Auth\User;
 use App\Models\Company\Company;
 use App\Models\Company\CompanyService;
 use App\Models\Service\Category;
+use App\Models\Service\Item;
 use App\Models\System\Gateway;
 
 trait ServiceRelationship
@@ -29,6 +30,11 @@ trait ServiceRelationship
     public function gateway()
     {
         return $this->hasOne(Gateway::class, 'uuid', 'gateway_id');
+    }
+    
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'service_id', 'uuid');
     }
     
     public function companies()

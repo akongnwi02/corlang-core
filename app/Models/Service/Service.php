@@ -59,6 +59,7 @@ class Service extends Model
         'is_prepaid',
         'company_rate',
         'agent_rate',
+        'has_items',
     ];
     
     /**
@@ -71,5 +72,6 @@ class Service extends Model
         'customer_rate'    => 'double',
         'agent_rate'       => 'double',
         'is_prepaid'       => 'boolean',
+        'has_items'        => 'boolean',
     ];
 }

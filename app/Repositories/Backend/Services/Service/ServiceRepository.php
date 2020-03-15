@@ -13,6 +13,7 @@ use App\Events\Backend\Services\Service\ServiceDeactivated;
 use App\Events\Backend\Services\Service\ServiceReactivated;
 use App\Events\Backend\Services\Service\ServiceUpdated;
 use App\Exceptions\GeneralException;
+use App\Models\Service\Item;
 use App\Models\Service\Service;
 use Illuminate\Support\Facades\Storage;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -31,6 +32,7 @@ class ServiceRepository
             
             $service = (new Service)->fill($data);
             $service->is_prepaid = request()->has('is_prepaid') ? 1 : 0;
+            $service->has_items = request()->has('has_items') ? 1 : 0;
             
             if ($logo) {
 
@@ -91,35 +93,50 @@ class ServiceRepository
     }
     
     /**
-     * @param $service
+     * @param Service $service
      * @param $data
+     * @param null $logo
      * @return mixed
      * @throws \Throwable
      */
-    public function update($service, $data, $logo = null)
+    public function update(Service $service, $data, $logo = null)
     {
-        $service->fill($data);
-        $service->is_prepaid = request()->has('is_prepaid') ? 1 : 0;
+        return \DB::transaction(function () use ($service, $data, $logo) {
+            $service->fill($data);
+            if ($service->has_items) {
+                $items = $data['items'];
+                $service->items()->delete();
+                foreach ($items as $item) {
+                    $item['is_active'] = array_key_exists('is_active', $item) ? $item['is_active'] : 0;
+                    $item['service_id'] = $service->uuid;
     
-    
-        if ($logo) {
-            // delete previous logo
-            if (strlen($service->logo_url)) {
-//                Storage::disk('public')->delete($service->logo_url);
+                    $service->items()->save(new Item($item));
+                }
             }
-            
-            $service->logo_url = $logo->store('/logos', 'public');
-            
-        }
+    
+            $service->fill($data);
+            $service->is_prepaid = request()->has('is_prepaid') ? 1 : 0;
+            $service->has_items = request()->has('has_items') ? 1 : 0;
+    
+            if ($logo) {
+                // delete previous logo
+                if (strlen($service->logo_url)) {
+//                Storage::disk('public')->delete($service->logo_url);
+                }
         
-        if ($service->update()) {
-            
-            event(new ServiceUpdated($service));
-            
-            return $service;
-        }
+                $service->logo_url = $logo->store('/logos', 'public');
         
-        throw new GeneralException(__('exceptions.backend.services.service.update_error'));
+            }
+    
+            if ($service->update()) {
+        
+                event(new ServiceUpdated($service));
+        
+                return $service;
+            }
+    
+            throw new GeneralException(__('exceptions.backend.services.service.update_error'));
+        });
     }
     
     public function getAllActiveServices()
@@ -129,6 +146,8 @@ class ServiceRepository
     
     public function findByCode($code)
     {
-        return Service::where('code', $code);
+        return Service::where('code', $code)->first();
     }
+    
+    
 }

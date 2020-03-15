@@ -21,3 +21,7 @@
         </div><!-- row -->
     </div><!-- row -->
 @endsection
+
+<script>
+    window.userId = "{{ auth()->user()->uuid }}";
+</script>

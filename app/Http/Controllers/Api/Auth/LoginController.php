@@ -14,6 +14,7 @@ use App\Events\Api\Auth\UserLoggedOut;
 use App\Exceptions\Api\UnauthorizedException;
 use App\Helpers\Auth\Auth;
 use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Models\Auth\User;
 use App\Repositories\Api\Auth\UserRepository;
 use Illuminate\Http\Request;
 
@@ -87,7 +88,7 @@ class LoginController
         /*
          * Laravel specific logic
          */
-        auth('api')->logout();
+        auth()->logout();
 
         /*
          * Fire event, Log out user, Redirect
@@ -105,7 +106,7 @@ class LoginController
      */
     public function refresh()
     {
-        $token = auth('api')->refresh();
+        $token = auth()->refresh();
 
         if (!$token) {
             throw new UnauthorizedException('exceptions.api.auth.login.refresh_error');
@@ -123,10 +124,7 @@ class LoginController
      */
     public function me()
     {
-        return auth()->user()->with([
-            'company',
-            'account'
-        ]);
+        return User::where('id', auth()->id())->with(['company'])->first();
     }
 
     /**

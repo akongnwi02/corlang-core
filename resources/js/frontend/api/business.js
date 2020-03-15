@@ -1,13 +1,9 @@
-/*
-    GET 	/admin/business/payment/{slug}
-*/
-
 export default {
     quote: function (data) {
 
         let params = {};
         params.destination = data.destination; // destination account number (e.g Mobile money number)
-        params.destination_code = data.destination_code; // identifier of destination
+        params.service_code = data.destination_code; // identifier of destination
         params.amount = data.amount; // amount
         params.currency_code = data.currency_code; // currency code
         params.items = data.items; // optional array of items
@@ -23,10 +19,14 @@ export default {
         params.email = data.email; // customer email
         params.address = data.address; // customer address
         params.reference = data.reference; // special reference provided by customer
-        params.source = data.source; // payment method account number
-        params.source_code = data.source_code; // identifier of payment method
+        params.paymentaccount = data.paymentaccount; // payment method account number
+        params.paymentmethod_code = data.paymentmethod_code; // identifier of payment method
         params.quote_id = data.id; // id of the quote
 
         return axios.post('/api/pay', params);
+    },
+
+    configuration: function(){
+        return axios.get('/api/configuration');
     }
 }

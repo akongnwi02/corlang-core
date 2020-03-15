@@ -57,12 +57,14 @@ class ConfigurationController extends Controller
                                     // which are active
                                     ->where('company_service.is_active', true);
                         });
-                    });
+                    })
+                    // get the related service items
+                    ->with(['items' => function ($query) {
+                        // which are active
+                        $query->where('is_active', true);
+                    }])->get();
                 },
-//               Add items to the list of services
-//               Like airtime plans
-//              'items' => function () {}
-                ])->get(),
+            ])->get(),
         ]);
     }
 }

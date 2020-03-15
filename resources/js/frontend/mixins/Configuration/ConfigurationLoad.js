@@ -1,6 +1,6 @@
 
 export const ConfigurationLoad = {
-    mounted() {
+    created() {
         this.$store.dispatch('loadConfiguration');
     },
     computed: {

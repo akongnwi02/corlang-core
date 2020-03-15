@@ -45,8 +45,6 @@ class Gateway extends Model
         'name',
         'code',
         'api_key',
-        'api_secret',
         'api_url',
-        'callback_url',
     ];
 }

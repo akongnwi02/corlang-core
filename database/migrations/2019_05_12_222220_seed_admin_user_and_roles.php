@@ -32,6 +32,7 @@ class SeedAdminUserAndRoles extends Migration
             'username'             => 'admin',
             'phone'                => '653754332',
             'password'             => 'secret',
+            'pincode'             => '1234',
             'confirmation_code'    => md5(uniqid(mt_rand(), true)),
             'notification_channel' => 'mail',
             'confirmed'            => true,

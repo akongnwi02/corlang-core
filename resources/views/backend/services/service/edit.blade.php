@@ -101,7 +101,7 @@
                         <div class="col-md-10">
                             {{ html()->select('providercommission_id' , [null => null] + $commissions)
                                 ->class('form-control')
-                                ->required()}}
+                                }}
                         </div><!--col-->
                     </div><!--form-group-->
 
@@ -111,7 +111,7 @@
                         <div class="col-md-10">
                             {{ html()->select('customercommission_id', [null => null] + $commissions)
                                 ->class('form-control')
-                                ->required()}}
+                                }}
                         </div><!--col-->
                     </div><!--form-group-->
 
@@ -127,6 +127,17 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.service.items'))->class('col-md-2 form-control-label')->for('has_items') }}
+
+                        <div class="col-md-10">
+                            <label class="switch switch-label switch-pill switch-primary">
+                                {{ html()->checkbox('has_items', false, 1)->class('switch-input') }}
+                                <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
+                            </label>
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.services.service.logo'))->class('col-md-2 form-control-label')->for('logo') }}
 
                         <div class="col-md-10">
@@ -136,7 +147,58 @@
                             </div>
                         </div><!--col-->
                     </div><!--form-group-->
+                    @if($service->has_items)
+                        <div id="POItablediv">
+                        <div class="btn-toolbar" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
+                            <button id="addPOIbutton" onclick="insRow()" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.add')"><i class="fas fa-plus-circle"></i></button>
+                        </div>
 
+                        <br/>
+
+                        <table class="table table-responsive table-borderless" id="POITable">
+                            <thead>
+                            <tr>
+                                <th>@lang('validation.attributes.backend.services.item.name')</th>
+                                <th>@lang('validation.attributes.backend.services.item.code')</th>
+                                <th>@lang('validation.attributes.backend.services.item.amount')</th>
+                                <th>@lang('validation.attributes.backend.services.item.active')</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($service->items as $key => $item)
+                                <tr>
+                                    <td><input id="name" style="min-width:100px" type="text" name="items[{{ $key }}][name]" class="form-control" value="{{ $item->name }}" max="191" required/></td>
+                                    <td><input id="code" style="min-width:100px" type="text" name="items[{{ $key }}][code]" step="0.01" class="form-control" value="{{ $item->code }}" max="191" required/></td>
+                                    <td><input id="amount" style="min-width:100px" size=25 type="number" name="items[{{ $key }}][amount]" step="0.01" class="form-control" value="{{ $item->amount }}" min="0" required/></td>
+                                    <td>
+                                        <label class="switch switch-label switch-pill switch-primary">
+                                            {{ html()->checkbox("items[$key][is_active]", $item->is_active, 1)->class('switch-input') }}
+                                            <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
+                                        </label>
+                                    </td>
+                                    <td><button id="delPOIbutton" value="Delete" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></button></td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td><input id="name" style="min-width:100px" width="50px" type="text" name="items[0][name]" max="191" class="form-control" required/></td>
+                                    <td><input id="code" style="min-width:100px" type="text" name="items[0][code]" max="191" class="form-control" required/></td>
+                                    <td><input id="amount" style="min-width:100px" type="number" name="items[0][amount]" step="0.01" class="form-control" required/></td>
+                                    <td>
+                                        <label class="switch switch-label switch-pill switch-primary">
+                                            {{ html()->checkbox('items[0][is_active]', $item->is_active, 1)->class('switch-input') }}
+                                            <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
+                                        </label>
+                                    </td>
+                                    <td><button id="delPOIbutton" value="Delete" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></button></td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                            {{--<div>--}}
+                                {{--<small class="text-muted">@lang('business.landlord.percentage_for_the_landlord')</small>--}}
+                            {{--</div>--}}
+                    </div><!--col-->
+                    @endif
                 </div><!--col-->
             </div><!--row-->
         </div><!--card-body-->
@@ -179,10 +241,64 @@
 
 @push('after-styles')
     <style>
-        .required:after{
-            content:'*';
-            color:red;
-            padding-left:5px;
+        .required:after {
+            content: '*';
+            color: red;
+            padding-left: 5px;
+        }
+
+        table {
+            width: 70%;
+            font: 17px Calibri;
+        }
+
+        table, th, td {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
         }
     </style>
+@endpush
+@push('after-scripts')
+    <script>
+        function deleteRow(row) {
+
+            let x = document.getElementById('POITable');
+            let len = x.rows.length;
+            if (len <= 2) {
+                event.preventDefault();
+                return;
+            }
+
+            let i = row.parentNode.parentNode.rowIndex;
+            document.getElementById('POITable').deleteRow(i);
+        }
+
+        function insRow() {
+            let x = document.getElementById('POITable');
+
+            let new_row = x.rows[1].cloneNode(true);
+            let len = x.rows.length;
+
+            let inp1 = new_row.cells[0].getElementsByTagName('input')[0];
+            inp1.value = '';
+            inp1.name = `items[${len}][name]`;
+
+            let inp2 = new_row.cells[1].getElementsByTagName('input')[0];
+            inp2.value = '';
+            inp2.name = `items[${len}][code]`;
+
+            let inp3 = new_row.cells[2].getElementsByTagName('input')[0];
+            inp3.value = '';
+            inp3.name = `items[${len}][amount]`;
+
+            let inp4 = new_row.cells[3].getElementsByTagName('input')[0];
+            inp4.value = '';
+            inp4.name = `items[${len}][is_active]`;
+
+            x.appendChild(new_row);
+        }
+
+    </script>
 @endpush

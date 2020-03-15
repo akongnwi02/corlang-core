@@ -21,7 +21,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->boolean('has_reference')->default(false);
             $table->string('accountregex')->nullable();
             $table->string('name')->nullable();
-            $table->string('code');
+            $table->string('code')->unique();
             $table->string('description_en')->nullable();
             $table->string('description_fr')->nullable();
             $table->timestamps();

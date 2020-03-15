@@ -24,7 +24,7 @@ Vue.use( Vuex );
 	Imports all of the modules used in the application to build the data store.
 */
 import { business } from "./modules/business";
-import { configuration } from "./modules/configuration";
+import { auth } from "./modules/auth";
 
 /*
   Exports our data store.
@@ -32,6 +32,6 @@ import { configuration } from "./modules/configuration";
 export default new Vuex.Store({
     modules: {
         business,
-        configuration,
+        auth,
     }
 });

@@ -45,8 +45,8 @@ class PaymentMethod extends Model
      * @var array
      */
     protected $casts = [
-        'is_active'        => 'boolean',
-        'is_default' => 'boolean',
+        'is_active'     => 'boolean',
+        'is_default'    => 'boolean',
         'has_reference' => 'boolean',
     ];
     

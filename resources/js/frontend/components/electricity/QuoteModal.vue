@@ -40,7 +40,7 @@
                     </li>
                     <li>
                         {{ $t('dashboard.pages.general.fee')}}:
-                        <strong>{{ currencyFormat(quote.fee) }}</strong>
+                        <strong>{{ currencyFormat(quote.customer_fee) }}</strong>
                     </li>
                     <li>
                         {{ $t('dashboard.pages.general.total')}}:
@@ -63,13 +63,11 @@
                         <small>{{$i18n.locale == 'en' ? selectedMethod.description_en : selectedMethod.description_fr }}</small>
                     </div>
                 </mdb-col>
-            </mdb-row>
-            <mdb-row>
                 <mdb-col v-if="!selectedMethod.is_default" class="col-sm-6">
                     <mdb-input key="account" size="sm" :placeholder="$t('dashboard.pages.general.account')" v-model="account"></mdb-input>
                 </mdb-col>
                 <mdb-col v-if="selectedMethod.has_reference" class="col-sm-6">
-                    <mdb-input key="account" size="sm" :placeholder="$t('dashboard.pages.general.reference')" v-model="reference"></mdb-input>
+                    <mdb-input key="account" size="sm" :placeholder="selectedMethod.is_default ? $t('dashboard.pages.general.pincode') : $t('dashboard.pages.general.reference')" v-model="reference"></mdb-input>
                 </mdb-col>
             </mdb-row>
         </mdb-modal-body>
@@ -137,7 +135,7 @@
                 if (this.reference.length < 3) {
                     if (this.selectedMethod.has_reference) {
                         ++invalid;
-                        this.invalid_text = this.$t('validations.purchase.reference');
+                        this.invalid_text = this.selectedMethod.is_default ? this.$t('validations.purchase.pincode') : this.$t('validations.purchase.reference');
                         console.log('Invalid reference');
                     }
                 }

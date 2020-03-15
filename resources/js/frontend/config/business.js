@@ -6,5 +6,18 @@ export const BUSINESS_CONFIG = {
 
     SERVER_STORAGE_PATH: '/storage',
 
-    APP_REGEX_AMOUNT: /^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/
+    APP_REGEX_AMOUNT: /^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/,
+
+    // PUSHER
+    PUSHER_APP_ID: '963072',
+    PUSHER_APP_KEY: 'd1c75a6922f8d392931f',
+    PUSHER_APP_SECRET: 'a797bfbb0928413f1164',
+    PUSHER_APP_CLUSTER: 'eu',
+    PUSHER_APP_FORCE_TLS: false,
+
+    PUSHER_APP_TRANSACTION_CHANNEL: 'transaction-channel',
+    PUSHER_APP_TRANSACTION_EVENT: '.transaction-complete',
+
+
+
 };

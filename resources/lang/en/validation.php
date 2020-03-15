@@ -231,9 +231,18 @@ return [
                     'customercommission' => 'Customer Service Charge',
                     'logo'               => 'Logo',
                     'prepaid'            => 'Prepaid',
+                    'items'              => 'Items',
                     'company_rate'       => 'Default Company Rate (%)',
                     'agent_rate'         => 'Default Agent Rate (%)',
                     'providercompany'    => 'Provider Company',
+                ],
+                'item' => [
+                    'active' => 'Active',
+                    'description_en' => 'English Description',
+                    'description_fr' => 'French Description',
+                    'name' => 'Item Name',
+                    'amount' => 'Item Price',
+                    'code' => 'Item Code',
                 ],
                 'commission' => [
                     'name'        => 'Name',

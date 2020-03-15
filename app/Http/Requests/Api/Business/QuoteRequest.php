@@ -8,9 +8,8 @@
 
 namespace App\Http\Requests\Api\Business;
 
-
+use App\Rules\Business\ItemExistRule;
 use App\Rules\Service\ServiceAccessRule;
-use App\Rules\Service\ActiveServiceRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -33,7 +32,7 @@ class QuoteRequest extends FormRequest
             ],
             'amount' => ['sometimes', 'nullable', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/'],
             'currency_code' => ['required', Rule::exists('currencies', 'code')],
-            'items' => ['sometimes', 'nullable', 'array']
+            'items' => ['sometimes', new ItemExistRule()]
         ];
     }
 }

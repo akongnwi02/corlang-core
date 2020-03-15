@@ -34,7 +34,7 @@ class PaymentMethodTableSeeder extends Seeder
             'code'       => 'COR7487',
             'is_default'    => true,
             'is_active'     => true,
-            'has_reference' => false,
+            'has_reference' => true,
             'service_id'    => null,
             'accountregex'  => null,
             'description_en'   => 'Pay with corlang account',

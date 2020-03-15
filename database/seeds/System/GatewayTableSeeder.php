@@ -20,7 +20,6 @@ class GatewayTableSeeder extends Seeder
             'code' => $faker->postcode,
             'name' => 'MTN Gateway via Western Union',
             'api_key' => md5($faker->uuid),
-            'api_secret' => md5($faker->uuid),
             'api_url' => $faker->url,
         ]);
     }

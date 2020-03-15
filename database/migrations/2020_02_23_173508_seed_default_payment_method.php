@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class SeedDefaultPaymentMethod extends Migration
@@ -19,11 +17,11 @@ class SeedDefaultPaymentMethod extends Migration
             'code'          => 'COR7487',
             'is_default'    => true,
             'is_active'     => true,
-            'has_reference' => false,
+            'has_reference' => true,
             'service_id'    => null,
             'accountregex'  => null,
-            'description_en'   => 'Pay with corlang account',
-            'description_fr'   => 'Payez avec votre compte Corlang',
+            'description_en'   => 'Pay with corlang account.',
+            'description_fr'   => 'Payez avec votre compte Corlang.',
         ]);
     }
     

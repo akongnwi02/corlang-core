@@ -62,4 +62,11 @@ return [
             'description' => 'Pay with your Corlang account'
         ]
     ],
+    'transaction' => [
+        'status' => [
+            'pending' => 'pending',
+            'successful' => 'successful',
+            'failed'  => 'failed',
+        ],
+    ]
 ];

@@ -29,6 +29,7 @@ class CreateServicesTable extends Migration
             $table->double('company_rate')->nullable();
             $table->double('agent_rate')->nullable();
             $table->boolean('is_prepaid')->default(true);
+            $table->boolean('has_items')->default(false);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();

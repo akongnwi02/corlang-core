@@ -21,12 +21,11 @@ class CreateMovementsTable extends Migration
             $table->uuid('user_id')->nullable();
             $table->uuid('company_id')->nullable();
             $table->uuid('service_id')->nullable();
-            $table->double('agent_commission')->nullable();
-            $table->double('company_commission')->nullable();
-            $table->double('total_commission')->nullable();
+
             $table->uuid('currency_id');
             $table->uuid('sourceaccount_id')->nullable();
             $table->uuid('destinationaccount_id')->nullable();
+
             $table->boolean('is_reversed')->default(false);
             $table->dateTime('reversed_at')->nullable();
             

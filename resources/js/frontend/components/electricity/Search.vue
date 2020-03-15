@@ -4,26 +4,24 @@
             <div class="card-text text-danger"> {{ invalid_text }} </div>
             <div class="row">
                 <div class="col-6" v-show="is_prepaid">
-                    <mdb-input v-bind:class="{disabled: paymentLoadStatus==1}" key="meter_code" size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.meter_code`)" v-model="destination"></mdb-input>
+                    <mdb-input key="meter_code" size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.meter_code`)" v-model="destination"></mdb-input>
                 </div>
 
                 <div class="col-6" v-show="!is_prepaid">
-                    <mdb-input v-bind:class="{disabled: paymentLoadStatus==1}" key="bill_number" size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.bill_number`)" v-model="destination"></mdb-input>
+                    <mdb-input key="bill_number" size="sm" :placeholder="$t(`dashboard.pages.tabs.content.electricity.bill_number`)" v-model="destination"></mdb-input>
                 </div>
 
                 <div class="col-6" v-show="is_prepaid">
                     <!--put a v-if on the configuration.currency.code to avoid code not found error-->
-                    <mdb-input v-bind:class="{disabled: paymentLoadStatus==1}" key="amount" size="sm" :placeholder="$t(`dashboard.pages.general.amount`) +' '+ configuration.currency.code" v-model="amount"></mdb-input>
+                    <mdb-input key="amount" size="sm" :placeholder="$t(`dashboard.pages.general.amount`) +' '+ configuration.currency.code" v-model="amount"></mdb-input>
                 </div>
             </div>
 
-            <services v-bind:class="{disabled: paymentLoadStatus==1}" v-on:selected="selectService" :services="services"></services>
+            <services v-on:selected="selectService" :services="services"></services>
 
-            <search-button v-bind:class="{disabled: paymentLoadStatus==1}" v-on:clicked="requestQuote"></search-button>
+            <search-button v-on:clicked="requestQuote"></search-button>
 
             <quote-modal v-on:confirmed="confirm" :service="selectedService" :quote="quote" v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
-
-            <loader :status="paymentLoadStatus"></loader>
 
         </div>
     </div>
@@ -36,12 +34,10 @@
     import { BUSINESS_CONFIG } from "../../config/business";
     import SearchButton from "../global/SearchButton";
     import QuoteModal from './QuoteModal';
-    import Loader from "../global/Loader";
 
     export default {
         name: "Search",
         components: {
-            Loader,
             QuoteModal,
             SearchButton,
             Services,
@@ -66,9 +62,7 @@
             quoteLoadStatus() {
                 return this.$store.getters.getQuoteLoadStatus;
             },
-            paymentLoadStatus() {
-                return this.$store.getters.getPaymentStatus;
-            },
+
             is_prepaid() {
                 if (this.selectedService) {
                     return this.selectedService.is_prepaid;
@@ -94,7 +88,7 @@
                 if (this.validateData()) {
                     this.$store.dispatch('loadQuote',{
                         destination: this.destination,
-                        destination_code: this.selectedService.code,
+                        service_code: this.selectedService.code,
                         amount: this.amount,
                         currency_code: this.configuration.currency.code,
                     });
@@ -150,60 +144,19 @@
                 console.log('payment confirmed', data);
                 this.show_quote_modal = false;
                 this.$store.dispatch('performPayment', {
-                    id: this.quote.id,
-                    source: data.account,
-                    source_code: data.method.code,
+                    id: this.quote.uuid,
+                    paymentaccount: data.account,
+                    paymentmethod_code: data.method.code,
                     reference: data.reference,
                 });
             }
         },
         watch: {
             quoteLoadStatus(){
-                if (this.quoteLoadStatus == 3) {
-                    let errorFields = this.$store.getters.getQuoteErrorFields;
-                    let myFields = [];
-                    if (errorFields.includes('destination')) {
-                        if (this.is_prepaid) {
-                            myFields.push(this.$t('dashboard.pages.tabs.content.electricity.meter_code'));
-                        }
-                        else {
-                            myFields.push(this.$t('dashboard.pages.tabs.content.electricity.bill_number'));
-                        }
-                    }
-                    if (errorFields.includes('amount')) {
-                        myFields.push(this.$t('dashboard.pages.general.amount'));
-                    }
-
-                    this.$buefy.toast.open({
-                        message: this.$store.getters.getQuoteErrorMessage + ' ' + myFields.toString().replace(',', ' '),
-                        type: 'is-danger'
-                    });
-                }
-
                 if (this.quoteLoadStatus == 2) {
                     this.show_quote_modal=true;
                 }
             },
-            paymentLoadStatus() {
-                if(this.paymentLoadStatus==3) {
-                    let errorFields = this.$store.getters.getPaymentErrorFields;
-                    let myFields = [];
-                    if (errorFields.includes('destination')) {
-                        if (this.is_prepaid) {
-                            myFields.push(this.$t('dashboard.pages.tabs.content.electricity.meter_code'));
-                        } else {
-                            myFields.push(this.$t('dashboard.pages.tabs.content.electricity.bill_number'));
-                        }
-                    }
-                    if (errorFields.includes('amount')) {
-                        myFields.push(this.$t('dashboard.pages.general.amount'));
-                    }
-                    this.$buefy.toast.open({
-                        message: this.$store.getters.getPaymentErrorMessage + ' ' + myFields.toString().replace(',', ' '),
-                        type: 'is-danger'
-                    });
-                }
-            }
         }
     }
 </script>

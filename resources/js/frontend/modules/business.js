@@ -7,31 +7,21 @@
 
 import BusinessApi from '../api/business';
 import { helper} from '../helpers/helpers';
-import i18n from '../i18n';
+import {BUSINESS_CONFIG} from "../config/business";
 
 export const business = {
-    /*
-      Defines the state being monitored for the module.
-    */
     state: {
         quote: {},
         quoteLoadStatus: 0,
-        quoteErrorMessage: '',
-        quoteErrorFields: [],
 
         payment: {},
         paymentStatus: 0,
-        paymentErrorMessage: '',
-        paymentErrorFields: [],
+
+        configurationLoadStatus: 0,
+        configuration: {},
     },
 
-    /*
-      Defines the actions used to retrieve the data.
-    */
     actions: {
-        /*
-          Loads the quote from the API
-        */
         loadQuote( { commit }, data ){
             commit( 'setQuoteLoadStatus', 1 );
 
@@ -41,21 +31,12 @@ export const business = {
                     commit( 'setQuoteLoadStatus', 2 );
                 })
                 .catch( function( error ){
-                    if (error.response.data.code == 401 || error.response.data.code == 419) {
-                        window.alert(i18n.t('validations.general.unauthorized'));
-                        window.location.replace('/login');
-                    }
-                    let errorFields = [];
-                    if (error.response.data.errors) {
-                        errorFields = Object.keys(error.response.data.errors);
-                        console.log(errorFields);
-                    }
                     commit( 'setQuoteLoadStatus', 3 );
-                    commit( 'setQuoteErrorMessage', helper.handleException(error) );
-                    commit( 'setQuoteErrorFields',  errorFields);
+                    helper.handleException(error);
                     commit( 'setQuote', {} );
                 });
         },
+
         performPayment({commit}, data) {
             commit('setPaymentStatus', 1);
             BusinessApi.pay(data)
@@ -64,98 +45,90 @@ export const business = {
                     // asynchronously
                 })
                 .catch(function (error) {
-                    if (error.response.data.code == 401 || error.response.data.code == 419) {
-                        window.alert(i18n.t('validations.general.unauthorized'));
-                        window.location.replace('/login');
-                    }
-                    let errorFields = [];
-                    if (error.response.data.errors) {
-                        errorFields = Object.keys(error.response.data.errors);
-                        console.log(errorFields);
-                    }
                     commit( 'setPaymentStatus', 3 );
-                    commit( 'setPaymentErrorMessage', helper.handleException(error) );
-                    commit( 'setPaymentErrorFields', errorFields );
+                    helper.handleException(error);
                     commit( 'setPayment',  {});
                 });
-        }
+        },
+
+        loadConfiguration( { commit } ){
+
+            commit( 'setConfigurationLoadStatus', 1 );
+
+            let configExist = false;
+
+            // load the config from cache
+            if (localStorage.getItem('configuration')) {
+                let configuration = JSON.parse(localStorage.getItem('configuration'));
+                if ((new Date()).getTime() > configuration.expiration) {
+                    localStorage.removeItem('configuration');
+                    configExist = false;
+                } else {
+                    commit('setConfiguration', configuration);
+                    commit('setConfigurationLoadStatus', 2);
+                    configExist = true;
+                }
+            }
+
+            if (! configExist) {
+                // load the config from the API
+                BusinessApi.configuration()
+                    .then( function( response ){
+                        let configuration = response.data;
+                        configuration.expiration = (new Date()).getTime() + BUSINESS_CONFIG.CACHE_EXPIRATION;
+                        localStorage.setItem('configuration', JSON.stringify(configuration));
+                        commit( 'setConfiguration', configuration );
+                        commit('setConfigurationLoadStatus', 2);
+                    })
+                    .catch( function(error){
+                        commit('setConfigurationLoadStatus', 3);
+                        helper.handleException(error);
+                        commit('setConfiguration', {});
+                    });
+            }
+        },
     },
 
-    /*
-      Defines the mutations used
-    */
     mutations: {
-        /*
-          Sets the quote load status
-        */
         setQuoteLoadStatus( state, status ){
             state.quoteLoadStatus = status;
         },
-
-        /*
-          Set the quote
-        */
         setQuote( state, quote ){
             state.quote = quote;
         },
-
-        setQuoteErrorMessage( state, quoteErrorMessage ){
-            state.quoteErrorMessage = quoteErrorMessage;
-        },
-
-        setQuoteErrorFields( state, quoteErrorFields ){
-            state.quoteErrorFields = quoteErrorFields;
-        },
-
         setPaymentStatus(state, status) {
             state.paymentStatus = status;
         },
         setPayment(state, payment) {
             state.payment = payment
         },
-        setPaymentErrorFields(state, paymentErrorFields) {
-            state.paymentErrorFields = paymentErrorFields;
+        setConfigurationLoadStatus( state, status ){
+            state.configurationLoadStatus = status;
         },
-        setPaymentErrorMessage(state, paymentErrorMessage) {
-            state.paymentErrorMessage = paymentErrorMessage;
-        }
-
+        setConfiguration( state, configuration ){
+            state.configuration = configuration;
+        },
     },
 
-    /*
-      Defines the getters used by the module
-    */
     getters: {
-        /*
-          Returns the quote load status
-        */
         getQuoteLoadStatus( state ){
             return state.quoteLoadStatus;
         },
         getPaymentStatus( state ){
             return state.paymentStatus;
         },
-
-        /*
-          Returns the quote
-        */
         getQuote( state ){
             return state.quote;
-        },
-        getQuoteErrorMessage(state) {
-            return state.quoteErrorMessage;
-        },
-        getQuoteErrorFields(state) {
-            return state.quoteErrorFields;
         },
         getPayment(state) {
             return state.payment;
         },
-        getPaymentErrorMessage(state) {
-            return state.paymentErrorMessage;
+        getConfigurationLoadStatus( state ){
+            return state.configurationLoadStatus;
         },
-        getPaymentErrorFields(state) {
-            return state.paymentErrorFields;
+
+        getConfiguration( state ) {
+            return state.configuration;
         }
     }
 };

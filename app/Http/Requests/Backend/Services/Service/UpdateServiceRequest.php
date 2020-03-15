@@ -9,6 +9,7 @@
 namespace App\Http\Requests\Backend\Services\Service;
 
 
+use App\Rules\Service\ItemRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -35,6 +36,7 @@ class UpdateServiceRequest extends FormRequest
             'agent_rate'            => __('validation.attributes.backend.services.service.agent_rate'),
             'company_rate'          => __('validation.attributes.backend.services.service.company_rate'),
             'logo'                  => __('validation.attributes.backend.services.service.logo'),
+            'items'                 => __('validation.attributes.backend.services.service.items'),
         ];
     }
     
@@ -53,6 +55,7 @@ class UpdateServiceRequest extends FormRequest
             'agent_rate'            => ['required', 'numeric', 'between:0,100'],
             'company_rate'          => ['required', 'numeric', 'between:0,100'],
             'logo'                  => 'sometimes|image|max:191',
+            'items'                 => ['sometimes', 'array', new ItemRule(),]
         
         ];
     }

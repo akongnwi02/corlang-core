@@ -70,6 +70,11 @@ class Handler extends ExceptionHandler
                 $error['code']    = $exception->status();
             }
             
+            if ($exception instanceof \App\Exceptions\Api\DuplicateException) {
+                $error['message'] = $exception->getMessage();
+                $error['code']    = $exception->status();
+            }
+            
             if ($exception instanceof \Illuminate\Validation\ValidationException) {
                 $error['message'] = $exception->getMessage();
                 $error['errors']  = $exception->errors();
@@ -116,10 +121,9 @@ class Handler extends ExceptionHandler
                 ->route(home_route())
                 ->withFlashDanger(__('auth.general_error'));
         }
+        
         /**
-         *
          * General purpose exception handling for both WEB and API
-         *
          */
         return parent::render($request, $exception);
     }

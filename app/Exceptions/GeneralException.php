@@ -48,9 +48,8 @@ class GeneralException extends Exception
         /*
          * All instances of GeneralException redirect back with a flash message to show a bootstrap alert-error
          */
-
         return $request->expectsJson()
-            ? response()->json(['message' => $this->message], 400)
+            ? response()->json(['message' => $this->message], 500)
             : redirect()
                 ->back()
                 ->withInput($request->except('password', 'password_confirmation'))

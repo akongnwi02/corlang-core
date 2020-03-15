@@ -101,7 +101,7 @@
                         <div class="col-md-10">
                             {{ html()->select('providercommission_id' , [null => null] + $commissions)
                                 ->class('form-control')
-                                ->required()}}
+                                }}
                         </div><!--col-->
                     </div><!--form-group-->
 
@@ -111,7 +111,7 @@
                         <div class="col-md-10">
                             {{ html()->select('customercommission_id', [null => null] + $commissions)
                                 ->class('form-control')
-                                ->required()}}
+                                }}
                         </div><!--col-->
                     </div><!--form-group-->
 
@@ -122,6 +122,17 @@
                         <div class="col-md-10">
                             <label class="switch switch-label switch-pill switch-primary">
                                 {{ html()->checkbox('is_prepaid', false, 1)->class('switch-input') }}
+                                <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
+                            </label>
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.service.items'))->class('col-md-2 form-control-label')->for('has_items') }}
+
+                        <div class="col-md-10">
+                            <label class="switch switch-label switch-pill switch-primary">
+                                {{ html()->checkbox('has_items', false, 1)->class('switch-input') }}
                                 <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
                             </label>
                         </div><!--col-->

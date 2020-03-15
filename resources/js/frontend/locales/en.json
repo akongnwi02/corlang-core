@@ -35,7 +35,9 @@
                 "method": "Payment Method",
                 "account": "Account Number",
                 "reference": "Reference",
+                "pincode": "Pin Code",
                 "fee": "Fee",
+                "destination": "Destination identifier",
                 "total": "Total",
                 "logo": "Logo",
                 "description": "Payment Description",
@@ -57,20 +59,28 @@
 
                 }
             },
+            "destination": "Invalid destination identifier",
             "reference": "The reference is invalid",
+            "pincode": "The pin code is invalid",
             "source": "The payment account number is invalid"
         },
         "general": {
+            "unexpected": "An unexpected error occurred",
             "unauthorized": "You are not authenticated. Please login and retry",
             "server": "An internal server error occurred",
             "not_found": "A resource or service you requested was not found",
             "invalid_input": "Invalid inputs. ",
+            "duplicate": "This request may have been processed already",
             "business": {
                 "amount": "Please enter a valid amount",
-                "invalid": "The {{parameter}} is invalid.",
+                "invalid": "The {parameter} is invalid.",
                 "insufficient_balance": "Your balance is insufficient",
                 "unauthorized": "You are not authorized to make this request"
             }
         }
+    },
+    "notifications": {
+        "successful": "Transaction successful",
+        "failed": "Transaction failed"
     }
 }

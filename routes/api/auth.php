@@ -21,7 +21,13 @@ Route::group(['prefix' => 'auth'], function () {
     * These routes require the user to be logged in
     */
    Route::group(['middleware' => request()->hasHeader('authorization') ? 'jwt.auth' : 'auth'], function () {
+       /*
+        * Get current authenticated user
+        */
        Route::get('me', [LoginController::class, 'me']);
+       /*
+        * Logout the current user
+        */
        Route::get('logout', [LoginController::class, 'logout']);
    });
 

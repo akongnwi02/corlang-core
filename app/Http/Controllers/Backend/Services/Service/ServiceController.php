@@ -56,11 +56,14 @@ class ServiceController extends Controller
     
         $logo = $request->has('logo') ? $request->file('logo') : null;
         
-        $serviceRepository->create($request->input(), $logo);
+        $service = $serviceRepository->create($request->input(), $logo);
         
-        return redirect()
-            ->route('admin.services.service.index')
-            ->withFlashSuccess(__('alerts.backend.services.service.created'));
+        return  $service->has_items ?
+            redirect()->route('admin.services.service.edit', $service)
+                ->withFlashSuccess(__('alerts.backend.services.service.created'))
+            :
+            redirect()->route('admin.services.service.index')
+                ->withFlashSuccess(__('alerts.backend.services.service.created'));
     }
     
     public function show()
@@ -85,9 +88,10 @@ class ServiceController extends Controller
     
     /**
      * @param UpdateServiceRequest $request
-     * @param Company $company
+     * @param Service $service
+     * @param ServiceRepository $serviceRepository
      * @return mixed
-     * @throws \Throwable
+     * @throws \App\Exceptions\GeneralException
      */
     public function update(UpdateServiceRequest $request, Service $service, ServiceRepository $serviceRepository)
     {
