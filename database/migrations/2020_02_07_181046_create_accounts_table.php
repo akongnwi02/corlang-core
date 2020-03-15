@@ -19,6 +19,7 @@ class CreateAccountsTable extends Migration
             $table->uuid('type_id');
             $table->boolean('is_active')->default(true);
             $table->string('code')->unique();
+            $table->boolean('is_default')->default(false);
             $table->dateTime('previous_archived_date')->nullable();
             $table->double('previous_closing_balance')->nullable();
     

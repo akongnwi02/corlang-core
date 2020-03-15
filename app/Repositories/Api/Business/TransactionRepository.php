@@ -24,6 +24,10 @@ class TransactionRepository
     public function create($data)
     {
         $customer_fee = $this->serviceRepository->getCustomerFee($data['service_code']);
+        $agent_commission = '';
+        $company_commission = '';
+        $total_commission = '';
+        $system_commission = '';
         
         return Transaction::create([
             'code' => TransactionMethod::generateCode(),
@@ -35,6 +39,10 @@ class TransactionRepository
             'company_id' => auth()->user()->company_id,
             'items' => serialize($data['items']),
             'customer_fee' => '',
+            'agent_commission' => '',
+            'company_commission' => '',
+            'total_commission' => '',
+            'system_commission' => '',
         ]);
     }
 }

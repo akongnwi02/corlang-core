@@ -185,7 +185,7 @@
                                     <td><input id="amount" style="min-width:100px" type="number" name="items[0][amount]" step="0.01" class="form-control" required/></td>
                                     <td>
                                         <label class="switch switch-label switch-pill switch-primary">
-                                            {{ html()->checkbox('items[0][is_active]', $item->is_active, 1)->class('switch-input') }}
+                                            {{ html()->checkbox('items[0][is_active]', false, 1)->class('switch-input') }}
                                             <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
                                         </label>
                                     </td>

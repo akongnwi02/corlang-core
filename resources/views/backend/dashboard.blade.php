@@ -77,6 +77,28 @@
                                 </div>
                             </div>
                         </div><!--col-->
+                        @if(@$logged_in_user->company->is_default)
+                            <div class="col-sm-4 col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        @can(config('permission.permissions.request_payouts'))
+                                            <div class="btn-group float-right">
+                                                <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#payoutModalSystem" title="@lang('labels.backend.account.request_payout')">
+                                                    <img src="{{ url('img/backend/brand/arrow-circle-bottom.svg') }}" alt="@lang('labels.backend.account.request_payout')">
+                                                </button>
+                                            </div>
+                                        @endcan
+                                        <div class="text-value-lg">{{ $system_commission_balance }}</div>
+                                        <div>@lang('strings.backend.dashboard.company.system_commission')</div>
+                                        {{--<div class="progress progress-xs my-2">--}}
+                                            {{--<div class="progress-bar bg-warning" role="progressbar" style="width: 25%"--}}
+                                                 {{--aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>--}}
+                                        {{--</div>--}}
+                                        <small class="text-muted">@lang('strings.backend.dashboard.company.system_commission_help')</small>
+                                    </div>
+                                </div>
+                            </div><!--col-->
+                        @endif
                         <div class="col-sm-4 col-lg-4">
                             <div class="card">
                                 <div class="card-body">
@@ -113,6 +135,14 @@
         'currency' => $default_currency,
         'paymentMethods' => $payment_methods,
         'companyCommissionBalance' => $company_commission_balance,
+    ])
+    @endcomponent
+
+    @component('backend.components.dashboard.payout-system', [
+        'account' => $system_account,
+        'currency' => $default_currency,
+        'paymentMethods' => $payment_methods,
+        'companyCommissionBalance' => $system_commission_balance,
     ])
     @endcomponent
 

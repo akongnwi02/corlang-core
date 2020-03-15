@@ -26,7 +26,7 @@ class QuoteRequest extends FormRequest
     {
         return [
             'destination' => ['required', 'regex:/(^[A-Za-z0-9 ]+$)+/'],
-            'destination_code' => [
+            'service_code' => [
                 'required',
                 new ServiceAccessRule(),
             ],

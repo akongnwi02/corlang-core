@@ -62,6 +62,7 @@ class User extends Authenticatable implements JWTSubject
         'last_login_at',
         'last_login_ip',
         'company_id',
+        'pincode',
     ];
 
     /**

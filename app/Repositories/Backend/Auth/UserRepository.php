@@ -62,6 +62,7 @@ class UserRepository extends BaseRepository
             ])
             ->allowedSorts('users.active', 'users.created_at', 'users.username')
             ->defaultSort('-users.active', '-users.confirmed', '-users.created_at', 'users.username')
+            ->whereNotIn('username', ['system'])
             ->with('roles');
     
         if (! auth()->user()->company->isDefault()) {

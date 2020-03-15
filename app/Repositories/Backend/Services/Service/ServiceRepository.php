@@ -102,7 +102,7 @@ class ServiceRepository
     public function update(Service $service, $data, $logo = null)
     {
         return \DB::transaction(function () use ($service, $data, $logo) {
-            $service->fill($data);
+            
             if ($service->has_items) {
                 $items = $data['items'];
                 $service->items()->delete();

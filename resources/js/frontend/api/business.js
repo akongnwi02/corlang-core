@@ -3,7 +3,7 @@ export default {
 
         let params = {};
         params.destination = data.destination; // destination account number (e.g Mobile money number)
-        params.service_code = data.destination_code; // identifier of destination
+        params.service_code = data.service_code; // identifier of destination
         params.amount = data.amount; // amount
         params.currency_code = data.currency_code; // currency code
         params.items = data.items; // optional array of items

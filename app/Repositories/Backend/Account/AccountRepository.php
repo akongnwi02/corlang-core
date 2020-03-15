@@ -12,6 +12,9 @@ use App\Events\Backend\Account\AccountDeactivated;
 use App\Events\Backend\Account\AccountReactivated;
 use App\Exceptions\GeneralException;
 use App\Models\Account\Account;
+use App\Models\Account\Payout;
+use App\Models\Account\PayoutType;
+use App\Models\Transaction\Transaction;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -52,6 +55,7 @@ class AccountRepository
                 AllowedFilter::scope('is_active'),
                 AllowedFilter::scope('type_id'),
             ])
+            ->where('is_default', false)
             ->defaultSort('-accounts.is_active', '-accounts.created_at')
             ->with('type');
         
@@ -74,6 +78,7 @@ class AccountRepository
                 AllowedFilter::scope('is_active'),
                 AllowedFilter::scope('type_id'),
             ])
+            ->where('is_default', false)
             ->defaultSort('-accounts.is_active', '-accounts.created_at')
             ->with('type');
     
@@ -87,6 +92,30 @@ class AccountRepository
         }
     
         return $accounts->whereHas('user');
+    }
+    
+    public function getSystemCommissionBalance()
+    {
+        return $this->getSystemTotalCommission() - $this->getSystemTotalPayout();
+    }
+    
+    public function getSystemTotalCommission()
+    {
+        return Transaction::where('is_reversed', false)
+            ->sum('system_commission');
+    }
+    
+    public function getSystemTotalPayout()
+    {
+        return Payout::where('account_id', Account::where('is_default', true)->first()->uuid)
+            ->whereIn('status', [
+                config('business.payout.status.approved'),
+                config('business.payout.status.pending'),
+            ])
+            ->where(function ($query) {
+                $query->where('type_id', PayoutType::where('name', config('business.payout.type.commission'))->first()->uuid);
+            })
+            ->sum('amount');
     }
     
 }

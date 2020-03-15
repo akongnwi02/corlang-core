@@ -27,6 +27,9 @@ class RequestPayoutRequest extends FormRequest
         }
     
         if (request()->account->type->name == config('business.account.type.user')) {
+            if (request()->account->is_default) {
+                return auth()->user()->company->is_default && auth()->user()->isAdmin();
+            }
             return request()->account->user->uuid == auth()->user()->uuid;
         }
         

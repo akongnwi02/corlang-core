@@ -37,6 +37,19 @@ class SeedAdminUserAndRoles extends Migration
             'notification_channel' => 'mail',
             'confirmed'            => true,
         ]);
+        
+        $system = User::create([
+            'first_name'           => 'System',
+            'last_name'            => 'User',
+            'email'                => 'system@system.com',
+            'username'             => 'system',
+            'phone'                => '',
+            'password'             => 'system',
+            'pincode'              => '7777',
+            'confirmation_code'    => '7777',
+            'notification_channel' => 'mail',
+            'confirmed'            => true,
+        ]);
 
         $admin->assignRole($adminRole);
 

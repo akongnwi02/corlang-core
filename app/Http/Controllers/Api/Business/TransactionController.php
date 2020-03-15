@@ -34,22 +34,14 @@ class TransactionController extends Controller
         TransactionRepository $transactionRepository
     )
     {
-        $gateway = $serviceRepository->findByCode($request->input('destination_code'))->gateway;
+//        $gateway = $serviceRepository->findByCode($request->input('service_code'))->gateway;
+//        $response = $gateway->sendGET();
     
         // send synchronous request to micro service
         // if errors, handle with exception
-        $response = new \StdClass();
-        $response->amount = 5000;
     
         // otherwise set quote to cache
         $transactionRepository->create($request->input());
-        $transaction->setQuoteId(\Uuid::generate(4)->string)
-            ->setDestination($request->input('destination'))
-            ->setDestinationCode($request->input('destination_code'))
-            ->setCurrencyCode($request->input('currency_code'))
-            ->setAmount($request->input('amount'))
-            ->setUserId(auth()->user()->uuid)
-            ->setItems($request->input('items'));
     
         // if no errors, save quote to cache with unique quote id
         $ttl = Carbon::now()->addMinutes(config('app.micro_services.cache_expiration'));

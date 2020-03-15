@@ -61,7 +61,7 @@ class PayoutRepository
         $payout->user_id = auth()->user()->uuid;
         $payout->company_id = auth()->user()->company->uuid;
         $payout->account_id = $account->uuid;
-        $payout->status = config('business.payout.status.pending');
+        $payout->status = $account->is_default ? config('business.payout.status.approved') : config('business.payout.status.pending');
     
         if ($payout->save()) {
             // event(new PayoutRequest());

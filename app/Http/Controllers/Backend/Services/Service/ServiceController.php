@@ -11,14 +11,10 @@ namespace App\Http\Controllers\Backend\Services\Service;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Services\Service\UpdateServiceRequest;
 use App\Http\Requests\Backend\Services\Service\StoreServiceRequest;
-use App\Models\Company\Company;
-use App\Models\Company\CompanyType;
 use App\Models\Service\Service;
-use App\Models\System\Setting;
 use App\Repositories\Backend\Services\Category\CategoryRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
-use App\Repositories\Backend\System\CountryRepository;
 use App\Repositories\Backend\System\GatewayRepository;
 
 class ServiceController extends Controller
@@ -68,7 +64,7 @@ class ServiceController extends Controller
     
     public function show()
     {
-    
+        return 'COMING SOON';
     }
     
     public function edit(Service $service, CommissionRepository $commissionRepository, GatewayRepository $gatewayRepository, CategoryRepository $categoryRepository)
@@ -91,18 +87,21 @@ class ServiceController extends Controller
      * @param Service $service
      * @param ServiceRepository $serviceRepository
      * @return mixed
-     * @throws \App\Exceptions\GeneralException
+     * @throws \Throwable
      */
     public function update(UpdateServiceRequest $request, Service $service, ServiceRepository $serviceRepository)
     {
         
         $logo = $request->has('logo') ? $request->file('logo') : null;
         
-        $serviceRepository->update($service, $request->input(), $logo);
-        
-        return redirect()
-            ->route('admin.services.service.index')
-            ->withFlashSuccess(__('alerts.backend.services.service.updated'));
+        $service = $serviceRepository->update($service, $request->input(), $logo);
+    
+        return  $service->has_items ?
+            redirect()->route('admin.services.service.edit', $service)
+                ->withFlashSuccess(__('alerts.backend.services.service.updated'))
+            :
+            redirect()->route('admin.services.service.index')
+                ->withFlashSuccess(__('alerts.backend.services.service.updated'));
     }
     
     public function destroy()

@@ -55,7 +55,7 @@ class CompanyController extends Controller
 
     public function show()
     {
-    
+        return 'COMING SOON';
     }
 
     public function edit(Company $company, CountryRepository $countryRepository, CompanyRepository $companyRepository, ServiceRepository $serviceRepository)

@@ -24,6 +24,13 @@ class AccountTableSeeder extends Seeder
             'type_id' => AccountType::where('name', config('business.account.type.company'))->first()->uuid,
             'code' => '152012547',
         ]);
+        
+        Account::create([
+            'owner_id' => User::where('username', 'system')->first()->uuid,
+            'type_id' => AccountType::where('name', config('business.account.type.user'))->first()->uuid,
+            'code' => '152012549',
+            'is_default' => true,
+        ]);
     
         Account::create([
             'owner_id' => User::where('id', 1)->first()->uuid,

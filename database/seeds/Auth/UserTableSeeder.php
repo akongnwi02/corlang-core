@@ -32,6 +32,21 @@ class UserTableSeeder extends Seeder
             'company_id'        => Company::first()->uuid,
         ]);
         $user->assignRole(config('access.users.company_admin_role'));
+        
+        $user = User::create([
+            'id'                => 1,
+            'first_name'        => 'System',
+            'last_name'         => 'User',
+            'username'          => 'system',
+            'phone'             => $faker->numberBetween(600000000,699999999),
+            'email'             => $faker->email,
+            'password'          => 'system',
+            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+            'notification_channel' => 'mail',
+            'confirmed'         => true,
+            'company_id'        => Company::first()->uuid,
+        ]);
+        $user->assignRole(config('access.users.company_admin_role'));
 
         $user = User::create([
             'first_name'        => $faker->firstName,

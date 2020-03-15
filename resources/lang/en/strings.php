@@ -33,6 +33,7 @@ return [
                 'balance'                => 'Account Balance',
                 'number'                 => 'Company Account Number',
                 'commission'             => 'Commission Balance',
+                'system_commission'             => 'System Commission',
                 'commission_today'       => 'Today\'s Commission',
                 'commission_today_help'  => 'Commission earned today',
                 'agents_balance'         => 'Agents\' Balance',
@@ -45,6 +46,7 @@ return [
                 'total_balance_help'     => 'Total agent plus company balance',
                 'commission_help'        => 'The company\'s commission balance',
                 'total_commission_help'  => 'Total agent plus company commission',
+                'system_commission_help'  => 'System commission balance',
             ],
             'user'    => [
                 'balance'         => 'Your balance',
