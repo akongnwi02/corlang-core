@@ -56,7 +56,6 @@ class Service extends Model
         'providercommission_id',
         'customercommission_id',
         'providercompany_id',
-        'is_prepaid',
         'company_rate',
         'agent_rate',
         'has_items',
@@ -71,7 +70,6 @@ class Service extends Model
         'is_active'        => 'boolean',
         'customer_rate'    => 'double',
         'agent_rate'       => 'double',
-        'is_prepaid'       => 'boolean',
         'has_items'        => 'boolean',
     ];
 }

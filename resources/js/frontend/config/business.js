@@ -2,7 +2,7 @@ export const BUSINESS_CONFIG = {
 
     CACHE_EXPIRATION: 24 * 60 * 60 * 1000, // 24 hours
 
-    CATEGORY_ELECTRICITY_CODE: 'CORELEC001',
+    CATEGORY_PREPAID_BILLS_CODE: 'CORPREPAID001',
 
     SERVER_STORAGE_PATH: '/storage',
 
@@ -14,10 +14,9 @@ export const BUSINESS_CONFIG = {
     PUSHER_APP_SECRET: 'a797bfbb0928413f1164',
     PUSHER_APP_CLUSTER: 'eu',
     PUSHER_APP_FORCE_TLS: false,
-
-    PUSHER_APP_TRANSACTION_CHANNEL: 'transaction-channel',
     PUSHER_APP_TRANSACTION_EVENT: '.transaction-complete',
 
-
-
+    // Transaction Status
+    TRANSACTION_SUCCESSFUL: 'success',
+    TRANSACTION_FAILED: 'failed',
 };

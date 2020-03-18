@@ -116,17 +116,6 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.service.prepaid'))->class('col-md-2 form-control-label')->for('is_prepaid') }}
-
-                        <div class="col-md-10">
-                            <label class="switch switch-label switch-pill switch-primary">
-                                {{ html()->checkbox('is_prepaid', false, 1)->class('switch-input') }}
-                                <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
-                            </label>
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.services.service.items'))->class('col-md-2 form-control-label')->for('has_items') }}
 
                         <div class="col-md-10">
@@ -167,9 +156,9 @@
                             <tbody>
                             @forelse($service->items as $key => $item)
                                 <tr>
-                                    <td><input id="name" style="min-width:100px" type="text" name="items[{{ $key }}][name]" class="form-control" value="{{ $item->name }}" max="191" required/></td>
-                                    <td><input id="code" style="min-width:100px" type="text" name="items[{{ $key }}][code]" step="0.01" class="form-control" value="{{ $item->code }}" max="191" required/></td>
-                                    <td><input id="amount" style="min-width:100px" size=25 type="number" name="items[{{ $key }}][amount]" step="0.01" class="form-control" value="{{ $item->amount }}" min="0" required/></td>
+                                    <td><input id="name" style="min-width:100px" type="text" name="items[{{ $key }}][name]" class="form-control" value="{{ $item->name }}" max="191"/></td>
+                                    <td><input id="code" style="min-width:100px" type="text" name="items[{{ $key }}][code]" step="0.01" class="form-control" value="{{ $item->code }}" max="191"/></td>
+                                    <td><input id="amount" style="min-width:100px" size=25 type="number" name="items[{{ $key }}][amount]" step="0.01" class="form-control" value="{{ $item->amount }}" min="0"/></td>
                                     <td>
                                         <label class="switch switch-label switch-pill switch-primary">
                                             {{ html()->checkbox("items[$key][is_active]", $item->is_active, 1)->class('switch-input') }}
@@ -180,9 +169,9 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td><input id="name" style="min-width:100px" width="50px" type="text" name="items[0][name]" max="191" class="form-control" required/></td>
-                                    <td><input id="code" style="min-width:100px" type="text" name="items[0][code]" max="191" class="form-control" required/></td>
-                                    <td><input id="amount" style="min-width:100px" type="number" name="items[0][amount]" step="0.01" class="form-control" required/></td>
+                                    <td><input id="name" style="min-width:100px" width="50px" type="text" name="items[0][name]" max="191" class="form-control"/></td>
+                                    <td><input id="code" style="min-width:100px" type="text" name="items[0][code]" max="191" class="form-control"/></td>
+                                    <td><input id="amount" style="min-width:100px" type="number" name="items[0][amount]" step="0.01" class="form-control"/></td>
                                     <td>
                                         <label class="switch switch-label switch-pill switch-primary">
                                             {{ html()->checkbox('items[0][is_active]', false, 1)->class('switch-input') }}

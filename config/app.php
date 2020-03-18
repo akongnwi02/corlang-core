@@ -134,9 +134,9 @@ return [
          */
         'callback_url' => env('APP_URL') . env('APP_CALLBACK_URL'),
     
-        'cache_expiration' => env('APP_CACHE_EXPIRATION'),
+        'cache_expiration' => env('APP_CACHE_EXPIRATION', 1),
 
-        'cache_store' => env('APP_CACHE_STORE'),
+        'cache_store' => env('APP_CACHE_STORE', 'database'),
 
     ],
 

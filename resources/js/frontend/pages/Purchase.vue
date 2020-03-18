@@ -2,7 +2,7 @@
     <mdb-row>
         <mdb-col md="3">
             <mdb-tab pills color="primary" class="nav-pills" vertical key="tabs">
-                <mdb-tab-item class="mt-4" key="electricity-tab" :active="tab=='electricity.search'" @click.native.prevent="gotoTab('electricity.search')">
+                <mdb-tab-item class="mt-4" key="electricity-tab" :active="tab=='prepaid.bill.search'" @click.native.prevent="gotoTab('prepaid.bill.search')">
                     <mdb-icon icon="plug" class="ml-2"/> {{ $t(`dashboard.pages.tabs.titles.electricity`) }}
                 </mdb-tab-item>
                 <mdb-tab-item class="mt-4" key="water-tab" :active="tab=='water'" @click.native.prevent="gotoTab('water')">
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    import Search from '../components/electricity/Search'
+    import Search from '../components/prepaid-bill/Search'
     export default {
         name: "Purchase",
         components: {
@@ -34,7 +34,7 @@
         },
         data() {
             return {
-                tab: 'electricity.search',
+                tab: 'prepaid.bill.search',
                 spinner_status: 0,
             };
         },

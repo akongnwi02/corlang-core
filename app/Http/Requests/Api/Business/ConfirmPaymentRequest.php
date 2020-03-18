@@ -12,7 +12,7 @@ namespace App\Http\Requests\Api\Business;
 use App\Rules\Service\PaymentMethodAccessRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PayRequest extends FormRequest
+class ConfirmPaymentRequest extends FormRequest
 {
     public function authorize()
     {
@@ -25,13 +25,7 @@ class PayRequest extends FormRequest
     {
         return [
             'quote_id' => ['required', 'string', 'min:10'],
-            'reference' => ['sometimes', 'nullable', 'string', 'min:3'],
-            'source_code' => [
-                'sometimes',
-                'nullable',
-                'string',
-                new PaymentMethodAccessRule()
-            ],
+
             'items' => ['sometimes', 'nullable', 'array'],
         ];
     }

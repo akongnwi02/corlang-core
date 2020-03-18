@@ -12,6 +12,7 @@ namespace App\Http\Requests\Backend\Services\Service;
 use App\Rules\Service\ItemRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\RequiredIf;
 
 class UpdateServiceRequest extends FormRequest
 {

@@ -37,9 +37,9 @@ export const business = {
                 });
         },
 
-        performPayment({commit}, data) {
+        confirmPayment({commit}, data) {
             commit('setPaymentStatus', 1);
-            BusinessApi.pay(data)
+            BusinessApi.confirm(data)
                 .then(function (response) {
                     // Do nothing because request will be processed
                     // asynchronously

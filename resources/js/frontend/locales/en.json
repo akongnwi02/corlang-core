@@ -66,11 +66,13 @@
         },
         "general": {
             "unexpected": "An unexpected error occurred",
+            "maintenance": "We're currently maintaining our system. Please check back later",
             "unauthorized": "You are not authenticated. Please login and retry",
             "server": "An internal server error occurred",
             "not_found": "A resource or service you requested was not found",
             "invalid_input": "Invalid inputs. ",
             "duplicate": "This request may have been processed already",
+            "network": "Network error. Please check your internet connection",
             "business": {
                 "amount": "Please enter a valid amount",
                 "invalid": "The {parameter} is invalid.",

@@ -31,7 +31,6 @@ class ServiceRepository
         return \DB::transaction(function () use ($data, $logo) {
             
             $service = (new Service)->fill($data);
-            $service->is_prepaid = request()->has('is_prepaid') ? 1 : 0;
             $service->has_items = request()->has('has_items') ? 1 : 0;
             
             if ($logo) {
@@ -115,7 +114,6 @@ class ServiceRepository
             }
     
             $service->fill($data);
-            $service->is_prepaid = request()->has('is_prepaid') ? 1 : 0;
             $service->has_items = request()->has('has_items') ? 1 : 0;
     
             if ($logo) {

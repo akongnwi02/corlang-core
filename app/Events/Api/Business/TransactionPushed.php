@@ -8,7 +8,7 @@
 
 namespace App\Events\Api\Business;
 
-use App\Services\Business\Transaction;
+use App\Models\Transaction\Transaction;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -37,12 +37,12 @@ class TransactionPushed implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return [$this->transaction->userId];
+        return [$this->transaction->uuid];
     }
     
     public function broadcastAs()
     {
-        \Log::debug('Processing new job transaction pushed job: ' . $this->transaction->getUserId());
+        \Log::debug('Processing new job transaction pushed job: ' . $this->transaction->uuid);
 
         return 'transaction-complete';
     }

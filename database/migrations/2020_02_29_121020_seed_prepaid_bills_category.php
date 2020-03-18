@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class SeedElectricityCategory extends Migration
+class SeedPrepaidBillsCategory extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class SeedElectricityCategory extends Migration
         \DB::table('categories')->insert([
             'uuid'       => Uuid::generate(4)->string,
             'name'       => config('business.service.category.electricity'),
-            'code'       => 'CORELEC001',
+            'code'       => 'CORPREPAID001',
             'is_active' => true,
         ]);
     }

@@ -45,28 +45,6 @@
                 page: 'purchase',
             }
         },
-        mounted() {
-            Echo.channel(userId)
-                .listen(BUSINESS_CONFIG.PUSHER_APP_TRANSACTION_EVENT, function(data) {
-                    if (data.transaction.status == 'successful') {
-                        this.$store.commit('setPaymentStatus', 2);
-                        console.log('transaction successful', data.transaction);
-                        this.$buefy.toast.open({
-                            message: this.$t('notifications.successful'),
-                            type: 'is-success'
-                        });
-
-                    } else {
-                        this.$store.commit('setPaymentStatus', 3);
-                        console.log('transaction failed', data.transaction);
-                        let error = data.transaction.error;
-                        this.$buefy.toast.open({
-                            message: this.$t('validations.general.business.' + error),
-                            type: 'is-danger'
-                        });
-                    }
-            }.bind(this));
-        },
         // created() {
         //     this.$store.dispatch('loadUser')
         // },

@@ -12,17 +12,17 @@ namespace App\Http\Controllers\Api\Business;
 use App\Events\Api\Business\TransactionPushed;
 use App\Exceptions\Api\DuplicateException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Business\PayRequest;
+use App\Http\Requests\Api\Business\ConfirmPaymentRequest;
 use App\Models\Transaction\Transaction;
 
 class PayController extends Controller
 {
     /**
-     * @param PayRequest $request
+     * @param ConfirmPaymentRequest $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * @throws DuplicateException
      */
-    public function pay(PayRequest $request)
+    public function pay(ConfirmPaymentRequest $request)
     {
     
         /** @var Transaction $transaction */

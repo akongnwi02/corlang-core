@@ -6,24 +6,25 @@ export default {
         params.service_code = data.service_code; // identifier of destination
         params.amount = data.amount; // amount
         params.currency_code = data.currency_code; // currency code
+        params.paymentaccount = data.paymentaccount; // payment method account number
+        params.paymentmethod_code = data.paymentmethod_code; // identifier of payment method
         params.items = data.items; // optional array of items
 
-        return axios.post('/api/quote', params);
-    },
-
-    pay: function (data) {
-
-        let params = {};
         params.name = data.name; // customer name
         params.phone = data.phone; // customer phone
         params.email = data.email; // customer email
         params.address = data.address; // customer address
         params.reference = data.reference; // special reference provided by customer
-        params.paymentaccount = data.paymentaccount; // payment method account number
-        params.paymentmethod_code = data.paymentmethod_code; // identifier of payment method
+
+        return axios.post('/api/quote', params);
+    },
+
+    confirm: function (data) {
+
+        let params = {};
         params.quote_id = data.id; // id of the quote
 
-        return axios.post('/api/pay', params);
+        return axios.post('/api/confirm', params);
     },
 
     configuration: function(){

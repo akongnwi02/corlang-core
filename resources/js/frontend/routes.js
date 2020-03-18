@@ -25,9 +25,9 @@ Vue.use( VueRouter );
 export default new VueRouter({
     routes: [
         {
-            path: '/electricity/search',
-            name: 'electricity.search',
-            component: Vue.component( 'Search', require( './components/electricity/Search' ) ),
+            path: '/prepaid/bill/search',
+            name: 'prepaid.bill.search',
+            component: Vue.component( 'Search', require( './components/prepaid-bill/Search' ) ),
         },
     ]
 });

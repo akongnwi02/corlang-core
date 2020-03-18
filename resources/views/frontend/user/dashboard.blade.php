@@ -23,5 +23,7 @@
 @endsection
 
 <script>
-    window.userId = "{{ auth()->user()->uuid }}";
+    // get the user object from the backend
+    // used to create a pusher channel connection
+    window.user = {!! auth()->user() !!};
 </script>
