@@ -101,4 +101,9 @@ class TransactionController extends Controller
         $transaction = Transaction::where('uuid', $request->input('quote_id'))->first();
         event(new TransactionPushed($transaction));
     }
+    
+    public function status(Transaction $transaction)
+    {
+    
+    }
 }

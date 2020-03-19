@@ -3,16 +3,17 @@
  * Created by PhpStorm.
  * User: devert
  * Date: 3/18/20
- * Time: 10:40 AM
+ * Time: 5:14 PM
  */
 
 namespace App\Http\Middleware;
+
 
 use App\Exceptions\Api\ForbiddenException;
 use Closure;
 use Illuminate\Http\Request;
 
-class WhitelistMiddleware
+class APIKeyMiddleware
 {
     /**
      * @param Request $request
@@ -22,23 +23,20 @@ class WhitelistMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $apiKey = config('access.api_key');
         
-        $whitelist = config('access.whitelist');
-    
-        $ipAddresses = explode(';', $whitelist);
-        
-        if (! in_array($request->ip(), $ipAddresses)) {
-    
-            \Log::error('IP address is not whitelisted', ['ip address', $request->ip()]);
+        if ($request->header('x-api-key') != $apiKey) {
+            
+            \Log::error('Invalid API key');
     
             if (config('access.partner_restriction')) {
-                
+        
                 throw new ForbiddenException();
-                
+        
             }
-            
         }
-    
+        
         return $next($request);
+        
     }
 }

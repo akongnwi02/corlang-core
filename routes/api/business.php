@@ -27,6 +27,11 @@ Route::group(['middleware' => request()->hasHeader('authorization') ? 'jwt.auth'
      */
     Route::post('confirm', [TransactionController::class, 'confirm']);
     
+    /*
+     * Status
+     */
+    Route::get('status/{transaction}', [TransactionController::class, 'status']);
+    
 });
 
 /*

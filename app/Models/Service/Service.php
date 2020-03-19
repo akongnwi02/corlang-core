@@ -51,6 +51,7 @@ class Service extends Model
         'category_id',
         'gateway_id',
         'is_active',
+        'is_searchable',
         'code',
         'logo_url',
         'providercommission_id',
@@ -71,5 +72,6 @@ class Service extends Model
         'customer_rate'    => 'double',
         'agent_rate'       => 'double',
         'has_items'        => 'boolean',
+        'is_searchable'    => 'boolean',
     ];
 }

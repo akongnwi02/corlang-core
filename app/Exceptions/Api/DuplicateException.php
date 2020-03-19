@@ -22,5 +22,4 @@ class DuplicateException extends Exception
     {
         return $this->status;
     }
-
 }

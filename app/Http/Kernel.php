@@ -49,6 +49,12 @@ class Kernel extends HttpKernel
             'throttle:30,1',
             'bindings',
         ],
+        
+        // not used at the moment
+        'partner' => [
+            'whitelist',
+            'api_key',
+        ],
 
         'admin' => [
             'auth',
@@ -82,6 +88,8 @@ class Kernel extends HttpKernel
         'localization' => \App\Http\Middleware\LocalizationMiddleWare::class,
         'accept' => \App\Http\Middleware\AcceptHeaderMiddleware::class,
         'cors' => \Barryvdh\Cors\HandleCors::class,
+        'whitelist' => \App\Http\Middleware\WhitelistMiddleware::class,
+        'api_key' => \App\Http\Middleware\WhitelistMiddleware::class,
     ];
 
     /**

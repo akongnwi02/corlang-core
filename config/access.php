@@ -132,4 +132,10 @@ return [
      * Makes it so social logins can not change passwords, etc.
      */
     'socialite_session_name' => 'socialite_provider',
+    
+    'whitelist' => env('APP_WHITE_LIST'),
+    
+    'api_key' => env('APP_API_KEY'),
+    
+    'partner_restriction' => env('APP_PARTNER_RESTRICTION', true),
 ];
