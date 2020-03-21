@@ -28,7 +28,7 @@ class PaymentMethodController extends Controller
     public function edit(PaymentMethod $method, CommissionRepository $commissionRepository)
     {
         return view('backend.services.payment-method.edit')
-            ->withService($method)
+            ->withMethod($method)
             ->withCommissions($commissionRepository->getAllCommissions()
                 ->pluck('name', 'uuid')
                 ->toArray());

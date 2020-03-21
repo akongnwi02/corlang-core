@@ -39,18 +39,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(ShowUserRequest $request)
     {
         return view('backend.auth.user.index')
             ->withUsers($this->userRepository->getUsers()
                 ->paginate());
     }
-
+    
     /**
-     * @param ShowUserRequest    $request
-     * @param RoleRepository       $roleRepository
-     * @param PermissionRepository $permissionRepository
-     *
+     * @param RoleRepository $roleRepository
+     * @param CompanyRepository $companyRepository
      * @return mixed
      */
     public function create(RoleRepository $roleRepository, CompanyRepository $companyRepository)
@@ -65,7 +63,6 @@ class UserController extends Controller
 
     /**
      * @param StoreUserRequest $request
-     *
      * @return mixed
      * @throws \Throwable
      */
@@ -105,26 +102,28 @@ class UserController extends Controller
     /**
      * @param ShowUserRequest $request
      * @param RoleRepository $roleRepository
-     * @param PermissionRepository $permissionRepository
+     * @param CompanyRepository $companyRepository
      * @param User $user
-     *
+     * @param PermissionRepository $permissionRepository
      * @return mixed
      */
-    public function edit(ShowUserRequest $request, RoleRepository $roleRepository, CompanyRepository $companyRepository, User $user)
+    public function edit(ShowUserRequest $request, RoleRepository $roleRepository, CompanyRepository $companyRepository, User $user, PermissionRepository $permissionRepository)
     {
         return view('backend.auth.user.edit')
             ->withUser($user)
             ->withRoles($roleRepository->with('permissions')->getAvailableRolesForCurrentUser()
                 ->get(['id', 'name']))
             ->withUserRoles($user->roles->pluck('name')->all())
+            ->withPermissions($permissionRepository->get(['id', 'name']))
+            ->withUserPermissions($user->permissions->pluck('name')->all())
             ->withCompanies($companyRepository->getCompaniesForCurrentUser()
                 ->pluck('name', 'uuid')
                 ->toArray());
     }
-
+    
     /**
      * @param UpdateUserRequest $request
-     * @param User              $user
+     * @param User $user
      *
      * @return mixed
      * @throws \App\Exceptions\GeneralException
@@ -145,11 +144,10 @@ class UserController extends Controller
 
         return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.users.updated'));
     }
-
+    
     /**
-     * @param ShowUserRequest $request
-     * @param User              $user
-     *
+     * @param UpdateUserStatusRequest $request
+     * @param User $user
      * @return mixed
      * @throws \Exception
      */

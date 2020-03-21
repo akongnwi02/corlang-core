@@ -33,7 +33,7 @@ class UpdatePaymentMethodRequest extends FormRequest
     {
         return [
             'commission_id'  => ['sometimes', 'nullable', Rule::exists('commissions', 'uuid')],
-            'name'           => ['required', 'string', 'max:191', Rule::unique('paymentmethods', 'name')->ignore('name', 'name')],
+            'name'           => ['required', 'string', 'max:191', Rule::unique('paymentmethods', 'name')->ignore(request()->route('method'), 'uuid')],
             'description_en' => ['required', 'string', 'max:191'],
             'description_fr' => ['required', 'string', 'max:191'],
         ];

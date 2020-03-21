@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    {{ html()->modelForm($service, 'PUT', route('admin.services.method.update', $service))->class('form-horizontal')->attribute('enctype', 'multipart/form-data')->open() }}
+    {{ html()->modelForm($method, 'PUT', route('admin.services.method.update', $method))->class('form-horizontal')->attribute('enctype', 'multipart/form-data')->open() }}
     <div class="card">
         <div class="card-body">
             <div class="row">

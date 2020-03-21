@@ -151,39 +151,43 @@
                                                                 {{ html()->label(ucwords($role->name))->for('role-'.$role->id) }}
                                                             </div>
                                                         </div>
-                                                        {{--<div class="card-body">--}}
-                                                            {{--@if($role->id != 1)--}}
-                                                                {{--@if($role->permissions->count())--}}
-                                                                    {{--@foreach($role->permissions as $permission)--}}
-                                                                        {{--<i class="fas fa-dot-circle"></i> {{ ucwords($permission->name) }}--}}
-                                                                    {{--@endforeach--}}
-                                                                {{--@else--}}
-                                                                    {{--@lang('labels.general.none')--}}
-                                                                {{--@endif--}}
-                                                            {{--@else--}}
-                                                                {{--@lang('labels.backend.access.users.all_permissions')--}}
-                                                            {{--@endif--}}
-                                                        {{--</div>--}}
+                                                        @if($logged_in_user->isAdmin() && $logged_in_user->company->isDefault())
+                                                        <div class="card-body">
+                                                            @if($role->id != 1)
+                                                                @if($role->permissions->count())
+                                                                    @foreach($role->permissions as $permission)
+                                                                        <i class="fas fa-dot-circle"></i> {{ ucwords($permission->name) }}
+                                                                    @endforeach
+                                                                @else
+                                                                    @lang('labels.general.none')
+                                                                @endif
+                                                            @else
+                                                                @lang('labels.backend.access.users.all_permissions')
+                                                            @endif
+                                                        </div>
                                                     </div><!--card-->
+                                                    @endif
                                                 @endforeach
                                             @endif
                                         </td>
-                                        {{--<td>--}}
-                                            {{--@if($permissions->count())--}}
-                                                {{--@foreach($permissions as $permission)--}}
-                                                    {{--<div class="checkbox d-flex align-items-center">--}}
-                                                        {{--{{ html()->label(--}}
-                                                                {{--html()->checkbox('permissions[]', in_array($permission->name, $userPermissions), $permission->name)--}}
-                                                                        {{--->class('switch-input')--}}
-                                                                        {{--->id('permission-'.$permission->id)--}}
-                                                                    {{--. '<span class="switch-slider" data-checked="on" data-unchecked="off"></span>')--}}
-                                                                {{--->class('switch switch-label switch-pill switch-primary mr-2')--}}
-                                                            {{--->for('permission-'.$permission->id) }}--}}
-                                                        {{--{{ html()->label(ucwords($permission->name))->for('permission-'.$permission->id) }}--}}
-                                                    {{--</div>--}}
-                                                {{--@endforeach--}}
-                                            {{--@endif--}}
-                                        {{--</td>--}}
+                                        @if($logged_in_user->isAdmin() && $logged_in_user->company->isDefault())
+                                        <td>
+                                            @if($permissions->count())
+                                                @foreach($permissions as $permission)
+                                                    <div class="checkbox d-flex align-items-center">
+                                                        {{ html()->label(
+                                                                html()->checkbox('permissions[]', in_array($permission->name, $userPermissions), $permission->name)
+                                                                        ->class('switch-input')
+                                                                        ->id('permission-'.$permission->id)
+                                                                    . '<span class="switch-slider" data-checked="on" data-unchecked="off"></span>')
+                                                                ->class('switch switch-label switch-pill switch-primary mr-2')
+                                                            ->for('permission-'.$permission->id) }}
+                                                        {{ html()->label(ucwords($permission->name))->for('permission-'.$permission->id) }}
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        </td>
+                                        @endif
                                     </tr>
                                 </tbody>
                             </table>
