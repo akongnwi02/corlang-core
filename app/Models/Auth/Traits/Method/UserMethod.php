@@ -192,6 +192,11 @@ trait UserMethod
         return $this->can(config('permission.permissions.freeze_accounts'));
     }
     
+    public function canDeactivatePaymentMethods()
+    {
+        return $this->can(config('permission.permissions.deactivate_payment_methods'));
+    }
+    
     public function isTemporalLoggedToCompany()
     {
         return $this->is_comp_temp;

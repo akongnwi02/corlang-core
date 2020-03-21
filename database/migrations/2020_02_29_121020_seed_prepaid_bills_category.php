@@ -13,8 +13,8 @@ class SeedPrepaidBillsCategory extends Migration
     {
         \DB::table('categories')->insert([
             'uuid'       => Uuid::generate(4)->string,
-            'name'       => config('business.service.category.electricity'),
-            'code'       => 'CORPREPAID001',
+            'name'       => config('business.service.category.prepaidbills.name'),
+            'code'       => config('business.service.category.prepaidbills.code'),
             'is_active' => true,
         ]);
     }

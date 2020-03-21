@@ -40,7 +40,10 @@ return [
     ],
     'service' => [
         'category' => [
-            'electricity' => 'Electricity'
+            'prepaidbills' => [
+                'name' => 'Prepaid Bills',
+                'code' => 'CORPREPAID001',
+            ]
         ]
     ],
     

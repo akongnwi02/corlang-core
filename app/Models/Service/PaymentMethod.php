@@ -8,6 +8,7 @@
 
 namespace App\Models\Service;
 
+use App\Models\Traits\Attributes\PaymentMethodAttribute;
 use App\Models\Traits\Relationships\PaymentMethodRelationship;
 use App\Models\Traits\Scopes\PaymentMethodScope;
 use App\Models\Traits\Uuid;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentMethod extends Model
 {
     use Uuid,
+        PaymentMethodAttribute,
         PaymentMethodRelationship,
         PaymentMethodScope;
     
@@ -37,7 +39,12 @@ class PaymentMethod extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'description_en',
+        'description_fr',
+        'commission_id',
+    ];
     
     /**
      * The attributes that should be cast to native types.

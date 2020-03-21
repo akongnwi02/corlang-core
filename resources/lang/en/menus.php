@@ -76,6 +76,11 @@ return [
                 'management' => 'Service Charges',
                 'create'     => 'Create Service Charge',
                 'edit'       => 'Edit Service Charge',
+            ],
+            'method' => [
+                'management' => 'Payment Methods',
+                'create'     => 'Create Payment Method',
+                'edit'       => 'Edit Payment Method',
             ]
         ],
         'accounts' => [

@@ -34,7 +34,7 @@ class ServiceAccessRule implements Rule
         }
         
         // service is deactivated for everybody
-        if (! $service->is_active) {
+        if (! $service->is_active || ! $service->category->is_active) {
             return false;
         }
     

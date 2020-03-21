@@ -223,18 +223,35 @@ return [
                     ],
                 ],
             ],
+            'method'     => [
+                'management' => 'Payment Methods',
+                'create'     => 'Create Payment Method',
+                'edit'       => 'Edit Payment Method',
+                'table'      => [
+                    'name'           => 'Name',
+                    'description_en' => 'Description En',
+                    'description_fr' => 'Description Fr',
+                    'code'           => 'Code',
+                    'active'         => 'Active',
+                    'service'        => 'Service',
+                    'logo'           => 'Logo',
+                    'commission'     => 'Fee',
+                    'total' => 'payment method|payment methods',
+                ],
+            
+            ],
         ],
         'account'   => [
-            'management'       => 'Account',
-            'company_balance'  => 'Company Balance',
-            'umbrella_balance' => 'Umbrella Balance',
+            'management'         => 'Account',
+            'company_balance'    => 'Company Balance',
+            'umbrella_balance'   => 'Umbrella Balance',
             'commission_balance' => 'Commission Balance',
-            'credit'           => 'Credit Account',
-            'debit'            => 'Debit Account',
-            'drain'            => 'Drain Account',
-            'float'            => 'Add Float',
-            'request_payout'   => 'Request Payout',
-            'deposit'          => [
+            'credit'             => 'Credit Account',
+            'debit'              => 'Debit Account',
+            'drain'              => 'Drain Account',
+            'float'              => 'Add Float',
+            'request_payout'     => 'Request Payout',
+            'deposit'            => [
                 'management' => 'Deposit Accounts',
                 'actions'    => 'Account Actions',
                 'view'       => 'View Account',
@@ -276,7 +293,7 @@ return [
                     ],
                 ],
             ],
-            'umbrella'         => [
+            'umbrella'           => [
                 'management' => 'Umbrella Accounts',
                 'actions'    => 'Account Actions',
                 'view'       => 'View Account',
@@ -314,7 +331,7 @@ return [
                     ],
                 ],
             ],
-            'payout'         => [
+            'payout'             => [
                 'management' => 'Payout Accounts',
                 'actions'    => 'Account Actions',
                 'view'       => 'View Account',
@@ -323,7 +340,7 @@ return [
                     'balance' => 'Commission Balance',
                     'pending' => 'Pending',
                     'total'   => 'account|accounts',
-                    'owner'    => 'Owner',
+                    'owner'   => 'Owner',
                     'type'    => 'Type',
                 ],
                 'tabs'       => [
@@ -334,7 +351,7 @@ return [
                     'content' => [
                         'overview'  => [
                             'code'    => 'Account Number',
-                            'owner'    => 'Owner',
+                            'owner'   => 'Owner',
                             'balance' => 'Commission Balance',
                         ],
                         'movements' => [
@@ -348,7 +365,7 @@ return [
                                 'user'    => 'Executed by',
                                 'company' => 'Company',
                                 'date'    => 'Date',
-                                'status'    => 'Status',
+                                'status'  => 'Status',
                                 'total'   => 'movement|movements',
                             ],
                         ],

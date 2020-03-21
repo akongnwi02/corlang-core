@@ -13,17 +13,19 @@ use App\Events\Api\Business\TransactionPushed;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Business\ConfirmPaymentRequest;
-use App\Http\Requests\Api\Business\QuoteRequest;
+use App\Http\Requests\Api\Business\GeneralRequest;
 use App\Models\Transaction\Transaction;
 use App\Repositories\Api\Business\TransactionRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
+use App\Services\Business\Validators\ValidatorTrait;
 use App\Services\Clients\HttpClient;
 use Illuminate\Support\Carbon;
 
 class TransactionController extends Controller
 {
+    use ValidatorTrait;
     /**
-     * @param QuoteRequest $request
+     * @param GeneralRequest $request
      * @param ServiceRepository $serviceRepository
      * @param Transaction $transaction
      * @param TransactionRepository $transactionRepository
@@ -32,14 +34,18 @@ class TransactionController extends Controller
      * @throws GeneralException
      */
     public function quote(
-        QuoteRequest $request,
+        GeneralRequest $request,
         ServiceRepository $serviceRepository,
         Transaction $transaction,
         TransactionRepository $transactionRepository,
         HttpClient $client
     )
     {
-        $gateway = $serviceRepository->findByCode($request->input('service_code'))->gateway;
+        $service = $serviceRepository->findByCode($request['service_code']);
+        
+        $this->validator($service->category->code)->validate($request);
+        
+        $gateway = $service->gateway;
         $response = $client->post($gateway->url, [
             'body' => $request->input(),
             'headers' => [
@@ -103,6 +109,11 @@ class TransactionController extends Controller
     }
     
     public function status(Transaction $transaction)
+    {
+    
+    }
+    
+    public function httpClient()
     {
     
     }

@@ -35,6 +35,10 @@ return [
                 'activate' => 'Activate Service',
                 'deactivate' => 'Deactivate Service',
             ],
+            'method' => [
+                'activate' => 'Activate Method',
+                'deactivate' => 'Deactivate Method',
+            ],
         ],
         'companies' => [
             'company' => [

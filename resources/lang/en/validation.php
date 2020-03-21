@@ -255,6 +255,14 @@ return [
                         'fixed'      => 'Fixed',
                         'percentage' => 'Percentage',
                     ]
+                ],
+                'method' => [
+                    'name' => 'Name',
+                    'code' => 'Code',
+                    'description_en' => 'English Description',
+                    'description_fr' => 'French Description',
+                    'commission' => 'Fee',
+                    'service' => 'Service',
                 ]
             ],
             'account' => [

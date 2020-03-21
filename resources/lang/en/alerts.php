@@ -56,6 +56,11 @@ return [
             ],
             'commission' => [
                 'created' => 'Pricings successfully attached',
+            ],
+            'method' => [
+                'created' => 'The payment method was successfully created.',
+                'updated' => 'The payment method was successfully updated.',
+                'status_updated' => 'The status was successfully updated',
             ]
         ],
         'account' => [

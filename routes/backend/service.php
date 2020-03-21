@@ -12,6 +12,8 @@
  */
 
 use App\Http\Controllers\Backend\Services\Commission\CommissionController;
+use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodController;
+use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodStatusController;
 use App\Http\Controllers\Backend\Services\Service\ServiceController;
 use App\Http\Controllers\Backend\Services\Service\ServiceStatusController;
 
@@ -101,5 +103,49 @@ Route::group([
             ->name('commission.destroy')
             ->middleware('permission:'.config('permission.permissions.delete_commissions'));
     });
+    
+    /*
+     * Payment Method CRUD
+     */
+    Route::get('method', [PaymentMethodController::class, 'index'])
+        ->name('method.index')
+        ->middleware('permission:'.config('permission.permissions.read_payment_methods'));
+    
+//    Route::get('method/create', [PaymentMethodController::class, 'create'])
+//        ->name('method.create')
+//        ->middleware('permission:'.config('permission.permissions.create_payment_methods'));
+//
+//    Route::post('method', [PaymentMethodController::class, 'store'])
+//        ->name('method.store')
+//        ->middleware('permission:'.config('permission.permissions.create_payment_methods'));
+    
+    /*
+     * Specific Payment Method
+     */
+    Route::group(['prefix' => 'method/{method}'], function () {
+        
+//        // Payment Method
+//        Route::get('/', [CommissionController::class, 'show'])
+//            ->name('method.show')
+//            ->middleware('permission:'.config('permission.permissions.read_payment_methods'));
+        
+        Route::get('edit', [PaymentMethodController::class, 'edit'])
+            ->name('method.edit')
+            ->middleware('permission:'.config('permission.permissions.update_payment_methods'));
+        
+        Route::put('/', [PaymentMethodController::class, 'update'])
+            ->name('method.update')
+            ->middleware('permission:'.config('permission.permissions.update_payment_methods'));
+        
+//        Route::delete('/', [CommissionController::class, 'destroy'])
+//            ->name('method.destroy')
+//            ->middleware('permission:'.config('permission.permissions.deactivate_payment_methods'));
+        
+        // Status
+        Route::get('mark/{status}', [PaymentMethodStatusController::class, 'mark'])
+            ->name('method.mark')
+            ->middleware('permission:'.config('permission.permissions.deactivate_payment_methods'));
+    });
+    
     
 });
