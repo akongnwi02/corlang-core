@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGatewaysTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,21 @@ class CreateGatewaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('gateways', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
-            $table->uuid('category_id');
+        Schema::create('categories', function (Blueprint $table) {
+    
+            $table->uuid('uuid')->primary()->unique();
             $table->string('name')->unique();
             $table->string('code')->unique();
-            $table->string('api_key')->nullable();
-            $table->string('api_url')->nullable();
-    
+            $table->boolean('is_active')->default(true);
+            $table->string('logo_url')->nullable();
+            
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
+    
+    
             $table->softDeletes();
             $table->timestamps();
-    
-            $table->foreign('category_id')->references('uuid')->on('categories');
-    
         });
     }
 
@@ -39,6 +38,6 @@ class CreateGatewaysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gateways');
+        Schema::dropIfExists('categories');
     }
 }

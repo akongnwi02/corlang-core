@@ -58,19 +58,17 @@ class Company extends Model
         'type_id',
         'owner_id',
         'logo_url',
-        'is_provider',
         'direct_polling',
     ];
-
+    
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
     protected $casts = [
-        'is_active'  => 'boolean',
-        'uuid' => 'string',
-        'is_provider' => 'boolean',
+        'is_active'      => 'boolean',
+        'uuid'           => 'string',
         'direct_polling' => 'boolean',
     ];
 }

@@ -129,17 +129,6 @@
                 </div><!--form-group-->
 
                 <div class="form-group row">
-                    {{ html()->label(__('validation.attributes.backend.companies.company.provider'))->class('col-md-2 form-control-label')->for('is_provider') }}
-
-                    <div class="col-md-10">
-                        <label class="switch switch-label switch-pill switch-primary">
-                            {{ html()->checkbox('is_provider', false, 1)->class('switch-input') }}
-                            <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
-                        </label>
-                    </div><!--col-->
-                </div><!--form-group-->
-
-                <div class="form-group row">
                     {{ html()->label(__('validation.attributes.backend.companies.company.direct_polling'))->class('col-md-2 form-control-label')->for('direct_polling') }}
 
                     <div class="col-md-10">

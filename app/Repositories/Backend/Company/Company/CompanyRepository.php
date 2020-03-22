@@ -33,7 +33,6 @@ class CompanyRepository
     {
         $company = (new Company())->fill($data);
         
-        $company->is_provider = request()->has('is_provider') ? 1 : 0;
         $company->direct_polling = request()->has('direct_polling') ? 1 : 0;
 
         // create account for the company
@@ -117,7 +116,6 @@ class CompanyRepository
      */
     public function update(Company $company, $data, $logo = null)
     {
-        $company->is_provider = request()->has('is_provider') ? 1 : 0;
         $company->direct_polling = request()->has('direct_polling') ? 1 : 0;
         
         $company->fill($data);

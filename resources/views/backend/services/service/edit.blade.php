@@ -59,15 +59,6 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.service.gateway'))->class('col-md-2 form-control-label')->for('gateway_id') }}
-
-                        <div class="col-md-10">
-                            {{ html()->select('gateway_id', [null => null] + $gateways)
-                                ->class('form-control')}}
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.services.service.agent_rate'))->class('col-md-2 form-control-label required')->for('agent_rate') }}
 
                         <div class="col-md-10">
@@ -139,19 +130,19 @@
                     @if($service->has_items)
                         <div id="POItablediv">
                         <div class="btn-toolbar" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
-                            <button id="addPOIbutton" onclick="insRow()" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.add')"><i class="fas fa-plus-circle"></i></button>
+                            <span id="addPOIbutton" onclick="insRow()" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.add')"><i class="fas fa-plus-circle"></i></span>
                         </div>
 
                         <br/>
 
                         <table class="table table-responsive table-borderless" id="POITable">
                             <thead>
-                            <tr>
-                                <th>@lang('validation.attributes.backend.services.item.name')</th>
-                                <th>@lang('validation.attributes.backend.services.item.code')</th>
-                                <th>@lang('validation.attributes.backend.services.item.amount')</th>
-                                <th>@lang('validation.attributes.backend.services.item.active')</th>
-                            </tr>
+                                <tr>
+                                    <th>@lang('validation.attributes.backend.services.item.name')</th>
+                                    <th>@lang('validation.attributes.backend.services.item.code')</th>
+                                    <th>@lang('validation.attributes.backend.services.item.amount') ({{$default_currency->code}})</th>
+                                    <th>@lang('validation.attributes.backend.services.item.active')</th>
+                                </tr>
                             </thead>
                             <tbody>
                             @forelse($service->items as $key => $item)

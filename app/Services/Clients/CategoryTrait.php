@@ -8,21 +8,21 @@
 
 namespace App\Services\Business\Validators;
 
-
 use App\Exceptions\GeneralException;
+use App\Services\Clients\Category\PrepaidBillClient;
 
-trait ValidatorTrait
+trait CategoryTrait
 {
     /**
-     * @param $categoryCode
-     * @return PrepaidBillsValidator
+     * @param $category
+     * @return PrepaidBillClient
      * @throws GeneralException
      */
-    public function validator($categoryCode)
+    public function category($category)
     {
-        switch ($categoryCode) {
+        switch ($category->code) {
             case config('business.service.category.prepaidbills.code');
-                return new PrepaidBillsValidator();
+                return new PrepaidBillClient($category);
             default:
                 throw new GeneralException('Validator for this service does not exist');
         }

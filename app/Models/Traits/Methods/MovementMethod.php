@@ -15,6 +15,7 @@ trait MovementMethod
     public static function generateCode() {
         $code = mt_rand(1000000000, 9999999999);
         if (static::codeExists($code)) {
+            \Log::warning('Movement code already exist. Generating a new one', ['code' => $code]);
             static::generateCode();
         }
         

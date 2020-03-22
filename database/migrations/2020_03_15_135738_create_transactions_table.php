@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->uuid('uuid')->primary()->unique();
             $table->string('code')->unique();
             $table->text('items')->nullable();
+            $table->string('asset')->nullable();
             $table->double('amount');
             
             $table->uuid('user_id')->nullable();
@@ -28,9 +29,13 @@ class CreateTransactionsTable extends Migration
             $table->double('system_commission')->nullable();
             $table->double('total_commission')->nullable();
             $table->string('currency_code');
-    
+            
+            $table->uuid('customercommission_id')->nullable();
+            $table->uuid('providercommission_id')->nullable();
+            $table->uuid('paymentmethodcommission_id')->nullable();
+            
             $table->string('movement_code')->nullable();
-            $table->string('destination')->nullable()->comment('customer identifier');
+            $table->string('destination')->nullable();
             $table->string('paymentmethod_code')->nullable();
             $table->string('paymentaccount')->nullable();
             $table->string('status')->nullable();
@@ -48,6 +53,9 @@ class CreateTransactionsTable extends Migration
             $table->foreign('service_code')->references('code')->on('services');
             $table->foreign('currency_code')->references('code')->on('currencies');
             $table->foreign('paymentmethod_code')->references('code')->on('paymentmethods');
+            $table->foreign('customercommission_id')->references('uuid')->on('commissions');
+            $table->foreign('providercommission_id')->references('uuid')->on('commissions');
+            $table->foreign('paymentmethodcommission_id')->references('uuid')->on('commissions');
         });
     }
 

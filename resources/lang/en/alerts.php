@@ -40,35 +40,35 @@ return [
             'company' => [
                 'created' => 'The company was successfully created.',
                 'updated' => 'The company was successfully updated.',
-                'status_updated' => 'The status was successfully updated',
-                'logged_in'     => 'You have changed company successfully',
+                'status_updated' => 'The status was successfully updated.',
+                'logged_in'     => 'You have changed company successfully.',
             ],
             'service' => [
-                'status_updated' => 'The status was successfully updated',
-                'updated' => 'The service was updated for this company successfully',
+                'status_updated' => 'The status was successfully updated.',
+                'updated' => 'The service was updated for this company successfully.',
             ]
         ],
         'services' => [
             'service' => [
                 'created' => 'The service was successfully created.',
                 'updated' => 'The service was successfully updated.',
-                'status_updated' => 'The status was successfully updated',
+                'status_updated' => 'The status was successfully updated.',
             ],
             'commission' => [
-                'created' => 'Pricings successfully attached',
+                'created' => 'The service charge was updated successfully.',
             ],
             'method' => [
                 'created' => 'The payment method was successfully created.',
                 'updated' => 'The payment method was successfully updated.',
-                'status_updated' => 'The status was successfully updated',
+                'status_updated' => 'The status was successfully updated.',
             ]
         ],
         'account' => [
-            'floated' => 'Float applied successfully',
-            'transferred' => 'Amount transferred successfully',
+            'floated' => 'Float applied successfully.',
+            'transferred' => 'Amount transferred successfully,',
             'status_updated' => 'The status was successfully updated.',
             'drained' => 'Amount drained successfully.',
-            'paid_out' => 'The payout request was successful. The request is pending validation',
+            'paid_out' => 'The payout request was successful. The request is pending validation.',
         ],
         'payout' => [
             'status_updated' => 'Payout status updated successfully.'

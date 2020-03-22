@@ -17,41 +17,44 @@ use App\Http\Requests\Api\Business\GeneralRequest;
 use App\Models\Transaction\Transaction;
 use App\Repositories\Api\Business\TransactionRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
-use App\Services\Business\Validators\ValidatorTrait;
-use App\Services\Clients\HttpClient;
+use App\Services\Business\Validators\CategoryTrait;
 use Illuminate\Support\Carbon;
 
 class TransactionController extends Controller
 {
-    use ValidatorTrait;
+    use CategoryTrait;
     /**
      * @param GeneralRequest $request
      * @param ServiceRepository $serviceRepository
-     * @param Transaction $transaction
      * @param TransactionRepository $transactionRepository
-     * @param HttpClient $client
      * @return \Illuminate\Http\JsonResponse
      * @throws GeneralException
      */
     public function quote(
         GeneralRequest $request,
         ServiceRepository $serviceRepository,
-        Transaction $transaction,
-        TransactionRepository $transactionRepository,
-        HttpClient $client
+        TransactionRepository $transactionRepository
     )
     {
         $service = $serviceRepository->findByCode($request['service_code']);
+    
+        $categoryClient = $this->category($service->category);
         
-        $this->validator($service->category->code)->validate($request);
+        $categoryClient->validate($request);
         
-        $gateway = $service->gateway;
-        $response = $client->post($gateway->url, [
-            'body' => $request->input(),
-            'headers' => [
-                ''
-            ]
-        ]);
+        $model = $categoryClient->quote($request->input());
+        
+        $transaction = $transactionRepository->create($model);
+    
+        $model->setTransactionId($transaction->uuid);
+        
+        $ttl = Carbon::now()->addMinutes(config('app.micro_services.cache_expiration'));
+        
+        $cached = \Cache::store(config('app.micro_services.cache_store'))->add($model->getTransactionId(), $model, $ttl);
+        
+        return $categoryClient->response($model);
+        
+
         
 //        $response = $gateway->sendGET();
 
@@ -65,7 +68,6 @@ class TransactionController extends Controller
         
         
         
-        $transaction = new Transaction();
         
         $transaction->code = rand();
         $transaction->amount = 5000;
@@ -76,7 +78,6 @@ class TransactionController extends Controller
         $ttl = Carbon::now()->addMinutes(config('app.micro_services.cache_expiration'));
 //        dd($transaction->uuid);
         $cached = \Cache::store(config('app.micro_services.cache_store'))->add($transaction->uuid, $transaction, $ttl);
-        $cached = \Cache::store(config('app.micro_services.cache_store'))->pull($transaction->uuid);
     
         
         
@@ -106,6 +107,8 @@ class TransactionController extends Controller
     {
         $transaction = Transaction::where('uuid', $request->input('quote_id'))->first();
         event(new TransactionPushed($transaction));
+        $cached = \Cache::store(config('app.micro_services.cache_store'))->pull($transaction->uuid);
+    
     }
     
     public function status(Transaction $transaction)

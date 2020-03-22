@@ -18,11 +18,9 @@ class CreateServicesTable extends Migration
             $table->string('name')->unique();
             $table->string('code')->unique();
             $table->boolean('is_active')->default(true);
-            $table->boolean('is_searchable')->default(true);
             $table->string('logo_url')->nullable();
             $table->string('description_en')->nullable();
             $table->string('description_fr')->nullable();
-            $table->uuid('gateway_id')->nullable();
             $table->uuid('category_id');
             $table->uuid('providercompany_id')->nullable();
             $table->uuid('providercommission_id')->nullable();
@@ -39,7 +37,6 @@ class CreateServicesTable extends Migration
             $table->foreign('providercommission_id')->references('uuid')->on('commissions');
             $table->foreign('customercommission_id')->references('uuid')->on('commissions');
             $table->foreign('category_id')->references('uuid')->on('categories');
-            $table->foreign('gateway_id')->references('uuid')->on('gateways');
         });
     }
 

@@ -28,7 +28,7 @@ class GeneralRequest extends FormRequest
         return [
             'service_code' => ['required', new ServiceAccessRule(),],
             'reference' => ['sometimes', 'nullable', 'string', 'min:3'],
-            'paymentmethod_code' => ['sometimes', 'nullable', 'string', new PaymentMethodAccessRule()],
+            'paymentmethod_code' => ['string', new PaymentMethodAccessRule()],
         ];
     }
 }

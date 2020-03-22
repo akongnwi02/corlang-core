@@ -20,6 +20,10 @@ use App\Repositories\Backend\System\GatewayRepository;
 class ServiceController extends Controller
 {
     
+    /**
+     * @param ServiceRepository $serviceRepository
+     * @return mixed
+     */
     public function index(ServiceRepository $serviceRepository)
     {
         return view('backend.services.service.index')
@@ -27,13 +31,15 @@ class ServiceController extends Controller
                 ->paginate());
     }
     
-    public function create(GatewayRepository $gatewayRepository,  CommissionRepository $commissionRepository, CategoryRepository $categoryRepository)
+    /**
+     * @param CommissionRepository $commissionRepository
+     * @param CategoryRepository $categoryRepository
+     * @return mixed
+     */
+    public function create(CommissionRepository $commissionRepository, CategoryRepository $categoryRepository)
     {
         return view('backend.services.service.create')
             ->withCommissions($commissionRepository->getAllCommissions()
-                ->pluck('name', 'uuid')
-                ->toArray())
-            ->withGateways($gatewayRepository->get()
                 ->pluck('name', 'uuid')
                 ->toArray())
             ->withCategories($categoryRepository->get()
@@ -67,14 +73,17 @@ class ServiceController extends Controller
         return 'COMING SOON';
     }
     
-    public function edit(Service $service, CommissionRepository $commissionRepository, GatewayRepository $gatewayRepository, CategoryRepository $categoryRepository)
+    /**
+     * @param Service $service
+     * @param CommissionRepository $commissionRepository
+     * @param CategoryRepository $categoryRepository
+     * @return mixed
+     */
+    public function edit(Service $service, CommissionRepository $commissionRepository, CategoryRepository $categoryRepository)
     {
         return view('backend.services.service.edit')
             ->withService($service)
             ->withCommissions($commissionRepository->getAllCommissions()
-                ->pluck('name', 'uuid')
-                ->toArray())
-            ->withGateways($gatewayRepository->get()
                 ->pluck('name', 'uuid')
                 ->toArray())
             ->withCategories($categoryRepository->get()

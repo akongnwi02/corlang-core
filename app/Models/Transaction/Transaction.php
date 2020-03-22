@@ -35,4 +35,20 @@ class Transaction extends Model
     
     public $incrementing = false;
     
+    
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_reversed'        => 'boolean',
+        'amount'             => 'double',
+        'customer_fee'       => 'double',
+        'agent_commission'   => 'double',
+        'company_commission' => 'double',
+        'system_commission'  => 'double',
+        'total_commission'   => 'double',
+    ];
+    
 }

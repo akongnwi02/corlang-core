@@ -8,7 +8,6 @@
 
 namespace App\Http\Requests\Backend\Services\Service;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -26,7 +25,6 @@ class StoreServiceRequest extends FormRequest
             'description_en'        => __('validation.attributes.backend.services.service.description_en'),
             'description_fr'        => __('validation.attributes.backend.services.service.description_fr'),
             'category_id'           => __('validation.attributes.backend.services.service.category'),
-            'gateway_id'            => __('validation.attributes.backend.services.service.gateway'),
             'code'                  => __('validation.attributes.backend.services.service.code'),
             'providercommission_id' => __('validation.attributes.backend.services.service.providercommission'),
             'customercommission_id' => __('validation.attributes.backend.services.service.customercommission'),
@@ -45,7 +43,6 @@ class StoreServiceRequest extends FormRequest
             'description_en'        => ['nullable', 'string', 'max:191',],
             'description_fr'        => ['nullable', 'string', 'max:191',],
             'category_id'           => ['required', Rule::exists('categories', 'uuid'), 'nullable'],
-            'gateway_id'            => ['sometimes', Rule::exists('gateways', 'uuid'), 'nullable'],
             'code'                  => ['required', 'string', 'max:191', Rule::unique('services', 'code')],
             'providercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid'), 'nullable'],
             'customercommission_id' => ['sometimes', Rule::exists('commissions', 'uuid'), 'nullable'],

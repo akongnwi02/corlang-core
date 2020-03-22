@@ -60,17 +60,17 @@ class CommissionRepository
     public function update(Commission $commission, $data)
     {
         return \DB::transaction(function () use ($commission, $data) {
-        
+            
             $commission->fill($data);
             
             $commission->pricings()->delete();
-
-            $pricings = $data['pricings'];
-            
-            foreach ($pricings as $pricing) {
+                
+                $pricings = $data['pricings'];
+    
+                foreach ($pricings as $pricing) {
                 $commission->pricings()->save(new Pricing($pricing));
-            }
-
+                }
+    
             if ($commission->save()) {
                 event(new CommissionCreated($commission));
                 return $commission;

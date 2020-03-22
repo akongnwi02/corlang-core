@@ -15,7 +15,7 @@ class CreateCommissionsTable extends Migration
     {
         Schema::create('commissions', function (Blueprint $table) {
             $table->uuid('uuid')->primary()->unique();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('description')->nullable();
             $table->uuid('currency_id');
     

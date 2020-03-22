@@ -43,6 +43,8 @@ return [
             'prepaidbills' => [
                 'name' => 'Prepaid Bills',
                 'code' => 'CORPREPAID001',
+                'api_key' => env(''),
+                'api_url' => env(''),
             ]
         ]
     ],

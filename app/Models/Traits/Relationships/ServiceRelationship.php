@@ -27,11 +27,6 @@ trait ServiceRelationship
         return $this->hasOne(Category::class, 'uuid', 'category_id');
     }
     
-    public function gateway()
-    {
-        return $this->hasOne(Gateway::class, 'uuid', 'gateway_id');
-    }
-    
     public function items()
     {
         return $this->hasMany(Item::class, 'service_id', 'uuid');

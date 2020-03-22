@@ -21,7 +21,6 @@ class DumpTableSeeder extends Seeder
         $this->call(CurrencyTableSeeder::class);
         $this->call(CommissionTableSeeder::class);
         $this->call(PricingTableSeeder::class);
-        $this->call(GatewayTableSeeder::class);
         $this->call(ServiceTableSeeder::class);
         $this->call(CompanyServiceTableSeeder::class);
         $this->call(AccountTableSeeder::class);

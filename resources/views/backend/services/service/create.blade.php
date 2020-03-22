@@ -87,15 +87,6 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.service.gateway'))->class('col-md-2 form-control-label')->for('gateway_id') }}
-
-                        <div class="col-md-10">
-                            {{ html()->select('gateway_id', [null => null] + $gateways)
-                                ->class('form-control')}}
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.services.service.providercommission'))->class('col-md-2 form-control-label')->for('providercommission_id') }}
 
                         <div class="col-md-10">
