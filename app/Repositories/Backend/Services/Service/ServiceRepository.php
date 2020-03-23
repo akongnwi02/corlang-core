@@ -147,5 +147,14 @@ class ServiceRepository
         return Service::where('code', $code)->first();
     }
     
+    public function getAgentServiceRate($service, $user)
+    {
+        return $user->company->services()->where('uuid', $service->uuid)->first()->specific->agent_rate ?: $service->agent_rate;
+    }
+    
+    public function getCompanyServiceRate($service, $company)
+    {
+        return $company->services()->where('uuid', $service->uuid)->first()->specific->company_rate ?: $service->company_rate;
+    }
     
 }

@@ -9,6 +9,7 @@
 namespace App\Models\Traits\Relationships;
 
 use App\Models\Auth\User;
+use App\Models\Business\Commission;
 use App\Models\Company\Company;
 use App\Models\Company\CompanyService;
 use App\Models\Service\Category;
@@ -43,5 +44,15 @@ trait ServiceRelationship
                 'company_rate',
                 'agent_rate',
             ]);
+    }
+    
+    public function customer_commission()
+    {
+        return $this->belongsTo(Commission::class, 'customercommission_id', 'uuid');
+    }
+    
+    public function provider_commission()
+    {
+        return $this->belongsTo(Commission::class, 'providercommission_id', 'uuid');
     }
 }

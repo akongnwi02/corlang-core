@@ -31,12 +31,12 @@ class CreateServicesTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
     
+            $table->foreign('category_id')->references('uuid')->on('categories');
             $table->foreign('providercommission_id')->references('uuid')->on('commissions');
             $table->foreign('customercommission_id')->references('uuid')->on('commissions');
-            $table->foreign('category_id')->references('uuid')->on('categories');
         });
     }
 

@@ -10,6 +10,7 @@ namespace App\Repositories\Backend\Services\Commission;
 
 
 use App\Events\Backend\Services\Commission\CommissionCreated;
+use App\Exceptions\Api\RangeException;
 use App\Exceptions\GeneralException;
 use App\Models\Business\Commission;
 use App\Models\Business\Pricing;
@@ -78,5 +79,39 @@ class CommissionRepository
             
             throw new GeneralException(__('exceptions.backend.services.commission.create_error'));
         });
+    }
+    
+    public function calculateFee(Commission $commission, $amount) : float
+    {
+        if (is_null($commission)) {
+            return 0;
+        }
+        
+        $pricing = $this->getPriceRange($commission->pricings, $amount);
+        
+        $fee = $pricing->fixed + ($amount * $pricing->precentage) / 100 ;
+        
+        return $fee;
+        
+    }
+    
+    public function getPriceRange($pricings, $amount)
+    {
+        $availableRange = [];
+        
+        foreach ($pricings as $pricing) {
+            if ($pricing->from <= $amount && $pricing->to >= $amount) {
+                $availableRange[] = $pricing;
+            }
+        }
+    
+        if (empty($availableRange)) {
+            throw new RangeException();
+        } else {
+            // Return the first item for now
+            // return range based on a certain logic
+            // for example. The largest to range.
+            return $availableRange[0];
+        }
     }
 }

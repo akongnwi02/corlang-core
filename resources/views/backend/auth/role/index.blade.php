@@ -38,9 +38,7 @@
                                         @lang('labels.general.all')
                                     @else
                                         @if($role->permissions->count())
-                                            @foreach($role->permissions as $permission)
-                                                {{ ucwords($permission->name) }}
-                                            @endforeach
+                                            {{ ucwords(implode(', ', $role->permissions->pluck('name')->toArray())) }}
                                         @else
                                             @lang('labels.general.none')
                                         @endif

@@ -26,30 +26,29 @@ return [
         ]
     ],
     
-    'payout' => [
-        'type' => [
+    'payout'      => [
+        'type'   => [
             'commission' => 'commission',
-            'drain' => 'drain',
+            'drain'      => 'drain',
         ],
         'status' => [
-            'pending' => 'pending',
-            'approved' => 'approved',
-            'rejected' => 'rejected',
+            'pending'   => 'pending',
+            'approved'  => 'approved',
+            'rejected'  => 'rejected',
             'cancelled' => 'cancelled',
         ],
     ],
-    'service' => [
+    'service'     => [
         'category' => [
             'prepaidbills' => [
-                'name' => 'Prepaid Bills',
-                'code' => 'CORPREPAID001',
+                'name'    => 'Prepaid Bills',
+                'code'    => 'CORPREPAID001',
                 'api_key' => env(''),
                 'api_url' => env(''),
             ]
         ]
     ],
-    
-    'system' => [
+    'system'      => [
         'country' => [
             'name' => [
                 'cameroon' => 'cameroon',
@@ -63,15 +62,17 @@ return [
             ]
         ],
         'service' => [
-            'name' => 'Corlang',
+            'name'        => 'Corlang',
             'description' => 'Pay with your Corlang account'
         ]
     ],
     'transaction' => [
         'status' => [
-            'pending' => 'pending',
-            'successful' => 'successful',
-            'failed'  => 'failed',
+            'pending'    => 'pending',
+            'failed'     => 'failed',
+            'created'    => 'created',
+            'processing' => 'processing',
+            'success'    => 'success',
         ],
     ]
 ];

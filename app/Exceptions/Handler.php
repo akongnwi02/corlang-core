@@ -80,6 +80,11 @@ class Handler extends ExceptionHandler
                 $error['code']    = $exception->status();
             }
             
+            if ($exception instanceof \App\Exceptions\Api\RangeException) {
+                $error['message'] = $exception->getMessage();
+                $error['code']    = $exception->status();
+            }
+            
             if ($exception instanceof \Illuminate\Validation\ValidationException) {
                 $error['message'] = $exception->getMessage();
                 $error['errors']  = $exception->errors();

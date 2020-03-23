@@ -19,26 +19,30 @@ class CreateTransactionsTable extends Migration
             $table->text('items')->nullable();
             $table->string('asset')->nullable();
             $table->double('amount');
-            
             $table->uuid('user_id')->nullable();
             $table->uuid('company_id')->nullable();
             $table->string('service_code')->nullable();
-            $table->double('customer_fee')->nullable();
-            $table->double('agent_commission')->nullable();
-            $table->double('company_commission')->nullable();
-            $table->double('system_commission')->nullable();
-            $table->double('total_commission')->nullable();
             $table->string('currency_code');
-            
-            $table->uuid('customercommission_id')->nullable();
-            $table->uuid('providercommission_id')->nullable();
-            $table->uuid('paymentmethodcommission_id')->nullable();
-            
-            $table->string('movement_code')->nullable();
             $table->string('destination')->nullable();
             $table->string('paymentmethod_code')->nullable();
             $table->string('paymentaccount')->nullable();
             $table->string('status')->nullable();
+    
+            $table->double('customer_service_fee')->nullable();
+            $table->double('provider_fee')->nullable();
+            $table->double('paymentmethod_fee')->nullable();
+            $table->double('total_customer_fee')->nullable();
+            $table->double('total_fee')->nullable();
+    
+            $table->uuid('customercommission_id')->nullable();
+            $table->uuid('providercommission_id')->nullable();
+            $table->uuid('paymentmethodcommission_id')->nullable();
+    
+            $table->double('agent_commission')->nullable();
+            $table->double('company_commission')->nullable();
+            $table->double('system_commission')->nullable();
+            
+            $table->string('movement_code')->nullable();
             $table->boolean('is_reversed')->default(false);
             $table->dateTime('reversed_at')->nullable();
     

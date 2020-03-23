@@ -74,4 +74,9 @@ class PaymentMethodRepository
         
         throw new GeneralException(__('exceptions.backend.services.method.mark_error'));
     }
+    
+    public function findByCode($code)
+    {
+        return PaymentMethod::where('code', $code)->first();
+    }
 }

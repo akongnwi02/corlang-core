@@ -16,7 +16,7 @@
 
             @can(config('permission.permissions.read_users'))
                 <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/auth*'), 'open') }}">
-                    <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/auth*')) }}" href="#">
+                    <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/auth*')) }}" href="{{ route('admin.auth.user.index') }}">
                         <i class="nav-icon icon-user"></i> @lang('menus.backend.access.title')
 
                         @if ($pending_approval > 0)
