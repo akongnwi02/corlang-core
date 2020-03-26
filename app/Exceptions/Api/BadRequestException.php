@@ -6,31 +6,25 @@ use Exception;
 
 class BadRequestException extends Exception
 {
-    public $errors;
-    
-    public $parameter;
+    public $error_code;
     
     public $status = 400;
     
-    public function __construct(string $parameter, string $value = null)
+    public function __construct($error_code, $message = 'Invalid input')
     {
-        $this->parameter = $parameter;
-        
-        $message = "$parameter has an invalid value $value";
+        $this->error_code = $error_code;
         
         parent::__construct($message);
-    }
-    
-    public function errors()
-    {
-        return [$this->parameter => [
-            'invalid',
-        ]];
     }
     
     public function status()
     {
         return $this->status;
+    }
+    
+    public function error_code()
+    {
+        return $this->error_code;
     }
 
 }

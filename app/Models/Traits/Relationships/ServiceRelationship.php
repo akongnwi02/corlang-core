@@ -14,7 +14,6 @@ use App\Models\Company\Company;
 use App\Models\Company\CompanyService;
 use App\Models\Service\Category;
 use App\Models\Service\Item;
-use App\Models\System\Gateway;
 
 trait ServiceRelationship
 {

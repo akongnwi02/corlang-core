@@ -8,11 +8,8 @@
 
 namespace App\Models\Traits\Relationships;
 
-use App\Models\Auth\User;
 use App\Models\Business\Pricing;
-use App\Models\Service\Category;
 use App\Models\System\Currency;
-use App\Models\System\Gateway;
 
 trait CommissionRelationship
 {

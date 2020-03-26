@@ -8,11 +8,10 @@
 
 namespace App\Http\Requests\Api\Business;
 
-use App\Rules\Business\ItemExistRule;
 use App\Rules\Service\PaymentMethodAccessRule;
 use App\Rules\Service\ServiceAccessRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\RequiredIf;
 
 class GeneralRequest extends FormRequest
 {
@@ -29,6 +28,7 @@ class GeneralRequest extends FormRequest
             'service_code' => ['required', new ServiceAccessRule(),],
             'reference' => ['sometimes', 'nullable', 'string', 'min:3'],
             'paymentmethod_code' => ['string', new PaymentMethodAccessRule()],
+            'account' => [ 'sometimes', 'nullable', 'min:8'],
         ];
     }
 }

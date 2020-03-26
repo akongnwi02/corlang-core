@@ -42,4 +42,8 @@ interface ModelInterface
     public function setItems($items);
     
     public function getItems();
+    
+    public function setCustomerFee($fee);
+    
+    public function getCustomerFee();
 }

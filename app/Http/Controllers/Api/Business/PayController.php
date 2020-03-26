@@ -11,16 +11,18 @@ namespace App\Http\Controllers\Api\Business;
 
 use App\Events\Api\Business\TransactionPushed;
 use App\Exceptions\Api\DuplicateException;
+use App\Exceptions\Api\NotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Business\ConfirmPaymentRequest;
 use App\Models\Transaction\Transaction;
+use App\Services\Constants\BusinessErrorCodes;
 
 class PayController extends Controller
 {
     /**
      * @param ConfirmPaymentRequest $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     * @throws DuplicateException
+     * @throws NotFoundException
      */
     public function pay(ConfirmPaymentRequest $request)
     {
@@ -29,7 +31,7 @@ class PayController extends Controller
         $transaction = \Cache::store(config('app.micro_services.cache_store'))->pull($request->input('quote_id'));
         
         if (! $transaction) {
-            throw new DuplicateException();
+            throw new NotFoundException(BusinessErrorCodes::TRANSACTION_NOT_IN_CACHE, 'The transaction does not exist in cache');
         }
     
         $transaction->setPaymentMethodCode($request->input('source_code'));

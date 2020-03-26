@@ -18,7 +18,7 @@
                 <ul>
                     <li>
                         {{ $t('dashboard.pages.tabs.content.electricity.meter_code') }}:
-                        <strong>{{ quote.destination }}</strong>
+                        <strong>{{ quote.meter_code }}</strong>
                     </li>
                     <li>
                         {{ $t('dashboard.pages.general.amount')}}:
@@ -34,11 +34,11 @@
                     </li>
                     <li>
                         {{ $t('dashboard.pages.general.fee')}}:
-                        <strong>{{ currencyFormat(quote.customer_fee) }}</strong>
+                        <strong>{{ currencyFormat(quote.fee) }}</strong>
                     </li>
                     <li>
                         {{ $t('dashboard.pages.general.total')}}:
-                        <strong>{{ currencyFormat(quote.total) }}</strong>
+                        <strong>{{ currencyFormat(quote.amount + quote.fee) }}</strong>
                     </li>
                 </ul>
             </mdb-row>
@@ -62,7 +62,7 @@
         ],
         methods: {
             currencyFormat(amount) {
-                return currency.format(amount, this.quote.currency)
+                return currency.format(amount, this.quote.currency_code)
             },
             confirm() {
                 this.$emit('confirmed');

@@ -126,9 +126,9 @@
                         service_code: this.selectedService.code,
                         amount: this.amount,
                         currency_code: this.configuration.currency.code,
-                        method: this.selectedMethod,
+                        paymentmethod_code: this.selectedMethod.code,
                         reference: this.reference,
-                        paymentmethod_code: this.account,
+                        account: this.account
                     });
                 }
             },

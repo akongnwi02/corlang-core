@@ -8,7 +8,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Exceptions\Api\BadRequestException;
 use App\Exceptions\GeneralException;
+use App\Services\Constants\BusinessErrorCodes;
 use Closure;
 
 class AcceptHeaderMiddleware
@@ -49,7 +51,7 @@ class AcceptHeaderMiddleware
 
             \Log::error('A required accept parameter is not present application/json');
 
-            throw new GeneralException('Invalid \'Accept\' header');
+            throw new BadRequestException(BusinessErrorCodes::INVALID_ACCEPT_HEADER_ERROR, 'Invalid accept header. Header should include application/json');
         }
 
         /*

@@ -8,12 +8,14 @@
 
 namespace App\Repositories\Api\Business;
 
+use App\Exceptions\Api\ServerErrorException;
 use App\Exceptions\GeneralException;
 use App\Models\Transaction\Transaction;
 use App\Services\Business\Models\ModelInterface;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
 use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
+use App\Services\Constants\BusinessErrorCodes;
 
 class TransactionRepository
 {
@@ -61,18 +63,19 @@ class TransactionRepository
             
             // commission gained
             $agent_commission_rate   = $paymentMethod->is_default ? $this->serviceRepository->getAgentServiceRate($service, auth()->user()) : 0;
-            $company_commission_rate = $paymentMethod->is_default ? $this->serviceRepository->getCompanyServiceRate($service, auth()->user()) : 0;
+            $company_commission_rate = $paymentMethod->is_default ? $this->serviceRepository->getCompanyServiceRate($service, auth()->user()->company) : 0;
             
             $company_commission = ($sharableFee * $company_commission_rate / 100) * (1 - $agent_commission_rate / 100);
             $agent_commission   = ($sharableFee * $company_commission_rate / 100) * ($agent_commission_rate / 100);
             $system_commission  = $totalFee - ($company_commission + $agent_commission);
             
+            // Transaction creation
             $transaction = new Transaction();
             
             $transaction->code               = Transaction::generateCode();
             $transaction->items              = $model->getItems();
             $transaction->amount             = $model->getAmount();
-            $transaction->user_id            = auth()->user()->id;
+            $transaction->user_id            = auth()->user()->uuid;
             $transaction->company_id         = auth()->user()->company_id;
             $transaction->service_code       = $model->getServiceCode();
             $transaction->currency_code      = $model->getCurrencyCode();
@@ -87,9 +90,9 @@ class TransactionRepository
             $transaction->total_customer_fee   = $totalCustomerFee;
             $transaction->total_fee            = $totalFee;
             
-            $transaction->customercommission_id      = $customerCommission->uuid;
-            $transaction->providercommission_id      = $providerCommission->uuid;
-            $transaction->paymentmethodcommission_id = $paymentMethodCommission->uuid;
+            $transaction->customercommission_id      = @$customerCommission->uuid;
+            $transaction->providercommission_id      = @$providerCommission->uuid;
+            $transaction->paymentmethodcommission_id = @$paymentMethodCommission->uuid;
             
             $transaction->agent_commission   = $agent_commission;
             $transaction->company_commission = $company_commission;
@@ -99,7 +102,7 @@ class TransactionRepository
                 return $transaction;
             }
             
-            throw new GeneralException('Error creating transaction database record');
+            throw new ServerErrorException(BusinessErrorCodes::TRANSACTION_CREATION_ERROR);
         });
     }
 }

@@ -9,6 +9,7 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\Api\ForbiddenException;
+use App\Services\Constants\BusinessErrorCodes;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -32,13 +33,9 @@ class WhitelistMiddleware
             \Log::error('IP address is not whitelisted', ['ip address', $request->ip()]);
     
             if (config('access.partner_restriction')) {
-                
-                throw new ForbiddenException();
-                
+                throw new ForbiddenException(BusinessErrorCodes::IP_WHITELIST_ERROR);
             }
-            
         }
-    
         return $next($request);
     }
 }

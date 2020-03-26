@@ -40,4 +40,64 @@ class PostpaidBill implements ModelInterface
     {
         // TODO: Implement getAmount() method.
     }
+    
+    public function setCurrencyCode($code)
+    {
+        // TODO: Implement setCurrencyCode() method.
+    }
+    
+    public function getCurrencyCode()
+    {
+        // TODO: Implement getCurrencyCode() method.
+    }
+    
+    public function setPaymentAccount($account)
+    {
+        // TODO: Implement setPaymentAccount() method.
+    }
+    
+    public function getPaymentAccount()
+    {
+        // TODO: Implement getPaymentAccount() method.
+    }
+    
+    public function setPaymentMethodCode($code)
+    {
+        // TODO: Implement setPaymentMethodCode() method.
+    }
+    
+    public function getPaymentMethodCode()
+    {
+        // TODO: Implement getPaymentMethodCode() method.
+    }
+    
+    public function setDestination($destination)
+    {
+        // TODO: Implement setDestination() method.
+    }
+    
+    public function getDestination()
+    {
+        // TODO: Implement getDestination() method.
+    }
+    
+    public function setItems($items)
+    {
+        // TODO: Implement setItems() method.
+    }
+    
+    public function getItems()
+    {
+        // TODO: Implement getItems() method.
+    }
+    
+    public function setCustomerFee($fee)
+    {
+        // TODO: Implement setCustomerFee() method.
+    }
+    
+    public function getCustomerFee()
+    {
+        // TODO: Implement getCustomerFee() method.
+    }
 }

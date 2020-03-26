@@ -10,7 +10,6 @@ use App\Models\Business\Commission;
 use App\Models\Service\Category;
 use App\Models\Service\Service;
 use App\Models\System\Country;
-use App\Models\System\Gateway;
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 

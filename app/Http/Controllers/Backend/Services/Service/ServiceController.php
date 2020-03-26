@@ -15,7 +15,6 @@ use App\Models\Service\Service;
 use App\Repositories\Backend\Services\Category\CategoryRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
-use App\Repositories\Backend\System\GatewayRepository;
 
 class ServiceController extends Controller
 {

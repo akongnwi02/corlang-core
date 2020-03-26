@@ -12,6 +12,7 @@ namespace App\Rules\Service;
 use App\Exceptions\Api\NotFoundException;
 use App\Models\Service\PaymentMethod;
 use App\Models\Service\Service;
+use App\Services\Constants\BusinessErrorCodes;
 use Illuminate\Contracts\Validation\Rule;
 
 class PaymentMethodAccessRule implements Rule
@@ -31,10 +32,10 @@ class PaymentMethodAccessRule implements Rule
         
         // service should exist
         if (! $method) {
-            throw new NotFoundException($attribute, $value);
+            throw new NotFoundException(BusinessErrorCodes::PAYMENT_METHOD_FOUND, "Payment method with code $value was not found");
         }
         
-        // service is deactivated for everybody
+        // payment method is deactivated for everybody
         if (! $method->is_active) {
             return false;
         }

@@ -11,6 +11,7 @@ namespace App\Rules\Service;
 
 use App\Exceptions\Api\NotFoundException;
 use App\Models\Service\Service;
+use App\Services\Constants\BusinessErrorCodes;
 use Illuminate\Contracts\Validation\Rule;
 
 class ServiceAccessRule implements Rule
@@ -29,8 +30,8 @@ class ServiceAccessRule implements Rule
         $service = Service::where('services.code', $value)->first();
     
         // service should exist
-        if (!$service) {
-            throw new NotFoundException($attribute, $value);
+        if (! $service) {
+            throw new NotFoundException(BusinessErrorCodes::SERVICE_NOT_FOUND, "Service with code $value was not found");
         }
         
         // service is deactivated for everybody

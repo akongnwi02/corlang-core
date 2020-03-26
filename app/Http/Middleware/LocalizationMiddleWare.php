@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Exceptions\Api\BadRequestException;
 use App\Exceptions\GeneralException;
+use App\Services\Constants\BusinessErrorCodes;
 use Closure;
 
 class LocalizationMiddleWare
@@ -46,7 +48,7 @@ class LocalizationMiddleWare
              */
             if (!array_key_exists($locale, config('locale.languages'))) {
 
-                throw new GeneralException('Invalid \'Content-Language\' header');
+                throw new BadRequestException(BusinessErrorCodes::INVALID_LANG_KEY, 'The language key \'Content-Language\' provided is not supported');
             }
 
             /*

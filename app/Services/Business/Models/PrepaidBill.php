@@ -8,13 +8,16 @@
 
 namespace App\Services\Business\Models;
 
-
 class PrepaidBill implements ModelInterface
 {
     
     public $transaction_id;
     public $meter_code;
     public $service_code;
+    public $currency_code;
+    public $items;
+    public $paymentmethod_code;
+    public $account;
     public $address;
     public $name;
     public $phone;
@@ -24,6 +27,7 @@ class PrepaidBill implements ModelInterface
     public $price;
     public $amount;
     public $energy;
+    public $customer_fee;
     
     public function getMeterCode()
     {
@@ -126,37 +130,41 @@ class PrepaidBill implements ModelInterface
     
     public function setCurrencyCode($code)
     {
-        // TODO: Implement setCurrencyCode() method.
+        $this->currency_code = $code;
+        return $this;
     }
     
     public function getCurrencyCode()
     {
-        // TODO: Implement getCurrencyCode() method.
+        return $this->currency_code;
     }
     
     public function setPaymentAccount($account)
     {
-        // TODO: Implement setPaymentAccount() method.
+        $this->account = $account;
+        return $this;
     }
     
     public function getPaymentAccount()
     {
-        // TODO: Implement getPaymentAccount() method.
+        return $this->account;
     }
     
     public function setPaymentMethodCode($code)
     {
-        // TODO: Implement setPaymentMethodCode() method.
+        $this->paymentmethod_code = $code;
+        return $this;
     }
     
     public function getPaymentMethodCode()
     {
-        // TODO: Implement getPaymentMethodCode() method.
+        return $this->paymentmethod_code;
     }
     
     public function setDestination($destination)
     {
         $this->meter_code = $destination;
+        return $this;
     }
     
     public function getDestination()
@@ -166,11 +174,23 @@ class PrepaidBill implements ModelInterface
     
     public function setItems($items)
     {
-        // TODO: Implement setItems() method.
+        $this->items = $items;
+        return $this;
     }
     
     public function getItems()
     {
-        // TODO: Implement getItems() method.
+        return $this->items;
+    }
+    
+    public function setCustomerFee($fee)
+    {
+        $this->customer_fee = $fee;
+        return $this;
+    }
+    
+    public function getCustomerFee()
+    {
+        return $this->customer_fee;
     }
 }

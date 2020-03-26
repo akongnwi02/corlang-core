@@ -7,29 +7,23 @@ use Throwable;
 
 class NotFoundException extends Exception
 {
-    public $errors;
     
-    public $value;
+    public $error_code;
     
     public $resource;
     
     public $status = 404;
     
-    public function __construct(string $resource, string $value)
+    public function __construct($error_code, $message = 'Resource or service not found')
     {
-        $this->value = $value;
-        $this->resource = $resource;
-        
-        $message = "$resource: $value is not found";
+        $this->error_code = $error_code;
         
         parent::__construct($message);
     }
     
-    public function errors()
+    public function error_code()
     {
-        return [$this->resource => [
-            'not_found',
-        ]];
+        return $this->error_code;
     }
     
     public function status()

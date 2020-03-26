@@ -11,12 +11,15 @@ namespace App\Exceptions\Api;
 
 class ForbiddenException extends \Exception
 {
-    public $errors;
+    
+    public $error_code;
     
     public $status = 403;
     
-    public function __construct($message = "Request is forbidden")
+    public function __construct($error_code, $message = "Request is forbidden")
     {
+        $this->error_code = $error_code;
+        
         parent::__construct($message);
     }
     
@@ -24,4 +27,10 @@ class ForbiddenException extends \Exception
     {
         return $this->status;
     }
+    
+    public function error_code()
+    {
+        return $this->error_code;
+    }
 }
+

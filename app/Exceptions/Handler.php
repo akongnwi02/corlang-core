@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Services\Constants\BusinessErrorCodes;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -57,61 +58,72 @@ class Handler extends ExceptionHandler
 
             $error['code']    = $rendered->getStatusCode();
             $error['message'] = 'Unexpected Error';
+            $error['error_code'] = BusinessErrorCodes::GENERAL_CODE;
             
             if ($exception instanceof \App\Exceptions\Api\BadRequestException) {
                 $error['message'] = $exception->getMessage();
-                $error['errors']  = $exception->errors();
                 $error['code']    = $exception->getCode();
-            }
-            
-            if ($exception instanceof \App\Exceptions\Api\NotFoundException) {
-                $error['message'] = $exception->getMessage();
-                $error['errors']  = $exception->errors();
-                $error['code']    = $exception->status();
-            }
-            
-            if ($exception instanceof \App\Exceptions\Api\DuplicateException) {
-                $error['message'] = $exception->getMessage();
-                $error['code']    = $exception->status();
+                $error['error_code'] = $exception->error_code();
             }
             
             if ($exception instanceof \App\Exceptions\Api\ForbiddenException) {
                 $error['message'] = $exception->getMessage();
-                $error['code']    = $exception->status();
+                $error['code']    = $exception->getCode();
+                $error['error_code'] = $exception->error_code();
             }
             
-            if ($exception instanceof \App\Exceptions\Api\RangeException) {
+            if ($exception instanceof \App\Exceptions\Api\NotFoundException) {
                 $error['message'] = $exception->getMessage();
                 $error['code']    = $exception->status();
+                $error['error_code'] = $exception->error_code();
+            }
+            
+            if ($exception instanceof \App\Exceptions\Api\UnauthorizedException) {
+                $error['message'] = $exception->getMessage();
+                $error['code']    = $exception->status();
+                $error['error_code'] = $exception->error_code();
+            }
+            
+            if ($exception instanceof \App\Exceptions\Api\ServerErrorException) {
+                $error['message'] = $exception->getMessage();
+                $error['code']    = $exception->status();
+                $error['error_code'] = $exception->error_code();
             }
             
             if ($exception instanceof \Illuminate\Validation\ValidationException) {
                 $error['message'] = $exception->getMessage();
                 $error['errors']  = $exception->errors();
+                $error['error_code'] = BusinessErrorCodes::INVALID_INPUTS;
             }
             
             if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
                 $error['message'] = $exception->getMessage();
+                $error['error_code'] = BusinessErrorCodes::AUTHENTICATION_ERROR;
             }
             
             if ($exception instanceof \Illuminate\Auth\Access\AuthorizationException) {
                 $error['message'] = $exception->getMessage();
+                $error['error_code'] = BusinessErrorCodes::AUTHORIZATION_ERROR;
             }
             
             if ($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException) {
                 $error['message'] = 'Method Not Allowed';
+                $error['error_code'] = BusinessErrorCodes::METHOD_NOT_ALLOWED;
             }
             
             if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
                 $error['message'] = 'Route Not Found';
+                $error['error_code'] = BusinessErrorCodes::PATH_NOT_FOUND;
             }
             
             if ($exception instanceof \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException) {
                 $error['message'] = 'Unauthorized';
+                $error['error_code'] = BusinessErrorCodes::AUTHORIZATION_ERROR;
             }
     
             if ($exception instanceof \Illuminate\Http\Exceptions\ThrottleRequestsException) {
                 $error['message'] = 'Too Many Attempts';
+                $error['error_code'] = BusinessErrorCodes::TOO_MANY_ATTEMPTS;
             }
     
             \Log::error('ExceptionHandler', array_merge($error, [

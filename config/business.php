@@ -43,9 +43,13 @@ return [
             'prepaidbills' => [
                 'name'    => 'Prepaid Bills',
                 'code'    => 'CORPREPAID001',
-                'api_key' => env(''),
-                'api_url' => env(''),
+                'api_url' => env('APP_CATEGORY_PREPAID_BILL_URL'),
+                'api_key' => env('APP_CATEGORY_PREPAID_BILL_KEY'),
             ]
+        ],
+        'endpoints' => [
+            'search' => '/search',
+            'execute' => '/execute',
         ]
     ],
     'system'      => [

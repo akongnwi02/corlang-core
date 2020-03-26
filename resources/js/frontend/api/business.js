@@ -6,7 +6,7 @@ export default {
         params.service_code = data.service_code; // identifier of destination
         params.amount = data.amount; // amount
         params.currency_code = data.currency_code; // currency code
-        params.paymentaccount = data.paymentaccount; // payment method account number
+        params.account = data.account; // payment method account number
         params.paymentmethod_code = data.paymentmethod_code; // identifier of payment method
         params.items = data.items; // optional array of items
 

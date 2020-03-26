@@ -1,18 +1,24 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: devert
+ * Date: 3/25/20
+ * Time: 8:29 PM
+ */
 
 namespace App\Exceptions\Api;
 
-use Exception;
-use Throwable;
 
-class UnauthorizedException extends Exception
+class ServerErrorException extends \Exception
 {
     public $error_code;
     
-    public $status = 401;
+    public $status = 500;
     
-    public function __construct($message = "User is not authenticated")
+    public function __construct($error_code, $message = 'Server Error')
     {
+        $this->error_code = $error_code;
+        
         parent::__construct($message);
     }
     
@@ -25,4 +31,5 @@ class UnauthorizedException extends Exception
     {
         return $this->error_code;
     }
+    
 }

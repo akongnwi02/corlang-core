@@ -11,9 +11,11 @@ namespace App\Repositories\Backend\Services\Commission;
 
 use App\Events\Backend\Services\Commission\CommissionCreated;
 use App\Exceptions\Api\RangeException;
+use App\Exceptions\Api\ServerErrorException;
 use App\Exceptions\GeneralException;
 use App\Models\Business\Commission;
 use App\Models\Business\Pricing;
+use App\Services\Constants\BusinessErrorCodes;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class CommissionRepository
@@ -81,21 +83,26 @@ class CommissionRepository
         });
     }
     
-    public function calculateFee(Commission $commission, $amount) : float
+    public function calculateFee($commission, $amount) : float
     {
         if (is_null($commission)) {
             return 0;
         }
         
-        $pricing = $this->getPriceRange($commission->pricings, $amount);
-        
-        $fee = $pricing->fixed + ($amount * $pricing->precentage) / 100 ;
-        
-        return $fee;
+        $pricing = $this->getPricing($commission->pricings, $amount);
+    
+        if ($pricing) {
+            
+            $fee = $pricing->fixed + ($amount * $pricing->percentage) / 100 ;
+            
+            return ceil(($fee * 100)) / 100;
+    
+        }
+        return 0;
         
     }
     
-    public function getPriceRange($pricings, $amount)
+    public function getPricing($pricings, $amount)
     {
         $availableRange = [];
         
@@ -106,7 +113,8 @@ class CommissionRepository
         }
     
         if (empty($availableRange)) {
-            throw new RangeException();
+            return null;
+//            throw new ServerErrorException(BusinessErrorCodes::NO_PRICE_RANGE_ERROR, 'There is no price range for this price');
         } else {
             // Return the first item for now
             // return range based on a certain logic
