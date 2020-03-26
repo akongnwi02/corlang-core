@@ -48,7 +48,7 @@ class TransactionRepository
             $service       = $this->serviceRepository->findByCode($model->getServiceCode());
             $paymentMethod = $this->paymentMethodRepository->findByCode($model->getPaymentMethodCode());
             
-            // commission settings
+            // commissions
             $customerCommission      = $service->customer_commission;
             $providerCommission      = $service->provider_commission;
             $paymentMethodCommission = $paymentMethod->commission;
@@ -59,14 +59,14 @@ class TransactionRepository
             $paymentMethodFee   = $this->commissionRepository->calculateFee($paymentMethodCommission, $model->getAmount());
             $totalCustomerFee   = $customerServiceFee + $paymentMethodFee;
             $totalFee           = $totalCustomerFee + $providerFee;
-            $sharableFee        = $totalFee - $paymentMethodFee;
             
-            // commission gained
+            // commission rates
             $agent_commission_rate   = $paymentMethod->is_default ? $this->serviceRepository->getAgentServiceRate($service, auth()->user()) : 0;
             $company_commission_rate = $paymentMethod->is_default ? $this->serviceRepository->getCompanyServiceRate($service, auth()->user()->company) : 0;
             
-            $company_commission = ($sharableFee * $company_commission_rate / 100) * (1 - $agent_commission_rate / 100);
-            $agent_commission   = ($sharableFee * $company_commission_rate / 100) * ($agent_commission_rate / 100);
+            // commission sharing
+            $company_commission = ($totalFee * $company_commission_rate / 100) * (1 - $agent_commission_rate / 100);
+            $agent_commission   = ($totalFee * $company_commission_rate / 100) * ($agent_commission_rate / 100);
             $system_commission  = $totalFee - ($company_commission + $agent_commission);
             
             // Transaction creation
