@@ -8,8 +8,8 @@
 
 namespace App\Repositories\Api\Business;
 
+use App\Exceptions\Api\NotFoundException;
 use App\Exceptions\Api\ServerErrorException;
-use App\Exceptions\GeneralException;
 use App\Models\Transaction\Transaction;
 use App\Services\Business\Models\ModelInterface;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
@@ -36,6 +36,22 @@ class TransactionRepository
     }
     
     /**
+     * @param $uuid
+     * @return mixed
+     * @throws NotFoundException
+     */
+    public function findByUuid($uuid)
+    {
+        $transaction = Transaction::where('uuid', $uuid)->first();
+        
+        if ($transaction) {
+            return $transaction;
+        }
+        
+        throw new NotFoundException(BusinessErrorCodes::TRANSACTION_NOT_FOUND, 'Transaction does not exist in database');
+    }
+    
+    /**
      * @param ModelInterface $model
      * @return mixed
      * @throws \Throwable
@@ -44,27 +60,38 @@ class TransactionRepository
     {
         
         return \DB::transaction(function () use ($model) {
-            
+            /*
+             * get the service and the payment method
+             */
             $service       = $this->serviceRepository->findByCode($model->getServiceCode());
             $paymentMethod = $this->paymentMethodRepository->findByCode($model->getPaymentMethodCode());
+            $category      = $service->category;
             
-            // commissions
+            /*
+             * get the commissions
+             */
             $customerCommission      = $service->customer_commission;
             $providerCommission      = $service->provider_commission;
             $paymentMethodCommission = $paymentMethod->commission;
             
-            // fees calculation
+            /*
+             * calculate the fees
+             */
             $customerServiceFee = $this->commissionRepository->calculateFee($customerCommission, $model->getAmount());
             $providerFee        = $this->commissionRepository->calculateFee($providerCommission, $model->getAmount());
             $paymentMethodFee   = $this->commissionRepository->calculateFee($paymentMethodCommission, $model->getAmount());
             $totalCustomerFee   = $customerServiceFee + $paymentMethodFee;
             $totalFee           = $totalCustomerFee + $providerFee;
             
-            // commission rates
+            /*
+             * get the commission rates
+             */
             $agent_commission_rate   = $paymentMethod->is_default ? $this->serviceRepository->getAgentServiceRate($service, auth()->user()) : 0;
             $company_commission_rate = $paymentMethod->is_default ? $this->serviceRepository->getCompanyServiceRate($service, auth()->user()->company) : 0;
             
-            // commission sharing
+            /*
+             * share the commissions
+             */
             $company_commission = ($totalFee * $company_commission_rate / 100) * (1 - $agent_commission_rate / 100);
             $agent_commission   = ($totalFee * $company_commission_rate / 100) * ($agent_commission_rate / 100);
             $system_commission  = $totalFee - ($company_commission + $agent_commission);
@@ -84,15 +111,21 @@ class TransactionRepository
             $transaction->paymentaccount     = $model->getPaymentAccount();
             $transaction->status             = config('business.transaction.status.created');
             
-            $transaction->customer_service_fee = $customerServiceFee;
-            $transaction->provider_fee         = $providerFee;
-            $transaction->paymentmethod_fee    = $paymentMethodFee;
-            $transaction->total_customer_fee   = $totalCustomerFee;
-            $transaction->total_fee            = $totalFee;
+            $transaction->customer_service_fee  = $customerServiceFee;
+            $transaction->provider_fee          = $providerFee;
+            $transaction->paymentmethod_fee     = $paymentMethodFee;
+            $transaction->total_customer_fee    = $totalCustomerFee;
+            $transaction->total_customer_amount = $model->getAmount() + $totalCustomerFee;
+            $transaction->total_fee             = $totalFee;
             
             $transaction->customercommission_id      = @$customerCommission->uuid;
             $transaction->providercommission_id      = @$providerCommission->uuid;
             $transaction->paymentmethodcommission_id = @$paymentMethodCommission->uuid;
+            
+            $transaction->service_id       = $service->uuid;
+            $transaction->paymentmethod_id = $paymentMethod->uuid;
+            $transaction->category_id      = $category->uuid;
+            $transaction->category_code      = $category->code;
             
             $transaction->agent_commission   = $agent_commission;
             $transaction->company_commission = $company_commission;

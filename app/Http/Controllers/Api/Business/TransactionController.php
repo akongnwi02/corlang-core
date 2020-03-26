@@ -13,9 +13,12 @@ use App\Exceptions\Api\ServerErrorException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Business\ConfirmPaymentRequest;
 use App\Http\Requests\Api\Business\GeneralRequest;
+use App\Http\Resources\Api\TransactionResource;
+use App\Jobs\Business\ProcessTransactionJob;
 use App\Models\Transaction\Transaction;
 use App\Repositories\Api\Business\TransactionRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
+use App\Services\Business\Models\ModelInterface;
 use App\Services\Business\Validators\CategoryTrait;
 use App\Services\Constants\BusinessErrorCodes;
 use Illuminate\Support\Carbon;
@@ -61,26 +64,36 @@ class TransactionController extends Controller
         throw new ServerErrorException(BusinessErrorCodes::TRANSACTION_SAVE_TO_CACHE_ERROR);
     }
     
-    public function confirm(ConfirmPaymentRequest $request)
+    /**
+     * @param ConfirmPaymentRequest $request
+     * @param TransactionRepository $transactionRepository
+     * @return TransactionResource
+     * @throws NotFoundException
+     */
+    public function confirm(ConfirmPaymentRequest $request, TransactionRepository $transactionRepository)
     {
+        /** @var ModelInterface $model */
         $model = \Cache::store(config('app.micro_services.cache_store'))->pull($request->input('quote_id'));
         
         if ($model) {
             \Log::info('Transaction retrieved from cache successfully. Dispatching transaction to queue');
             
-            dispatch();
+            $transaction = $transactionRepository->findByUuid($model->getTransactionId());
+            
+            dispatch(new ProcessTransactionJob($transaction));
+    
+            return new TransactionResource($transaction);
         }
     
         throw new NotFoundException(BusinessErrorCodes::TRANSACTION_NOT_IN_CACHE, 'This transaction is no longer in cache. May have expired or already processed');
     }
     
+    /**
+     * @param Transaction $transaction
+     * @return TransactionResource
+     */
     public function status(Transaction $transaction)
     {
-    
-    }
-    
-    public function httpClient()
-    {
-    
+        return new TransactionResource($transaction);
     }
 }

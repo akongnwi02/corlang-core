@@ -21,10 +21,14 @@ class CreateTransactionsTable extends Migration
             $table->double('amount');
             $table->uuid('user_id')->nullable();
             $table->uuid('company_id')->nullable();
+            $table->uuid('service_id')->nullable();
+            $table->uuid('category_id')->nullable();
+            $table->string('category_code')->nullable();
             $table->string('service_code')->nullable();
             $table->string('currency_code');
             $table->string('destination')->nullable();
             $table->string('paymentmethod_code')->nullable();
+            $table->uuid('paymentmethod_id')->nullable();
             $table->string('paymentaccount')->nullable();
             $table->string('status')->nullable();
     
@@ -32,6 +36,7 @@ class CreateTransactionsTable extends Migration
             $table->double('provider_fee')->nullable();
             $table->double('paymentmethod_fee')->nullable();
             $table->double('total_customer_fee')->nullable();
+            $table->double('total_customer_amount')->nullable();
             $table->double('total_fee')->nullable();
     
             $table->uuid('customercommission_id')->nullable();
@@ -45,6 +50,7 @@ class CreateTransactionsTable extends Migration
             $table->string('movement_code')->nullable();
             $table->boolean('is_reversed')->default(false);
             $table->dateTime('reversed_at')->nullable();
+            $table->dateTime('completed_at')->nullable();
     
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
@@ -55,8 +61,12 @@ class CreateTransactionsTable extends Migration
             $table->foreign('user_id')->references('uuid')->on('users');
             $table->foreign('company_id')->references('uuid')->on('companies');
             $table->foreign('service_code')->references('code')->on('services');
+            $table->foreign('service_id')->references('uuid')->on('services');
+            $table->foreign('category_id')->references('uuid')->on('categories');
+            $table->foreign('category_code')->references('code')->on('categories');
             $table->foreign('currency_code')->references('code')->on('currencies');
             $table->foreign('paymentmethod_code')->references('code')->on('paymentmethods');
+            $table->foreign('paymentmethod_id')->references('uuid')->on('paymentmethods');
             $table->foreign('customercommission_id')->references('uuid')->on('commissions');
             $table->foreign('providercommission_id')->references('uuid')->on('commissions');
             $table->foreign('paymentmethodcommission_id')->references('uuid')->on('commissions');

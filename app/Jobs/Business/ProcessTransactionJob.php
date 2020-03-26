@@ -16,7 +16,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class ProcessTransaction implements ShouldQueue
+class ProcessTransactionJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels,
         CategoryTrait;
@@ -38,6 +38,6 @@ class ProcessTransaction implements ShouldQueue
     
         $categoryClient = $this->category($service->category);
         
-        $categoryClient->validate()
+//        $categoryClient->validate();
     }
 }

@@ -12,5 +12,5 @@ interface CategoryInterface
 {
     public function validate($request);
     
-    public function confirm();
+    public function confirm($data);
 }
