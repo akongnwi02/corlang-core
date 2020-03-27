@@ -16,6 +16,7 @@ use App\Services\Business\Models\PrepaidBill;
 use App\Services\Clients\CategoryInterface;
 use App\Services\Constants\BusinessErrorCodes;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
@@ -56,6 +57,8 @@ class PrepaidBillClient implements CategoryInterface
                     'service_code' => $data['service_code'],
                 ]
             ]);
+        } catch (BadResponseException $exception) {
+            $response = $exception->getResponse();
         } catch (GuzzleException $exception) {
             throw new ServerErrorException(BusinessErrorCodes::MICRO_SERVICE_CONNECTION_ERROR, 'Error connecting to service: ' . $exception->getMessage());
         }
