@@ -210,7 +210,6 @@ trait UserMethod
     public function getUserCommissionTotal()
     {
         return Transaction::where('user_id', $this->uuid)
-            ->where('is_reversed', false)
             ->sum('agent_commission');
     }
 }

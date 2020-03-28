@@ -48,7 +48,6 @@ class CreateTransactionsTable extends Migration
             $table->double('system_commission')->nullable();
             
             $table->string('movement_code')->nullable();
-            $table->boolean('is_reversed')->default(false);
             $table->dateTime('reversed_at')->nullable();
             $table->dateTime('completed_at')->nullable();
     

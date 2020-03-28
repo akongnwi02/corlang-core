@@ -29,5 +29,9 @@ export default {
 
     configuration: function(){
         return axios.get('/api/configuration');
+    },
+
+    transaction: function () {
+        return axios.get('/api/transaction')
     }
 }

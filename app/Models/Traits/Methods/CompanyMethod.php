@@ -41,7 +41,6 @@ trait CompanyMethod
     public function getCompanyCommissionsTotal()
     {
         return Transaction::where('company_id', $this->uuid)
-            ->where('is_reversed', false)
             ->sum('company_commission');
     }
     
@@ -49,7 +48,6 @@ trait CompanyMethod
     {
         $commission = Transaction::where('company_id', $this->uuid)
             ->where('created_at', '>=', Carbon::today())
-            ->where('is_reversed', false)
             ->sum('company_commission');
         return $commission;
     }

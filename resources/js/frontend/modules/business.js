@@ -19,6 +19,9 @@ export const business = {
 
         configurationLoadStatus: 0,
         configuration: {},
+
+        transactions: [],
+        transactionsLoadStatus: 0,
     },
 
     actions: {
@@ -32,8 +35,8 @@ export const business = {
                 })
                 .catch( function( error ){
                     commit( 'setQuoteLoadStatus', 3 );
-                    helper.handleException(error);
                     commit( 'setQuote', {} );
+                    helper.handleException(error);
                 });
         },
 
@@ -46,8 +49,8 @@ export const business = {
                 })
                 .catch(function (error) {
                     commit( 'setPaymentStatus', 3 );
-                    helper.handleException(error);
                     commit( 'setPayment',  {});
+                    helper.handleException(error);
                 });
         },
 
@@ -82,11 +85,24 @@ export const business = {
                     })
                     .catch( function(error){
                         commit('setConfigurationLoadStatus', 3);
-                        helper.handleException(error);
                         commit('setConfiguration', {});
+                        helper.handleException(error);
                     });
             }
         },
+        loadTransactions( { commit } ) {
+            commit('setTransactionsLoadStatus', 1);
+            BusinessApi.transaction()
+                .then(function (response) {
+                    commit('setTransactions', response.data);
+                    commit('setTransactionsLoadStatus', 2);
+                })
+                .catch(function (error) {
+                    commit('setTransactionsLoadStatus', 3);
+                    commit('setTransactions', []);
+                    helper.handleException(error);
+                });
+        }
     },
 
     mutations: {
@@ -108,6 +124,12 @@ export const business = {
         setConfiguration( state, configuration ){
             state.configuration = configuration;
         },
+        setTransactions(state, transactions) {
+            state.transactions = transactions;
+        },
+        setTransactionsLoadStatus(state, status) {
+            state.transactionsLoadStatus = status;
+        }
     },
 
     getters: {
@@ -129,6 +151,12 @@ export const business = {
 
         getConfiguration( state ) {
             return state.configuration;
+        },
+        getTransactions(state) {
+            return state.transactions;
+        },
+        getTransactionsLoadStatus(state) {
+            return state.transactionsLoadStatus;
         }
     }
 };

@@ -74,6 +74,7 @@ class PrepaidBillClient implements CategoryInterface
         if ($response->getStatusCode() == 200) {
             $prepaidBill = new PrepaidBill();
             $prepaidBill->setServiceCode($data['service_code'])
+                ->setItems($data['service_code'])
                 ->setMeterCode($data['destination'])
                 ->setName($body->name)
                 ->setAddress($body->address)

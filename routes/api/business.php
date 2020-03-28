@@ -28,19 +28,32 @@ Route::group(['middleware' => request()->hasHeader('authorization') ? 'jwt.auth'
     Route::post('confirm', [TransactionController::class, 'confirm']);
     
     /*
+     * Transaction
+     */
+    Route::get('transaction', [TransactionController::class, 'index']);
+    
+    /*
+     * Transaction CRUD
+     */
+    Route::group(['prefix' => 'transaction/{transaction}'], function () {
+        Route::get('/', [TransactionController::class, 'show']);
+    });
+    
+    /*
      * Status
      */
-    Route::get('status/{transaction}', [TransactionController::class, 'status']);
+    Route::get('transaction', [TransactionController::class, 'index']);
     
 });
 
 /*
  * These routes do not require any authentication
  */
-Route::group(['namespace' => 'Callback'], function () {
+Route::group(['namespace' => 'Public'], function () {
     /*
      * Callback
      */
-    Route::post('callback', [CallbackController::class, 'callback']);
+    Route::post('callback/payment', [CallbackController::class, 'callback']);
+    Route::post('callback/transaction', [CallbackController::class, 'callback']);
     
 });

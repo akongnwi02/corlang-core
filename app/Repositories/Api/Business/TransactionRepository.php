@@ -16,6 +16,8 @@ use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
 use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 use App\Services\Constants\BusinessErrorCodes;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TransactionRepository
 {
@@ -108,7 +110,7 @@ class TransactionRepository
             $transaction->currency_code      = $model->getCurrencyCode();
             $transaction->destination        = $model->getDestination();
             $transaction->paymentmethod_code = $model->getPaymentMethodCode();
-            $transaction->paymentaccount     = $model->getPaymentAccount();
+            $transaction->paymentaccount     = $paymentMethod->is_default ? auth()->user()->account->code : $model->getPaymentAccount();
             $transaction->status             = config('business.transaction.status.created');
             
             $transaction->customer_service_fee  = $customerServiceFee;
@@ -137,5 +139,14 @@ class TransactionRepository
             
             throw new ServerErrorException(BusinessErrorCodes::TRANSACTION_CREATION_ERROR);
         });
+    }
+    
+    public function getAgentTransactions()
+    {
+        $transactions = QueryBuilder::for(Transaction::class)
+            ->where('user_id', auth()->user()->uuid)
+            ->allowedSorts('transactions.created_at', 'transactions.updated_at')
+            ->defaultSort( '-transactions.created_at', 'transactions.updated_at');
+        return $transactions;
     }
 }

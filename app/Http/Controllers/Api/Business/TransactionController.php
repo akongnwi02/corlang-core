@@ -92,8 +92,18 @@ class TransactionController extends Controller
      * @param Transaction $transaction
      * @return TransactionResource
      */
-    public function status(Transaction $transaction)
+    public function show(Transaction $transaction)
     {
         return new TransactionResource($transaction);
+    }
+    
+    public function index(TransactionRepository $transactionRepository)
+    {
+        $transactions =  $transactionRepository->getAgentTransactions()
+            // Limit the transactions to just 50 to save bandwidth
+            ->limit(50)
+            ->get();
+        
+        return TransactionResource::collection($transactions);
     }
 }

@@ -8,6 +8,10 @@
             <mdb-tab-item key="transactions-tab" :active="page=='transactions'" @click.native.prevent="page='transactions'">
                 <mdb-icon icon="list" class="ml-2"/> {{ $t(`dashboard.pages.titles.transactions`) }}
             </mdb-tab-item>
+
+            <mdb-tab-item key="account-tab" :active="page=='account'" @click.native.prevent="page='account'">
+                <mdb-icon icon="inbox" class="ml-2"/> {{ $t(`dashboard.pages.titles.account`) }}
+            </mdb-tab-item>
         </mdb-tab>
         <mdb-tab-content key="page-content">
             <mdb-tab-pane key="purchase-content" class="active" v-if="page=='purchase'">
@@ -16,7 +20,14 @@
                 </keep-alive>
             </mdb-tab-pane>
             <mdb-tab-pane class="fade" key="transactions-content" v-if="page=='transactions'">
-                <br/>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. <br><br>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+                <keep-alive>
+                    <transactions></transactions>
+                </keep-alive>
+            </mdb-tab-pane>
+            <mdb-tab-pane class="fade" key="account-content" v-if="page=='account'">
+                <keep-alive>
+                    <account></account>
+                </keep-alive>
             </mdb-tab-pane>
         </mdb-tab-content>
         <loader></loader>
@@ -29,7 +40,9 @@
     import { BUSINESS_CONFIG } from "../config/business";
 
     import Purchase from '../pages/Purchase';
+    import Transactions from '../pages/Transactions';
     import Loader from "../components/global/Loader";
+    import Account from "../pages/Account";
 
     export default {
         name: "Layout",
@@ -37,8 +50,10 @@
             ChangeLanguage,
         ],
         components: {
+            Account,
             Loader,
             Purchase,
+            Transactions,
         },
         data() {
             return{

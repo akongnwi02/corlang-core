@@ -3,7 +3,8 @@
         "pages": {
             "titles": {
                 "purchase": "Purchase",
-                "transactions": "Transactions"
+                "transactions": "Transactions",
+                "account": "Account"
             },
             "tabs": {
                 "titles": {
@@ -25,11 +26,40 @@
                     }
                 }
             },
+            "transactions": {
+                "table": {
+                    "entriesTitle": "Last 50 transactions",
+                    "showingText": "Showing",
+                    "noFoundMessage": "No matching transaction records found",
+                    "header": {
+                        "code": "Reference",
+                        "items": "Item",
+                        "amount": "Amount",
+                        "fee": "Fee",
+                        "service": "Service",
+                        "total": "Total",
+                        "paymentmethod": "Payment Method",
+                        "status": "Status",
+                        "asset": "Asset",
+                        "completed_at": "Paid At"
+                    },
+                    "status" : {
+                        "created": "Created",
+                        "pending": "Pending",
+                        "processing": "In Processing",
+                        "success": "Completed",
+                        "failed": "Failed",
+                        "reversed": "Reversed"
+                    }
+                }
+            },
             "general": {
                 "close": "Close",
                 "confirm": "Confirm",
                 "next": "Next",
                 "loading": "Loading",
+                "refresh": "Refresh",
+                "search": "Search",
                 "summary": "Order Details",
                 "amount": "Amount",
                 "method": "Payment Method",
@@ -51,18 +81,16 @@
     "validations": {
         "purchase": {
             "electricity": {
-                "vendor": "Please select a service from the list",
-                "vendor_empty": "No services available for this category at the moment",
                 "meter_code": "Please enter a valid meter code",
-                "bill_number": "Please enter a valid bill number",
-                "server": {
-
-                }
+                "bill_number": "Please enter a valid bill number"
             },
-            "destination": "Invalid destination identifier",
             "reference": "The reference is invalid",
             "pincode": "The pin code is invalid",
-            "source": "The payment account number is invalid"
+            "source": "The payment account number is invalid",
+            "amount": "Please enter a valid amount",
+            "paymentmethod": "Select a payment method",
+            "service": "Please select a service from the list",
+            "empty_service": "No services available for this category at the moment"
         },
         "general": {
             "maintenance": "We're currently maintaining our system. Please check back later",

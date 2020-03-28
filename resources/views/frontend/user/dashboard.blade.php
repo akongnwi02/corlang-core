@@ -27,3 +27,9 @@
     // used to create a pusher channel connection
     window.user = {!! auth()->user() !!};
 </script>
+
+<style>
+    .tab-pane {
+        height: 100% !important;
+    }
+</style>

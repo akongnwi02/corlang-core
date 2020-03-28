@@ -101,8 +101,7 @@ class AccountRepository
     
     public function getSystemTotalCommission()
     {
-        return Transaction::where('is_reversed', false)
-            ->sum('system_commission');
+        return Transaction::sum('system_commission');
     }
     
     public function getSystemTotalPayout()

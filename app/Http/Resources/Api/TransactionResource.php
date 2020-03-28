@@ -34,7 +34,6 @@ class TransactionResource extends JsonResource
             'status'                => $this->status,
             'total_customer_fee'    => (double)$this->total_customer_fee,
             'total_customer_amount' => (double)$this->total_customer_amount,
-            'is_reversed'           => $this->is_reversed,
             'created_at'            => $this->created_at->toDatetimeString(),
             'reversed_at'           => $this->reversed_at ? $this->reversed_at->toDatetimeString() : null,
             'completed_at'          => $this->completed_at ? $this->completed_at->toDatetimeString() : null,

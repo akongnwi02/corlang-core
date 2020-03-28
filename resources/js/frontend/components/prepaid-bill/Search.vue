@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center card-body">
+    <div class="text-center card-body" @keyup.enter="requestQuote">
         <div class="card-text text-danger"> {{ invalid_text }}</div>
         <div class="row">
             <div class="col-sm-6">
@@ -150,7 +150,7 @@
                 if (!BUSINESS_CONFIG.APP_REGEX_AMOUNT.test(this.amount)) {
                     ++invalid;
                     console.log('Invalid amount');
-                    this.invalid_text = this.$t('validations.general.business.amount');
+                    this.invalid_text = this.$t('validations.purchase.amount');
                 }
 
                 if (!this.selectedService) {
@@ -160,10 +160,10 @@
                     } else if (this.services.length === 0) {
                         console.log('No services available');
                         ++invalid;
-                        this.invalid_text = this.$t('validations.purchase.electricity.vendor_empty');
+                        this.invalid_text = this.$t('validations.purchase.empty_service');
                     } else {
                         console.log('No service selected');
-                        this.invalid_text = this.$t('validations.purchase.electricity.vendor');
+                        this.invalid_text = this.$t('validations.purchase.service');
                         ++invalid;
                     }
                 }
@@ -179,8 +179,8 @@
                 if (this.account.length < 6) {
                     if (!this.selectedMethod.is_default) {
                         ++invalid;
-                        this.invalid_text = this.$t('validations.purchase.source');
-                        console.log('Invalid source');
+                        this.invalid_text = this.$t('validations.purchase.paymentmethod');
+                        console.log('Invalid payment method');
                     }
                 }
 

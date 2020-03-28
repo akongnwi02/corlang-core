@@ -42,7 +42,6 @@ class Transaction extends Model
      * @var array
      */
     protected $casts = [
-        'is_reversed'        => 'boolean',
         'amount'             => 'double',
         'customer_fee'       => 'double',
         'agent_commission'   => 'double',
