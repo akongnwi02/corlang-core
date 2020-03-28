@@ -34,7 +34,7 @@
 
     .cc-selector-2 input{
         position:absolute;
-        z-index:999;
+        /*z-index:999;*/
     }
 
     .cc-selector-2 input:active +.drinkcard-cc, .cc-selector input:active +.drinkcard-cc{opacity: .9;}
