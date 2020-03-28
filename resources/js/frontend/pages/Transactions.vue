@@ -1,6 +1,5 @@
 <template>
-
-    <div>
+    <div class="text-center card-body" @keyup.enter="requestQuote">
         <button @click="refresh" class="btn btn-primary btn-sm float-left" type="button">
             <span class="fa fa-sync" role="status" aria-hidden="true"></span>
             {{ $t('dashboard.pages.general.refresh') }}
@@ -23,8 +22,8 @@
             :entriesTitle="$t('dashboard.pages.transactions.table.entriesTitle')"
             :showingText="$t('dashboard.pages.transactions.table.showingText')"
             :noFoundMessage="$t('dashboard.pages.transactions.table.noFoundMessage')"
-
-        />
+        >
+        </mdb-datatable>
         <spinner :status="transactionsLoadStatus"></spinner>
     </div>
 
@@ -45,6 +44,11 @@
                         {
                             label: this.$t('dashboard.pages.transactions.table.header.code'),
                             field: 'code',
+                            sort: 'desc'
+                        },
+                        {
+                            label: this.$t('dashboard.pages.transactions.table.header.destination'),
+                            field: 'destination',
                             sort: 'desc'
                         },
                         {
@@ -118,6 +122,7 @@
                         let obj = {};
                         obj.code = transaction.code;
                         obj.items = transaction.items;
+                        obj.destination = transaction.destination;
                         obj.fee = currency.format(transaction.total_customer_fee, transaction.currency_code);
                         obj.total = currency.format(transaction.total_customer_amount, transaction.currency_code);
                         obj.service = transaction.service;

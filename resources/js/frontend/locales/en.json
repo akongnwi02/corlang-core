@@ -34,6 +34,7 @@
                     "header": {
                         "code": "Reference",
                         "items": "Item",
+                        "destination": "Destination",
                         "amount": "Amount",
                         "fee": "Fee",
                         "service": "Service",
