@@ -87,9 +87,10 @@
             },
             "reference": "The reference is invalid",
             "pincode": "The pin code is invalid",
-            "source": "The payment account number is invalid",
+            "account": "The payment account number is invalid",
             "amount": "Please enter a valid amount",
-            "paymentmethod": "Select a payment method",
+            "paymentmethod": "Select a payment method from the list",
+            "empty_paymentmethod": "No payment method is currently available for you",
             "service": "Please select a service from the list",
             "empty_service": "No services available for this category at the moment"
         },
@@ -100,6 +101,7 @@
     },
     "notifications": {
         "successful": "Transaction successful",
+        "transactions_loaded": "Transactions updated successfully",
         "failed": "Transaction failed"
     },
     "exceptions": {

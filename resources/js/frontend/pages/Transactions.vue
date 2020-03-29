@@ -132,6 +132,10 @@
                         obj.completed_at = transaction.completed_at;
                         this.data.rows.push(obj);
                     }
+                    this.$buefy.toast.open({
+                        message: this.$t('notifications.transactions_loaded'),
+                        type: 'is-success'
+                    });
                 }
             }
         }

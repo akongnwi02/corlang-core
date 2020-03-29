@@ -15,32 +15,57 @@
             </mdb-row>
             <hr>
             <mdb-row class="justify-content-center">
-                <ul>
-                    <li>
-                        {{ $t('dashboard.pages.tabs.content.electricity.meter_code') }}:
-                        <strong>{{ quote.meter_code }}</strong>
-                    </li>
-                    <li>
-                        {{ $t('dashboard.pages.general.amount')}}:
-                        <strong>{{ currencyFormat(quote.amount) }}</strong>
-                    </li>
-                    <li>
-                        {{ $t('dashboard.pages.general.customer.name')}}:
-                        <strong>{{ quote.name }}</strong>
-                    </li>
-                    <li>
-                        {{ $t('dashboard.pages.general.customer.address')}}:
-                        <strong>{{ quote.address }}</strong>
-                    </li>
-                    <li>
-                        {{ $t('dashboard.pages.general.fee')}}:
-                        <strong>{{ currencyFormat(quote.fee) }}</strong>
-                    </li>
-                    <li>
-                        {{ $t('dashboard.pages.general.total')}}:
-                        <strong>{{ currencyFormat(quote.amount + quote.fee) }}</strong>
-                    </li>
-                </ul>
+
+                <table class="table table-sm dataTable table-borderless text-sm-center">
+                    <tr>
+                        <th>
+                            {{ $t('dashboard.pages.tabs.content.electricity.meter_code') }}
+                        </th>
+                        <td>
+                            {{ quote.meter_code }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ $t('dashboard.pages.general.amount')}}
+                        </th>
+                        <td>
+                            {{ currencyFormat(quote.amount) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ $t('dashboard.pages.general.customer.name')}}
+                        </th>
+                        <td>
+                            {{ quote.name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ $t('dashboard.pages.general.customer.address')}}
+                        </th>
+                        <td>
+                            {{ quote.address }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ $t('dashboard.pages.general.fee')}}
+                        </th>
+                        <td>
+                            {{ currencyFormat(quote.fee) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ $t('dashboard.pages.general.total') }}
+                        </th>
+                        <td>
+                            {{ currencyFormat(quote.amount + quote.fee) }}
+                        </td>
+                    </tr>
+                </table>
             </mdb-row>
         </mdb-modal-body>
         <mdb-modal-footer>
@@ -52,9 +77,11 @@
 
 <script>
     import { currency} from "../../helpers/currency";
+    import Table from "buefy";
 
     export default {
         name: "QuoteModal",
+        components: {Table},
         props: [
             'showModal',
             'quote',
@@ -70,3 +97,9 @@
         }
     }
 </script>
+
+<style scoped>
+    .table > tbody > tr > td {
+        vertical-align: middle;
+    }
+</style>

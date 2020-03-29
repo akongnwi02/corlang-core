@@ -87,7 +87,7 @@
                 // Component Data
                 invalid_text: '',
                 show_quote_modal: false,
-                selectedMethod: {}
+                selectedMethod: null
 
             };
         },
@@ -168,6 +168,21 @@
                     }
                 }
 
+                if (!this.selectedMethod) {
+                    if (this.methods.length === 1) {
+                        this.selectedMethod = this.methods[0];
+                        console.log('Only one payment method in list. Hence selected');
+                    } else if (this.methods.length === 0) {
+                        console.log('No payment method available');
+                        ++invalid;
+                        this.invalid_text = this.$t('validations.purchase.empty_paymentmethod');
+                    } else {
+                        console.log('No payment method selected');
+                        this.invalid_text = this.$t('validations.purchase.paymentmethod');
+                        ++invalid;
+                    }
+                }
+
                 if (this.reference.length < 3) {
                     if (this.selectedMethod.has_reference) {
                         ++invalid;
@@ -179,7 +194,7 @@
                 if (this.account.length < 6) {
                     if (!this.selectedMethod.is_default) {
                         ++invalid;
-                        this.invalid_text = this.$t('validations.purchase.paymentmethod');
+                        this.invalid_text = this.$t('validations.purchase.account');
                         console.log('Invalid payment method');
                     }
                 }
