@@ -77,6 +77,20 @@ return [
             'created'    => 'created',
             'processing' => 'processing',
             'success'    => 'success',
+            'reversed' => 'reversed',
         ],
-    ]
+        'queue' => [
+            'payment' => [
+                'process' => 'process_payment',
+                'verify' => 'verify_payment',
+                'complete' => 'complete_payment'
+                
+            ],
+            'purchase' => [
+                'process' => 'process_purchase',
+                'verify' => 'verify_purchase',
+                'complete' => 'complete_purchase',
+            ],
+        ],
+    ],
 ];

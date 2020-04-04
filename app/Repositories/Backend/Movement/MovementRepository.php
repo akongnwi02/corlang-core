@@ -9,10 +9,14 @@
 namespace App\Repositories\Backend\Movement;
 
 use App\Events\Backend\Movement\MovementCreated;
+use App\Exceptions\Api\ServerErrorException;
 use App\Exceptions\GeneralException;
 use App\Models\Account\Account;
 use App\Models\Account\Movement;
 use App\Models\Account\MovementType;
+use App\Models\Company\Company;
+use App\Repositories\Backend\System\CurrencyRepository;
+use App\Services\Constants\BusinessErrorCodes;
 use function foo\func;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -27,6 +31,13 @@ use Spatie\QueryBuilder\QueryBuilder;
  */
 class MovementRepository
 {
+    public $currencyRepository;
+    
+    public function __construct(CurrencyRepository $currencyRepository)
+    {
+        $this->currencyRepository = $currencyRepository;
+    }
+    
     /**
      * @param $account
      * @param $data
@@ -91,9 +102,42 @@ class MovementRepository
     {
         $movements = QueryBuilder::for(Movement::class)
             ->where('destinationaccount_id', $account->uuid)
-            ->whereNotIn('type_id', [MovementType::where('name', config('business.movement.type.sale'))->first()->uuid])
             ->defaultSort('-movements.created_at');
     
         return $movements;
+    }
+    
+    /**
+     * @param $account
+     * @param $transaction
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function registerSale($account, $transaction)
+    {
+        $movement = new Movement();
+        $movement->code = Movement::generateCode();
+        $movement->amount = $transaction->total_customer_amount;
+        $movement->type_id = MovementType::where('name', config('business.movement.type.sale'))->first()->uuid;
+        $movement->user_id = $transaction->user->uuid;
+        $movement->company_id = @$transaction->company->uuid;
+        $movement->service_id = $transaction->service_id;
+        $movement->currency_id = $this->currencyRepository->findByCode($transaction->currency_code)->uuid;
+        $movement->sourceaccount_id = $account->uuid;
+        $movement->destinationaccount_id = Company::where('is_default', true)->first()->account->uuid;
+        
+        $double = clone $movement;
+        $double->type_id = MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid;
+        $double->sourceaccount_id = Company::where('is_default', true)->first()->account->uuid;
+        $double->destinationaccount_id = $account->uuid;
+        
+        return \DB::transaction(function () use ($movement, $double) {
+            if ($movement->save() && $double->save()) {
+//                event(Accountfdfs($movement, $double));
+                return true;
+            }
+    
+            throw new ServerErrorException(BusinessErrorCodes::GENERAL_CODE, 'Error creating sale');
+        });
     }
 }

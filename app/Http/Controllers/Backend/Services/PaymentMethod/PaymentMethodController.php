@@ -17,14 +17,23 @@ use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 
 class PaymentMethodController extends Controller
 {
+    /**
+     * @param PaymentMethodRepository $paymentMethodRepository
+     * @return mixed
+     */
     public function index(PaymentMethodRepository $paymentMethodRepository)
     {
         return view('backend.services.payment-method.index')
             ->withMethods($paymentMethodRepository->getAllPaymentMethods()
-                ->with(['service', 'commission'])
+                ->with(['service', 'customer_commission', 'provider_commission'])
                 ->paginate());
     }
     
+    /**
+     * @param PaymentMethod $method
+     * @param CommissionRepository $commissionRepository
+     * @return mixed
+     */
     public function edit(PaymentMethod $method, CommissionRepository $commissionRepository)
     {
         return view('backend.services.payment-method.edit')
@@ -34,6 +43,13 @@ class PaymentMethodController extends Controller
                 ->toArray());
     }
     
+    /**
+     * @param UpdatePaymentMethodRequest $request
+     * @param PaymentMethod $method
+     * @param PaymentMethodRepository $paymentMethodRepository
+     * @return mixed
+     * @throws \App\Exceptions\GeneralException
+     */
     public function update(UpdatePaymentMethodRequest $request, PaymentMethod $method, PaymentMethodRepository $paymentMethodRepository)
     {
         $paymentMethodRepository->update($method, $request->input());

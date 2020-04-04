@@ -107,7 +107,9 @@ return [
         ],
         'payout' => [
             'drain_error' => 'There was an error draining the amount',
+            'transfer_error' => 'There was a problem transferring the amount to the strongbox.',
             'payout_error' => 'There was a problem executing the payout. Please try again.',
+            'no_company_error' => 'The user belongs to no company',
             'invalid_status' => 'Invalid payout status.',
             'status_error' => 'There was a problem updating the status of the payout. Please try again.'
         ]

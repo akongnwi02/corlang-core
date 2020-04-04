@@ -261,7 +261,8 @@ return [
                     'code' => 'Code',
                     'description_en' => 'English Description',
                     'description_fr' => 'French Description',
-                    'commission' => 'Fee',
+                    'customercommission' => 'Customer Service Charge',
+                    'providercommission' => 'Service Provider Fee',
                     'service' => 'Service',
                 ]
             ],

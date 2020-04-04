@@ -16,7 +16,8 @@ class CreatePaymentMethodsTable extends Migration
         Schema::create('paymentmethods', function (Blueprint $table) {
             $table->uuid('uuid')->primary()->unique();
             $table->uuid('service_id')->nullable();
-            $table->uuid('commission_id')->nullable();
+            $table->uuid('providercommission_id')->nullable();
+            $table->uuid('customercommission_id')->nullable();
             $table->boolean('is_default')->default(false);
             $table->boolean('is_active')->default(true);
             $table->boolean('has_reference')->default(false);
@@ -26,7 +27,8 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('description_en')->nullable();
             $table->string('description_fr')->nullable();
     
-            $table->foreign('commission_id')->references('uuid')->on('commissions');
+            $table->foreign('providercommission_id')->references('uuid')->on('commissions');
+            $table->foreign('customercommission_id')->references('uuid')->on('commissions');
             $table->foreign('service_id')->references('uuid')->on('services');
     
             $table->timestamps();

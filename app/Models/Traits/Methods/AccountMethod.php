@@ -75,7 +75,7 @@ trait AccountMethod
     public function getSales()
     {
         return Movement::where('is_reversed', false)
-            ->where('destinationaccount_id', $this->uuid)
+            ->where('user_id', $this->user->uuid)
             ->where(function ($query) {
                 $query->where('type_id', MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid);
             })

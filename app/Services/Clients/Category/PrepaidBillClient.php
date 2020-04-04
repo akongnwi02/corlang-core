@@ -38,8 +38,8 @@ class PrepaidBillClient implements CategoryInterface
             'amount'        => ['required', 'nullable', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/'],
             'currency_code' => ['required', Rule::exists('currencies', 'code')],
             'reference'     => ['sometimes', 'nullable', 'string', 'min:3'],
-            'phone'         => ['required', 'string', 'min:9'],
-        ]);
+//            'phone'         => ['required', 'string', 'min:9'],
+        ])->validate();
     }
     
     /**
@@ -88,7 +88,6 @@ class PrepaidBillClient implements CategoryInterface
             throw new ServerErrorException($body->error_code, $body->message);
         }
     }
-    
     
     public function confirm($data)
     {

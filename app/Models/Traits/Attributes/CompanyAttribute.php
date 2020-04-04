@@ -112,4 +112,9 @@ trait CompanyAttribute
     {
         return number_format($this->getCompanyTodayCommission(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
     }
+    
+    public function getCompanyStrongboxBalanceLabelAttribute()
+    {
+        return number_format($this->strongbox->balance, 2) . ' ' . Currency::where('is_default', true)->first()->code;
+    }
 }

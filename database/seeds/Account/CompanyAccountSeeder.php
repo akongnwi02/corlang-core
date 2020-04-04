@@ -2,6 +2,7 @@
 
 use App\Models\Account\Account;
 use App\Models\Account\AccountType;
+use App\Models\Account\Strongbox;
 use App\Models\Auth\User;
 use App\Models\Company\Company;
 use Illuminate\Database\Seeder;
@@ -19,11 +20,11 @@ class CompanyAccountSeeder extends Seeder
     {
         Account::unguard();
     
-        $usersWithNoAccount = Company::has('account', '=', 0)->get();
+        $companyWithNoAccount = Company::has('account', '=', 0)->get();
     
-        foreach ($usersWithNoAccount as $user) {
+        foreach ($companyWithNoAccount as $company) {
             Account::create([
-                'owner_id' => $user->uuid,
+                'owner_id' => $company->uuid,
                 'type_id' => AccountType::where('name', config('business.account.type.company'))->first()->uuid,
                 'code' => Account::generateCode(),
             ]);

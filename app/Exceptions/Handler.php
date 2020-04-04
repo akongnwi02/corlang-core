@@ -62,13 +62,13 @@ class Handler extends ExceptionHandler
             
             if ($exception instanceof \App\Exceptions\Api\BadRequestException) {
                 $error['message'] = $exception->getMessage();
-                $error['code']    = $exception->getCode();
+                $error['code']    = $exception->status();
                 $error['error_code'] = $exception->error_code();
             }
             
             if ($exception instanceof \App\Exceptions\Api\ForbiddenException) {
                 $error['message'] = $exception->getMessage();
-                $error['code']    = $exception->getCode();
+                $error['code']    = $exception->status();
                 $error['error_code'] = $exception->error_code();
             }
             
@@ -124,6 +124,11 @@ class Handler extends ExceptionHandler
             if ($exception instanceof \Illuminate\Http\Exceptions\ThrottleRequestsException) {
                 $error['message'] = 'Too Many Attempts';
                 $error['error_code'] = BusinessErrorCodes::TOO_MANY_ATTEMPTS;
+            }
+    
+            if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+                $error['message'] = 'Your token has expired';
+                $error['error_code'] = BusinessErrorCodes::TOKEN_EXPIRED;
             }
     
             \Log::error('ExceptionHandler', array_merge($error, [

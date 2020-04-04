@@ -43,7 +43,8 @@ class PaymentMethod extends Model
         'name',
         'description_en',
         'description_fr',
-        'commission_id',
+        'customercommission_id',
+        'providercommission_id',
     ];
     
     /**

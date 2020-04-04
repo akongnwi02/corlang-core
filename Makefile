@@ -27,7 +27,7 @@ test:
 down:
 	docker-compose down --volumes --remove-orphans
 
-reload: down up
+reload: down up seed
 
 up:
 	echo "Starting Containers"

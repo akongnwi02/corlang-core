@@ -9,6 +9,7 @@
 namespace App\Models\Traits\Relationships;
 
 use App\Models\Account\Account;
+use App\Models\Account\Strongbox;
 use App\Models\Auth\User;
 use App\Models\System\Country;
 use App\Models\Service\Service;
@@ -58,5 +59,10 @@ trait CompanyRelationship
     public function account()
     {
         return $this->hasOne(Account::class, 'owner_id', 'uuid');
+    }
+    
+    public function strongbox()
+    {
+        return $this->hasOne(Strongbox::class, 'company_id', 'uuid');
     }
 }

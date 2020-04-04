@@ -27,4 +27,9 @@ class CurrencyRepository
             ->where('is_default', true);
         return $currency;
     }
+    
+    public function findByCode($code)
+    {
+        return Currency::where('code', $code)->first();
+    }
 }

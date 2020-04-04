@@ -15,6 +15,7 @@ use App\Events\Backend\Companies\Company\CompanyUpdated;
 use App\Exceptions\GeneralException;
 use App\Models\Account\Account;
 use App\Models\Account\AccountType;
+use App\Models\Account\Strongbox;
 use App\Models\Auth\User;
 use App\Models\Company\Company;
 use Codeception\Module\Db;
@@ -39,11 +40,14 @@ class CompanyRepository
         $account = new Account();
         $account->code = Account::generateCode();
         $account->type_id = AccountType::where('name', config('business.account.type.company'))->first()->uuid;
+    
+        $strongbox = new Strongbox();
+        $strongbox->balance = 0;
         
         if ($company->save()) {
             $account->owner_id = $company->uuid;
-
-            if ($account->save()) {
+            $strongbox->company_id = $company->uuid;
+            if ($account->save() && $strongbox->save()) {
                 event(new CompanyCreated($company));
                 return $company;
             }

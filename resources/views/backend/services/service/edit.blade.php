@@ -156,7 +156,7 @@
                                             <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
                                         </label>
                                     </td>
-                                    <td><button id="delPOIbutton" value="Delete" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></button></td>
+                                    <td><span id="delPOIbutton" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></span></td>
                                 </tr>
                             @empty
                                 <tr>
@@ -169,7 +169,7 @@
                                             <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
                                         </label>
                                     </td>
-                                    <td><button id="delPOIbutton" value="Delete" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></button></td>
+                                    <td><span id="delPOIbutton" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></span></td>
                                 </tr>
                             @endforelse
                             </tbody>

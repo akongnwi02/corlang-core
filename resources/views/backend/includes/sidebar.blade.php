@@ -73,17 +73,17 @@
                     </a>
 
                     <ul class="nav-dropdown-items">
-                        @can(config('permission.permissions.read_services'))
-                            <li class="nav-item">
-                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/services/service*')) }}" href="{{ route('admin.services.service.index') }}">
-                                    @lang('labels.backend.services.service.management')
-                                </a>
-                            </li>
-                        @endcan
                         @can(config('permission.permissions.read_commissions'))
                             <li class="nav-item">
                                 <a class="nav-link {{ active_class(Active::checkUriPattern('admin/services/commission*')) }}" href="{{ route('admin.services.commission.index') }}">
                                     @lang('labels.backend.services.commission.management')
+                                </a>
+                            </li>
+                        @endcan
+                        @can(config('permission.permissions.read_services'))
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/services/service*')) }}" href="{{ route('admin.services.service.index') }}">
+                                    @lang('labels.backend.services.service.management')
                                 </a>
                             </li>
                         @endcan
@@ -106,23 +106,49 @@
 
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/accounts/deposit*')) }}" href="{{ route('admin.account.deposit.index') }}">
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/account/deposit*')) }}" href="{{ route('admin.account.deposit.index') }}">
                                 @lang('menus.backend.accounts.deposit.management')
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/accounts/umbrella*')) }}" href="{{ route('admin.account.umbrella.index') }}">
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/account/umbrella*')) }}" href="{{ route('admin.account.umbrella.index') }}">
                                 @lang('menus.backend.accounts.umbrella.management')
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/accounts/payout*')) }}" href="{{ route('admin.account.payout.index') }}">
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/account/payout*')) }}" href="{{ route('admin.account.payout.index') }}">
                                 @lang('menus.backend.accounts.payout.management')
                             </a>
                         </li>
                     </ul>
                 </li>
             @endcan
+            {{--@can(config('permission.permissions.read_provisions'))--}}
+                {{--<li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/provision*'), 'open') }}">--}}
+                    {{--<a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/provision*')) }}" href="{{ route('admin.provision.service.index') }}">--}}
+                        {{--<i class="nav-icon icon-drawer"></i> @lang('menus.backend.provisions.title')--}}
+                    {{--</a>--}}
+
+                    {{--<ul class="nav-dropdown-items">--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link {{ active_class(Active::checkUriPattern('admin/provision/method*')) }}" href="{{ route('admin.provision.method.index') }}">--}}
+                                {{--@lang('menus.backend.provisions.method.management')--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link {{ active_class(Active::checkUriPattern('admin/provision/service*')) }}" href="{{ route('admin.provision.service.index') }}">--}}
+                                {{--@lang('menus.backend.provisions.service.management')--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
+            {{--@endcan--}}
+
+            <li class="nav-item">
+                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/sales')) }}" href="{{ route('admin.sales.index') }}">
+                    <i class="nav-icon icon-basket-loaded"></i> @lang('menus.backend.sidebar.sales')
+                </a>
+            </li>
 
             <li class="nav-title">
                 <h6><b>@lang('menus.backend.sidebar.system')</b></h6>

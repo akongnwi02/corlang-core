@@ -50,7 +50,7 @@
                                                 <a href="{{ route('admin.account.umbrella.show', $account->uuid) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.view')" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                             @endcan
                                             @can(config('permission.permissions.debit_accounts'))
-                                                <button name="drainPopup" id="{{ $account->uuid }}" title="@lang('labels.backend.account.drain')" class="btn btn-danger"><i class="fas fa-arrow-down"></i></button>
+                                                <button name="drainPopup" id="{{ $account->uuid }}" title="@lang('labels.backend.account.transfer_to_strongbox')" class="btn btn-danger"><i class="fas fa-arrow-down"></i></button>
                                             @endcan
                                         </div>
                                     </td>

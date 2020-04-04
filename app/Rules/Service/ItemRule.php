@@ -22,16 +22,16 @@ class ItemRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        foreach ($value as $item) {
-            if (
-                array_diff(['name', 'code', 'amount'], array_keys($item))
-                // make sure the values are positive
-                || $item['amount'] < 0
-            ) {
-                \Log::error('invalid item format', ['item' => $item]);
-                return false;
+        if (request()->has_items){
+            foreach ($value as $item) {
+                validator($item, [
+                    'name' => ['required', 'string', 'min:3',],
+                    'code' => ['required', 'string', 'min:3',],
+                    'amount' => ['required', 'numeric', 'min:0'],
+                ])->validate();
             }
         }
+
         return true;
     }
     

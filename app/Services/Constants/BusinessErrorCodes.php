@@ -34,4 +34,7 @@ class BusinessErrorCodes
     const METER_CODE_NOT_FOUND              = '10020';
     const CALLBACK_SEND_ERROR               = '10021';
     const SERVICE_NOT_IMPLEMENTED           = '10022';
+    const INSUFFICIENT_BALANCE              = '10023';
+    const ACCOUNT_LIMITED                   = '10024';
+    const TOKEN_EXPIRED                     = '10025';
 }

@@ -17,6 +17,8 @@ use Spatie\QueryBuilder\QueryBuilder;
 class PayoutRepository
 {
     /**
+     * Transfer money from a user account to company strongbox
+     *
      * @param $account
      * @param $data
      * @return bool
@@ -34,12 +36,19 @@ class PayoutRepository
         $drain->currency_id = $data['currency_id'];
         $drain->account_id = $account->uuid;
         
-        if ($drain->save()) {
+        if(! $account->user->company){
+            throw new GeneralException(__('exceptions.backend.payout.no_company_error'));
+        }
+        
+        $strongbox = $account->user->company->strongbox;
+        $strongbox->balance += $data['amount'];
+        
+        if ($drain->save() && $strongbox->save()) {
 //            event(new AccountDrained());
             return true;
         }
     
-        throw new GeneralException(__('exceptions.backend.movement.create_error'));
+        throw new GeneralException(__('exceptions.backend.payout.transfer_error'));
     }
     
     /**

@@ -15,6 +15,8 @@ use App\Http\Requests\Api\Business\ConfirmPaymentRequest;
 use App\Http\Requests\Api\Business\GeneralRequest;
 use App\Http\Resources\Api\TransactionResource;
 use App\Jobs\Business\ProcessTransactionJob;
+use App\Jobs\Business\Purchase\ProcessPurchaseJob;
+use App\Jobs\Payment\ProcessPaymentJob;
 use App\Models\Transaction\Transaction;
 use App\Repositories\Api\Business\TransactionRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
@@ -69,6 +71,8 @@ class TransactionController extends Controller
      * @param TransactionRepository $transactionRepository
      * @return TransactionResource
      * @throws NotFoundException
+     * @throws \App\Exceptions\Api\BadRequestException
+     * @throws \Throwable
      */
     public function confirm(ConfirmPaymentRequest $request, TransactionRepository $transactionRepository)
     {
@@ -79,9 +83,16 @@ class TransactionController extends Controller
             \Log::info('Transaction retrieved from cache successfully. Dispatching transaction to queue');
             
             $transaction = $transactionRepository->findByUuid($model->getTransactionId());
-            
-            dispatch(new ProcessTransactionJob($transaction));
     
+            if ($transaction->method->is_default) {
+    
+                $transactionRepository->processPayment($transaction);
+                
+                dispatch(new ProcessPurchaseJob($transaction));
+            } else {
+                dispatch(new ProcessPaymentJob($transaction));
+            }
+            
             return new TransactionResource($transaction);
         }
     

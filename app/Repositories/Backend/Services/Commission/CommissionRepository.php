@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Backend\Services\Commission;
 
-
 use App\Events\Backend\Services\Commission\CommissionCreated;
 use App\Exceptions\GeneralException;
 use App\Models\Business\Commission;

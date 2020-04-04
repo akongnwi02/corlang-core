@@ -46,6 +46,7 @@ return [
 
         'sidebar' => [
             'dashboard' => 'Dashboard',
+            'sales' => 'Sales',
             'horizon' => 'Horizon',
             'general'   => 'General',
             'history'   => 'History',
@@ -83,6 +84,9 @@ return [
                 'edit'       => 'Edit Payment Method',
             ]
         ],
+        'sales' => [
+            'management' => 'Sales',
+        ],
         'accounts' => [
             'title' => 'Accounts',
             
@@ -95,10 +99,22 @@ return [
                 'view' => 'View Account',
             ],
             'payout' => [
-                'management' => 'Payout Account',
+                'management' => 'Commission Account',
                 'view' => 'View Account',
             ]
         ],
+        'provisions' => [
+            'title' => 'Provisions',
+            
+            'method' => [
+                'management' => 'Payment Method Provision',
+                'view' => 'View Payment Method Provision'
+            ],
+            'service' => [
+                'management' => 'Service Provision',
+                'view' => 'View Service Provision',
+            ],
+        ]
     ],
 
     'language-picker' => [

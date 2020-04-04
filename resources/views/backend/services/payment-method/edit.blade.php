@@ -49,10 +49,20 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.method.commission'))->class('col-md-2 form-control-label')->for('commission_id') }}
+                        {{ html()->label(__('validation.attributes.backend.services.method.customercommission'))->class('col-md-2 form-control-label')->for('customercommission_id') }}
 
                         <div class="col-md-10">
-                            {{ html()->select('commission_id', [null => null] + $commissions)
+                            {{ html()->select('customercommission_id', [null => null] + $commissions)
+                                ->class('form-control')
+                                }}
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.method.providercommission'))->class('col-md-2 form-control-label')->for('providercommission_id') }}
+
+                        <div class="col-md-10">
+                            {{ html()->select('providercommission_id', [null => null] + $commissions)
                                 ->class('form-control')
                                 }}
                         </div><!--col-->

@@ -12,13 +12,14 @@ class SeedPaymentMethodPermissions extends Migration
      * @return void
      */
     public function up()
-    {        $permissions = [
-        config('permission.permissions.read_payment_methods'),
-        config('permission.permissions.create_payment_methods'),
-        config('permission.permissions.update_payment_methods'),
-        config('permission.permissions.delete_payment_methods'),
-        config('permission.permissions.deactivate_payment_methods'),
-    ];
+    {
+        $permissions = [
+            config('permission.permissions.read_payment_methods'),
+            config('permission.permissions.create_payment_methods'),
+            config('permission.permissions.update_payment_methods'),
+            config('permission.permissions.delete_payment_methods'),
+            config('permission.permissions.deactivate_payment_methods'),
+        ];
     
         foreach ($permissions as $permission) {
             \Spatie\Permission\Models\Permission::create(['name' => $permission]);

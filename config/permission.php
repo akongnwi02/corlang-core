@@ -155,6 +155,12 @@ return [
         'read_accounts'   => 'read accounts',
         'update_accounts' => 'update accounts',
         'drain_accounts'  => 'drain accounts',
+        
+        // provisions
+        'read_provisions' => 'read provisions',
+        
+        //sales
+        'read_sales' => 'read sales',
     ],
 
 ];

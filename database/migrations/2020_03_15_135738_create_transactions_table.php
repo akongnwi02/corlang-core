@@ -31,17 +31,20 @@ class CreateTransactionsTable extends Migration
             $table->uuid('paymentmethod_id')->nullable();
             $table->string('paymentaccount')->nullable();
             $table->string('status')->nullable();
+            $table->string('error_code')->nullable();
     
             $table->double('customer_service_fee')->nullable();
-            $table->double('provider_fee')->nullable();
-            $table->double('paymentmethod_fee')->nullable();
+            $table->double('provider_service_fee')->nullable();
+            $table->double('customer_paymentmethod_fee')->nullable();
+            $table->double('provider_paymentmethod_fee')->nullable();
             $table->double('total_customer_fee')->nullable();
             $table->double('total_customer_amount')->nullable();
             $table->double('total_fee')->nullable();
     
-            $table->uuid('customercommission_id')->nullable();
-            $table->uuid('providercommission_id')->nullable();
-            $table->uuid('paymentmethodcommission_id')->nullable();
+            $table->uuid('customer_servicecommission_id')->nullable();
+            $table->uuid('provider_servicecommission_id')->nullable();
+            $table->uuid('customer_paymentmethodcommission_id')->nullable();
+            $table->uuid('provider_paymentmethodcommission_id')->nullable();
     
             $table->double('agent_commission')->nullable();
             $table->double('company_commission')->nullable();
@@ -66,9 +69,10 @@ class CreateTransactionsTable extends Migration
             $table->foreign('currency_code')->references('code')->on('currencies');
             $table->foreign('paymentmethod_code')->references('code')->on('paymentmethods');
             $table->foreign('paymentmethod_id')->references('uuid')->on('paymentmethods');
-            $table->foreign('customercommission_id')->references('uuid')->on('commissions');
-            $table->foreign('providercommission_id')->references('uuid')->on('commissions');
-            $table->foreign('paymentmethodcommission_id')->references('uuid')->on('commissions');
+            $table->foreign('customer_servicecommission_id')->references('uuid')->on('commissions');
+            $table->foreign('provider_servicecommission_id')->references('uuid')->on('commissions');
+            $table->foreign('customer_paymentmethodcommission_id')->references('uuid')->on('commissions');
+            $table->foreign('provider_paymentmethodcommission_id')->references('uuid')->on('commissions');
         });
     }
 

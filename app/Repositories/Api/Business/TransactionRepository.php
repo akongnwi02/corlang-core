@@ -8,15 +8,17 @@
 
 namespace App\Repositories\Api\Business;
 
+use App\Exceptions\Api\BadRequestException;
+use App\Exceptions\Api\ForbiddenException;
 use App\Exceptions\Api\NotFoundException;
 use App\Exceptions\Api\ServerErrorException;
 use App\Models\Transaction\Transaction;
+use App\Repositories\Backend\Movement\MovementRepository;
 use App\Services\Business\Models\ModelInterface;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
 use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 use App\Services\Constants\BusinessErrorCodes;
-use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class TransactionRepository
@@ -24,17 +26,21 @@ class TransactionRepository
     public $serviceRepository;
     public $paymentMethodRepository;
     public $commissionRepository;
+    public $movementRepository;
     
     public function __construct
     (
         ServiceRepository $serviceRepository,
         PaymentMethodRepository $paymentMethodRepository,
-        CommissionRepository $commissionRepository
+        CommissionRepository $commissionRepository,
+        MovementRepository $movementRepository
     )
     {
         $this->serviceRepository       = $serviceRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->commissionRepository    = $commissionRepository;
+        $this->movementRepository      = $movementRepository;
+        
     }
     
     /**
@@ -72,18 +78,26 @@ class TransactionRepository
             /*
              * get the commissions
              */
-            $customerCommission      = $service->customer_commission;
-            $providerCommission      = $service->provider_commission;
-            $paymentMethodCommission = $paymentMethod->commission;
+            $customerServiceCommission       = $service->customer_commission;
+            $providerServiceCommission       = $service->provider_commission;
+            $customerPaymentMethodCommission = $paymentMethod->customer_commission;
+            $providerPaymentMethodCommission = $paymentMethod->provider_commission;
             
             /*
              * calculate the fees
              */
-            $customerServiceFee = $this->commissionRepository->calculateFee($customerCommission, $model->getAmount());
-            $providerFee        = $this->commissionRepository->calculateFee($providerCommission, $model->getAmount());
-            $paymentMethodFee   = $this->commissionRepository->calculateFee($paymentMethodCommission, $model->getAmount());
-            $totalCustomerFee   = $customerServiceFee + $paymentMethodFee;
-            $totalFee           = $totalCustomerFee + $providerFee;
+            $customerServiceFee       = $this->commissionRepository->calculateFee($customerServiceCommission, $model->getAmount());
+            $providerServiceFee       = $this->commissionRepository->calculateFee($providerServiceCommission, $model->getAmount());
+            $customerPaymentMethodFee = $this->commissionRepository->calculateFee($customerPaymentMethodCommission, $model->getAmount());
+            
+            $totalCustomerFee = $customerServiceFee + $customerPaymentMethodFee;
+            
+            /*
+             * calculate the provider payment method fee
+             */
+            $providerPaymentMethodFee = $this->commissionRepository->calculateFee($providerPaymentMethodCommission, $totalCustomerFee);
+            
+            $totalFee = $totalCustomerFee + $providerServiceFee + $providerPaymentMethodFee;
             
             /*
              * get the commission rates
@@ -113,21 +127,22 @@ class TransactionRepository
             $transaction->paymentaccount     = $paymentMethod->is_default ? auth()->user()->account->code : $model->getPaymentAccount();
             $transaction->status             = config('business.transaction.status.created');
             
-            $transaction->customer_service_fee  = $customerServiceFee;
-            $transaction->provider_fee          = $providerFee;
-            $transaction->paymentmethod_fee     = $paymentMethodFee;
-            $transaction->total_customer_fee    = $totalCustomerFee;
-            $transaction->total_customer_amount = $model->getAmount() + $totalCustomerFee;
-            $transaction->total_fee             = $totalFee;
+            $transaction->customer_service_fee       = $customerServiceFee;
+            $transaction->provider_service_fee       = $providerServiceFee;
+            $transaction->customer_paymentmethod_fee = $customerPaymentMethodFee;
+            $transaction->provider_paymentmethod_fee = $providerPaymentMethodFee;
+            $transaction->total_customer_fee         = $totalCustomerFee;
+            $transaction->total_customer_amount      = $model->getAmount() + $totalCustomerFee;
+            $transaction->total_fee                  = $totalFee;
             
-            $transaction->customercommission_id      = @$customerCommission->uuid;
-            $transaction->providercommission_id      = @$providerCommission->uuid;
-            $transaction->paymentmethodcommission_id = @$paymentMethodCommission->uuid;
+            $transaction->customer_servicecommission_id       = @$customerServiceCommission->uuid;
+            $transaction->provider_servicecommission_id       = @$providerServiceCommission->uuid;
+            $transaction->customer_paymentmethodcommission_id = @$customerPaymentMethodCommission->uuid;
             
             $transaction->service_id       = $service->uuid;
             $transaction->paymentmethod_id = $paymentMethod->uuid;
             $transaction->category_id      = $category->uuid;
-            $transaction->category_code      = $category->code;
+            $transaction->category_code    = $category->code;
             
             $transaction->agent_commission   = $agent_commission;
             $transaction->company_commission = $company_commission;
@@ -141,12 +156,59 @@ class TransactionRepository
         });
     }
     
-    public function getAgentTransactions()
+    /**
+     * Processes payment for the default payment method.
+     * If user's account balance is insufficient,
+     * use the company's balance if direct polling is enabled
+     *
+     * @param $transaction
+     * @throws BadRequestException
+     * @throws \Throwable
+     */
+    public function processPayment($transaction)
     {
+        // verify if user has sufficient balance
+        $userAccount = $transaction->user->account;
+        
+        if ($userAccount->getBalance() > $transaction->total_customer_amount && $userAccount->is_active) {
+
+            $this->movementRepository->registerSale($userAccount, $transaction);
+            
+        } else if ($transaction->company->direct_polling && $transaction->company->account->is_active) {
+            
+            $companyAccount = $transaction->company->account;
+            
+            if ($companyAccount->getBalance() > $transaction->total_customer_amount) {
+                
+                $this->movementRepository->registerSale($companyAccount, $transaction);
+            }
+        } else {
+            if (! $userAccount->is_active) {
+                throw new ForbiddenException(BusinessErrorCodes::ACCOUNT_LIMITED, 'Your account has been limited.');
+            }
+            throw new BadRequestException(BusinessErrorCodes::INSUFFICIENT_BALANCE, 'Your account balance is insufficient for this transaction');
+        }
+    }
+    
+    public function getAgentTransactions()
+    {//create movement
         $transactions = QueryBuilder::for(Transaction::class)
             ->where('user_id', auth()->user()->uuid)
             ->allowedSorts('transactions.created_at', 'transactions.updated_at')
-            ->defaultSort( '-transactions.created_at', 'transactions.updated_at');
+            ->defaultSort('-transactions.created_at', 'transactions.updated_at');
         return $transactions;
+    }
+    
+    public function getAllSales()
+    {
+        $sales = QueryBuilder::for(Transaction::class)
+            ->allowedSorts('transactions.created_at', 'transactions.updated_at')
+            ->defaultSort('-transactions.created_at', 'transactions.updated_at');
+        
+        if (!auth()->user()->company->is_default) {
+            $sales->where('company_id', auth()->user()->company_id);
+        }
+        
+        return $sales;
     }
 }

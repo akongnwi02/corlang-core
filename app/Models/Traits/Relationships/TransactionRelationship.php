@@ -41,4 +41,6 @@ trait TransactionRelationship
     {
         return $this->belongsTo(PaymentMethod::class, 'paymentmethod_id', 'uuid');
     }
+    
+    
 }

@@ -18,8 +18,13 @@ trait PaymentMethodRelationship
         return $this->belongsTo(Service::class, 'service_id', 'uuid');
     }
     
-    public function commission()
+    public function customer_commission()
     {
-        return $this->belongsTo(Commission::class, 'commission_id', 'uuid');
+        return $this->belongsTo(Commission::class, 'customercommission_id', 'uuid');
+    }
+    
+    public function provider_commission()
+    {
+        return $this->belongsTo(Commission::class, 'providercommission_id', 'uuid');
     }
 }

@@ -23,22 +23,14 @@ class PricingRule implements Rule
     {
         // make sure all the keys are present in each array
         foreach ($value as $pricing) {
-            if (
-                array_diff(['from', 'to', 'fixed', 'percentage'], array_keys($pricing))
-                // make sure the values are positive
-                || $pricing['from'] < 0
-                || $pricing['to'] < 0
-                || $pricing['fixed'] < 0
-                // make sure the percentage is a percentage
-                || $pricing['percentage'] > 100
-                || $pricing['percentage'] < 0
-                //make sure from value is less than to
-                || $pricing['from'] > $pricing['to']
-            ) {
-                \Log::error('Invalid pricing', $pricing);
-                return false;
-            }
+            validator($pricing, [
+                'from'       => ['required', 'numeric', 'min:0'],
+                'to'         => ['required', 'numeric', 'min:0'],
+                'fixed'      => ['required', 'numeric'],
+                'percentage' => ['required', 'numeric', 'min:-100', 'max:100']
+            ])->validate();
         }
+    
         return true;
     }
     

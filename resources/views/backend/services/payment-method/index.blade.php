@@ -34,7 +34,8 @@
                                 <th>@lang('labels.backend.services.method.table.active')</th>
                                 <th>@lang('labels.backend.services.method.table.description_en')</th>
                                 <th>@lang('labels.backend.services.method.table.description_fr')</th>
-                                <th>@lang('labels.backend.services.method.table.commission')</th>
+                                <th>@lang('labels.backend.services.method.table.customercommission')</th>
+                                <th>@lang('labels.backend.services.method.table.providercommission')</th>
                                 <th>@lang('labels.general.actions')</th>
                             </tr>
                             </thead>
@@ -48,7 +49,8 @@
                                     <td>{!! $method->active_label !!}</td>
                                     <td>{{ $method->description_en }}</td>
                                     <td>{{ $method->description_fr}}</td>
-                                    <td>{{ @$method->commission->name }}</td>
+                                    <td>{{ @$method->customer_commission->name }}</td>
+                                    <td>{{ @$method->provider_commission->name }}</td>
                                     <td>{!! $method->action_buttons  !!}</td>
                                 </tr>
                             @endforeach
