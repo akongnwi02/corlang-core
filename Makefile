@@ -42,6 +42,9 @@ up:
 root:
 	docker exec -it -u root $$(docker-compose ps -q workspace) bash
 
+npm:
+	docker exec $$(docker-compose ps -q workspace) sh -c "npm run dev"
+
 clear:
 	docker exec $$(docker-compose ps -q workspace) sh -c "composer clear-all"
 
