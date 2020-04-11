@@ -7,7 +7,6 @@
     <div class="container-fluid">
         <div class="fade-in">
             <div class="row">
-
                 <div class="cols-sm-4 col-lg-3">
                     <div class="row">
                         <div class="col-sm-12 col-lg-12">

@@ -1,5 +1,5 @@
 <template>
-    <mdb-modal :show="showModal" @close="$emit('closed')" class="text-center">
+    <mdb-modal @close="$emit('closed')" class="text-center">
         <mdb-modal-header>
             <mdb-modal-title>{{ $t('dashboard.pages.general.summary') }}</mdb-modal-title>
         </mdb-modal-header>
@@ -81,9 +81,7 @@
 
     export default {
         name: "QuoteModal",
-        components: {Table},
         props: [
-            'showModal',
             'quote',
             'service',
         ],

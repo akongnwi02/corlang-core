@@ -118,22 +118,16 @@ class MovementRepository
         $movement = new Movement();
         $movement->code = Movement::generateCode();
         $movement->amount = $transaction->total_customer_amount;
-        $movement->type_id = MovementType::where('name', config('business.movement.type.sale'))->first()->uuid;
+        $movement->type_id = MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid;
         $movement->user_id = $transaction->user->uuid;
         $movement->company_id = @$transaction->company->uuid;
         $movement->service_id = $transaction->service_id;
         $movement->currency_id = $this->currencyRepository->findByCode($transaction->currency_code)->uuid;
-        $movement->sourceaccount_id = $account->uuid;
-        $movement->destinationaccount_id = Company::where('is_default', true)->first()->account->uuid;
+        $movement->destinationaccount_id = $account->uuid;
         
-        $double = clone $movement;
-        $double->type_id = MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid;
-        $double->sourceaccount_id = Company::where('is_default', true)->first()->account->uuid;
-        $double->destinationaccount_id = $account->uuid;
-        
-        return \DB::transaction(function () use ($movement, $double) {
-            if ($movement->save() && $double->save()) {
-//                event(Accountfdfs($movement, $double));
+        return \DB::transaction(function () use ($movement) {
+            if ($movement->save()) {
+//                event(Accountfdfs($movement));
                 return true;
             }
     

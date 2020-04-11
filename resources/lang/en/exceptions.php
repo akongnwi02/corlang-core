@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    
     /*
     |--------------------------------------------------------------------------
     | Exception Language Lines
@@ -12,7 +12,7 @@ return [
     | found in a intuitive way.
     |
     */
-
+    
     'backend' => [
         'access' => [
             'roles' => [
@@ -26,7 +26,7 @@ return [
                 'update_error'      => 'There was a problem updating this role. Please try again.',
                 'name_exists'       => 'A role already exists with the name :name.',
             ],
-
+            
             'users' => [
                 'already_confirmed'       => 'This user is already confirmed.',
                 'cant_confirm'            => 'There was a problem confirming the user account.',
@@ -59,10 +59,10 @@ return [
         
         'companies' => [
             'company' => [
-                'create_error' => 'There was a problem creating this company. Please try again.',
-                'update_error' => 'There was a problem updating this company. Please try again.',
-                'mark_error'   => 'There was a problem updating the status of this company. Please try again.',
-                'mark_rights_error'   => 'There was a problem updating the status of this company. The company was deactivated by a higher role.',
+                'create_error'          => 'There was a problem creating this company. Please try again.',
+                'update_error'          => 'There was a problem updating this company. Please try again.',
+                'mark_error'            => 'There was a problem updating the status of this company. Please try again.',
+                'mark_rights_error'     => 'There was a problem updating the status of this company. The company was deactivated by a higher role.',
                 'cant_change_attribute' => 'You are not permitted to change the :attribute',
                 'cant_change_check_box' => 'You are not allowed to change one of the checkbox values',
                 'invalid_service'       => 'An invalid service has been provided',
@@ -71,15 +71,15 @@ return [
             ],
             'service' => [
                 'mark_error'   => 'There was a problem updating the status of this service for this company. Please try again.',
-                'update_error'   => 'There was a problem updating the this service for this company. Please try again.',
+                'update_error' => 'There was a problem updating the this service for this company. Please try again.',
             ]
         ],
         
         'account' => [
-            'mark_error' => 'There was an error freezing this account.',
-            'inactive' => 'There was a problem authorizing the transaction. Either source or destination account is inactive.',
-            'insufficient_balance' => 'The was a problem authorizing the transaction. Either source or destination account has insufficient funds',
-            'insufficient_drain' => 'Insufficient funds in umbrella account',
+            'mark_error'              => 'There was an error freezing this account.',
+            'inactive'                => 'There was a problem authorizing the transaction. Account is inactive.',
+            'insufficient_balance'    => 'There was a problem authorizing the transaction. Insufficient funds',
+            'insufficient_drain'      => 'Insufficient funds in umbrella account',
             'insufficient_commission' => 'Insufficient funds in commission account',
         ],
         
@@ -88,33 +88,33 @@ return [
         ],
         
         'services' => [
-            'service' => [
-                'create_error' => 'There was a problem creating this service. Please try again.',
-                'update_error' => 'There was a problem updating this service. Please try again.',
-                'mark_error'   => 'There was a problem updating the status of this service. Please try again.',
+            'service'    => [
+                'create_error'  => 'There was a problem creating this service. Please try again.',
+                'update_error'  => 'There was a problem updating this service. Please try again.',
+                'mark_error'    => 'There was a problem updating the status of this service. Please try again.',
                 'invalid_items' => 'The :attribute contain some invalid values',
             ],
             'commission' => [
-                'create_error'  => 'There was a problem creating this commission. Please try again.',
-                'update_error'  => 'There was a problem updating this commission. Please try again.',
+                'create_error'     => 'There was a problem creating this commission. Please try again.',
+                'update_error'     => 'There was a problem updating this commission. Please try again.',
                 'invalid_pricings' => 'The :attribute contain some invalid values',
             ],
-            'method' => [
+            'method'     => [
                 'create_error' => 'There was a problem creating this payment method. Please try again.',
                 'update_error' => 'There was a problem updating this payment method. Please try again.',
                 'mark_error'   => 'There was a problem updating the status of this payment method. Please try again.',
             ]
         ],
-        'payout' => [
-            'drain_error' => 'There was an error draining the amount',
-            'transfer_error' => 'There was a problem transferring the amount to the strongbox.',
-            'payout_error' => 'There was a problem executing the payout. Please try again.',
+        'payout'   => [
+            'drain_error'      => 'There was an error draining the amount',
+            'transfer_error'   => 'There was a problem transferring the amount to the strongbox.',
+            'payout_error'     => 'There was a problem executing the payout. Please try again.',
             'no_company_error' => 'The user belongs to no company',
-            'invalid_status' => 'Invalid payout status.',
-            'status_error' => 'There was a problem updating the status of the payout. Please try again.'
+            'invalid_status'   => 'Invalid payout status.',
+            'status_error'     => 'There was a problem updating the status of the payout. Please try again.'
         ]
     ],
-
+    
     'frontend' => [
         'auth' => [
             'confirmation' => [
@@ -135,7 +135,7 @@ return [
                 'no_company'           => 'You have a business account which is not linked to any company at the moment.',
                 'deactivated_company'  => 'You have a business account and your company has been deactivated. Please contact your company administrator.',
             ],
-
+            
             'deactivated'            => 'Your account has been deactivated.',
             'email_taken'            => 'That e-mail address is already taken.',
             'phone_taken'            => 'That phone number is already taken.',
@@ -143,19 +143,19 @@ return [
             'cannot_change_phone'    => 'You cannot change your phone number. This is you default notification means.',
             'cannot_change_username' => 'You cannot change your username. Please contact support',
             'no_picture'             => 'You must supply a profile image.',
-
+            
             'password' => [
-                'change_mismatch'  => 'That is not your old password.',
-                'reset_successful' => 'Password reset successful',
+                'change_mismatch'      => 'That is not your old password.',
+                'reset_successful'     => 'Password reset successful',
                 'reset_code_confirmed' => 'Password reset confirmed successfully. Choose a new password',
-                'reset_problem'    => 'There was a problem resetting your password. Please resend the password reset email.',
-                'reset_not_confirmed'    => 'There was a problem resetting your password. Please resend the password reset code.',
+                'reset_problem'        => 'There was a problem resetting your password. Please resend the password reset email.',
+                'reset_not_confirmed'  => 'There was a problem resetting your password. Please resend the password reset code.',
             ],
-
+            
             'registration_disabled' => 'Registration is currently closed.',
         ],
     ],
-
+    
     'api' => [
         'auth'    => [
             'confirmation' => [
@@ -170,16 +170,16 @@ return [
                 'success'           => 'Your account has been successfully confirmed!',
                 'resent'            => 'A new confirmation e-mail has been sent to the address on file.',
             ],
-
+            
             'deactivated' => 'Your account has been deactivated.',
             'email_taken' => 'That e-mail address is already taken.',
             'phone_taken' => 'That phone number address is already taken.',
-
+            
             'password' => [
                 'change_mismatch' => 'That is not your old password.',
                 'reset_problem'   => 'There was a problem resetting your password. Please resend the password reset email.',
             ],
-
+            
             'registration_disabled' => 'Registration is currently closed.',
             'login'                 => [
                 'unauthorized'                     => 'You are not authorized.',
@@ -200,11 +200,11 @@ return [
                 'token_invalid'       => 'Your token is invalid',
                 'token_error_unknown' => 'Unknown authentication error'
             ],
-
+            
             'validation' => [
                 'unprocessable_entity' => 'Some information provided could not be processed.'
             ],
-
+            
             'general_error' => [
                 'message' => 'Oops something unexpected happened!'
             ]

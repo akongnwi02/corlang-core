@@ -32,6 +32,21 @@ export default {
     },
 
     transaction: function () {
-        return axios.get('/api/transaction')
+        return axios.get('/api/transaction');
+    },
+
+    account: function () {
+        return axios.get('/api/account');
+    },
+
+    payout: function (data) {
+        let params = {};
+        params.paymentmethod_code = data.paymentmethod_code;
+        params.currency_code = data.currency_code;
+        params.amount = data.amount;
+        params.comment = data.comment;
+        params.account = data.account;
+
+        return axios.post('/api/payout', params);
     }
 }

@@ -21,11 +21,11 @@ class RequestPayoutRequest extends FormRequest
         if (!auth()->user()->company->is_active) {
             throw new GeneralException(__('exceptions.backend.companies.company.inactive'));
         }
-    
-        if (! auth()->user()->company->account->is_active) {
+        
+        if (!auth()->user()->company->account->is_active) {
             throw new GeneralException(__('exceptions.backend.account.inactive'));
         }
-    
+        
         if (request()->account->type->name == config('business.account.type.user')) {
             if (request()->account->is_default) {
                 return auth()->user()->company->is_default && auth()->user()->isAdmin();
@@ -38,29 +38,29 @@ class RequestPayoutRequest extends FormRequest
                 && auth()->user()->isAdmin()
                 || auth()->user()->isCompanyAdmin();
         }
-    
+        
         return false;
     }
     
     public function attributes()
     {
         return [
-            'amount'      => __('validation.attributes.backend.account.amount'),
-            'currency_id' => __('validation.attributes.backend.account.currency'),
-            'comment' => __('validation.attributes.backend.account.comment'),
+            'amount'           => __('validation.attributes.backend.account.amount'),
+            'currency_id'      => __('validation.attributes.backend.account.currency'),
+            'comment'          => __('validation.attributes.backend.account.comment'),
             'paymentmethod_id' => __('validation.attributes.backend.account.payment_method'),
-            'account_number' => __('validation.attributes.backend.account.number'),
+            'account_number'   => __('validation.attributes.backend.account.number'),
         ];
     }
     
     public function rules()
     {
         return [
-            'amount'      => ['required', 'numeric', 'min:100', new SufficientCommissionBalanceRule()],
-            'comment'   => ['max:191', 'string', 'nullable'],
-            'currency_id' => ['required', Rule::exists('currencies', 'uuid')],
+            'amount'           => ['required', 'numeric', 'min:100', new SufficientCommissionBalanceRule()],
+            'comment'          => ['max:191', 'string', 'nullable'],
+            'currency_id'      => ['required', Rule::exists('currencies', 'uuid')],
             'paymentmethod_id' => ['sometimes', 'nullable', Rule::exists('paymentmethods', 'uuid')],
-            'account_number' => ['required', 'string', 'max:191'],
+            'account_number'   => ['required', 'string', 'max:191'],
         ];
     }
 }

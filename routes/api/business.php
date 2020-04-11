@@ -4,6 +4,7 @@
  * All routes are prefixed with /api
  */
 
+use App\Http\Controllers\Api\Business\AccountController;
 use App\Http\Controllers\Api\Business\CallbackController;
 use App\Http\Controllers\Api\Business\ConfigurationController;
 use App\Http\Controllers\Api\Business\TransactionController;
@@ -16,7 +17,7 @@ Route::group(['middleware' => request()->hasHeader('authorization') ? 'jwt.auth'
      * Configuration
      */
     Route::get('configuration', [ConfigurationController::class, 'index']);
-    
+
     /*
      * Quote
      */
@@ -31,6 +32,16 @@ Route::group(['middleware' => request()->hasHeader('authorization') ? 'jwt.auth'
      * Transaction
      */
     Route::get('transaction', [TransactionController::class, 'index']);
+    
+    /*
+     * Payout
+     */
+    Route::post('payout', [AccountController::class, 'payout']);
+    
+    /*
+     * Account
+     */
+    Route::get('account', [AccountController::class, 'account']);
     
     /*
      * Transaction CRUD

@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <mdb-row>
+        <mdb-row v-if="configurationLoadStatus==2">
             <mdb-col class="col-sm-6">
                 <label for="paymentMethod"><strong>{{ $t('dashboard.pages.general.method') }}</strong></label>
                 <select v-model="selectedMethod" class="custom-select" id="paymentMethod" required>
@@ -32,7 +32,7 @@
                 </div>
             </mdb-col>
         </mdb-row>
-        <mdb-row>
+        <mdb-row v-if="configurationLoadStatus==2">
             <mdb-col v-if="!selectedMethod.is_default" class="col-sm-6">
                 <mdb-input key="account" size="sm" :placeholder="$t('dashboard.pages.general.account')"
                            v-model="account"></mdb-input>
@@ -87,7 +87,7 @@
                 // Component Data
                 invalid_text: '',
                 show_quote_modal: false,
-                selectedMethod: null
+                selectedMethod: {}
 
             };
         },

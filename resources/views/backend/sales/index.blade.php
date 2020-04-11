@@ -52,7 +52,7 @@
                                     <td>{{ $sale->service->name }}</td>
                                     <td>{{ number_format($sale->total_customer_amount, 2) . ' ' . $sale->currency_code }}</td>
                                     <td>{{ $sale->destination }}</td>
-                                    <td>{{ $sale->method->name . '-' . $sale->paymentaccount}}</td>
+                                    <td>{{ $sale->method->name . ' - ' . $sale->paymentaccount}}</td>
                                     <td>{{ number_format($sale->company_commission, 2) . ' ' . $sale->currency_code }}</td>
                                     <td>{{ number_format($sale->agent_commission, 2) . ' ' . $sale->currency_code }}</td>
                                     <td><span class="badge badge-{{ $sale->class_label }}">{{ $sale->status }}</span></td>

@@ -22,7 +22,7 @@
                         <td>{{ $movement->amount_label }}</td>
                         <td><span class="badge badge-{{ $movement->class_label }}">{{ $movement->is_reversed ? __('labels.backend.account.deposit.tabs.content.movements.table.cancelled') : $movement->type->name }}</span></td>
                         <td>{{ $movement->user->full_name }}</td>
-                        <td>{{ $movement->source_label }}</td>
+                        <td>{{ $movement->sourceaccount_id ? $movement->source_label : '-'}}</td>
                         <td>{{ $movement->destination_label }}</td>
                         <td>{{ $movement->created_at->toDatetimeString() }}</td>
                         <td>{!! $movement->action_buttons  !!}</td>

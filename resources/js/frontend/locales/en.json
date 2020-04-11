@@ -39,6 +39,7 @@
                         "fee": "Fee",
                         "service": "Service",
                         "total": "Total",
+                        "commission": "Commission",
                         "paymentmethod": "Payment Method",
                         "status": "Status",
                         "asset": "Asset",
@@ -53,6 +54,17 @@
                         "reversed": "Reversed"
                     }
                 }
+            },
+            "account": {
+                "account_number": "Account Number",
+                "account_number_help": "Your deposit account number.",
+                "account_balance": "Account Balance",
+                "account_balance_help": "Your current account balance.",
+                "commission_balance": "Commission Balance",
+                "commission_balance_help": "Your commission balance",
+                "payout_method": "Payout method",
+                "comment": "Comment",
+                "request_payout": "Request Payout"
             },
             "general": {
                 "close": "Close",
@@ -94,6 +106,12 @@
             "service": "Please select a service from the list",
             "empty_service": "No services available for this category at the moment"
         },
+        "account": {
+            "insufficient_balance": "Your balance is insufficient",
+            "empty_payout_method": "Please select a payout method",
+            "account_number": "Please enter a valid account number",
+            "invalid_amount": "Please enter a valid amount"
+        },
         "general": {
             "maintenance": "We're currently maintaining our system. Please check back later",
             "network": "Network error. Please check your internet connection"
@@ -109,7 +127,7 @@
         "10000": "The service you requested is not available",
         "10001": "The payment method you requested is not available",
         "10002": "The request sent contains some invalid inputs",
-        "10003": "You are not authenticated.",
+        "10003": "You have been logged out. Login to continue.",
         "10004": "You are not authorized to make this request",
         "10006": "The path requested was not found",
         "10007": "You are making too many requests to the server",

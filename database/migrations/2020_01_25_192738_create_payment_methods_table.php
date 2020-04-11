@@ -24,8 +24,8 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('accountregex')->nullable();
             $table->string('name')->nullable();
             $table->string('code')->unique();
-            $table->string('description_en')->nullable();
-            $table->string('description_fr')->nullable();
+            $table->text('description_en')->nullable();
+            $table->text('description_fr')->nullable();
     
             $table->foreign('providercommission_id')->references('uuid')->on('commissions');
             $table->foreign('customercommission_id')->references('uuid')->on('commissions');

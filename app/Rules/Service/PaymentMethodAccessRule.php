@@ -32,18 +32,14 @@ class PaymentMethodAccessRule implements Rule
         
         // service should exist
         if (! $method) {
-            throw new NotFoundException(BusinessErrorCodes::PAYMENT_METHOD_FOUND, "Payment method with code $value was not found");
+            throw new NotFoundException(BusinessErrorCodes::PAYMENT_METHOD_NOT_FOUND, "Payment method with code $value was not found");
         }
         
         // payment method is deactivated for everybody
         if (! $method->is_active) {
             return false;
         }
-    
-        if ($method->is_default) {
-            return auth()->user()->company()->exists();
-        }
-
+        
         return true;
     }
     

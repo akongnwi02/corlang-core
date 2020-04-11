@@ -18,7 +18,7 @@ class Strongbox extends Model
     use Uuid,
         StrongboxRelationship;
     
-    protected $table = 'strongbox';
+    protected $table = 'strongboxes';
     
     protected $primaryKey = 'uuid';
     

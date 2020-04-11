@@ -19,8 +19,8 @@ class CreateServicesTable extends Migration
             $table->string('code')->unique();
             $table->boolean('is_active')->default(true);
             $table->string('logo_url')->nullable();
-            $table->string('description_en')->nullable();
-            $table->string('description_fr')->nullable();
+            $table->text('description_en')->nullable();
+            $table->text('description_fr')->nullable();
             $table->uuid('category_id');
             $table->uuid('providercompany_id')->nullable();
             $table->uuid('providercommission_id')->nullable();

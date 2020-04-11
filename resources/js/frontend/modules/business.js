@@ -22,6 +22,12 @@ export const business = {
 
         transactions: [],
         transactionsLoadStatus: 0,
+
+        account:{},
+        accountLoadStatus: 0,
+
+        payoutStatus: 0,
+        payout: {}
     },
 
     actions: {
@@ -102,6 +108,32 @@ export const business = {
                     commit('setTransactions', []);
                     helper.handleException(error);
                 });
+        },
+        getAccount({commit}) {
+            commit('setAccountLoadStatus', 1);
+            BusinessApi.account()
+                .then(function (response) {
+                    commit('setAccountLoadStatus', 2);
+                    commit('setAccount', response.data);
+                })
+                .catch(function (error) {
+                    commit('setAccountLoadStatus', 3);
+                    commit('setAccount', {});
+                    helper.handleException(error);
+                })
+        },
+        requestPayout({commit}, data) {
+            commit('setPayoutStatus', 1);
+            BusinessApi.payout(data)
+                .then(function (response) {
+                    commit('setPayoutStatus', 2);
+                    commit('setPayout', response.data);
+                })
+                .catch(function (error) {
+                    commit('setPayoutStatus', 3);
+                    commit('setPayout', {});
+                    helper.handleException(error);
+                });
         }
     },
 
@@ -129,6 +161,18 @@ export const business = {
         },
         setTransactionsLoadStatus(state, status) {
             state.transactionsLoadStatus = status;
+        },
+        setAccountLoadStatus(state, status) {
+            state.accountLoadStatus = status;
+        },
+        setAccount(state, account) {
+            state.account = account;
+        },
+        setPayoutStatus(state, status) {
+            state.payoutStatus = status;
+        },
+        setPayout(state, payout) {
+            state.payout = payout;
         }
     },
 
@@ -157,6 +201,18 @@ export const business = {
         },
         getTransactionsLoadStatus(state) {
             return state.transactionsLoadStatus;
+        },
+        getAccount(state) {
+            return state.account;
+        },
+        getAccountLoadStatus(state) {
+            return state.accountLoadStatus
+        },
+        getPayoutStatus(state) {
+            return state.payoutStatus;
+        },
+        getPayout(state) {
+            return state.payout;
         }
     }
 };

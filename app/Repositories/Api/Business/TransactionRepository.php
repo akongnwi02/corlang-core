@@ -169,19 +169,18 @@ class TransactionRepository
     {
         // verify if user has sufficient balance
         $userAccount = $transaction->user->account;
-        
-        if ($userAccount->getBalance() > $transaction->total_customer_amount && $userAccount->is_active) {
-
+    
+        if (($userAccount->getBalance() > $transaction->total_customer_amount) && $userAccount->is_active) {
             $this->movementRepository->registerSale($userAccount, $transaction);
             
-        } else if ($transaction->company->direct_polling && $transaction->company->account->is_active) {
-            
+        } elseif (
+            $transaction->company->direct_polling
+            && $transaction->company->account->is_active
+            && $transaction->company->account->getBalance() > $transaction->total_customer_amount
+        ) {
             $companyAccount = $transaction->company->account;
-            
-            if ($companyAccount->getBalance() > $transaction->total_customer_amount) {
                 
-                $this->movementRepository->registerSale($companyAccount, $transaction);
-            }
+            $this->movementRepository->registerSale($companyAccount, $transaction);
         } else {
             if (! $userAccount->is_active) {
                 throw new ForbiddenException(BusinessErrorCodes::ACCOUNT_LIMITED, 'Your account has been limited.');

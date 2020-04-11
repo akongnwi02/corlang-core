@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStrongboxTable extends Migration
+class CreateStrongboxesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateStrongboxTable extends Migration
      */
     public function up()
     {
-        Schema::create('strongbox', function (Blueprint $table) {
+        Schema::create('strongboxes', function (Blueprint $table) {
             $table->uuid('uuid')->primary()->unique();
             $table->uuid('company_id');
             $table->float('balance');
