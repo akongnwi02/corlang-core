@@ -44,7 +44,7 @@ class PayoutAccountController extends Controller
      */
     public function payout(RequestPayoutRequest $request ,PayoutRepository $payoutRepository, Account $account)
     {
-        $payoutRepository->payout($account, $request->only(['amount', 'currency_id', 'comment', 'account_number', 'paymentmethod_id']));
+        $payoutRepository->payout($account, $request->only(['amount', 'currency_id', 'name', 'account_number', 'paymentmethod_id']));
     
         return redirect()->route('admin.account.payout.index')
             ->withFlashSuccess(__('alerts.backend.account.paid_out'));

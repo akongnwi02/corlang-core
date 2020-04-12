@@ -63,7 +63,7 @@
                 "commission_balance": "Commission Balance",
                 "commission_balance_help": "Your commission balance",
                 "payout_method": "Payout method",
-                "comment": "Comment",
+                "name": "Account Name",
                 "request_payout": "Request Payout"
             },
             "general": {
@@ -114,7 +114,8 @@
         },
         "general": {
             "maintenance": "We're currently maintaining our system. Please check back later",
-            "network": "Network error. Please check your internet connection"
+            "network": "Network error. Please check your internet connection",
+            "unexpected": "An unexpected error occurred"
         }
     },
     "notifications": {

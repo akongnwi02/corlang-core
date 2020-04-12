@@ -8,7 +8,7 @@
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.amount')</th>
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.method')</th>
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.number')</th>
-                    <th>@lang('labels.backend.account.payout.tabs.content.movements.table.comment')</th>
+                    <th>@lang('labels.backend.account.payout.tabs.content.movements.table.name')</th>
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.user')</th>
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.account')</th>
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.company')</th>
@@ -25,7 +25,7 @@
                         <td>{{ $payout->amount_label }}</td>
                         <td>{{ @$payout->method->name ?: config('business.system.service.name') }}</td>
                         <td>{{ $payout->account_number }}</td>
-                        <td>{{ $payout->comment }}</td>
+                        <td>{{ $payout->account_name }}</td>
                         <td>{{ $payout->user->full_name }}</td>
                         <td>{{ $payout->account_label }}</td>
                         <td>{{ $payout->company->name }}</td>

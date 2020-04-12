@@ -44,7 +44,7 @@ export default {
         params.paymentmethod_code = data.paymentmethod_code;
         params.currency_code = data.currency_code;
         params.amount = data.amount;
-        params.comment = data.comment;
+        params.name = data.name;
         params.account = data.account;
 
         return axios.post('/api/payout', params);

@@ -22,7 +22,7 @@ class PayoutRequest extends FormRequest
     {
         return [
             'amount'             => ['required', 'numeric', 'min:50'],
-            'comment'            => ['sometimes', 'nullable', 'max:191', 'string',],
+            'name'               => ['sometimes', 'nullable', 'max:191', 'string',],
             'currency_code'      => ['required', Rule::exists('currencies', 'code')],
             'paymentmethod_code' => ['string', Rule::exists('paymentmethods', 'code')],
             'account'            => ['sometimes', 'nullable', 'string', 'min:6']

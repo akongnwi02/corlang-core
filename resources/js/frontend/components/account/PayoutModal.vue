@@ -13,9 +13,9 @@
                                v-model="amount"></mdb-input>
                 </mdb-col>
                 <mdb-col class="col-sm-6">
-                    <mdb-input key="comment"
-                               :placeholder="$t('dashboard.pages.account.comment')"
-                               v-model="comment"></mdb-input>
+                    <mdb-input key="name"
+                               :placeholder="$t('dashboard.pages.account.name')"
+                               v-model="name"></mdb-input>
                 </mdb-col>
                 <mdb-col class="col-sm-6">
                     <label for="paymentMethod"><strong>{{ $t('dashboard.pages.account.payout_method') }}</strong></label>
@@ -54,7 +54,7 @@
                 invalid_text: '',
                 paymentaccount: '',
                 amount: 0,
-                comment: '',
+                name: '',
                 selectedMethod: {}
             }
         },
@@ -73,7 +73,7 @@
                     this.$emit('payout', {
                         amount: this.amount,
                         paymentaccount: this.paymentaccount,
-                        comment: this.comment,
+                        name: this.name,
                         selectedMethod: this.selectedMethod
                     })
                 }

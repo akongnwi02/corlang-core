@@ -62,7 +62,7 @@ class PayoutRepository
         $payout = new Payout();
         $payout->code = Payout::generateCode();
         $payout->amount = $data['amount'];
-        $payout->comment = $data['comment'];
+        $payout->name = $data['name'];
         $payout->account_number = $data['account_number'];
         $payout->paymentmethod_id = $data['paymentmethod_id'];
         $payout->currency_id = $data['currency_id'];

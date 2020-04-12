@@ -25,6 +25,7 @@ class CreatePayoutsTable extends Migration
             $table->text('comment')->nullable();
             $table->uuid('paymentmethod_id')->nullable();
             $table->string('account_number')->nullable();
+            $table->string('account_name')->nullable();
             $table->uuid('currency_id');
     
             $table->unsignedBigInteger('created_by')->nullable();

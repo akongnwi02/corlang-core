@@ -47,7 +47,7 @@ class RequestPayoutRequest extends FormRequest
         return [
             'amount'           => __('validation.attributes.backend.account.amount'),
             'currency_id'      => __('validation.attributes.backend.account.currency'),
-            'comment'          => __('validation.attributes.backend.account.comment'),
+            'name'             => __('validation.attributes.backend.account.name'),
             'paymentmethod_id' => __('validation.attributes.backend.account.payment_method'),
             'account_number'   => __('validation.attributes.backend.account.number'),
         ];
@@ -57,7 +57,7 @@ class RequestPayoutRequest extends FormRequest
     {
         return [
             'amount'           => ['required', 'numeric', 'min:100', new SufficientCommissionBalanceRule()],
-            'comment'          => ['max:191', 'string', 'nullable'],
+            'name'          => ['max:191', 'string', 'nullable'],
             'currency_id'      => ['required', Rule::exists('currencies', 'uuid')],
             'paymentmethod_id' => ['sometimes', 'nullable', Rule::exists('paymentmethods', 'uuid')],
             'account_number'   => ['required', 'string', 'max:191'],

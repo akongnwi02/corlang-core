@@ -102,8 +102,8 @@ class TransactionRepository
             /*
              * get the commission rates
              */
-            $agent_commission_rate   = $paymentMethod->is_default ? $this->serviceRepository->getAgentServiceRate($service, auth()->user()) : 0;
-            $company_commission_rate = $paymentMethod->is_default ? $this->serviceRepository->getCompanyServiceRate($service, auth()->user()->company) : 0;
+            $agent_commission_rate   = $paymentMethod->is_default && auth()->user()->company->exists() ? $this->serviceRepository->getAgentServiceRate($service, auth()->user()) : 0;
+            $company_commission_rate = $paymentMethod->is_default && auth()->user()->company->exists() ? $this->serviceRepository->getCompanyServiceRate($service, auth()->user()->company) : 0;
             
             /*
              * share the commissions

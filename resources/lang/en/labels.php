@@ -382,6 +382,7 @@ return [
                                 'method'  => 'Payout Method',
                                 'number'  => 'Account Number',
                                 'comment' => 'Comment',
+                                'name'    => 'Account Name',
                                 'account' => 'Account',
                                 'user'    => 'Executed by',
                                 'company' => 'Company',

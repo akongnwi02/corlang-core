@@ -1,11 +1,11 @@
 <template>
     <div class="justify-content-center card-body">
-        <div class="cols-sm-8 col-lg-8">
+        <div class="cols-sm-12 col-lg-12">
             <div class="row">
                 <div class="col-sm-4 col-lg-4">
                     <div class="card">
                         <div class="card-body">
-                            <div v-if="!accountIsEmpty" class="text-value-lg"><h4>{{account.code}}</h4></div>
+                            <div v-if="!accountIsEmpty" class="text-value-lg"><h4><strong>{{account.code}}</strong></h4></div>
                             <div>{{$t('dashboard.pages.account.account_number')}}</div>
                             <small class="text-muted">{{ $t('dashboard.pages.account.account_number_help')}}</small>
                         </div>
@@ -14,7 +14,7 @@
                 <div class="col-sm-4 col-lg-4">
                     <div class="card">
                         <div class="card-body">
-                            <div v-if="!accountIsEmpty" class="text-value-lg"><h4>{{ currency(account.balance)}}</h4></div>
+                            <div v-if="!accountIsEmpty" class="text-value-lg"><h4><strong>{{ currency(account.balance)}}</strong></h4></div>
                             <div>{{ $t('dashboard.pages.account.account_balance')}}</div>
                             <small class="text-muted">{{ $t('dashboard.pages.account.account_balance_help')}}</small>
                         </div>
@@ -26,7 +26,7 @@
                             <div v-if="!accountIsEmpty" class="btn-group float-right" @click="showModal" >
                                 <span style="cursor: pointer" class="fa fa-arrow-circle-down"></span>
                             </div>
-                            <div v-if="!accountIsEmpty" class="text-value-lg"><h4>{{currency(account.commission)}}</h4></div>
+                            <div v-if="!accountIsEmpty" class="text-value-lg"><h4><strong>{{currency(account.commission)}}</strong></h4></div>
                             <div>{{ $t('dashboard.pages.account.commission_balance')}}</div>
                             <small class="text-muted">{{ $t('dashboard.pages.account.commission_balance_help')}}</small>
                         </div>
@@ -80,7 +80,7 @@
                     currency_code: this.account.currency_code,
                     paymentmethod_code: payout.selectedMethod.code,
                     amount: payout.amount,
-                    comment: payout.comment,
+                    name: payout.name,
                     account: payout.paymentaccount,
                 });
 

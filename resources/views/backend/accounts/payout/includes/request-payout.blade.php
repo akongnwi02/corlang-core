@@ -29,7 +29,7 @@
                 </div>
                 <br/>
                 <div>
-                    <input name="comment" type="text" class="form-control" placeholder="@lang('validation.attributes.backend.account.comment')">
+                    <input name="name" type="text" class="form-control" placeholder="@lang('validation.attributes.backend.account.name')">
                 </div>
                 <br/>
                 <div>
