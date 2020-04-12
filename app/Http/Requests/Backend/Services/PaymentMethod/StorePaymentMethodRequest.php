@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: devert
- * Date: 3/21/20
- * Time: 12:12 PM
+ * Date: 4/12/20
+ * Time: 10:20 PM
  */
 
 namespace App\Http\Requests\Backend\Services\PaymentMethod;
@@ -12,7 +12,7 @@ namespace App\Http\Requests\Backend\Services\PaymentMethod;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdatePaymentMethodRequest extends FormRequest
+class StorePaymentMethodRequest extends FormRequest
 {
     public function authorize()
     {
@@ -36,7 +36,7 @@ class UpdatePaymentMethodRequest extends FormRequest
         return [
             'customercommission_id' => ['sometimes', 'nullable', Rule::exists('commissions', 'uuid')],
             'providercommission_id' => ['sometimes', 'nullable', Rule::exists('commissions', 'uuid')],
-            'name'                  => ['required', 'string', 'max:191', Rule::unique('paymentmethods', 'name')->ignore(request()->route('method'), 'uuid')],
+            'name'                  => ['required', 'string', 'max:191', Rule::unique('paymentmethods', 'name')],
             'description_en'        => ['required', 'string', 'max:191'],
             'description_fr'        => ['required', 'string', 'max:191'],
             'service_id'            => ['nullable', Rule::exists('services', 'uuid')],

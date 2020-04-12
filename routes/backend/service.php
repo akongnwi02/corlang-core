@@ -111,13 +111,13 @@ Route::group([
         ->name('method.index')
         ->middleware('permission:'.config('permission.permissions.read_payment_methods'));
     
-//    Route::get('method/create', [PaymentMethodController::class, 'create'])
-//        ->name('method.create')
-//        ->middleware('permission:'.config('permission.permissions.create_payment_methods'));
-//
-//    Route::post('method', [PaymentMethodController::class, 'store'])
-//        ->name('method.store')
-//        ->middleware('permission:'.config('permission.permissions.create_payment_methods'));
+    Route::get('method/create', [PaymentMethodController::class, 'create'])
+        ->name('method.create')
+        ->middleware('permission:'.config('permission.permissions.create_payment_methods'));
+
+    Route::post('method', [PaymentMethodController::class, 'store'])
+        ->name('method.store')
+        ->middleware('permission:'.config('permission.permissions.create_payment_methods'));
     
     /*
      * Specific Payment Method

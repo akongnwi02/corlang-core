@@ -47,12 +47,32 @@ class PaymentMethodRepository
      */
     public function update($method, $data)
     {
-        $method = $method->update($data);
-    
-        if ($method) {
+        $method->fill($data);
+        $method->is_payment_service = request()->has('is_payment_service') ? 1 : 0;
+        
+        if ($method->save()) {
+//            event(new PaymentMethodUpdated($method));
             return $method;
         }
         
+        throw new GeneralException(__('exceptions.backend.services.method.update_error'));
+    }
+    
+    /**
+     * @param $data
+     * @return PaymentMethod
+     * @throws GeneralException
+     */
+    public function create($data)
+    {
+        $method = (new PaymentMethod())->fill($data);
+        $method->is_payment_service = request()->has('is_payment_service') ? 1 : 0;
+    
+        if ($method->save()) {
+//            event(new PaymentMethodCreated($method));
+            return $method;
+        }
+    
         throw new GeneralException(__('exceptions.backend.services.method.create_error'));
     }
     
@@ -87,5 +107,10 @@ class PaymentMethodRepository
     public function findByCode($code)
     {
         return PaymentMethod::where('code', $code)->first();
+    }
+    
+    public function defaultPaymentMethod()
+    {
+        return PaymentMethod::where('is_default', true)->first();
     }
 }

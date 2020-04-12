@@ -51,8 +51,8 @@ class PaymentMethodTableSeeder extends Seeder
             'is_payment_service' => false,
             'service_id'         => null,
             'accountregex'       => null,
-            'description_en'     => 'Pay with corlang account',
-            'description_fr'     => 'Payez avec votre compte Corlang',
+            'description_en'     => 'UBA account',
+            'description_fr'     => 'Compte UBA',
         ]);
         
         PaymentMethod::reguard();

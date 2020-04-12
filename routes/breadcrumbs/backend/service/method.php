@@ -9,3 +9,9 @@ Breadcrumbs::for('admin.services.method.edit', function ($trail, $id) {
     $trail->parent('admin.services.method.index');
     $trail->push(__('menus.backend.services.method.edit'), route('admin.services.method.edit', $id));
 });
+
+Breadcrumbs::for('admin.services.method.create', function ($trail) {
+    $trail->parent('admin.services.method.index');
+    $trail->push(__('menus.backend.services.method.create'), route('admin.services.method.create'));
+});
+

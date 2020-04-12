@@ -17,7 +17,7 @@
                 </div><!--col-->
 
                 <div class="col-sm-7">
-                    {{--@include('backend.services.payment-method.includes.header-buttons')--}}
+                    @include('backend.services.payment-method.includes.header-buttons')
                 </div><!--col-->
             </div><!--row-->
 
@@ -34,6 +34,7 @@
                                 <th>@lang('labels.backend.services.method.table.active')</th>
                                 <th>@lang('labels.backend.services.method.table.description_en')</th>
                                 <th>@lang('labels.backend.services.method.table.description_fr')</th>
+                                <th>@lang('labels.backend.services.method.table.payment_service')</th>
                                 <th>@lang('labels.backend.services.method.table.customercommission')</th>
                                 <th>@lang('labels.backend.services.method.table.providercommission')</th>
                                 <th>@lang('labels.general.actions')</th>
@@ -44,11 +45,12 @@
                                 <tr>
                                     <td>{{ $method->name }}</td>
                                     <td>{{ $method->code }}</td>
-                                    <td>{!! $method->logo_label !!}</td>
-                                    <td>{{ $method->service_name }}</td>
+                                    <td>{!! @$method->logo_label !!}</td>
+                                    <td>{{ @$method->service_name }}</td>
                                     <td>{!! $method->active_label !!}</td>
                                     <td>{{ $method->description_en }}</td>
                                     <td>{{ $method->description_fr}}</td>
+                                    <td>{!! $method->payment_service_label !!}</td>
                                     <td>{{ @$method->customer_commission->name }}</td>
                                     <td>{{ @$method->provider_commission->name }}</td>
                                     <td>{!! $method->action_buttons  !!}</td>

@@ -55,6 +55,19 @@ trait PaymentMethodAttribute
         }
         return '<span class="badge badge-danger">'.__('labels.general.no').'</span>';
     }
+    
+    /**
+     * @return string
+     */
+    public function getPaymentServiceLabelAttribute()
+    {
+        if ($this->is_payment_service) {
+            
+            return '<i class="fa fa-check"></i>';
+        }
+        
+        return '<i class="fa fa-times"></i>';
+    }
 
     public function getEditButtonAttribute()
     {

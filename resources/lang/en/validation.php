@@ -264,6 +264,7 @@ return [
                     'customercommission' => 'Customer Service Charge',
                     'providercommission' => 'Service Provider Fee',
                     'service'            => 'Service',
+                    'payment_service'    => 'For Automatic Payment',
                 ]
             ],
             'account'   => [

@@ -233,6 +233,7 @@ return [
                     'description_fr'     => 'Description Fr',
                     'code'               => 'Code',
                     'active'             => 'Active',
+                    'payment_service'    => 'Automatic Payment',
                     'service'            => 'Service',
                     'logo'               => 'Logo',
                     'customercommission' => 'Customer Service Charge',
