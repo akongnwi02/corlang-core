@@ -25,6 +25,15 @@ class PaymentMethodRepository
     public function getAllPaymentMethods()
     {
         return QueryBuilder::for(PaymentMethod::class)
+            ->where('is_payment_service', true)
+            ->allowedFilters([AllowedFilter::exact('is_active')])
+            ->allowedSorts('paymentmethods.is_active', 'paymentmethods.name')
+            ->defaultSort( '-paymentmethods.is_active', 'paymentmethods.name');
+    }
+    
+    public function getPayoutMethods()
+    {
+        return QueryBuilder::for(PaymentMethod::class)
             ->allowedFilters([AllowedFilter::exact('is_active')])
             ->allowedSorts('paymentmethods.is_active', 'paymentmethods.name')
             ->defaultSort( '-paymentmethods.is_active', 'paymentmethods.name');

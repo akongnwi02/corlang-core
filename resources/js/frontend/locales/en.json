@@ -110,7 +110,8 @@
             "insufficient_balance": "Your balance is insufficient",
             "empty_payout_method": "Please select a payout method",
             "account_number": "Please enter a valid account number",
-            "invalid_amount": "Please enter a valid amount"
+            "invalid_amount": "Please enter a valid amount",
+            "account_name": "Please enter a valid name"
         },
         "general": {
             "maintenance": "We're currently maintaining our system. Please check back later",

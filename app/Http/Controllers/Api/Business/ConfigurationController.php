@@ -29,12 +29,14 @@ class ConfigurationController extends Controller
             // get default country
             'country' => $countryRepository->get()->where('is_default', true)->get()[0],
             // get all payment methods
-            'methods' => $paymentMethodRepository->getPaymentMethods()
+            'methods' => $paymentMethodRepository->getAllPaymentMethods()
                 // with related service
                 ->with(['service' => function ($query) {
                     // only active services
                     $query->where('is_active', true);
                 }])->get(),
+            // get all payout methods
+            'payout_methods' => $paymentMethodRepository->getPayoutMethods()->get(),
             // get all categories
             'categories' => $categoryRepository->get()
                 // only active categories

@@ -38,7 +38,7 @@ class DashboardComposer
             ->with('company_strongbox_balance', auth()->user()->company->company_strongbox_balance_label)
             ->with('system_commission_balance', number_format($this->accountRepository->getSystemCommissionBalance(), 2) . ' ' . Currency::where('is_default', true)->first()->code)
             ->with('system_account', Account::where('is_default', true)->first())
-            ->with('payment_methods', $this->paymentMethodRepository->getPaymentMethods()->pluck('name', 'uuid')->toArray())
+            ->with('payout_methods', $this->paymentMethodRepository->getPayoutMethods()->pluck('name', 'uuid')->toArray())
             ->with('number_of_users', auth()->user()->company->getNumberOfUsers());
     }
 }

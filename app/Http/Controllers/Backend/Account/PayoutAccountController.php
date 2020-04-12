@@ -23,7 +23,7 @@ class PayoutAccountController extends Controller
     {
         return view('backend.accounts.payout.index')
             ->withAccounts($accountRepository->getAllAccounts()->paginate())
-            ->withPaymentMethods($paymentMethodRepository->getPaymentMethods()->get()
+            ->withPaymentMethods($paymentMethodRepository->getPayoutMethods()->get()
                 ->pluck('name', 'uuid')
                 ->toArray());
     }

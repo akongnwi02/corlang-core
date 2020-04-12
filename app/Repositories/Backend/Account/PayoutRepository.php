@@ -80,6 +80,11 @@ class PayoutRepository
         throw new GeneralException(__('exceptions.backend.payout.payout_error'));
     }
     
+    public function frontendPayout($account, $data)
+    {
+        $
+    }
+    
     /**
      * @param $payout
      * @param $status

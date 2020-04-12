@@ -13,17 +13,17 @@
                                v-model="amount"></mdb-input>
                 </mdb-col>
                 <mdb-col class="col-sm-6">
-                    <mdb-input key="name"
-                               :placeholder="$t('dashboard.pages.account.name')"
-                               v-model="name"></mdb-input>
-                </mdb-col>
-                <mdb-col class="col-sm-6">
                     <label for="paymentMethod"><strong>{{ $t('dashboard.pages.account.payout_method') }}</strong></label>
                     <select v-model="selectedMethod" class="custom-select" id="paymentMethod" required>
                         <option v-for="method in methods" :value="method">
                             {{ method.name }}
                         </option>
                     </select>
+                </mdb-col>
+                <mdb-col class="col-sm-6">
+                    <mdb-input v-if="!selectedMethod.is_default" key="name"
+                               :placeholder="$t('dashboard.pages.account.name')"
+                               v-model="name"></mdb-input>
                 </mdb-col>
                 <mdb-col class="col-sm-6">
                     <mdb-input v-if="!selectedMethod.is_default" key="amount"
@@ -60,7 +60,7 @@
         },
         computed: {
             methods() {
-                return this.$store.getters.getConfiguration.methods
+                return this.$store.getters.getConfiguration.payout_methods
             }
         },
         mounted() {
@@ -86,6 +86,7 @@
                     this.invalid_text = this.$t('validations.account.invalid_amount');
                     console.log('Balance is invalid');
                 }
+
                 if (BUSINESS_CONFIG.APP_REGEX_AMOUNT.test(this.amount)) {
                     if (this.amount > this.account.balance) {
                         ++invalid;
@@ -93,11 +94,20 @@
                         console.log('Balance is insufficient');
                     }
                 }
+
                 if (this.paymentaccount.length < 7) {
-                    if (!this.selectedMethod.is_default) {
+                    if (! this.selectedMethod.is_default) {
                         ++invalid;
                         this.invalid_text = this.$t('validations.account.account_number');
                         console.log('Invalid account number entered. Too short');
+                    }
+                }
+
+                if (this.name.length < 4) {
+                    if (! this.selectedMethod.is_default) {
+                        ++invalid;
+                        this.invalid_text = this.$t('validations.account.account_name');
+                        console.log('Invalid account name entered. Too short');
                     }
                 }
 

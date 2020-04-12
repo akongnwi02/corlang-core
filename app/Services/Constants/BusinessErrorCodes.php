@@ -37,4 +37,5 @@ class BusinessErrorCodes
     const INSUFFICIENT_BALANCE              = '10023';
     const ACCOUNT_LIMITED                   = '10024';
     const TOKEN_EXPIRED                     = '10025';
+    const PAYMENT_METHOD_NOT_ACTIVE         = '10026';
 }

@@ -24,7 +24,7 @@ class PaymentMethodController extends Controller
     public function index(PaymentMethodRepository $paymentMethodRepository)
     {
         return view('backend.services.payment-method.index')
-            ->withMethods($paymentMethodRepository->getAllPaymentMethods()
+            ->withMethods($paymentMethodRepository->getPaymentMethods()
                 ->with(['service', 'customer_commission', 'provider_commission'])
                 ->paginate());
     }

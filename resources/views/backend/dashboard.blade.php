@@ -152,7 +152,7 @@
     @component('backend.components.dashboard.payout', [
         'account' => $logged_in_user->company->account,
         'currency' => $default_currency,
-        'paymentMethods' => $payment_methods,
+        'paymentMethods' => $payout_methods,
         'companyCommissionBalance' => $company_commission_balance,
     ])
     @endcomponent
@@ -160,7 +160,7 @@
     @component('backend.components.dashboard.payout-system', [
         'account' => $system_account,
         'currency' => $default_currency,
-        'paymentMethods' => $payment_methods,
+        'paymentMethods' => $payout_methods,
         'companyCommissionBalance' => $system_commission_balance,
     ])
     @endcomponent

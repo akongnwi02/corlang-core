@@ -19,6 +19,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->uuid('providercommission_id')->nullable();
             $table->uuid('customercommission_id')->nullable();
             $table->boolean('is_default')->default(false);
+            $table->boolean('is_payment_service')->default(true);
             $table->boolean('is_active')->default(true);
             $table->boolean('has_reference')->default(false);
             $table->string('accountregex')->nullable();

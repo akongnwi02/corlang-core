@@ -8,7 +8,6 @@
 
 namespace App\Rules\Account;
 
-
 use Illuminate\Contracts\Validation\Rule;
 
 class SufficientCommissionBalanceRule implements Rule
