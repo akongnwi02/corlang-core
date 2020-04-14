@@ -27,7 +27,12 @@ export const business = {
         accountLoadStatus: 0,
 
         payoutStatus: 0,
-        payout: {}
+        payout: {},
+
+        payoutsLoadStatus: 0,
+        payouts: [],
+
+        cancelPayoutStatus: 0,
     },
 
     actions: {
@@ -134,6 +139,31 @@ export const business = {
                     commit('setPayout', {});
                     helper.handleException(error);
                 });
+        },
+        loadPayouts({commit}) {
+            commit('setPayoutsLoadStatus', 1);
+            BusinessApi.getPayouts()
+                .then(function (response) {
+                    commit('setPayoutsLoadStatus', 2);
+                    commit('setPayouts', response.data);
+                })
+                .catch(function (error) {
+                    commit('setPayoutsLoadStatus', 3);
+                    commit('setPayouts', []);
+                    helper.handleException(error);
+                });
+        },
+        cancelPayout({commit}, uuid) {
+            commit('setCancelPayoutStatus', 1);
+            BusinessApi.cancelPayout(uuid)
+                .then(function (response) {
+                    commit('setCancelPayoutStatus', 2);
+
+                })
+                .catch(function (error) {
+                    commit('setCancelPayoutStatus', 3);
+                    helper.handleException(error);
+                })
         }
     },
 
@@ -173,6 +203,15 @@ export const business = {
         },
         setPayout(state, payout) {
             state.payout = payout;
+        },
+        setPayoutsLoadStatus(state, status) {
+            state.payoutsLoadStatus = status;
+        },
+        setPayouts(state, payouts) {
+            state.payouts = payouts;
+        },
+        setCancelPayoutStatus(state, status) {
+            state.cancelPayoutStatus = status;
         }
     },
 
@@ -213,6 +252,15 @@ export const business = {
         },
         getPayout(state) {
             return state.payout;
+        },
+        getPayoutsLoadStatus(state) {
+            return state.payoutsLoadStatus;
+        },
+        getPayouts(state) {
+            return state.payouts;
+        },
+        getCancelPayoutStatus(state) {
+            return state.cancelPayoutStatus;
         }
     }
 };

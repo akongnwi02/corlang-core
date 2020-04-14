@@ -7,7 +7,7 @@
             </tr>
 
             <tr>
-                <th>@lang('labels.backend.account.payout.tabs.content.overview.code')</th>
+                <th>@lang('labels.backend.account.payout.tabs.content.overview.type')</th>
                 <td>{{ $account->type->name }}</td>
             </tr>
 

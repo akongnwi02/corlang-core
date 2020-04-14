@@ -373,6 +373,7 @@ return [
                     'content' => [
                         'overview'  => [
                             'code'    => 'Account Number',
+                            'type'    => 'Account Type',
                             'owner'   => 'Owner',
                             'balance' => 'Commission Balance',
                         ],
@@ -385,10 +386,12 @@ return [
                                 'comment' => 'Comment',
                                 'name'    => 'Account Name',
                                 'account' => 'Account',
-                                'user'    => 'Executed by',
+                                'user'    => 'Requested By',
+                                'date'    => 'Requested At',
                                 'company' => 'Company',
-                                'date'    => 'Date',
                                 'status'  => 'Status',
+                                'decision_by'  => 'Decision By',
+                                'decision_at'  => 'Decision At',
                                 'total'   => 'movement|movements',
                             ],
                         ],

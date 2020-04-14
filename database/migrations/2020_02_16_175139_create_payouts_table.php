@@ -21,6 +21,8 @@ class CreatePayoutsTable extends Migration
             $table->uuid('account_id')->nullable();
             $table->uuid('type_id');
             $table->uuid('user_id')->nullable();
+            $table->uuid('decisor_id')->nullable();
+            $table->dateTime('decision_at')->nullable();
             $table->uuid('company_id')->nullable();
             $table->text('comment')->nullable();
             $table->uuid('paymentmethod_id')->nullable();
@@ -36,6 +38,7 @@ class CreatePayoutsTable extends Migration
             
             $table->foreign('type_id')->references('uuid')->on('payouttypes');
             $table->foreign('user_id')->references('uuid')->on('users');
+            $table->foreign('decisor_id')->references('uuid')->on('users');
             $table->foreign('paymentmethod_id')->references('uuid')->on('paymentmethods');
             $table->foreign('company_id')->references('uuid')->on('companies');
             $table->foreign('currency_id')->references('uuid')->on('currencies');

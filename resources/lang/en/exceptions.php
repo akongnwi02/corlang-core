@@ -111,7 +111,8 @@ return [
             'payout_error'     => 'There was a problem executing the payout. Please try again.',
             'no_company_error' => 'The user belongs to no company',
             'invalid_status'   => 'Invalid payout status.',
-            'status_error'     => 'There was a problem updating the status of the payout. Please try again.'
+            'status_error'     => 'There was a problem updating the status of the payout. Please try again.',
+            'state_error'     => 'There was a problem updating the status of the payout. The payout is in a final state.'
         ]
     ],
     

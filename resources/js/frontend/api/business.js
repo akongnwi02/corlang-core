@@ -48,5 +48,13 @@ export default {
         params.account = data.account;
 
         return axios.post('/api/payout', params);
+    },
+
+    getPayouts: function () {
+        return axios.get('/api/payout');
+    },
+
+    cancelPayout: function (uuid) {
+        return axios.patch(`/api/payout/${uuid}/cancel`);
     }
 }

@@ -9,9 +9,11 @@
 namespace App\Repositories\Backend\Account;
 
 
+use App\Exceptions\Api\ServerErrorException;
 use App\Exceptions\GeneralException;
 use App\Models\Account\Payout;
 use App\Models\Account\PayoutType;
+use App\Services\Constants\BusinessErrorCodes;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class PayoutRepository
@@ -62,7 +64,7 @@ class PayoutRepository
         $payout = new Payout();
         $payout->code = Payout::generateCode();
         $payout->amount = $data['amount'];
-        $payout->name = $data['name'];
+        $payout->account_name = $data['name'];
         $payout->account_number = $data['account_number'];
         $payout->paymentmethod_id = $data['paymentmethod_id'];
         $payout->currency_id = $data['currency_id'];
@@ -80,9 +82,32 @@ class PayoutRepository
         throw new GeneralException(__('exceptions.backend.payout.payout_error'));
     }
     
+    /**
+     * @param $account
+     * @param $data
+     * @return Payout
+     * @throws ServerErrorException
+     */
     public function frontendPayout($account, $data)
     {
-        $
+        $payout = new Payout();
+        $payout->code = Payout::generateCode();
+        $payout->amount = $data['amount'];
+        $payout->account_name = $data['name'];
+        $payout->account_number = $data['account'];
+        $payout->paymentmethod_id = $data['paymentmethod_id'];
+        $payout->currency_id = $data['currency_id'];
+        $payout->type_id = PayoutType::where('name', config('business.payout.type.commission'))->first()->uuid;
+        $payout->user_id = auth()->user()->uuid;
+        $payout->company_id = auth()->user()->company->uuid;
+        $payout->account_id = $account->uuid;
+        $payout->status = config('business.payout.status.pending');
+        
+        if ($payout->save()) {
+//            event(new PayoutRequest());
+            return $payout;
+        }
+        throw new ServerErrorException(BusinessErrorCodes::PAYOUT_REQUEST_ERROR, 'Error requesting payout');
     }
     
     /**
@@ -94,6 +119,8 @@ class PayoutRepository
     public function mark($payout, $status)
     {
         $payout->status = $status;
+        $payout->decisor_id = auth()->user()->uuid;
+        $payout->decision_at = now()->toDateTimeString();
     
         if ($payout->update()) {
         
@@ -131,5 +158,21 @@ class PayoutRepository
             ->where('account_id', $account->uuid)
             ->where('type_id', PayoutType::where('name', config('business.payout.type.commission'))->first()->uuid)
             ->defaultSort('-payouts.created_at');
+    }
+    
+    /**
+     * @param $payout
+     * @return mixed
+     * @throws ServerErrorException
+     */
+    public function cancel($payout)
+    {
+        $payout->status = config('business.payout.status.cancelled');
+        $payout->decisor_id = auth()->user()->uuid;
+        $payout->decision_at = now()->toDateTimeString();
+        if ($payout->save()) {
+            return $payout;
+        }
+        throw new ServerErrorException(BusinessErrorCodes::PAYOUT_REQUEST_ERROR, 'Error cancelling payout request');
     }
 }

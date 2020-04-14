@@ -20,6 +20,8 @@
                         </option>
                     </select>
                 </mdb-col>
+            </div>
+            <div class="row">
                 <mdb-col class="col-sm-6">
                     <mdb-input v-if="!selectedMethod.is_default" key="name"
                                :placeholder="$t('dashboard.pages.account.name')"
@@ -85,14 +87,6 @@
                     ++invalid;
                     this.invalid_text = this.$t('validations.account.invalid_amount');
                     console.log('Balance is invalid');
-                }
-
-                if (BUSINESS_CONFIG.APP_REGEX_AMOUNT.test(this.amount)) {
-                    if (this.amount > this.account.balance) {
-                        ++invalid;
-                        this.invalid_text = this.$t('validations.account.insufficient_balance');
-                        console.log('Balance is insufficient');
-                    }
                 }
 
                 if (this.paymentaccount.length < 7) {

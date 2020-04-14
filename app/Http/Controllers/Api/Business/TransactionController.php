@@ -111,7 +111,7 @@ class TransactionController extends Controller
     {
         $transactions =  $transactionRepository->getAgentTransactions()
             // Limit the transactions to just 50 to save bandwidth
-            ->limit(50)
+            ->limit(20)
             ->get();
         
         return TransactionResource::collection($transactions);

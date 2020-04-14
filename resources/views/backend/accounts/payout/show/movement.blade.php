@@ -10,10 +10,12 @@
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.number')</th>
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.name')</th>
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.user')</th>
+                    <th>@lang('labels.backend.account.payout.tabs.content.movements.table.date')</th>
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.account')</th>
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.company')</th>
                     <th>@lang('labels.backend.account.payout.tabs.content.movements.table.status')</th>
-                    <th>@lang('labels.backend.account.payout.tabs.content.movements.table.date')</th>
+                    <th>@lang('labels.backend.account.payout.tabs.content.movements.table.decision_by')</th>
+                    <th>@lang('labels.backend.account.payout.tabs.content.movements.table.decision_at')</th>
 
                     <th>@lang('labels.general.actions')</th>
                 </tr>
@@ -27,10 +29,12 @@
                         <td>{{ $payout->account_number }}</td>
                         <td>{{ $payout->account_name }}</td>
                         <td>{{ $payout->user->full_name }}</td>
+                        <td>{{ $payout->created_at->toDatetimeString() }}</td>
                         <td>{{ $payout->account_label }}</td>
                         <td>{{ $payout->company->name }}</td>
                         <td>{!! $payout->status_label !!}</td>
-                        <td>{{ $payout->created_at->toDatetimeString() }}</td>
+                        <td>{{ @$payout->decisor->full_name }}</td>
+                        <td>{{ $payout->decision_at }}</td>
                         <td>
                             @if($payout->status == config('business.payout.status.pending'))
                                 <div class="btn-group" role="group" aria-label="@lang('labels.backend.account.payout.actions')">
@@ -46,7 +50,6 @@
                                 </div>
                             @endif
                         </td>
-
                     </tr>
                 @endforeach
                 </tbody>

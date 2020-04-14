@@ -14,6 +14,7 @@ use App\Models\Auth\User;
 use App\Models\Company\Company;
 use App\Models\System\Currency;
 
+// Some methods inherited from PayoutRelationship
 trait DrainRelationship
 {
     public function user()

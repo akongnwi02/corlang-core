@@ -28,7 +28,7 @@
             },
             "transactions": {
                 "table": {
-                    "entriesTitle": "Last 50 transactions",
+                    "entriesTitle": "Recent transactions",
                     "showingText": "Showing",
                     "noFoundMessage": "No matching transaction records found",
                     "header": {
@@ -64,9 +64,34 @@
                 "commission_balance_help": "Your commission balance",
                 "payout_method": "Payout method",
                 "name": "Account Name",
-                "request_payout": "Request Payout"
+                "request_payout": "Request Payout",
+                "table": {
+                    "entriesTitle": "Recent Requests",
+                    "header": {
+                        "code": "Ref",
+                        "amount": "Amount",
+                        "method": "Payout Method",
+                        "account_number": "Account Number",
+                        "account_name": "Account Name",
+                        "user": "Requested By",
+                        "date": "Requested At",
+                        "status": "Status",
+                        "decision_at": "Decision At"
+                    },
+                    "status": {
+                        "pending": "Pending",
+                        "approved": "Approved",
+                        "rejected": "Rejected",
+                        "cancelled": "Cancelled"
+                    },
+                    "actions": {
+                        "cancel": "Cancel",
+                        "action": "Payout action"
+                    }
+                }
             },
             "general": {
+                "actions": "Actions",
                 "close": "Close",
                 "confirm": "Confirm",
                 "next": "Next",
@@ -122,13 +147,14 @@
     "notifications": {
         "successful": "Transaction successful",
         "transactions_loaded": "Transactions updated successfully",
+        "payouts_loaded": "Recent payouts updated successfully",
         "failed": "Transaction failed"
     },
     "exceptions": {
         "00000": "An unexpected error occurred",
         "10000": "The service you requested is not available",
         "10001": "The payment method you requested is not available",
-        "10002": "The request sent contains some invalid inputs",
+        "10002": "The request sent contains some validation errors",
         "10003": "You have been logged out. Login to continue.",
         "10004": "You are not authorized to make this request",
         "10006": "The path requested was not found",
@@ -147,8 +173,11 @@
         "10020": "The meter code does not exist",
         "10021": "There was a problem sending a callback request",
         "10022": "This service does not exist yet",
-        "10023": "You account balance is insufficient",
+        "10023": "Your account balance is insufficient",
         "10024": "You are not authorized to perform this transaction. Your account has been limited",
-        "10025": "Your session has expired. Please refresh your browser"
+        "10025": "Your session has expired. Please refresh your browser",
+        "10026": "The payment method is not active",
+        "10027": "There was an error requesting the payout. Please try again later",
+        "10028": "Your commission balance is insufficient"
     }
 }

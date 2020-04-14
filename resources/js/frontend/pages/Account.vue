@@ -34,6 +34,75 @@
                 </div><!--col-->
             </div>
         </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-5">
+                <h4 class="mb-0">
+                    {{ $t('dashboard.pages.account.table.entriesTitle') }}
+                </h4>
+            </div><!--col-->
+
+            <div class="col-sm-7">
+                <button @click="refresh" class="btn btn-primary btn-sm float-right" type="button">
+                    <span class="fa fa-sync" role="status" aria-hidden="true"></span>
+                    {{ $t('dashboard.pages.general.refresh') }}
+                </button>
+            </div><!--col-->
+        </div><!--row-->
+        <div class="row mt-4">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{ $t('dashboard.pages.account.table.header.code') }}</th>
+                                <th>{{ $t('dashboard.pages.account.table.header.amount') }}</th>
+                                <th>{{ $t('dashboard.pages.account.table.header.method') }}</th>
+                                <th>{{ $t('dashboard.pages.account.table.header.account_number') }}</th>
+                                <th>{{ $t('dashboard.pages.account.table.header.account_name') }}</th>
+                                <th>{{ $t('dashboard.pages.account.table.header.user') }}</th>
+                                <th>{{ $t('dashboard.pages.account.table.header.date') }}</th>
+                                <th>{{ $t('dashboard.pages.account.table.header.status') }}</th>
+                                <th>{{ $t('dashboard.pages.account.table.header.decision_at') }}</th>
+
+                                <th>{{ $t('dashboard.pages.general.actions') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="payout in payouts">
+                            <td>{{ payout.code }}</td>
+                            <td>{{ currency(payout.amount) }}</td>
+                            <td>{{ payout.method }}</td>
+                            <td>{{ payout.account_number }}</td>
+                            <td>{{ payout.account_name }}</td>
+                            <td>{{ payout.user }}</td>
+                            <td>{{ payout.date }}</td>
+                            <td>{{ $t('dashboard.pages.account.table.status.'+payout.status) }}</td>
+                            <td>{{ payout.decision_at }}</td>
+                            <td>
+                                <div v-if="payout.status=='pending'" @click="cancelPayout(payout.uuid)" class="btn-group" role="group" :aria-label="$t('dashboard.pages.account.table.actions.action')">
+                                    <span data-toggle="tooltip" data-placement="top" :title="$t('dashboard.pages.account.table.actions.cancel')" class="btn btn-sm btn-danger"><i class="fas fa-ban"></i></span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--col-->
+        </div><!--row-->
+        <div class="row">
+            <div class="col-7">
+                <!--<div class="float-left">-->
+                    <!--{!! $payouts->total() !!} {{ trans_choice('labels.backend.account.deposit.tabs.content.movements.table.total', $payouts->total()) }}-->
+                <!--</div>-->
+            </div><!--col-->
+
+            <div class="col-5">
+                <!--<div class="float-right">-->
+                    <!--{!! $payouts->render() !!}-->
+                <!--</div>-->
+            </div><!--col-->
+        </div><!--row-->
         <payout-modal v-on:payout="requestPayout" v-on:closed="show_payout_modal=false" v-show="show_payout_modal==true" :account="account"></payout-modal>
     </div><!--card-body-->
 </template>
@@ -50,7 +119,9 @@
                 show_payout_modal: false,
             }
         },
-
+        mounted() {
+            this.refresh();
+        },
         activated() {
             this.$store.dispatch('getAccount');
         },
@@ -63,6 +134,18 @@
             },
             accountIsEmpty() {
                 return Object.keys(this.account).length === 0;
+            },
+            payouts() {
+                return this.$store.getters.getPayouts;
+            },
+            payoutsLoadStatus() {
+                return this.$store.getters.getPayoutsLoadStatus;
+            },
+            payoutStatus() {
+                return this.$store.getters.getPayoutStatus;
+            },
+            cancelPayoutStatus() {
+                return this.$store.getters.getCancelPayoutStatus;
             }
         },
         methods: {
@@ -83,7 +166,34 @@
                     name: payout.name,
                     account: payout.paymentaccount,
                 });
-
+            },
+            refresh() {
+                this.$store.dispatch('loadPayouts');
+            },
+            cancelPayout(uuid) {
+                this.$store.dispatch('cancelPayout', uuid);
+            }
+        },
+        watch: {
+            payoutsLoadStatus() {
+                if (this.payoutsLoadStatus == 2) {
+                    this.$buefy.toast.open({
+                        message: this.$t('notifications.payouts_loaded'),
+                        type: 'is-success'
+                    });
+                }
+            },
+            payoutStatus() {
+                if (this.payoutStatus == 2) {
+                    this.$store.dispatch('getAccount');
+                    this.refresh();
+                }
+            },
+            cancelPayoutStatus() {
+                if (this.cancelPayoutStatus == 2) {
+                    this.$store.dispatch('getAccount');
+                    this.refresh();
+                }
             }
         }
     }

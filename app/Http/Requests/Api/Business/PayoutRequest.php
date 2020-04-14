@@ -8,6 +8,7 @@
 
 namespace App\Http\Requests\Api\Business;
 
+use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -18,14 +19,15 @@ class PayoutRequest extends FormRequest
         return true;
     }
     
-    public function rules()
+    public function rules(PaymentMethodRepository $paymentMethodRepository)
     {
+        $defaultMethod = $paymentMethodRepository->defaultPaymentMethod();
         return [
-            'amount'             => ['required', 'numeric', 'min:50'],
-            'name'               => ['sometimes', 'nullable', 'max:191', 'string',],
+            'amount'             => ['required', 'numeric', 'min:50',],
+            'account'            => ["required_unless:paymentmethod_code,$defaultMethod->code",],
+            'name'               => ["required_unless:paymentmethod_code,$defaultMethod->code",],
             'currency_code'      => ['required', Rule::exists('currencies', 'code')],
-            'paymentmethod_code' => ['string', Rule::exists('paymentmethods', 'code')],
-            'account'            => ['sometimes', 'nullable', 'string', 'min:6']
+            'paymentmethod_code' => ['required', Rule::exists('paymentmethods', 'code')],
         ];
     }
 }

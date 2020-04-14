@@ -12,10 +12,12 @@ namespace App\Models\Account;
 use App\Models\Traits\Relationships\StrongboxRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Wildside\Userstamps\Userstamps;
 
 class Strongbox extends Model
 {
     use Uuid,
+        Userstamps,
         StrongboxRelationship;
     
     protected $table = 'strongboxes';

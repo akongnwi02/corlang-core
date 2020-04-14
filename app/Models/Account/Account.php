@@ -14,10 +14,12 @@ use App\Models\Traits\Methods\AccountMethod;
 use App\Models\Traits\Relationships\AccountRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Wildside\Userstamps\Userstamps;
 
 class Account extends Model
 {
     use Uuid,
+        Userstamps,
         AccountAttribute,
         AccountRelationship,
         AccountMethod;

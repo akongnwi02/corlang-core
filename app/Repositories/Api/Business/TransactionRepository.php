@@ -185,7 +185,7 @@ class TransactionRepository
             if (! $userAccount->is_active) {
                 throw new ForbiddenException(BusinessErrorCodes::ACCOUNT_LIMITED, 'Your account has been limited.');
             }
-            throw new BadRequestException(BusinessErrorCodes::INSUFFICIENT_BALANCE, 'Your account balance is insufficient for this transaction');
+            throw new BadRequestException(BusinessErrorCodes::INSUFFICIENT_ACCOUNT_BALANCE, 'Your account balance is insufficient for this transaction');
         }
     }
     

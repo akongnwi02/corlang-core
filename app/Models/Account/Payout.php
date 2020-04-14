@@ -17,11 +17,13 @@ use App\Models\Traits\Relationships\PayoutRelationship;
 use App\Models\Traits\Scopes\PayoutScope;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Wildside\Userstamps\Userstamps;
 
 class Payout extends Model
 {
     
     use Uuid,
+        Userstamps,
         DrainRelationship,
         DrainAttribute,
         PayoutScope,

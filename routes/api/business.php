@@ -7,6 +7,7 @@
 use App\Http\Controllers\Api\Business\AccountController;
 use App\Http\Controllers\Api\Business\CallbackController;
 use App\Http\Controllers\Api\Business\ConfigurationController;
+use App\Http\Controllers\Api\Business\PayoutController;
 use App\Http\Controllers\Api\Business\TransactionController;
 
 /*
@@ -36,7 +37,12 @@ Route::group(['middleware' => request()->hasHeader('authorization') ? 'jwt.auth'
     /*
      * Payout
      */
-    Route::post('payout', [AccountController::class, 'payout']);
+    Route::post('payout', [PayoutController::class, 'store']);
+    Route::get('payout', [PayoutController::class, 'index']);
+    // Specific Payout
+    Route::group(['prefix' => 'payout/{payout}'], function () {
+        Route::patch('/cancel', [PayoutController::class, 'cancel']);
+    });
     
     /*
      * Account
@@ -44,17 +50,13 @@ Route::group(['middleware' => request()->hasHeader('authorization') ? 'jwt.auth'
     Route::get('account', [AccountController::class, 'account']);
     
     /*
-     * Transaction CRUD
+     * Transaction
      */
+    Route::get('transaction', [TransactionController::class, 'index']);
+    // Specific Transaction
     Route::group(['prefix' => 'transaction/{transaction}'], function () {
         Route::get('/', [TransactionController::class, 'show']);
     });
-    
-    /*
-     * Status
-     */
-    Route::get('transaction', [TransactionController::class, 'index']);
-    
 });
 
 /*

@@ -9,12 +9,19 @@
 namespace App\Models\Traits\Relationships;
 
 
-use App\Models\Service\Service;
+use App\Models\Auth\User;
+use App\Models\Service\PaymentMethod;
 
+// some methods inherited from DrainRelationship
 trait PayoutRelationship
 {
     public function method()
     {
-        return $this->belongsTo(Service::class, 'paymentmethod_id', 'uuid');
+        return $this->belongsTo(PaymentMethod::class, 'paymentmethod_id', 'uuid');
+    }
+    
+    public function decisor()
+    {
+        return $this->belongsTo(User::class, 'decisor_id', 'uuid');
     }
 }

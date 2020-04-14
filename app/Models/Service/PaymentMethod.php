@@ -13,10 +13,12 @@ use App\Models\Traits\Relationships\PaymentMethodRelationship;
 use App\Models\Traits\Scopes\PaymentMethodScope;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Wildside\Userstamps\Userstamps;
 
 class PaymentMethod extends Model
 {
     use Uuid,
+        Userstamps,
         PaymentMethodAttribute,
         PaymentMethodRelationship,
         PaymentMethodScope;
