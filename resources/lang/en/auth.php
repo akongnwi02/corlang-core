@@ -22,6 +22,8 @@ return [
     'unauthorized_role'     => 'You can only assign a role lower than the :highest_role role to a user',
     'phone_or_email'        => 'Please enter a valid phone number or e-mail address.',
     'unique_phone_or_email' => 'The contact :username provided is linked to a different account',
+    'invalid_pin'           => 'The :attribute is invalid. Please enter 4 random digits',
+    'not_found_pin'         => 'Warning! You have entered an incorrect pin.',
     'socialite'             => [
         'unacceptable' => ':provider is not an acceptable login type.',
     ],

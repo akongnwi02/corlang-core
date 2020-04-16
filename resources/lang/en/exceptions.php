@@ -153,6 +153,10 @@ return [
                 'reset_not_confirmed'  => 'There was a problem resetting your password. Please resend the password reset code.',
             ],
             
+            'pin' => [
+                'change_error' => 'There was a problem changing your pin code. Please try again later.'
+            ],
+            
             'registration_disabled' => 'Registration is currently closed.',
         ],
     ],

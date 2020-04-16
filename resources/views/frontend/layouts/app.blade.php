@@ -45,6 +45,9 @@
         @stack('after-scripts')
 
         @include('includes.partials.ga')
+
+        @include('backend.includes.footer')
+
     </body>
     <style>
         /*Override mdb bootstrap */

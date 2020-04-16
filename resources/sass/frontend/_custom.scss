@@ -1,1 +1,13 @@
 // Override the Bootstrap defaults without modifying key, versioned files.
+@import '~simple-line-icons/scss/simple-line-icons';
+// Fix mobile footer
+.app-footer {
+    flex: 0 0;
+    padding-top: map-get($spacers, 3);
+    padding-bottom: map-get($spacers, 3);
+    text-align: center;
+}
+
+#app{
+    margin-bottom: 50px;
+}

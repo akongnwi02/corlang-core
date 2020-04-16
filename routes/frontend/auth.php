@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\Auth\LoginController;
 use App\Http\Controllers\Frontend\Auth\RegisterController;
+use App\Http\Controllers\Frontend\Auth\UpdatePinController;
 use App\Http\Controllers\Frontend\Auth\SocialLoginController;
 use App\Http\Controllers\Frontend\Auth\ResetPasswordController;
 use App\Http\Controllers\Frontend\Auth\ConfirmAccountController;
@@ -29,6 +30,8 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
             // Change Password Routes
             Route::patch('password/update', [UpdatePasswordController::class, 'update'])->name('password.update');
         });
+    
+        Route::patch('pin/update', [UpdatePinController::class, 'update'])->name('pin.update');
 
         // Password expired routes
         if (is_numeric(config('access.users.password_expires_days'))) {

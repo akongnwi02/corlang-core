@@ -19,7 +19,7 @@ return [
     ],
 
     'frontend' => [
-        'contact' => 'Contact',
+        'contact'   => 'Contact',
         'dashboard' => 'Dashboard',
         'login'     => 'Login',
         'macros'    => 'Macros',
@@ -29,6 +29,7 @@ return [
             'account'         => 'My Account',
             'administration'  => 'Administration',
             'change_password' => 'Change Password',
+            'change_pin'      => 'Change Pin Code',
             'my_information'  => 'My Information',
             'profile'         => 'Profile',
         ],

@@ -18,7 +18,6 @@ use Wildside\Userstamps\Userstamps;
 class PaymentMethod extends Model
 {
     use Uuid,
-        Userstamps,
         PaymentMethodAttribute,
         PaymentMethodRelationship,
         PaymentMethodScope;

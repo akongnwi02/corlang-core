@@ -273,6 +273,16 @@ class UserRepository extends BaseRepository
 
         throw new GeneralException(__('exceptions.frontend.auth.password.change_mismatch'));
     }
+    
+    public function updatePin($pin)
+    {
+        $user = auth()->user();
+        $user->pincode = $pin;
+        if ($user->save()) {
+            return $user;
+        }
+        throw new GeneralException(__('exceptions.frontend.auth.pin.change_error'));
+    }
 
     /**
      * @param $code

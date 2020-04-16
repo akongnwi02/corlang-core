@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique()->nullable();
             $table->string('phone')->unique()->nullable();
-            $table->string('avatar_type')->default('gravatar');
+            $table->string('avatar_type')->default('storage');
             $table->string('avatar_location')->nullable();
             $table->string('password')->nullable();
             $table->timestamp('password_changed_at')->nullable();
@@ -38,7 +38,7 @@ class CreateUsersTable extends Migration
             $table->boolean('reset_confirmed')->default(false);
             $table->timestamp('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
-            $table->string('pincode')->nullable();
+            $table->integer('pincode')->nullable();
             $table->string('user_agent')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

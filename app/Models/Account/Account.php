@@ -19,7 +19,6 @@ use Wildside\Userstamps\Userstamps;
 class Account extends Model
 {
     use Uuid,
-        Userstamps,
         AccountAttribute,
         AccountRelationship,
         AccountMethod;

@@ -62,7 +62,7 @@ return [
             'all_rights_reserved' => 'All Rights Reserved.',
             'are_you_sure'        => 'Are you sure you want to do this?',
             'boilerplate_link'    => 'Laravel 5 Boilerplate',
-            'corlang_link'        => 'Corlang',
+            'corlang_link'        => 'Corlang Limited',
             'powered_by'          => 'Powered by',
             'continue'            => 'Continue',
             'member_since'        => 'Member since',
@@ -189,6 +189,7 @@ return [
             'cannot_change_phone_notice' => 'You cannot change your phone number. This is your default notification means',
             'profile_updated'            => 'Profile successfully updated.',
             'password_updated'           => 'Password successfully updated.',
+            'pin_changed'                => 'Your pin code was changed successfully.',
         ],
         
         'welcome_to' => 'Welcome to :place',

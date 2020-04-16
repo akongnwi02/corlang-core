@@ -1,6 +1,6 @@
 {{ html()->modelForm($logged_in_user, 'PATCH', route('frontend.user.profile.update'))->class('form-horizontal')->attribute('enctype', 'multipart/form-data')->open() }}
     <div class="row">
-        <div class="col">
+        <div class="col-sm-6">
             <div class="form-group">
                 {{ html()->label(__('validation.attributes.frontend.avatar'))->for('avatar') }}
 
@@ -14,12 +14,16 @@
                         @endif
                     @endforeach
                 </div>
+
             </div><!--form-group-->
 
             <div class="form-group hidden" id="avatar_location">
-                {{ html()->file('avatar_location')->class('form-control') }}
+                {{ html()->file('avatar_location')->class('form-control-file')->id('avatar') }}
             </div><!--form-group-->
         </div><!--col-->
+        <div class="col-sm-6">
+            {{ html()->img($logged_in_user->picture, __('labels.frontend.user.profile.avatar'))->style('width:100px;height:100px;')->id('preview')->class('user-profile-image') }}
+        </div>
     </div><!--row-->
 
     <div class="row">
@@ -133,6 +137,22 @@
                     avatar_location.hide();
                 }
             });
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#avatar").change(function(){
+            readURL(this);
         });
     </script>
 @endpush
