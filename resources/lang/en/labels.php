@@ -436,7 +436,6 @@ return [
             'send_password_reset_link_button' => 'Send Password Reset Link',
             'send_password_reset_code'        => 'Send Password Reset Code',
             'confirm_code_button'             => 'Confirm Code',
-        
         ],
         
         'user' => [

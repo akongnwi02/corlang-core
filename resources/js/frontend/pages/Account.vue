@@ -87,6 +87,7 @@
                         </tr>
                         </tbody>
                     </table>
+                    <spinner :status="spinner_status"></spinner>
                 </div>
             </div><!--col-->
         </div><!--row-->
@@ -110,13 +111,18 @@
 <script>
     import {currency} from "../helpers/currency";
     import PayoutModal from "../components/account/PayoutModal";
+    import Spinner from '../components/global/Spinner';
 
     export default {
         name: "Account",
-        components: {PayoutModal},
+        components: {
+            PayoutModal,
+            Spinner
+        },
         data() {
             return {
                 show_payout_modal: false,
+                spinner_status: false,
             }
         },
         mounted() {
@@ -172,7 +178,7 @@
             },
             cancelPayout(uuid) {
                 this.$store.dispatch('cancelPayout', uuid);
-            }
+            },
         },
         watch: {
             payoutsLoadStatus() {
@@ -182,19 +188,25 @@
                         type: 'is-success'
                     });
                 }
+                this.spinner_status = this.payoutsLoadStatus;
             },
             payoutStatus() {
                 if (this.payoutStatus == 2) {
                     this.$store.dispatch('getAccount');
                     this.refresh();
                 }
+                this.spinner_status = this.payoutStatus;
             },
             cancelPayoutStatus() {
                 if (this.cancelPayoutStatus == 2) {
                     this.$store.dispatch('getAccount');
                     this.refresh();
                 }
-            }
+                this.spinner_status = this.cancelPayoutStatus;
+            },
+            accountLoadStatus() {
+                this.spinner_status = this.accountLoadStatus;
+            },
         }
     }
 </script>

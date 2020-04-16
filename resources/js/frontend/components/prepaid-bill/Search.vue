@@ -51,6 +51,7 @@
         <quote-modal v-on:confirmed="confirm" :service="selectedService" :quote="quote"
                      v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
 
+        <spinner :status="spinner_status"></spinner>
     </div>
 </template>
 
@@ -62,10 +63,12 @@
     import {BUSINESS_CONFIG} from "../../config/business";
     import SearchButton from "../global/SearchButton";
     import QuoteModal from './QuoteModal';
+    import Spinner from "../global/Spinner";
 
     export default {
         name: "Search",
         components: {
+            Spinner,
             QuoteModal,
             SearchButton,
             Services,
@@ -87,7 +90,8 @@
                 // Component Data
                 invalid_text: '',
                 show_quote_modal: false,
-                selectedMethod: {}
+                selectedMethod: {},
+                spinner_status: 0,
 
             };
         },
@@ -221,6 +225,7 @@
                 if (this.quoteLoadStatus == 2) {
                     this.show_quote_modal = true;
                 }
+                this.spinner_status = this.quoteLoadStatus;
             },
         }
     }
