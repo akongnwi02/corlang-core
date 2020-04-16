@@ -449,6 +449,7 @@ return [
                 'created_at'         => 'Created At',
                 'edit_information'   => 'Edit Information',
                 'email'              => 'E-mail',
+                'company'            => 'Company',
                 'phone'              => 'Telephone',
                 'username'           => 'Username',
                 'last_updated'       => 'Last Updated',

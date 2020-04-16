@@ -20,6 +20,12 @@
             <th>@lang('labels.frontend.user.profile.email')</th>
             <td>{{ $logged_in_user->email }}</td>
         </tr>
+        @if($logged_in_user->company_id)
+        <tr>
+            <th>@lang('labels.frontend.user.profile.company')</th>
+            <td>{{ $logged_in_user->company->name }}</td>
+        </tr>
+        @endif
         <tr>
             <th>@lang('labels.frontend.user.profile.created_at')</th>
             <td>{{ timezone()->convertToLocal($logged_in_user->created_at) }} ({{ $logged_in_user->created_at->diffForHumans() }})</td>
