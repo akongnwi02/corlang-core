@@ -40,5 +40,8 @@ class BusinessErrorCodes
     const PAYMENT_METHOD_NOT_ACTIVE         = '10026';
     const PAYOUT_REQUEST_ERROR              = '10027';
     const INSUFFICIENT_COMMISSION_BALANCE   = '10028';
-    const PAYOUT_CANCEL_ERROR   = '10029';
+    const PAYOUT_CANCEL_ERROR               = '10029';
+    const INCORRECT_PIN_CODE                = '10030';
+    const DEACTIVATED_METER                 = '10031';
+    const INVALID_METER_CODE                = '10032';
 }

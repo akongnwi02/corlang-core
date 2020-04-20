@@ -125,8 +125,10 @@ class MovementRepository
         $movement->currency_id = $this->currencyRepository->findByCode($transaction->currency_code)->uuid;
         $movement->destinationaccount_id = $account->uuid;
         
-        return \DB::transaction(function () use ($movement) {
-            if ($movement->save()) {
+        $transaction->paymentaccount = $account->code;
+        
+        return \DB::transaction(function () use ($movement, $transaction) {
+            if ($movement->save() && $transaction->save()) {
 //                event(Accountfdfs($movement));
                 return true;
             }

@@ -29,7 +29,6 @@ class TransactionResource extends JsonResource
             'category_code'         => $this->category_code,
             'currency_code'         => $this->currency_code,
             'destination'           => $this->destination,
-            'paymentmethod'         => $this->method->name,
             'paymentaccount'        => $this->paymentaccount,
             'agent_commission'      => $this->agent_commission,
             'status'                => $this->status,

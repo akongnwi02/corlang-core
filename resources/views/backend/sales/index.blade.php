@@ -34,7 +34,7 @@
                                 <th>@lang('labels.backend.sales.table.service')</th>
                                 <th>@lang('labels.backend.sales.table.total')</th>
                                 <th>@lang('labels.backend.sales.table.destination')</th>
-                                <th>@lang('labels.backend.sales.table.payment_method')</th>
+                                <th>@lang('labels.backend.sales.table.payment_account')</th>
                                 <th>@lang('labels.backend.sales.table.company_commission')</th>
                                 <th>@lang('labels.backend.sales.table.agent_commission')</th>
                                 <th>@lang('labels.backend.sales.table.status')</th>
@@ -52,7 +52,7 @@
                                     <td>{{ $sale->service->name }}</td>
                                     <td>{{ number_format($sale->total_customer_amount, 2) . ' ' . $sale->currency_code }}</td>
                                     <td>{{ $sale->destination }}</td>
-                                    <td>{{ $sale->method->name . ' - ' . $sale->paymentaccount}}</td>
+                                    <td>{{ $sale->paymentaccount}}</td>
                                     <td>{{ number_format($sale->company_commission, 2) . ' ' . $sale->currency_code }}</td>
                                     <td>{{ number_format($sale->agent_commission, 2) . ' ' . $sale->currency_code }}</td>
                                     <td><span class="badge badge-{{ $sale->class_label }}">{{ $sale->status }}</span></td>

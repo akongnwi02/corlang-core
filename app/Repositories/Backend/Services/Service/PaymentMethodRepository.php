@@ -18,17 +18,7 @@ class PaymentMethodRepository
 {
     public function getPaymentMethods()
     {
-        return PaymentMethod::active()
-            ->orderBy('is_default', 'desc');
-    }
-    
-    public function getAllPaymentMethods()
-    {
-        return QueryBuilder::for(PaymentMethod::class)
-            ->where('is_payment_service', true)
-            ->allowedFilters([AllowedFilter::exact('is_active')])
-            ->allowedSorts('paymentmethods.is_active', 'paymentmethods.name')
-            ->defaultSort( '-paymentmethods.is_active', 'paymentmethods.name');
+        return PaymentMethod::orderBy('is_default', 'desc');
     }
     
     public function getPayoutMethods()

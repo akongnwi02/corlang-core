@@ -33,11 +33,8 @@ class APIKeyMiddleware
             if (config('access.partner_restriction')) {
         
                 throw new ForbiddenException(BusinessErrorCodes::INVALID_API_KEY, 'Invalid API key');
-        
             }
         }
-        
         return $next($request);
-        
     }
 }

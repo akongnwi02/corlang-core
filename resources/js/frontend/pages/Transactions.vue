@@ -76,11 +76,11 @@
                             field: 'service',
                             sort: 'desc'
                         },
-                        {
-                            label: this.$t('dashboard.pages.transactions.table.header.paymentmethod'),
-                            field: 'paymentmethod',
-                            sort: 'desc'
-                        },
+                        // {
+                        //     label: this.$t('dashboard.pages.transactions.table.header.paymentmethod'),
+                        //     field: 'paymentmethod',
+                        //     sort: 'desc'
+                        // },
                         {
                             label: this.$t('dashboard.pages.transactions.table.header.status'),
                             field: 'status',
@@ -132,7 +132,7 @@
                         obj.total = currency.format(transaction.total_customer_amount, transaction.currency_code);
                         obj.commission = currency.format(transaction.agent_commission, transaction.currency_code);
                         obj.service = transaction.service;
-                        obj.paymentmethod = transaction.paymentmethod+' - '+transaction.paymentaccount;
+                        // obj.paymentmethod = transaction.paymentmethod+' - '+transaction.paymentaccount;
                         obj.status = this.$t('dashboard.pages.transactions.table.status.'+transaction.status);
                         obj.asset = transaction.asset;
                         obj.completed_at = transaction.completed_at;

@@ -14,7 +14,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class TransactionPushed implements ShouldBroadcast
+class TransactionComplete implements ShouldBroadcast
 {
     use Dispatchable,
         InteractsWithSockets,
@@ -42,8 +42,6 @@ class TransactionPushed implements ShouldBroadcast
     
     public function broadcastAs()
     {
-        \Log::debug('Processing new job transaction pushed job: ' . $this->transaction->uuid);
-
         return 'transaction-complete';
     }
 }

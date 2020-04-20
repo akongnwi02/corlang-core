@@ -36,11 +36,4 @@ trait TransactionRelationship
     {
         return $this->belongsTo(Category::class, 'category_id', 'uuid');
     }
-    
-    public function method()
-    {
-        return $this->belongsTo(PaymentMethod::class, 'paymentmethod_id', 'uuid');
-    }
-    
-    
 }

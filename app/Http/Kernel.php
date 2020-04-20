@@ -88,8 +88,7 @@ class Kernel extends HttpKernel
         'localization' => \App\Http\Middleware\LocalizationMiddleWare::class,
         'accept' => \App\Http\Middleware\AcceptHeaderMiddleware::class,
         'cors' => \Barryvdh\Cors\HandleCors::class,
-        'whitelist' => \App\Http\Middleware\WhitelistMiddleware::class,
-        'api_key' => \App\Http\Middleware\WhitelistMiddleware::class,
+        'api_key' => \App\Http\Middleware\APIKeyMiddleware::class,
     ];
 
     /**

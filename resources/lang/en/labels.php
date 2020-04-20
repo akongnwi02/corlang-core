@@ -253,7 +253,6 @@ return [
                 'service'            => 'Service',
                 'total'              => 'Total',
                 'destination'        => 'Destination',
-                'payment_method'     => 'Payment Method',
                 'payment_account'    => 'Payment Account',
                 'company_commission' => 'Company Commission',
                 'agent_commission'   => 'Agent Commission',

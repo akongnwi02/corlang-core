@@ -39,16 +39,22 @@ return [
         ],
     ],
     'service'     => [
-        'category' => [
+        'category'  => [
             'prepaidbills' => [
                 'name'    => 'Prepaid Bills',
                 'code'    => 'CORPREPAID001',
                 'api_url' => env('APP_CATEGORY_PREPAID_BILL_URL'),
                 'api_key' => env('APP_CATEGORY_PREPAID_BILL_KEY'),
+            ],
+            'mobilemoney'  => [
+                'name'    => 'Mobile Money',
+                'code'    => 'COREMOMO',
+                'api_url' => env('APP_CATEGORY_MOBILE_MONEY_URL'),
+                'api_key' => env('APP_CATEGORY_MOBILE_MONEY_KEY'),
             ]
         ],
         'endpoints' => [
-            'search' => '/search',
+            'search'  => '/search',
             'execute' => '/execute',
         ]
     ],
@@ -72,23 +78,19 @@ return [
     ],
     'transaction' => [
         'status' => [
-            'pending'    => 'pending',
-            'failed'     => 'failed',
-            'created'    => 'created',
-            'processing' => 'processing',
-            'success'    => 'success',
-            'reversed' => 'reversed',
+            'pending'      => 'pending',
+            'failed'       => 'failed',
+            'created'      => 'created',
+            'processing'   => 'processing',
+            'success'      => 'success',
+            'errored'      => 'errored',
+            'reversed'     => 'reversed',
+            'verification' => 'verification'
         ],
-        'queue' => [
-            'payment' => [
-                'process' => 'process_payment',
-                'verify' => 'verify_payment',
-                'complete' => 'complete_payment'
-                
-            ],
+        'queue'  => [
             'purchase' => [
-                'process' => 'process_purchase',
-                'verify' => 'verify_purchase',
+                'process'  => 'process_purchase',
+                'verify'   => 'verify_purchase',
                 'complete' => 'complete_purchase',
             ],
         ],

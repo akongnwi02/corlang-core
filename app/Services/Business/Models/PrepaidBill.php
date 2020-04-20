@@ -16,8 +16,6 @@ class PrepaidBill implements ModelInterface
     public $service_code;
     public $currency_code;
     public $items;
-    public $paymentmethod_code;
-    public $account;
     public $address;
     public $name;
     public $phone;
@@ -137,28 +135,6 @@ class PrepaidBill implements ModelInterface
     public function getCurrencyCode()
     {
         return $this->currency_code;
-    }
-    
-    public function setPaymentAccount($account)
-    {
-        $this->account = $account;
-        return $this;
-    }
-    
-    public function getPaymentAccount()
-    {
-        return $this->account;
-    }
-    
-    public function setPaymentMethodCode($code)
-    {
-        $this->paymentmethod_code = $code;
-        return $this;
-    }
-    
-    public function getPaymentMethodCode()
-    {
-        return $this->paymentmethod_code;
     }
     
     public function setDestination($destination)

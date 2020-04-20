@@ -9,7 +9,6 @@
 namespace App\Http\Requests\Api\Business;
 
 
-use App\Rules\Service\PaymentMethodAccessRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ConfirmPaymentRequest extends FormRequest

@@ -9,7 +9,7 @@
             <div class="row">
                 <mdb-col class="col-sm-6">
                     <mdb-input key="amount"
-                               :placeholder="$t('dashboard.pages.general.amount') + ' ' + account.currency_code"
+                               :label="$t('dashboard.pages.general.amount') + ' ' + account.currency_code"
                                v-model="amount"></mdb-input>
                 </mdb-col>
                 <mdb-col class="col-sm-6">
@@ -24,12 +24,12 @@
             <div class="row">
                 <mdb-col class="col-sm-6">
                     <mdb-input v-if="!selectedMethod.is_default" key="name"
-                               :placeholder="$t('dashboard.pages.account.name')"
+                               :label="$t('dashboard.pages.account.name')"
                                v-model="name"></mdb-input>
                 </mdb-col>
                 <mdb-col class="col-sm-6">
                     <mdb-input v-if="!selectedMethod.is_default" key="amount"
-                               :placeholder="$t('dashboard.pages.general.account')"
+                               :label="$t('dashboard.pages.general.account')"
                                v-model="paymentaccount"></mdb-input>
                 </mdb-col>
             </div>

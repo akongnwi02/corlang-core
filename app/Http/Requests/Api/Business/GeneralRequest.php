@@ -8,10 +8,9 @@
 
 namespace App\Http\Requests\Api\Business;
 
-use App\Rules\Service\PaymentMethodAccessRule;
+use App\Rules\Business\CorrectPinCode;
 use App\Rules\Service\ServiceAccessRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\RequiredIf;
 
 class GeneralRequest extends FormRequest
 {
@@ -26,9 +25,7 @@ class GeneralRequest extends FormRequest
     {
         return [
             'service_code' => ['required', new ServiceAccessRule(),],
-            'reference' => ['sometimes', 'nullable', 'string', 'min:3'],
-            'paymentmethod_code' => ['string', new PaymentMethodAccessRule()],
-            'account' => [ 'sometimes', 'nullable', 'min:8'],
+            'pincode' => ['required', new CorrectPinCode()],
         ];
     }
 }

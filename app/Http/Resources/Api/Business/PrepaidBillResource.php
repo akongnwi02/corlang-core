@@ -22,8 +22,6 @@ class PrepaidBillResource extends JsonResource
             'amount'             => (float)$this->amount,
             'service_code'       => $this->service_code,
             'currency_code'      => $this->currency_code,
-            'paymentmethod_code' => $this->paymentmethod_code,
-            'account'            => $this->account,
             'phone'              => $this->phone,
             'fee'                => (float)$this->customer_fee,
         ];

@@ -24,7 +24,7 @@ class SeedAdminUserAndRoles extends Migration
         $branchAdminRole->givePermissionTo($permission);
 
         // Add the master administrator, user id of 1agent
-
+        User::unguard();
         $admin = User::create([
             'first_name'           => 'Administrator',
             'last_name'            => 'System',
@@ -50,7 +50,7 @@ class SeedAdminUserAndRoles extends Migration
             'notification_channel' => 'mail',
             'confirmed'            => true,
         ]);
-
+        User::reguard();
         $admin->assignRole($adminRole);
 
     }

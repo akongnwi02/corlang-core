@@ -9,8 +9,6 @@
 namespace App\Http\Controllers\Api\Business;
 
 
-use App\Events\Api\Business\TransactionPushed;
-use App\Exceptions\Api\DuplicateException;
 use App\Exceptions\Api\NotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Business\ConfirmPaymentRequest;

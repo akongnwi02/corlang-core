@@ -178,6 +178,8 @@
         "10025": "Your session has expired. Please refresh your browser",
         "10026": "The payment method is not active",
         "10027": "There was an error requesting the payout. Please try again later",
-        "10028": "Your commission balance is insufficient"
+        "10028": "Your commission balance is insufficient",
+        "10029": "There was an error cancelling the payout. Please try again later",
+        "10030": "Warning! You have entered an incorrect pin code"
     }
 }

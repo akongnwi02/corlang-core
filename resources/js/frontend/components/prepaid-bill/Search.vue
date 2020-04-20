@@ -2,45 +2,26 @@
     <div class="text-center card-body" @keyup.enter="requestQuote">
         <div class="card-text text-danger"> {{ invalid_text }}</div>
         <div class="row">
-            <div class="col-sm-6">
-                <mdb-input key="meter_code" size="sm"
-                           :placeholder="$t(`dashboard.pages.tabs.content.electricity.meter_code`)"
+            <div class="col-6">
+                <mdb-input key="meter_code"
+                           :label="$t(`dashboard.pages.tabs.content.electricity.meter_code`)"
                            v-model="destination"></mdb-input>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-6">
                 <!--put a v-if on the configuration.currency.code to avoid code not found error-->
-                <mdb-input key="amount" size="sm"
-                           :placeholder="$t(`dashboard.pages.general.amount`) +' '+ configuration.currency.code"
+                <mdb-input key="amount"
+                           :label="$t(`dashboard.pages.general.amount`) +' '+ configuration.currency.code"
                            v-model="amount"></mdb-input>
             </div>
         </div>
 
-        <mdb-row v-if="configurationLoadStatus==2">
-            <mdb-col class="col-sm-6">
-                <label for="paymentMethod"><strong>{{ $t('dashboard.pages.general.method') }}</strong></label>
-                <select v-model="selectedMethod" class="custom-select" id="paymentMethod" required>
-                    <option v-for="method in methods" :value="method">
-                        {{ method.name }}
-                    </option>
-                </select>
-            </mdb-col>
-            <mdb-col class="col-sm-6">
-                <div><strong>{{ $t('dashboard.pages.general.description')}}</strong></div>
-                <div>
-                    <small>{{ $i18n.locale == 'en' ? selectedMethod.description_en : selectedMethod.description_fr }}</small>
-                </div>
-            </mdb-col>
-        </mdb-row>
-        <mdb-row v-if="configurationLoadStatus==2">
-            <mdb-col v-if="!selectedMethod.is_default" class="col-sm-6">
-                <mdb-input key="account" size="sm" :placeholder="$t('dashboard.pages.general.account')"
-                           v-model="account"></mdb-input>
-            </mdb-col>
-            <mdb-col v-if="selectedMethod.has_reference" class="col-sm-6">
-                <mdb-input type="password" key="account" size="sm"
-                           :placeholder="selectedMethod.is_default ? $t('dashboard.pages.general.pincode') : $t('dashboard.pages.general.reference')"
-                           v-model="reference"></mdb-input>
+        <mdb-row>
+            <!--</mdb-col>-->
+            <mdb-col class="col-6">
+                <mdb-input type="password" key="pincode"
+                           :label="$t('dashboard.pages.general.pincode')"
+                           v-model="pincode"></mdb-input>
             </mdb-col>
         </mdb-row>
 
@@ -81,7 +62,7 @@
             return {
                 // Models Fields
                 account: '',
-                reference: '',
+                pincode: '',
                 destination: '',
                 amount: '',
                 selectedService: null,
@@ -90,13 +71,9 @@
                 // Component Data
                 invalid_text: '',
                 show_quote_modal: false,
-                selectedMethod: {},
                 spinner_status: 0,
 
             };
-        },
-        mounted() {
-            this.selectedMethod = this.configuration.methods[0];
         },
         computed: {
             quoteLoadStatus() {
@@ -114,9 +91,6 @@
             quote() {
                 return this.$store.getters.getQuote;
             },
-            methods() {
-                return this.$store.getters.getConfiguration.methods;
-            },
         },
         methods: {
             selectService: function (service) {
@@ -130,15 +104,10 @@
                         service_code: this.selectedService.code,
                         amount: this.amount,
                         currency_code: this.configuration.currency.code,
-                        paymentmethod_code: this.selectedMethod.code,
-                        reference: this.reference,
+                        pincode: this.pincode,
                         account: this.account
                     });
                 }
-            },
-
-            selectMethod(method) {
-                this.selectedMethod = method;
             },
 
             validateData() {
@@ -172,35 +141,10 @@
                     }
                 }
 
-                if (!this.selectedMethod) {
-                    if (this.methods.length === 1) {
-                        this.selectedMethod = this.methods[0];
-                        console.log('Only one payment method in list. Hence selected');
-                    } else if (this.methods.length === 0) {
-                        console.log('No payment method available');
-                        ++invalid;
-                        this.invalid_text = this.$t('validations.purchase.empty_paymentmethod');
-                    } else {
-                        console.log('No payment method selected');
-                        this.invalid_text = this.$t('validations.purchase.paymentmethod');
-                        ++invalid;
-                    }
-                }
-
-                if (this.reference.length < 3) {
-                    if (this.selectedMethod.has_reference) {
-                        ++invalid;
-                        this.invalid_text = this.selectedMethod.is_default ? this.$t('validations.purchase.pincode') : this.$t('validations.purchase.reference');
-                        console.log('Invalid reference');
-                    }
-                }
-
-                if (this.account.length < 6) {
-                    if (!this.selectedMethod.is_default) {
-                        ++invalid;
-                        this.invalid_text = this.$t('validations.purchase.account');
-                        console.log('Invalid payment method');
-                    }
+                if (this.pincode.length < 3) {
+                    ++invalid;
+                    this.invalid_text = this.selectedMethod.is_default ? this.$t('validations.purchase.pincode') : this.$t('validations.purchase.reference');
+                    console.log('Invalid reference');
                 }
 
                 if (invalid === 0) {

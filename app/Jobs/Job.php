@@ -17,4 +17,9 @@ use Illuminate\Foundation\Bus\Dispatchable;
 class Job implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    
+    public function getJobName()
+    {
+        return class_basename($this->job);
+    }
 }

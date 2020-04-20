@@ -137,6 +137,8 @@ return [
         'search_uri' => env('APP_MICRO_SERVICE_SEARCH_URI', '/search'),
         
         'confirm_uri' => env('APP_MICRO_SERVICE_CONFIRM_URI', '/execute'),
+        
+        'status_uri' => env('APP_MICRO_SERVICE_STATUS_URI', '/status'),
     
         'cache_expiration' => env('APP_CACHE_EXPIRATION', 1),
 

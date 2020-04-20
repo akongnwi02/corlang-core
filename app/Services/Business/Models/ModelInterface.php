@@ -26,15 +26,7 @@ interface ModelInterface
     public function setCurrencyCode($code);
     
     public function getCurrencyCode();
-    
-    public function setPaymentAccount($account);
-    
-    public function getPaymentAccount();
-    
-    public function setPaymentMethodCode($code);
-    
-    public function getPaymentMethodCode();
-    
+   
     public function setDestination($destination);
     
     public function getDestination();

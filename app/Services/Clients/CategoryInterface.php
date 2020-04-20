@@ -12,5 +12,9 @@ interface CategoryInterface
 {
     public function validate($request);
     
-    public function confirm($data);
+    public function confirm($transaction);
+    
+    public function getCategoryClientName(): string;
+    
+    public function status($transaction): bool;
 }
