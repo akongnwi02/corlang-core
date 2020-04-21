@@ -257,7 +257,8 @@ return [
                 'company_commission' => 'Company Commission',
                 'agent_commission'   => 'Agent Commission',
                 'completed_at'       => 'Completed At',
-                'status'             => 'Status',
+                'user_status'        => 'User\'s Status',
+                'actual_status'      => 'Actual Status',
                 'total_sales'        => 'sales|sales',
             ]
         ],

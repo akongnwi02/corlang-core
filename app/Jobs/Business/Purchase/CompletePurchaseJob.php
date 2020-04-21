@@ -48,7 +48,7 @@ class CompletePurchaseJob extends Job
     
     public function handle()
     {
-        \Log::info("{$this->getJobName()}: Transaction is terminated. Broadcasting new event...", [
+        \Log::info("{$this->getJobName()}: Transaction is terminated. Broadcasting transaction complete event...", [
             'transaction.status'                => $this->transaction->status,
             'transaction.asset'                 => $this->transaction->asset,
             'transaction.code'                  => $this->transaction->code,
@@ -59,7 +59,8 @@ class CompletePurchaseJob extends Job
             'transaction.error'                 => $this->transaction->error,
             'transaction.error_code'            => $this->transaction->error_code,
             'transaction.external_id'           => $this->transaction->external_id,
-            'transaction.verification_attempts' => $this->transaction->callback_attempts,
+            'transaction.callback_attempts'     => $this->transaction->callback_attempts,
+            'transaction.verification_attempts' => $this->transaction->verification_attempts,
             'transaction.service_code'          => $this->transaction->service_code,
         ]);
         

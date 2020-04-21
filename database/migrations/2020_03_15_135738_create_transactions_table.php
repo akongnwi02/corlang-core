@@ -43,6 +43,7 @@ class CreateTransactionsTable extends Migration
                 config('business.transaction.status.success'),
                 config('business.transaction.status.failed'),
             ]);
+            $table->boolean('to_be_verified')->default(false);
             $table->string('error_code')->nullable();
             $table->text('error')->nullable();
             $table->text('message')->nullable();

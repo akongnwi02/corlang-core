@@ -98,6 +98,7 @@ class VerifyPurchaseJob extends Job
     {
         $this->transaction->status  = config('business.transaction.status.failed');
         $this->transaction->message = 'Transaction failed unexpectedly while verifying status';
+        $this->transaction->to_be_verified = true;
         $this->transaction->save();
         \Log::emergency("{$this->getJobName()}: Transaction failed unexpectedly during status check. Inserted into COMPLETE queue", [
             'transaction.code'        => $this->transaction->code,

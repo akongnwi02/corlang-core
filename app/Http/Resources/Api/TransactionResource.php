@@ -31,7 +31,7 @@ class TransactionResource extends JsonResource
             'destination'           => $this->destination,
             'paymentaccount'        => $this->paymentaccount,
             'agent_commission'      => $this->agent_commission,
-            'status'                => $this->status,
+            'status'                => $this->user_status,
             'total_customer_fee'    => number_format((double)$this->total_customer_fee, 2),
             'total_customer_amount' => number_format((double)$this->total_customer_amount, 2),
             'created_at'            => $this->created_at->toDatetimeString(),

@@ -143,8 +143,8 @@
 
                 if (this.pincode.length < 3) {
                     ++invalid;
-                    this.invalid_text = this.selectedMethod.is_default ? this.$t('validations.purchase.pincode') : this.$t('validations.purchase.reference');
-                    console.log('Invalid reference');
+                    this.invalid_text = this.$t('validations.purchase.pincode');
+                    console.log('Invalid pincode');
                 }
 
                 if (invalid === 0) {
