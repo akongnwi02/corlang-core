@@ -69,7 +69,7 @@ class CompletePurchaseJob extends Job
             'transaction.service_code'          => $this->transaction->service_code,
         ]);
         
-        $this->transaction->complete_at = now();
+        $this->transaction->completed_at = now();
         $this->transaction->save();
         
         $pusher = new Pusher(
