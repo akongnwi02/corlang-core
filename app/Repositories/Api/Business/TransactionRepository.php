@@ -175,7 +175,7 @@ class TransactionRepository
     }
     
     public function getAgentTransactions()
-    {//create movement
+    {
         $transactions = QueryBuilder::for(Transaction::class)
             ->where('user_id', auth()->user()->uuid)
             ->allowedSorts('transactions.created_at', 'transactions.updated_at')

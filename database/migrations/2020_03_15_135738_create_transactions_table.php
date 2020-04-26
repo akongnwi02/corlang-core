@@ -38,11 +38,6 @@ class CreateTransactionsTable extends Migration
                 config('business.transaction.status.failed'),
                 config('business.transaction.status.reversed'),
             ])->nullable();
-            $table->enum('user_status', [
-                config('business.transaction.status.processing'),
-                config('business.transaction.status.success'),
-                config('business.transaction.status.failed'),
-            ]);
             $table->boolean('to_be_verified')->default(false);
             $table->string('error_code')->nullable();
             $table->text('error')->nullable();

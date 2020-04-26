@@ -51,7 +51,8 @@
                         "processing": "In Processing",
                         "success": "Completed",
                         "failed": "Failed",
-                        "reversed": "Reversed"
+                        "reversed": "Reversed",
+                        "cancelled": "Cancelled"
                     }
                 }
             },
@@ -180,6 +181,8 @@
         "10027": "There was an error requesting the payout. Please try again later",
         "10028": "Your commission balance is insufficient",
         "10029": "There was an error cancelling the payout. Please try again later",
-        "10030": "Warning! You have entered an incorrect pin code"
+        "10030": "Warning! You have entered an incorrect pin code",
+        "10031": "The meter with the provided has been deactivated",
+        "10032": "The meter code provided is invalid"
     }
 }

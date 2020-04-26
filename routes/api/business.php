@@ -66,7 +66,5 @@ Route::group(['namespace' => 'Public'], function () {
     /*
      * Callback
      */
-    Route::post('callback/payment', [CallbackController::class, 'callback']);
-    Route::post('callback/transaction', [CallbackController::class, 'callback']);
-    
+    Route::patch('callback/{transaction}', [CallbackController::class, 'callback']);
 });

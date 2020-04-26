@@ -154,7 +154,7 @@ class PrepaidBillClient implements CategoryInterface
         
         $httpClient = $this->getHttpClient();
         try {
-            $response = $httpClient->request('GET', config('business.service.endpoints.search')."/$transaction->uuid");
+            $response = $httpClient->request('GET', config('business.service.endpoints.status')."/$transaction->uuid");
             $content = $response->getBody()->getContents();
             Log::debug("{$this->getCategoryClientName()}: Response from micro service", [
                 'destination'  => $transaction->destination,

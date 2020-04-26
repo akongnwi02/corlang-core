@@ -44,4 +44,5 @@ class BusinessErrorCodes
     const INCORRECT_PIN_CODE                = '10030';
     const DEACTIVATED_METER                 = '10031';
     const INVALID_METER_CODE                = '10032';
+    const TRANSACTION_IN_FINAL_STATUS       = '10033';
 }

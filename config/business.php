@@ -56,6 +56,7 @@ return [
         'endpoints' => [
             'search'  => '/search',
             'execute' => '/execute',
+            'status' => '/status',
         ]
     ],
     'system'      => [
@@ -85,7 +86,7 @@ return [
             'success'      => 'success',
             'errored'      => 'errored',
             'reversed'     => 'reversed',
-            'verification' => 'verification'
+            'verification' => 'verification',
         ],
         'queue'  => [
             'purchase' => [

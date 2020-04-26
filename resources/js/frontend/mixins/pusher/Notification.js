@@ -4,10 +4,10 @@ export const PusherNotification = {
     methods: {
         waitForNotification(uuid) {
             Echo.channel(uuid)
-                .listen(BUSINESS_CONFIG.PUSHER_APP_TRANSACTION_EVENT, function(data) {
-                    if (data.transaction.status == BUSINESS_CONFIG.TRANSACTION_SUCCESSFUL) {
+                .listen(BUSINESS_CONFIG.PUSHER_APP_TRANSACTION_EVENT, function(transaction) {
+                    console.log('callback notification received', transaction);
+                    if (transaction.status == BUSINESS_CONFIG.TRANSACTION_SUCCESSFUL) {
                         this.$store.commit('setPaymentStatus', 2);
-                        console.log('transaction successful', data.transaction);
                         this.$buefy.toast.open({
                             message: this.$t('notifications.successful'),
                             type: 'is-success'
@@ -15,10 +15,9 @@ export const PusherNotification = {
 
                     } else {
                         this.$store.commit('setPaymentStatus', 3);
-                        console.log('transaction failed', data.transaction);
-                        let error = data.transaction.error;
+                        console.log('transaction failed', transaction);
                         this.$buefy.toast.open({
-                            message: this.$t('validations.general.business.' + error),
+                            message: this.$t('exceptions.' + transaction.error_code),
                             type: 'is-danger'
                         });
                     }

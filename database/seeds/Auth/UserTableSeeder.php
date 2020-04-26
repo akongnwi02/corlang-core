@@ -31,6 +31,9 @@ class UserTableSeeder extends Seeder
             'confirmed'         => true,
             'company_id'        => Company::first()->uuid,
         ]);
+        $user->pincode = 4444;
+        $user->save();
+        
         $user->assignRole(config('access.users.company_admin_role'));
         
         $user = User::create([

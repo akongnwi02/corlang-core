@@ -8,13 +8,75 @@
 
 namespace App\Http\Controllers\Api\Business;
 
+use App\Exceptions\Api\ServerErrorException;
 use App\Http\Controllers\Controller;
+use App\Jobs\Business\Purchase\CompletePurchaseJob;
+use App\Models\Transaction\Transaction;
+use App\Services\Constants\BusinessErrorCodes;
 use Illuminate\Http\Request;
 
 class CallbackController extends Controller
 {
-    public function callback(Request $request)
+    /**
+     * @param Request $request
+     * @param Transaction $transaction
+     * @return \Illuminate\Http\JsonResponse
+     * @throws ServerErrorException
+     */
+    public function callback(Request $request, Transaction $transaction)
     {
+        \Log::info('New callback request received', [
+            'ip'      => $request->ip(),
+            'payload' => $request->input()
+        ]);
+        
+        $transactionInLocalDb = [
+            'transaction.status'                => $transaction->status,
+            'transaction.uuid'                  => $transaction->uuid,
+            'transaction.code'                  => $transaction->code,
+            'transaction.service_code'          => $transaction->service_code,
+            'transaction.movement_code'         => $transaction->movement_code,
+            'transaction.paymentaccount'        => $transaction->paymentaccount,
+            'transaction.created_at'            => $transaction->created_at->toDatetimeString(),
+            'transaction.destination'           => $transaction->destination,
+            'transaction.total_customer_amount' => $transaction->total_customer_amount,
+        ];
+        
+        \Log::debug('Transaction exists in local database', $transactionInLocalDb);
     
+        if (in_array($transaction->status, [
+            config('business.transaction.status.failed'),
+            config('business.transaction.status.success'),
+        ])) {
+            \Log::emergency('Transaction in final status received a status update',[
+                'status received'                   => $request->input('status'),
+                'transaction.status'                => $transaction->status,
+                'transaction.uuid'                  => $transaction->uuid,
+                'transaction.code'                  => $transaction->code,
+                'transaction.service_code'          => $transaction->service_code,
+                'transaction.movement_code'         => $transaction->movement_code,
+                'transaction.paymentaccount'        => $transaction->paymentaccount,
+                'transaction.created_at'            => $transaction->created_at->toDatetimeString(),
+                'transaction.destination'           => $transaction->destination,
+                'transaction.total_customer_amount' => $transaction->total_customer_amount,
+            ]);
+            throw new ServerErrorException(BusinessErrorCodes::TRANSACTION_IN_FINAL_STATUS, "Transaction $transaction->code in final state received a status update");
+        };
+        
+        $transaction->status         = $request->input('status');
+        $transaction->asset          = $request->input('asset');
+        $transaction->message        = $request->input('message');
+        $transaction->error_code     = $request->input('error_code');
+        $transaction->to_be_verified = $request->input('to_be_verified');
+        
+        $transaction->save();
+    
+        \Log::info('Inserting transaction to COMPLETE queue');
+        
+        dispatch(new CompletePurchaseJob($transaction))->onQueue(config('business.transaction.queue.purchase.complete'));
+     
+        return response()->json([
+            'status' => 'OK'
+        ], 200);
     }
 }

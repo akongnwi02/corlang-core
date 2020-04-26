@@ -18,9 +18,9 @@ class ServiceTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         Service::create([
-            'name' => 'Sample service 1',
+            'name' => 'IAT Prepaid',
             'description' => 'Some quick example text to serve as the service description and make up the bulk of the service\'s content.',
-            'code' => $faker->postcode,
+            'code' => 'CORIAT',
             'country_id' => Country::first()->uuid,
             'is_active' => true,
             'category_id' => Category::first()->uuid,

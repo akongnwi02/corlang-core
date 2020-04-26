@@ -8,6 +8,7 @@
 
 namespace App\Jobs\Business\Purchase;
 
+use App\Events\TransactionComplete;
 use App\Exceptions\Api\BadRequestException;
 use App\Jobs\Job;
 use App\Models\Transaction\Transaction;
@@ -53,7 +54,6 @@ class ProcessPurchaseJob extends Job
      */
     public function handle(ServiceRepository $serviceRepository)
     {
-        
         $service        = $serviceRepository->findByCode($this->transaction->service_code);
         $categoryClient = $this->category($service->category);
         
@@ -73,7 +73,6 @@ class ProcessPurchaseJob extends Job
     
         } catch (BadRequestException $exception) {
             $this->transaction->status     = config('business.transaction.status.failed');
-            $this->transaction->user_status= config('business.transaction.status.failed');
             $this->transaction->error      = $exception->getMessage();
             $this->transaction->message    = 'Transaction failed due to client error';
             $this->transaction->error_code = $exception->error_code();
@@ -98,7 +97,7 @@ class ProcessPurchaseJob extends Job
         $this->transaction->error_code = BusinessErrorCodes::GENERAL_CODE;
         $this->transaction->error   = $exception->getMessage();
         $this->transaction->save();
-        Log::emergency("{$this->getJobName()}: Transaction failed unexpectedly while sending to micro service, Inserting to VERIFICATION queue", [
+        Log::emergency("{$this->getJobName()}: Transaction failed unexpectedly while sending request to micro service, Inserting to VERIFICATION queue", [
             'transaction.status'      => $this->transaction->status,
             'transaction.uuid'        => $this->transaction->uuid,
             'transaction.destination' => $this->transaction->destination,
@@ -112,4 +111,8 @@ class ProcessPurchaseJob extends Job
         dispatch(new VerifyPurchaseJob($this->transaction))->onQueue(config('business.transaction.queue.purchase.verify'));
     }
     
+    public function getJobName()
+    {
+        return class_basename($this);
+    }
 }

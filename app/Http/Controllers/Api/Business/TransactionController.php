@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Business\ConfirmPaymentRequest;
 use App\Http\Requests\Api\Business\GeneralRequest;
 use App\Http\Resources\Api\TransactionResource;
+use App\Jobs\Business\Purchase\CompletePurchaseJob;
 use App\Jobs\Business\Purchase\ProcessPurchaseJob;
 use App\Models\Transaction\Transaction;
 use App\Repositories\Api\Business\TransactionRepository;
@@ -40,6 +41,8 @@ class TransactionController extends Controller
         TransactionRepository $transactionRepository
     )
     {
+        \Log::info('New quote request received. Processing the quote request ... ');
+    
         $service = $serviceRepository->findByCode($request['service_code']);
         
         $categoryClient = $this->category($service->category);
@@ -58,6 +61,9 @@ class TransactionController extends Controller
         $cached = \Cache::store(config('app.micro_services.cache_store'))->add($model->getTransactionId(), $model, $ttl);
         
         if ($cached) {
+    
+            \Log::info('Quote saved to cache successfully. Sending response to client');
+    
             return $categoryClient->response($model);
         }
         
@@ -78,14 +84,13 @@ class TransactionController extends Controller
         $model = \Cache::store(config('app.micro_services.cache_store'))->pull($request->input('quote_id'));
         
         if ($model) {
-            \Log::info('Transaction retrieved from cache successfully. Dispatching transaction to queue');
+            \Log::info('Purchase confirmation request received. Dispatching transaction to queue');
             
             $transaction = $transactionRepository->findByUuid($model->getTransactionId());
             
             $transactionRepository->processPayment($transaction);
             
             $transaction->status      = config('business.transaction.status.pending');
-            $transaction->user_status = config('business.transaction.status.processing');
             $transaction->save();
             
             dispatch(new ProcessPurchaseJob($transaction))->onQueue(config('business.transaction.queue.purchase.process'));

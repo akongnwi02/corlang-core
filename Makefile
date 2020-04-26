@@ -46,7 +46,9 @@ npm:
 	docker exec $$(docker-compose ps -q workspace) sh -c "npm run dev"
 
 clear:
-	docker exec $$(docker-compose ps -q workspace) sh -c "composer clear-all"
+	docker exec $$(docker-compose ps -q workspace) sh -c "composer clear-all \
+	    && truncate -s 0 storage/logs/*.log"
+
 
 ide-helper:
 	docker exec $$(docker-compose ps -q workspace) sh -c "php artisan ide-helper:generate \

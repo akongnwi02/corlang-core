@@ -154,14 +154,14 @@
                 }
                 return false;
             },
-            confirm: function (data) {
-                console.log('payment confirmed', data);
+            confirm () {
+                console.log('transaction confirmed');
                 this.show_quote_modal = false;
                 this.$store.dispatch('confirmPayment', {
                     id: this.quote.uuid,
                 });
                 this.waitForNotification(this.quote.uuid);
-                console.log('waiting for notification', this.quote.uuid);
+                console.log('waiting for callback notification on channel', this.quote.uuid);
             }
         },
         watch: {

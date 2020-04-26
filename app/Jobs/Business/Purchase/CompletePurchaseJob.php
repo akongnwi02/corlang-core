@@ -8,9 +8,13 @@
 
 namespace App\Jobs\Business\Purchase;
 
-use App\Events\Api\Business\TransactionComplete;
+use App\Events\TransactionComplete;
+use App\Exceptions\Api\ServerErrorException;
+use App\Http\Resources\Api\TransactionResource;
 use App\Jobs\Job;
 use App\Models\Transaction\Transaction;
+use App\Services\Constants\BusinessErrorCodes;
+use Pusher\Pusher;
 
 class CompletePurchaseJob extends Job
 {
@@ -41,14 +45,18 @@ class CompletePurchaseJob extends Job
      *
      * @param Transaction $transaction
      */
-    public function __construct($transaction)
+    public function __construct(Transaction $transaction)
     {
         $this->transaction = $transaction;
     }
     
+    /**
+     * @throws ServerErrorException
+     * @throws \Pusher\PusherException
+     */
     public function handle()
     {
-        \Log::info("{$this->getJobName()}: Transaction is terminated. Broadcasting transaction complete event...", [
+        \Log::info("{$this->getJobName()}: Transaction is terminated. Sending event to pusher...", [
             'transaction.status'                => $this->transaction->status,
             'transaction.asset'                 => $this->transaction->asset,
             'transaction.code'                  => $this->transaction->code,
@@ -58,12 +66,32 @@ class CompletePurchaseJob extends Job
             'transaction.message'               => $this->transaction->message,
             'transaction.error'                 => $this->transaction->error,
             'transaction.error_code'            => $this->transaction->error_code,
-            'transaction.external_id'           => $this->transaction->external_id,
-            'transaction.callback_attempts'     => $this->transaction->callback_attempts,
-            'transaction.verification_attempts' => $this->transaction->verification_attempts,
             'transaction.service_code'          => $this->transaction->service_code,
         ]);
         
-        event(new TransactionComplete($this->transaction));
+        $pusher = new Pusher(
+            config('broadcasting.connections.pusher.key'),
+            config('broadcasting.connections.pusher.secret'),
+            config('broadcasting.connections.pusher.app_id'),
+            config('broadcasting.connections.pusher.options')
+        );
+    
+        $triggered = $pusher->trigger(
+            $this->transaction->uuid,
+            config('broadcasting.connections.pusher.events.transaction_complete'),
+            new TransactionResource($this->transaction)
+        );
+    
+        if (! $triggered) {
+            \Log::error("{$this->getJobName()}: Error encountered while sending event to pusher");
+            throw new ServerErrorException(BusinessErrorCodes::GENERAL_CODE, 'Error connection to the pusher server');
+        }
+    
+        \Log::info("{$this->getJobName()}: Event sent to pusher successfully");
+    }
+    
+    public function getJobName()
+    {
+        return class_basename($this);
     }
 }

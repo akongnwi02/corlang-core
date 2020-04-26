@@ -52,13 +52,32 @@ class VerifyPurchaseJob extends Job
      */
     public function handle()
     {
-        \Log::info("{$this->getJobName()}: Processing new status verification job", [
+        \Log::info("{$this->getJobName()}: Processing new transaction status verification job", [
             'status'       => $this->transaction->status,
             'code'         => $this->transaction->code,
             'destination'  => $this->transaction->destination,
             'service_code' => $this->transaction->service_code,
             'uuid'         => $this->transaction->uuid,
         ]);
+    
+        if (in_array($this->transaction->status, [
+            config('business.transaction.status.failed'),
+            config('business.transaction.status.success'),
+        ])) {
+            \Log::warning("{$this->getJobName()}: Transaction is already in final state. No further verification is required", [
+                'transaction.status'      => $this->transaction->status,
+                'transaction.code'        => $this->transaction->code,
+                'transaction.uuid'        => $this->transaction->uuid,
+                'transaction.destination' => $this->transaction->destination,
+                'transaction.amount'      => $this->transaction->amount,
+                'transaction.message'     => $this->transaction->message,
+                'transaction.error'       => $this->transaction->error,
+                'transaction.error_code'  => $this->transaction->error_code,
+            ]);
+            $this->delete();
+            
+            return;
+        }
         
         $this->transaction->status = config('business.transaction.status.verification');
         $this->transaction->save();
@@ -66,16 +85,17 @@ class VerifyPurchaseJob extends Job
         try {
             
             $this->category($this->transaction->category)->status($this->transaction);
-            \Log::info("{$this->getJobName()}: Transaction exists in micro service system. Waiting for callback...", [
+            $this->transaction->status  = config('business.transaction.status.processing');
+            $this->transaction->message = 'Verified and discovered transaction in micro service';
+            $this->transaction->save();
+    
+            \Log::warning("{$this->getJobName()}: Transaction exists in micro service system. Waiting for callback...", [
                 'status'       => $this->transaction->status,
                 'code'         => $this->transaction->code,
                 'destination'  => $this->transaction->destination,
                 'uuid'         => $this->transaction->uuid,
                 'service_code' => $this->transaction->service_code,
             ]);
-            $this->transaction->status  = config('business.transaction.status.processing');
-            $this->transaction->message = 'Verified and discovered transaction in micro service';
-            $this->transaction->save();
             
         } catch (\Exception $exception) {
             \Log::info("{$this->getJobName()}: Status verification attempt failed", [
@@ -101,6 +121,7 @@ class VerifyPurchaseJob extends Job
         $this->transaction->to_be_verified = true;
         $this->transaction->save();
         \Log::emergency("{$this->getJobName()}: Transaction failed unexpectedly during status check. Inserted into COMPLETE queue", [
+            'transaction.status'      => $this->transaction->status,
             'transaction.code'        => $this->transaction->code,
             'transaction.uuid'        => $this->transaction->uuid,
             'transaction.destination' => $this->transaction->destination,
@@ -115,5 +136,10 @@ class VerifyPurchaseJob extends Job
          * Transaction Status cannot be determined after several retries. Send to callback queue
          */
         dispatch(new CompletePurchaseJob($this->transaction))->onQueue(config('business.transaction.queue.purchase.complete'));
+    }
+    
+    public function getJobName()
+    {
+        return class_basename($this);
     }
 }
