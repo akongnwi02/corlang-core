@@ -37,7 +37,7 @@ class TransactionResource extends JsonResource
             'total_customer_amount' => number_format((double)$this->total_customer_amount, 2),
             'created_at'            => $this->created_at->toDatetimeString(),
             'reversed_at'           => $this->reversed_at ? $this->reversed_at->toDatetimeString() : null,
-            'completed_at'          => $this->completed_at ? $this->completed_at->toDatetimeString() : null,
+            'completed_at'          => $this->completed_at,
         ];
     }
 }
