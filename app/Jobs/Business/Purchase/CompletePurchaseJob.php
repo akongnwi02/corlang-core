@@ -69,6 +69,9 @@ class CompletePurchaseJob extends Job
             'transaction.service_code'          => $this->transaction->service_code,
         ]);
         
+        $this->transaction->complete_at = now();
+        $this->transaction->save();
+        
         $pusher = new Pusher(
             config('broadcasting.connections.pusher.key'),
             config('broadcasting.connections.pusher.secret'),
