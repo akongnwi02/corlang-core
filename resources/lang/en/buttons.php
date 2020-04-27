@@ -26,6 +26,7 @@ return [
                 'resend_email'       => 'Resend Confirmation E-mail',
                 'restore_user'       => 'Restore User',
                 'transfer_user'      => 'Transfer User',
+                'reset_pin'          => 'Reset Pin Code',
                 'unconfirm'          => 'Un-confirm',
                 'unlink'             => 'Unlink',
             ],

@@ -32,6 +32,7 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
         });
     
         Route::patch('pin/update', [UpdatePinController::class, 'update'])->name('pin.update');
+        Route::patch('pin/create', [UpdatePinController::class, 'create'])->name('pin.create');
 
         // Password expired routes
         if (is_numeric(config('access.users.password_expires_days'))) {

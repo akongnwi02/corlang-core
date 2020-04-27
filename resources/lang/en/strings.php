@@ -190,6 +190,7 @@ return [
             'profile_updated'            => 'Profile successfully updated.',
             'password_updated'           => 'Password successfully updated.',
             'pin_changed'                => 'Your pin code was changed successfully.',
+            'pin_created'                => 'Your pin code was created successfully.',
         ],
         
         'welcome_to' => 'Welcome to :place',

@@ -34,6 +34,7 @@ return [
             'updated'                  => 'The user was successfully updated.',
             'transferred'                 => 'The user was successfully transferred.',
             'updated_password'         => "The user's password was successfully updated.",
+            'reset_pin'         => "The user's pin was successfully reset.",
         ],
         
         'companies' => [

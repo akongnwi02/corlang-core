@@ -312,6 +312,16 @@ trait UserAttribute
             return '<a href="'.route('admin.auth.user.transfer', $this).'" class="dropdown-item">'.__('buttons.backend.access.users.transfer_user').'</a> ';
         }
     }
+    
+    /**
+     * @return string
+     */
+    public function getResetPinButtonAttribute()
+    {
+        if (auth()->user()->can(config('permission.permissions.deactivate_users')) && auth()->id() != $this->id) {
+            return '<a href="'.route('admin.auth.user.reset-pin', $this).'" class="dropdown-item">'.__('buttons.backend.access.users.reset_pin').'</a> ';
+        }
+    }
 
     /**
      * @return string
@@ -343,6 +353,7 @@ trait UserAttribute
 			  '.$this->status_button.'
 			  '.$this->confirmed_button.'
 			  '.$this->delete_button.'
+			  '.$this->reset_pin_button.'
 			</div>
 		  </div>
 		</div>';

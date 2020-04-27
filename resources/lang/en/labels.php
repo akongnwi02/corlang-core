@@ -25,6 +25,7 @@ return [
         'buttons'            => [
             'save'   => 'Save',
             'update' => 'Update',
+            'create' => 'Create',
         ],
         'hide'               => 'Hide',
         'inactive'           => 'Inactive',

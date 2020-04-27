@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\Auth\User\UserSocialController;
 use App\Http\Controllers\Backend\Auth\User\UserStatusController;
 use App\Http\Controllers\Backend\Auth\User\UserSessionController;
 use App\Http\Controllers\Backend\Auth\User\UserPasswordController;
+use App\Http\Controllers\Backend\Auth\User\UserPinController;
 use App\Http\Controllers\Backend\Auth\User\UserConfirmationController;
 
 /*
@@ -98,6 +99,10 @@ Route::group([
             Route::patch('password/change', [UserPasswordController::class, 'update'])
                 ->name('user.change-password.post')
                 ->middleware('permission:'.config('permission.permissions.update_users'));
+    
+            Route::get('pin/reset', [UserPinController::class, 'reset'])
+                ->name('user.reset-pin')
+                ->middleware('permission:'.config('permission.permissions.deactivate_users'));
     
             // Transfer
             Route::get('transfer', [TransferUserController::class, 'transfer'])

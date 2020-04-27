@@ -407,6 +407,12 @@ class UserRepository extends BaseRepository
         }
     }
     
+    /**
+     * @param User $user
+     * @param $data
+     * @return mixed
+     * @throws \Throwable
+     */
     public function transfer(User $user, $data)
     {
         return DB::transaction(function () use ($user, $data) {
@@ -423,5 +429,23 @@ class UserRepository extends BaseRepository
         
             throw new GeneralException(__('exceptions.backend.access.users.transfer_error'));
         });
+    }
+    
+    /**
+     * @param User $user
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function resetPin(User $user)
+    {
+        return DB::transaction(function () use ($user) {
+            $user->pincode = null;
+            if ($user->save()) {
+                return $user;
+            }
+            
+            throw new GeneralException(__('exceptions.backend.access.users.reset_pin_error'));
+        });
+
     }
 }

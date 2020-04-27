@@ -53,7 +53,8 @@ return [
                 'social_delete_error'     => 'There was a problem removing the social account from the user.',
                 'update_error'            => 'There was a problem updating this user. Please try again.',
                 'transfer_error'          => 'There was a problem transferring this user. Please try again.',
-                'update_password_error'   => 'There was a problem changing this users password. Please try again.',
+                'update_password_error'   => 'There was a problem changing this user\'s password. Please try again.',
+                'reset_pin_error'         => 'There was a problem resetting this user\' pin code. Please try again.',
             ],
         ],
         
