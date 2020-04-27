@@ -8,7 +8,6 @@
 
 namespace App\Jobs\Business\Purchase;
 
-use App\Events\TransactionComplete;
 use App\Exceptions\Api\ServerErrorException;
 use App\Http\Resources\Api\TransactionResource;
 use App\Jobs\Job;
