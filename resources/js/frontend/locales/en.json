@@ -43,7 +43,7 @@
                         "paymentmethod": "Payment Method",
                         "status": "Status",
                         "asset": "Asset",
-                        "completed_at": "Paid At"
+                        "completed_at": "Completed At"
                     },
                     "status": {
                         "created": "Created",
