@@ -136,4 +136,16 @@ class MovementRepository
             throw new ServerErrorException(BusinessErrorCodes::GENERAL_CODE, 'Error creating sale');
         });
     }
+    
+    public function reverseMovements($code)
+    {
+        $movements = Movement::where('code', $code)->get();
+    
+        if ($movements) {
+            foreach ($movements as $movement) {
+                $movement->is_reversed = true;
+                $movement->save();
+            }
+        }
+    }
 }

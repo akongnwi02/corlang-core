@@ -132,6 +132,8 @@ class TransactionRepository
             $transaction->agent_commission   = $agent_commission;
             $transaction->company_commission = $company_commission;
             $transaction->system_commission  = $system_commission;
+    
+            $transaction->customer_phone = $model->getPhone();
             
             if ($transaction->save()) {
                 return $transaction;

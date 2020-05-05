@@ -240,6 +240,7 @@ class UserRepository extends BaseRepository
         }
 
         $user->active = $status;
+        $user->to_be_logged_out = true;
 
         switch ($status) {
             case 0:

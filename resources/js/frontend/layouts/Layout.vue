@@ -37,7 +37,6 @@
 
 <script>
     import { ChangeLanguage }from '../mixins/local/ChangeLanguage'
-    import { BUSINESS_CONFIG } from "../config/business";
 
     import Purchase from '../pages/Purchase';
     import Transactions from '../pages/Transactions';

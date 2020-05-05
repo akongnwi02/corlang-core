@@ -30,6 +30,10 @@
                             <li class="nav-item">
                                 <a href="#pin" class="nav-link" aria-controls="pin" role="tab" data-toggle="tab">@lang('navs.frontend.user.change_pin')</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="#topup" class="nav-link" aria-controls="topup" role="tab" data-toggle="tab">@lang('navs.frontend.user.topup')</a>
+                            </li>
                         </ul>
 
                         <div class="tab-content">
@@ -50,6 +54,10 @@
                             <div role="tabpanel" class="tab-pane fade show pt-3" id="pin" aria-labelledby="pin-tab">
                                 @include('frontend.user.account.tabs.change-pin')
                             </div><!--tab panel change pin-->
+
+                            <div role="tabpanel" class="tab-pane fade show pt-3" id="topup" aria-labelledby="topup-tab">
+                                @include('frontend.user.account.tabs.topup')
+                            </div><!--tab panel topup -->
                         </div><!--tab content-->
                     </div><!--tab panel-->
                 </div><!--card body-->

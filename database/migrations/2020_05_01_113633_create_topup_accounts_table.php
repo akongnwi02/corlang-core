@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStrongboxesTable extends Migration
+class CreateTopupAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,20 @@ class CreateStrongboxesTable extends Migration
      */
     public function up()
     {
-        Schema::create('strongboxes', function (Blueprint $table) {
+        Schema::create('topup_accounts', function (Blueprint $table) {
             $table->uuid('uuid')->primary()->unique();
-            $table->uuid('company_id');
-            $table->float('balance');
+            $table->uuid('user_id');
+            $table->boolean('is_confirmed')->default(false);
+            $table->uuid('paymentmethod_id');
+            $table->string('account')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
     
             $table->timestamps();
-            
-            $table->foreign('company_id')->references('uuid')->on('companies');
+    
+            $table->foreign('paymentmethod_id')->references('uuid')->on('paymentmethods');
+            $table->foreign('user_id')->references('uuid')->on('users');
     
         });
     }
@@ -35,6 +38,6 @@ class CreateStrongboxesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('strongbox');
+        Schema::dropIfExists('topup_accounts');
     }
 }

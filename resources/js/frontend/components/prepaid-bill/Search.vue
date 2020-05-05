@@ -17,12 +17,20 @@
         </div>
 
         <mdb-row>
+
+            <div class="col-6">
+                <!--put a v-if on the configuration.currency.code to avoid code not found error-->
+                <mdb-input key="phone"
+                           :label="$t(`dashboard.pages.general.phone`)"
+                           v-model="phone"></mdb-input>
+            </div>
             <!--</mdb-col>-->
             <mdb-col class="col-6">
                 <mdb-input type="password" key="pincode"
                            :label="$t('dashboard.pages.general.pincode')"
                            v-model="pincode"></mdb-input>
             </mdb-col>
+
         </mdb-row>
 
         <services v-on:selected="selectService" :services="services"></services>
@@ -31,6 +39,8 @@
 
         <quote-modal v-on:confirmed="confirm" :service="selectedService" :quote="quote"
                      v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
+        <transaction-modal :transaction="transaction"
+                     v-on:closed="show_transaction_modal=false" v-if="show_transaction_modal"></transaction-modal>
 
         <spinner :status="spinner_status"></spinner>
     </div>
@@ -44,7 +54,9 @@
     import {BUSINESS_CONFIG} from "../../config/business";
     import SearchButton from "../global/SearchButton";
     import QuoteModal from './QuoteModal';
+    import TransactionModal from '../../components/global/TransactionModal'
     import Spinner from "../global/Spinner";
+    import {Navigation} from "../../mixins/transaction/NavigateToTransactionDetails"
 
     export default {
         name: "Search",
@@ -53,16 +65,19 @@
             QuoteModal,
             SearchButton,
             Services,
+            TransactionModal,
         },
         mixins: [
             ConfigurationLoad,
             PusherNotification,
+            Navigation,
         ],
         data() {
             return {
                 // Models Fields
                 account: '',
                 pincode: '',
+                phone: '',
                 destination: '',
                 amount: '',
                 selectedService: null,
@@ -71,8 +86,8 @@
                 // Component Data
                 invalid_text: '',
                 show_quote_modal: false,
+                show_transaction_modal: false,
                 spinner_status: 0,
-
             };
         },
         computed: {
@@ -91,6 +106,15 @@
             quote() {
                 return this.$store.getters.getQuote;
             },
+            paymentStatus() {
+                return this.$store.getters.getPaymentStatus;
+            },
+            transaction() {
+                return this.$store.getters.getTransaction;
+            },
+            transactionLoadStatus() {
+                return this.$store.getters.getTransactionLoadStatus;
+            }
         },
         methods: {
             selectService: function (service) {
@@ -105,6 +129,7 @@
                         amount: this.amount,
                         currency_code: this.configuration.currency.code,
                         pincode: this.pincode,
+                        phone: this.phone,
                         account: this.account
                     });
                 }
@@ -147,6 +172,12 @@
                     console.log('Invalid pincode');
                 }
 
+                if (this.phone.length < 9) {
+                    ++invalid;
+                    this.invalid_text = this.$t('validations.purchase.phone');
+                    console.log('Invalid phone number');
+                }
+
                 if (invalid === 0) {
                     this.invalid_text = '';
                     console.log('Validation complete. All inputs valid');
@@ -160,6 +191,7 @@
                 this.$store.dispatch('confirmPayment', {
                     id: this.quote.uuid,
                 });
+
                 this.waitForNotification(this.quote.uuid);
                 console.log('waiting for callback notification on channel', this.quote.uuid);
             }
@@ -171,6 +203,17 @@
                 }
                 this.spinner_status = this.quoteLoadStatus;
             },
+            paymentStatus() {
+                if (this.paymentStatus == 2) {
+                    this.$store.dispatch('loadTransaction', this.transaction.uuid)
+                }
+            },
+            transactionLoadStatus() {
+                if (this.transactionLoadStatus == 2 && this.paymentStatus == 2) {
+                    this.show_transaction_modal = true;
+                }
+                this.spinner_status = this.transactionLoadStatus;
+            }
         }
     }
 </script>

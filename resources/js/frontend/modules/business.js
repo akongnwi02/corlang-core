@@ -17,6 +17,9 @@ export const business = {
         payment: {},
         paymentStatus: 0,
 
+        transaction: {},
+        transactionLoadStatus: 0,
+
         configurationLoadStatus: 0,
         configuration: {},
 
@@ -55,8 +58,7 @@ export const business = {
             commit('setPaymentStatus', 1);
             BusinessApi.confirm(data)
                 .then(function (response) {
-                    // Do nothing because request will be processed
-                    // asynchronously
+                    commit('setTransaction', response.data)
                 })
                 .catch(function (error) {
                     commit( 'setPaymentStatus', 3 );
@@ -103,7 +105,7 @@ export const business = {
         },
         loadTransactions( { commit } ) {
             commit('setTransactionsLoadStatus', 1);
-            BusinessApi.transaction()
+            BusinessApi.transactions()
                 .then(function (response) {
                     commit('setTransactions', response.data);
                     commit('setTransactionsLoadStatus', 2);
@@ -164,6 +166,18 @@ export const business = {
                     commit('setCancelPayoutStatus', 3);
                     helper.handleException(error);
                 })
+        },
+        loadTransaction({commit}, uuid) {
+            commit('setTransactionLoadStatus', 1);
+            BusinessApi.transaction(uuid)
+                .then(function (response) {
+                    commit('setTransactionLoadStatus', 2);
+                    commit('setTransaction', response.data);
+                })
+                .catch(function (error) {
+                    commit('setTransactionLoadStatus', 3);
+                    helper.handleException(error);
+                })
         }
     },
 
@@ -212,6 +226,12 @@ export const business = {
         },
         setCancelPayoutStatus(state, status) {
             state.cancelPayoutStatus = status;
+        },
+        setTransaction(state, transaction) {
+            state.transaction = transaction;
+        } ,
+        setTransactionLoadStatus(state, status) {
+            state.transactionLoadStatus = status;
         }
     },
 
@@ -261,6 +281,12 @@ export const business = {
         },
         getCancelPayoutStatus(state) {
             return state.cancelPayoutStatus;
+        },
+        getTransaction(state) {
+            return state.transaction;
+        },
+        getTransactionLoadStatus(state) {
+            return state.transactionLoadStatus;
         }
     }
 };

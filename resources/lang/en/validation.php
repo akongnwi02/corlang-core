@@ -232,6 +232,8 @@ return [
                     'logo'               => 'Logo',
                     'prepaid'            => 'Prepaid',
                     'items'              => 'Items',
+                    'requires_auth'      => 'Authorization Required',
+                    'withdrawal'      => 'Money Withdrawal',
                     'company_rate'       => 'Default Company Rate (%)',
                     'agent_rate'         => 'Default Agent Rate (%)',
                     'providercompany'    => 'Provider Company',
@@ -288,7 +290,7 @@ return [
             'last_name'                 => 'Last Name',
             'name'                      => 'Full Name',
             'password'                  => 'Password',
-            'pin'                  => 'Pin Code',
+            'pin'                       => 'Pin Code',
             'password_confirmation'     => 'Password Confirmation',
             'message'                   => 'Message',
             'new_password'              => 'New Password',
@@ -300,6 +302,12 @@ return [
             'timezone'                  => 'Timezone',
             'language'                  => 'Language',
             'location'                  => 'Location',
-        ],
+            'topup' => [
+                'service' => 'Service',
+                'account' => 'Account',
+                'config'  => 'Topup Configuration',
+                'otp'     => 'OTP',
+            ]
+        ]
     ],
 ];

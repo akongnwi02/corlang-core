@@ -23,6 +23,7 @@ class TransactionResource extends JsonResource
             'user'                  => $this->user->full_name,
             'company'               => $this->company->name,
             'company_logo'          => $this->company->logo_url,
+            'service_logo'          => $this->service->logo_url,
             'service'               => $this->service->name,
             'service_code'          => $this->service_code,
             'category'              => $this->category->name,

@@ -34,7 +34,7 @@
                     "header": {
                         "code": "Reference",
                         "items": "Item",
-                        "destination": "Destination",
+                        "destination": "Service Number",
                         "amount": "Amount",
                         "fee": "Fee",
                         "service": "Service",
@@ -45,6 +45,7 @@
                         "asset": "Asset",
                         "completed_at": "Completed At"
                     },
+                    "total": "Total",
                     "status": {
                         "created": "Created",
                         "pending": "Pending",
@@ -52,7 +53,24 @@
                         "success": "Completed",
                         "failed": "Failed",
                         "reversed": "Reversed",
-                        "cancelled": "Cancelled"
+                        "cancelled": "Cancelled",
+                        "errored": "Error"
+                    }
+                },
+                "transaction": {
+                    "modal": {
+                        "code": "Reference",
+                        "destination": "Service Number",
+                        "agent": "Agent",
+                        "company": "Company",
+                        "amount": "Amount",
+                        "fee": "Fee",
+                        "service": "Service",
+                        "asset": "Asset",
+                        "items": "Items",
+                        "status": "Status",
+                        "completed_at": "Paid At",
+                        "total": "Total"
                     }
                 }
             },
@@ -105,6 +123,7 @@
                 "account": "Account Number",
                 "reference": "Reference",
                 "pincode": "Pin Code",
+                "phone": "Phone Number",
                 "fee": "Fee",
                 "destination": "Destination identifier",
                 "total": "Total",
@@ -125,6 +144,7 @@
             },
             "reference": "The reference is invalid",
             "pincode": "The pin code is invalid",
+            "phone": "The phone number is invalid",
             "account": "The payment account number is invalid",
             "amount": "Please enter a valid amount",
             "paymentmethod": "Select a payment method from the list",

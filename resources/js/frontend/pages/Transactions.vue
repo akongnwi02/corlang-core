@@ -1,30 +1,88 @@
 <template>
     <div class="text-center card-body" @keyup.enter="requestQuote">
-        <button @click="refresh" class="btn btn-primary btn-sm float-left" type="button">
-            <span class="fa fa-sync" role="status" aria-hidden="true"></span>
-            {{ $t('dashboard.pages.general.refresh') }}
-        </button>
+        <div class="row">
+            <div class="col-sm-5">
+                <h4 class="mb-0">
+                    {{ $t('dashboard.pages.transactions.table.entriesTitle') }}
+                </h4>
+            </div><!--col-->
 
-        <mdb-datatable
-            :data="data"
-            striped
-            bordered
-            :responsive="true"
-            :sorting="false"
+            <div class="col-sm-7">
+                <button @click="refresh" class="btn btn-primary btn-sm float-right" type="button">
+                    <span class="fa fa-sync" role="status" aria-hidden="true"></span>
+                    {{ $t('dashboard.pages.general.refresh') }}
+                </button>
+            </div><!--col-->
+        </div><!--row-->
+        <div class="row mt-4">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>{{ $t('dashboard.pages.transactions.table.header.code') }}</th>
+                            <th>{{ $t('dashboard.pages.transactions.table.header.destination') }}</th>
+                            <th>{{ $t('dashboard.pages.transactions.table.header.items') }}</th>
+                            <th>{{ $t('dashboard.pages.transactions.table.header.fee') }}</th>
+                            <th>{{ $t('dashboard.pages.transactions.table.header.total') }}</th>
+                            <th>{{ $t('dashboard.pages.transactions.table.header.commission') }}</th>
+                            <th>{{ $t('dashboard.pages.transactions.table.header.service') }}</th>
+                            <th>{{ $t('dashboard.pages.transactions.table.header.asset') }}</th>
+                            <th>{{ $t('dashboard.pages.transactions.table.header.completed_at') }}</th>
+                            <th>{{ $t('dashboard.pages.transactions.table.header.status') }}</th>
 
-            arrows
-            start="<<"
-            end=">>"
-            next=">"
-            previous="<"
-            :tfoot="false"
-            :searchPlaceholder="$t('dashboard.pages.general.search')"
-            :entriesTitle="$t('dashboard.pages.transactions.table.entriesTitle')"
-            :showingText="$t('dashboard.pages.transactions.table.showingText')"
-            :noFoundMessage="$t('dashboard.pages.transactions.table.noFoundMessage')"
-        >
-        </mdb-datatable>
-        <spinner :status="transactionsLoadStatus"></spinner>
+                            <th>{{ $t('dashboard.pages.general.actions') }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-if="transactionsLoadStatus==2" v-for="transaction in transactions">
+                            <td>{{ transaction.code }}</td>
+                            <td>{{ transaction.destination }}</td>
+                            <td>{{ transaction.items }}</td>
+                            <td>{{ currency(transaction.total_customer_fee, transaction.currency_code) }}</td>
+                            <td>{{ currency(transaction.total_customer_amount, transaction.currency_code) }}</td>
+                            <td>{{ currency(transaction.agent_commission, transaction.currency_code) }}</td>
+                            <td>{{ transaction.service }}</td>
+                            <td>{{ transaction.asset }}</td>
+                            <td>{{ transaction.completed_at }}</td>
+                            <td><span class="badge" :class="badge(transaction.status)">{{ $t('dashboard.pages.transactions.table.status.'+transaction.status) }}</span></td>
+                            <td>
+                                <div @click="view(transaction.uuid)" class="btn-group" role="group">
+                                    <span data-toggle="tooltip" data-placement="top" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <spinner :status="spinner_status"></spinner>
+                    <transaction-modal :transaction="transaction"
+                                       v-on:closed="show_transaction_modal=false" v-if="show_transaction_modal"></transaction-modal>
+                </div>
+            </div><!--col-->
+        </div><!--row-->
+        <div class="row">
+            <div class="col-7">
+                <div class="float-left">
+                    {{ transactions.length }} {{ $t('dashboard.pages.transactions.table.total') }}
+                </div>
+            </div><!--col-->
+
+            <!--<div class="col-5">-->
+                <!--<div class="float-right">-->
+                    <!--<paginate-->
+                        <!--:page-count="10"-->
+                        <!--:page-range="3"-->
+                        <!--:margin-pages="2"-->
+                        <!--:click-handler="clickCallback"-->
+                        <!--:prev-text="'«'"-->
+                        <!--:next-text="'»'"-->
+                        <!--:container-class="'pagination'"-->
+                        <!--:page-class="'page-item'">-->
+                    <!--</paginate>-->
+                <!--</div>-->
+            <!--</div>&lt;!&ndash;col&ndash;&gt;-->
+        </div><!--row-->
+
     </div>
 
 </template>
@@ -33,80 +91,35 @@
 
     import Spinner from "../components/global/Spinner";
     import {currency} from "../helpers/currency";
+    import Paginate from 'vuejs-paginate';
+    import {Navigation} from "../mixins/transaction/NavigateToTransactionDetails";
+    import TransactionModal from "../components/global/TransactionModal"
 
     export default {
-        components: {Spinner},
-        mixins: [],
+        components: {
+            Paginate,
+            Spinner,
+            TransactionModal,
+        },
+        mixins: [Navigation],
         data() {
             return {
-                data: {
-                    columns: [
-                        {
-                            label: this.$t('dashboard.pages.transactions.table.header.code'),
-                            field: 'code',
-                            sort: 'desc'
-                        },
-                        {
-                            label: this.$t('dashboard.pages.transactions.table.header.destination'),
-                            field: 'destination',
-                            sort: 'desc'
-                        },
-                        {
-                            label: this.$t('dashboard.pages.transactions.table.header.items'),
-                            field: 'items',
-                            sort: 'desc'
-                        },
-                        {
-                            label: this.$t('dashboard.pages.transactions.table.header.fee'),
-                            field: 'fee',
-                            sort: 'desc'
-                        },
-                        {
-                            label: this.$t('dashboard.pages.transactions.table.header.total'),
-                            field: 'total',
-                            sort: 'desc'
-                        },
-                        {
-                            label: this.$t('dashboard.pages.transactions.table.header.commission'),
-                            field: 'commission',
-                            sort: 'desc'
-                        },
-                        {
-                            label: this.$t('dashboard.pages.transactions.table.header.service'),
-                            field: 'service',
-                            sort: 'desc'
-                        },
-                        // {
-                        //     label: this.$t('dashboard.pages.transactions.table.header.paymentmethod'),
-                        //     field: 'paymentmethod',
-                        //     sort: 'desc'
-                        // },
-                        {
-                            label: this.$t('dashboard.pages.transactions.table.header.status'),
-                            field: 'status',
-                            sort: 'desc'
-                        },
-                        {
-                            label: this.$t('dashboard.pages.transactions.table.header.asset'),
-                            field: 'asset',
-                            sort: 'desc'
-                        },
-                        {
-                            label: this.$t('dashboard.pages.transactions.table.header.completed_at'),
-                            field: 'completed_at',
-                            sort: 'desc'
-                        },
-                    ],
-                    rows: []
-                }
+                show_transaction_modal: false,
+                spinner_status: 0
             }
         },
         computed: {
             transactionsLoadStatus() {
                 return this.$store.getters.getTransactionsLoadStatus;
             },
+            transactionLoadStatus() {
+                return this.$store.getters.getTransactionLoadStatus;
+            },
             transactions() {
                 return this.$store.getters.getTransactions;
+            },
+            transaction() {
+                return this.$store.getters.getTransaction;
             },
         },
         mounted() {
@@ -116,33 +129,42 @@
             refresh() {
                 this.$store.dispatch('loadTransactions');
             },
+            currency(amount, currency_code) {
+                return currency.format(amount, currency_code)
+            },
+            view(uuid) {
+                this.$store.dispatch('loadTransaction', uuid);
+            },
+            // to be fixed
+            clickCallback (pageNum) {
+                console.log(pageNum)
+            },
+            badge(status) {
+                switch (status) {
+                    case 'success': return 'badge-success';
+                    case 'failed': return 'badge-danger';
+                    case 'errored': return 'badge-danger';
+                    case 'reversed': return 'badge-warning';
+                    case 'cancelled': return 'badge-secondary';
+                    default: return 'badge-light';
+                }
+            }
         },
         watch: {
             transactionsLoadStatus() {
                 if (this.transactionsLoadStatus == 2) {
-                    let transaction;
-                    // using this hack to reset the array
-                    this.data.rows.splice(0, this.data.rows.length);
-                    for (transaction of this.transactions) {
-                        let obj = {};
-                        obj.code = transaction.code;
-                        obj.items = transaction.items;
-                        obj.destination = transaction.destination;
-                        obj.fee = currency.format(transaction.total_customer_fee, transaction.currency_code);
-                        obj.total = currency.format(transaction.total_customer_amount, transaction.currency_code);
-                        obj.commission = currency.format(transaction.agent_commission, transaction.currency_code);
-                        obj.service = transaction.service;
-                        // obj.paymentmethod = transaction.paymentmethod+' - '+transaction.paymentaccount;
-                        obj.status = this.$t('dashboard.pages.transactions.table.status.'+transaction.status);
-                        obj.asset = transaction.asset;
-                        obj.completed_at = transaction.completed_at;
-                        this.data.rows.push(obj);
-                    }
                     this.$buefy.toast.open({
                         message: this.$t('notifications.transactions_loaded'),
                         type: 'is-success'
                     });
                 }
+                this.spinner_status = this.transactionLoadStatus;
+            },
+            transactionLoadStatus() {
+                if (this.transactionLoadStatus == 2) {
+                    this.show_transaction_modal = true;
+                }
+                this.spinner_status = this.transactionLoadStatus;
             }
         }
     }

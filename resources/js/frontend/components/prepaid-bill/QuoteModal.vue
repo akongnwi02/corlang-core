@@ -77,7 +77,6 @@
 
 <script>
     import { currency} from "../../helpers/currency";
-    import Table from "buefy";
 
     export default {
         name: "QuoteModal",

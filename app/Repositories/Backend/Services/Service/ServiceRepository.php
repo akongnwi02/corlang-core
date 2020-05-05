@@ -115,6 +115,8 @@ class ServiceRepository
     
             $service->fill($data);
             $service->has_items = request()->has('has_items') ? 1 : 0;
+            $service->requires_auth = request()->has('requires_auth') ? 1 : 0;
+            $service->is_money_withdrawal = request()->has('is_money_withdrawal') ? 1 : 0;
     
             if ($logo) {
                 // delete previous logo

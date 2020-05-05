@@ -26,7 +26,6 @@ class PaymentMethodTableSeeder extends Seeder
             'accountregex'       => null,
             'description_en'     => 'Orange Money Payment. Dial *154# to receive a code to continue',
             'description_fr'     => 'Paiement par Orange. Composez *154# pour continuer',
-            'has_reference'      => true,
         ]);
         
         PaymentMethod::create([
@@ -35,7 +34,6 @@ class PaymentMethodTableSeeder extends Seeder
             'is_default'         => true,
             'is_active'          => true,
             'is_payment_service' => true,
-            'has_reference'      => true,
             'service_id'         => null,
             'accountregex'       => null,
             'description_en'     => 'Pay with corlang account',
@@ -47,7 +45,6 @@ class PaymentMethodTableSeeder extends Seeder
             'code'               => 'UBA0125',
             'is_default'         => false,
             'is_active'          => true,
-            'has_reference'      => true,
             'is_payment_service' => false,
             'service_id'         => null,
             'accountregex'       => null,

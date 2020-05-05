@@ -29,7 +29,7 @@ export default {
         return axios.get('/api/configuration');
     },
 
-    transaction: function () {
+    transactions: function () {
         return axios.get('/api/transaction');
     },
 
@@ -54,5 +54,10 @@ export default {
 
     cancelPayout: function (uuid) {
         return axios.patch(`/api/payout/${uuid}/cancel`);
+    },
+
+    transaction: function (uuid) {
+        return axios.get('/api/transaction/' + uuid);
     }
+
 }

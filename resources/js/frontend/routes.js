@@ -27,7 +27,12 @@ export default new VueRouter({
         {
             path: '/prepaid/bill/search',
             name: 'prepaid.bill.search',
-            component: Vue.component( 'Search', require( './components/prepaid-bill/Search' ) ),
+            component: Vue.component('Search', require('./components/prepaid-bill/Search')),
         },
+        // {
+        //     path: '/transaction/view/:uuid',
+        //     name: 'transaction.view',
+        //     component: Vue.component( 'Transaction', require( './components/global/Transaction' ) ),
+        // },
     ]
 });

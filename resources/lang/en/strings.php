@@ -191,6 +191,7 @@ return [
             'password_updated'           => 'Password successfully updated.',
             'pin_changed'                => 'Your pin code was changed successfully.',
             'pin_created'                => 'Your pin code was created successfully.',
+            'topup_updated'              => 'Your Topup configuration has been updated successfully.'
         ],
         
         'welcome_to' => 'Welcome to :place',

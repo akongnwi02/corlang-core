@@ -118,6 +118,28 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.service.requires_auth'))->class('col-md-2 form-control-label')->for('requires_auth') }}
+
+                        <div class="col-md-10">
+                            <label class="switch switch-label switch-pill switch-primary">
+                                {{ html()->checkbox('requires_auth', false, 1)->class('switch-input') }}
+                                <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
+                            </label>
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.service.withdrawal'))->class('col-md-2 form-control-label')->for('is_money_withdrawal') }}
+
+                        <div class="col-md-10">
+                            <label class="switch switch-label switch-pill switch-primary">
+                                {{ html()->checkbox('is_money_withdrawal', false, 1)->class('switch-input') }}
+                                <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
+                            </label>
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.services.service.logo'))->class('col-md-2 form-control-label')->for('logo') }}
 
                         <div class="col-md-10">
@@ -129,55 +151,73 @@
                     </div><!--form-group-->
                     @if($service->has_items)
                         <div id="POItablediv">
-                        <div class="btn-toolbar" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
-                            <span id="addPOIbutton" onclick="insRow()" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.add')"><i class="fas fa-plus-circle"></i></span>
-                        </div>
+                            <div class="btn-toolbar" role="toolbar"
+                                 aria-label="@lang('labels.general.toolbar_btn_groups')">
+                                <span id="addPOIbutton" onclick="insRow()" class="btn btn-success ml-1"
+                                      data-toggle="tooltip" title="@lang('labels.general.add')"><i
+                                        class="fas fa-plus-circle"></i></span>
+                            </div>
 
-                        <br/>
+                            <br/>
 
-                        <table class="table table-responsive table-borderless" id="POITable">
-                            <thead>
+                            <table class="table table-responsive table-borderless" id="POITable">
+                                <thead>
                                 <tr>
                                     <th>@lang('validation.attributes.backend.services.item.name')</th>
                                     <th>@lang('validation.attributes.backend.services.item.code')</th>
                                     <th>@lang('validation.attributes.backend.services.item.amount') ({{$default_currency->code}})</th>
                                     <th>@lang('validation.attributes.backend.services.item.active')</th>
                                 </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($service->items as $key => $item)
-                                <tr>
-                                    <td><input id="name" style="min-width:100px" type="text" name="items[{{ $key }}][name]" class="form-control" value="{{ $item->name }}" max="191"/></td>
-                                    <td><input id="code" style="min-width:100px" type="text" name="items[{{ $key }}][code]" step="0.01" class="form-control" value="{{ $item->code }}" max="191"/></td>
-                                    <td><input id="amount" style="min-width:100px" size=25 type="number" name="items[{{ $key }}][amount]" step="0.01" class="form-control" value="{{ $item->amount }}" min="0"/></td>
-                                    <td>
-                                        <label class="switch switch-label switch-pill switch-primary">
-                                            {{ html()->checkbox("items[$key][is_active]", $item->is_active, 1)->class('switch-input') }}
-                                            <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
-                                        </label>
-                                    </td>
-                                    <td><span id="delPOIbutton" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></span></td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td><input id="name" style="min-width:100px" width="50px" type="text" name="items[0][name]" max="191" class="form-control"/></td>
-                                    <td><input id="code" style="min-width:100px" type="text" name="items[0][code]" max="191" class="form-control"/></td>
-                                    <td><input id="amount" style="min-width:100px" type="number" name="items[0][amount]" step="0.01" class="form-control"/></td>
-                                    <td>
-                                        <label class="switch switch-label switch-pill switch-primary">
-                                            {{ html()->checkbox('items[0][is_active]', false, 1)->class('switch-input') }}
-                                            <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
-                                        </label>
-                                    </td>
-                                    <td><span id="delPOIbutton" onclick="deleteRow(this)" class="btn btn-default btn-xs"><span class="fa fa-trash"></span></span></td>
-                                </tr>
-                            @endforelse
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                @forelse($service->items as $key => $item)
+                                    <tr>
+                                        <td><input id="name" style="min-width:100px" type="text"
+                                                   name="items[{{ $key }}][name]" class="form-control"
+                                                   value="{{ $item->name }}" max="191"/></td>
+                                        <td><input id="code" style="min-width:100px" type="text"
+                                                   name="items[{{ $key }}][code]" step="0.01" class="form-control"
+                                                   value="{{ $item->code }}" max="191"/></td>
+                                        <td><input id="amount" style="min-width:100px" size=25 type="number"
+                                                   name="items[{{ $key }}][amount]" step="0.01" class="form-control"
+                                                   value="{{ $item->amount }}" min="0"/></td>
+                                        <td>
+                                            <label class="switch switch-label switch-pill switch-primary">
+                                                {{ html()->checkbox("items[$key][is_active]", $item->is_active, 1)->class('switch-input') }}
+                                                <span class="switch-slider" data-checked="yes"
+                                                      data-unchecked="no"></span>
+                                            </label>
+                                        </td>
+                                        <td><span id="delPOIbutton" onclick="deleteRow(this)"
+                                                  class="btn btn-default btn-xs"><span
+                                                    class="fa fa-trash"></span></span></td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td><input id="name" style="min-width:100px" width="50px" type="text"
+                                                   name="items[0][name]" max="191" class="form-control"/></td>
+                                        <td><input id="code" style="min-width:100px" type="text" name="items[0][code]"
+                                                   max="191" class="form-control"/></td>
+                                        <td><input id="amount" style="min-width:100px" type="number"
+                                                   name="items[0][amount]" step="0.01" class="form-control"/></td>
+                                        <td>
+                                            <label class="switch switch-label switch-pill switch-primary">
+                                                {{ html()->checkbox('items[0][is_active]', false, 1)->class('switch-input') }}
+                                                <span class="switch-slider" data-checked="yes"
+                                                      data-unchecked="no"></span>
+                                            </label>
+                                        </td>
+                                        <td><span id="delPOIbutton" onclick="deleteRow(this)"
+                                                  class="btn btn-default btn-xs"><span
+                                                    class="fa fa-trash"></span></span></td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
                             {{--<div>--}}
-                                {{--<small class="text-muted">@lang('business.landlord.percentage_for_the_landlord')</small>--}}
+                            {{--<small class="text-muted">@lang('business.landlord.percentage_for_the_landlord')</small>--}}
                             {{--</div>--}}
-                    </div><!--col-->
+                        </div><!--col-->
                     @endif
                 </div><!--col-->
             </div><!--row-->
@@ -213,7 +253,7 @@
             }
         }
 
-        $("#logo").change(function(){
+        $("#logo").change(function () {
             readURL(this);
         });
     </script>

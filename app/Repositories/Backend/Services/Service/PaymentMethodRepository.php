@@ -11,6 +11,7 @@ namespace App\Repositories\Backend\Services\Service;
 
 use App\Exceptions\GeneralException;
 use App\Models\Service\PaymentMethod;
+use App\Models\Service\TopupAccount;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -26,7 +27,7 @@ class PaymentMethodRepository
         return QueryBuilder::for(PaymentMethod::class)
             ->allowedFilters([AllowedFilter::exact('is_active')])
             ->allowedSorts('paymentmethods.is_active', 'paymentmethods.name')
-            ->defaultSort( '-paymentmethods.is_active', 'paymentmethods.name');
+            ->defaultSort('-paymentmethods.is_active', 'paymentmethods.name');
     }
     
     /**
@@ -55,14 +56,14 @@ class PaymentMethodRepository
      */
     public function create($data)
     {
-        $method = (new PaymentMethod())->fill($data);
+        $method                     = (new PaymentMethod())->fill($data);
         $method->is_payment_service = request()->has('is_payment_service') ? 1 : 0;
-    
+        
         if ($method->save()) {
 //            event(new PaymentMethodCreated($method));
             return $method;
         }
-    
+        
         throw new GeneralException(__('exceptions.backend.services.method.create_error'));
     }
     
@@ -77,7 +78,7 @@ class PaymentMethodRepository
         $method->is_active = $status;
         
         if ($method->save()) {
-        
+
 //            switch ($status) {
 //                case 0:
 //                    event(new PaymentMethodDeactivated($method));
@@ -102,5 +103,19 @@ class PaymentMethodRepository
     public function defaultPaymentMethod()
     {
         return PaymentMethod::where('is_default', true)->first();
+    }
+    
+    public function setTopupMethods($user, $topupConfig)
+    {
+        foreach ($topupConfig as $topupAccount) {
+            TopupAccount::updateOrCreate([
+                'paymentmethod_id' => $topupAccount['method_id'],
+                'user_id' => $user->uuid,
+            ],[
+                'user_id'          => $user->uuid,
+                'paymentmethod_id' => $topupAccount['method_id'],
+                'account'          => $topupAccount['account'],
+            ]);
+        }
     }
 }

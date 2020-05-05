@@ -5,6 +5,7 @@ use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\User\AccountController;
 use App\Http\Controllers\Frontend\User\ProfileController;
 use App\Http\Controllers\Frontend\User\DashboardController;
+use App\Http\Controllers\Frontend\User\TopupAccountController;
 
 /*
  * Frontend Controllers
@@ -35,5 +36,10 @@ Route::group(['middleware' => ['auth', 'password_expires', ]], function () {
          * User Profile Specific
          */
         Route::patch('profile/update', [ProfileController::class, 'update'])->name('profile.update');
+        
+        /*
+         * Set Topup Accounts
+         */
+        Route::post('topup', [TopupAccountController::class, 'setup'])->name('topup');
     });
 });

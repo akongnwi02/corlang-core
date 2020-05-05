@@ -40,7 +40,7 @@ class PrepaidBillClient implements CategoryInterface
             'amount'        => ['required', 'nullable', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/'],
             'currency_code' => ['required', Rule::exists('currencies', 'code')],
             'reference'     => ['sometimes', 'nullable', 'string', 'min:3'],
-            'phone'         => ['sometimes', 'string', 'min:9'],
+            'phone'         => ['sometimes', 'nullable', 'string', 'min:9'],
         ])->validate();
     }
     
@@ -88,6 +88,7 @@ class PrepaidBillClient implements CategoryInterface
                 ->setAddress($body->address)
                 ->setAmount($data['amount'])
                 ->setCurrencyCode($data['currency_code'])
+                ->setPhone($data['phone'])
                 ->setDestination($data['destination']);
             return $prepaidBill;
         } else {
@@ -106,6 +107,7 @@ class PrepaidBillClient implements CategoryInterface
             'service_code' => $transaction->service_code,
             'amount'       => $transaction->amount,
             'external_id'  => $transaction->uuid,
+            'phone'        => $transaction->phone,
             'callback_url' => config('app.micro_services.callback_url')
         ];
         

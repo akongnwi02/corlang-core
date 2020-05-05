@@ -14,6 +14,9 @@
                 <div class="col-sm-4 col-lg-4">
                     <div class="card">
                         <div class="card-body">
+                            <div v-if="!accountIsEmpty" class="btn-group float-right" @click="showModal" >
+                                <span style="cursor: pointer" class="fa fa-arrow-circle-up fa-lg"></span>
+                            </div>
                             <div v-if="!accountIsEmpty" class="text-value-lg"><h4><strong>{{ currency(account.balance)}}</strong></h4></div>
                             <div>{{ $t('dashboard.pages.account.account_balance')}}</div>
                             <small class="text-muted">{{ $t('dashboard.pages.account.account_balance_help')}}</small>
@@ -24,7 +27,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div v-if="!accountIsEmpty" class="btn-group float-right" @click="showModal" >
-                                <span style="cursor: pointer" class="fa fa-arrow-circle-down"></span>
+                                <span style="cursor: pointer" class="fa fa-arrow-circle-down fa-lg"></span>
                             </div>
                             <div v-if="!accountIsEmpty" class="text-value-lg"><h4><strong>{{currency(account.commission)}}</strong></h4></div>
                             <div>{{ $t('dashboard.pages.account.commission_balance')}}</div>
@@ -77,7 +80,8 @@
                             <td>{{ payout.account_name }}</td>
                             <td>{{ payout.user }}</td>
                             <td>{{ payout.date }}</td>
-                            <td>{{ $t('dashboard.pages.account.table.status.'+payout.status) }}</td>
+
+                            <td><span class="alert" :class="alert(payout.status)">{{ $t('dashboard.pages.account.table.status.'+payout.status) }}</span></td>
                             <td>{{ payout.decision_at }}</td>
                             <td>
                                 <div v-if="payout.status=='pending'" @click="cancelPayout(payout.uuid)" class="btn-group" role="group" :aria-label="$t('dashboard.pages.account.table.actions.action')">
@@ -152,6 +156,9 @@
             },
             cancelPayoutStatus() {
                 return this.$store.getters.getCancelPayoutStatus;
+            },
+            paymentMethods() {
+                return this.$store.getters.getConfiguration.payout_method
             }
         },
         methods: {
@@ -179,6 +186,15 @@
             cancelPayout(uuid) {
                 this.$store.dispatch('cancelPayout', uuid);
             },
+            alert(status) {
+                switch (status) {
+                    case 'approved': return 'alert-success';
+                    case 'rejected': return 'alert-danger';
+                    case 'cancelled': return 'alert-secondary';
+                    default: return 'badge-light';
+
+                }
+            }
         },
         watch: {
             payoutsLoadStatus() {

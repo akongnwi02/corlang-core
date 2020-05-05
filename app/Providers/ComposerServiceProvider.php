@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Composers\Backend\DashboardComposer;
+use App\Http\Composers\Frontend\TopupAccountComposer;
 use Illuminate\Support\Facades\View;
 use App\Http\Composers\GlobalComposer;
 use Illuminate\Support\ServiceProvider;
@@ -32,6 +33,10 @@ class ComposerServiceProvider extends ServiceProvider
         /*
          * Frontend
          */
+        View::composer(
+            'frontend.user.account.tabs.topup',
+            TopupAccountComposer::class
+        );
 
         /*
          * Backend

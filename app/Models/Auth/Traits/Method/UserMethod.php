@@ -5,6 +5,7 @@ use App\Models\Account\Movement;
 use App\Models\Account\MovementType;
 use App\Models\Transaction\Transaction;
 use Carbon\Carbon;
+use function foo\func;
 
 /**
  * Trait UserMethod.
@@ -211,5 +212,14 @@ trait UserMethod
     {
         return Transaction::where('user_id', $this->uuid)
             ->sum('agent_commission');
+    }
+    
+    public function getAccount($paymentMethod, $user)
+    {
+        $topupAccounts = $user->topup_accounts;
+        
+        return $topupAccounts->first(function ($topupAccount) use($paymentMethod) {
+            return $topupAccount->paymentmethod_id == $paymentMethod->uuid;
+        })->account;
     }
 }

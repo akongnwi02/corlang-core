@@ -32,6 +32,7 @@ return [
             'change_pin'      => 'Change Pin Code',
             'my_information'  => 'My Information',
             'profile'         => 'Profile',
+            'topup'           => 'Topup Configuration',
         ],
     ],
 ];

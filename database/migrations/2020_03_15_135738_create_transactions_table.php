@@ -60,6 +60,8 @@ class CreateTransactionsTable extends Migration
             $table->dateTime('reversed_at')->nullable();
             $table->dateTime('completed_at')->nullable();
     
+            $table->string('customer_phone')->nullable();
+    
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
