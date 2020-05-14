@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Api\Business;
 
 use App\Http\Controllers\Controller;
+use App\Models\Service\TopupAccount;
 use App\Models\System\Currency;
 
 class AccountController extends Controller
@@ -20,9 +21,10 @@ class AccountController extends Controller
         
         return response()->json(
             array_merge($account->toArray(), [
-                'balance'       => number_format($account->getBalance(), 2),
-                'commission'    => number_format($account->getCommissionBalance(), 2),
-                'currency_code' => Currency::where('is_default', true)->first()->code,
+                'balance'        => number_format($account->getBalance(), 2),
+                'commission'     => number_format($account->getCommissionBalance(), 2),
+                'currency_code'  => Currency::where('is_default', true)->first()->code,
+                'topup_accounts' => TopupAccount::where('user_id', auth()->user()->uuid)->get()
             ])
         );
     }

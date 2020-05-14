@@ -234,14 +234,13 @@ return [
                     'description_fr'     => 'Description Fr',
                     'code'               => 'Code',
                     'active'             => 'Active',
-                    'payment_service'    => 'Automatic Payment',
+                    'realtime'           => 'Realtime',
                     'service'            => 'Service',
                     'logo'               => 'Logo',
                     'customercommission' => 'Customer Service Charge',
                     'providercommission' => 'Provider Service Charge',
                     'total'              => 'payment method|payment methods',
                 ],
-            
             ],
         ],
         'sales'     => [

@@ -218,7 +218,7 @@ trait UserMethod
     {
         $topupAccounts = $user->topup_accounts;
         
-        return $topupAccounts->first(function ($topupAccount) use($paymentMethod) {
+        return @$topupAccounts->first(function ($topupAccount) use($paymentMethod) {
             return $topupAccount->paymentmethod_id == $paymentMethod->uuid;
         })->account;
     }

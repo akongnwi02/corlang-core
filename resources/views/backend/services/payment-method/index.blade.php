@@ -34,7 +34,7 @@
                                 <th>@lang('labels.backend.services.method.table.active')</th>
                                 <th>@lang('labels.backend.services.method.table.description_en')</th>
                                 <th>@lang('labels.backend.services.method.table.description_fr')</th>
-                                <th>@lang('labels.backend.services.method.table.payment_service')</th>
+                                <th>@lang('labels.backend.services.method.table.realtime')</th>
                                 <th>@lang('labels.backend.services.method.table.customercommission')</th>
                                 <th>@lang('labels.backend.services.method.table.providercommission')</th>
                                 <th>@lang('labels.general.actions')</th>

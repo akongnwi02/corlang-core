@@ -25,11 +25,11 @@
                            v-model="phone"></mdb-input>
             </div>
             <!--</mdb-col>-->
-            <mdb-col class="col-6">
-                <mdb-input type="password" key="pincode"
-                           :label="$t('dashboard.pages.general.pincode')"
-                           v-model="pincode"></mdb-input>
-            </mdb-col>
+            <!--<mdb-col class="col-6">-->
+                <!--<mdb-input type="password" key="pincode"-->
+                           <!--:label="$t('dashboard.pages.general.pincode')"-->
+                           <!--v-model="pincode"></mdb-input>-->
+            <!--</mdb-col>-->
 
         </mdb-row>
 
@@ -75,7 +75,6 @@
         data() {
             return {
                 // Models Fields
-                account: '',
                 pincode: '',
                 phone: '',
                 destination: '',
@@ -128,9 +127,7 @@
                         service_code: this.selectedService.code,
                         amount: this.amount,
                         currency_code: this.configuration.currency.code,
-                        pincode: this.pincode,
                         phone: this.phone,
-                        account: this.account
                     });
                 }
             },
@@ -165,12 +162,12 @@
                         ++invalid;
                     }
                 }
-
-                if (this.pincode.length < 3) {
-                    ++invalid;
-                    this.invalid_text = this.$t('validations.purchase.pincode');
-                    console.log('Invalid pincode');
-                }
+                //
+                // if (this.pincode.length < 3) {
+                //     ++invalid;
+                //     this.invalid_text = this.$t('validations.purchase.pincode');
+                //     console.log('Invalid pincode');
+                // }
 
                 if (this.phone.length < 9) {
                     ++invalid;

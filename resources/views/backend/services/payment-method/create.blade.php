@@ -94,11 +94,11 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.method.payment_service'))->class('col-md-2 form-control-label')->for('is_payment_service') }}
+                        {{ html()->label(__('validation.attributes.backend.services.method.realtime'))->class('col-md-2 form-control-label')->for('is_realtime') }}
 
                         <div class="col-md-10">
                             <label class="switch switch-label switch-pill switch-primary">
-                                {{ html()->checkbox('is_payment_service', false, 1)->class('switch-input') }}
+                                {{ html()->checkbox('is_realtime', false, 1)->class('switch-input') }}
                                 <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
                             </label>
                         </div><!--col-->

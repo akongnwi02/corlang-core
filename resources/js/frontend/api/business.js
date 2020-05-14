@@ -8,11 +8,12 @@ export default {
         params.currency_code = data.currency_code; // currency code
         params.items = data.items; // optional array of items
 
+        params.auth_payload = data.auth_payload;
+
         params.name = data.name; // customer name
         params.phone = data.phone; // customer phone
         params.email = data.email; // customer email
         params.address = data.address; // customer address
-        params.pincode = data.pincode; // special reference provided by customer
 
         return axios.post('/api/quote', params);
     },

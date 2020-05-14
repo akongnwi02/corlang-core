@@ -14,7 +14,7 @@
                 <div class="col-sm-4 col-lg-4">
                     <div class="card">
                         <div class="card-body">
-                            <div v-if="!accountIsEmpty" class="btn-group float-right" @click="showModal" >
+                            <div v-if="!accountIsEmpty" class="btn-group float-right" @click="showTopupModal" >
                                 <span style="cursor: pointer" class="fa fa-arrow-circle-up fa-lg"></span>
                             </div>
                             <div v-if="!accountIsEmpty" class="text-value-lg"><h4><strong>{{ currency(account.balance)}}</strong></h4></div>
@@ -26,7 +26,7 @@
                 <div class="col-sm-4 col-lg-4">
                     <div class="card">
                         <div class="card-body">
-                            <div v-if="!accountIsEmpty" class="btn-group float-right" @click="showModal" >
+                            <div v-if="!accountIsEmpty" class="btn-group float-right" @click="showPayoutModal" >
                                 <span style="cursor: pointer" class="fa fa-arrow-circle-down fa-lg"></span>
                             </div>
                             <div v-if="!accountIsEmpty" class="text-value-lg"><h4><strong>{{currency(account.commission)}}</strong></h4></div>
@@ -109,24 +109,34 @@
             </div><!--col-->
         </div><!--row-->
         <payout-modal v-on:payout="requestPayout" v-on:closed="show_payout_modal=false" v-show="show_payout_modal==true" :account="account"></payout-modal>
+        <topup-modal v-on:topup="confirmTopup" v-on:closed="show_topup_modal=false" v-show="show_topup_modal==true"></topup-modal>
+
+        <quote-modal v-on:confirmed="confirm" :service="selectedService" :quote="quote"
+                     v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
     </div><!--card-body-->
 </template>
 
 <script>
     import {currency} from "../helpers/currency";
     import PayoutModal from "../components/account/PayoutModal";
+    import TopupModal from "../components/account/TopupModal";
+    import QuoteModal from "../components/mobile-money/QuoteModal";
     import Spinner from '../components/global/Spinner';
 
     export default {
         name: "Account",
         components: {
             PayoutModal,
+            TopupModal,
+            QuoteModal,
             Spinner
         },
         data() {
             return {
                 show_payout_modal: false,
+                show_topup_modal: false,
                 spinner_status: false,
+                show_quote_modal: false,
             }
         },
         mounted() {
@@ -158,15 +168,21 @@
                 return this.$store.getters.getCancelPayoutStatus;
             },
             paymentMethods() {
-                return this.$store.getters.getConfiguration.payout_method
-            }
+                return this.$store.getters.getConfiguration.payout_methods
+            },
+            quoteLoadStatus() {
+                return this.$store.getters.getQuoteLoadStatus;
+            },
         },
         methods: {
             currency(amount) {
                 return currency.format(amount, this.account.currency_code);
             },
-            showModal() {
+            showPayoutModal() {
                 this.show_payout_modal = true;
+            },
+            showTopupModal() {
+                this.show_topup_modal = true;
             },
             requestPayout(payout) {
                 this.show_payout_modal = false;
@@ -178,6 +194,19 @@
                     amount: payout.amount,
                     name: payout.name,
                     account: payout.paymentaccount,
+                });
+            },
+            confirmTopup(data) {
+                console.log('topup data', data);
+                this.show_topup_modal = false;
+                this.$store.dispatch('loadQuote', {
+                    destination: data.paymentaccount,
+                    service_code: data.selectedMethod.service.code,
+                    amount: data.amount,
+                    currency_code: data.currency_code,
+                    auth_payload: data.auth_payload,
+                    auth_type: data.auth_type,
+                    phone: this.phone,
                 });
             },
             refresh() {
@@ -222,6 +251,12 @@
             },
             accountLoadStatus() {
                 this.spinner_status = this.accountLoadStatus;
+            },
+            quoteLoadStatus() {
+                if (this.quoteLoadStatus == 2) {
+                    this.show_quote_modal = true;
+                }
+                this.spinner_status = this.quoteLoadStatus;
             },
         }
     }

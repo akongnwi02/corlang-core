@@ -17,39 +17,51 @@ class PaymentMethodTableSeeder extends Seeder
         PaymentMethod::unguard();
         
         PaymentMethod::create([
-            'name'               => 'Orange',
-            'code'               => 'ORANGE7487',
-            'is_default'         => false,
-            'is_active'          => true,
-            'is_payment_service' => true,
-            'service_id'         => Service::first()->uuid,
-            'accountregex'       => null,
-            'description_en'     => 'Orange Money Payment. Dial *154# to receive a code to continue',
-            'description_fr'     => 'Paiement par Orange. Composez *154# pour continuer',
+            'name'           => 'MTN',
+            'code'           => 'MTN7487',
+            'is_default'     => false,
+            'is_active'      => true,
+            'is_realtime'    => true,
+            'service_id'     => Service::where('code', 'CORMTNIN')->first()->uuid,
+            'accountregex'   => null,
+            'description_en' => 'MTN Mobile Money payment. Dial *126# on your mobile to confirm payment',
+            'description_fr' => 'Paiement par MTN Money. Composez *126# sur votre compte pour confirmer le paiement',
         ]);
         
         PaymentMethod::create([
-            'name'               => config('business.system.service.name'),
-            'code'               => 'COR7487',
-            'is_default'         => true,
-            'is_active'          => true,
-            'is_payment_service' => true,
-            'service_id'         => null,
-            'accountregex'       => null,
-            'description_en'     => 'Pay with corlang account',
-            'description_fr'     => 'Payez avec votre compte Corlang',
+            'name'           => 'Orange',
+            'code'           => 'ORANGE7487',
+            'is_default'     => false,
+            'is_active'      => true,
+            'is_realtime'    => true,
+            'service_id'     => Service::where('code', 'CORORANGE')->first()->uuid,
+            'accountregex'   => null,
+            'description_en' => 'Orange Money Payment. Dial *154# to receive a code to continue',
+            'description_fr' => 'Paiement par Orange. Composez *154# pour continuer',
         ]);
         
         PaymentMethod::create([
-            'name'               => 'UBA',
-            'code'               => 'UBA0125',
-            'is_default'         => false,
-            'is_active'          => true,
-            'is_payment_service' => false,
-            'service_id'         => null,
-            'accountregex'       => null,
-            'description_en'     => 'UBA account',
-            'description_fr'     => 'Compte UBA',
+            'name'           => config('business.system.service.name'),
+            'code'           => 'COR7487',
+            'is_default'     => true,
+            'is_active'      => true,
+            'is_realtime'    => true,
+            'service_id'     => null,
+            'accountregex'   => null,
+            'description_en' => 'Pay with corlang account',
+            'description_fr' => 'Payez avec votre compte Corlang',
+        ]);
+        
+        PaymentMethod::create([
+            'name'           => 'UBA',
+            'code'           => 'UBA0125',
+            'is_default'     => false,
+            'is_active'      => true,
+            'is_realtime'    => false,
+            'service_id'     => null,
+            'accountregex'   => null,
+            'description_en' => 'UBA account',
+            'description_fr' => 'Compte UBA',
         ]);
         
         PaymentMethod::reguard();

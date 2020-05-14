@@ -86,7 +86,7 @@
                 if (!BUSINESS_CONFIG.APP_REGEX_AMOUNT.test(this.amount)) {
                     ++invalid;
                     this.invalid_text = this.$t('validations.account.invalid_amount');
-                    console.log('Balance is invalid');
+                    console.log('Amount is invalid');
                 }
 
                 if (this.paymentaccount.length < 7) {

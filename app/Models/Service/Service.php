@@ -73,5 +73,6 @@ class Service extends Model
         'customer_rate'    => 'double',
         'agent_rate'       => 'double',
         'has_items'        => 'boolean',
+        'requires_auth'    => 'boolean',
     ];
 }

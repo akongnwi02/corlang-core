@@ -46,4 +46,8 @@ class BusinessErrorCodes
     const INVALID_METER_CODE                = '10032';
     const TRANSACTION_IN_FINAL_STATUS       = '10033';
     const MINIMUM_AMOUNT_ERROR              = '10034';
+    const SUBSCRIBER_CANNOT_PERFORM         = '10035';
+    const SUBSCRIBER_NOT_FOUND              = '10036';
+    const INSUFFICIENT_FUNDS_IN_WALLET      = '10037';
+    const TRANSACTION_CANCELED              = '10038';
 }

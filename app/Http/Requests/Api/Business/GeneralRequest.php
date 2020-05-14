@@ -25,7 +25,7 @@ class GeneralRequest extends FormRequest
     {
         return [
             'service_code' => ['required', new ServiceAccessRule(),],
-            'pincode' => ['required', new CorrectPinCode()],
+//            'pincode' => ['required', new CorrectPinCode()],
         ];
     }
 }

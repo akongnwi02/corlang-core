@@ -46,11 +46,11 @@ return [
                 'api_url' => env('APP_CATEGORY_PREPAID_BILL_URL'),
                 'api_key' => env('APP_CATEGORY_PREPAID_BILL_KEY'),
             ],
-            'mobilemoney'  => [
-                'name'    => 'Mobile Money',
-                'code'    => 'COREMOMO',
-                'api_url' => env('APP_CATEGORY_MOBILE_MONEY_URL'),
-                'api_key' => env('APP_CATEGORY_MOBILE_MONEY_KEY'),
+            'receivemoney'  => [
+                'name'    => 'Receive Money',
+                'code'    => 'CORERECEIVEMONEY001',
+                'api_url' => env('APP_CATEGORY_RECEIVE_MONEY_URL'),
+                'api_key' => env('APP_CATEGORY_RECEIVE_MONEY_KEY'),
             ]
         ],
         'endpoints' => [

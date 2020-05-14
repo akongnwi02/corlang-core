@@ -23,6 +23,10 @@
                         "quote": {
                             "title": "Meter Details"
                         }
+                    },
+                    "receive_money": {
+                        "source_account": "Account Identifier",
+                        "name": "Account Holder"
                     }
                 }
             },
@@ -82,8 +86,10 @@
                 "commission_balance": "Commission Balance",
                 "commission_balance_help": "Your commission balance",
                 "payout_method": "Payout method",
+                "topup_method": "Top up Method",
                 "name": "Account Name",
                 "request_payout": "Request Payout",
+                "topup_account": "Top up Account",
                 "table": {
                     "entriesTitle": "Recent Requests",
                     "header": {
@@ -119,6 +125,8 @@
                 "search": "Search",
                 "summary": "Order Details",
                 "amount": "Amount",
+                "otp": "OTP",
+                "pin": "PIN",
                 "method": "Payment Method",
                 "account": "Account Number",
                 "reference": "Reference",
@@ -144,6 +152,7 @@
             },
             "reference": "The reference is invalid",
             "pincode": "The pin code is invalid",
+            "otp": "The OTP field is invalid",
             "phone": "The phone number is invalid",
             "account": "The payment account number is invalid",
             "amount": "Please enter a valid amount",
@@ -155,6 +164,7 @@
         "account": {
             "insufficient_balance": "Your balance is insufficient",
             "empty_payout_method": "Please select a payout method",
+            "topup_account_not_configured": "You have not set an account for this topup method",
             "account_number": "Please enter a valid account number",
             "invalid_amount": "Please enter a valid amount",
             "account_name": "Please enter a valid name"
