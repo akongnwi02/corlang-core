@@ -39,7 +39,7 @@ class PaymentMethodRepository
     public function update($method, $data)
     {
         $method->fill($data);
-        $method->is_payment_service = request()->has('is_realtime') ? 1 : 0;
+        $method->is_realtime = request()->has('is_realtime') ? 1 : 0;
         
         if ($method->save()) {
 //            event(new PaymentMethodUpdated($method));
@@ -57,7 +57,7 @@ class PaymentMethodRepository
     public function create($data)
     {
         $method                     = (new PaymentMethod())->fill($data);
-        $method->is_payment_service = request()->has('is_realtime') ? 1 : 0;
+        $method->is_realtime = request()->has('is_realtime') ? 1 : 0;
         
         if ($method->save()) {
 //            event(new PaymentMethodCreated($method));

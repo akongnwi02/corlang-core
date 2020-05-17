@@ -23,6 +23,10 @@ interface ModelInterface
     
     public function getAmount();
     
+    public function setPhone($phone);
+    
+    public function getPhone();
+    
     public function setCurrencyCode($code);
     
     public function getCurrencyCode();

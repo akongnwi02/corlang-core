@@ -304,6 +304,7 @@ return [
             'location'                  => 'Location',
             'topup' => [
                 'service' => 'Service',
+                'confirmed' => 'Confirmed',
                 'account' => 'Account',
                 'config'  => 'Topup Configuration',
                 'otp'     => 'OTP',

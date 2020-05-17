@@ -214,12 +214,12 @@ trait UserMethod
             ->sum('agent_commission');
     }
     
-    public function getAccount($paymentMethod, $user)
+    public function getTopupAccount($paymentMethod)
     {
-        $topupAccounts = $user->topup_accounts;
+        $topupAccounts = $this->topup_accounts;
         
         return @$topupAccounts->first(function ($topupAccount) use($paymentMethod) {
             return $topupAccount->paymentmethod_id == $paymentMethod->uuid;
-        })->account;
+        });
     }
 }

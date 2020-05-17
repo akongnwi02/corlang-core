@@ -113,4 +113,15 @@ class ReceiveMoney implements ModelInterface
     {
         return $this->name;
     }
+    
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+    
+    public function getPhone()
+    {
+        return $this->phone;
+    }
 }

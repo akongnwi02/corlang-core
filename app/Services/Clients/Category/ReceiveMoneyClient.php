@@ -11,8 +11,11 @@ namespace App\Services\Clients\Category;
 
 use App\Exceptions\Api\BadRequestException;
 use App\Exceptions\Api\ServerErrorException;
+use App\Http\Resources\Api\Business\ReceiveMoneyResource;
 use App\Models\Service\Category;
+use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Rules\Service\ServiceAccessRule;
+use App\Services\Business\Models\ReceiveMoney;
 use App\Services\Clients\CategoryInterface;
 use App\Services\Constants\BusinessErrorCodes;
 use GuzzleHttp\Client;
@@ -23,12 +26,19 @@ use Log;
 class ReceiveMoneyClient implements CategoryInterface
 {
     public $category;
+    public $serviceRepository;
     
     public function __construct(Category $category)
     {
         $this->category = $category;
+        $this->serviceRepository = new ServiceRepository;
     }
     
+    /**
+     * @param $request
+     * @throws BadRequestException
+     * @throws ServerErrorException
+     */
     public function validate($request)
     {
         validator($request, [
@@ -36,8 +46,40 @@ class ReceiveMoneyClient implements CategoryInterface
             'service_code'  => ['required', new ServiceAccessRule(),],
             'amount'        => ['required', 'nullable', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/'],
             'currency_code' => ['required', Rule::exists('currencies', 'code')],
-            'otp'           => ['sometimes', 'nullable', 'string', 'min:3'],
+            'auth_payload'  => ['sometimes', 'nullable', 'string', 'min:3'],
         ])->validate();
+    
+        $service = $this->serviceRepository->findByCode($request['service_code']);
+        
+        // verify if the auth field has been provided
+        if ($service->requires_auth) {
+            if (empty($request['auth_payload'])) {
+                throw new BadRequestException(BusinessErrorCodes::CUSTOMER_PAYMENT_AUTH_ERROR, 'The payment authorization token was not provided by the customer');
+            }
+        }
+    
+        if (!$service->is_money_withdrawal) {
+            throw new ServerErrorException(BusinessErrorCodes::SERVICE_MAL_CONFIGURED, 'Service misconfigured. is_money_withdrawal flag must be set to true');
+        }
+    }
+    
+    public function response($receiveMoney)
+    {
+        return new ReceiveMoneyResource($receiveMoney);
+    }
+    
+    /**
+     * @param $data
+     * @return ReceiveMoney
+     */
+    public function quote($data): ReceiveMoney
+    {
+        $receiveMoney = new ReceiveMoney;
+        $receiveMoney->setDestination($data['destination'])
+            ->setServiceCode($data['service_code'])
+            ->setCurrencyCode($data['currency_code'])
+            ->setAmount($data['amount']);
+        return $receiveMoney;
     }
     
     /**

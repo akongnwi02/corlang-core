@@ -49,6 +49,7 @@ trait AccountMethod
                     ->orWhere('type_id', MovementType::where('name', config('business.movement.type.deposit'))->first()->uuid)
                     ->orWhere('type_id', MovementType::where('name', config('business.movement.type.sale'))->first()->uuid);
             })
+            ->where('is_complete', true)
             ->sum('amount');
     }
     

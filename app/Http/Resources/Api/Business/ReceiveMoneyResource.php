@@ -17,7 +17,7 @@ class ReceiveMoneyResource extends JsonResource
     {
         return [
             'uuid'               => $this->transaction_id,
-            'source account'     => $this->source_account,
+            'source_account'     => $this->source_account,
             'name'               => $this->name,
             'address'            => $this->address,
             'amount'             => (float)$this->amount,

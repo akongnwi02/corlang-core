@@ -16,8 +16,8 @@
                     </select>
                 </mdb-col>
                 <mdb-col class="col-sm-6">
-                    <!--<label v-if="!topupAccount(selectedMethod)" class="text text-danger">{{ $t('validations.account.topup_account_not_configured') }}</label>-->
-                    <mdb-input v-if="accountLoadStatus==2" id="account" key="account" :label="$t('dashboard.pages.general.account')" v-model="account" :value="topupAccount(selectedMethod)"></mdb-input>
+                    <label v-if="!topupAccount(selectedMethod)" class="text text-danger">{{ $t('validations.account.topup_account_not_configured') }}</label>
+                    <mdb-input v-if="topupAccount(selectedMethod) && accountLoadStatus==2" id="account" key="account" :label="$t('dashboard.pages.general.account')" :value="topupAccount(selectedMethod)" disabled></mdb-input>
                 </mdb-col>
             </div>
             <div class="row">
@@ -53,7 +53,6 @@
             return {
                 invalid_text: '',
                 amount: 0,
-                account: '',
                 auth_payload: '',
                 selectedMethod: {}
             }
@@ -82,7 +81,7 @@
                 if (this.validate()) {
                     this.$emit('topup', {
                         amount: this.amount,
-                        paymentaccount: this.account,
+                        paymentaccount: this.topupAccount(this.selectedMethod),
                         auth_payload: this.auth_payload,
                         selectedMethod: this.selectedMethod,
                         currency_code: this.currency.code,
@@ -98,10 +97,10 @@
                     console.log('Amount is invalid');
                 }
 
-                if (this.account.length < 7) {
+                if (! this.topupAccount(this.selectedMethod)) {
                     ++invalid;
                     this.invalid_text = this.$t('validations.account.account_number');
-                    console.log('Invalid account number entered. Too short');
+                    console.log('Account not configured');
                 }
 
 
@@ -128,6 +127,7 @@
                 if (myAccount) {
                     return myAccount.account;
                 }
+                return null;
             }
         }
     }

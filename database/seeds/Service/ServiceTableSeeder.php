@@ -34,7 +34,7 @@ class ServiceTableSeeder extends Seeder
         Service::create([
             'name' => 'Sample service 2',
             'description' => 'Some quick example text to serve as the service description and make up the bulk of the service\'s content.',
-            'code' => 'CORMTNOUT',
+            'code' => 'CORMTNIN',
             'country_id' => Country::first()->uuid,
             'is_active' => true,
             'category_id' => Category::where('code', 'CORERECEIVEMONEY001')->first()->uuid,
@@ -51,11 +51,12 @@ class ServiceTableSeeder extends Seeder
             'code' => 'CORORANGE',
             'country_id' => Country::first()->uuid,
             'is_active' => true,
-            'category_id' => Category::first()->uuid,
+            'category_id' => Category::where('code', 'CORERECEIVEMONEY001')->first()->uuid,
             'company_rate' => 45,
             'agent_rate' => 50,
             'is_prepaid' => true,
             'requires_auth'  => true,
+            'is_money_withdrawal' => true,
             'auth_type'      => 'otp',
             'customercommission_id' => Commission::first()->uuid,
             'providercommission_id' => Commission::first()->uuid,
@@ -64,18 +65,18 @@ class ServiceTableSeeder extends Seeder
         Service::create([
             'name' => 'Sample service 4',
             'description' => 'Some quick example text to serve as the service description and make up the bulk of the service\'s content.',
-            'code' => 'CORMTNIN',
+            'code' => 'CORMTNOUT',
             'country_id' => Country::first()->uuid,
             'is_active' => true,
-            'category_id' => Category::first()->uuid,
+            'category_id' => Category::where('code', 'CORERECEIVEMONEY001')->first()->uuid,
             'company_rate' => 45,
             'agent_rate' => 50,
             'is_prepaid' => true,
             'requires_auth'  => false,
+            'is_money_withdrawal' => true,
             'auth_type'      => null,
             'customercommission_id' => Commission::first()->uuid,
             'providercommission_id' => Commission::first()->uuid,
         ]);
-    
     }
 }

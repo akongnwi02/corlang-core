@@ -14,6 +14,7 @@ use App\Models\Company\Company;
 use App\Models\Company\CompanyService;
 use App\Models\Service\Category;
 use App\Models\Service\Item;
+use App\Models\Service\PaymentMethod;
 
 trait ServiceRelationship
 {
@@ -53,5 +54,10 @@ trait ServiceRelationship
     public function provider_commission()
     {
         return $this->belongsTo(Commission::class, 'providercommission_id', 'uuid');
+    }
+    
+    public function payment_method()
+    {
+        return $this->belongsTo(PaymentMethod::class, 'uuid', 'service_id');
     }
 }

@@ -50,4 +50,6 @@ class BusinessErrorCodes
     const SUBSCRIBER_NOT_FOUND              = '10036';
     const INSUFFICIENT_FUNDS_IN_WALLET      = '10037';
     const TRANSACTION_CANCELED              = '10038';
+    const CUSTOMER_PAYMENT_AUTH_ERROR       = '10039';
+    const SERVICE_MAL_CONFIGURED            = '10040';
 }

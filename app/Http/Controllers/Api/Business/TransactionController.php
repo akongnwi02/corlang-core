@@ -14,7 +14,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Business\ConfirmPaymentRequest;
 use App\Http\Requests\Api\Business\GeneralRequest;
 use App\Http\Resources\Api\TransactionResource;
-use App\Jobs\Business\Purchase\CompletePurchaseJob;
 use App\Jobs\Business\Purchase\ProcessPurchaseJob;
 use App\Models\Transaction\Transaction;
 use App\Repositories\Api\Business\TransactionRepository;
@@ -90,7 +89,7 @@ class TransactionController extends Controller
             
             $transactionRepository->processPayment($transaction);
             
-            $transaction->status      = config('business.transaction.status.pending');
+            $transaction->status = config('business.transaction.status.pending');
             $transaction->save();
             
             dispatch(new ProcessPurchaseJob($transaction))->onQueue(config('business.transaction.queue.purchase.process'));

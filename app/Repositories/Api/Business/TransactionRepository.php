@@ -65,17 +65,38 @@ class TransactionRepository
     {
         
         return \DB::transaction(function () use ($model) {
+            // is user trying to top up his account balance ?
+            $isTopup = false;
+            
             /*
-             * get the service and the payment method
+             * get the service
              */
             $service       = $this->serviceRepository->findByCode($model->getServiceCode());
             $category      = $service->category;
+    
+            // determine if user is trying to do a topup
+            if ($service->is_money_withdrawal && $service->payment_method) {
+    
+                $topupAccount = auth()->user()->getTopupAccount($service->payment_method)->account;
+                if ($topupAccount == $model->getDestination()) {
+                    $isTopup = true;
+                    /*
+                     * get the commissions
+                     */
+                    $customerServiceCommission = $service->payment_method->customer_commission;
+                    $providerServiceCommission = $service->payment_method->provider_commission;
+                }
+            }
+    
+            // proceed normally if not a topup
+            if (! $isTopup) {
+                /*
+                 * get the commissions
+                 */
+                $customerServiceCommission = $service->customer_commission;
+                $providerServiceCommission = $service->provider_commission;
+            }
             
-            /*
-             * get the commissions
-             */
-            $customerServiceCommission       = $service->customer_commission;
-            $providerServiceCommission       = $service->provider_commission;;
             
             /*
              * calculate the fees
@@ -93,8 +114,8 @@ class TransactionRepository
             /*
              * get the commission rates
              */
-            $agent_commission_rate  = auth()->user()->company->exists() ? $this->serviceRepository->getAgentServiceRate($service, auth()->user()) : 0;
-            $company_commission_rate = auth()->user()->company->exists() ? $this->serviceRepository->getCompanyServiceRate($service, auth()->user()->company) : 0;
+            $agent_commission_rate  = auth()->user()->company->exists() && !$isTopup ? $this->serviceRepository->getAgentServiceRate($service, auth()->user()) : 0;
+            $company_commission_rate = auth()->user()->company->exists() && !$isTopup ? $this->serviceRepository->getCompanyServiceRate($service, auth()->user()->company) : 0;
             
             /*
              * share the commissions
@@ -102,6 +123,8 @@ class TransactionRepository
             $company_commission = ($totalFee * $company_commission_rate / 100) * (1 - $agent_commission_rate / 100);
             $agent_commission   = ($totalFee * $company_commission_rate / 100) * ($agent_commission_rate / 100);
             $system_commission  = $totalFee - ($company_commission + $agent_commission);
+            
+            
             
             // Transaction creation
             $transaction = new Transaction();
@@ -133,7 +156,7 @@ class TransactionRepository
             $transaction->company_commission = $company_commission;
             $transaction->system_commission  = $system_commission;
     
-            $transaction->customer_phone = $model->getPhone();
+            $transaction->customer_phone = @$model->getPhone();
             
             if ($transaction->save()) {
                 return $transaction;
@@ -151,14 +174,24 @@ class TransactionRepository
      * @param $transaction
      * @throws BadRequestException
      * @throws \Throwable
+     * @return boolean
      */
     public function processPayment($transaction)
     {
         // verify if user has sufficient balance
         $userAccount = $transaction->user->account;
     
-        if (($userAccount->getBalance() > $transaction->total_customer_amount) && $userAccount->is_active) {
+        if (!$userAccount->is_active) {
+            throw new ForbiddenException(BusinessErrorCodes::ACCOUNT_LIMITED, 'Your account has been limited.');
+        }
+        if ($transaction->service->is_money_withdrawal) {
             $this->movementRepository->registerSale($userAccount, $transaction);
+            return true;
+        }
+        
+        if (($userAccount->getBalance() > $transaction->total_customer_amount)) {
+            $this->movementRepository->registerSale($userAccount, $transaction);
+            return true;
             
         } elseif (
             $transaction->company->direct_polling
@@ -168,10 +201,8 @@ class TransactionRepository
             $companyAccount = $transaction->company->account;
                 
             $this->movementRepository->registerSale($companyAccount, $transaction);
+            return true;
         } else {
-            if (! $userAccount->is_active) {
-                throw new ForbiddenException(BusinessErrorCodes::ACCOUNT_LIMITED, 'Your account has been limited.');
-            }
             throw new BadRequestException(BusinessErrorCodes::INSUFFICIENT_ACCOUNT_BALANCE, 'Your account balance is insufficient for this transaction');
         }
     }

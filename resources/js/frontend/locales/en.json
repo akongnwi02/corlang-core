@@ -165,7 +165,7 @@
             "insufficient_balance": "Your balance is insufficient",
             "empty_payout_method": "Please select a payout method",
             "topup_account_not_configured": "You have not set an account for this topup method",
-            "account_number": "Please enter a valid account number",
+            "account_number": "Please configure account identifier for this top up method under your profile setting",
             "invalid_amount": "Please enter a valid amount",
             "account_name": "Please enter a valid name"
         },

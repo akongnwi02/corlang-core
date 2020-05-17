@@ -96,7 +96,6 @@ class MovementRepository
             throw new GeneralException(__('exceptions.backend.movement.create_error'));
         });
     }
-
     
     public function getAccountMovements($account)
     {
@@ -118,10 +117,13 @@ class MovementRepository
         $movement = new Movement();
         $movement->code = Movement::generateCode();
         $movement->amount = $transaction->total_customer_amount;
-        $movement->type_id = MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid;
+        $movement->type_id = $transaction->service->is_money_withdrawal
+            ? MovementType::where('name', config('business.movement.type.sale'))->first()->uuid
+            : MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid;
         $movement->user_id = $transaction->user->uuid;
         $movement->company_id = @$transaction->company->uuid;
         $movement->service_id = $transaction->service_id;
+        $movement->is_complete = false;
         $movement->currency_id = $this->currencyRepository->findByCode($transaction->currency_code)->uuid;
         $movement->destinationaccount_id = $account->uuid;
         
@@ -144,6 +146,18 @@ class MovementRepository
         if ($movements) {
             foreach ($movements as $movement) {
                 $movement->is_reversed = true;
+                $movement->save();
+            }
+        }
+    }
+    
+    public function completeMovement($code)
+    {
+        $movements = Movement::where('code', $code)->get();
+    
+        if ($movements) {
+            foreach ($movements as $movement) {
+                $movement->is_complete = true;
                 $movement->save();
             }
         }

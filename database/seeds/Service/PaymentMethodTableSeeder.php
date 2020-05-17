@@ -22,7 +22,7 @@ class PaymentMethodTableSeeder extends Seeder
             'is_default'     => false,
             'is_active'      => true,
             'is_realtime'    => true,
-            'service_id'     => Service::where('code', 'CORMTNIN')->first()->uuid,
+            'service_id'     => Service::where('code', 'CORMTNOUT')->first()->uuid,
             'accountregex'   => null,
             'description_en' => 'MTN Mobile Money payment. Dial *126# on your mobile to confirm payment',
             'description_fr' => 'Paiement par MTN Money. Composez *126# sur votre compte pour confirmer le paiement',

@@ -27,6 +27,7 @@ class CreateMovementsTable extends Migration
             $table->uuid('destinationaccount_id')->nullable();
 
             $table->boolean('is_reversed')->default(false);
+            $table->boolean('is_complete')->default(false);
             $table->dateTime('reversed_at')->nullable();
             
             $table->unsignedBigInteger('created_by')->nullable();

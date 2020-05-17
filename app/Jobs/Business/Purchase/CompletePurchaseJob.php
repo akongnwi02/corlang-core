@@ -66,6 +66,8 @@ class CompletePurchaseJob extends Job
             
             $movementRepository->reverseMovements($this->transaction->movement_code);
         }
+    
+        $movementRepository->completeMovements($this->transaction->movement_code);
         
         \Log::info("{$this->getJobName()}: Transaction is terminated. Sending event to pusher...", [
             'transaction.status'       => $this->transaction->status,
