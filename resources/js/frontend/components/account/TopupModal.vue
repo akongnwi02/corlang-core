@@ -16,7 +16,7 @@
                     </select>
                 </mdb-col>
                 <mdb-col class="col-sm-6">
-                    <label v-if="!topupAccount(selectedMethod)" class="text text-danger">{{ $t('validations.account.topup_account_not_configured') }}</label>
+                    <label v-if="!topupAccount(selectedMethod)" class="alert alert-danger">{{ $t('validations.account.topup_account_not_configured') }}</label>
                     <mdb-input v-if="topupAccount(selectedMethod) && accountLoadStatus==2" id="account" key="account" :label="$t('dashboard.pages.general.account')" :value="topupAccount(selectedMethod)" disabled></mdb-input>
                 </mdb-col>
             </div>
@@ -102,7 +102,6 @@
                     this.invalid_text = this.$t('validations.account.account_number');
                     console.log('Account not configured');
                 }
-
 
                 if (this.auth_payload.length < 3) {
                     if (this.selectedMethod.service.requires_auth) {

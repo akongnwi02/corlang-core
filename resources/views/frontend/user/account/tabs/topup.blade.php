@@ -18,10 +18,10 @@
             @foreach($topup_methods as $key => $method)
                 <tr>
                     <td>{!! @$method->logo_label !!}</td>
-                    <td style="min-width: 100px; text-align: center" class="alert alert-light">{{$method->name}}</td>
-                    <td><input id="account-{{$method->uuid}}" style="min-width:100px" type="text" name="topup_config[{{ $key }}][account]" value="{{$logged_in_user->getTopupAccount($method)->account}}" class="form-control"/></td>
+                    <td style="min-width: 100px; text-align: center" class="alert alert-warning">{{$method->name}}</td>
+                    <td><input placeholder="{{$method->placeholder_text}}" id="account-{{$method->uuid}}" style="min-width:100px" type="text" name="topup_config[{{ $key }}][account]" value="{{@$logged_in_user->getTopupAccount($method)->account}}" class="form-control"/></td>
                     <td><input type="hidden" id="uuid" name="topup_config[{{$key}}][method_id]" value="{{$method->uuid}}"/></td>
-                    @if($logged_in_user->getTopupAccount($method)->is_confirmed)
+                    @if(@$logged_in_user->getTopupAccount($method)->is_confirmed)
                         <td><span class='badge badge-success'>@lang('labels.general.yes')</span></td>
                     @else
                         <td><span class='badge badge-danger'>@lang('labels.general.no')</span></td>

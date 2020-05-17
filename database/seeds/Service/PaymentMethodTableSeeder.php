@@ -24,6 +24,7 @@ class PaymentMethodTableSeeder extends Seeder
             'is_realtime'    => true,
             'service_id'     => Service::where('code', 'CORMTNOUT')->first()->uuid,
             'accountregex'   => null,
+            'placeholder_text' => '2376xxxxxxxx',
             'description_en' => 'MTN Mobile Money payment. Dial *126# on your mobile to confirm payment',
             'description_fr' => 'Paiement par MTN Money. Composez *126# sur votre compte pour confirmer le paiement',
         ]);
@@ -36,6 +37,7 @@ class PaymentMethodTableSeeder extends Seeder
             'is_realtime'    => true,
             'service_id'     => Service::where('code', 'CORORANGE')->first()->uuid,
             'accountregex'   => null,
+            'placeholder_text' => '2376xxxxxxxx',
             'description_en' => 'Orange Money Payment. Dial *154# to receive a code to continue',
             'description_fr' => 'Paiement par Orange. Composez *154# pour continuer',
         ]);

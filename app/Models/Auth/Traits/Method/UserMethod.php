@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Models\Auth\Traits\Method;
-use App\Models\Account\Movement;
-use App\Models\Account\MovementType;
+
 use App\Models\Transaction\Transaction;
 use Carbon\Carbon;
-use function foo\func;
 
 /**
  * Trait UserMethod.
@@ -211,6 +209,7 @@ trait UserMethod
     public function getUserCommissionTotal()
     {
         return Transaction::where('user_id', $this->uuid)
+            ->where('status', config('business.transaction.status.success'))
             ->sum('agent_commission');
     }
     

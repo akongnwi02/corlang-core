@@ -8,11 +8,6 @@
 
 namespace App\Models\Traits\Methods;
 
-
-use App\Models\Account\Movement;
-use App\Models\Account\MovementType;
-use App\Models\Account\Payout;
-use App\Models\Account\PayoutType;
 use App\Models\Transaction\Transaction;
 use Carbon\Carbon;
 
@@ -41,6 +36,7 @@ trait CompanyMethod
     public function getCompanyCommissionsTotal()
     {
         return Transaction::where('company_id', $this->uuid)
+            ->where('status', config('business.transaction.status.success'))
             ->sum('company_commission');
     }
     
@@ -51,5 +47,4 @@ trait CompanyMethod
             ->sum('company_commission');
         return $commission;
     }
-    
 }

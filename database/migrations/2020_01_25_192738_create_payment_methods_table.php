@@ -22,6 +22,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->boolean('is_realtime')->default(true);
             $table->boolean('is_active')->default(true);
             $table->string('accountregex')->nullable();
+            $table->string('placeholder_text')->nullable();
             $table->string('name')->nullable();
             $table->string('code')->unique();
             $table->text('description_en')->nullable();
