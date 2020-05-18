@@ -46,7 +46,7 @@ class ReceiveMoneyClient implements CategoryInterface
             'service_code'  => ['required', new ServiceAccessRule(),],
             'amount'        => ['required', 'nullable', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/'],
             'currency_code' => ['required', Rule::exists('currencies', 'code')],
-            'auth_payload'  => ['sometimes', 'nullable', 'string', 'min:3'],
+            'auth_payload'  => ['sometimes', 'nullable', 'min:3'],
         ])->validate();
     
         $service = $this->serviceRepository->findByCode($request['service_code']);
@@ -92,7 +92,7 @@ class ReceiveMoneyClient implements CategoryInterface
         $json = [
             'destination'  => $transaction->destination,
             'service_code' => $transaction->service_code,
-            'amount'       => $transaction->amount,
+            'amount'       => $transaction->total_customer_amount,
             'external_id'  => $transaction->uuid,
             'otp'          => $otp,
             'callback_url' => config('app.micro_services.callback_url')
