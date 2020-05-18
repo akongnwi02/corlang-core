@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-    <img class="navbar-brand-full" src="{!! asset('img/backend/brand/logo/logo-browser-icon.png') !!}" width="50" height="50" style="border-radius: 50%" alt="logo">
+    <a href="{{ route('frontend.index') }}" class="navbar-brand"><img class="navbar-brand-full" src="{!! asset('img/backend/brand/logo/logo-browser-icon.png') !!}" width="50" height="50" style="border-radius: 50%" alt="logo"></a>
 
     &nbsp;&nbsp;&nbsp; <a href="{{ route('frontend.index') }}" class="navbar-brand">{{ app_name() }}</a>
 
@@ -9,7 +9,8 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav">
-            @if(config('locale.status') && count(config('locale.languages')) > 1)
+            <li class="nav-item"><a href="{{route('frontend.index')}}" class="nav-link {{ active_class(Active::checkRoute('frontend.index')) }}">@lang('navs.general.home')</a></li>
+        @if(config('locale.status') && count(config('locale.languages')) > 1)
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownLanguageLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">@lang('menus.language-picker.language') ({{ strtoupper(app()->getLocale()) }})</a>
