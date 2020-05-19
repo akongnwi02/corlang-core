@@ -19,6 +19,9 @@ class GeneralRequest extends FormRequest
         if (auth()->user()->company_id) {
             return auth()->user()->company->is_active;
         }
+        
+        // return true for guests
+        return true;
     }
     
     public function rules()
