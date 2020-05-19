@@ -78,7 +78,8 @@ class ReceiveMoneyClient implements CategoryInterface
         $receiveMoney->setDestination($data['destination'])
             ->setServiceCode($data['service_code'])
             ->setCurrencyCode($data['currency_code'])
-            ->setAmount($data['amount']);
+            ->setAmount($data['amount'])
+            ->setItems($data['auth_payload']);
         return $receiveMoney;
     }
     
@@ -87,14 +88,14 @@ class ReceiveMoneyClient implements CategoryInterface
      * @param null $otp
      * @throws BadRequestException
      */
-    public function confirm($transaction, $otp = null)
+    public function confirm($transaction)
     {
         $json = [
             'destination'  => $transaction->destination,
             'service_code' => $transaction->service_code,
             'amount'       => $transaction->total_customer_amount,
             'external_id'  => $transaction->uuid,
-            'otp'          => $otp,
+            'auth_payload' => $transaction->items,
             'callback_url' => config('app.micro_services.callback_url')
         ];
     
