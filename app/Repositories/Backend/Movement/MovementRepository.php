@@ -116,7 +116,7 @@ class MovementRepository
     {
         $movement = new Movement();
         $movement->code = Movement::generateCode();
-        $movement->amount = $transaction->total_customer_amount;
+        $movement->amount = $transaction->service->is_money_withdrawal ? $transaction->amount : $transaction->total_customer_amount;
         $movement->type_id = $transaction->service->is_money_withdrawal
             ? MovementType::where('name', config('business.movement.type.sale'))->first()->uuid
             : MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid;
