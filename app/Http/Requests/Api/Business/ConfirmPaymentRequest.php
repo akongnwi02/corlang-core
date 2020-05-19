@@ -18,6 +18,9 @@ class ConfirmPaymentRequest extends FormRequest
         if (auth()->user()->company_id) {
             return auth()->user()->company->is_active;
         }
+        
+        // return true for guest users
+        return true;
     }
     
     public function rules()
