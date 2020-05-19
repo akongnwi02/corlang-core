@@ -16,6 +16,7 @@ use App\Models\Company\Company;
 use App\Models\Company\CompanyType;
 use App\Models\System\Setting;
 use App\Repositories\Backend\Company\Company\CompanyRepository;
+use App\Repositories\Backend\Services\Commission\CommissionRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Repositories\Backend\System\CountryRepository;
 
@@ -58,13 +59,22 @@ class CompanyController extends Controller
         return 'COMING SOON';
     }
 
-    public function edit(Company $company, CountryRepository $countryRepository, CompanyRepository $companyRepository, ServiceRepository $serviceRepository)
+    public function edit(
+        Company $company,
+        CountryRepository $countryRepository,
+        CompanyRepository $companyRepository,
+        ServiceRepository $serviceRepository,
+        CommissionRepository $commissionRepository
+    )
     {
 //        dd($serviceRepository->getAllActiveServices()->pluck('name', 'uuid'));
         return view('backend.companies.company.edit')
             ->withCompanyServices($companyRepository->getAvailableServices($company)->get())
             ->withServices($serviceRepository->getAllActiveServices()->get())
             ->withCompany($company)
+            ->withCommissions($commissionRepository->getAllCommissions()
+                ->pluck('name', 'uuid')
+                ->toArray())
             ->withCountries($countryRepository->get()
                 ->pluck('name', 'uuid')
                 ->toArray())

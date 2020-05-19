@@ -66,7 +66,7 @@ class TransactionRepository
         
         return \DB::transaction(function () use ($model) {
             // is user trying to top up his account balance ?
-            $isTopup = false;
+            $accountTopUp = false;
             
             /*
              * get the service
@@ -79,24 +79,21 @@ class TransactionRepository
     
                 $topupAccount = auth()->user()->getTopupAccount($service->payment_method)->account;
                 if ($topupAccount == $model->getDestination()) {
-                    $isTopup = true;
-                    /*
-                     * get the commissions
-                     */
-                    $customerServiceCommission = $service->payment_method->customer_commission;
-                    $providerServiceCommission = $service->payment_method->provider_commission;
+                    $accountTopUp = true;
                 }
             }
     
-            // proceed normally if not a topup
-            if (! $isTopup) {
-                /*
-                 * get the commissions
-                 */
-                $customerServiceCommission = $service->customer_commission;
-                $providerServiceCommission = $service->provider_commission;
+            /*
+             * get the commissions
+             */
+            if ($accountTopUp) {
+                $customerServiceCommission = $service->payment_method->customer_commission;
+                $providerServiceCommission = $service->payment_method->provider_commission;
             }
-            
+            else {
+                $customerServiceCommission = auth()->user()->company ? $this->commissionRepository->getCompanyCustomerCommission($service, auth()->user()->company) : $service->customer_commission;
+                $providerServiceCommission = auth()->user()->company ? $this->commissionRepository->getCompanyProviderCommission($service, auth()->user()->company) : $service->provider_commission;
+            }
             
             /*
              * calculate the fees
@@ -114,8 +111,8 @@ class TransactionRepository
             /*
              * get the commission rates
              */
-            $agent_commission_rate  = auth()->user()->company->exists() && !$isTopup ? $this->serviceRepository->getAgentServiceRate($service, auth()->user()) : 0;
-            $company_commission_rate = auth()->user()->company->exists() && !$isTopup ? $this->serviceRepository->getCompanyServiceRate($service, auth()->user()->company) : 0;
+            $agent_commission_rate  = auth()->user()->company && !$accountTopUp ? $this->serviceRepository->getAgentServiceRate($service, auth()->user()) : 0;
+            $company_commission_rate = auth()->user()->company && !$accountTopUp ? $this->serviceRepository->getCompanyServiceRate($service, auth()->user()->company) : 0;
             
             /*
              * share the commissions
@@ -123,7 +120,6 @@ class TransactionRepository
             $company_commission = ($totalFee * $company_commission_rate / 100) * (1 - $agent_commission_rate / 100);
             $agent_commission   = ($totalFee * $company_commission_rate / 100) * ($agent_commission_rate / 100);
             $system_commission  = $totalFee - ($company_commission + $agent_commission);
-            
             
             
             // Transaction creation

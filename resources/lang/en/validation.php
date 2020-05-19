@@ -212,9 +212,12 @@ return [
                 'service' => [
                     'company_rate' => 'Company Rate (%)',
                     'agent_rate'   => 'Agent Rate (%)',
+                    'customercommission' => 'Customer Commission',
+                    'providercommission'   => 'Provider Commission',
                     'default'      => 'Use service default value',
                     'custom'       => 'Set custom value',
                     'services'     => 'Services',
+                    'default_setting' => 'Use Default Service Charge'
                 ]
             ],
             'services'  => [

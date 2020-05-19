@@ -48,6 +48,8 @@ trait CompanyRelationship
                 'is_active',
                 'company_rate',
                 'agent_rate',
+                'customercommission_id',
+                'providercommission_id',
             ]);
     }
     

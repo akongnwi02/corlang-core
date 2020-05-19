@@ -9,15 +9,8 @@
 namespace App\Models\Traits\Relationships;
 
 use App\Models\Account\Account;
-use App\Models\Account\AccountType;
-use App\Models\Account\Movement;
 use App\Models\Account\MovementType;
 use App\Models\Auth\User;
-use App\Models\Company\Company;
-use App\Models\System\Country;
-use App\Models\Service\Service;
-use App\Models\Company\CompanyType;
-use App\Models\Company\CompanyService;
 use App\Models\System\Currency;
 
 trait MovementRelationship

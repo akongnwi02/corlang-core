@@ -174,6 +174,8 @@ return [
                                 'logo'         => 'Logo',
                                 'company_rate' => 'Specific Company Rate (%)',
                                 'agent_rate'   => 'Specific Agent Rate (%)',
+                                'customercommission' => 'Customer Service Charge',
+                                'providercommission' => 'Provider Service Charge',
                                 'total'        => 'service|services'
                             ]
                         ]
@@ -196,8 +198,10 @@ return [
                     'logo'         => 'Logo',
                     'gateway'      => 'Gateway',
                     'category'     => 'Category',
-                    'agent_rate'   => 'Agent Rate',
-                    'company_rate' => 'Company Rate',
+                    'agent_rate'   => 'Default Agent Rate',
+                    'company_rate' => 'Default Company Rate',
+                    'customercommission' => 'Default Customer Service Charge',
+                    'providercommission' => 'Default Provider Service Charge',
                     'total'        => 'service|services',
                 ],
             ],

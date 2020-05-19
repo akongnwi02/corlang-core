@@ -118,4 +118,14 @@ class CommissionRepository
             return $availableRange[0];
         }
     }
+    
+    public function getCompanyCustomerCommission($service, $company)
+    {
+        return $company->services()->where('uuid', $service->uuid)->first()->specific->customer_commission ?: $service->customer_commission;
+    }
+    
+    public function getCompanyProviderCommission($service, $company)
+    {
+        return $company->services()->where('uuid', $service->uuid)->first()->specific->provider_commission ?: $service->provider_commission;
+    }
 }

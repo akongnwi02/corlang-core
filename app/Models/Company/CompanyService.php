@@ -9,13 +9,14 @@
 namespace App\Models\Company;
 
 
-use App\Models\Traits\Uuid;
+use App\Models\Traits\Relationships\CompanyServiceRelationship;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use App\Models\Traits\Attributes\CompanyServiceAttribute;
 
 class CompanyService extends Pivot
 {
-    use CompanyServiceAttribute;
+    use CompanyServiceAttribute,
+        CompanyServiceRelationship;
     
     protected $table = 'company_service';
     
@@ -27,6 +28,8 @@ class CompanyService extends Pivot
         'is_active',
         'company_rate',
         'agent_rate',
+        'providercommission_id',
+        'customercommission_id',
     ];
     
     protected $casts = [

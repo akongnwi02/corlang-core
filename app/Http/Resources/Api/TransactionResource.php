@@ -8,6 +8,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Models\Company\Company;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TransactionResource extends JsonResource
@@ -21,8 +22,8 @@ class TransactionResource extends JsonResource
             'asset'                 => $this->asset,
             'amount'                => $this->amount,
             'user'                  => $this->user->full_name,
-            'company'               => $this->company->name,
-            'company_logo'          => $this->company->logo_url,
+            'company'               => $this->company ? $this->company->name : null,
+            'company_logo'          => $this->company ? $this->company->logo_url : Company::where('is_default', true)->first()->logo_url,
             'service_logo'          => $this->service->logo_url,
             'service'               => $this->service->name,
             'service_code'          => $this->service_code,

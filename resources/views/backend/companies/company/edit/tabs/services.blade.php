@@ -28,6 +28,8 @@
                     <th>@lang('labels.backend.companies.company.tabs.content.service.table.active')</th>
                     <th>@lang('labels.backend.companies.company.tabs.content.service.table.agent_rate')</th>
                     <th>@lang('labels.backend.companies.company.tabs.content.service.table.company_rate')</th>
+                    <th>@lang('labels.backend.companies.company.tabs.content.service.table.customercommission')</th>
+                    <th>@lang('labels.backend.companies.company.tabs.content.service.table.providercommission')</th>
                     <th>@lang('labels.general.actions')</th>
                 </tr>
                 </thead>
@@ -40,6 +42,9 @@
                         <td>{!! $service->specific->active_label !!}</td>
                         <td>{{ ! is_null($service->specific->agent_rate) ? $service->specific->agent_rate_label : $service->agent_rate_label }}</td>
                         <td>{{ ! is_null($service->specific->company_rate) ? $service->specific->company_rate_label : $service->company_rate_label }}</td>
+                        <td>{{ ! is_null($service->specific->customercommission_id) ? $service->specific->customer_commission->name : $service->customer_commission->name }}</td>
+                        <td>{{ ! is_null($service->specific->providercommission_id) ? $service->specific->provider_commission->name : $service->provider_commission->name }}</td>
+                        <td></td>
                         <td>
                             @can(config('permission.permissions.update_company_services'))
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#service-{{ $service->uuid }}" data-placement="top" title="@lang('buttons.general.crud.edit')"><i class="fas fa-edit"></i></button></td>
@@ -65,7 +70,7 @@
                                             <div class="form-check mb-2 mr-sm-2">
                                                 <label class="form-check-label agent-default" ><input type="checkbox" id="{{ $service->uuid }}" class="form-check-input" name="agent-default"/> @lang('validation.attributes.backend.companies.service.default') ({{ $service->agent_rate_label }})</label>
                                             </div>
-                                            <input value="{{ $service->specific->agent_rate ?: '' }}" name="agent_rate" type="number" step="0.01" min="0" max="100" class="form-control" id="{{ $service->uuid }}" placeholder="@lang('validation.attributes.backend.companies.service.custom')" required>
+                                            <input value="{{ $service->specific->agent_rate}}" name="agent_rate" type="number" step="0.01" min="0" max="100" class="form-control" id="{{ $service->uuid }}" placeholder="@lang('validation.attributes.backend.companies.service.custom')" required>
                                         </div>
 
                                         <div class="form-group">
@@ -73,12 +78,39 @@
                                             <div class="form-check mb-2 mr-sm-2">
                                                 <label class="form-check-label" ><input type="checkbox" name="company-default" class="form-check-input" id="{{ $service->uuid }}"/> @lang('validation.attributes.backend.companies.service.default') ({{ $service->company_rate_label }})</label>
                                             </div>
-                                            <input value="{{ $service->specific->company_rate ?: '' }}" name="company_rate" type="number" step="0.01" min="0" max="100" class="form-control" id="{{ $service->uuid }}" placeholder="@lang('validation.attributes.backend.companies.service.custom')" required>
+                                            <input value="{{ $service->specific->company_rate}}" name="company_rate" type="number" step="0.01" min="0" max="100" class="form-control" id="{{ $service->uuid }}" placeholder="@lang('validation.attributes.backend.companies.service.custom')" required>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="customercommission_id" class="col-form-label">@lang('validation.attributes.backend.companies.service.customercommission')</label>
+                                            <div class="form-check mb-2 mr-sm-2">
+                                                <label class="form-check-label" ><input type="checkbox" name="customer-default" class="form-check-input" id="{{ $service->uuid }}"/> @lang('validation.attributes.backend.companies.service.default_setting') ({{ $service->customer_commission->name }})</label>
+                                            </div>
+                                            {{ html()->select('customercommission_id' , $commissions)
+                                                ->class('form-control')
+                                                ->value($service->specific->customercommission_id)
+                                                ->required()
+
+                                             }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="providercommission_id" class="col-form-label">@lang('validation.attributes.backend.companies.service.providercommission')</label>
+                                            <div class="form-check mb-2 mr-sm-2">
+                                                <label class="form-check-label" ><input type="checkbox" name="provider-default" class="form-check-input" id="{{ $service->uuid }}"/> @lang('validation.attributes.backend.companies.service.default_setting') ({{ $service->provider_commission->name }})</label>
+                                            </div>
+                                            {{ html()->select('providercommission_id' , $commissions)
+                                                ->class('form-control')
+                                                ->value($service->specific->providercommission_id)
+                                                ->required()
+                                            }}
+                                        </div>
+
                                         <div class="modal-footer">
                                             <button type="button" class="'btn btn-secondary btn-sm" data-dismiss="modal">@lang('buttons.general.cancel')</button>
                                             {{ form_submit(__('buttons.general.crud.update')) }}
                                         </div>
+
                                     {{ html()->form()->close() }}
                                 </div>
 
@@ -173,6 +205,16 @@
         $('input[name="company-default"]').click(function(){
             let id = $(this).attr('id');
             $('input[name="company_rate"][id=' +id+']').attr('disabled', this.checked).val('')
+        });
+
+        $('input[name="customer-default"]').click(function(){
+            let id = $(this).attr('id');
+            $('select[name="customercommission_id"][id="customercommission_id"]').attr('disabled', this.checked).val('')
+        });
+
+        $('input[name="provider-default"]').click(function(){
+            let id = $(this).attr('id');
+            $('select[name="providercommission_id"][id="providercommission_id"]').attr('disabled', this.checked).val('')
         });
     </script>
 @endpush
