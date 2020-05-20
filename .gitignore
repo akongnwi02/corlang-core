@@ -33,4 +33,4 @@ output.txt
 coverage.xml
 /coverage
 .phpunit.result.cache
-mix-manifest.json
+#mix-manifest.json
