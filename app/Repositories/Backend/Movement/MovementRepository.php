@@ -151,7 +151,7 @@ class MovementRepository
         }
     }
     
-    public function completeMovement($code)
+    public function completeMovements($code)
     {
         $movements = Movement::where('code', $code)->get();
     
