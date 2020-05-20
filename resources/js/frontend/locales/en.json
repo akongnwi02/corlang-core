@@ -215,6 +215,13 @@
         "10031": "The meter with the provided has been deactivated",
         "10032": "The meter code provided is invalid",
         "10033": "The transaction status cannot be updated",
-        "10034": "The amount provided is less than the minimum amount required for this service"
+        "10034": "The amount provided is less than the minimum amount required for this service",
+        "10035": "The customer cannot perform this transaction with service provider",
+        "10036": "The customer is not found",
+        "10037": "Insufficient funds in customer's wallet",
+        "10038": "Transaction canceled by customer",
+        "10039": "The customer has not authorized the transaction",
+        "10040": "The service is not properly configured",
+        "10041": "Customer has reached transaction limit"
     }
 }
