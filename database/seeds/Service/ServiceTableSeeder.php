@@ -46,18 +46,17 @@ class ServiceTableSeeder extends Seeder
         ]);
         
         Service::create([
-            'name' => 'Sample service 3',
+            'name' => 'Orange Web Payment',
             'description' => 'Some quick example text to serve as the service description and make up the bulk of the service\'s content.',
-            'code' => 'CORORANGE',
+            'code' => 'CORORANGEWEBPAY',
             'country_id' => Country::first()->uuid,
             'is_active' => true,
-            'category_id' => Category::where('code', 'CORERECEIVEMONEY001')->first()->uuid,
+            'category_id' => Category::where('code', config('business.service.category.receivemoney.code'))->first()->uuid,
             'company_rate' => 45,
             'agent_rate' => 50,
             'is_prepaid' => true,
-            'requires_auth'  => true,
+            'requires_auth'  => false,
             'is_money_withdrawal' => true,
-            'auth_type'      => 'otp',
             'customercommission_id' => Commission::first()->uuid,
             'providercommission_id' => Commission::first()->uuid,
         ]);

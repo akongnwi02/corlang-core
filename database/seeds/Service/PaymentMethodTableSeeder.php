@@ -30,14 +30,14 @@ class PaymentMethodTableSeeder extends Seeder
         ]);
         
         PaymentMethod::create([
-            'name'           => 'Orange',
-            'code'           => 'ORANGE7487',
+            'name'           => 'Orange wp topup',
+            'code'           => 'CORPAYORANGEWP',
             'is_default'     => false,
             'is_active'      => true,
             'is_realtime'    => true,
-            'service_id'     => Service::where('code', 'CORORANGE')->first()->uuid,
+            'service_id'     => Service::where('code', 'CORORANGEWEBPAY')->first()->uuid,
             'accountregex'   => null,
-            'placeholder_text' => '2376xxxxxxxx',
+            'placeholder_text' => '6xxxxxxxx',
             'description_en' => 'Orange Money Payment. Dial *154# to receive a code to continue',
             'description_fr' => 'Paiement par Orange. Composez *154# pour continuer',
         ]);
