@@ -50,7 +50,15 @@ class AppServiceProvider extends ServiceProvider
 
         // Force SSL in production
         if ($this->app->environment() == 'production') {
+            /*
+             * Force incoming request to https
+             */
             URL::forceScheme('https');
+
+            /*
+             * Enable app to only generate https links
+             */
+            $this->app['request']->server->set('HTTPS','on');
         }
 
         // Set the default string length for Laravel5.4
