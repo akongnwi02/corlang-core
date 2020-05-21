@@ -37,7 +37,7 @@ class PaymentMethodTableSeeder extends Seeder
             'is_realtime'    => true,
             'service_id'     => Service::where('code', 'CORORANGEWEBPAY')->first()->uuid,
             'accountregex'   => null,
-            'placeholder_text' => '6xxxxxxxx',
+            'placeholder_text' => '2376xxxxxxxx',
             'description_en' => 'Orange Money Payment. Dial *154# to receive a code to continue',
             'description_fr' => 'Paiement par Orange. Composez *154# pour continuer',
         ]);

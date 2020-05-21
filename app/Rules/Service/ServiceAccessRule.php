@@ -9,6 +9,7 @@
 namespace App\Rules\Service;
 
 
+use App\Exceptions\Api\ForbiddenException;
 use App\Exceptions\Api\NotFoundException;
 use App\Models\Service\Service;
 use App\Services\Constants\BusinessErrorCodes;
@@ -24,6 +25,7 @@ class ServiceAccessRule implements Rule
      * @param  mixed $value
      * @return bool
      * @throws NotFoundException
+     * @throws ForbiddenException
      */
     public function passes($attribute, $value)
     {
@@ -41,9 +43,11 @@ class ServiceAccessRule implements Rule
     
         // service should be active for the company
         if (auth()->user()->company) {
-            return auth()->user()->company->services()->where('services.code', $value)->exists()
-                && auth()->user()->company->services()->where('services.code', $value)->first()->specific->is_active;
-    
+            if (auth()->user()->company->services()->where('services.code', $value)->exists()
+                && auth()->user()->company->services()->where('services.code', $value)->first()->specific->is_active) {
+                return true;
+            }
+            throw new ForbiddenException(BusinessErrorCodes::SERVICE_NOT_ALLOWED, 'You are not allowed to use this service at the moment');
         }
         return true;
     }

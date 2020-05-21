@@ -222,6 +222,7 @@
         "10038": "Transaction canceled by customer",
         "10039": "The customer has not authorized the transaction",
         "10040": "The service is not properly configured",
-        "10041": "Customer has reached transaction limit"
+        "10041": "Customer has reached transaction limit",
+        "10042": "You are not allowed to use this service at the moment"
     }
 }

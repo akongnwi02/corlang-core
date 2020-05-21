@@ -52,5 +52,6 @@ class BusinessErrorCodes
     const TRANSACTION_CANCELED              = '10038';
     const CUSTOMER_PAYMENT_AUTH_ERROR       = '10039';
     const SERVICE_MAL_CONFIGURED            = '10040';
-    const CUSTOMER_ACCOUNT_LIMIT = '10041';
+    const CUSTOMER_TRANSACTION_LIMIT        = '10041';
+    const SERVICE_NOT_ALLOWED               = '10042';
 }
