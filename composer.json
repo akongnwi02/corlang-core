@@ -83,11 +83,7 @@
             "@php artisan key:generate"
         ],
         "post-autoload-dump": [
-            "@php artisan migrate",
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan ide-helper:generate",
-            "@php artisan ide-helper:meta",
-            "@php artisan package:discover"
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"
         ],
         "clear-all": [
             "@php artisan clear-compiled",
