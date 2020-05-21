@@ -132,7 +132,7 @@ return [
         /*
          * Callback URL for the micro services
          */
-        'callback_url' => env('APP_URL') . env('APP_CALLBACK_URL', '/callback'),
+        'callback_url' => env('APP_CALLBACK_URL'),
         
         'search_uri' => env('APP_MICRO_SERVICE_SEARCH_URI', '/search'),
         
