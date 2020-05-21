@@ -1,10 +1,7 @@
 /node_modules
 /public/hot
-#/public/storage
-#/public/js
-#/public/css
-#public/images
-/storage
+logs
+public
 /vendor
 /tests/_output
 /tests/_support/_generated
@@ -33,4 +30,3 @@ output.txt
 coverage.xml
 /coverage
 .phpunit.result.cache
-#mix-manifest.json

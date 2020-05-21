@@ -27,3 +27,6 @@ Run the following command on project's root directory
 * > install node packages `npm install`
 * > grant permissions `chmod -R 777 storage`
 * `make down` to take down containers
+
+### HEROKU COMMANDS
+* Change stack `heroku stack:set heroku-18 -a corlang`
