@@ -154,32 +154,32 @@
             <section class="our-webcoderskull padding-lg">
                 <div class="container">
                     <div class="row heading heading-icon">
-                        <h2>@lang('strings.frontend.our_partners')</h2>
+                        <h2 style="color: black;">@lang('strings.frontend.our_partners')</h2>
                     </div>
                     <ul class="row">
                         <li class="col-12 col-md-6 col-lg-3">
-                            <div class="cnt-block equal-hight" style="height: 349px;">
+                            <div class="card cnt-block equal-hight" style="height: 349px;">
                                 <figure><img src="{{url('img/frontend/brand/partner/orange-money.jpg')}}" class="img-responsive" alt=""></figure>
                                 <h3>Orange Money</h3>
                                 <p>Withdrawal / Retrait</p>
                             </div>
                         </li>
                         <li class="col-12 col-md-6 col-lg-3">
-                            <div class="cnt-block equal-hight" style="height: 349px;">
+                            <div class="card cnt-block equal-hight" style="height: 349px;">
                                 <figure><img src="{{url('img/frontend/brand/partner/mtn-momo.jpg')}}" class="img-responsive" alt=""></figure>
                                 <h3>MTN Mobile Money</h3>
                                 <p>Cashin - Cashout / Dépôt - Retrait</p>
                             </div>
                         </li>
                         <li class="col-12 col-md-6 col-lg-3">
-                            <div class="cnt-block equal-hight" style="height: 349px;">
+                            <div class="card cnt-block equal-hight" style="height: 349px;">
                                 <figure><img src="{{url('img/frontend/brand/partner/express-union.png')}}" class="img-responsive" alt=""></figure>
                                 <h3>Express Union</h3>
                                 <p>Express Union Services / Services Express Union</p>
                             </div>
                         </li>
                         <li class="col-12 col-md-6 col-lg-3">
-                            <div class="cnt-block equal-hight" style="height: 349px;">
+                            <div class="card cnt-block equal-hight" style="height: 349px;">
                                 <figure><img src="{{url('img/frontend/brand/partner/iat-prepaid.jpg')}}" class="img-responsive" alt=""></figure>
                                 <h3>IAT Global</h3>
                                 <p>Prepaid electricity / Électricité prépayée</p>
@@ -398,10 +398,9 @@
         .practice-area .inner img{
             display:inline-block;
         }
-
-
+        
         .our-webcoderskull{
-            background: url('img/frontend/brand/background.png') no-repeat center top / cover;
+            /*background: url('img/frontend/brand/background.png') no-repeat center top / cover;*/
 
         }
         .our-webcoderskull .cnt-block{
