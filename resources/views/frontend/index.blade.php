@@ -401,7 +401,7 @@
 
 
         .our-webcoderskull{
-            background: url("http://www.webcoderskull.com/img/right-sider-banner.png") no-repeat center top / cover;
+            background: url('img/frontend/brand/background.png') no-repeat center top / cover;
 
         }
         .our-webcoderskull .cnt-block{
