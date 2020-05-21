@@ -197,7 +197,8 @@ return [
         
         'welcome_to'              => 'Welcome to :place',
         'what_we_do'              => 'What We Do',
-        'how_to_become_a_partner' => 'How To Become A Partner (Agent / Distributor)',
+        'our_services'            => 'Our Services',
+        'how_to_become_a_partner' => 'How To Become A Partner',
         'our_partners'            => 'Our Partners',
         
         'services' => [
@@ -216,14 +217,37 @@ return [
             'airtime_recharge' => [
                 'title'       => 'Mobile Airtime Recharge',
                 'description' => 'We facilitate the purchase of airtime, mobile data, sms etc. with your network provider.'
+            ],
+            'ticket' => [
+                'title' => 'Ticket',
+                'description' => 'Buy your tickets easily at our points of sale. Cinema, Travel, Concert etc.'
+            ],
+            'ecommerce' => [
+                'title' => 'E-commerce',
+                'description' => 'Purchase goods online from your favorite online shop integrated with us.'
             ]
         ],
         'partner'  => [
             'steps' => [
                 '1' => 'Contact Us',
                 '2' => 'Submit KYC documents',
-                '3' => 'Integrate our API OR Learn how to use our platform',
-                '4' => 'Start selling and earning commissions',
+                '3' => 'Integrate your business',
+                '4' => 'Start selling and earning',
+            ]
+        ],
+        'what_we_do_details' => [
+            'tagline' => 'Helping businesses sell to their customers through our large network of agents.',
+            'agent' => [
+                'title' => 'Agents',
+                'description' => 'Join our fast growing network of agents and start earning commissions with a single capital and single platform for all the services.'
+            ],
+            'biller' => [
+                'title' => 'Billers / Merchants',
+                'description' => 'With our simple APIs, plugins, platform, we can integrate your business very easily and start collecting your payments and improving on your processes.',
+            ],
+            'distributor' => [
+                'title' => 'Distributors',
+                'description' => 'With our SIMPLE but POWERFUL API, you can sell over our platform or create your agents\' accounts directly in our platform and start selling and earning commissions'
             ]
         ]
     ],

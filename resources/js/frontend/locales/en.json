@@ -73,7 +73,7 @@
                         "asset": "Asset",
                         "items": "Items",
                         "status": "Status",
-                        "completed_at": "Paid At",
+                        "completed_at": "Completed At",
                         "total": "Total"
                     }
                 }

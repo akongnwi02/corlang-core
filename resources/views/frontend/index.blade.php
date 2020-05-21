@@ -12,6 +12,47 @@
             <div class="row heading heading-icon">
                 <h2 style="color: black">@lang('strings.frontend.what_we_do')</h2>
             </div>
+            <section id="what-we-do">
+                <div class="container-fluid">
+                    <p class="text-center text-muted h5">@lang('strings.frontend.what_we_do_details.tagline')</p>
+                    <div class="row mt-5">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                            <div class="card">
+                                <div class="card-block block-1">
+                                    <h3 class="card-title">@lang('strings.frontend.what_we_do_details.agent.title')</h3>
+                                    <p class="card-text">@lang('strings.frontend.what_we_do_details.agent.description')</p>
+                                    {{--<a href="https://www.fiverr.com/share/qb8D02" title="Read more" class="read-more" >Read more<i class="fa fa-angle-double-right ml-2"></i></a>--}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                            <div class="card">
+                                <div class="card-block block-2">
+                                    <h3 class="card-title">@lang('strings.frontend.what_we_do_details.biller.title')</h3>
+                                    <p class="card-text">@lang('strings.frontend.what_we_do_details.biller.description')</p>
+                                    {{--<a href="https://www.fiverr.com/share/qb8D02" title="Read more" class="read-more" >Read more<i class="fa fa-angle-double-right ml-2"></i></a>--}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                            <div class="card">
+                                <div class="card-block block-3">
+                                    <h3 class="card-title">@lang('strings.frontend.what_we_do_details.distributor.title')</h3>
+                                    <p class="card-text">@lang('strings.frontend.what_we_do_details.distributor.description')</p>
+                                    {{--<a href="https://www.fiverr.com/share/qb8D02" title="Read more" class="read-more" >Read more<i class="fa fa-angle-double-right ml-2"></i></a>--}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div><!--col-->
+    </div><!--row-->
+    <div class="row mb-4">
+        <div class="card-body">
+            <div class="row heading heading-icon">
+                <h2 style="color: black">@lang('strings.frontend.our_services')</h2>
+            </div>
             <section>
                 <div class="container">
                     <div class="row mbr-justify-content-center">
@@ -61,6 +102,30 @@
                                     <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">@lang('strings.frontend.services.airtime_recharge.title')
                                     </h2>
                                     <p class="mbr-fonts-style text1 mbr-text display-6">@lang('strings.frontend.services.airtime_recharge.description')</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mbr-col-md-10">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont fas fa-ticket-alt"></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">@lang('strings.frontend.services.ticket.title')
+                                    </h2>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">@lang('strings.frontend.services.ticket.description')</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mbr-col-md-10">
+                            <div class="wrap">
+                                <div class="ico-wrap">
+                                    <span class="mbr-iconfont fa fa-shopping-cart"></span>
+                                </div>
+                                <div class="text-wrap vcenter">
+                                    <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">@lang('strings.frontend.services.ecommerce.title')
+                                    </h2>
+                                    <p class="mbr-fonts-style text1 mbr-text display-6">@lang('strings.frontend.services.ecommerce.description')</p>
                                 </div>
                             </div>
                         </div>
@@ -148,6 +213,77 @@
             padding-top: 4rem;
             padding-bottom: 5rem;
             background-color: #f1f4fa;
+        }
+
+
+        }
+        #what-we-do{
+            background:#ffffff;
+        }
+        #what-we-do .card{
+            padding: 1rem!important;
+            border: none;
+            margin-bottom:1rem;
+            -webkit-transition: .5s all ease;
+            -moz-transition: .5s all ease;
+            transition: .5s all ease;
+        }
+        #what-we-do .card:hover{
+            -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+            -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+            box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+        }
+        #what-we-do .card .card-block{
+            padding-left: 50px;
+            position: relative;
+        }
+        #what-we-do .card .card-block a{
+            color: #007b5e !important;
+            font-weight:700;
+            text-decoration:none;
+        }
+        #what-we-do .card .card-block a i{
+            display:none;
+
+        }
+        #what-we-do .card:hover .card-block a i{
+            display:inline-block;
+            font-weight:700;
+
+        }
+        #what-we-do .card .card-block:before{
+            font-family: FontAwesome;
+            position: absolute;
+            font-size: 39px;
+            color: #007b5e;
+            left: 0;
+            -webkit-transition: -webkit-transform .2s ease-in-out;
+            transition:transform .2s ease-in-out;
+        }
+        #what-we-do .card .block-1:before{
+            content: "\f0e7";
+        }
+        #what-we-do .card .block-2:before{
+            content: "\f0eb";
+        }
+        #what-we-do .card .block-3:before{
+            content: "\f00c";
+        }
+        #what-we-do .card .block-4:before{
+            content: "\f209";
+        }
+        #what-we-do .card .block-5:before{
+            content: "\f0a1";
+        }
+        #what-we-do .card .block-6:before{
+            content: "\f218";
+        }
+        #what-we-do .card:hover .card-block:before{
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+            -webkit-transition: .5s all ease;
+            -moz-transition: .5s all ease;
+            transition: .5s all ease;
         }
 
         .wrap {

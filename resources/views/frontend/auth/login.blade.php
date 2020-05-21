@@ -56,17 +56,19 @@
                                     {{ html()->form()->close() }}
                                 </div>
                             </div>
-                            <div class="card text-white bg-primary py-5 d-md-down-none">
-                                <div class="card-body text-center">
-                                    <div>
-                                        <h2>Sign up</h2>
-                                        <p>@lang('labels.frontend.auth.no_account')</p>
-                                        <p>@lang('labels.frontend.auth.register_now')</p>
-                                        <p>@lang('labels.frontend.auth.quick')</p>
-                                        <a href="{{ route('frontend.auth.register') }}" type="button" class="btn btn-primary active mt-3">@lang('labels.frontend.auth.register_now')</a>
+                            @if(config('access.registration'))
+                                <div class="card text-white bg-primary py-5 d-md-down-none">
+                                    <div class="card-body text-center">
+                                        <div>
+                                            <h2>Sign up</h2>
+                                            <p>@lang('labels.frontend.auth.no_account')</p>
+                                            <p>@lang('labels.frontend.auth.register_now')</p>
+                                            <p>@lang('labels.frontend.auth.quick')</p>
+                                            <a href="{{ route('frontend.auth.register') }}" type="button" class="btn btn-primary active mt-3">@lang('labels.frontend.auth.register_now')</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

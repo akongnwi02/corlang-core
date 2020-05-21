@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Backend\Account;
 
-
 use App\Exceptions\Api\ServerErrorException;
 use App\Exceptions\GeneralException;
 use App\Models\Account\Payout;
