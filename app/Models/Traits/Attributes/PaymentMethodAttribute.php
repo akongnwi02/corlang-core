@@ -59,9 +59,9 @@ trait PaymentMethodAttribute
     /**
      * @return string
      */
-    public function getPaymentServiceLabelAttribute()
+    public function getRealtimeLabelAttribute()
     {
-        if ($this->is_payment_service) {
+        if ($this->is_realtime) {
             
             return '<i class="fa fa-check"></i>';
         }

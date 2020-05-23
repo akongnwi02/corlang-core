@@ -50,7 +50,7 @@
                                     <td>{!! $method->active_label !!}</td>
                                     <td>{{ $method->description_en }}</td>
                                     <td>{{ $method->description_fr}}</td>
-                                    <td>{!! $method->payment_service_label !!}</td>
+                                    <td>{!! $method->realtime_label !!}</td>
                                     <td>{{ @$method->customer_commission->name }}</td>
                                     <td>{{ @$method->provider_commission->name }}</td>
                                     <td>{!! $method->action_buttons  !!}</td>
