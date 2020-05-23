@@ -5,7 +5,7 @@ export const PusherNotification = {
         waitForNotification(uuid) {
             Echo.channel(uuid)
                 .listen(BUSINESS_CONFIG.PUSHER_APP_TRANSACTION_EVENT, function(transaction) {
-                    console.log('callback notification received', transaction);
+                    console.log('callback received. Transaction status:', transaction.status);
                     if (transaction.status == BUSINESS_CONFIG.TRANSACTION_SUCCESSFUL) {
                         this.$store.commit('setPaymentStatus', 2);
                         this.$buefy.toast.open({
@@ -15,7 +15,6 @@ export const PusherNotification = {
 
                     } else {
                         this.$store.commit('setPaymentStatus', 3);
-                        console.log('transaction failed', transaction);
                         this.$buefy.toast.open({
                             message: this.$t('exceptions.' + transaction.error_code),
                             type: 'is-danger'
