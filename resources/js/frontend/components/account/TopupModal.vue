@@ -119,14 +119,17 @@
                 return false
             },
             topupAccount(method) {
-                let myAccount = this.topupAccounts.filter(obj => {
-                    return obj.paymentmethod_id == method.uuid;
-                })[0];
+                if (this.accountLoadStatus == 2) {
+                    let myAccount = this.topupAccounts.filter(obj => {
+                        return obj.paymentmethod_id == method.uuid;
+                    })[0];
 
-                if (myAccount) {
-                    return myAccount.account;
+                    if (myAccount) {
+                        return myAccount.account;
+                    }
+                    return null;
                 }
-                return null;
+                return null
             }
         }
     }
