@@ -52,7 +52,7 @@
                         {{ html()->label(__('validation.attributes.backend.services.service.category'))->class('col-md-2 form-control-label required')->for('category_id') }}
 
                         <div class="col-md-10">
-                            {{ html()->select('category_id', [null => null] + $categories)
+                            {{ html()->select('category_id', $categories)
                                 ->class('form-control')
                                 ->required()}}
                         </div><!--col-->
