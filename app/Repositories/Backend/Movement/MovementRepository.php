@@ -54,6 +54,7 @@ class MovementRepository
         $movement->company_id = auth()->user()->company->uuid;
         $movement->currency_id = $data['currency_id'];
         $movement->destinationaccount_id = $account->uuid;
+        $movement->is_complete = true;
     
         if ($movement->save()) {
             event(new MovementCreated($movement));
@@ -85,6 +86,7 @@ class MovementRepository
         $double->type_id = MovementType::where('name', config('business.movement.type.withdrawal'))->first()->uuid;
         $double->sourceaccount_id = $movement->destinationaccount_id;
         $double->destinationaccount_id = $movement->sourceaccount_id;
+        $movement->is_complete = true;
     
         return \DB::transaction(function () use ($movement, $double) {
     

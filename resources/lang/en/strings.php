@@ -229,9 +229,9 @@ return [
         ],
         'partner'  => [
             'steps' => [
-                '1' => 'Contact Us',
+                '1' => 'Contact us',
                 '2' => 'Submit KYC documents',
-                '3' => 'Integrate your business',
+                '3' => 'Get integrated',
                 '4' => 'Start selling and earning',
             ]
         ],
