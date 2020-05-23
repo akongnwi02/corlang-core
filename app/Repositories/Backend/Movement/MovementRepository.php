@@ -130,7 +130,7 @@ class MovementRepository
         $movement->destinationaccount_id = $account->uuid;
         
         $transaction->paymentaccount = $account->code;
-        
+        $transaction->movement_code = $movement->code;
         return \DB::transaction(function () use ($movement, $transaction) {
             if ($movement->save() && $transaction->save()) {
 //                event(Accountfdfs($movement));
