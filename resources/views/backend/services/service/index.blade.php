@@ -48,8 +48,8 @@
                                     <td>{!! $service->active_label !!}</td>
                                     <td>{!! $service->agent_rate_label !!}</td>
                                     <td>{!! $service->company_rate_label !!}</td>
-                                    <td>{{ $service->provider_commission->name }}</td>
-                                    <td>{{ $service->customer_commission->name }}</td>
+                                    <td>{{ @$service->provider_commission->name }}</td>
+                                    <td>{{ @$service->customer_commission->name }}</td>
                                     <td>{{ $service->category->name }}</td>
                                     <td>{!! $service->action_buttons  !!}</td>
                                 </tr>
