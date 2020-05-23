@@ -14,7 +14,7 @@
             </div>
             <section id="what-we-do">
                 <div class="container-fluid">
-                    <p class="text-center text-muted h5">@lang('strings.frontend.what_we_do_details.tagline')</p>
+                    <p class="text-center text-muted h5 display-4">@lang('strings.frontend.what_we_do_details.tagline')</p>
                     <div class="row mt-5">
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                             <div class="card">
@@ -141,13 +141,12 @@
                 <h1 style="color: black">@lang('strings.frontend.how_to_become_a_partner')</h1>
             </div>
             <ul class="progressbar">
-                <li class="active"><a href="{{route('frontend.contact')}}">@lang('strings.frontend.partner.steps.1')</a></li>
-                <li>@lang('strings.frontend.partner.steps.2')</li>
-                <li>@lang('strings.frontend.partner.steps.3')</li>
-                <li>@lang('strings.frontend.partner.steps.4')</li>
+                <li class="active display-5"><a href="{{route('frontend.contact')}}">@lang('strings.frontend.partner.steps.1')</a></li>
+                <li class="display-5">@lang('strings.frontend.partner.steps.2')</li>
+                <li class="display-5">@lang('strings.frontend.partner.steps.3')</li>
+                <li class="display-5">@lang('strings.frontend.partner.steps.4')</li>
             </ul>
         </div>
-
     </div>
     <div class="row mb-4">
         <div class="col">

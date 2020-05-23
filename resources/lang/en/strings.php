@@ -236,7 +236,7 @@ return [
             ]
         ],
         'what_we_do_details' => [
-            'tagline' => 'Helping businesses sell to their customers through our large network of agents.',
+            'tagline' => 'We help businesses sell to their customers through our large network of agents.',
             'agent' => [
                 'title' => 'Agents',
                 'description' => 'Join our fast growing network of agents and start earning commissions with a single capital and single platform for all the services.'
