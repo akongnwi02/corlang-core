@@ -42,8 +42,8 @@
                         <td>{!! $service->specific->active_label !!}</td>
                         <td>{{ ! is_null($service->specific->agent_rate) ? $service->specific->agent_rate_label : $service->agent_rate_label }}</td>
                         <td>{{ ! is_null($service->specific->company_rate) ? $service->specific->company_rate_label : $service->company_rate_label }}</td>
-                        <td>{{ ! is_null($service->specific->customercommission_id) ? $service->specific->customer_commission->name : $service->customer_commission->name }}</td>
-                        <td>{{ ! is_null($service->specific->providercommission_id) ? $service->specific->provider_commission->name : $service->provider_commission->name }}</td>
+                        <td>{{ ! is_null($service->specific->customercommission_id) ? @$service->specific->customer_commission->name : @$service->customer_commission->name }}</td>
+                        <td>{{ ! is_null($service->specific->providercommission_id) ? @$service->specific->provider_commission->name : @$service->provider_commission->name }}</td>
                         <td></td>
                         <td>
                             @can(config('permission.permissions.update_company_services'))
