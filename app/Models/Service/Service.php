@@ -69,10 +69,11 @@ class Service extends Model
      * @var array
      */
     protected $casts = [
-        'is_active'        => 'boolean',
-        'customer_rate'    => 'double',
-        'agent_rate'       => 'double',
-        'has_items'        => 'boolean',
-        'requires_auth'    => 'boolean',
+        'is_active'           => 'boolean',
+        'customer_rate'       => 'double',
+        'agent_rate'          => 'double',
+        'has_items'           => 'boolean',
+        'requires_auth'       => 'boolean',
+        'is_money_withdrawal' => 'boolean',
     ];
 }

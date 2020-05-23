@@ -98,7 +98,7 @@
 
                         <div class="col-md-10">
                             <label class="switch switch-label switch-pill switch-primary">
-                                {{ html()->checkbox('is_realtime', false, 1)->class('switch-input') }}
+                                {{ html()->checkbox('is_realtime', null, 1)->class('switch-input') }}
                                 <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
                             </label>
                         </div><!--col-->

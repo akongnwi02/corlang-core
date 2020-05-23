@@ -111,7 +111,7 @@
 
                         <div class="col-md-10">
                             <label class="switch switch-label switch-pill switch-primary">
-                                {{ html()->checkbox('has_items', false, 1)->class('switch-input') }}
+                                {{ html()->checkbox('has_items', null, 1)->class('switch-input') }}
                                 <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
                             </label>
                         </div><!--col-->
@@ -122,7 +122,7 @@
 
                         <div class="col-md-10">
                             <label class="switch switch-label switch-pill switch-primary">
-                                {{ html()->checkbox('requires_auth', false, 1)->class('switch-input') }}
+                                {{ html()->checkbox('requires_auth',null, 1)->class('switch-input') }}
                                 <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
                             </label>
                         </div><!--col-->
@@ -133,7 +133,7 @@
 
                         <div class="col-md-10">
                             <label class="switch switch-label switch-pill switch-primary">
-                                {{ html()->checkbox('is_money_withdrawal', false, 1)->class('switch-input') }}
+                                {{ html()->checkbox('is_money_withdrawal', null, 1)->class('switch-input') }}
                                 <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
                             </label>
                         </div><!--col-->
