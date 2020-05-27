@@ -42,8 +42,8 @@
                         <td>{!! $service->specific->active_label !!}</td>
                         <td>{{ ! is_null($service->specific->agent_rate) ? $service->specific->agent_rate_label : $service->agent_rate_label }}</td>
                         <td>{{ ! is_null($service->specific->company_rate) ? $service->specific->company_rate_label : $service->company_rate_label }}</td>
-                        {{--<td>{{ ! is_null($service->specific->customercommission_id) ? @$service->specific->customer_commission->name : @$service->customer_commission->name }}</td>--}}
-                        {{--<td>{{ ! is_null($service->specific->providercommission_id) ? @$service->specific->provider_commission->name : @$service->provider_commission->name }}</td>--}}
+                        <td>{{ ! is_null($service->specific->customercommission_id) ? @$service->specific->customer_commission->name : @$service->customer_commission->name }}</td>
+                        <td>{{ ! is_null($service->specific->providercommission_id) ? @$service->specific->provider_commission->name : @$service->provider_commission->name }}</td>
                         <td></td>
                         <td>
                             @can(config('permission.permissions.update_company_services'))
@@ -84,7 +84,7 @@
                                         <div class="form-group">
                                             <label for="customercommission_id" class="col-form-label">@lang('validation.attributes.backend.companies.service.customercommission')</label>
                                             <div class="form-check mb-2 mr-sm-2">
-                                                <label class="form-check-label" ><input type="checkbox" name="customer-default" class="form-check-input" id="{{ $service->uuid }}"/> @lang('validation.attributes.backend.companies.service.default_setting') ({{ $service->customer_commission->name }})</label>
+                                                <label class="form-check-label" ><input type="checkbox" name="customer-default" class="form-check-input" id="{{ $service->uuid }}"/> @lang('validation.attributes.backend.companies.service.default_setting') ({{ @$service->customer_commission->name }})</label>
                                             </div>
                                             {{ html()->select('customercommission_id' , $commissions)
                                                 ->class('form-control')
@@ -97,7 +97,7 @@
                                         <div class="form-group">
                                             <label for="providercommission_id" class="col-form-label">@lang('validation.attributes.backend.companies.service.providercommission')</label>
                                             <div class="form-check mb-2 mr-sm-2">
-                                                <label class="form-check-label" ><input type="checkbox" name="provider-default" class="form-check-input" id="{{ $service->uuid }}"/> @lang('validation.attributes.backend.companies.service.default_setting') ({{ $service->provider_commission->name }})</label>
+                                                <label class="form-check-label" ><input type="checkbox" name="provider-default" class="form-check-input" id="{{ $service->uuid }}"/> @lang('validation.attributes.backend.companies.service.default_setting') ({{ @$service->provider_commission->name }})</label>
                                             </div>
                                             {{ html()->select('providercommission_id' , $commissions)
                                                 ->class('form-control')
