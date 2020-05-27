@@ -54,4 +54,5 @@ class BusinessErrorCodes
     const SERVICE_MAL_CONFIGURED            = '10040';
     const CUSTOMER_TRANSACTION_LIMIT        = '10041';
     const SERVICE_NOT_ALLOWED               = '10042';
+    const BILL_IS_NOT_FOUND                 = '10043';
 }
