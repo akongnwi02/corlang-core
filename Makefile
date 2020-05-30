@@ -32,8 +32,8 @@ reload: down up seed
 up:
 	echo "Starting Containers"
 	docker-compose up -d
-#	sleep 10
-#	docker-compose up -d
+	sleep 10
+	docker-compose up -d
 
 	echo "\nInstalling Composer Dependencies"
 	docker exec $$(docker-compose ps -q workspace) sh -c "composer install"

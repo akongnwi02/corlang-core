@@ -9,85 +9,189 @@
 namespace App\Services\Business\Models;
 
 
+
 class PostpaidBill implements ModelInterface
 {
-    public function setServiceCode($serviceCode)
+    public $transaction_id;
+    public $bill_number;
+    public $bill_due_date;
+    public $bill_is_late;
+    public $bill_is_paid;
+    public $service_code;
+    public $contract_number;
+    public $address;
+    public $name;
+    public $phone;
+    public $email;
+    public $city;
+    public $state;
+    public $amount;
+    public $currency_code;
+    public $items;
+    public $customer_fee;
+    
+    public function getBillNumber()
     {
-        // TODO: Implement setServiceCode() method.
+        return $this->bill_number;
+    }
+    
+    public function setBillNumber($bill_number)
+    {
+        $this->bill_number = $bill_number;
+        return $this;
+    }
+    
+    public function setServiceCode($service_code)
+    {
+        $this->service_code = $service_code;
+        return $this;
     }
     
     public function getServiceCode()
     {
-        // TODO: Implement getServiceCode() method.
+        return $this->service_code;
     }
     
-    public function setTransactionId($uuid)
+    public function getAddress()
     {
-        // TODO: Implement setTransactionId() method.
+        return $this->address;
     }
     
-    public function getTransactionId()
+    public function setAddress($address)
     {
-        // TODO: Implement getTransactionId() method.
+        $this->address = $address;
+        return $this;
     }
     
-    public function setAmount($amount)
+    public function getName()
     {
-        // TODO: Implement setAmount() method.
+        return $this->name;
+    }
+    
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
     }
     
     public function getAmount()
     {
-        // TODO: Implement getAmount() method.
+        return $this->amount;
     }
     
-    public function setCurrencyCode($code)
+    public function setAmount($amount)
     {
-        // TODO: Implement setCurrencyCode() method.
+        $this->amount = $amount;
+        return $this;
+    }
+    
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+    
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+    
+    public function getBillDueDate()
+    {
+        return $this->bill_due_date;
+    }
+    
+    public function setBillDueDate($bill_due_date)
+    {
+        $this->bill_due_date = $bill_due_date;
+        return $this;
+    }
+    
+    public function getBillIsLate()
+    {
+        return $this->bill_is_late;
+    }
+    
+    public function setBillIsLate($bill_is_late)
+    {
+        $this->bill_is_late = $bill_is_late;
+        return $this;
     }
     
     public function getCurrencyCode()
     {
-        // TODO: Implement getCurrencyCode() method.
+        return $this->currency_code;
     }
     
-    public function setPaymentAccount($account)
+    public function setCurrencyCode($currency)
     {
-        // TODO: Implement setPaymentAccount() method.
+        $this->currency_code = $currency;
+        return $this;
     }
     
-    public function getPaymentAccount()
+    public function getContractNumber()
     {
-        // TODO: Implement getPaymentAccount() method.
+        return $this->contract_number;
     }
-
+    
+    public function setContractNumber($contract_number)
+    {
+        $this->contract_number = $contract_number;
+        return $this;
+    }
+    
+    public function getBillIsPaid()
+    {
+        return $this->bill_is_paid;
+    }
+    
+    public function setBillIsPaid($bill_is_paid)
+    {
+        $this->bill_is_paid = $bill_is_paid;
+        return $this;
+    }
+    
+    public function setTransactionId($uuid)
+    {
+        $this->transaction_id = $uuid;
+        return $this;
+    }
+    
+    public function getTransactionId()
+    {
+        return $this->transaction_id;
+    }
+    
     public function setDestination($destination)
     {
-        // TODO: Implement setDestination() method.
+        $this->bill_number = $destination;
+        return $this;
     }
     
     public function getDestination()
     {
-        // TODO: Implement getDestination() method.
+        return $this->bill_number;
     }
     
     public function setItems($items)
     {
-        // TODO: Implement setItems() method.
+        $this->items = $items;
+        return $this;
     }
     
     public function getItems()
     {
-        // TODO: Implement getItems() method.
+        return $this->items;
     }
     
     public function setCustomerFee($fee)
     {
-        // TODO: Implement setCustomerFee() method.
+        $this->customer_fee = $fee;
+        return $this;
     }
     
     public function getCustomerFee()
     {
-        // TODO: Implement getCustomerFee() method.
+        return $this->customer_fee;
     }
 }

@@ -15,7 +15,7 @@ class LocalizationMiddleWare
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure $next
      * @return mixed
-     * @throws GeneralException
+     * @throws BadRequestException
      */
     public function handle($request, Closure $next)
     {
@@ -30,7 +30,7 @@ class LocalizationMiddleWare
              *  check header request and determine locale
              */
             $locale = $request->header('Content-Language');
-
+            
             /*
              * check if the header is missed
              */

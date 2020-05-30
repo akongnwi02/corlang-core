@@ -4,34 +4,16 @@
         <div class="row">
             <div class="col-6">
                 <mdb-input key="meter_code"
-                           :label="$t(`dashboard.pages.tabs.content.electricity.meter_code`)"
+                           :label="$t(`dashboard.pages.tabs.content.electricity.bill_number`)"
                            v-model="destination"></mdb-input>
             </div>
-
-            <div class="col-6">
-                <!--put a v-if on the configuration.currency.code to avoid code not found error-->
-                <mdb-input key="amount"
-                           :label="$t(`dashboard.pages.general.amount`) +' '+ configuration.currency.code"
-                           v-model="amount"></mdb-input>
-            </div>
-        </div>
-
-        <mdb-row>
-
             <div class="col-6">
                 <!--put a v-if on the configuration.currency.code to avoid code not found error-->
                 <mdb-input key="phone"
                            :label="$t(`dashboard.pages.general.phone`)"
                            v-model="phone"></mdb-input>
             </div>
-            <!--</mdb-col>-->
-            <!--<mdb-col class="col-6">-->
-                <!--<mdb-input type="password" key="pincode"-->
-                           <!--:label="$t('dashboard.pages.general.pincode')"-->
-                           <!--v-model="pincode"></mdb-input>-->
-            <!--</mdb-col>-->
-
-        </mdb-row>
+        </div>
 
         <services v-on:selected="selectService" :services="services"></services>
 
@@ -40,7 +22,7 @@
         <quote-modal v-on:confirmed="confirm" :service="selectedService" :quote="quote"
                      v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
         <transaction-modal :transaction="transaction"
-                     v-on:closed="show_transaction_modal=false" v-if="show_transaction_modal"></transaction-modal>
+                           v-on:closed="show_transaction_modal=false" v-if="show_transaction_modal"></transaction-modal>
 
         <spinner :status="spinner_status"></spinner>
     </div>
@@ -53,13 +35,13 @@
     import {PusherNotification} from "../../mixins/pusher/Notification";
     import {BUSINESS_CONFIG} from "../../config/business";
     import SearchButton from "../global/SearchButton";
-    import QuoteModal from './QuoteModal';
+    import QuoteModal from './PostpaidBillQuoteModal';
     import TransactionModal from '../../components/global/TransactionModal'
     import Spinner from "../global/Spinner";
     import {Navigation} from "../../mixins/transaction/NavigateToTransactionDetails"
 
     export default {
-        name: "Search",
+        name: "PostpaidBillSearch",
         components: {
             Spinner,
             QuoteModal,
@@ -78,7 +60,6 @@
                 pincode: '',
                 phone: '',
                 destination: '',
-                amount: '',
                 selectedService: null,
                 items: [], // not applicable
 
@@ -97,10 +78,10 @@
                 return this.$store.getters.getConfiguration;
             },
             services() {
-                let prepaidBillCategory = this.configuration.categories.filter(obj => {
-                    return obj.code == BUSINESS_CONFIG.CATEGORY_PREPAID_BILLS_CODE;
+                let postpaidBillCategory = this.configuration.categories.filter(obj => {
+                    return obj.code == BUSINESS_CONFIG.CATEGORY_POSTPAID_BILLS_CODE;
                 });
-                return prepaidBillCategory[0].services
+                return postpaidBillCategory[0].services
             },
             quote() {
                 return this.$store.getters.getQuote;
@@ -125,8 +106,6 @@
                     this.$store.dispatch('loadQuote', {
                         destination: this.destination,
                         service_code: this.selectedService.code,
-                        amount: this.amount,
-                        currency_code: this.configuration.currency.code,
                         phone: this.phone,
                     });
                 }
@@ -140,12 +119,6 @@
                     ++invalid;
                     this.invalid_text = this.$t('validations.purchase.electricity.meter_code');
                     console.log('Invalid meter code');
-                }
-
-                if (!BUSINESS_CONFIG.APP_REGEX_AMOUNT.test(this.amount)) {
-                    ++invalid;
-                    console.log('Invalid amount');
-                    this.invalid_text = this.$t('validations.purchase.amount');
                 }
 
                 if (!this.selectedService) {

@@ -51,7 +51,13 @@ return [
                 'code'    => 'CORERECEIVEMONEY001',
                 'api_url' => env('APP_CATEGORY_RECEIVE_MONEY_URL'),
                 'api_key' => env('APP_CATEGORY_RECEIVE_MONEY_KEY'),
-            ]
+            ],
+            'postpaidbills'  => [
+                'name'    => 'Postpaid Bills',
+                'code'    => 'CORPOSTPAID001',
+                'api_url' => env('APP_CATEGORY_POSTPAID_BILL_URL'),
+                'api_key' => env('APP_CATEGORY_POSTPAID_BILL_KEY'),
+            ],
         ],
         'endpoints' => [
             'search'  => '/search',

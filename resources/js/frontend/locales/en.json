@@ -8,7 +8,8 @@
             },
             "tabs": {
                 "titles": {
-                    "electricity": "Electricity"
+                    "prepaid": "Prepaid Bills",
+                    "postpaid": "Postpaid Bills"
                 },
                 "content": {
                     "electricity": {
@@ -18,6 +19,7 @@
                         "vendor": "Vendor",
                         "meter_code": "Meter Code",
                         "bill_number": "Bill Number",
+                        "bill_due_date": "Bill Due Date",
                         "asset": "Units",
                         "contract_number": "Contract Number",
                         "quote": {
@@ -179,7 +181,8 @@
         "successful": "Transaction successful",
         "transactions_loaded": "Transactions updated successfully",
         "payouts_loaded": "Recent payouts updated successfully",
-        "failed": "Transaction failed"
+        "failed": "Transaction failed",
+        "late_bill": "Warning! Bill is late"
     },
     "exceptions": {
         "00000": "An unexpected error occurred",
@@ -223,6 +226,7 @@
         "10039": "The customer has not authorized the transaction",
         "10040": "The service is not properly configured",
         "10041": "Customer has reached transaction limit",
-        "10042": "You are not allowed to use this service at the moment"
+        "10042": "You are not allowed to use this service at the moment",
+        "10043": "No bill was found"
     }
 }

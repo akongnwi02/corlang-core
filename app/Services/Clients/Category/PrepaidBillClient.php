@@ -14,8 +14,9 @@ use App\Http\Resources\Api\Business\PrepaidBillResource;
 use App\Models\Service\Category;
 use App\Rules\Business\CorrectPinCode;
 use App\Rules\Service\ServiceAccessRule;
+use App\Services\Business\Models\ModelInterface;
 use App\Services\Business\Models\PrepaidBill;
-use App\Services\Clients\CategoryInterface;
+use App\Services\Clients\AbstractCategory;
 use App\Services\Constants\BusinessErrorCodes;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
@@ -23,15 +24,8 @@ use GuzzleHttp\Exception\ClientException;
 use Log;
 use Illuminate\Validation\Rule;
 
-class PrepaidBillClient implements CategoryInterface
+class PrepaidBillClient extends AbstractCategory
 {
-    public $category;
-    
-    public function __construct(Category $category)
-    {
-        $this->category = $category;
-    }
-    
     public function validate($request)
     {
         validator($request, [
@@ -49,8 +43,9 @@ class PrepaidBillClient implements CategoryInterface
      * @param $data
      * @return PrepaidBill
      * @throws ServerErrorException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function quote($data): PrepaidBill
+    public function quote($data): ModelInterface
     {
         $json = [
             'destination'  => $data['destination'],
@@ -61,6 +56,7 @@ class PrepaidBillClient implements CategoryInterface
     
         Log::debug("{$this->getCategoryClientName()}: Sending search request to micro service", [
             'json' => $json,
+            'host' => $this->url
         ]);
         try {
             $response = $httpClient->request('GET', config('business.service.endpoints.search'), [
@@ -100,6 +96,7 @@ class PrepaidBillClient implements CategoryInterface
     /**
      * @param $transaction
      * @throws BadRequestException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function confirm($transaction)
     {
@@ -113,7 +110,8 @@ class PrepaidBillClient implements CategoryInterface
         ];
         
         Log::debug("{$this->getCategoryClientName()}: Sending purchase request to micro service", [
-            'json' => $json
+            'json' => $json,
+            'host' => $this->url,
         ]);
         
         $httpClient = $this->getHttpClient();
@@ -143,43 +141,14 @@ class PrepaidBillClient implements CategoryInterface
      * @param $transaction
      * @return bool
      * @throws ServerErrorException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function status($transaction): bool
     {
-        Log::info("{$this->getCategoryClientName()}: Sending status check request to micro service", [
-            'destination'  => $transaction->destination,
-            'uuid'         => $transaction->uuid,
-            'service_code' => $transaction->service_code,
-            'amount'       => $transaction->amount,
-            'status'       => $transaction->status,
-            'code'         => $transaction->code,
-        ]);
-        
-        $httpClient = $this->getHttpClient();
-        try {
-            $response = $httpClient->request('GET', config('business.service.endpoints.status')."/$transaction->uuid");
-            $content = $response->getBody()->getContents();
-            Log::debug("{$this->getCategoryClientName()}: Response from micro service", [
-                'destination'  => $transaction->destination,
-                'service_code' => $transaction->service_code,
-                'code'         => $transaction->code,
-                'body'         => json_decode($content),
-                'content'      => $content,
-            ]);
-            return true;
-        } catch (\Exception $exception) {
-            Log::error("{$this->getCategoryClientName()}: Error Response from micro service", [
-                'destination'  => $transaction->destination,
-                'service_code' => $transaction->service_code,
-                'code'         => $transaction->code,
-                'error'        => $exception->getMessage(),
-                'exception'    => $exception,
-            ]);
-            throw new ServerErrorException(BusinessErrorCodes::GENERAL_CODE, $exception->getMessage());
-        }
+        return $this->statusCheck($this->url, $this->key, $transaction);
     }
     
-    public function response($prepaidBill)
+    public function response(ModelInterface $prepaidBill)
     {
         return new PrepaidBillResource($prepaidBill);
     }
@@ -189,13 +158,7 @@ class PrepaidBillClient implements CategoryInterface
      */
     public function getHttpClient()
     {
-        return new Client([
-            'base_uri'        => config('business.service.category.prepaidbills.api_url'),
-            'timeout'         => 120,
-            'connect_timeout' => 120,
-            'allow_redirects' => true,
-            'headers'         => ['x-api-key' => config('business.service.category.prepaidbills.api_key')],
-        ]);
+        return $this->httpClient($this->url, $this->key);
     }
     
     public function getCategoryClientName(): string

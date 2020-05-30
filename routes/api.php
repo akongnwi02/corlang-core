@@ -12,6 +12,6 @@
  * Namespaces indicate folder structure
  */
 
-Route::group(['namespace' => 'Api'], function () {
+Route::group(['namespace' => 'Api', 'middleware' => 'localization'], function () {
     include_route_files(__DIR__.'/api/');
 });

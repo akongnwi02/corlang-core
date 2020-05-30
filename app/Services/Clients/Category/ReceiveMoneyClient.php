@@ -15,23 +15,24 @@ use App\Http\Resources\Api\Business\ReceiveMoneyResource;
 use App\Models\Service\Category;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Rules\Service\ServiceAccessRule;
+use App\Services\Business\Models\ModelInterface;
 use App\Services\Business\Models\ReceiveMoney;
-use App\Services\Clients\CategoryInterface;
+use App\Services\Clients\AbstractCategory;
 use App\Services\Constants\BusinessErrorCodes;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Validation\Rule;
 use Log;
 
-class ReceiveMoneyClient implements CategoryInterface
+class ReceiveMoneyClient extends AbstractCategory
 {
-    public $category;
     public $serviceRepository;
     
-    public function __construct(Category $category)
+    public function __construct(Category $category, $config)
     {
-        $this->category = $category;
         $this->serviceRepository = new ServiceRepository;
+
+        return parent::__construct($category, $config);
     }
     
     /**
@@ -63,7 +64,7 @@ class ReceiveMoneyClient implements CategoryInterface
         }
     }
     
-    public function response($receiveMoney)
+    public function response(ModelInterface $receiveMoney)
     {
         return new ReceiveMoneyResource($receiveMoney);
     }
@@ -72,7 +73,7 @@ class ReceiveMoneyClient implements CategoryInterface
      * @param $data
      * @return ReceiveMoney
      */
-    public function quote($data): ReceiveMoney
+    public function quote($data): ModelInterface
     {
         $receiveMoney = new ReceiveMoney;
         $receiveMoney->setDestination($data['destination'])
@@ -85,8 +86,8 @@ class ReceiveMoneyClient implements CategoryInterface
     
     /**
      * @param $transaction
-     * @param null $otp
      * @throws BadRequestException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function confirm($transaction)
     {
@@ -100,13 +101,14 @@ class ReceiveMoneyClient implements CategoryInterface
         ];
     
         Log::debug("{$this->getCategoryClientName()}: Sending purchase request to micro service", [
-            'json' => $json
+            'json' => $json,
+            'host' => $this->url,
         ]);
     
         $httpClient = $this->getHttpClient();
         try {
             $response = $httpClient->request('POST', config('business.service.endpoints.execute'), [
-                'json' => $json
+                'json' => $json,
             ]);
             $content = $response->getBody()->getContents();
         
@@ -135,40 +137,11 @@ class ReceiveMoneyClient implements CategoryInterface
      * @param $transaction
      * @return bool
      * @throws ServerErrorException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function status($transaction): bool
     {
-        Log::info("{$this->getCategoryClientName()}: Sending status check request to micro service", [
-            'destination'  => $transaction->destination,
-            'uuid'         => $transaction->uuid,
-            'service_code' => $transaction->service_code,
-            'amount'       => $transaction->amount,
-            'status'       => $transaction->status,
-            'code'         => $transaction->code,
-        ]);
-    
-        $httpClient = $this->getHttpClient();
-        try {
-            $response = $httpClient->request('GET', config('business.service.endpoints.status')."/$transaction->uuid");
-            $content = $response->getBody()->getContents();
-            Log::debug("{$this->getCategoryClientName()}: Response from micro service", [
-                'destination'  => $transaction->destination,
-                'service_code' => $transaction->service_code,
-                'code'         => $transaction->code,
-                'body'         => json_decode($content),
-                'content'      => $content,
-            ]);
-            return true;
-        } catch (\Exception $exception) {
-            Log::error("{$this->getCategoryClientName()}: Error Response from micro service", [
-                'destination'  => $transaction->destination,
-                'service_code' => $transaction->service_code,
-                'code'         => $transaction->code,
-                'error'        => $exception->getMessage(),
-                'exception'    => $exception,
-            ]);
-            throw new ServerErrorException(BusinessErrorCodes::GENERAL_CODE, $exception->getMessage());
-        }
+        return $this->statusCheck($this->url, $this->key, $transaction);
     }
     
     /**
@@ -176,12 +149,6 @@ class ReceiveMoneyClient implements CategoryInterface
      */
     public function getHttpClient()
     {
-        return new Client([
-            'base_uri'        => config('business.service.category.receivemoney.api_url'),
-            'timeout'         => 120,
-            'connect_timeout' => 120,
-            'allow_redirects' => true,
-            'headers'         => ['x-api-key' => config('business.service.category.receivemoney.api_key')],
-        ]);
+        return $this->httpClient($this->url, $this->key);
     }
 }

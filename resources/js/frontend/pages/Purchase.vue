@@ -2,11 +2,11 @@
     <mdb-row>
         <mdb-col md="3">
             <mdb-tab pills color="primary" class="nav-pills" vertical key="tabs">
-                <mdb-tab-item class="mt-4" key="electricity-tab" :active="tab=='prepaid.bill.search'" @click.native.prevent="gotoTab('prepaid.bill.search')">
-                    <mdb-icon icon="plug" class="ml-2"/> {{ $t(`dashboard.pages.tabs.titles.electricity`) }}
+                <mdb-tab-item class="mt-4" key="prepaidbills-tab" :active="tab=='prepaid.bill.search'" @click.native.prevent="gotoTab('prepaid.bill.search')">
+                    <mdb-icon icon="plug" class="ml-2"/> {{ $t(`dashboard.pages.tabs.titles.prepaid`) }}
                 </mdb-tab-item>
-                <mdb-tab-item class="mt-4" key="water-tab" :active="tab=='water'" @click.native.prevent="gotoTab('water')">
-                    <mdb-icon icon="file" class="ml-2"/> Orders & Invoices
+                <mdb-tab-item class="mt-4" key="postpaidbills-tab" :active="tab=='postpaid.bill.search'" @click.native.prevent="gotoTab('postpaid.bill.search')">
+                    <mdb-icon icon="file" class="ml-2"/> {{ $t(`dashboard.pages.tabs.titles.postpaid`) }}
                 </mdb-tab-item>
                 <mdb-tab-item class="mt-4" key="recharge-tab" :active="tab=='recharge'" @click.native.prevent="gotoTab('recharge')">
                     <mdb-icon icon="address-card" class="ml-2"/> Billing Details

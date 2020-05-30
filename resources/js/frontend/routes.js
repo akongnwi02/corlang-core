@@ -29,6 +29,11 @@ export default new VueRouter({
             name: 'prepaid.bill.search',
             component: Vue.component('Search', require('./components/prepaid-bill/Search')),
         },
+        {
+            path: '/postpaid/bill/search',
+            name: 'postpaid.bill.search',
+            component: Vue.component('Search', require('./components/postpaid-bills/PostpaidBillSearch')),
+        },
         // {
         //     path: '/transaction/view/:uuid',
         //     name: 'transaction.view',

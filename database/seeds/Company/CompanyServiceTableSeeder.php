@@ -16,12 +16,17 @@ class CompanyServiceTableSeeder extends Seeder
 {
     public function run(Faker $faker)
     {
-        CompanyService::create([
-            'company_id'   => Company::first()->uuid,
-            'service_id'   => Service::first()->uuid,
-            'is_active'    => true,
-            'agent_rate'   => 75,
-            'company_rate' => 50,
-        ]);
+    
+        $services = Service::all();
+    
+        foreach ($services as $service) {
+            CompanyService::create([
+                'company_id'   => Company::first()->uuid,
+                'service_id'   => $service->uuid,
+                'is_active'    => true,
+                'agent_rate'   => 75,
+                'company_rate' => 50,
+            ]);
+        }
     }
 }
