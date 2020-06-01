@@ -53,9 +53,9 @@ trait CompanyAttribute
      */
     public function getShowButtonAttribute()
     {
-        if (auth()->user()->can(config('permission.permissions.read_companies'))) {
-            return '<a href="'.route('admin.companies.company.show', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.view').'" class="btn btn-info"><i class="fas fa-eye"></i></a>';
-        }
+//        if (auth()->user()->can(config('permission.permissions.read_companies'))) {
+//            return '<a href="'.route('admin.companies.company.show', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.view').'" class="btn btn-info"><i class="fas fa-eye"></i></a>';
+//        }
     }
     
     /**

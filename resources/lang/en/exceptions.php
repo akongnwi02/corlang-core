@@ -54,7 +54,8 @@ return [
                 'update_error'            => 'There was a problem updating this user. Please try again.',
                 'transfer_error'          => 'There was a problem transferring this user. Please try again.',
                 'update_password_error'   => 'There was a problem changing this user\'s password. Please try again.',
-                'reset_pin_error'         => 'There was a problem resetting this user\' pin code. Please try again.',
+                'reset_pin_error'         => 'There was a problem resetting this user\'s pin code. Please try again.',
+                'reset_topup_account_error'         => 'There was a problem resetting this user\'s top up accounts. Please try again.',
             ],
         ],
         

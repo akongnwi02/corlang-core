@@ -35,6 +35,7 @@ return [
             'transferred'                 => 'The user was successfully transferred.',
             'updated_password'         => "The user's password was successfully updated.",
             'reset_pin'         => "The user's pin was successfully reset.",
+            'reset_topup_account'         => "The user's top up accounts were successfully reset.",
         ],
         
         'companies' => [

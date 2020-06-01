@@ -318,8 +318,18 @@ trait UserAttribute
      */
     public function getResetPinButtonAttribute()
     {
-        if (auth()->user()->can(config('permission.permissions.deactivate_users')) && auth()->id() != $this->id) {
+        if (auth()->user()->can(config('permission.permissions.deactivate_users'))) {
             return '<a href="'.route('admin.auth.user.reset-pin', $this).'" class="dropdown-item">'.__('buttons.backend.access.users.reset_pin').'</a> ';
+        }
+    }
+    
+    /**
+     * @return string
+     */
+    public function getResetTopupAccountButtonAttribute()
+    {
+        if (auth()->user()->can(config('permission.permissions.deactivate_users'))) {
+            return '<a href="'.route('admin.auth.user.reset-topup-account', $this).'" class="dropdown-item">'.__('buttons.backend.access.users.reset_topup_account').'</a> ';
         }
     }
 
@@ -354,6 +364,7 @@ trait UserAttribute
 			  '.$this->confirmed_button.'
 			  '.$this->delete_button.'
 			  '.$this->reset_pin_button.'
+			  '.$this->reset_topup_account_button.'
 			</div>
 		  </div>
 		</div>';

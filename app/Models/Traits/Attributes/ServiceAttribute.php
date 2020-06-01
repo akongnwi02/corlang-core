@@ -42,9 +42,9 @@ trait ServiceAttribute
      */
     public function getShowButtonAttribute()
     {
-        if (auth()->user()->can(config('permission.permissions.read_services'))) {
-            return '<a href="'.route('admin.services.service.show', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.view').'" class="btn btn-info"><i class="fas fa-eye"></i></a>';
-        }
+//        if (auth()->user()->can(config('permission.permissions.read_services'))) {
+//            return '<a href="'.route('admin.services.service.show', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.view').'" class="btn btn-info"><i class="fas fa-eye"></i></a>';
+//        }
     }
     
     /**

@@ -34,6 +34,7 @@ class TopupAccount extends Model
     protected $fillable = [
         'user_id',
         'paymentmethod_id',
-        'account'
+        'account',
+        'is_confirmed',
     ];
 }

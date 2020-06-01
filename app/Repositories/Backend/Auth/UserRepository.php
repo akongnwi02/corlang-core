@@ -449,4 +449,22 @@ class UserRepository extends BaseRepository
         });
 
     }
+    
+    /**
+     * @param User $user
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function resetTopupAccount(User $user)
+    {
+        return DB::transaction(function () use ($user) {
+            if ($user->topup_accounts()->update([
+                'is_confirmed' => false
+            ])) {
+                return $user;
+            }
+            throw new GeneralException(__('exceptions.backend.access.users.reset_topup_account_error'));
+        });
+
+    }
 }

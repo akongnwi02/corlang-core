@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\Auth\User\UserSessionController;
 use App\Http\Controllers\Backend\Auth\User\UserPasswordController;
 use App\Http\Controllers\Backend\Auth\User\UserPinController;
 use App\Http\Controllers\Backend\Auth\User\UserConfirmationController;
+use App\Http\Controllers\Backend\Auth\User\UserTopupAccountController;
 
 /*
  * All route names are prefixed with 'admin.auth'.
@@ -102,6 +103,10 @@ Route::group([
     
             Route::get('pin/reset', [UserPinController::class, 'reset'])
                 ->name('user.reset-pin')
+                ->middleware('permission:'.config('permission.permissions.deactivate_users'));
+    
+            Route::get('topup-account/reset', [UserTopupAccountController::class, 'reset'])
+                ->name('user.reset-topup-account')
                 ->middleware('permission:'.config('permission.permissions.deactivate_users'));
     
             // Transfer

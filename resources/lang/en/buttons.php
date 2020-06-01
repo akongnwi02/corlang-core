@@ -27,6 +27,7 @@ return [
                 'restore_user'       => 'Restore User',
                 'transfer_user'      => 'Transfer User',
                 'reset_pin'          => 'Reset Pin Code',
+                'reset_topup_account'          => 'Reset Top up Account',
                 'unconfirm'          => 'Un-confirm',
                 'unlink'             => 'Unlink',
             ],
