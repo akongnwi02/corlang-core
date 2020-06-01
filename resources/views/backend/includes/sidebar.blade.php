@@ -87,6 +87,13 @@
                                 </a>
                             </li>
                         @endcan
+                        @can(config('permission.permissions.read_categories'))
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/services/category*')) }}" href="{{ route('admin.services.category.index') }}">
+                                    @lang('labels.backend.services.category.management')
+                                </a>
+                            </li>
+                        @endcan
                         @can(config('permission.permissions.read_payment_methods'))
                             <li class="nav-item">
                                 <a class="nav-link {{ active_class(Active::checkUriPattern('admin/services/method*')) }}" href="{{ route('admin.services.method.index') }}">
@@ -123,33 +130,32 @@
                     </ul>
                 </li>
             @endcan
-            {{--@can(config('permission.permissions.read_provisions'))--}}
-                {{--<li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/provision*'), 'open') }}">--}}
-                    {{--<a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/provision*')) }}" href="{{ route('admin.provision.service.index') }}">--}}
-                        {{--<i class="nav-icon icon-drawer"></i> @lang('menus.backend.provisions.title')--}}
-                    {{--</a>--}}
+            @can(config('permission.permissions.read_provisions'))
+                <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/accounting*'), 'open') }}">
+                    <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/accounting*')) }}" href="{{ route('admin.accounting.provision.index') }}">
+                        <i class="nav-icon icon-book-open"></i> @lang('menus.backend.accounting.title')
+                    </a>
 
-                    {{--<ul class="nav-dropdown-items">--}}
-                        {{--<li class="nav-item">--}}
-                            {{--<a class="nav-link {{ active_class(Active::checkUriPattern('admin/provision/method*')) }}" href="{{ route('admin.provision.method.index') }}">--}}
-                                {{--@lang('menus.backend.provisions.method.management')--}}
-                            {{--</a>--}}
-                        {{--</li>--}}
-                        {{--<li class="nav-item">--}}
-                            {{--<a class="nav-link {{ active_class(Active::checkUriPattern('admin/provision/service*')) }}" href="{{ route('admin.provision.service.index') }}">--}}
-                                {{--@lang('menus.backend.provisions.service.management')--}}
-                            {{--</a>--}}
-                        {{--</li>--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
-            {{--@endcan--}}
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/accounting/provision*')) }}" href="{{ route('admin.accounting.provision.index') }}">
+                                @lang('menus.backend.accounting.provisions.management')
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('admin/accounting/collection*')) }}" href="{{ route('admin.accounting.collection.index') }}">
+                                @lang('menus.backend.accounting.collections.management')
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
 
             <li class="nav-item">
                 <a class="nav-link {{ active_class(Active::checkUriPattern('admin/sales')) }}" href="{{ route('admin.sales.index') }}">
                     <i class="nav-icon icon-basket-loaded"></i> @lang('menus.backend.sidebar.sales')
                 </a>
             </li>
-
             <li class="nav-title">
                 <h6><b>@lang('menus.backend.sidebar.system')</b></h6>
             </li>
@@ -171,19 +177,15 @@
                             </a>
                         </li>
                     </ul>
-
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ active_class(Active::checkUriPattern('admin/horizon')) }}" href="{{ route('admin.horizon') }}">
                         <i class="nav-icon icon-speedometer"></i> @lang('menus.backend.sidebar.horizon')
                     </a>
                 </li>
-
             @endif
             <li class="divider"></li>
-
         </ul>
     </nav>
-
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>
 </div><!--sidebar-->

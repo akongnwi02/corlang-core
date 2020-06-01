@@ -104,6 +104,10 @@ return [
                 'create_error' => 'There was a problem creating this payment method. Please try again.',
                 'update_error' => 'There was a problem updating this payment method. Please try again.',
                 'mark_error'   => 'There was a problem updating the status of this payment method. Please try again.',
+            ],
+            'category' => [
+                'update_error' => 'There was a problem updating this category. Please try again.',
+                'mark_error'   => 'There was a problem updating the status of this category. Please try again.',
             ]
         ],
         'payout'   => [

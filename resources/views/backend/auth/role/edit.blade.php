@@ -50,7 +50,7 @@
                                                     . '<span class="switch-slider" data-checked="on" data-unchecked="off"></span>')
                                                 ->class('switch switch-label switch-pill switch-primary mr-2')
                                             ->for('permission-'.$permission->id) }}
-                                        {{ html()->label(ucwords($permission->name))->for('permission-'.$permission->id) }}
+                                        {{ html()->label(ucwords(__($permission->name)))->for('permission-'.$permission->id) }}
                                     </div>
                                 @endforeach
                             @endif

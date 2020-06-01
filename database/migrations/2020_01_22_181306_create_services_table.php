@@ -25,6 +25,8 @@ class CreateServicesTable extends Migration
             $table->uuid('providercompany_id')->nullable();
             $table->uuid('providercommission_id')->nullable();
             $table->uuid('customercommission_id')->nullable();
+            $table->double('min_amount')->default(0);
+            $table->double('max_amount')->default(1000000);
             $table->double('company_rate')->nullable();
             $table->double('agent_rate')->nullable();
             $table->boolean('is_public')->nullable();

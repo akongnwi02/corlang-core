@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "PostpaidBillOrderSummary"
+        name: "AirtimeSearch"
     }
 </script>
 

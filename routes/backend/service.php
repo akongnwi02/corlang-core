@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodController;
 use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodStatusController;
 use App\Http\Controllers\Backend\Services\Service\ServiceController;
 use App\Http\Controllers\Backend\Services\Service\ServiceStatusController;
+use App\Http\Controllers\Backend\Services\Category\CategoryController;
 
 Route::group([
     'prefix'     => 'services',
@@ -64,6 +65,32 @@ Route::group([
         Route::get('mark/{status}', [ServiceStatusController::class, 'mark'])
             ->name('service.mark')
             ->middleware('permission:'.config('permission.permissions.deactivate_services'));
+    });
+    
+    /*
+     * Category CRUD
+     */
+    Route::get('category', [CategoryController::class, 'index'])
+        ->name('category.index')
+        ->middleware('permission:'.config('permission.permissions.read_categories'));
+    
+    /*
+     * Specific Category
+     */
+    Route::group(['prefix' => 'category/{category}'], function () {
+        
+        Route::get('edit', [CategoryController::class, 'edit'])
+            ->name('category.edit')
+            ->middleware('permission:'.config('permission.permissions.update_categories'));
+        
+        Route::put('/', [CategoryController::class, 'update'])
+            ->name('category.update')
+            ->middleware('permission:'.config('permission.permissions.update_categories'));
+        
+        // Status
+        Route::get('mark/{status}', [CategoryController::class, 'mark'])
+            ->name('category.mark')
+            ->middleware('permission:'.config('permission.permissions.deactivate_categories'));
     });
     
     /*

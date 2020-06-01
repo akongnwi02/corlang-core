@@ -47,8 +47,8 @@
                                     <td><address>{{ $company->address }}</address></td>
                                     <td>{{ $company->city }}</td>
                                     <td>{{ $company->state }}</td>
-                                    <td>{{ $company->country->name }}</td>
-                                    <td>{{ $company->type->name }}</td>
+                                    <td>{{ __($company->country->name) }}</td>
+                                    <td>{{ __($company->type->name) }}</td>
                                     <td>{!! $company->active_label !!}</td>
                                     <td>{{ $company->updated_at->diffForHumans() }}</td>
                                     <td>{!! $company->action_buttons  !!}</td>

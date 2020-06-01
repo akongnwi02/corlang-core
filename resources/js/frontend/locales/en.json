@@ -9,7 +9,9 @@
             "tabs": {
                 "titles": {
                     "prepaid": "Prepaid Bills",
-                    "postpaid": "Postpaid Bills"
+                    "postpaid": "Postpaid Bills",
+                    "momo": "Mobile Money",
+                    "airtime": "Airtime Recharge"
                 },
                 "content": {
                     "electricity": {
@@ -26,9 +28,11 @@
                             "title": "Meter Details"
                         }
                     },
-                    "receive_money": {
+                    "mobile_money": {
                         "source_account": "Account Identifier",
-                        "name": "Account Holder"
+                        "name": "Account Holder",
+                        "cashin": "Cash In",
+                        "cashout": "Cash Out"
                     }
                 }
             },
@@ -152,6 +156,9 @@
                 "meter_code": "Please enter a valid meter code",
                 "bill_number": "Please enter a valid bill number"
             },
+            "mobile_money": {
+                "account_number": "Please enter a valid account number"
+            },
             "reference": "The reference is invalid",
             "pincode": "The pin code is invalid",
             "otp": "The OTP field is invalid",
@@ -227,6 +234,7 @@
         "10040": "The service is not properly configured",
         "10041": "Customer has reached transaction limit",
         "10042": "You are not allowed to use this service at the moment",
-        "10043": "No bill was found"
+        "10043": "No bill was found",
+        "10044": "NThe amount provided is more than the maximum amount required for this service"
     }
 }

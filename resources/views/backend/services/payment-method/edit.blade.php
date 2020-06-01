@@ -14,7 +14,7 @@
                 <div class="col-sm-5">
                     <h4 class="card-title mb-0">
                         @lang('labels.backend.services.method.management')
-                        <small class="text-muted">@lang('labels.backend.services.method.create')</small>
+                        <small class="text-muted">@lang('labels.backend.services.method.edit')</small>
                     </h4>
                 </div><!--col-->
             </div><!--row-->

@@ -87,6 +87,34 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.service.min_amount'))->class('col-md-2 form-control-label required')->for('min_amount') }}
+
+                        <div class="col-md-10">
+                            {{ html()->text('min_amount')
+                                ->class('form-control')
+                                ->required()
+                                 ->attribute('min', 0)
+                                 ->attribute('step', 0.01)
+                                ->attribute('max', 100)
+                                ->placeholder(__('validation.attributes.backend.services.service.min_amount'))}}
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.service.max_amount'))->class('col-md-2 form-control-label required')->for('max_amount') }}
+
+                        <div class="col-md-10">
+                            {{ html()->text('max_amount')
+                                ->class('form-control')
+                                ->required()
+                                 ->attribute('min', 0)
+                                 ->attribute('step', 0.01)
+                                ->attribute('max', 100)
+                                ->placeholder(__('validation.attributes.backend.services.service.max_amount'))}}
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.services.service.providercommission'))->class('col-md-2 form-control-label')->for('providercommission_id') }}
 
                         <div class="col-md-10">

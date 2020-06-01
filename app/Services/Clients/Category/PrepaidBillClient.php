@@ -14,6 +14,7 @@ use App\Http\Resources\Api\Business\PrepaidBillResource;
 use App\Models\Service\Category;
 use App\Rules\Business\CorrectPinCode;
 use App\Rules\Service\ServiceAccessRule;
+use App\Rules\Service\ServiceAmountRangeRule;
 use App\Services\Business\Models\ModelInterface;
 use App\Services\Business\Models\PrepaidBill;
 use App\Services\Clients\AbstractCategory;
@@ -31,7 +32,7 @@ class PrepaidBillClient extends AbstractCategory
         validator($request, [
             'destination'   => ['required', 'regex:/(^[A-Za-z0-9 ]+$)+/'],
             'service_code'  => ['required', new ServiceAccessRule(),],
-            'amount'        => ['required', 'nullable', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/'],
+            'amount'        => ['required', 'nullable', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/', new ServiceAmountRangeRule()],
             'currency_code' => ['required', Rule::exists('currencies', 'code')],
             'phone'         => ['sometimes', 'nullable', 'string', 'min:9'],
 //            'pincode'       => ['required', new CorrectPinCode()],
@@ -52,14 +53,14 @@ class PrepaidBillClient extends AbstractCategory
             'service_code' => $data['service_code'],
         ];
         
-        $httpClient = $this->getHttpClient();
+        $httpClient = $this->httpClient();
     
         Log::debug("{$this->getCategoryClientName()}: Sending search request to micro service", [
             'json' => $json,
             'host' => $this->url
         ]);
         try {
-            $response = $httpClient->request('GET', config('business.service.endpoints.search'), [
+            $response = $httpClient->request('GET', $this->searchEndpoint, [
                 'json' => $json
             ]);
         } catch (BadResponseException $exception) {
@@ -70,7 +71,7 @@ class PrepaidBillClient extends AbstractCategory
         $content = $response->getBody()->getContents();
     
         Log::debug("{$this->getCategoryClientName()}: Response from micro service", [
-            'service' => config('business.service.category.prepaidbills.name'),
+            'service' => $this->name,
             'response' => $content
         ]);
     
@@ -106,7 +107,7 @@ class PrepaidBillClient extends AbstractCategory
             'amount'       => $transaction->amount,
             'external_id'  => $transaction->uuid,
             'phone'        => $transaction->phone,
-            'callback_url' => config('app.micro_services.callback_url')
+            'callback_url' => $this->callbackUrl
         ];
         
         Log::debug("{$this->getCategoryClientName()}: Sending purchase request to micro service", [
@@ -114,9 +115,9 @@ class PrepaidBillClient extends AbstractCategory
             'host' => $this->url,
         ]);
         
-        $httpClient = $this->getHttpClient();
+        $httpClient = $this->httpClient();
         try {
-            $response = $httpClient->request('POST', config('business.service.endpoints.execute'), [
+            $response = $httpClient->request('POST', $this->executeEndpoint, [
                 'json' => $json
             ]);
             $content = $response->getBody()->getContents();
@@ -137,28 +138,9 @@ class PrepaidBillClient extends AbstractCategory
         }
     }
     
-    /**
-     * @param $transaction
-     * @return bool
-     * @throws ServerErrorException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function status($transaction): bool
-    {
-        return $this->statusCheck($this->url, $this->key, $transaction);
-    }
-    
     public function response(ModelInterface $prepaidBill)
     {
         return new PrepaidBillResource($prepaidBill);
-    }
-    
-    /**
-     * @return Client
-     */
-    public function getHttpClient()
-    {
-        return $this->httpClient($this->url, $this->key);
     }
     
     public function getCategoryClientName(): string

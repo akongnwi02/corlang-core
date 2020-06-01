@@ -40,6 +40,10 @@ return [
                 'activate' => 'Activate Method',
                 'deactivate' => 'Deactivate Method',
             ],
+            'category' => [
+                'activate' => 'Activate Category',
+                'deactivate' => 'Deactivate Category',
+            ]
         ],
         'companies' => [
             'company' => [

@@ -20,6 +20,8 @@ class CreateCategoriesTable extends Migration
             $table->string('code')->unique();
             $table->boolean('is_active')->default(true);
             $table->string('logo_url')->nullable();
+            $table->string('api_key')->nullable();
+            $table->string('api_url')->nullable();
             
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

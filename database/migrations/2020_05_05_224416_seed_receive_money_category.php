@@ -15,7 +15,7 @@ class SeedReceiveMoneyCategory extends Migration
     {
         \DB::table('categories')->insert([
             'uuid'       => Uuid::generate(4)->string,
-            'name'       => config('business.service.category.receivemoney.name'),
+            'name'       => 'Receive Money',
             'code'       => config('business.service.category.receivemoney.code'),
             'is_active' => true,
         ]);

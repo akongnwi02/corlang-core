@@ -35,6 +35,8 @@ class UpdateServiceRequest extends FormRequest
             'providercompany_id'    => __('validation.attributes.backend.services.service.providercompany'),
             'agent_rate'            => __('validation.attributes.backend.services.service.agent_rate'),
             'company_rate'          => __('validation.attributes.backend.services.service.company_rate'),
+            'min_amount'            => __('validation.attributes.backend.services.service.min_amount'),
+            'max_amount'            => __('validation.attributes.backend.services.service.max_amount'),
             'logo'                  => __('validation.attributes.backend.services.service.logo'),
             'items'                 => __('validation.attributes.backend.services.service.items'),
         ];
@@ -47,15 +49,16 @@ class UpdateServiceRequest extends FormRequest
             'description_en'        => ['nullable', 'string', 'max:191'],
             'description_fr'        => ['nullable', 'string', 'max:191'],
             'category_id'           => ['required', Rule::exists('categories', 'uuid')],
-//            'code'                  => ['sometimes', 'string', 'max:191', Rule::unique('services', 'code')->ignore(request()->service, 'uuid')],
+            // 'code'                 => ['sometimes', 'string', 'max:191', Rule::unique('services', 'code')->ignore(request()->service, 'uuid')],
             'providercommission_id' => ['nullable', Rule::exists('commissions', 'uuid')],
             'customercommission_id' => ['nullable', Rule::exists('commissions', 'uuid')],
             'providercompany_id'    => ['nullable', Rule::exists('companies', 'uuid')],
             'agent_rate'            => ['required', 'numeric', 'between:0,100'],
             'company_rate'          => ['required', 'numeric', 'between:0,100'],
+            'min_amount'            => ['required', 'numeric', 'min:0'],
+            'max_amount'            => ['required', 'numeric', 'min:0'],
             'logo'                  => 'sometimes|image|max:191',
             'items'                 => ['sometimes', 'array', new ItemRule(),]
-        
         ];
     }
 }

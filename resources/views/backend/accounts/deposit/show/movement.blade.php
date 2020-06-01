@@ -20,7 +20,7 @@
                     <tr>
                         <td>{{ $movement->code }}</td>
                         <td>{{ $movement->amount_label }}</td>
-                        <td><span class="badge badge-{{ $movement->class_label }}">{{ $movement->is_reversed ? __('labels.backend.account.deposit.tabs.content.movements.table.cancelled') : $movement->type->name }}</span></td>
+                        <td><span class="badge badge-{{ $movement->class_label }}">{{ $movement->is_reversed ? __('labels.backend.account.deposit.tabs.content.movements.table.cancelled') : __($movement->type->name) }}</span></td>
                         <td>{{ $movement->user->full_name }}</td>
                         <td>{{ $movement->sourceaccount_id ? $movement->source_label : '-'}}</td>
                         <td>{{ $movement->destination_label }}</td>

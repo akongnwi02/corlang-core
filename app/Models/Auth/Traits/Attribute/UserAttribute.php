@@ -89,7 +89,7 @@ trait UserAttribute
 
         if (\count($roles)) {
             return implode(', ', array_map(function ($item) {
-                return ucwords($item);
+                return ucwords(__($item));
             }, $roles));
         }
 

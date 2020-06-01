@@ -30,8 +30,9 @@
 
 <script>
 
-    import Services from '../services/Services'
-    import {ConfigurationLoad} from '../../mixins/Configuration/ConfigurationLoad'
+    import Services from '../services/Services';
+    import {ConfigurationLoad} from '../../mixins/Configuration/ConfigurationLoad';
+    import {Reset} from '../../mixins/Configuration/Reset';
     import {PusherNotification} from "../../mixins/pusher/Notification";
     import {BUSINESS_CONFIG} from "../../config/business";
     import SearchButton from "../global/SearchButton";
@@ -53,6 +54,7 @@
             ConfigurationLoad,
             PusherNotification,
             Navigation,
+            Reset,
         ],
         data() {
             return {
@@ -117,8 +119,8 @@
                 // this validation needs to be handled properly
                 if (this.destination.length < 6) {
                     ++invalid;
-                    this.invalid_text = this.$t('validations.purchase.electricity.meter_code');
-                    console.log('Invalid meter code');
+                    this.invalid_text = this.$t('validations.purchase.electricity.bill_number');
+                    console.log('Invalid bill number. Too short');
                 }
 
                 if (!this.selectedService) {

@@ -61,6 +61,8 @@ class Service extends Model
         'company_rate',
         'agent_rate',
         'has_items',
+        'min_amount',
+        'max_amount',
     ];
     
     /**
@@ -72,6 +74,8 @@ class Service extends Model
         'is_active'           => 'boolean',
         'customer_rate'       => 'double',
         'agent_rate'          => 'double',
+        'min_amount'          => 'double',
+        'max_amount'          => 'double',
         'has_items'           => 'boolean',
         'requires_auth'       => 'boolean',
         'is_money_withdrawal' => 'boolean',

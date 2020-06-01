@@ -15,6 +15,7 @@ use App\Models\Company\CompanyService;
 use App\Models\Service\Category;
 use App\Models\Service\Item;
 use App\Models\Service\PaymentMethod;
+use App\Models\Transaction\Transaction;
 
 trait ServiceRelationship
 {
@@ -61,5 +62,10 @@ trait ServiceRelationship
     public function payment_method()
     {
         return $this->belongsTo(PaymentMethod::class, 'uuid', 'service_id');
+    }
+    
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'service_id', 'uuid');
     }
 }

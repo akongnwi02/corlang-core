@@ -73,6 +73,10 @@ return [
                 'create'     => 'Create Service',
                 'edit'       => 'Edit Service',
             ],
+            'category' => [
+                'management' => 'Categories',
+                'edit' => 'Edit Category',
+            ],
             'commission' => [
                 'management' => 'Service Charges',
                 'create'     => 'Create Service Charge',
@@ -103,16 +107,15 @@ return [
                 'view' => 'View Account',
             ]
         ],
-        'provisions' => [
-            'title' => 'Provisions',
-            
-            'method' => [
-                'management' => 'Payment Method Provision',
-                'view' => 'View Payment Method Provision'
+        'accounting' => [
+            'title' => 'Accounting',
+            'collections' => [
+                'management' => 'Collections',
+                'view' => 'View Collections'
             ],
-            'service' => [
-                'management' => 'Service Provision',
-                'view' => 'View Service Provision',
+            'provisions' => [
+                'management' => 'Provisions',
+                'view' => 'View Provisions',
             ],
         ]
     ],

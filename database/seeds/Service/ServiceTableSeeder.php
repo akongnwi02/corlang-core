@@ -37,7 +37,7 @@ class ServiceTableSeeder extends Seeder
             'code' => 'CORMTNIN',
             'country_id' => Country::first()->uuid,
             'is_active' => true,
-            'category_id' => Category::where('code', config('business.service.category.receivemoney.code'))->first()->uuid,
+            'category_id' => Category::where('code', config('business.service.category.sendmoney.code'))->first()->uuid,
             'company_rate' => 25,
             'agent_rate' => 30,
             'is_prepaid' => true,

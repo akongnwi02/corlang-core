@@ -23,7 +23,7 @@ return [
         ],
 
         'dashboard' => [
-            'title'   => "Tableau de bord de l'administration",
+            'title'   => "Tableau de bord",
             'welcome' => 'Bienvenue',
         ],
 

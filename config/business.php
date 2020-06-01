@@ -4,7 +4,7 @@ return [
     
     'company' => [
         'type' => [
-            'formal'   => 'informal company',
+            'formal'   => 'formal company',
             'informal' => 'informal company',
         ]
     ],
@@ -30,6 +30,8 @@ return [
         'type'   => [
             'commission' => 'commission',
             'drain'      => 'drain',
+            'provision'  => 'provision',
+            'collection' => 'collection',
         ],
         'status' => [
             'pending'   => 'pending',
@@ -40,29 +42,23 @@ return [
     ],
     'service'     => [
         'category'  => [
-            'prepaidbills' => [
-                'name'    => 'Prepaid Bills',
-                'code'    => 'CORPREPAID001',
-                'api_url' => env('APP_CATEGORY_PREPAID_BILL_URL'),
-                'api_key' => env('APP_CATEGORY_PREPAID_BILL_KEY'),
+            'prepaidbills'  => [
+                'code' => 'CORPREPAID001',
             ],
             'receivemoney'  => [
-                'name'    => 'Receive Money',
-                'code'    => 'CORERECEIVEMONEY001',
-                'api_url' => env('APP_CATEGORY_RECEIVE_MONEY_URL'),
-                'api_key' => env('APP_CATEGORY_RECEIVE_MONEY_KEY'),
+                'code' => 'CORRECEIVEMONEY001',
             ],
-            'postpaidbills'  => [
-                'name'    => 'Postpaid Bills',
-                'code'    => 'CORPOSTPAID001',
-                'api_url' => env('APP_CATEGORY_POSTPAID_BILL_URL'),
-                'api_key' => env('APP_CATEGORY_POSTPAID_BILL_KEY'),
+            'sendmoney'     => [
+                'code' => 'CORSENDMONEY001',
+            ],
+            'postpaidbills' => [
+                'code' => 'CORPOSTPAID001',
             ],
         ],
         'endpoints' => [
             'search'  => '/search',
             'execute' => '/execute',
-            'status' => '/status',
+            'status'  => '/status',
         ]
     ],
     'system'      => [

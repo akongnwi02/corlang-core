@@ -55,7 +55,7 @@
                                     <td>{{ $sale->paymentaccount}}</td>
                                     <td>{{ number_format($sale->company_commission, 2) . ' ' . $sale->currency_code }}</td>
                                     <td>{{ number_format($sale->agent_commission, 2) . ' ' . $sale->currency_code }}</td>
-                                    <td><span class="badge badge-{{ $sale->status_class_label }}">{{ $sale->status }}</span></td>
+                                    <td><span class="badge badge-{{ $sale->status_class_label }}">{{ __($sale->status) }}</span></td>
                                 </tr>
                             @endforeach
                             </tbody>

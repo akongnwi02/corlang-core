@@ -123,6 +123,11 @@ return [
         'delete_services'             => 'delete services',
         'deactivate_services'         => 'deactivate services',
         
+        // categories
+        'read_categories'             => 'read categories',
+        'update_categories'           => 'update categories',
+        'deactivate_categories'       => 'deactivate categories',
+        
         // payment methods
         'create_payment_methods'      => 'create payment methods',
         'read_payment_methods'        => 'read payment methods',
@@ -157,10 +162,12 @@ return [
         'drain_accounts'  => 'drain accounts',
         
         // provisions
-        'read_provisions' => 'read provisions',
+        'read_accounting' => 'read accounting',
+        'request_provision' => 'request provision',
+        'pay_collection' => 'pay collection',
         
         //sales
-        'read_sales' => 'read sales',
+        'read_sales'      => 'read sales',
     ],
 
 ];

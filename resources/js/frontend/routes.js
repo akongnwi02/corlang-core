@@ -32,7 +32,17 @@ export default new VueRouter({
         {
             path: '/postpaid/bill/search',
             name: 'postpaid.bill.search',
-            component: Vue.component('Search', require('./components/postpaid-bills/PostpaidBillSearch')),
+            component: Vue.component('PostpaidBillSearch', require('./components/postpaid-bills/PostpaidBillSearch')),
+        },
+        {
+            path: '/momo',
+            name: 'momo',
+            component: Vue.component('MomoSearch', require('./components/mobile-money/Search')),
+        },
+        {
+            path: '/airtime',
+            name: 'airtime',
+            component: Vue.component('AirtimeSearch', require('./components/airtime/AirtimeSearch')),
         },
         // {
         //     path: '/transaction/view/:uuid',

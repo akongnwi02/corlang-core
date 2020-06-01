@@ -10,6 +10,7 @@ namespace App\Http\Requests\Api\Business;
 
 use App\Rules\Business\CorrectPinCode;
 use App\Rules\Service\ServiceAccessRule;
+use App\Rules\Service\ServiceAmountRangeRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GeneralRequest extends FormRequest

@@ -22,11 +22,26 @@ abstract class AbstractCategory
     
     public $key;
     
+    public $callbackUrl;
+    
+    public $statusEndpoint;
+    
+    public $executeEndpoint;
+    
+    public $searchEndpoint;
+    
+    public $name;
+    
     public function __construct($category, $config)
     {
-        $this->category = $category;
-        $this->url = $config['api_url'];
-        $this->key = $config['api_key'];
+        $this->category        = $category;
+        $this->url             = $config['api_url'];
+        $this->key             = $config['api_key'];
+        $this->callbackUrl     = $config['callback_url'];
+        $this->statusEndpoint  = $config['status_endpoint'];
+        $this->executeEndpoint = $config['execute_endpoint'];
+        $this->searchEndpoint  = $config['search_endpoint'];
+        $this->name  = $config['name'];
     }
     
     public abstract function validate($request);
@@ -35,37 +50,31 @@ abstract class AbstractCategory
     
     public abstract function getCategoryClientName(): string;
     
-    public abstract function status($transaction): bool;
-    
     public abstract function quote($data): ModelInterface;
     
     public abstract function response(ModelInterface $model);
     
     /**
-     * @param $url
-     * @param $key
      * @return Client
      */
-    public function httpClient($url, $key)
+    public function httpClient()
     {
         return new Client([
-            'base_uri'        => $url,
+            'base_uri'        => $this->url,
             'timeout'         => 120,
             'connect_timeout' => 120,
             'allow_redirects' => true,
-            'headers'         => ['x-api-key' => $key],
+            'headers'         => ['x-api-key' => $this->key],
         ]);
     }
     
     /**
-     * @param $url
-     * @param $key
      * @param $transaction
      * @return bool
      * @throws ServerErrorException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function statusCheck($url, $key, $transaction)
+    public function status($transaction)
     {
         Log::info("{$this->getCategoryClientName()}: Sending status check request to micro service", [
             'destination'  => $transaction->destination,
@@ -75,11 +84,11 @@ abstract class AbstractCategory
             'status'       => $transaction->status,
             'code'         => $transaction->code,
         ]);
-    
-        $httpClient = $this->httpClient($url, $key);
+        
+        $httpClient = $this->httpClient();
         try {
-            $response = $httpClient->request('GET', config('business.service.endpoints.status')."/$transaction->uuid");
-            $content = $response->getBody()->getContents();
+            $response = $httpClient->request('GET', $this->statusEndpoint . "/$transaction->uuid");
+            $content  = $response->getBody()->getContents();
             Log::debug("{$this->getCategoryClientName()}: Response from micro service", [
                 'destination'  => $transaction->destination,
                 'service_code' => $transaction->service_code,

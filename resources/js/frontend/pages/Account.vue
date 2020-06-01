@@ -123,6 +123,8 @@
     import QuoteModal from "../components/mobile-money/QuoteModal";
     import Spinner from '../components/global/Spinner';
     import {PusherNotification} from "../mixins/pusher/Notification";
+    import {Reset} from '../mixins/Configuration/Reset'
+
 
     export default {
         name: "Account",
@@ -133,7 +135,8 @@
             Spinner
         },
         mixins: [
-            PusherNotification
+            PusherNotification,
+            Reset,
         ],
         data() {
             return {
@@ -209,13 +212,13 @@
                 console.log('topup data', data);
                 this.topup_method = data.selectedMethod.service;
                 this.show_topup_modal = false;
+
                 this.$store.dispatch('loadQuote', {
                     destination: data.paymentaccount,
                     service_code: data.selectedMethod.service.code,
                     amount: data.amount,
                     currency_code: data.currency_code,
                     auth_payload: data.auth_payload,
-                    auth_type: data.auth_type,
                     phone: this.phone,
                 });
             },

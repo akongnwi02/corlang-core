@@ -55,6 +55,11 @@ return [
                 'updated' => 'The service was successfully updated.',
                 'status_updated' => 'The status was successfully updated.',
             ],
+            'category' => [
+                'created' => 'The category was successfully created.',
+                'updated' => 'The category was successfully updated.',
+                'status_updated' => 'The status was successfully updated.',
+            ],
             'commission' => [
                 'created' => 'The service charge was updated successfully.',
             ],

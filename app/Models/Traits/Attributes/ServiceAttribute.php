@@ -9,6 +9,8 @@
 namespace App\Models\Traits\Attributes;
 
 
+use App\Models\System\Currency;
+
 trait ServiceAttribute
 {
     /**
@@ -92,4 +94,18 @@ trait ServiceAttribute
         return $this->company_rate . '%';
     }
     
+    public function getCollectedAmountLabelAttribute()
+    {
+        return number_format($this->getCollectedAmount(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
+    }
+    
+    public function getMinAmountLabelAttribute()
+    {
+        return number_format($this->min_amount, 2) . ' '. Currency::where('is_default', true)->first()->code;
+    }
+    
+    public function getMaxAmountLabelAttribute()
+    {
+        return number_format($this->max_amount, 2) . ' '. Currency::where('is_default', true)->first()->code;
+    }
 }

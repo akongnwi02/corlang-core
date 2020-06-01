@@ -166,17 +166,17 @@ return [
                             'default'    => 'Use service default',
                             'custom'     => 'Set custom',
                             'table'      => [
-                                'name'         => 'Service Name',
-                                'category'     => 'Service Category',
-                                'gateway'      => 'Gateway Configuration',
-                                'active'       => 'Active',
-                                'code'         => 'Code',
-                                'logo'         => 'Logo',
-                                'company_rate' => 'Specific Company Rate (%)',
-                                'agent_rate'   => 'Specific Agent Rate (%)',
+                                'name'               => 'Service Name',
+                                'category'           => 'Service Category',
+                                'gateway'            => 'Gateway Configuration',
+                                'active'             => 'Active',
+                                'code'               => 'Code',
+                                'logo'               => 'Logo',
+                                'company_rate'       => 'Specific Company Rate (%)',
+                                'agent_rate'         => 'Specific Agent Rate (%)',
                                 'customercommission' => 'Customer Service Charge',
                                 'providercommission' => 'Provider Service Charge',
-                                'total'        => 'service|services'
+                                'total'              => 'service|services'
                             ]
                         ]
                     ]
@@ -192,18 +192,34 @@ return [
                 'service_actions' => 'Service Actions',
                 
                 'table' => [
-                    'name'         => 'Service Name',
-                    'code'         => 'Service Code',
-                    'active'       => 'Active',
-                    'logo'         => 'Logo',
-                    'gateway'      => 'Gateway',
-                    'category'     => 'Category',
-                    'agent_rate'   => 'Default Agent Rate',
-                    'company_rate' => 'Default Company Rate',
+                    'name'               => 'Service Name',
+                    'code'               => 'Service Code',
+                    'active'             => 'Active',
+                    'logo'               => 'Logo',
+                    'gateway'            => 'Gateway',
+                    'category'           => 'Category',
+                    'agent_rate'         => 'Default Agent Rate',
+                    'company_rate'       => 'Default Company Rate',
+                    'min_amount'         => 'Min Amount',
+                    'max_amount'         => 'Max Amount',
                     'customercommission' => 'Default Customer Service Charge',
                     'providercommission' => 'Default Provider Service Charge',
-                    'total'        => 'service|services',
+                    'total'              => 'service|services',
                 ],
+            ],
+            'category'   => [
+                'management' => 'Service Category',
+                'edit'       => 'Edit Category',
+                'active'     => 'Active Categories',
+                'table'      => [
+                    'name'    => 'Category Name',
+                    'code'    => 'Category Code',
+                    'active'  => 'Active',
+                    'logo'    => 'Logo',
+                    'api_url' => 'Micro Service URL',
+                    'api_key' => 'Micro Service API Key',
+                    'total'              => 'category|categories',
+                ]
             ],
             'commission' => [
                 'management'         => 'Service Charge',
@@ -267,17 +283,17 @@ return [
             ]
         ],
         'account'   => [
-            'management'         => 'Account',
-            'company_balance'    => 'Company Balance',
-            'umbrella_balance'   => 'Umbrella Balance',
-            'commission_balance' => 'Commission Balance',
-            'credit'             => 'Credit Account',
-            'debit'              => 'Debit Account',
+            'management'            => 'Account',
+            'company_balance'       => 'Company Balance',
+            'umbrella_balance'      => 'Umbrella Balance',
+            'commission_balance'    => 'Commission Balance',
+            'credit'                => 'Credit Account',
+            'debit'                 => 'Debit Account',
             'transfer_to_strongbox' => 'Transfer to Strongbox',
-            'drain'              => 'Drain Account',
-            'float'              => 'Add Float',
-            'request_payout'     => 'Request Payout',
-            'deposit'            => [
+            'drain'                 => 'Drain Account',
+            'float'                 => 'Add Float',
+            'request_payout'        => 'Request Payout',
+            'deposit'               => [
                 'management' => 'Deposit Accounts',
                 'actions'    => 'Account Actions',
                 'view'       => 'View Account',
@@ -319,7 +335,7 @@ return [
                     ],
                 ],
             ],
-            'umbrella'           => [
+            'umbrella'              => [
                 'management' => 'Umbrella Accounts',
                 'actions'    => 'Account Actions',
                 'view'       => 'View Account',
@@ -357,7 +373,7 @@ return [
                     ],
                 ],
             ],
-            'payout'             => [
+            'payout'                => [
                 'management' => 'Commission Accounts',
                 'actions'    => 'Account Actions',
                 'view'       => 'View Account',
@@ -383,26 +399,65 @@ return [
                         ],
                         'movements' => [
                             'table' => [
-                                'code'    => 'Transaction Number',
-                                'amount'  => 'Amount',
-                                'method'  => 'Payout Method',
-                                'number'  => 'Account Number',
-                                'comment' => 'Comment',
-                                'name'    => 'Account Name',
-                                'account' => 'Account',
-                                'user'    => 'Requested By',
-                                'date'    => 'Requested At',
-                                'company' => 'Company',
-                                'status'  => 'Status',
-                                'decision_by'  => 'Decision By',
-                                'decision_at'  => 'Decision At',
-                                'total'   => 'movement|movements',
+                                'code'        => 'Transaction Number',
+                                'amount'      => 'Amount',
+                                'method'      => 'Payout Method',
+                                'number'      => 'Account Number',
+                                'comment'     => 'Comment',
+                                'name'        => 'Account Name',
+                                'account'     => 'Account',
+                                'user'        => 'Requested By',
+                                'date'        => 'Requested At',
+                                'company'     => 'Company',
+                                'status'      => 'Status',
+                                'decision_by' => 'Decision By',
+                                'decision_at' => 'Decision At',
+                                'total'       => 'movement|movements',
                             ],
                         ],
                     ],
                 ],
             ],
         ],
+        'accounting' => [
+            'pay' => 'Payout Collection',
+            'provision' => [
+                'management' => 'Provisions',
+                'actions'    => 'Provision Actions',
+                'view'       => 'View Provision',
+                'table' => [
+                    'service' => 'Service',
+                    'commission' => 'Commission',
+                    'last_payout_date' => 'Last Payout Date',
+                ],
+                'movements' => [
+                    'code'    => 'Transaction Number',
+                    'amount'  => 'Amount',
+                    'comment' => 'Comment',
+                    'user'    => 'Executed by',
+                    'date'    => 'Date',
+                    'total'   => 'request|requests',
+                ]
+            ],
+            'collection' => [
+                'management' => 'Collections',
+                'actions'    => 'Collection Actions',
+                'view'       => 'View Collection',
+                'table' => [
+                    'service' => 'Service',
+                    'amount' => 'Collected Amount',
+                    'last_payout_date' => 'Last Payout Date',
+                ],
+                'movements' => [
+                    'code'    => 'Transaction Number',
+                    'amount'  => 'Amount',
+                    'comment' => 'Comment',
+                    'user'    => 'Executed by',
+                    'date'    => 'Date',
+                    'total'   => 'payment|payments',
+                ]
+            ],
+        ]
     ],
     
     'frontend' => [

@@ -9,6 +9,7 @@
 namespace App\Models\Service;
 
 
+use App\Models\Traits\Attributes\CategoryAttribute;
 use App\Models\Traits\Relationships\CategoryRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use Uuid,
+        CategoryAttribute,
         CategoryRelationship;
     
     /**
@@ -35,6 +37,8 @@ class Category extends Model
         'name',
         'is_active',
         'code',
+        'api_key',
+        'api_url',
     ];
     
     /**

@@ -77,7 +77,7 @@ class TransactionRepository
             // determine if user is trying to do a topup
             if ($service->is_money_withdrawal && $service->payment_method) {
     
-                $topupAccount = auth()->user()->getTopupAccount($service->payment_method)->account;
+                $topupAccount = @auth()->user()->getTopupAccount($service->payment_method)->account;
                 if ($topupAccount == $model->getDestination()) {
                     $accountTopUp = true;
                 }

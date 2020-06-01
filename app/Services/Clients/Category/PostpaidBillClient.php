@@ -17,7 +17,6 @@ use App\Services\Business\Models\ModelInterface;
 use App\Services\Business\Models\PostpaidBill;
 use App\Services\Clients\AbstractCategory;
 use App\Services\Constants\BusinessErrorCodes;
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\ClientException;
 use Log;
@@ -49,7 +48,7 @@ class PostpaidBillClient extends AbstractCategory
             'amount'       => $transaction->amount,
             'external_id'  => $transaction->uuid,
             'phone'        => $transaction->phone,
-            'callback_url' => config('app.micro_services.callback_url')
+            'callback_url' => $this->callbackUrl,
         ];
     
         Log::debug("{$this->getCategoryClientName()}: Sending purchase request to micro service", [
@@ -57,9 +56,9 @@ class PostpaidBillClient extends AbstractCategory
             'host' => $this->url,
         ]);
     
-        $httpClient = $this->getHttpClient();
+        $httpClient = $this->httpClient();
         try {
-            $response = $httpClient->request('POST', config('business.service.endpoints.execute'), [
+            $response = $httpClient->request('POST', $this->executeEndpoint, [
                 'json' => $json
             ]);
             $content = $response->getBody()->getContents();
@@ -93,14 +92,14 @@ class PostpaidBillClient extends AbstractCategory
             'service_code' => $data['service_code'],
         ];
     
-        $httpClient = $this->getHttpClient();
+        $httpClient = $this->httpClient();
     
         Log::debug("{$this->getCategoryClientName()}: Sending search request to micro service", [
             'json' => $json,
             'host' => $this->url
         ]);
         try {
-            $response = $httpClient->request('GET', config('business.service.endpoints.search'), [
+            $response = $httpClient->request('GET', $this->searchEndpoint, [
                 'json' => $json
             ]);
         } catch (BadResponseException $exception) {
@@ -111,7 +110,7 @@ class PostpaidBillClient extends AbstractCategory
         $content = $response->getBody()->getContents();
     
         Log::debug("{$this->getCategoryClientName()}: Response from micro service", [
-            'service' => config('business.service.category.prepaidbills.name'),
+            'service' => $this->name,
             'response' => $content
         ]);
     
@@ -141,25 +140,6 @@ class PostpaidBillClient extends AbstractCategory
     public function getCategoryClientName(): string
     {
         return class_basename($this);
-    }
-    
-    /**
-     * @param $transaction
-     * @return bool
-     * @throws ServerErrorException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function status($transaction): bool
-    {
-        return $this->statusCheck($this->url, $this->key, $transaction);
-    }
-    
-    /**
-     * @return Client
-     */
-    public function getHttpClient()
-    {
-        return $this->httpClient($this->url, $this->key);
     }
     
     public function response(ModelInterface $model)

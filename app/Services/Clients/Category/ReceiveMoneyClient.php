@@ -15,11 +15,11 @@ use App\Http\Resources\Api\Business\ReceiveMoneyResource;
 use App\Models\Service\Category;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Rules\Service\ServiceAccessRule;
+use App\Rules\Service\ServiceAmountRangeRule;
 use App\Services\Business\Models\ModelInterface;
 use App\Services\Business\Models\ReceiveMoney;
 use App\Services\Clients\AbstractCategory;
 use App\Services\Constants\BusinessErrorCodes;
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Validation\Rule;
 use Log;
@@ -45,7 +45,7 @@ class ReceiveMoneyClient extends AbstractCategory
         validator($request, [
             'destination'   => ['required', 'regex:/(^[A-Za-z0-9 ]+$)+/'],
             'service_code'  => ['required', new ServiceAccessRule(),],
-            'amount'        => ['required', 'nullable', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/'],
+            'amount'        => ['required', 'nullable', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/', new ServiceAmountRangeRule()],
             'currency_code' => ['required', Rule::exists('currencies', 'code')],
             'auth_payload'  => ['sometimes', 'nullable', 'min:3'],
         ])->validate();
@@ -75,13 +75,13 @@ class ReceiveMoneyClient extends AbstractCategory
      */
     public function quote($data): ModelInterface
     {
-        $receiveMoney = new ReceiveMoney;
-        $receiveMoney->setDestination($data['destination'])
-            ->setServiceCode($data['service_code'])
-            ->setCurrencyCode($data['currency_code'])
-            ->setAmount($data['amount'])
-            ->setItems($data['auth_payload']);
-        return $receiveMoney;
+            $receiveMoney = new ReceiveMoney;
+            $receiveMoney->setDestination($data['destination'])
+                ->setServiceCode($data['service_code'])
+                ->setCurrencyCode($data['currency_code'])
+                ->setAmount($data['amount'])
+                ->setItems($data['auth_payload']);
+            return $receiveMoney;
     }
     
     /**
@@ -97,7 +97,7 @@ class ReceiveMoneyClient extends AbstractCategory
             'amount'       => $transaction->total_customer_amount,
             'external_id'  => $transaction->uuid,
             'auth_payload' => $transaction->items,
-            'callback_url' => config('app.micro_services.callback_url')
+            'callback_url' => $this->callbackUrl
         ];
     
         Log::debug("{$this->getCategoryClientName()}: Sending purchase request to micro service", [
@@ -105,9 +105,9 @@ class ReceiveMoneyClient extends AbstractCategory
             'host' => $this->url,
         ]);
     
-        $httpClient = $this->getHttpClient();
+        $httpClient = $this->httpClient();
         try {
-            $response = $httpClient->request('POST', config('business.service.endpoints.execute'), [
+            $response = $httpClient->request('POST', $this->executeEndpoint, [
                 'json' => $json,
             ]);
             $content = $response->getBody()->getContents();
@@ -131,24 +131,5 @@ class ReceiveMoneyClient extends AbstractCategory
     public function getCategoryClientName(): string
     {
         return class_basename($this);
-    }
-    
-    /**
-     * @param $transaction
-     * @return bool
-     * @throws ServerErrorException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function status($transaction): bool
-    {
-        return $this->statusCheck($this->url, $this->key, $transaction);
-    }
-    
-    /**
-     * @return Client
-     */
-    public function getHttpClient()
-    {
-        return $this->httpClient($this->url, $this->key);
     }
 }

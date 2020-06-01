@@ -28,6 +28,22 @@ class SeedPayoutTypesTable extends Migration
             'created_at' => now()->toDateTimeString(),
             'updated_at' => now()->toDateTimeString(),
         ]);
+        
+        DB::table('payouttypes')->insert([
+            'uuid' => Uuid::generate(4)->string,
+            'code' => 'PROVISION',
+            'name' => config('business.payout.type.provision'),
+            'created_at' => now()->toDateTimeString(),
+            'updated_at' => now()->toDateTimeString(),
+        ]);
+        
+        DB::table('payouttypes')->insert([
+            'uuid' => Uuid::generate(4)->string,
+            'code' => 'COLLECTION',
+            'name' => config('business.payout.type.collection'),
+            'created_at' => now()->toDateTimeString(),
+            'updated_at' => now()->toDateTimeString(),
+        ]);
     }
 
     /**

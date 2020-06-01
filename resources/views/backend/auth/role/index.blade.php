@@ -32,13 +32,13 @@
                         <tbody>
                         @foreach($roles as $role)
                             <tr>
-                                <td>{{ ucwords($role->name) }}</td>
+                                <td>{{ ucwords(__($role->name)) }}</td>
                                 <td>
                                     @if($role->id == 1)
                                         @lang('labels.general.all')
                                     @else
                                         @if($role->permissions->count())
-                                            {{ ucwords(implode(', ', $role->permissions->pluck('name')->toArray())) }}
+                                            {{ ucwords(implode(', ', array_map(function($permission){return __($permission);}, $role->permissions->pluck('name')->toArray()))) }}
                                         @else
                                             @lang('labels.general.none')
                                         @endif

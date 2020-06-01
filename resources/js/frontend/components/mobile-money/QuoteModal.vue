@@ -19,7 +19,7 @@
                 <table class="table table-sm dataTable table-borderless text-sm-center">
                     <tr>
                         <th>
-                            {{ $t('dashboard.pages.tabs.content.receive_money.source_account') }}
+                            {{ $t('dashboard.pages.tabs.content.mobile_money.source_account') }}
                         </th>
                         <td>
                             {{ quote.source_account }}

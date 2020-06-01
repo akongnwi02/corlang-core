@@ -239,6 +239,8 @@ return [
                     'withdrawal'      => 'Money Withdrawal',
                     'company_rate'       => 'Default Company Rate (%)',
                     'agent_rate'         => 'Default Agent Rate (%)',
+                    'min_amount'         => 'Minimum Amount',
+                    'max_amount'         => 'Maximum Amount',
                     'providercompany'    => 'Provider Company',
                 ],
                 'item'       => [
@@ -270,6 +272,13 @@ return [
                     'providercommission' => 'Service Provider Fee',
                     'service'            => 'Service',
                     'realtime'           => 'Realtime',
+                ],
+                'category' => [
+                    'name' => 'Name',
+                    'code' => 'Code',
+                    'active' => 'Active',
+                    'api_key' => 'Micro Service API Key',
+                    'api_url' => 'Micro Service URL'
                 ]
             ],
             'account'   => [
