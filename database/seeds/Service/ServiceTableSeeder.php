@@ -20,10 +20,10 @@ class ServiceTableSeeder extends Seeder
         Service::create([
             'name' => 'IAT Prepaid',
             'description' => 'Some quick example text to serve as the service description and make up the bulk of the service\'s content.',
-            'code' => config('business.service.category.prepaidbills.code'),
+            'code' => 'CORIAT',
             'country_id' => Country::first()->uuid,
             'is_active' => true,
-            'category_id' => Category::first()->uuid,
+            'category_id' => Category::where('code', config('business.service.category.prepaidbills.code'))->first()->uuid,
             'company_rate' => 50,
             'agent_rate' => 50,
             'is_prepaid' => false,
