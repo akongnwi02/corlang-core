@@ -447,6 +447,7 @@ return [
                     'service' => 'Service',
                     'amount' => 'Collected Amount',
                     'last_payout_date' => 'Last Payout Date',
+                    'total' => 'service|services'
                 ],
                 'movements' => [
                     'code'    => 'Transaction Number',

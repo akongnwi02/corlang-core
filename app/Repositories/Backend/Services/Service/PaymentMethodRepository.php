@@ -107,6 +107,9 @@ class PaymentMethodRepository
     
     public function setTopupMethods($user, $topupConfig)
     {
+        //TODO  there is a security hole here.
+        // make sure the 'is_confirmed' flag is set to false before updating
+        // otherwise skip that particular topup account
         foreach ($topupConfig as $topupAccount) {
             TopupAccount::updateOrCreate([
                 'paymentmethod_id' => $topupAccount['method_id'],

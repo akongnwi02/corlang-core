@@ -281,6 +281,13 @@ return [
                     'api_url' => 'Micro Service URL'
                 ]
             ],
+            'accounting' => [
+                'collection' => [
+                    'amount' => 'Amount',
+                    'currency' => 'Currency',
+                    'comment' => 'comment',
+                ]
+            ],
             'account'   => [
                 'amount'         => 'Amount',
                 'currency'       => 'Currency',

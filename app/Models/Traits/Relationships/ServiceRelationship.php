@@ -8,6 +8,7 @@
 
 namespace App\Models\Traits\Relationships;
 
+use App\Models\Account\BillerPayment;
 use App\Models\Auth\User;
 use App\Models\Business\Commission;
 use App\Models\Company\Company;
@@ -67,5 +68,10 @@ trait ServiceRelationship
     public function transactions()
     {
         return $this->hasMany(Transaction::class, 'service_id', 'uuid');
+    }
+    
+    public function biller_payments()
+    {
+        return $this->hasMany(BillerPayment::class, 'service_id', 'uuid');
     }
 }

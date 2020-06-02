@@ -60,7 +60,7 @@
                         "created": "Created",
                         "pending": "Pending",
                         "processing": "In Processing",
-                        "success": "Completed",
+                        "success": "Successful",
                         "failed": "Failed",
                         "reversed": "Reversed",
                         "cancelled": "Cancelled",

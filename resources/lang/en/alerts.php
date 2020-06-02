@@ -70,6 +70,11 @@ return [
                 'status_updated' => 'The status was successfully updated.',
             ]
         ],
+        'accounting' => [
+            'collection' => [
+                'paid' => 'The collection was paid successfully.'
+            ]
+        ],
         'account' => [
             'floated' => 'Float applied successfully.',
             'transferred' => 'Amount transferred successfully,',

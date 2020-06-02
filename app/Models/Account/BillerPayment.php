@@ -9,11 +9,21 @@
 namespace App\Models\Account;
 
 
+use App\Models\Traits\Attributes\BillerPaymentAttribute;
+use App\Models\Traits\Methods\BillerPaymentMethod;
+use App\Models\Traits\Relationships\BillerPaymentRelationship;
+use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Wildside\Userstamps\Userstamps;
 
 class BillerPayment extends Model
 {
-    
+    use Uuid,
+        Userstamps,
+        BillerPaymentMethod,
+        BillerPaymentRelationship,
+        BillerPaymentAttribute;
+        
     /**
      * The database table used by the model.
      *

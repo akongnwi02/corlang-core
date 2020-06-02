@@ -111,7 +111,7 @@ return [
             'title' => 'Accounting',
             'collections' => [
                 'management' => 'Collections',
-                'view' => 'View Collections'
+                'view' => 'View Collection'
             ],
             'provisions' => [
                 'management' => 'Provisions',

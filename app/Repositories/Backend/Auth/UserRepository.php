@@ -459,7 +459,7 @@ class UserRepository extends BaseRepository
     {
         return DB::transaction(function () use ($user) {
             if ($user->topup_accounts()->update([
-                'is_confirmed' => false
+                'is_confirmed' => false,
             ])) {
                 return $user;
             }

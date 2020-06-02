@@ -84,7 +84,10 @@ return [
             'insufficient_drain'      => 'Insufficient funds in umbrella account',
             'insufficient_commission' => 'Insufficient funds in commission account',
         ],
-        
+        'accounting' => [
+            'insufficient_collected_amount' => 'The :attribute is more than the collected amount',
+            'collection_payment_error' => 'There was a problem paying out the collection. Please try again.'
+        ],
         'movement' => [
             'create_error' => 'There was a problem performing this operation. Please try again.',
         ],

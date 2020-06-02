@@ -10,7 +10,7 @@ namespace App\Models\Traits\Methods;
 
 
 use App\Models\Account\BillerPayment;
-use App\Models\Account\BillerPaymentType;
+use App\Models\Account\PayoutType;
 
 trait ServiceMethod
 {
@@ -22,14 +22,16 @@ trait ServiceMethod
     public function getPaidAmount()
     {
         $total = BillerPayment::where('service_id', $this->uuid)
-            ->where('type_id', BillerPaymentType::where('name', config('business.payout.type.collection'))->first()->uuid)
+            ->where('type_id', PayoutType::where('name', config('business.payout.type.collection'))->first()->uuid)
             ->sum('amount');
         return $total;
     }
     
     public function getTransactionAmount()
     {
-        return $this->transactions->sum('amount');
+        return $this->transactions()
+            ->where('status', config('business.transaction.status.success'))
+            ->sum('amount');
     }
     
     public function getCollectedAmount()

@@ -8,7 +8,7 @@
 
 @section('content')
 
-    @include('backend.accounts.deposit.includes.credit')
+    @include('backend.accounting.collection.includes.pay')
 
     <div class="card">
         <div class="card-body">
@@ -49,7 +49,7 @@
                                                 <a href="{{ route('admin.accounting.collection.show', $service->uuid) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.view')" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                             @endcan
                                             @can(config('permission.permissions.pay_collection'))
-                                                <button name="creditPopup" id="{{ $service->uuid }}" title="@lang('labels.backend.accounting.pay')" class="btn btn-success"><i class="fas fa-plus-circle"></i></button>
+                                                <button name="payCollection" data-content="{{$service->name}}" id="{{ $service->uuid }}" title="@lang('labels.backend.accounting.pay')" class="btn btn-success"><i class="fas fa-arrow-down"></i></button>
                                             @endcan
                                         </div>
                                     </td>
@@ -63,13 +63,13 @@
             <div class="row">
                 <div class="col-7">
                     <div class="float-left">
-                        {!! $accounts->total() !!} {{ trans_choice('labels.backend.account.deposit.table.total', $accounts->total()) }}
+                        {!! $services->total() !!} {{ trans_choice('labels.backend.accounting.collection.table.total', $services->total()) }}
                     </div>
                 </div><!--col-->
 
                 <div class="col-5">
                     <div class="float-right">
-                        {!! $accounts->render() !!}
+                        {!! $services->render() !!}
                     </div>
                 </div><!--col-->
             </div><!--row-->
@@ -81,32 +81,16 @@
     <script>
 
         $(function () {
-            $("button[name='creditPopup']").click(function () {
+            $("button[name='payCollection']").click(function () {
                 let title = this.title;
-                let direction = "IN";
                 let id = this.id;
 
-                $("#creditModal .title-text").html(title);
-                $("#creditModal button[type='submit']").html(title);
-                $("#creditModal input[name='direction']").val(direction);
-                $("#creditModal form").attr('action', `/admin/account/${id}/credit`);
+                $("#payCollectionModal .title-text").html(title);
+                $("#payCollectionModal button[type='submit']").html(title);
+                $("#payCollectionModal form").attr('action', `/admin/accounting/collection/${id}/pay`);
 
-                $("#creditModal").modal("show");
+                $("#payCollectionModal").modal("show");
             });
-
-            $("button[name='debitPopup']").click(function () {
-                let title = this.title;
-                let direction = "OUT";
-                let id = this.id;
-
-                $("#creditModal .title-text").html(title);
-                $("#creditModal button[type='submit']").html(title);
-                $("#creditModal input[name='direction']").val(direction);
-                $("#creditModal form").attr('action', `/admin/account/${id}/credit`);
-
-                $("#creditModal").modal("show");
-            });
-
         });
 
     </script>
