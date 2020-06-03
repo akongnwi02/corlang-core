@@ -43,7 +43,7 @@ return [
     ],
     
     'backend' => [
-        'access'    => [
+        'access'     => [
             'roles' => [
                 'create'     => 'Create Role',
                 'edit'       => 'Edit Role',
@@ -127,7 +127,7 @@ return [
                 'view' => 'View User',
             ],
         ],
-        'companies' => [
+        'companies'  => [
             'company' => [
                 'management'      => 'Company Management',
                 'create'          => 'Create Company',
@@ -183,7 +183,7 @@ return [
                 ],
             ],
         ],
-        'services'  => [
+        'services'   => [
             'service'    => [
                 'management'      => 'Service Management',
                 'create'          => 'Create Service',
@@ -218,7 +218,7 @@ return [
                     'logo'    => 'Logo',
                     'api_url' => 'Micro Service URL',
                     'api_key' => 'Micro Service API Key',
-                    'total'              => 'category|categories',
+                    'total'   => 'category|categories',
                 ]
             ],
             'commission' => [
@@ -263,7 +263,7 @@ return [
                 ],
             ],
         ],
-        'sales'     => [
+        'sales'      => [
             'management' => 'Sales',
             'table'      => [
                 'code'               => 'Reference',
@@ -282,7 +282,7 @@ return [
                 'total_sales'        => 'sales|sales',
             ]
         ],
-        'account'   => [
+        'account'    => [
             'management'            => 'Account',
             'company_balance'       => 'Company Balance',
             'umbrella_balance'      => 'Umbrella Balance',
@@ -420,17 +420,20 @@ return [
             ],
         ],
         'accounting' => [
-            'pay' => 'Payout Collection',
-            'provision' => [
+            'pay'        => 'Payout Collection',
+            'request'    => 'Request Provision',
+            'provision'  => [
                 'management' => 'Provisions',
                 'actions'    => 'Provision Actions',
                 'view'       => 'View Provision',
-                'table' => [
-                    'service' => 'Service',
-                    'commission' => 'Commission',
-                    'last_payout_date' => 'Last Payout Date',
+                'table'      => [
+                    'service'           => 'Service',
+                    'commission'        => 'Commission',
+                    'number_requests'   => 'Number of requests',
+                    'last_request_date' => 'Last request date',
+                    'total'             => 'service|services'
                 ],
-                'movements' => [
+                'movements'  => [
                     'code'    => 'Transaction Number',
                     'amount'  => 'Amount',
                     'comment' => 'Comment',
@@ -443,14 +446,14 @@ return [
                 'management' => 'Collections',
                 'actions'    => 'Collection Actions',
                 'view'       => 'View Collection',
-                'table' => [
-                    'service' => 'Service',
-                    'amount' => 'Collected Amount',
-                    'number_payments' => 'Number of payments',
+                'table'      => [
+                    'service'          => 'Service',
+                    'amount'           => 'Collected Amount',
+                    'number_payments'  => 'Number of payments',
                     'last_payout_date' => 'Last payout date',
-                    'total' => 'service|services'
+                    'total'            => 'service|services'
                 ],
-                'movements' => [
+                'movements'  => [
                     'code'    => 'Transaction Number',
                     'amount'  => 'Amount',
                     'comment' => 'Comment',

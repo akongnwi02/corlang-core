@@ -43,7 +43,7 @@ Route::group([
             ->name('provision.show')
             ->middleware('permission:'.config('permission.permissions.read_accounting'));
         
-        Route::patch('/request', [ProvisionController::class, 'payout'])
+        Route::patch('/request', [ProvisionController::class, 'request'])
             ->name('provision.request')
             ->middleware('permission:'.config('permission.permissions.request_provision'));
     });

@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', app_name() . ' | ' . __('labels.backend.accounting.collection.view'))
+@section('title', app_name() . ' | ' . __('labels.backend.accounting.provision.view'))
 
 @section('breadcrumb-links')
     {{--@include('backend.services.service.includes.breadcrumb-links')--}}
@@ -15,11 +15,11 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>@lang('labels.backend.accounting.collection.movements.code')</th>
-                                <th>@lang('labels.backend.accounting.collection.movements.amount')</th>
-                                <th>@lang('labels.backend.accounting.collection.movements.user')</th>
-                                <th>@lang('labels.backend.accounting.collection.movements.comment')</th>
-                                <th>@lang('labels.backend.accounting.collection.movements.date')</th>
+                                <th>@lang('labels.backend.accounting.provision.movements.code')</th>
+                                <th>@lang('labels.backend.accounting.provision.movements.amount')</th>
+                                <th>@lang('labels.backend.accounting.provision.movements.user')</th>
+                                <th>@lang('labels.backend.accounting.provision.movements.comment')</th>
+                                <th>@lang('labels.backend.accounting.provision.movements.date')</th>
 
                                 {{--<th>@lang('labels.general.actions')</th>--}}
                             </tr>
@@ -43,7 +43,7 @@
             <div class="row">
                 <div class="col-7">
                     <div class="float-left">
-                        {!! $movements->total() !!} {{ trans_choice('labels.backend.accounting.collection.movements.total', $movements->total()) }}
+                        {!! $movements->total() !!} {{ trans_choice('labels.backend.accounting.provision.movements.total', $movements->total()) }}
                     </div>
                 </div><!--col-->
 

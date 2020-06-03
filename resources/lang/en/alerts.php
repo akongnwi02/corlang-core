@@ -73,6 +73,9 @@ return [
         'accounting' => [
             'collection' => [
                 'paid' => 'The collection was paid successfully.'
+            ],
+            'provision' => [
+                'requested' => 'The provision was requested successfully.',
             ]
         ],
         'account' => [

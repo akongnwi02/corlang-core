@@ -9,6 +9,7 @@
 namespace App\Models\Traits\Relationships;
 
 use App\Models\Account\BillerPayment;
+use App\Models\Account\PayoutType;
 use App\Models\Auth\User;
 use App\Models\Business\Commission;
 use App\Models\Company\Company;
@@ -70,8 +71,14 @@ trait ServiceRelationship
         return $this->hasMany(Transaction::class, 'service_id', 'uuid');
     }
     
-    public function biller_payments()
+    public function collections()
     {
-        return $this->hasMany(BillerPayment::class, 'service_id', 'uuid');
+        return $this->hasMany(BillerPayment::class, 'service_id', 'uuid')->where('type_id', PayoutType::where('name', config('business.payout.type.collection'))->first()->uuid);
+    }
+    
+    public function provisions()
+    {
+        return $this->hasMany(BillerPayment::class, 'service_id', 'uuid')->where('type_id', PayoutType::where('name', config('business.payout.type.provision'))->first()->uuid);
     }
 }
+

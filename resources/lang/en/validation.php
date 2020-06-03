@@ -286,6 +286,11 @@ return [
                     'amount' => 'Amount',
                     'currency' => 'Currency',
                     'comment' => 'comment',
+                ],
+                'provision' => [
+                    'amount' => 'Amount',
+                    'currency' => 'Currency',
+                    'comment' => 'comment',
                 ]
             ],
             'account'   => [

@@ -99,6 +99,11 @@ trait ServiceAttribute
         return number_format($this->getCollectedAmount(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
     }
     
+    public function getCommissionAmountLabelAttribute()
+    {
+        return number_format($this->getCommissionAmount(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
+    }
+    
     public function getMinAmountLabelAttribute()
     {
         return number_format($this->min_amount, 2) . ' '. Currency::where('is_default', true)->first()->code;

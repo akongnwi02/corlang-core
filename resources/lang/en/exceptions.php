@@ -85,7 +85,9 @@ return [
             'insufficient_commission' => 'Insufficient funds in commission account',
         ],
         'accounting' => [
+            'insufficient_provision_amount' => 'The :attribute is more than the commission amount',
             'insufficient_collected_amount' => 'The :attribute is more than the collected amount',
+            'provision_request_error' => 'There was a problem requesting the provision. Please try again.',
             'collection_payment_error' => 'There was a problem paying out the collection. Please try again.'
         ],
         'movement' => [

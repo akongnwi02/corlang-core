@@ -43,8 +43,8 @@
                                 <tr>
                                     <td>{{ $service->name }}</td>
                                     <td>{{ $service->collected_amount_label }}</td>
-                                    <td>{{ @$service->biller_payments()->get()->last()->created_at ? @$service->biller_payments()->get()->last()->created_at->diffForHumans() : 'N/A' }}</td>
-                                    <td>{{ $service->biller_payments()->count() }}</td>
+                                    <td>{{ @$service->collections()->get()->last()->created_at ? @$service->collections()->get()->last()->created_at->diffForHumans() : 'N/A' }}</td>
+                                    <td>{{ $service->collections()->count() }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="@lang('labels.backend.accounting.collection.actions')">
                                             @can(config('permission.permissions.read_accounting'))

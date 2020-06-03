@@ -34,7 +34,7 @@ class CollectionController extends Controller
     public function show(Service $service)
     {
         return view('backend.accounting.collection.show')
-            ->withMovements($service->biller_payments()
+            ->withMovements($service->collections()
                 ->paginate());
     }
     
