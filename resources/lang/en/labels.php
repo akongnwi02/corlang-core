@@ -446,7 +446,8 @@ return [
                 'table' => [
                     'service' => 'Service',
                     'amount' => 'Collected Amount',
-                    'last_payout_date' => 'Last Payout Date',
+                    'number_payments' => 'Number of payments',
+                    'last_payout_date' => 'Last payout date',
                     'total' => 'service|services'
                 ],
                 'movements' => [

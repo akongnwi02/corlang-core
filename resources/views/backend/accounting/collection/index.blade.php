@@ -33,6 +33,7 @@
                                 <th>@lang('labels.backend.accounting.collection.table.service')</th>
                                 <th>@lang('labels.backend.accounting.collection.table.amount')</th>
                                 <th>@lang('labels.backend.accounting.collection.table.last_payout_date')</th>
+                                <th>@lang('labels.backend.accounting.collection.table.number_payments')</th>
 
                                 <th>@lang('labels.general.actions')</th>
                             </tr>
@@ -42,7 +43,8 @@
                                 <tr>
                                     <td>{{ $service->name }}</td>
                                     <td>{{ $service->collected_amount_label }}</td>
-                                    <td>{{ $service->last_payout_date ? $service->last_payout_date->toDatetimeString() : 'N/A' }}</td>
+                                    <td>{{ @$service->biller_payments()->get()->last()->created_at ? @$service->biller_payments()->get()->last()->created_at->diffForHumans() : 'N/A' }}</td>
+                                    <td>{{ $service->biller_payments()->count() }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="@lang('labels.backend.accounting.collection.actions')">
                                             @can(config('permission.permissions.read_accounting'))
