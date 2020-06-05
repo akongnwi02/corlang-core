@@ -123,13 +123,11 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -173,32 +171,165 @@ return [
                     'associated_roles'        => 'Rôles associés',
                     'confirmed'               => 'Confirmé',
                     'email'                   => 'Adresse email',
+                    'username'                  => 'Username',
+                    'phone'                     => 'Telephone',
                     'name'                    => 'Nom complet',
-                    'first_name'              => 'Prénom',
                     'last_name'               => 'Nom',
+                    'first_name'              => 'Prénom',
                     'other_permissions'       => 'Autres permissions',
                     'password'                => 'Mot de passe',
                     'password_confirmation'   => 'Confirmation du mot de passe',
                     'send_confirmation_message' => 'Envoyer un message de confirmation',
+                    'notification_channel'      => 'Notification Channel',
+                    'sms'                       => 'SMS',
+                    'mail'                      => 'E-mail',
+                    'timezone'                  => 'Timezone',
+                    'language'                  => 'Language',
+                    'company'                   => 'Company'
                 ],
             ],
+            'companies' => [
+                'company' => [
+                    'name'             => 'Company Name',
+                    'address'          => 'Address',
+                    'country'          => 'Country',
+                    'state'            => 'State',
+                    'city'             => 'City',
+                    'phone'            => 'Company Phone',
+                    'type'             => 'Company Type',
+                    'email'            => 'Company Email',
+                    'street'           => 'Street',
+                    'website'          => 'Website',
+                    'postal_code'      => 'Postal Code',
+                    'size'             => 'Size',
+                    'logo'             => 'Company Logo',
+                    'provider'         => 'Provider',
+                    'direct_polling'   => 'Direct Polling',
+                    'agent_self_topup' => 'Agent Self Topup',
+                ],
+                'service' => [
+                    'company_rate' => 'Company Rate (%)',
+                    'agent_rate'   => 'Agent Rate (%)',
+                    'customercommission' => 'Customer Commission',
+                    'providercommission'   => 'Provider Commission',
+                    'default'      => 'Use service default value',
+                    'custom'       => 'Set custom value',
+                    'services'     => 'Services',
+                    'default_setting' => 'Use Default Service Charge'
+                ]
+            ],
+            'services'  => [
+                'service'    => [
+                    'name'               => 'Service Name',
+                    'description_en'     => 'English Description',
+                    'description_fr'     => 'French Description',
+                    'category'           => 'Service Category',
+                    'gateway'            => 'Gateway Configuration',
+                    'active'             => 'Active',
+                    'code'               => 'Code',
+                    'providercommission' => 'Service Provider Service Charge',
+                    'companycommission'  => 'Company Service Charge',
+                    'customercommission' => 'Customer Service Charge',
+                    'logo'               => 'Logo',
+                    'prepaid'            => 'Prepaid',
+                    'items'              => 'Items',
+                    'requires_auth'      => 'Authorization Required',
+                    'withdrawal'      => 'Money Withdrawal',
+                    'company_rate'       => 'Default Company Rate (%)',
+                    'agent_rate'         => 'Default Agent Rate (%)',
+                    'min_amount'         => 'Minimum Amount',
+                    'max_amount'         => 'Maximum Amount',
+                    'providercompany'    => 'Provider Company',
+                ],
+                'item'       => [
+                    'active'         => 'Active',
+                    'description_en' => 'English Description',
+                    'description_fr' => 'French Description',
+                    'name'           => 'Item Name',
+                    'amount'         => 'Item Price',
+                    'code'           => 'Item Code',
+                ],
+                'commission' => [
+                    'name'        => 'Name',
+                    'description' => 'Description',
+                    'currency'    => 'Currency',
+                    'pricings'    => 'Pricings',
+                    'pricing'     => [
+                        'from'       => 'From',
+                        'to'         => 'To',
+                        'fixed'      => 'Fixed',
+                        'percentage' => 'Percentage',
+                    ]
+                ],
+                'method'     => [
+                    'name'               => 'Name',
+                    'code'               => 'Code',
+                    'description_en'     => 'English Description',
+                    'description_fr'     => 'French Description',
+                    'customercommission' => 'Customer Service Charge',
+                    'providercommission' => 'Service Provider Fee',
+                    'service'            => 'Service',
+                    'realtime'           => 'Realtime',
+                ],
+                'category' => [
+                    'name' => 'Name',
+                    'code' => 'Code',
+                    'active' => 'Active',
+                    'api_key' => 'Micro Service API Key',
+                    'api_url' => 'Micro Service URL'
+                ]
+            ],
+            'accounting' => [
+                'collection' => [
+                    'amount' => 'Amount',
+                    'currency' => 'Currency',
+                    'comment' => 'comment',
+                ],
+                'provision' => [
+                    'amount' => 'Amount',
+                    'currency' => 'Currency',
+                    'comment' => 'comment',
+                ]
+            ],
+            'account'   => [
+                'amount'         => 'Amount',
+                'currency'       => 'Currency',
+                'comment'        => 'Comment (Optional)',
+                'name'           => 'Account Name',
+                'number'         => 'Account Number',
+                'payment_method' => 'Payment Method',
+            ]
         ],
-
         'frontend' => [
             'avatar'                    => 'Avatar',
             'email'                     => 'Adresse email',
-            'last_name'                 => 'Nom',
+            'code'                      => 'Confirmation Code',
+            'phone_or_email'            => 'Phone or Email',
+            'username'                  => 'Username',
+            'phone'                     => 'Telephone',
             'first_name'                => 'Prénom',
+            'last_name'                 => 'Nom',
             'name'                      => 'Nom complet',
             'password'                  => 'Mot de passe',
+            'pin'                       => 'Pin Code',
             'password_confirmation'     => 'Confirmation',
-            'phone'                     => 'Téléphone',
             'message'                   => 'Message',
-            'new_password'              => 'Nouveau mot de passe',
-            'new_password_confirmation' => 'Confirmation du nouveau mot de passe',
-            'old_password'              => 'Ancien mot de passe',
-            'timezone'                  => 'Fuseau Horaire',
+            'new_password'              => 'New Password',
+            'new_password_confirmation' => 'New Password Confirmation',
+            'new_pin'                   => 'New Pin',
+            'new_pin_confirmation'      => 'New Pin Confirmation',
+            'old_password'              => 'Old Password',
+            'old_pin'                   => 'Old Pin',
+            'timezone'                  => 'Timezone',
+            'language'                  => 'Language',
+            'location'                  => 'Location',
+            'topup' => [
+                'service' => 'Service',
+                'confirmed' => 'Confirmed',
+                'account' => 'Account',
+                'config'  => 'Topup Configuration',
+                'otp'     => 'OTP',
+            ],
         ],
     ],
-
 ];

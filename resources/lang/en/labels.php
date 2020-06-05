@@ -41,14 +41,12 @@ return [
         'more'               => 'More',
         'select'             => 'Select One'
     ],
-    
     'backend' => [
         'access'     => [
             'roles' => [
                 'create'     => 'Create Role',
                 'edit'       => 'Edit Role',
                 'management' => 'Role Management',
-                
                 'table' => [
                     'number_of_users' => 'Number of Users',
                     'permissions'     => 'Permissions',
@@ -57,7 +55,6 @@ return [
                     'total'           => 'role total|roles total',
                 ],
             ],
-            
             'users' => [
                 'active'              => 'Active Users',
                 'all_permissions'     => 'All Permissions',
@@ -74,7 +71,6 @@ return [
                 'no_roles'            => 'No Roles to set.',
                 'permissions'         => 'Permissions',
                 'user_actions'        => 'User Actions',
-                
                 'table' => [
                     'confirmed'         => 'Confirmed',
                     'created'           => 'Created',
@@ -95,13 +91,11 @@ return [
                     'social'            => 'Social',
                     'total'             => 'user total|users total',
                 ],
-                
                 'tabs' => [
                     'titles' => [
                         'overview' => 'Overview',
                         'history'  => 'History',
                     ],
-                    
                     'content' => [
                         'overview' => [
                             'avatar'        => 'Avatar',
@@ -123,7 +117,6 @@ return [
                         ],
                     ],
                 ],
-                
                 'view' => 'View User',
             ],
         ],
@@ -134,7 +127,6 @@ return [
                 'edit'            => 'Edit Company',
                 'active'          => 'Active Companies',
                 'company_actions' => 'Company Actions',
-                
                 'table' => [
                     'name'         => 'Company Name',
                     'address'      => 'Address',
@@ -151,7 +143,6 @@ return [
                     'last_updated' => 'Size',
                     'active'       => 'Active',
                     'total'        => 'company|companies',
-                
                 ],
                 'tabs'  => [
                     'titles'  => [
@@ -464,9 +455,7 @@ return [
             ],
         ]
     ],
-    
     'frontend' => [
-        
         'auth' => [
             'login_box_title'    => 'Login',
             'login_to_account'   => 'Sign in to your account',
@@ -480,17 +469,14 @@ return [
             'register_button'    => 'Register',
             'remember_me'        => 'Remember Me',
         ],
-        
         'contact' => [
             'box_title' => 'Contact Us',
             'button'    => 'Send Information',
         ],
-        
         'confirm'   => [
             'confirm_account_box_title' => 'Confirm Your Account',
             'confirm_account_button'    => 'Confirm Account',
-        ]
-        ,
+        ],
         'passwords' => [
             'expired_password_box_title'      => 'Your password has expired.',
             'forgot_password'                 => 'Forgot Password?',
@@ -501,7 +487,6 @@ return [
             'send_password_reset_code'        => 'Send Password Reset Code',
             'confirm_code_button'             => 'Confirm Code',
         ],
-        
         'user' => [
             'passwords' => [
                 'change' => 'Change Password',
@@ -522,6 +507,5 @@ return [
                 'update_information' => 'Update Information',
             ],
         ],
-    
     ],
 ];

@@ -25,10 +25,53 @@ return [
                 'login_as'           => 'Se connecter an tant que :user',
                 'resend_email'       => 'Renvoyer le mail de confirmation',
                 'restore_user'       => "Réactiver l'utilisateur",
+                'transfer_user'      => 'Transfer User',
+                'reset_pin'          => 'Reset Pin Code',
+                'reset_topup_account'          => 'Reset Top up Account',
                 'unconfirm'          => 'Infirmer',
                 'unlink' => 'Unlink',
             ],
         ],
+        'services' => [
+            'service' => [
+                'activate' => 'Activate Service',
+                'deactivate' => 'Deactivate Service',
+            ],
+            'method' => [
+                'activate' => 'Activate Method',
+                'deactivate' => 'Deactivate Method',
+            ],
+            'category' => [
+                'activate' => 'Activate Category',
+                'deactivate' => 'Deactivate Category',
+            ]
+        ],
+        'companies' => [
+            'company' => [
+                'activate'   => 'Activate Company',
+                'deactivate' => 'Deactivate Company',
+                'login'      => 'Login to this company'
+            ],
+            'services' => [
+                'commission' => [
+                    'stack' => 'Stack',
+                ]
+            ]
+        ],
+        'account' => [
+            'credit' => 'Credit',
+            'debit' => 'Debit',
+            'float' => 'Float',
+            'payout' => 'Payout',
+            
+            'activate' => 'Unfreeze Account',
+            'deactivate' => 'Freeze Account'
+        ],
+        'payout' => [
+            'cancel' => 'Cancel',
+            'approve' => 'Approve',
+            'reject' => 'Reject',
+        ]
     ],
 
     'emails' => [
@@ -40,7 +83,9 @@ return [
 
     'general' => [
         'cancel' => 'Annuler',
+        'back'   => 'Back',
         'continue' => 'Continuer',
+        'submit'   => 'Submit',
 
         'crud' => [
             'create' => 'Créer',

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    
+
     /*
     |--------------------------------------------------------------------------
     | Exception Language Lines
@@ -12,7 +12,7 @@ return [
     | found in a intuitive way.
     |
     */
-    
+
     'backend' => [
         'access' => [
             'roles' => [
@@ -26,7 +26,6 @@ return [
                 'update_error'      => 'There was a problem updating this role. Please try again.',
                 'name_exists'       => 'A role already exists with the name :name.',
             ],
-            
             'users' => [
                 'already_confirmed'       => 'This user is already confirmed.',
                 'cant_confirm'            => 'There was a problem confirming the user account.',
@@ -58,7 +57,6 @@ return [
                 'reset_topup_account_error'         => 'There was a problem resetting this user\'s top up accounts. Please try again.',
             ],
         ],
-        
         'companies' => [
             'company' => [
                 'create_error'          => 'There was a problem creating this company. Please try again.',
@@ -76,7 +74,6 @@ return [
                 'update_error' => 'There was a problem updating the this service for this company. Please try again.',
             ]
         ],
-        
         'account' => [
             'mark_error'              => 'There was an error freezing this account.',
             'inactive'                => 'There was a problem authorizing the transaction. Account is inactive.',
@@ -93,7 +90,6 @@ return [
         'movement' => [
             'create_error' => 'There was a problem performing this operation. Please try again.',
         ],
-        
         'services' => [
             'service'    => [
                 'create_error'  => 'There was a problem creating this service. Please try again.',
@@ -126,7 +122,6 @@ return [
             'state_error'     => 'There was a problem updating the status of the payout. The payout is in a final state.'
         ]
     ],
-    
     'frontend' => [
         'auth' => [
             'confirmation' => [
@@ -147,7 +142,6 @@ return [
                 'no_company'           => 'You have a business account which is not linked to any company at the moment.',
                 'deactivated_company'  => 'You have a business account and your company has been deactivated. Please contact your company administrator.',
             ],
-            
             'deactivated'            => 'Your account has been deactivated.',
             'email_taken'            => 'That e-mail address is already taken.',
             'phone_taken'            => 'That phone number is already taken.',
@@ -163,15 +157,12 @@ return [
                 'reset_problem'        => 'There was a problem resetting your password. Please resend the password reset email.',
                 'reset_not_confirmed'  => 'There was a problem resetting your password. Please resend the password reset code.',
             ],
-            
             'pin' => [
                 'change_error' => 'There was a problem changing your pin code. Please try again later.'
             ],
-            
             'registration_disabled' => 'Registration is currently closed.',
         ],
     ],
-    
     'api' => [
         'auth'    => [
             'confirmation' => [
@@ -186,7 +177,6 @@ return [
                 'success'           => 'Your account has been successfully confirmed!',
                 'resent'            => 'A new confirmation e-mail has been sent to the address on file.',
             ],
-            
             'deactivated' => 'Your account has been deactivated.',
             'email_taken' => 'That e-mail address is already taken.',
             'phone_taken' => 'That phone number address is already taken.',
@@ -195,7 +185,6 @@ return [
                 'change_mismatch' => 'That is not your old password.',
                 'reset_problem'   => 'There was a problem resetting your password. Please resend the password reset email.',
             ],
-            
             'registration_disabled' => 'Registration is currently closed.',
             'login'                 => [
                 'unauthorized'                     => 'You are not authorized.',
@@ -216,11 +205,9 @@ return [
                 'token_invalid'       => 'Your token is invalid',
                 'token_error_unknown' => 'Unknown authentication error'
             ],
-            
             'validation' => [
                 'unprocessable_entity' => 'Some information provided could not be processed.'
             ],
-            
             'general_error' => [
                 'message' => 'Oops something unexpected happened!'
             ]

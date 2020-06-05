@@ -123,13 +123,11 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-    
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
     ],
-    
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -302,7 +300,6 @@ return [
                 'payment_method' => 'Payment Method',
             ]
         ],
-        
         'frontend' => [
             'avatar'                    => 'Avatar Location',
             'email'                     => 'E-mail Address',

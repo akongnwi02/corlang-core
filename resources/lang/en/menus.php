@@ -54,7 +54,6 @@ return [
             'business'  => 'Business',
             'access'    => 'Access',
         ],
-
         'companies' => [
             'title' => 'Companies',
     

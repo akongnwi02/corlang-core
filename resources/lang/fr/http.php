@@ -11,13 +11,30 @@ return [
     |
     */
 
+    '403' => [
+        'title'       => 'Forbidden',
+        'description' => 'Sorry, this action is unauthorized.',
+    ],
+    
     '404' => [
         'title'       => 'Page introuvable',
         'description' => "Désolé, cette page n'existe pas.",
+        'back'        => 'Go Home',
+    ],
+    
+    '419' => [
+        'title'       => 'Page Expired',
+        'description' => 'Sorry, but the page you are trying to view has expired.',
+    ],
+
+    '500' => [
+        'title'       => 'Internal Server Error',
+        'description' => 'Sorry, an unexpected error has occurred. Please contact support.',
     ],
 
     '503' => [
-        'title'       => 'Bientôt de retour.',
-        'description' => 'Bientôt de retour.',
+        'title'       => 'Be right back.',
+        'description' => 'Be right back.',
     ],
+    
 ];

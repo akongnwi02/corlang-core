@@ -57,7 +57,6 @@ return [
                 'commission_help' => 'Your available commission'
             ]
         ],
-        
         'general' => [
             'all_rights_reserved' => 'All Rights Reserved.',
             'are_you_sure'        => 'Are you sure you want to do this?',
@@ -69,35 +68,29 @@ return [
             'minutes'             => ' minutes',
             'search_placeholder'  => 'Search...',
             'timeout'             => 'You were automatically logged out for security reasons since you had no activity in ',
-            
             'see_all' => [
                 'messages'      => 'See all messages',
                 'notifications' => 'View all',
                 'tasks'         => 'View all tasks',
             ],
-            
             'status' => [
                 'online'  => 'Online',
                 'offline' => 'Offline',
             ],
-            
             'you_have' => [
                 'messages'      => '{0} You don\'t have messages|{1} You have 1 message|[2,Inf] You have :number messages',
                 'notifications' => '{0} You don\'t have notifications|{1} You have 1 notification|[2,Inf] You have :number notifications',
                 'tasks'         => '{0} You don\'t have tasks|{1} You have 1 task|[2,Inf] You have :number tasks',
             ],
         ],
-        
         'search' => [
             'empty'      => 'Please enter a search term.',
             'incomplete' => 'You must write your own search logic for this system.',
             'title'      => 'Search Results',
             'results'    => 'Search Results for :query',
         ],
-        
         'welcome' => 'Welcome to the Dashboard',
     ],
-    
     'emails' => [
         'auth' => [
             'account_confirmed'       => 'Your account has been confirmed. ',
@@ -121,7 +114,6 @@ return [
             
             'login_sms' => 'Visit our website to log into your account.'
         ],
-        
         'companies' => [
             'companies' => [
                 'sms'  => [
@@ -134,12 +126,10 @@ return [
                 ],
             ]
         ],
-        
         'contact' => [
             'email_body_title' => 'You have a new contact form request: Below are the details:',
             'subject'          => 'A new :app_name contact form submission!',
         ],
-        
         'general' => [
             'user_greeting' => 'Hello :first_name!',
             'login'         => 'Click here to login to your account:',
@@ -147,20 +137,15 @@ return [
             'greeting'      => 'Hello!',
         ],
     ],
-    
     'frontend' => [
         'test' => 'Test',
-        
         'tests' => [
             'based_on' => [
                 'permission' => 'Permission Based - ',
                 'role'       => 'Role Based - ',
             ],
-            
             'js_injected_from_controller' => 'Javascript Injected from a Controller',
-            
             'using_blade_extensions' => 'Using Blade Extensions',
-            
             'using_access_helper' => [
                 'array_permissions'     => 'Using Access Helper with Array of Permission Names or ID\'s where the user does have to possess all.',
                 'array_permissions_not' => 'Using Access Helper with Array of Permission Names or ID\'s where the user does not have to possess all.',
@@ -171,16 +156,13 @@ return [
                 'role_id'               => 'Using Access Helper with Role ID',
                 'role_name'             => 'Using Access Helper with Role Name',
             ],
-            
             'view_console_it_works'          => 'View console, you should see \'it works!\' which is coming from FrontendController@index',
             'you_can_see_because'            => 'You can see this because you have the role of \':role\'!',
             'you_can_see_because_permission' => 'You can see this because you have the permission of \':permission\'!',
         ],
-        
         'general' => [
             'joined' => 'Joined',
         ],
-        
         'user' => [
             'change_email_notice'         => 'If you change your e-mail you will have to confirm your new e-mail address.',
             'change_phone_notice'         => 'If you change your phone number, you will have to confirm your new phone number',
@@ -194,13 +176,11 @@ return [
             'topup_updated'               => 'Your Topup configuration has been updated successfully.',
             'topup_account_change_notice' => 'Once a topup account is confirmed by the system. It cannot be changed except you contact support.'
         ],
-        
         'welcome_to'              => 'Welcome to :place',
         'what_we_do'              => 'What We Do',
         'our_services'            => 'Our Services',
         'how_to_become_a_partner' => 'How To Become A Partner',
         'our_partners'            => 'Our Partners',
-        
         'services' => [
             'prepaid_bills'    => [
                 'title'       => 'Prepaid Utility Bills',
