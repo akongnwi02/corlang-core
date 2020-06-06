@@ -75,12 +75,21 @@ trait AccountMethod
     
     public function getSales()
     {
-        return Movement::where('is_reversed', false)
+        $credit = Movement::where('is_reversed', false)
             ->where('user_id', $this->user->uuid)
             ->where(function ($query) {
                 $query->where('type_id', MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid);
             })
             ->sum('amount');
+        
+        $debit = Movement::where('is_reversed', false)
+            ->where('user_id', $this->user->uuid)
+            ->where(function ($query) {
+                $query->where('type_id', MovementType::where('name', config('business.movement.type.sale'))->first()->uuid);
+            })
+            ->sum('amount');
+        
+        return $credit - $debit;
     }
     
     public function getUmbrellaBalance()

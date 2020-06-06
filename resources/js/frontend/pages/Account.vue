@@ -282,6 +282,7 @@
             paymentStatus() {
                 if (this.paymentStatus == 2) {
                     this.$store.dispatch('getAccount');
+                    this.refresh();
                 }
             },
         }
