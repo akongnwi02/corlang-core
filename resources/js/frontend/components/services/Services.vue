@@ -15,7 +15,7 @@
         props: ['services'],
         methods: {
             getImageUrl(logo_url){
-                return BUSINESS_CONFIG.SERVER_STORAGE_PATH + '/' + logo_url
+                return logo_url
             },
             emitToParent(service) {
                 this.$emit('selected', service);

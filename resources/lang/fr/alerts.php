@@ -23,81 +23,81 @@ return [
         'users' => [
             'cant_resend_confirmation' => "L'application est actuellement paramétrée avec une validation manuelle des utilisateurs.",
             'confirmation_message'  => "Un message de confirmation a été adressé à l'adresse indiquée.",
-            'confirmed'              => "Le compte de l'utilisateur a été confirmé avec succès.",
+            'confirmed'              => "L'utilisateur a été confirmé avec succès.",
             'created'             => 'Utilisateur créé avec succès.',
             'deleted'             => 'Utilisateur supprimé avec succès.',
             'deleted_permanently' => "L'utilisateur a été supprimé définitivement.",
-            'restored'            => "L'utilisateur a été ré-activé.",
-            'session_cleared'      => "La session de l'utilisateur a été effacé avec succès.",
+            'restored'            => "L'utilisateur a été réactivé.",
+            'session_cleared'      => "La session de l'utilisateur a été effacée avec succès.",
             'social_deleted' => 'Le compte de réseau social a été effacé avec succès.',
             'unconfirmed' => "Le compte de l'utilisateur a été infirmé avec succès.",
             'updated'             => 'Utilisateur mis à jour avec succès.',
-            'transferred'                 => 'The user was successfully transferred.',
-            'updated_password'    => 'Le mot de passe utilisateur a été mis à jour avec succès.',
-            'reset_pin'         => "The user's pin was successfully reset.",
-            'reset_topup_account'         => "The user's top up accounts were successfully reset.",
+            'transferred'                 => "L'utilisateur a été transféré avec succès.",
+            'updated_password'    => 'Le mot de passe de l\'utilisateur a été mis à jour avec succès.',
+            'reset_pin'         => "Le code d'accès de l'utilisateur a été réinitialisé avec succès.",
+            'reset_topup_account'         => "Les comptes de recharge de l'utilisateur ont été réinitialisés avec succès.",
         ],
         
         'companies' => [
             'company' => [
-                'created' => 'The company was successfully created.',
-                'updated' => 'The company was successfully updated.',
-                'status_updated' => 'The status was successfully updated.',
-                'logged_in'     => 'You have changed company successfully.',
+                'created' => 'L\'entreprise a été créée avec succès.',
+                'updated' => 'L\'entreprise a été mise à jour avec succès.',
+                'status_updated' => 'Le statut a été mis à jour avec succès.',
+                'logged_in'     => 'Vous avez changé d\'entreprise avec succès.',
             ],
             'service' => [
-                'status_updated' => 'The status was successfully updated.',
-                'updated' => 'The service was updated for this company successfully.',
+                'status_updated' => 'Le statut a été mis à jour avec succès.',
+                'updated' => 'Le service a été mis à jour pour cette entreprise avec succès.',
             ]
         ],
         'services' => [
             'service' => [
-                'created' => 'The service was successfully created.',
-                'updated' => 'The service was successfully updated.',
-                'status_updated' => 'The status was successfully updated.',
+                'created' => 'Le service a été crée avcec succès.',
+                'updated' => 'Le service a été mis à jour avec succès.',
+                'status_updated' => 'Le statut a été mis à jour avec succès.',
             ],
             'category' => [
-                'created' => 'The category was successfully created.',
-                'updated' => 'The category was successfully updated.',
-                'status_updated' => 'The status was successfully updated.',
+                'created' => 'La rubrique a été crée avce succès.',
+                'updated' => 'La rubrique a été mis à jour avce succès.',
+                'status_updated' => 'Le statut a été mis à jour avce succès.',
             ],
             'commission' => [
-                'created' => 'The service charge was updated successfully.',
+                'created' => 'Les frais de service ont été mis à jour avec succès.',
             ],
             'method' => [
-                'created' => 'The payment method was successfully created.',
-                'updated' => 'The payment method was successfully updated.',
-                'status_updated' => 'The status was successfully updated.',
+                'created' => 'Le mode de paiement a été créé avec succès.',
+                'updated' => 'Le mode de paiement a été mis à jour avec succès.',
+                'status_updated' => 'Le statut a été mis à jour avec succès.',
             ]
         ],
         'accounting' => [
             'collection' => [
-                'paid' => 'The collection was paid successfully.'
+                'paid' => 'La collecte a été effectuée avec succès.'
             ],
             'provision' => [
-                'requested' => 'The provision was requested successfully.',
+                'requested' => 'La provision a été demandée avec succès.',
             ]
         ],
         'account' => [
-            'floated' => 'Float applied successfully.',
-            'transferred' => 'Amount transferred successfully,',
-            'status_updated' => 'The status was successfully updated.',
-            'drained' => 'Amount drained successfully.',
-            'paid_out' => 'The payout request was successful. The request is pending validation.',
+            'floated' => 'La Float a été appliquée avec succès.',
+            'transferred' => 'Montant transféré avec succès,',
+            'status_updated' => 'Le statut a été mis à jour avec succès.',
+            'drained' => 'Montant extrait avec succès.',
+            'paid_out' => 'La demande de paiement a été acceptée. La demande est en attente de validation.',
         ],
         'payout' => [
-            'status_updated' => 'Payout status updated successfully.'
+            'status_updated' => 'Le statut de paiement a été mis à jour avec succès.'
         ]
     ],
 
     'frontend' => [
         'contact' => [
-            'sent' => "Votre message a été envoyé avec succès. Nous répondrons à l'adresse email que vous nous avez fourni dès que nous le pourrons.",
+            'sent' => "Vos informations ont été envoyées avec succès. Nous répondrons à l'e-mail indiqué dans les plus brefs délais.",
         ],
     ],
     'api'      => [
         'users' => [
-            'logged_out' => 'User logged out successfully.'
+            'logged_out' => 'Utilisateur déconnecté avec succès.'
         ]
     ]
 ];

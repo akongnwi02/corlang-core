@@ -8,9 +8,8 @@
 
 namespace App\Http\Requests\Api\Business;
 
-use App\Rules\Business\CorrectPinCode;
 use App\Rules\Service\ServiceAccessRule;
-use App\Rules\Service\ServiceAmountRangeRule;
+use App\Rules\Service\DestinationRegexRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GeneralRequest extends FormRequest
@@ -29,6 +28,7 @@ class GeneralRequest extends FormRequest
     {
         return [
             'service_code' => ['required', new ServiceAccessRule(),],
+            'destination' => [new DestinationRegexRule($this->input('service_code'), $this->input('destination'))]
 //            'pincode' => ['required', new CorrectPinCode()],
         ];
     }

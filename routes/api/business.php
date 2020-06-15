@@ -56,6 +56,7 @@ Route::group(['middleware' => request()->hasHeader('authorization') ? 'jwt.auth'
     // Specific Transaction
     Route::group(['prefix' => 'transaction/{transaction}'], function () {
         Route::get('/', [TransactionController::class, 'show']);
+        Route::delete('/', [TransactionController::class, 'delete']);
     });
 });
 

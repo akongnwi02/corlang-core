@@ -9,12 +9,6 @@ import i18n from './i18n';
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-// Register mdbvue components globally
-import * as mdbvue from 'mdbvue'
-for (const component in mdbvue) {
-    Vue.component(component, mdbvue[component])
-}
-
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import 'bootstrap-css-only/css/bootstrap.min.css'

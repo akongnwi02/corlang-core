@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers\Backend\Services\Commission;
 
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Services\Commission\StoreCommissionRequest;
 use App\Http\Requests\Backend\Services\Commission\UpdateCommissionRequest;
@@ -38,7 +37,7 @@ class CommissionController extends Controller
                     ->orderBy('to', 'asc');
             }]))
             ->withCurrencies($currencyRepository->get()
-                ->pluck('name', 'uuid')
+                ->pluck('code', 'uuid')
                 ->toArray());
     }
     
@@ -65,7 +64,7 @@ class CommissionController extends Controller
     {
         return view('backend.services.commission.create')
             ->withCurrencies($currencyRepository->get()
-                ->pluck('name', 'uuid')
+                ->pluck('code', 'uuid')
                 ->toArray());
     }
     

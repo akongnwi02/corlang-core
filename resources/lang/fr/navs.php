@@ -29,10 +29,10 @@ return [
             'account'         => 'Mon compte',
             'administration'  => 'Administration',
             'change_password' => 'Changer mon mot de passe',
-            'change_pin'      => 'Change Pin Code',
+            'change_pin'      => 'Change Code pin',
             'my_information'  => 'Mes informations',
             'profile'         => 'Profil',
-            'topup'           => 'Topup Configuration',
+            'topup'           => 'Paramètres de recharges',
         ],
     ],
 ];

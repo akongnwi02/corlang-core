@@ -28,6 +28,7 @@ class CompanyService extends Pivot
         'is_active',
         'company_rate',
         'agent_rate',
+        'external_rate',
         'providercommission_id',
         'customercommission_id',
     ];

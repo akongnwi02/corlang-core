@@ -12,6 +12,8 @@ use App\Exceptions\Api\NotFoundException;
 use App\Exceptions\Api\ServerErrorException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Business\ConfirmPaymentRequest;
+use App\Http\Requests\Api\Business\DeleteTransactionRequest;
+use App\Http\Requests\Api\Business\ShowTransactionRequest;
 use App\Http\Requests\Api\Business\GeneralRequest;
 use App\Http\Resources\Api\TransactionResource;
 use App\Jobs\Business\Purchase\ProcessPurchaseJob;
@@ -101,12 +103,27 @@ class TransactionController extends Controller
     }
     
     /**
+     * @param ShowTransactionRequest $request
      * @param Transaction $transaction
      * @return TransactionResource
      */
-    public function show(Transaction $transaction)
+    public function show(ShowTransactionRequest $request, Transaction $transaction)
     {
         return new TransactionResource($transaction);
+    }
+    
+    /**
+     * @param DeleteTransactionRequest $request
+     * @param Transaction $transaction
+     * @return bool|null
+     * @throws ServerErrorException
+     */
+    public function delete(DeleteTransactionRequest $request,Transaction $transaction)
+    {
+        if ($transaction->delete()) {
+            return response()->json([], 204);
+        }
+        throw new ServerErrorException(BusinessErrorCodes::GENERAL_CODE, 'There was a problem deleting this transaction');
     }
     
     public function index(TransactionRepository $transactionRepository)

@@ -20,7 +20,7 @@ return [
             'roles' => [
                 'all'        => 'Tous les rôles',
                 'create'     => 'Créer un rôle',
-                'edit'       => 'Éditer un rôle',
+                'edit'       => 'Modifier un rôle',
                 'management' => 'Gestion des rôles',
                 'main'       => 'Rôles',
             ],
@@ -28,39 +28,39 @@ return [
             'users' => [
                 'all'             => 'Tous les utilisateurs',
                 'change-password' => 'Changer le mot de passe',
-                'transfer-user'   => 'Transfer User',
+                'transfer-user'   => 'Transférer l\'utilisateur',
                 'create'          => 'Créer un utilisateur',
                 'deactivated'     => 'Utilisateurs désactivés',
                 'deleted'         => 'Utilisateurs supprimés',
-                'edit'            => 'Éditer un utilisateur',
+                'edit'            => 'Modifier un utilisateur',
                 'main'            => 'Utilisateurs',
                 'view'            => 'Voir un utilisateur',
             ],
         ],
 
         'log-viewer' => [
-            'main'      => 'Consulter les logs',
+            'main'      => 'Vue du journal',
             'dashboard' => 'Tableau de bord',
-            'logs'      => 'Logs',
+            'logs'      => 'Journaux',
         ],
 
         'sidebar' => [
             'dashboard' => 'Tableau de bord',
-            'sales' => 'Sales',
+            'sales' => 'Ventes',
             'horizon' => 'Horizon',
             'general'   => 'Général',
-            'history'   => 'History',
+            'history'   => 'Historique',
             'system'    => 'Système',
-            'business'  => 'Business',
-            'access'    => 'Access',
+            'business'  => 'Activités',
+            'access'    => 'Accès',
         ],
         'companies' => [
-            'title' => 'Companies',
+            'title' => 'Entreprises',
     
             'company' => [
-                'management' => 'Companies',
-                'create'     => 'Create Company',
-                'edit'       => 'Edit Company',
+                'management' => 'Entreprises',
+                'create'     => 'Créer une entreprise',
+                'edit'       => 'Modifier l\'enttreprise',
             ],
         ],
 
@@ -69,52 +69,52 @@ return [
     
             'service'   => [
                 'management' => 'Services',
-                'create'     => 'Create Service',
-                'edit'       => 'Edit Service',
+                'create'     => 'Créer un service',
+                'edit'       => 'Modifier le service',
             ],
             'category' => [
-                'management' => 'Categories',
-                'edit' => 'Edit Category',
+                'management' => 'Catégories',
+                'edit' => 'Modifier la catégorie',
             ],
             'commission' => [
-                'management' => 'Service Charges',
-                'create'     => 'Create Service Charge',
-                'edit'       => 'Edit Service Charge',
+                'management' => 'Frais de service',
+                'create'     => 'Créer frais de service',
+                'edit'       => 'Modifier frais de service',
             ],
             'method' => [
-                'management' => 'Payment Methods',
-                'create'     => 'Create Payment Method',
-                'edit'       => 'Edit Payment Method',
+                'management' => 'Modes de paiement',
+                'create'     => 'Créer un mode de paiement',
+                'edit'       => 'Modifier le mode de paiement',
             ]
         ],
         'sales' => [
-            'management' => 'Sales',
+            'management' => 'Ventes',
         ],
         'accounts' => [
-            'title' => 'Accounts',
+            'title' => 'Comptes',
             
             'deposit' => [
-                'management' => 'Deposit Account',
-                'view' => 'View Account'
+                'management' => 'Compte de dépôt',
+                'view' => 'Voir le compte'
             ],
             'umbrella' => [
-                'management' => 'Umbrella Account',
-                'view' => 'View Account',
+                'management' => 'Compte espèces',
+                'view' => 'Voir le compte',
             ],
             'payout' => [
-                'management' => 'Commission Account',
-                'view' => 'View Account',
+                'management' => 'Compte de commission',
+                'view' => 'Voir le compte',
             ]
         ],
         'accounting' => [
-            'title' => 'Accounting',
+            'title' => 'Comptabilité',
             'collections' => [
-                'management' => 'Collections',
-                'view' => 'View Collection'
+                'management' => 'Collectes',
+                'view' => 'Voir la collecte'
             ],
             'provisions' => [
                 'management' => 'Provisions',
-                'view' => 'View Provisions',
+                'view' => 'Voir Provisions',
             ],
         ]
     ],

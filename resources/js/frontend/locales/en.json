@@ -148,16 +148,23 @@
                     "address": "Address"
                 }
             }
+        },
+        "hover": {
+            "view": "View",
+            "execute": "Execute",
+            "topup": "Top Up Your Account",
+            "payout": "Request Commission Payout",
+            "delete": "Delete"
         }
     },
     "validations": {
         "purchase": {
             "electricity": {
-                "meter_code": "Please enter a valid meter code",
-                "bill_number": "Please enter a valid bill number"
+                "meter_code": "Please enter the meter code in the required format {format}",
+                "bill_number": "Please enter a bill number in the valid format {format}"
             },
             "mobile_money": {
-                "account_number": "Please enter a valid account number"
+                "account_number": "Please enter an account number in the valid format {format}"
             },
             "reference": "The reference is invalid",
             "pincode": "The pin code is invalid",
@@ -202,7 +209,7 @@
         "10007": "You are making too many requests to the server",
         "10008": "Transaction could not be saved to cache",
         "10009": "There was an error creating this transaction",
-        "10010": "This transaction was not found. The transaction may have been processed already",
+        "10010": "This transaction was not found. The transaction may have been processed already or expired",
         "10011": "There was a problem connecting to one of our servers",
         "10012": "There was a problem calculating the fee for this transaction. A fee has not been set for this amount",
         "10013": "The service category is currently unavailable",
@@ -235,6 +242,8 @@
         "10041": "Customer has reached transaction limit",
         "10042": "You are not allowed to use this service at the moment",
         "10043": "No bill was found",
-        "10044": "NThe amount provided is more than the maximum amount required for this service"
+        "10044": "The amount provided is more than the maximum amount required for this service",
+        "10045": "The service number provided is not in the required format",
+        "10046": "There is a commission distribution error with this service. Please contact support"
     }
 }

@@ -14,14 +14,14 @@ class SeedCompanyTypes extends Migration
     {
         DB::table('companytypes')->insert([
             'uuid' => Uuid::generate(4)->string,
-            'name' => config('business.company.type.formal'),
-            'code' => 'FORMALCOMPANY',
+            'name' => config('business.company.type.merchant'),
+            'code' => 'MERCHANTCOMPANY',
         ]);
     
         DB::table('companytypes')->insert([
             'uuid' => Uuid::generate(4)->string,
-            'name' => config('business.company.type.informal'),
-            'code' => 'INFORMALCOMPANY',
+            'name' => config('business.company.type.internal'),
+            'code' => 'INTERNALCOMPANY',
         ]);
     }
 

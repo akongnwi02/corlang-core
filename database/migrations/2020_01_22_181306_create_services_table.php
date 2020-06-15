@@ -17,6 +17,8 @@ class CreateServicesTable extends Migration
             $table->uuid('uuid')->primary();
             $table->string('name')->unique();
             $table->string('code')->unique();
+            $table->string('destination_placeholder')->nullable();
+            $table->string('destination_regex')->nullable();
             $table->boolean('is_active')->default(true);
             $table->string('logo_url')->nullable();
             $table->text('description_en')->nullable();
@@ -29,6 +31,7 @@ class CreateServicesTable extends Migration
             $table->double('max_amount')->default(1000000);
             $table->double('company_rate')->nullable();
             $table->double('agent_rate')->nullable();
+            $table->double('external_rate')->nullable();
             $table->boolean('is_public')->nullable();
             $table->string('auth_type')->nullable();
             $table->double('requires_auth')->default(false);

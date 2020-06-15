@@ -19,6 +19,7 @@ class CreateCompanyServiceTable extends Migration
             $table->boolean('is_active')->default(true);
             $table->double('company_rate')->nullable();
             $table->double('agent_rate')->nullable();
+            $table->double('external_rate')->nullable();
             $table->uuid('providercommission_id')->nullable();
             $table->uuid('customercommission_id')->nullable();
             $table->softDeletes();

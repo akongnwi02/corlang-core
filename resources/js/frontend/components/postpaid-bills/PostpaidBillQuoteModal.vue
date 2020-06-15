@@ -6,7 +6,7 @@
         <mdb-modal-body>
             <mdb-row>
                 <mdb-col class="col-sm-3">
-                    <img :src="'/storage/' + service.logo_url" :alt="$t('dashboard.pages.general.logo')">
+                    <img :src="service.logo_url" :alt="$t('dashboard.pages.general.logo')">
                 </mdb-col>
                 <mdb-col class="col-sm-9">
                     <strong>{{ service.name }}</strong>
@@ -93,12 +93,24 @@
 
 <script>
     import { currency } from "../../helpers/currency";
+    import {mdbModalFooter, mdbModal, mdbBtn, mdbCol, mdbRow, mdbInput, mdbModalBody, mdbModalHeader, mdbModalTitle} from 'mdbvue';
     export default {
         name: "PostpaidBillQuoteModal",
         props: [
             'quote',
             'service',
         ],
+        components: {
+            mdbModalFooter,
+            mdbModal,
+            mdbBtn,
+            mdbCol,
+            mdbInput,
+            mdbModalBody,
+            mdbModalHeader,
+            mdbModalTitle,
+            mdbRow
+        },
         methods: {
             currencyFormat(amount) {
                 return currency.format(amount, this.quote.currency_code)

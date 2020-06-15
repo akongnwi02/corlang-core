@@ -47,16 +47,17 @@
                             <td>{{ transaction.completed_at }}</td>
                             <td><span class="badge" :class="badge(transaction.status)">{{ $t('dashboard.pages.transactions.table.status.'+transaction.status) }}</span></td>
                             <td>
-                                <div @click="view(transaction.uuid)" class="btn-group" role="group">
-                                    <span data-toggle="tooltip" data-placement="top" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></span>
+                                <div class="btn-group" role="group">
+                                    <span @click="view(transaction.uuid)" data-toggle="tooltip" data-placement="top" class="btn btn-sm btn-info" :title="$t('dashboard.hover.view')"><i class="fas fa-eye"></i></span>
+                                    <span @click="execute(transaction.uuid)" v-if="transaction.status == 'created'" data-toggle="tooltip" data-placement="top" class="btn btn-sm btn-success" :title="$t('dashboard.hover.execute')"><i class="fas fa-play"></i></span>
+                                    <span @click="remove(transaction.uuid)" v-if="transaction.status == 'created'" data-toggle="tooltip" data-placement="top" class="btn btn-sm btn-danger" :title="$t('dashboard.hover.delete')"><i class="fas fa-trash"></i></span>
                                 </div>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <spinner :status="spinner_status"></spinner>
-                    <transaction-modal :transaction="transaction"
-                                       v-on:closed="show_transaction_modal=false" v-if="show_transaction_modal"></transaction-modal>
+                    <transaction-modal :transaction="transaction" v-on:closed="show_transaction_modal=false" v-if="show_transaction_modal"></transaction-modal>
                 </div>
             </div><!--col-->
         </div><!--row-->
@@ -94,6 +95,7 @@
     import Paginate from 'vuejs-paginate';
     import {Navigation} from "../mixins/transaction/NavigateToTransactionDetails";
     import TransactionModal from "../components/global/TransactionModal"
+    import {PusherNotification} from "../mixins/pusher/Notification";
 
     export default {
         components: {
@@ -101,7 +103,7 @@
             Spinner,
             TransactionModal,
         },
-        mixins: [Navigation],
+        mixins: [Navigation, PusherNotification],
         data() {
             return {
                 show_transaction_modal: false,
@@ -121,6 +123,9 @@
             transaction() {
                 return this.$store.getters.getTransaction;
             },
+            deleteTransactionStatus() {
+                return this.$store.getters.getDeleteTransactionStatus;
+            }
         },
         mounted() {
             this.refresh();
@@ -135,6 +140,18 @@
             view(uuid) {
                 this.$store.dispatch('loadTransaction', uuid);
             },
+            execute(uuid) {
+                console.log('execute transaction');
+                this.$store.dispatch('confirmPayment', {
+                    id: uuid,
+                });
+                this.waitForNotification(uuid);
+                console.log('waiting for callback notification on channel', uuid);
+            },
+            remove(uuid) {
+                console.log('delete transaction');
+                this.$store.dispatch('deleteTransaction', uuid);
+            },
             // to be fixed
             clickCallback (pageNum) {
                 console.log(pageNum)
@@ -144,8 +161,9 @@
                     case 'success': return 'badge-success';
                     case 'failed': return 'badge-danger';
                     case 'errored': return 'badge-danger';
-                    case 'reversed': return 'badge-warning';
-                    case 'cancelled': return 'badge-secondary';
+                    case 'processing': return 'badge-warning';
+                    case 'reversed': return 'badge-dark';
+                    case 'cancelled': return 'badge-dark';
                     default: return 'badge-light';
                 }
             }
@@ -165,7 +183,13 @@
                     this.show_transaction_modal = true;
                 }
                 this.spinner_status = this.transactionLoadStatus;
-            }
+            },
+            deleteTransactionStatus() {
+                if (this.deleteTransactionStatus == 2) {
+                    this.refresh();
+                }
+                this.spinner_status = this.deleteTransactionStatus;
+            },
         }
     }
 </script>

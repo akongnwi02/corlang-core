@@ -98,7 +98,7 @@ return [
                 'view' => 'View Account'
             ],
             'umbrella' => [
-                'management' => 'Umbrella Account',
+                'management' => 'Cash Account',
                 'view' => 'View Account',
             ],
             'payout' => [

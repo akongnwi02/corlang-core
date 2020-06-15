@@ -71,7 +71,7 @@ trait ServiceAttribute
      */
     public function getLogoLabelAttribute()
     {
-        $url = url($this->service_logo ?: 'img/backend/brand/logo/logo-company-profile.png');
+        $url =$this->service_logo ?:  url('img/backend/brand/logo/logo-company-profile.png');
     
         return "<img class='navbar-brand-full img-fluid' src='$url' width='30' height='30' style='border-radius: 50%' alt='$this->name'>";
     }
@@ -79,7 +79,7 @@ trait ServiceAttribute
     public function getServiceLogoAttribute()
     {
         if ($this->logo_url) {
-            return 'storage/'. $this->logo_url;
+            return $this->logo_url;
         }
         return false;
     }
@@ -92,6 +92,11 @@ trait ServiceAttribute
     public function getCompanyRateLabelAttribute()
     {
         return $this->company_rate . '%';
+    }
+    
+    public function getExternalRateLabelAttribute()
+    {
+        return $this->external_rate . '%';
     }
     
     public function getCollectedAmountLabelAttribute()

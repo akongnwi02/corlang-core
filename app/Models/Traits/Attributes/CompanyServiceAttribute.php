@@ -46,5 +46,10 @@ trait CompanyServiceAttribute
     {
         return $this->company_rate . '%';
     }
+    
+    public function getExternalRateLabelAttribute()
+    {
+        return $this->external_rate . '%';
+    }
 
 }

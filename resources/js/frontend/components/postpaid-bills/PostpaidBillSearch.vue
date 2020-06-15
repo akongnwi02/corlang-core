@@ -32,7 +32,6 @@
 
     import Services from '../services/Services';
     import {ConfigurationLoad} from '../../mixins/Configuration/ConfigurationLoad';
-    import {Reset} from '../../mixins/Configuration/Reset';
     import {PusherNotification} from "../../mixins/pusher/Notification";
     import {BUSINESS_CONFIG} from "../../config/business";
     import SearchButton from "../global/SearchButton";
@@ -40,6 +39,8 @@
     import TransactionModal from '../../components/global/TransactionModal'
     import Spinner from "../global/Spinner";
     import {Navigation} from "../../mixins/transaction/NavigateToTransactionDetails"
+    import {mdbInput} from 'mdbvue';
+
 
     export default {
         name: "PostpaidBillSearch",
@@ -49,12 +50,12 @@
             SearchButton,
             Services,
             TransactionModal,
+            mdbInput
         },
         mixins: [
             ConfigurationLoad,
             PusherNotification,
             Navigation,
-            Reset,
         ],
         data() {
             return {
@@ -117,6 +118,21 @@
                 let invalid = 0;
 
                 // this validation needs to be handled properly
+                if (this.selectedService) {
+                    if (this.selectedService.destination_regex) {
+                        let re = new RegExp(this.selectedService.destination_regex);
+                        if (!re.test(this.destination)) {
+                            ++invalid;
+                            this.invalid_text = this.$t('validations.purchase.electricity.bill_number', {format: this.selectedService.destination_placeholder});
+                            console.log('Invalid bill number');
+                        }
+                    } else if (this.destination.length < 6) {
+                        ++invalid;
+                        this.invalid_text = this.$t('validations.purchase.electricity.bill_number');
+                        console.log('Invalid bill number');
+                    }
+                }
+
                 if (this.destination.length < 6) {
                     ++invalid;
                     this.invalid_text = this.$t('validations.purchase.electricity.bill_number');
@@ -186,6 +202,11 @@
                 }
                 this.spinner_status = this.transactionLoadStatus;
             }
+        },
+        deactivated() {
+            this.$store.commit('setQuoteLoadStatus', 0);
+            this.$store.commit('setTransactionLoadStatus', 0);
+            this.$store.commit('setPaymentStatus', 0);
         }
     }
 </script>

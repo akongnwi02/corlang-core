@@ -54,7 +54,6 @@
 <script>
     import Services from '../services/Services'
     import {ConfigurationLoad} from '../../mixins/Configuration/ConfigurationLoad'
-    import {Reset} from '../../mixins/Configuration/Reset'
     import {PusherNotification} from "../../mixins/pusher/Notification";
     import {BUSINESS_CONFIG} from "../../config/business";
     import SearchButton from "../global/SearchButton";
@@ -62,6 +61,8 @@
     import TransactionModal from '../../components/global/TransactionModal'
     import Spinner from "../global/Spinner";
     import {Navigation} from "../../mixins/transaction/NavigateToTransactionDetails"
+    import {mdbBtn, mdbCol, mdbRow, mdbInput} from 'mdbvue';
+
     export default {
         name: "Search",
         components: {
@@ -70,12 +71,15 @@
             SearchButton,
             Services,
             TransactionModal,
+            mdbBtn,
+            mdbCol,
+            mdbInput,
+            mdbRow,
         },
         mixins: [
             ConfigurationLoad,
             PusherNotification,
             Navigation,
-            Reset
         ],
         data() {
             return {
@@ -132,7 +136,7 @@
         },
         methods: {
             selectService: function (service) {
-                console.log('selected', service);
+                console.log('selected service', service);
                 this.selectedService = service;
             },
             requestQuote() {
@@ -152,10 +156,25 @@
                 let invalid = 0;
 
                 // this validation needs to be handled properly
+                if (this.selectedService) {
+                    if (this.selectedService.destination_regex) {
+                        let re = new RegExp(this.selectedService.destination_regex);
+                        if (!re.test(this.destination)) {
+                            ++invalid;
+                            this.invalid_text = this.$t('validations.purchase.mobile_money.account_number', {format: this.selectedService.destination_placeholder});
+                            console.log('Invalid account number');
+                        }
+                    } else if (this.destination.length < 6) {
+                        ++invalid;
+                        this.invalid_text = this.$t('validations.purchase.mobile_money.account_number');
+                        console.log('Invalid account number');
+                    }
+                }
+
                 if (this.destination.length < 6) {
                     ++invalid;
                     this.invalid_text = this.$t('validations.purchase.mobile_money.account_number');
-                    console.log('Invalid meter code');
+                    console.log('Invalid account number');
                 }
 
                 if (!BUSINESS_CONFIG.APP_REGEX_AMOUNT.test(this.amount)) {
@@ -235,6 +254,11 @@
                 }
                 this.spinner_status = this.transactionLoadStatus;
             }
+        },
+        deactivated() {
+            this.$store.commit('setQuoteLoadStatus', 0);
+            this.$store.commit('setTransactionLoadStatus', 0);
+            this.$store.commit('setPaymentStatus', 0);
         }
     }
 

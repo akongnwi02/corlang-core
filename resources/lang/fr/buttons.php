@@ -22,35 +22,35 @@ return [
                 'confirm'            => 'Confirmer',
                 'deactivate'         => 'Désactiver',
                 'delete_permanently' => 'Supprimer définitivement',
-                'login_as'           => 'Se connecter an tant que :user',
+                'login_as'           => 'Se connecter en tant qu\'utilisateur',
                 'resend_email'       => 'Renvoyer le mail de confirmation',
                 'restore_user'       => "Réactiver l'utilisateur",
-                'transfer_user'      => 'Transfer User',
-                'reset_pin'          => 'Reset Pin Code',
-                'reset_topup_account'          => 'Reset Top up Account',
+                'transfer_user'      => 'Transférer l\'utilisateur',
+                'reset_pin'          => 'Réinitialisation du code Pin',
+                'reset_topup_account'          => 'Réinitialisation du compte de recharge',
                 'unconfirm'          => 'Infirmer',
                 'unlink' => 'Unlink',
             ],
         ],
         'services' => [
             'service' => [
-                'activate' => 'Activate Service',
-                'deactivate' => 'Deactivate Service',
+                'activate' => 'Activer le service',
+                'deactivate' => 'Désactiver le Service',
             ],
             'method' => [
-                'activate' => 'Activate Method',
-                'deactivate' => 'Deactivate Method',
+                'activate' => 'Activer le mode',
+                'deactivate' => 'Désactiver le mode',
             ],
             'category' => [
-                'activate' => 'Activate Category',
-                'deactivate' => 'Deactivate Category',
+                'activate' => 'Activer la catégorie',
+                'deactivate' => 'Désactiver la catégorie',
             ]
         ],
         'companies' => [
             'company' => [
-                'activate'   => 'Activate Company',
-                'deactivate' => 'Deactivate Company',
-                'login'      => 'Login to this company'
+                'activate'   => 'Actciver l\'entreprise',
+                'deactivate' => 'Désactiver l\'entreprise',
+                'login'      => 'Se connecter à cette entreprise'
             ],
             'services' => [
                 'commission' => [
@@ -62,15 +62,15 @@ return [
             'credit' => 'Credit',
             'debit' => 'Debit',
             'float' => 'Float',
-            'payout' => 'Payout',
+            'payout' => 'Paiement',
             
-            'activate' => 'Unfreeze Account',
-            'deactivate' => 'Freeze Account'
+            'activate' => 'Débloquer un compte',
+            'deactivate' => 'Bloquer un compte'
         ],
         'payout' => [
-            'cancel' => 'Cancel',
-            'approve' => 'Approve',
-            'reject' => 'Reject',
+            'cancel' => 'Annuler',
+            'approve' => 'Approuver',
+            'reject' => 'Rejetter',
         ]
     ],
 
@@ -83,14 +83,14 @@ return [
 
     'general' => [
         'cancel' => 'Annuler',
-        'back'   => 'Back',
+        'back'   => 'Retourner',
         'continue' => 'Continuer',
-        'submit'   => 'Submit',
+        'submit'   => 'Soumettre',
 
         'crud' => [
             'create' => 'Créer',
             'delete' => 'Supprimer',
-            'edit'   => 'Editer',
+            'edit'   => 'Modifier',
             'update' => 'Mettre à jour',
             'view'   => 'Voir',
         ],

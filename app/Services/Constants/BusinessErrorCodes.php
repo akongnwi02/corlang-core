@@ -56,4 +56,6 @@ class BusinessErrorCodes
     const SERVICE_NOT_ALLOWED               = '10042';
     const BILL_IS_NOT_FOUND                 = '10043';
     const MAXIMUM_AMOUNT_ERROR              = '10044';
+    const REGEX_VALIDATION_ERROR            = '10045';
+    const COMMISSION_DISTRIBUTION_ERROR     = '10046';
 }

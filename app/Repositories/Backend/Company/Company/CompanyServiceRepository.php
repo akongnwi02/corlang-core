@@ -56,12 +56,14 @@ class CompanyServiceRepository
     {
         $company_rate = request()->has('company_rate') ? $data['company_rate'] : null;
         $agent_rate = request()->has('agent_rate') ? $data['agent_rate'] : null;
+        $external_rate = request()->has('external_rate') ? $data['external_rate'] : null;
         $providercommission_id = request()->has('providercommission_id') ? $data['providercommission_id'] : null;
         $customercommission_id = request()->has('customercommission_id') ? $data['customercommission_id'] : null;
     
         $updated = $company->services()->updateExistingPivot($service, [
             'company_rate' => $company_rate,
             'agent_rate' => $agent_rate,
+            'external_rate' => $external_rate,
             'customercommission_id' => $customercommission_id,
             'providercommission_id' => $providercommission_id,
         ]);

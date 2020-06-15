@@ -165,6 +165,7 @@ return [
                                 'logo'               => 'Logo',
                                 'company_rate'       => 'Specific Company Rate (%)',
                                 'agent_rate'         => 'Specific Agent Rate (%)',
+                                'external_rate'      => 'Specific External Rate(%)',
                                 'customercommission' => 'Customer Service Charge',
                                 'providercommission' => 'Provider Service Charge',
                                 'total'              => 'service|services'
@@ -191,6 +192,7 @@ return [
                     'category'           => 'Category',
                     'agent_rate'         => 'Default Agent Rate',
                     'company_rate'       => 'Default Company Rate',
+                    'external_rate'       => 'Default External Rate',
                     'min_amount'         => 'Min Amount',
                     'max_amount'         => 'Max Amount',
                     'customercommission' => 'Default Customer Service Charge',
@@ -267,6 +269,7 @@ return [
                 'payment_account'    => 'Payment Account',
                 'company_commission' => 'Company Commission',
                 'agent_commission'   => 'Agent Commission',
+                'external_commission' => 'External Commission',
                 'completed_at'       => 'Completed At',
                 'user_status'        => 'User\'s Status',
                 'actual_status'      => 'Actual Status',
@@ -327,7 +330,7 @@ return [
                 ],
             ],
             'umbrella'              => [
-                'management' => 'Umbrella Accounts',
+                'management' => 'Cash Accounts',
                 'actions'    => 'Account Actions',
                 'view'       => 'View Account',
                 'table'      => [
@@ -420,6 +423,7 @@ return [
                 'table'      => [
                     'service'           => 'Service',
                     'commission'        => 'Commission',
+                    'external'          => 'External',
                     'number_requests'   => 'Number of requests',
                     'last_request_date' => 'Last request date',
                     'total'             => 'service|services'

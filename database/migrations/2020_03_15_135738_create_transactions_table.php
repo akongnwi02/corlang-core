@@ -54,6 +54,7 @@ class CreateTransactionsTable extends Migration
     
             $table->double('agent_commission')->nullable();
             $table->double('company_commission')->nullable();
+            $table->double('external_commission')->nullable();
             $table->double('system_commission')->nullable();
             
             $table->string('movement_code')->nullable();

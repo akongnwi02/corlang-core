@@ -38,13 +38,13 @@ trait CompanyAttribute
     
     public function getFullLogoAttribute()
     {
-        return url($this->getCompanyLogo() ?: 'img/backend/brand/logo/logo-company-profile.png');
+        return $this->getCompanyLogo() ?: url('img/backend/brand/logo/logo-company-profile.png');
     }
     
     public function getCompanyLogo()
     {
         if ($this->logo_url) {
-            return 'storage/'. $this->logo_url;
+            return $this->logo_url;
         }
         return false;
     }

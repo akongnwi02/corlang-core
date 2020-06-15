@@ -49,9 +49,9 @@ class PayoutController extends Controller
         $account = auth()->user()->account;
         
         $data = [
-            'name'             => $paymentMethod->is_default ? $account->user->full_name : $request->input('name'),
+            'name'             => $request->input('name'),
             'amount'           => $request->input('amount'),
-            'account'          => $paymentMethod->is_default ? $account->code : $request->input('account') ,
+            'account'          => $request->input('account') ,
             'currency_id'      => $currency->uuid,
             'paymentmethod_id' => $paymentMethod->uuid,
         ];

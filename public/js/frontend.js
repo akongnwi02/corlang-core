@@ -143,6 +143,8 @@ module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.wo
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_business__ = __webpack_require__("./resources/js/frontend/config/business.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mdbvue__);
 //
 //
 //
@@ -188,12 +190,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "PayoutModal",
     props: ['account'],
+    components: {
+        mdbModalFooter: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalFooter"],
+        mdbModal: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModal"],
+        mdbBtn: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbBtn"],
+        mdbCol: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbCol"],
+        mdbInput: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbInput"],
+        mdbModalBody: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalBody"],
+        mdbModalHeader: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalHeader"],
+        mdbModalTitle: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalTitle"]
+    },
     data: function data() {
         return {
             invalid_text: '',
@@ -267,6 +280,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_business__ = __webpack_require__("./resources/js/frontend/config/business.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mdbvue__);
 //
 //
 //
@@ -313,11 +328,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "TopupModal",
+    components: {
+        mdbModalFooter: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalFooter"],
+        mdbModal: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModal"],
+        mdbBtn: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbBtn"],
+        mdbCol: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbCol"],
+        mdbInput: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbInput"],
+        mdbModalBody: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalBody"],
+        mdbModalHeader: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalHeader"],
+        mdbModalTitle: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalTitle"]
+    },
     data: function data() {
         return {
             invalid_text: '',
@@ -516,6 +542,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mdbvue__);
 //
 //
 //
@@ -631,12 +659,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Transaction",
     props: ['transaction'],
+    components: {
+        mdbModalFooter: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalFooter"],
+        mdbModal: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModal"],
+        mdbBtn: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbBtn"],
+        mdbCol: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbCol"],
+        mdbInput: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbInput"],
+        mdbModalBody: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalBody"],
+        mdbModalHeader: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalHeader"],
+        mdbModalTitle: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalTitle"],
+        mdbRow: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbRow"]
+    },
     methods: {
         currencyFormat: function currencyFormat(amount) {
             return __WEBPACK_IMPORTED_MODULE_0__helpers_currency__["a" /* currency */].format(amount, this.transaction.currency_code);
@@ -652,6 +692,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mdbvue__);
 //
 //
 //
@@ -729,12 +771,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "QuoteModal",
     props: ['quote', 'service'],
+    components: {
+        mdbModalFooter: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalFooter"],
+        mdbModal: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModal"],
+        mdbBtn: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbBtn"],
+        mdbCol: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbCol"],
+        mdbInput: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbInput"],
+        mdbModalBody: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalBody"],
+        mdbModalHeader: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalHeader"],
+        mdbModalTitle: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalTitle"],
+        mdbRow: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbRow"]
+    },
     methods: {
         currencyFormat: function currencyFormat(amount) {
             return __WEBPACK_IMPORTED_MODULE_0__helpers_currency__["a" /* currency */].format(amount, this.quote.currency_code);
@@ -755,18 +809,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_Services__ = __webpack_require__("./resources/js/frontend/components/services/Services.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_Services___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__services_Services__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_Configuration_ConfigurationLoad__ = __webpack_require__("./resources/js/frontend/mixins/Configuration/ConfigurationLoad.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_Configuration_Reset__ = __webpack_require__("./resources/js/frontend/mixins/Configuration/Reset.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_pusher_Notification__ = __webpack_require__("./resources/js/frontend/mixins/pusher/Notification.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__config_business__ = __webpack_require__("./resources/js/frontend/config/business.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__global_SearchButton__ = __webpack_require__("./resources/js/frontend/components/global/SearchButton.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__global_SearchButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__global_SearchButton__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__QuoteModal__ = __webpack_require__("./resources/js/frontend/components/mobile-money/QuoteModal.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__QuoteModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__QuoteModal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_global_TransactionModal__ = __webpack_require__("./resources/js/frontend/components/global/TransactionModal.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_global_TransactionModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_global_TransactionModal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__global_Spinner__ = __webpack_require__("./resources/js/frontend/components/global/Spinner.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__global_Spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__global_Spinner__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__mixins_transaction_NavigateToTransactionDetails__ = __webpack_require__("./resources/js/frontend/mixins/transaction/NavigateToTransactionDetails.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_pusher_Notification__ = __webpack_require__("./resources/js/frontend/mixins/pusher/Notification.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config_business__ = __webpack_require__("./resources/js/frontend/config/business.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__global_SearchButton__ = __webpack_require__("./resources/js/frontend/components/global/SearchButton.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__global_SearchButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__global_SearchButton__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__QuoteModal__ = __webpack_require__("./resources/js/frontend/components/mobile-money/QuoteModal.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__QuoteModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__QuoteModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal__ = __webpack_require__("./resources/js/frontend/components/global/TransactionModal.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__global_Spinner__ = __webpack_require__("./resources/js/frontend/components/global/Spinner.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__global_Spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__global_Spinner__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mixins_transaction_NavigateToTransactionDetails__ = __webpack_require__("./resources/js/frontend/mixins/transaction/NavigateToTransactionDetails.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_mdbvue__);
 //
 //
 //
@@ -820,6 +875,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -834,13 +890,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Search",
     components: {
-        Spinner: __WEBPACK_IMPORTED_MODULE_8__global_Spinner___default.a,
-        QuoteModal: __WEBPACK_IMPORTED_MODULE_6__QuoteModal___default.a,
-        SearchButton: __WEBPACK_IMPORTED_MODULE_5__global_SearchButton___default.a,
+        Spinner: __WEBPACK_IMPORTED_MODULE_7__global_Spinner___default.a,
+        QuoteModal: __WEBPACK_IMPORTED_MODULE_5__QuoteModal___default.a,
+        SearchButton: __WEBPACK_IMPORTED_MODULE_4__global_SearchButton___default.a,
         Services: __WEBPACK_IMPORTED_MODULE_0__services_Services___default.a,
-        TransactionModal: __WEBPACK_IMPORTED_MODULE_7__components_global_TransactionModal___default.a
+        TransactionModal: __WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal___default.a,
+        mdbBtn: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbBtn"],
+        mdbCol: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbCol"],
+        mdbInput: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbInput"],
+        mdbRow: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbRow"]
     },
-    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_Configuration_ConfigurationLoad__["a" /* ConfigurationLoad */], __WEBPACK_IMPORTED_MODULE_3__mixins_pusher_Notification__["a" /* PusherNotification */], __WEBPACK_IMPORTED_MODULE_9__mixins_transaction_NavigateToTransactionDetails__["a" /* Navigation */], __WEBPACK_IMPORTED_MODULE_2__mixins_Configuration_Reset__["a" /* Reset */]],
+    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_Configuration_ConfigurationLoad__["a" /* ConfigurationLoad */], __WEBPACK_IMPORTED_MODULE_2__mixins_pusher_Notification__["a" /* PusherNotification */], __WEBPACK_IMPORTED_MODULE_8__mixins_transaction_NavigateToTransactionDetails__["a" /* Navigation */]],
     data: function data() {
         return {
             // Models Fields
@@ -869,13 +929,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         cashinServices: function cashinServices() {
             var cashinCategory = this.configuration.categories.filter(function (obj) {
-                return obj.code == __WEBPACK_IMPORTED_MODULE_4__config_business__["a" /* BUSINESS_CONFIG */].CATEGORY_SEND_MONEY_CODE;
+                return obj.code == __WEBPACK_IMPORTED_MODULE_3__config_business__["a" /* BUSINESS_CONFIG */].CATEGORY_SEND_MONEY_CODE;
             });
             return cashinCategory[0].services;
         },
         cashoutServices: function cashoutServices() {
             var cashoutCategory = this.configuration.categories.filter(function (obj) {
-                return obj.code == __WEBPACK_IMPORTED_MODULE_4__config_business__["a" /* BUSINESS_CONFIG */].CATEGORY_RECEIVE_MONEY_CODE;
+                return obj.code == __WEBPACK_IMPORTED_MODULE_3__config_business__["a" /* BUSINESS_CONFIG */].CATEGORY_RECEIVE_MONEY_CODE;
             });
             return cashoutCategory[0].services;
         },
@@ -897,7 +957,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         selectService: function selectService(service) {
-            console.log('selected', service);
+            console.log('selected service', service);
             this.selectedService = service;
         },
         requestQuote: function requestQuote() {
@@ -916,13 +976,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var invalid = 0;
 
             // this validation needs to be handled properly
+            if (this.selectedService) {
+                if (this.selectedService.destination_regex) {
+                    var re = new RegExp(this.selectedService.destination_regex);
+                    if (!re.test(this.destination)) {
+                        ++invalid;
+                        this.invalid_text = this.$t('validations.purchase.mobile_money.account_number', { format: this.selectedService.destination_placeholder });
+                        console.log('Invalid account number');
+                    }
+                } else if (this.destination.length < 6) {
+                    ++invalid;
+                    this.invalid_text = this.$t('validations.purchase.mobile_money.account_number');
+                    console.log('Invalid account number');
+                }
+            }
+
             if (this.destination.length < 6) {
                 ++invalid;
                 this.invalid_text = this.$t('validations.purchase.mobile_money.account_number');
-                console.log('Invalid meter code');
+                console.log('Invalid account number');
             }
 
-            if (!__WEBPACK_IMPORTED_MODULE_4__config_business__["a" /* BUSINESS_CONFIG */].APP_REGEX_AMOUNT.test(this.amount)) {
+            if (!__WEBPACK_IMPORTED_MODULE_3__config_business__["a" /* BUSINESS_CONFIG */].APP_REGEX_AMOUNT.test(this.amount)) {
                 ++invalid;
                 console.log('Invalid amount');
                 this.invalid_text = this.$t('validations.purchase.amount');
@@ -999,6 +1074,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             this.spinner_status = this.transactionLoadStatus;
         }
+    },
+    deactivated: function deactivated() {
+        this.$store.commit('setQuoteLoadStatus', 0);
+        this.$store.commit('setTransactionLoadStatus', 0);
+        this.$store.commit('setPaymentStatus', 0);
     }
 });
 
@@ -1010,6 +1090,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mdbvue__);
 //
 //
 //
@@ -1103,11 +1185,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "PostpaidBillQuoteModal",
     props: ['quote', 'service'],
+    components: {
+        mdbModalFooter: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalFooter"],
+        mdbModal: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModal"],
+        mdbBtn: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbBtn"],
+        mdbCol: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbCol"],
+        mdbInput: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbInput"],
+        mdbModalBody: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalBody"],
+        mdbModalHeader: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalHeader"],
+        mdbModalTitle: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalTitle"],
+        mdbRow: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbRow"]
+    },
     methods: {
         currencyFormat: function currencyFormat(amount) {
             return __WEBPACK_IMPORTED_MODULE_0__helpers_currency__["a" /* currency */].format(amount, this.quote.currency_code);
@@ -1128,18 +1222,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_Services__ = __webpack_require__("./resources/js/frontend/components/services/Services.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_Services___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__services_Services__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_Configuration_ConfigurationLoad__ = __webpack_require__("./resources/js/frontend/mixins/Configuration/ConfigurationLoad.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_Configuration_Reset__ = __webpack_require__("./resources/js/frontend/mixins/Configuration/Reset.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_pusher_Notification__ = __webpack_require__("./resources/js/frontend/mixins/pusher/Notification.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__config_business__ = __webpack_require__("./resources/js/frontend/config/business.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__global_SearchButton__ = __webpack_require__("./resources/js/frontend/components/global/SearchButton.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__global_SearchButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__global_SearchButton__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__PostpaidBillQuoteModal__ = __webpack_require__("./resources/js/frontend/components/postpaid-bills/PostpaidBillQuoteModal.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__PostpaidBillQuoteModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__PostpaidBillQuoteModal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_global_TransactionModal__ = __webpack_require__("./resources/js/frontend/components/global/TransactionModal.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_global_TransactionModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_global_TransactionModal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__global_Spinner__ = __webpack_require__("./resources/js/frontend/components/global/Spinner.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__global_Spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__global_Spinner__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__mixins_transaction_NavigateToTransactionDetails__ = __webpack_require__("./resources/js/frontend/mixins/transaction/NavigateToTransactionDetails.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_pusher_Notification__ = __webpack_require__("./resources/js/frontend/mixins/pusher/Notification.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config_business__ = __webpack_require__("./resources/js/frontend/config/business.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__global_SearchButton__ = __webpack_require__("./resources/js/frontend/components/global/SearchButton.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__global_SearchButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__global_SearchButton__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__PostpaidBillQuoteModal__ = __webpack_require__("./resources/js/frontend/components/postpaid-bills/PostpaidBillQuoteModal.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__PostpaidBillQuoteModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__PostpaidBillQuoteModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal__ = __webpack_require__("./resources/js/frontend/components/global/TransactionModal.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__global_Spinner__ = __webpack_require__("./resources/js/frontend/components/global/Spinner.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__global_Spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__global_Spinner__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mixins_transaction_NavigateToTransactionDetails__ = __webpack_require__("./resources/js/frontend/mixins/transaction/NavigateToTransactionDetails.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_mdbvue__);
 //
 //
 //
@@ -1186,13 +1281,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "PostpaidBillSearch",
     components: {
-        Spinner: __WEBPACK_IMPORTED_MODULE_8__global_Spinner___default.a,
-        QuoteModal: __WEBPACK_IMPORTED_MODULE_6__PostpaidBillQuoteModal___default.a,
-        SearchButton: __WEBPACK_IMPORTED_MODULE_5__global_SearchButton___default.a,
+        Spinner: __WEBPACK_IMPORTED_MODULE_7__global_Spinner___default.a,
+        QuoteModal: __WEBPACK_IMPORTED_MODULE_5__PostpaidBillQuoteModal___default.a,
+        SearchButton: __WEBPACK_IMPORTED_MODULE_4__global_SearchButton___default.a,
         Services: __WEBPACK_IMPORTED_MODULE_0__services_Services___default.a,
-        TransactionModal: __WEBPACK_IMPORTED_MODULE_7__components_global_TransactionModal___default.a
+        TransactionModal: __WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal___default.a,
+        mdbInput: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbInput"]
     },
-    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_Configuration_ConfigurationLoad__["a" /* ConfigurationLoad */], __WEBPACK_IMPORTED_MODULE_3__mixins_pusher_Notification__["a" /* PusherNotification */], __WEBPACK_IMPORTED_MODULE_9__mixins_transaction_NavigateToTransactionDetails__["a" /* Navigation */], __WEBPACK_IMPORTED_MODULE_2__mixins_Configuration_Reset__["a" /* Reset */]],
+    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_Configuration_ConfigurationLoad__["a" /* ConfigurationLoad */], __WEBPACK_IMPORTED_MODULE_2__mixins_pusher_Notification__["a" /* PusherNotification */], __WEBPACK_IMPORTED_MODULE_8__mixins_transaction_NavigateToTransactionDetails__["a" /* Navigation */]],
     data: function data() {
         return {
             // Models Fields
@@ -1219,7 +1315,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         services: function services() {
             var postpaidBillCategory = this.configuration.categories.filter(function (obj) {
-                return obj.code == __WEBPACK_IMPORTED_MODULE_4__config_business__["a" /* BUSINESS_CONFIG */].CATEGORY_POSTPAID_BILLS_CODE;
+                return obj.code == __WEBPACK_IMPORTED_MODULE_3__config_business__["a" /* BUSINESS_CONFIG */].CATEGORY_POSTPAID_BILLS_CODE;
             });
             return postpaidBillCategory[0].services;
         },
@@ -1254,6 +1350,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var invalid = 0;
 
             // this validation needs to be handled properly
+            if (this.selectedService) {
+                if (this.selectedService.destination_regex) {
+                    var re = new RegExp(this.selectedService.destination_regex);
+                    if (!re.test(this.destination)) {
+                        ++invalid;
+                        this.invalid_text = this.$t('validations.purchase.electricity.bill_number', { format: this.selectedService.destination_placeholder });
+                        console.log('Invalid bill number');
+                    }
+                } else if (this.destination.length < 6) {
+                    ++invalid;
+                    this.invalid_text = this.$t('validations.purchase.electricity.bill_number');
+                    console.log('Invalid bill number');
+                }
+            }
+
             if (this.destination.length < 6) {
                 ++invalid;
                 this.invalid_text = this.$t('validations.purchase.electricity.bill_number');
@@ -1323,6 +1434,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             this.spinner_status = this.transactionLoadStatus;
         }
+    },
+    deactivated: function deactivated() {
+        this.$store.commit('setQuoteLoadStatus', 0);
+        this.$store.commit('setTransactionLoadStatus', 0);
+        this.$store.commit('setPaymentStatus', 0);
     }
 });
 
@@ -1334,6 +1450,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mdbvue__);
 //
 //
 //
@@ -1411,12 +1529,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "QuoteModal",
     props: ['quote', 'service'],
+    components: {
+        mdbModalFooter: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalFooter"],
+        mdbModal: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModal"],
+        mdbBtn: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbBtn"],
+        mdbCol: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbCol"],
+        mdbModalBody: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalBody"],
+        mdbModalHeader: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalHeader"],
+        mdbModalTitle: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalTitle"],
+        mdbRow: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbRow"]
+    },
     methods: {
         currencyFormat: function currencyFormat(amount) {
             return __WEBPACK_IMPORTED_MODULE_0__helpers_currency__["a" /* currency */].format(amount, this.quote.currency_code);
@@ -1448,6 +1577,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__global_Spinner__ = __webpack_require__("./resources/js/frontend/components/global/Spinner.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__global_Spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__global_Spinner__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mixins_transaction_NavigateToTransactionDetails__ = __webpack_require__("./resources/js/frontend/mixins/transaction/NavigateToTransactionDetails.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_mdbvue__);
 //
 //
 //
@@ -1496,6 +1627,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -1515,7 +1647,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         QuoteModal: __WEBPACK_IMPORTED_MODULE_5__QuoteModal___default.a,
         SearchButton: __WEBPACK_IMPORTED_MODULE_4__global_SearchButton___default.a,
         Services: __WEBPACK_IMPORTED_MODULE_0__services_Services___default.a,
-        TransactionModal: __WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal___default.a
+        TransactionModal: __WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal___default.a,
+        mdbInput: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbInput"],
+        mdbRow: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbRow"]
     },
     mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_Configuration_ConfigurationLoad__["a" /* ConfigurationLoad */], __WEBPACK_IMPORTED_MODULE_2__mixins_pusher_Notification__["a" /* PusherNotification */], __WEBPACK_IMPORTED_MODULE_8__mixins_transaction_NavigateToTransactionDetails__["a" /* Navigation */]],
     data: function data() {
@@ -1582,10 +1716,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var invalid = 0;
 
             // this validation needs to be handled properly
-            if (this.destination.length < 6) {
-                ++invalid;
-                this.invalid_text = this.$t('validations.purchase.electricity.meter_code');
-                console.log('Invalid meter code');
+            if (this.selectedService) {
+                if (this.selectedService.destination_regex) {
+                    var re = new RegExp(this.selectedService.destination_regex);
+                    if (!re.test(this.destination)) {
+                        ++invalid;
+                        this.invalid_text = this.$t('validations.purchase.electricity.meter_code', { format: this.selectedService.destination_placeholder });
+                        console.log('Invalid meter code');
+                    }
+                } else if (this.destination.length < 6) {
+                    ++invalid;
+                    this.invalid_text = this.$t('validations.purchase.electricity.meter_code');
+                    console.log('Invalid meter code');
+                }
             }
 
             if (!__WEBPACK_IMPORTED_MODULE_3__config_business__["a" /* BUSINESS_CONFIG */].APP_REGEX_AMOUNT.test(this.amount)) {
@@ -1657,6 +1800,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             this.spinner_status = this.transactionLoadStatus;
         }
+    },
+    deactivated: function deactivated() {
+        this.$store.commit('setQuoteLoadStatus', 0);
+        this.$store.commit('setTransactionLoadStatus', 0);
+        this.$store.commit('setPaymentStatus', 0);
     }
 });
 
@@ -1685,7 +1833,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['services'],
     methods: {
         getImageUrl: function getImageUrl(logo_url) {
-            return __WEBPACK_IMPORTED_MODULE_0__config_business__["a" /* BUSINESS_CONFIG */].SERVER_STORAGE_PATH + '/' + logo_url;
+            return logo_url;
         },
         emitToParent: function emitToParent(service) {
             this.$emit('selected', service);
@@ -1701,14 +1849,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_local_ChangeLanguage__ = __webpack_require__("./resources/js/frontend/mixins/local/ChangeLanguage.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_Purchase__ = __webpack_require__("./resources/js/frontend/pages/Purchase.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_Purchase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__pages_Purchase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_Transactions__ = __webpack_require__("./resources/js/frontend/pages/Transactions.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_Transactions___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__pages_Transactions__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_global_Loader__ = __webpack_require__("./resources/js/frontend/components/global/Loader.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_global_Loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_global_Loader__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Account__ = __webpack_require__("./resources/js/frontend/pages/Account.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Account___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__pages_Account__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mdbvue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_Purchase__ = __webpack_require__("./resources/js/frontend/pages/Purchase.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_Purchase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__pages_Purchase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_Transactions__ = __webpack_require__("./resources/js/frontend/pages/Transactions.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_Transactions___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__pages_Transactions__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_Loader__ = __webpack_require__("./resources/js/frontend/components/global/Loader.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_Loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_global_Loader__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Account__ = __webpack_require__("./resources/js/frontend/pages/Account.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Account___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__pages_Account__);
 //
 //
 //
@@ -1746,6 +1896,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -1758,10 +1909,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "Layout",
     mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_local_ChangeLanguage__["a" /* ChangeLanguage */]],
     components: {
-        Account: __WEBPACK_IMPORTED_MODULE_4__pages_Account___default.a,
-        Loader: __WEBPACK_IMPORTED_MODULE_3__components_global_Loader___default.a,
-        Purchase: __WEBPACK_IMPORTED_MODULE_1__pages_Purchase___default.a,
-        Transactions: __WEBPACK_IMPORTED_MODULE_2__pages_Transactions___default.a
+        Account: __WEBPACK_IMPORTED_MODULE_5__pages_Account___default.a,
+        Loader: __WEBPACK_IMPORTED_MODULE_4__components_global_Loader___default.a,
+        Purchase: __WEBPACK_IMPORTED_MODULE_2__pages_Purchase___default.a,
+        Transactions: __WEBPACK_IMPORTED_MODULE_3__pages_Transactions___default.a,
+        mdbContainer: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbContainer"],
+        mdbTab: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbTab"],
+        mdbTabItem: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbTabItem"],
+        mdbIcon: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbIcon"],
+        mdbTabContent: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbTabContent"],
+        mdbTabPane: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbTabPane"]
     },
     data: function data() {
         return {
@@ -1787,7 +1944,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_Spinner__ = __webpack_require__("./resources/js/frontend/components/global/Spinner.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_Spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_global_Spinner__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_pusher_Notification__ = __webpack_require__("./resources/js/frontend/mixins/pusher/Notification.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mixins_Configuration_Reset__ = __webpack_require__("./resources/js/frontend/mixins/Configuration/Reset.js");
 //
 //
 //
@@ -1906,7 +2062,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
 
 
 
@@ -1923,7 +2078,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         QuoteModal: __WEBPACK_IMPORTED_MODULE_3__components_mobile_money_QuoteModal___default.a,
         Spinner: __WEBPACK_IMPORTED_MODULE_4__components_global_Spinner___default.a
     },
-    mixins: [__WEBPACK_IMPORTED_MODULE_5__mixins_pusher_Notification__["a" /* PusherNotification */], __WEBPACK_IMPORTED_MODULE_6__mixins_Configuration_Reset__["a" /* Reset */]],
+    mixins: [__WEBPACK_IMPORTED_MODULE_5__mixins_pusher_Notification__["a" /* PusherNotification */]],
     data: function data() {
         return {
             show_payout_modal: false,
@@ -2069,13 +2224,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.show_quote_modal = true;
             }
             this.spinner_status = this.quoteLoadStatus;
-        },
-        paymentStatus: function paymentStatus() {
-            if (this.paymentStatus == 2) {
-                this.$store.dispatch('getAccount');
-                this.refresh();
-            }
         }
+    },
+    deactivated: function deactivated() {
+        this.$store.commit('setQuoteLoadStatus', 0);
+        this.$store.commit('setAccountLoadStatus', 0);
+        this.$store.commit('setPaymentStatus', 0);
     }
 });
 
@@ -2088,6 +2242,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_prepaid_bill_Search__ = __webpack_require__("./resources/js/frontend/components/prepaid-bill/Search.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_prepaid_bill_Search___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_prepaid_bill_Search__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mdbvue__);
 //
 //
 //
@@ -2118,12 +2274,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Purchase",
     components: {
-        Search: __WEBPACK_IMPORTED_MODULE_0__components_prepaid_bill_Search___default.a
+        Search: __WEBPACK_IMPORTED_MODULE_0__components_prepaid_bill_Search___default.a,
+        mdbContainer: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbContainer"],
+        mdbTab: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbTab"],
+        mdbTabItem: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbTabItem"],
+        mdbIcon: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbIcon"],
+        mdbTabContent: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbTabContent"],
+        mdbTabPane: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbTabPane"],
+        mdbCol: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbCol"],
+        mdbRow: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbRow"]
     },
     data: function data() {
         return {
@@ -2172,6 +2338,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_transaction_NavigateToTransactionDetails__ = __webpack_require__("./resources/js/frontend/mixins/transaction/NavigateToTransactionDetails.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_TransactionModal__ = __webpack_require__("./resources/js/frontend/components/global/TransactionModal.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_global_TransactionModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_global_TransactionModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixins_pusher_Notification__ = __webpack_require__("./resources/js/frontend/mixins/pusher/Notification.js");
 //
 //
 //
@@ -2261,6 +2428,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -2275,7 +2444,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         Spinner: __WEBPACK_IMPORTED_MODULE_0__components_global_Spinner___default.a,
         TransactionModal: __WEBPACK_IMPORTED_MODULE_4__components_global_TransactionModal___default.a
     },
-    mixins: [__WEBPACK_IMPORTED_MODULE_3__mixins_transaction_NavigateToTransactionDetails__["a" /* Navigation */]],
+    mixins: [__WEBPACK_IMPORTED_MODULE_3__mixins_transaction_NavigateToTransactionDetails__["a" /* Navigation */], __WEBPACK_IMPORTED_MODULE_5__mixins_pusher_Notification__["a" /* PusherNotification */]],
     data: function data() {
         return {
             show_transaction_modal: false,
@@ -2295,6 +2464,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         transaction: function transaction() {
             return this.$store.getters.getTransaction;
+        },
+        deleteTransactionStatus: function deleteTransactionStatus() {
+            return this.$store.getters.getDeleteTransactionStatus;
         }
     },
     mounted: function mounted() {
@@ -2311,6 +2483,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         view: function view(uuid) {
             this.$store.dispatch('loadTransaction', uuid);
         },
+        execute: function execute(uuid) {
+            console.log('execute transaction');
+            this.$store.dispatch('confirmPayment', {
+                id: uuid
+            });
+            this.waitForNotification(uuid);
+            console.log('waiting for callback notification on channel', uuid);
+        },
+        remove: function remove(uuid) {
+            console.log('delete transaction');
+            this.$store.dispatch('deleteTransaction', uuid);
+        },
 
         // to be fixed
         clickCallback: function clickCallback(pageNum) {
@@ -2324,10 +2508,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return 'badge-danger';
                 case 'errored':
                     return 'badge-danger';
-                case 'reversed':
+                case 'processing':
                     return 'badge-warning';
+                case 'reversed':
+                    return 'badge-dark';
                 case 'cancelled':
-                    return 'badge-secondary';
+                    return 'badge-dark';
                 default:
                     return 'badge-light';
             }
@@ -2348,6 +2534,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.show_transaction_modal = true;
             }
             this.spinner_status = this.transactionLoadStatus;
+        },
+        deleteTransactionStatus: function deleteTransactionStatus() {
+            if (this.deleteTransactionStatus == 2) {
+                this.refresh();
+            }
+            this.spinner_status = this.deleteTransactionStatus;
         }
     }
 });
@@ -19091,7 +19283,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -19136,7 +19328,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -19166,7 +19358,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -19196,7 +19388,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -19211,7 +19403,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -32335,14 +32527,71 @@ var render = function() {
                               "div",
                               {
                                 staticClass: "btn-group",
-                                attrs: { role: "group" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.view(transaction.uuid)
-                                  }
-                                }
+                                attrs: { role: "group" }
                               },
-                              [_vm._m(0, true)]
+                              [
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "btn btn-sm btn-info",
+                                    attrs: {
+                                      "data-toggle": "tooltip",
+                                      "data-placement": "top",
+                                      title: _vm.$t("dashboard.hover.view")
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.view(transaction.uuid)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fas fa-eye" })]
+                                ),
+                                _vm._v(" "),
+                                transaction.status == "created"
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass: "btn btn-sm btn-success",
+                                        attrs: {
+                                          "data-toggle": "tooltip",
+                                          "data-placement": "top",
+                                          title: _vm.$t(
+                                            "dashboard.hover.execute"
+                                          )
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.execute(transaction.uuid)
+                                          }
+                                        }
+                                      },
+                                      [_c("i", { staticClass: "fas fa-play" })]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                transaction.status == "created"
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass: "btn btn-sm btn-danger",
+                                        attrs: {
+                                          "data-toggle": "tooltip",
+                                          "data-placement": "top",
+                                          title: _vm.$t(
+                                            "dashboard.hover.delete"
+                                          )
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.remove(transaction.uuid)
+                                          }
+                                        }
+                                      },
+                                      [_c("i", { staticClass: "fas fa-trash" })]
+                                    )
+                                  : _vm._e()
+                              ]
                             )
                           ])
                         ])
@@ -32386,21 +32635,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      {
-        staticClass: "btn btn-sm btn-info",
-        attrs: { "data-toggle": "tooltip", "data-placement": "top" }
-      },
-      [_c("i", { staticClass: "fas fa-eye" })]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -32500,7 +32735,8 @@ var render = function() {
                       [
                         _c("span", {
                           staticClass: "fa fa-arrow-circle-up fa-lg",
-                          staticStyle: { cursor: "pointer" }
+                          staticStyle: { cursor: "pointer" },
+                          attrs: { title: _vm.$t("dashboard.hover.topup") }
                         })
                       ]
                     )
@@ -32546,7 +32782,8 @@ var render = function() {
                       [
                         _c("span", {
                           staticClass: "fa fa-arrow-circle-down fa-lg",
-                          staticStyle: { cursor: "pointer" }
+                          staticStyle: { cursor: "pointer" },
+                          attrs: { title: _vm.$t("dashboard.hover.payout") }
                         })
                       ]
                     )
@@ -33495,7 +33732,7 @@ var render = function() {
               _c("mdb-col", { staticClass: "col-sm-3" }, [
                 _c("img", {
                   attrs: {
-                    src: "/storage/" + _vm.service.logo_url,
+                    src: _vm.service.logo_url,
                     alt: _vm.$t("dashboard.pages.general.logo")
                   }
                 })
@@ -33780,14 +34017,14 @@ var render = function() {
               _c("mdb-col", { staticClass: "col-sm-3" }, [
                 _c("img", {
                   attrs: {
-                    src: _vm.transaction.company_logo,
+                    src: _vm.transaction.service_logo,
                     alt: _vm.$t("dashboard.pages.general.logo")
                   }
                 })
               ]),
               _vm._v(" "),
               _c("mdb-col", { staticClass: "col-sm-9" }, [
-                _c("strong", [_vm._v(_vm._s(_vm.transaction.company))])
+                _c("strong", [_vm._v(_vm._s(_vm.transaction.service))])
               ])
             ],
             1
@@ -34227,19 +34464,17 @@ var render = function() {
               "mdb-col",
               { staticClass: "col-sm-6" },
               [
-                !_vm.selectedMethod.is_default
-                  ? _c("mdb-input", {
-                      key: "name",
-                      attrs: { label: _vm.$t("dashboard.pages.account.name") },
-                      model: {
-                        value: _vm.name,
-                        callback: function($$v) {
-                          _vm.name = $$v
-                        },
-                        expression: "name"
-                      }
-                    })
-                  : _vm._e()
+                _c("mdb-input", {
+                  key: "name",
+                  attrs: { label: _vm.$t("dashboard.pages.account.name") },
+                  model: {
+                    value: _vm.name,
+                    callback: function($$v) {
+                      _vm.name = $$v
+                    },
+                    expression: "name"
+                  }
+                })
               ],
               1
             ),
@@ -34248,21 +34483,17 @@ var render = function() {
               "mdb-col",
               { staticClass: "col-sm-6" },
               [
-                !_vm.selectedMethod.is_default
-                  ? _c("mdb-input", {
-                      key: "amount",
-                      attrs: {
-                        label: _vm.$t("dashboard.pages.general.account")
-                      },
-                      model: {
-                        value: _vm.paymentaccount,
-                        callback: function($$v) {
-                          _vm.paymentaccount = $$v
-                        },
-                        expression: "paymentaccount"
-                      }
-                    })
-                  : _vm._e()
+                _c("mdb-input", {
+                  key: "amount",
+                  attrs: { label: _vm.$t("dashboard.pages.general.account") },
+                  model: {
+                    value: _vm.paymentaccount,
+                    callback: function($$v) {
+                      _vm.paymentaccount = $$v
+                    },
+                    expression: "paymentaccount"
+                  }
+                })
               ],
               1
             )
@@ -34363,7 +34594,7 @@ var render = function() {
               _c("mdb-col", { staticClass: "col-sm-3" }, [
                 _c("img", {
                   attrs: {
-                    src: "/storage/" + _vm.service.logo_url,
+                    src: _vm.service.logo_url,
                     alt: _vm.$t("dashboard.pages.general.logo")
                   }
                 })
@@ -34743,7 +34974,7 @@ var render = function() {
               _c("mdb-col", { staticClass: "col-sm-3" }, [
                 _c("img", {
                   attrs: {
-                    src: "/storage/" + _vm.service.logo_url,
+                    src: _vm.service.logo_url,
                     alt: _vm.$t("dashboard.pages.general.logo")
                   }
                 })
@@ -52146,8 +52377,11 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_10_laravel_echo__["a" /* default */]
 
     transaction: function transaction(uuid) {
         return axios.get('/api/transaction/' + uuid);
-    }
+    },
 
+    deleteTransaction: function deleteTransaction(uuid) {
+        return axios.delete('/api/transaction/' + uuid);
+    }
 });
 
 /***/ }),
@@ -52164,15 +52398,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__i18n__ = __webpack_require__("./resources/js/frontend/i18n.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__fortawesome_fontawesome_free_css_all_min_css__ = __webpack_require__("./node_modules/@fortawesome/fontawesome-free/css/all.min.css");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__fortawesome_fontawesome_free_css_all_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__fortawesome_fontawesome_free_css_all_min_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_mdbvue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_buefy__ = __webpack_require__("./node_modules/buefy/dist/esm/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_buefy_dist_buefy_css__ = __webpack_require__("./node_modules/buefy/dist/buefy.css");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_buefy_dist_buefy_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_buefy_dist_buefy_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_bootstrap_css_only_css_bootstrap_min_css__ = __webpack_require__("./node_modules/bootstrap-css-only/css/bootstrap.min.css");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_bootstrap_css_only_css_bootstrap_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_bootstrap_css_only_css_bootstrap_min_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue_lib_css_mdb_min_css__ = __webpack_require__("./node_modules/mdbvue/lib/css/mdb.min.css");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue_lib_css_mdb_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_mdbvue_lib_css_mdb_min_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_buefy__ = __webpack_require__("./node_modules/buefy/dist/esm/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_buefy_dist_buefy_css__ = __webpack_require__("./node_modules/buefy/dist/buefy.css");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_buefy_dist_buefy_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_buefy_dist_buefy_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_bootstrap_css_only_css_bootstrap_min_css__ = __webpack_require__("./node_modules/bootstrap-css-only/css/bootstrap.min.css");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_bootstrap_css_only_css_bootstrap_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_bootstrap_css_only_css_bootstrap_min_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_mdbvue_lib_css_mdb_min_css__ = __webpack_require__("./node_modules/mdbvue/lib/css/mdb.min.css");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_mdbvue_lib_css_mdb_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_mdbvue_lib_css_mdb_min_css__);
 /*
   Imports the routes and store and vue to use with the Vue module.
 */
@@ -52183,18 +52415,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-// Register mdbvue components globally
-
-for (var component in __WEBPACK_IMPORTED_MODULE_5_mdbvue__) {
-  __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component(component, __WEBPACK_IMPORTED_MODULE_5_mdbvue__[component]);
-}
 
 
 
 
 
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_6_buefy__["b" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_5_buefy__["b" /* default */]);
 
 /*
    Register the main component
@@ -53152,14 +53378,14 @@ module.exports = Component.exports
 /***/ "./resources/js/frontend/locales/en.json":
 /***/ (function(module, exports) {
 
-module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Purchase","transactions":"Transactions","account":"Account"},"tabs":{"titles":{"prepaid":"Prepaid Bills","postpaid":"Postpaid Bills","momo":"Mobile Money","airtime":"Airtime Recharge"},"content":{"electricity":{"title":"Purchase Electricity","prepaid":"Prepaid","postpaid":"Postpaid","vendor":"Vendor","meter_code":"Meter Code","bill_number":"Bill Number","bill_due_date":"Bill Due Date","asset":"Units","contract_number":"Contract Number","quote":{"title":"Meter Details"}},"mobile_money":{"source_account":"Account Identifier","name":"Account Holder","cashin":"Cash In","cashout":"Cash Out"}}},"transactions":{"table":{"entriesTitle":"Recent transactions","showingText":"Showing","noFoundMessage":"No matching transaction records found","header":{"code":"Reference","items":"Item","destination":"Service Number","amount":"Amount","fee":"Fee","service":"Service","total":"Total","commission":"Commission","paymentmethod":"Payment Method","status":"Status","asset":"Asset","completed_at":"Completed At"},"total":"Total","status":{"created":"Created","pending":"Pending","processing":"In Processing","success":"Successful","failed":"Failed","reversed":"Reversed","cancelled":"Cancelled","errored":"Error"}},"transaction":{"modal":{"code":"Reference","destination":"Service Number","agent":"Agent","company":"Company","amount":"Amount","fee":"Fee","service":"Service","asset":"Asset","items":"Items","status":"Status","completed_at":"Completed At","total":"Total"}}},"account":{"account_number":"Account Number","account_number_help":"Your deposit account number.","account_balance":"Account Balance","account_balance_help":"Your current account balance.","commission_balance":"Commission Balance","commission_balance_help":"Your commission balance","payout_method":"Payout method","topup_method":"Top up Method","name":"Account Name","request_payout":"Request Payout","topup_account":"Top up Account","table":{"entriesTitle":"Recent Requests","header":{"code":"Ref","amount":"Amount","method":"Payout Method","account_number":"Account Number","account_name":"Account Name","user":"Requested By","date":"Requested At","status":"Status","decision_at":"Decision At"},"status":{"pending":"Pending","approved":"Approved","rejected":"Rejected","cancelled":"Cancelled"},"actions":{"cancel":"Cancel","action":"Payout action"}}},"general":{"actions":"Actions","close":"Close","confirm":"Confirm","next":"Next","loading":"Loading","refresh":"Refresh","search":"Search","summary":"Order Details","amount":"Amount","otp":"OTP","pin":"PIN","method":"Payment Method","account":"Account Number","reference":"Reference","pincode":"Pin Code","phone":"Phone Number","fee":"Fee","destination":"Destination identifier","total":"Total","logo":"Logo","description":"Payment Description","customer":{"name":"Customer Name","address":"Address"}}}},"validations":{"purchase":{"electricity":{"meter_code":"Please enter a valid meter code","bill_number":"Please enter a valid bill number"},"mobile_money":{"account_number":"Please enter a valid account number"},"reference":"The reference is invalid","pincode":"The pin code is invalid","otp":"The OTP field is invalid","phone":"The phone number is invalid","account":"The payment account number is invalid","amount":"Please enter a valid amount","paymentmethod":"Select a payment method from the list","empty_paymentmethod":"No payment method is currently available for you","service":"Please select a service from the list","empty_service":"No services available for this category at the moment"},"account":{"insufficient_balance":"Your balance is insufficient","empty_payout_method":"Please select a payout method","topup_account_not_configured":"You have not set an account for this topup method","account_number":"Please configure account identifier for this top up method under your profile setting","invalid_amount":"Please enter a valid amount","account_name":"Please enter a valid name"},"general":{"maintenance":"We're currently maintaining our system. Please check back later","network":"Network error. Please check your internet connection","unexpected":"An unexpected error occurred"}},"notifications":{"successful":"Transaction successful","transactions_loaded":"Transactions updated successfully","payouts_loaded":"Recent payouts updated successfully","failed":"Transaction failed","late_bill":"Warning! Bill is late"},"exceptions":{"10000":"The service you requested is not available","10001":"The payment method you requested is not available","10002":"The request sent contains some validation errors","10003":"You have been logged out. Login to continue.","10004":"You are not authorized to make this request","10006":"The path requested was not found","10007":"You are making too many requests to the server","10008":"Transaction could not be saved to cache","10009":"There was an error creating this transaction","10010":"This transaction was not found. The transaction may have been processed already","10011":"There was a problem connecting to one of our servers","10012":"There was a problem calculating the fee for this transaction. A fee has not been set for this amount","10013":"The service category is currently unavailable","10014":"An invalid key was provided with the request","10015":"The language selected is currently not supported","10016":"The accept header parameter does not contain application/json","10018":"This transaction could not be found","10019":"There was a problem connecting to the service provider","10020":"The meter code does not exist","10021":"There was a problem sending a callback request","10022":"This service does not exist yet","10023":"Your account balance is insufficient","10024":"You are not authorized to perform this transaction. Your account has been limited","10025":"Your session has expired. Please refresh your browser","10026":"The payment method is not active","10027":"There was an error requesting the payout. Please try again later","10028":"Your commission balance is insufficient","10029":"There was an error cancelling the payout. Please try again later","10030":"Warning! You have entered an incorrect pin code","10031":"The meter with the provided has been deactivated","10032":"The meter code provided is invalid","10033":"The transaction status cannot be updated","10034":"The amount provided is less than the minimum amount required for this service","10035":"The customer cannot perform this transaction with service provider","10036":"The customer is not found","10037":"Insufficient funds in customer's wallet","10038":"Transaction canceled by customer","10039":"The customer has not authorized the transaction","10040":"The service is not properly configured","10041":"Customer has reached transaction limit","10042":"You are not allowed to use this service at the moment","10043":"No bill was found","10044":"NThe amount provided is more than the maximum amount required for this service","00000":"An unexpected error occurred"}}
+module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Purchase","transactions":"Transactions","account":"Account"},"tabs":{"titles":{"prepaid":"Prepaid Bills","postpaid":"Postpaid Bills","momo":"Mobile Money","airtime":"Airtime Recharge"},"content":{"electricity":{"title":"Purchase Electricity","prepaid":"Prepaid","postpaid":"Postpaid","vendor":"Vendor","meter_code":"Meter Code","bill_number":"Bill Number","bill_due_date":"Bill Due Date","asset":"Units","contract_number":"Contract Number","quote":{"title":"Meter Details"}},"mobile_money":{"source_account":"Account Identifier","name":"Account Holder","cashin":"Cash In","cashout":"Cash Out"}}},"transactions":{"table":{"entriesTitle":"Recent transactions","showingText":"Showing","noFoundMessage":"No matching transaction records found","header":{"code":"Reference","items":"Item","destination":"Service Number","amount":"Amount","fee":"Fee","service":"Service","total":"Total","commission":"Commission","paymentmethod":"Payment Method","status":"Status","asset":"Asset","completed_at":"Completed At"},"total":"Total","status":{"created":"Created","pending":"Pending","processing":"In Processing","success":"Successful","failed":"Failed","reversed":"Reversed","cancelled":"Cancelled","errored":"Error"}},"transaction":{"modal":{"code":"Reference","destination":"Service Number","agent":"Agent","company":"Company","amount":"Amount","fee":"Fee","service":"Service","asset":"Asset","items":"Items","status":"Status","completed_at":"Completed At","total":"Total"}}},"account":{"account_number":"Account Number","account_number_help":"Your deposit account number.","account_balance":"Account Balance","account_balance_help":"Your current account balance.","commission_balance":"Commission Balance","commission_balance_help":"Your commission balance","payout_method":"Payout method","topup_method":"Top up Method","name":"Account Name","request_payout":"Request Payout","topup_account":"Top up Account","table":{"entriesTitle":"Recent Requests","header":{"code":"Ref","amount":"Amount","method":"Payout Method","account_number":"Account Number","account_name":"Account Name","user":"Requested By","date":"Requested At","status":"Status","decision_at":"Decision At"},"status":{"pending":"Pending","approved":"Approved","rejected":"Rejected","cancelled":"Cancelled"},"actions":{"cancel":"Cancel","action":"Payout action"}}},"general":{"actions":"Actions","close":"Close","confirm":"Confirm","next":"Next","loading":"Loading","refresh":"Refresh","search":"Search","summary":"Order Details","amount":"Amount","otp":"OTP","pin":"PIN","method":"Payment Method","account":"Account Number","reference":"Reference","pincode":"Pin Code","phone":"Phone Number","fee":"Fee","destination":"Destination identifier","total":"Total","logo":"Logo","description":"Payment Description","customer":{"name":"Customer Name","address":"Address"}}},"hover":{"view":"View","execute":"Execute","topup":"Top Up Your Account","payout":"Request Commission Payout","delete":"Delete"}},"validations":{"purchase":{"electricity":{"meter_code":"Please enter the meter code in the required format {format}","bill_number":"Please enter a bill number in the valid format {format}"},"mobile_money":{"account_number":"Please enter an account number in the valid format {format}"},"reference":"The reference is invalid","pincode":"The pin code is invalid","otp":"The OTP field is invalid","phone":"The phone number is invalid","account":"The payment account number is invalid","amount":"Please enter a valid amount","paymentmethod":"Select a payment method from the list","empty_paymentmethod":"No payment method is currently available for you","service":"Please select a service from the list","empty_service":"No services available for this category at the moment"},"account":{"insufficient_balance":"Your balance is insufficient","empty_payout_method":"Please select a payout method","topup_account_not_configured":"You have not set an account for this topup method","account_number":"Please configure account identifier for this top up method under your profile setting","invalid_amount":"Please enter a valid amount","account_name":"Please enter a valid name"},"general":{"maintenance":"We're currently maintaining our system. Please check back later","network":"Network error. Please check your internet connection","unexpected":"An unexpected error occurred"}},"notifications":{"successful":"Transaction successful","transactions_loaded":"Transactions updated successfully","payouts_loaded":"Recent payouts updated successfully","failed":"Transaction failed","late_bill":"Warning! Bill is late"},"exceptions":{"10000":"The service you requested is not available","10001":"The payment method you requested is not available","10002":"The request sent contains some validation errors","10003":"You have been logged out. Login to continue.","10004":"You are not authorized to make this request","10006":"The path requested was not found","10007":"You are making too many requests to the server","10008":"Transaction could not be saved to cache","10009":"There was an error creating this transaction","10010":"This transaction was not found. The transaction may have been processed already or expired","10011":"There was a problem connecting to one of our servers","10012":"There was a problem calculating the fee for this transaction. A fee has not been set for this amount","10013":"The service category is currently unavailable","10014":"An invalid key was provided with the request","10015":"The language selected is currently not supported","10016":"The accept header parameter does not contain application/json","10018":"This transaction could not be found","10019":"There was a problem connecting to the service provider","10020":"The meter code does not exist","10021":"There was a problem sending a callback request","10022":"This service does not exist yet","10023":"Your account balance is insufficient","10024":"You are not authorized to perform this transaction. Your account has been limited","10025":"Your session has expired. Please refresh your browser","10026":"The payment method is not active","10027":"There was an error requesting the payout. Please try again later","10028":"Your commission balance is insufficient","10029":"There was an error cancelling the payout. Please try again later","10030":"Warning! You have entered an incorrect pin code","10031":"The meter with the provided has been deactivated","10032":"The meter code provided is invalid","10033":"The transaction status cannot be updated","10034":"The amount provided is less than the minimum amount required for this service","10035":"The customer cannot perform this transaction with service provider","10036":"The customer is not found","10037":"Insufficient funds in customer's wallet","10038":"Transaction canceled by customer","10039":"The customer has not authorized the transaction","10040":"The service is not properly configured","10041":"Customer has reached transaction limit","10042":"You are not allowed to use this service at the moment","10043":"No bill was found","10044":"The amount provided is more than the maximum amount required for this service","10045":"The service number provided is not in the required format","10046":"There is a commission distribution error with this service. Please contact support","00000":"An unexpected error occurred"}}
 
 /***/ }),
 
 /***/ "./resources/js/frontend/locales/fr.json":
 /***/ (function(module, exports) {
 
-module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Purchase","transactions":"Transactions","account":"Account"},"tabs":{"titles":{"prepaid":"Prepaid Bills","postpaid":"Postpaid Bills","momo":"Mobile Money","airtime":"Airtime Recharge"},"content":{"electricity":{"title":"Purchase Electricity","prepaid":"Prepaid","postpaid":"Postpaid","vendor":"Vendor","meter_code":"Meter Code","bill_number":"Bill Number","bill_due_date":"Bill Due Date","asset":"Units","contract_number":"Contract Number","quote":{"title":"Meter Details"}},"mobile_money":{"source_account":"Account Identifier","name":"Account Holder","cashin":"Cash In","cashout":"Cash Out"}}},"transactions":{"table":{"entriesTitle":"Recent transactions","showingText":"Showing","noFoundMessage":"No matching transaction records found","header":{"code":"Reference","items":"Item","destination":"Service Number","amount":"Amount","fee":"Fee","service":"Service","total":"Total","commission":"Commission","paymentmethod":"Payment Method","status":"Status","asset":"Asset","completed_at":"Completed At"},"total":"Total","status":{"created":"Created","pending":"Pending","processing":"In Processing","success":"Successful","failed":"Failed","reversed":"Reversed","cancelled":"Cancelled","errored":"Error"}},"transaction":{"modal":{"code":"Reference","destination":"Service Number","agent":"Agent","company":"Company","amount":"Amount","fee":"Fee","service":"Service","asset":"Asset","items":"Items","status":"Status","completed_at":"Completed At","total":"Total"}}},"account":{"account_number":"Account Number","account_number_help":"Your deposit account number.","account_balance":"Account Balance","account_balance_help":"Your current account balance.","commission_balance":"Commission Balance","commission_balance_help":"Your commission balance","payout_method":"Payout method","topup_method":"Top up Method","name":"Account Name","request_payout":"Request Payout","topup_account":"Top up Account","table":{"entriesTitle":"Recent Requests","header":{"code":"Ref","amount":"Amount","method":"Payout Method","account_number":"Account Number","account_name":"Account Name","user":"Requested By","date":"Requested At","status":"Status","decision_at":"Decision At"},"status":{"pending":"Pending","approved":"Approved","rejected":"Rejected","cancelled":"Cancelled"},"actions":{"cancel":"Cancel","action":"Payout action"}}},"general":{"actions":"Actions","close":"Close","confirm":"Confirm","next":"Next","loading":"Loading","refresh":"Refresh","search":"Search","summary":"Order Details","amount":"Amount","otp":"OTP","pin":"PIN","method":"Payment Method","account":"Account Number","reference":"Reference","pincode":"Pin Code","phone":"Phone Number","fee":"Fee","destination":"Destination identifier","total":"Total","logo":"Logo","description":"Payment Description","customer":{"name":"Customer Name","address":"Address"}}}},"validations":{"purchase":{"electricity":{"meter_code":"Please enter a valid meter code","bill_number":"Please enter a valid bill number"},"mobile_money":{"account_number":"Please enter a valid account number"},"reference":"The reference is invalid","pincode":"The pin code is invalid","otp":"The OTP field is invalid","phone":"The phone number is invalid","account":"The payment account number is invalid","amount":"Please enter a valid amount","paymentmethod":"Select a payment method from the list","empty_paymentmethod":"No payment method is currently available for you","service":"Please select a service from the list","empty_service":"No services available for this category at the moment"},"account":{"insufficient_balance":"Your balance is insufficient","empty_payout_method":"Please select a payout method","topup_account_not_configured":"You have not set an account for this topup method","account_number":"Please configure account identifier for this top up method under your profile setting","invalid_amount":"Please enter a valid amount","account_name":"Please enter a valid name"},"general":{"maintenance":"We're currently maintaining our system. Please check back later","network":"Network error. Please check your internet connection","unexpected":"An unexpected error occurred"}},"notifications":{"successful":"Transaction successful","transactions_loaded":"Transactions updated successfully","payouts_loaded":"Recent payouts updated successfully","failed":"Transaction failed","late_bill":"Warning! Bill is late"},"exceptions":{"10000":"The service you requested is not available","10001":"The payment method you requested is not available","10002":"The request sent contains some validation errors","10003":"You have been logged out. Login to continue.","10004":"You are not authorized to make this request","10006":"The path requested was not found","10007":"You are making too many requests to the server","10008":"Transaction could not be saved to cache","10009":"There was an error creating this transaction","10010":"This transaction was not found. The transaction may have been processed already","10011":"There was a problem connecting to one of our servers","10012":"There was a problem calculating the fee for this transaction. A fee has not been set for this amount","10013":"The service category is currently unavailable","10014":"An invalid key was provided with the request","10015":"The language selected is currently not supported","10016":"The accept header parameter does not contain application/json","10018":"This transaction could not be found","10019":"There was a problem connecting to the service provider","10020":"The meter code does not exist","10021":"There was a problem sending a callback request","10022":"This service does not exist yet","10023":"Your account balance is insufficient","10024":"You are not authorized to perform this transaction. Your account has been limited","10025":"Your session has expired. Please refresh your browser","10026":"The payment method is not active","10027":"There was an error requesting the payout. Please try again later","10028":"Your commission balance is insufficient","10029":"There was an error cancelling the payout. Please try again later","10030":"Warning! You have entered an incorrect pin code","10031":"The meter code has been deactivated","10032":"The meter code provided is invalid","10033":"The transaction status cannot be updated","10034":"The amount provided is less than the minimum amount required for this service","10035":"The customer cannot perform this transaction with service provider","10036":"The customer is not found","10037":"Insufficient funds in customer's wallet","10038":"Transaction canceled by customer","10039":"The customer has not authorized the transaction","10040":"The service is not properly configured","10041":"Customer has reached transaction limit","10042":"You are not allowed to use this service at the moment","10043":"No bill was found","10044":"NThe amount provided is more than the maximum amount required for this service","00000":"An unexpected error occurred"}}
+module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Achat","transactions":"Transactions","account":"Compte"},"tabs":{"titles":{"prepaid":"Factures prépayées","postpaid":"Factures postpayées","momo":"Mobile Money","airtime":"Recharge de crédit"},"content":{"electricity":{"title":"Achat d'électricité","prepaid":"Prepayée","postpaid":"Postpayée","vendor":"Fournisseur","meter_code":"Indicatif du compteur","bill_number":"Numéro de facture","bill_due_date":"Date limite de paiement de la facture","asset":"Atout","contract_number":"Numéro de contrat","quote":{"title":"Détails du compteur"}},"mobile_money":{"source_account":"Identifiant du compte","name":"Détenteur de compte","cashin":"Dépôt","cashout":"Retrait"}}},"transactions":{"table":{"entriesTitle":"Transactions récentes","showingText":"Afficher","noFoundMessage":"Aucune transaction correspondante trouvée","header":{"code":"Reférence","items":"Article","destination":"Numéro de service","amount":"Montant","fee":"Frais","service":"Service","total":"Total","commission":"Commissions","paymentmethod":"Mode de paiement","status":"Statut","asset":"Ressource","completed_at":"Terminée à"},"total":"Total","status":{"created":"Crée","pending":"En attente","processing":"En cours de traitement","success":"Succès","failed":"Echouée","reversed":"Reversée","cancelled":"Annulée","errored":"Erreur"}},"transaction":{"modal":{"code":"Reférence","destination":"Numéro de service","agent":"Agent","company":"Entreprise","amount":"Montant","fee":"Frais","service":"Service","asset":"Ressource","items":"Articles","status":"Statut","completed_at":"Terminée à","total":"Total"}}},"account":{"account_number":"Numéro de compte","account_number_help":"Votre numéro de compte de dépôt.","account_balance":"Solde du compte","account_balance_help":"Le solde de votre compte actuel.","commission_balance":"Solde de commissions","commission_balance_help":"Votre solde de commissions","payout_method":"Mode de paiement","topup_method":"Mode de recharge","name":"Nom du compte","request_payout":"Demande de paiement","topup_account":"Recharge du compte","table":{"entriesTitle":"Dernières requêtes","header":{"code":"Ref","amount":"Montant","method":"Mode de paiement","account_number":"Numéro de compte","account_name":"Nom du compte","user":"Demandé par","date":"Demandé le","status":"Statut","decision_at":"Décision à"},"status":{"pending":"En attente","approved":"Approuvée","rejected":"Rejettée","cancelled":"Annulée"},"actions":{"cancel":"Annuler","action":"Procédure de paiement"}}},"general":{"actions":"Actions","close":"Fermer","confirm":"Confirmer","next":"Suivant","loading":"Chargement","refresh":"Actualiser","search":"Rechercher","summary":"Détails de la demande","amount":"Montant","otp":"OTP","pin":"PIN","method":"Mode de paiement","account":"Numéro de compte","reference":"Reférence","pincode":"Code Pin","phone":"Numéro de téléphone","fee":"Frais","destination":"Identifiants","total":"Total","logo":"Logo","description":"Informations sur le paiement","customer":{"name":"Nom du client","address":"Adresse"}}}},"validations":{"purchase":{"electricity":{"meter_code":"Veuillez entrer un numéro de compteur au format valid {format}","bill_number":"Veuillez entrer un numéro de facture au format valid {format}"},"mobile_money":{"account_number":"Veuillez entrer un numéro de compte au format valid {format}"},"reference":"La reférence n'est valide","pincode":"Le code PIN n'est pas valide","otp":"Le domaine OTP n'est pas valide","phone":"Le numéro de téléphone n'est pas valide","account":"Le numéro de compte de paiement n'est pas valide","amount":"Veuillez entrer un montant valide","paymentmethod":"Sélectionnez un mode de paiement dans la liste","empty_paymentmethod":"Aucun mode de paiement n'est actuellement disponible pour vous","service":"Veuillez sélectionner un service dans la liste","empty_service":"Aucun service disponible pour cette catégorie pour le moment"},"account":{"insufficient_balance":"Votre solde est insuffisant","empty_payout_method":"Veuillez sélectionner un mode de paiement","topup_account_not_configured":"Vous n'avez pas défini de compte pour cette méthode de recharge","account_number":"Veuillez configurer un numéro de compte pour cette méthode de recharge dans les paramètres de votre profil","invalid_amount":"Veuillez entrer un montant valide","account_name":"Veuillez entrer un nom valide"},"general":{"maintenance":"Nous assurons actuellement la maintenance de notre système. Veuillez revenir plus tard","network":"Erreur réseau. Veuillez vérifier votre connexion internet","unexpected":"Une erreur inattendue s'est produite"}},"notifications":{"successful":"Transaction réussie","transactions_loaded":"Transactions mises à jour avec succès","payouts_loaded":"Les derniers paiements ont été mis à jour avec succès","failed":"L'opération a échoué","late_bill":"Attention ! La facture a du retard"},"exceptions":{"10000":"Le service demandé n'est pas disponible","10001":"Le mode de paiement demandé n'est pas disponible","10002":"La demande envoyée contient quelques erreurs de saisie","10003":"Vous avez été déconnecté. Connectez-vous pour continuer","10004":"Vous n'êtes pas autorisé à soumettre cette requête","10006":"Le lien recherché n'a pas été trouvé","10007":"Vous envoyez un trop grand nombre de demandes au serveur","10008":"La transaction n'a pas pu être enregistrée dans la mémoire cache","10009":"Il y a eu une erreur pendant de la transaction","10010":"Cette transaction n'a pas été trouvée. La transaction a peut-être déjà été traitée ou expirée","10011":"Une erreur de cconnexion est survenue à l'un de nos serveurs","10012":"Un problème s'est produit lors du calcul des frais pour cette transaction. Aucun frais n'a été fixé pour ce montant","10013":"La liste des services n'est pas disponible pour le moment","10014":"Une clé non valide a été transmise avec la requête","10015":"The language selected is currently not supported","10016":"Le paramètre acceptance en-tête ne contient pas l'application/json","10018":"Cette transaction n'a pas été trouvée","10019":"Un problème de connexion avec le fournisseur de services s'est produit","10020":"Le numéro de compteur n'existe pas","10021":"Un problème est survenu lors de l'envoi d'une demande de relance","10022":"Ce service est indisponible pour le moment","10023":"Votre solde est insuffisant","10024":"Vous n'êtes pas autorisé à effectuer cette transaction. Votre compte a été soumis à des restrictions","10025":"Votre session a expiré. Veuillez actualiser votre navigateur","10026":"Le mode de paiement n'est pas activé","10027":"Une erreur s'est produite lors de la demande de paiement. Veuillez réessayer plus tard","10028":"Votre solde de commission est insuffisant","10029":"Une erreur a annulé le paiement. Veuillez réessayer plus tard","10030":"Attention ! Vous avez saisi un code pin incorrect","10031":"The meter with the provided has been deactivated","10032":"Le numéro de compteur fourni n'est pas valide","10033":"Le statut de la transaction ne peut pas être mis à jour","10034":"The amount provided is less than the minimum amount required for this service","10035":"Le client ne peut effectuer cette transaction avec le fournisseur de services","10036":"Le client n'a pas été trouvé","10037":"Solde insuffisant dans le compte du client","10038":"Transaction annulée par le client","10039":"Le client n'a pas approuvé la transaction","10040":"Le service n'est pas convenablement configuré","10041":"Le client a atteint la limite de transaction","10042":"Vous n'êtes pas autorisé à utiliser ce service pour le moment","10043":"Aucucne facture n'a été trouvée","10044":"Le montant indiqué est supérieur au montant maximum requis pour ce service","10045":"Le numéro de service fourni n'est pas dans le format requis","00000":"Une erreur inattendue s'est produite"}}
 
 /***/ }),
 
@@ -53181,21 +53407,6 @@ var ConfigurationLoad = {
         configuration: function configuration() {
             return this.$store.getters.getConfiguration;
         }
-    }
-};
-
-/***/ }),
-
-/***/ "./resources/js/frontend/mixins/Configuration/Reset.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Reset; });
-var Reset = {
-    activated: function activated() {
-        this.$store.commit('setQuoteLoadStatus', 0);
-        this.$store.commit('setPaymentStatus', 0);
-        this.$store.commit('setTransactionLoadStatus', 0);
     }
 };
 
@@ -53229,6 +53440,7 @@ var PusherNotification = {
                 console.log('callback received. Transaction status:', transaction.status);
                 if (transaction.status == __WEBPACK_IMPORTED_MODULE_0__config_business__["a" /* BUSINESS_CONFIG */].TRANSACTION_SUCCESSFUL) {
                     this.$store.commit('setPaymentStatus', 2);
+                    this.$store.dispatch('getAccount');
                     this.$buefy.toast.open({
                         message: this.$t('notifications.successful'),
                         type: 'is-success'
@@ -53361,7 +53573,9 @@ var business = {
         payoutsLoadStatus: 0,
         payouts: [],
 
-        cancelPayoutStatus: 0
+        cancelPayoutStatus: 0,
+
+        deleteTransactionStatus: 0
     },
 
     actions: {
@@ -53391,8 +53605,19 @@ var business = {
                 __WEBPACK_IMPORTED_MODULE_1__helpers_helpers__["a" /* helper */].handleException(error);
             });
         },
-        loadConfiguration: function loadConfiguration(_ref3) {
+        deleteTransaction: function deleteTransaction(_ref3, uuid) {
             var commit = _ref3.commit;
+
+            commit('setDeleteTransactionStatus', 1);
+            __WEBPACK_IMPORTED_MODULE_0__api_business__["a" /* default */].deleteTransaction(uuid).then(function (response) {
+                commit('setDeleteTransactionStatus', 2);
+            }).catch(function (error) {
+                commit('setDeleteTransactionStatus', 3);
+                __WEBPACK_IMPORTED_MODULE_1__helpers_helpers__["a" /* helper */].handleException(error);
+            });
+        },
+        loadConfiguration: function loadConfiguration(_ref4) {
+            var commit = _ref4.commit;
 
 
             commit('setConfigurationLoadStatus', 1);
@@ -53427,8 +53652,8 @@ var business = {
                 });
             }
         },
-        loadTransactions: function loadTransactions(_ref4) {
-            var commit = _ref4.commit;
+        loadTransactions: function loadTransactions(_ref5) {
+            var commit = _ref5.commit;
 
             commit('setTransactionsLoadStatus', 1);
             __WEBPACK_IMPORTED_MODULE_0__api_business__["a" /* default */].transactions().then(function (response) {
@@ -53440,8 +53665,8 @@ var business = {
                 __WEBPACK_IMPORTED_MODULE_1__helpers_helpers__["a" /* helper */].handleException(error);
             });
         },
-        getAccount: function getAccount(_ref5) {
-            var commit = _ref5.commit;
+        getAccount: function getAccount(_ref6) {
+            var commit = _ref6.commit;
 
             commit('setAccountLoadStatus', 1);
             __WEBPACK_IMPORTED_MODULE_0__api_business__["a" /* default */].account().then(function (response) {
@@ -53453,8 +53678,8 @@ var business = {
                 __WEBPACK_IMPORTED_MODULE_1__helpers_helpers__["a" /* helper */].handleException(error);
             });
         },
-        requestPayout: function requestPayout(_ref6, data) {
-            var commit = _ref6.commit;
+        requestPayout: function requestPayout(_ref7, data) {
+            var commit = _ref7.commit;
 
             commit('setPayoutStatus', 1);
             __WEBPACK_IMPORTED_MODULE_0__api_business__["a" /* default */].payout(data).then(function (response) {
@@ -53466,8 +53691,8 @@ var business = {
                 __WEBPACK_IMPORTED_MODULE_1__helpers_helpers__["a" /* helper */].handleException(error);
             });
         },
-        loadPayouts: function loadPayouts(_ref7) {
-            var commit = _ref7.commit;
+        loadPayouts: function loadPayouts(_ref8) {
+            var commit = _ref8.commit;
 
             commit('setPayoutsLoadStatus', 1);
             __WEBPACK_IMPORTED_MODULE_0__api_business__["a" /* default */].getPayouts().then(function (response) {
@@ -53479,8 +53704,8 @@ var business = {
                 __WEBPACK_IMPORTED_MODULE_1__helpers_helpers__["a" /* helper */].handleException(error);
             });
         },
-        cancelPayout: function cancelPayout(_ref8, uuid) {
-            var commit = _ref8.commit;
+        cancelPayout: function cancelPayout(_ref9, uuid) {
+            var commit = _ref9.commit;
 
             commit('setCancelPayoutStatus', 1);
             __WEBPACK_IMPORTED_MODULE_0__api_business__["a" /* default */].cancelPayout(uuid).then(function (response) {
@@ -53490,8 +53715,8 @@ var business = {
                 __WEBPACK_IMPORTED_MODULE_1__helpers_helpers__["a" /* helper */].handleException(error);
             });
         },
-        loadTransaction: function loadTransaction(_ref9, uuid) {
-            var commit = _ref9.commit;
+        loadTransaction: function loadTransaction(_ref10, uuid) {
+            var commit = _ref10.commit;
 
             commit('setTransactionLoadStatus', 1);
             __WEBPACK_IMPORTED_MODULE_0__api_business__["a" /* default */].transaction(uuid).then(function (response) {
@@ -53555,6 +53780,9 @@ var business = {
         },
         setTransactionLoadStatus: function setTransactionLoadStatus(state, status) {
             state.transactionLoadStatus = status;
+        },
+        setDeleteTransactionStatus: function setDeleteTransactionStatus(state, status) {
+            state.deleteTransactionStatus = status;
         }
     },
 
@@ -53609,6 +53837,9 @@ var business = {
         },
         getTransactionLoadStatus: function getTransactionLoadStatus(state) {
             return state.transactionLoadStatus;
+        },
+        getDeleteTransactionStatus: function getDeleteTransactionStatus(state) {
+            return state.deleteTransactionStatus;
         }
     }
 };

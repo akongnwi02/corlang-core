@@ -36,6 +36,8 @@ export const business = {
         payouts: [],
 
         cancelPayoutStatus: 0,
+
+        deleteTransactionStatus: 0
     },
 
     actions: {
@@ -63,6 +65,18 @@ export const business = {
                 .catch(function (error) {
                     commit( 'setPaymentStatus', 3 );
                     commit( 'setPayment',  {});
+                    helper.handleException(error);
+                });
+        },
+
+        deleteTransaction({commit}, uuid) {
+            commit('setDeleteTransactionStatus', 1);
+            BusinessApi.deleteTransaction(uuid)
+                .then(function (response) {
+                    commit('setDeleteTransactionStatus', 2);
+                })
+                .catch(function (error) {
+                    commit('setDeleteTransactionStatus', 3);
                     helper.handleException(error);
                 });
         },
@@ -232,6 +246,9 @@ export const business = {
         } ,
         setTransactionLoadStatus(state, status) {
             state.transactionLoadStatus = status;
+        },
+        setDeleteTransactionStatus(state, status) {
+            state.deleteTransactionStatus = status;
         }
     },
 
@@ -287,6 +304,9 @@ export const business = {
         },
         getTransactionLoadStatus(state) {
             return state.transactionLoadStatus;
+        },
+        getDeleteTransactionStatus(state) {
+            return state.deleteTransactionStatus;
         }
     }
 };

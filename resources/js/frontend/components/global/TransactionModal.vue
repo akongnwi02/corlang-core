@@ -6,10 +6,10 @@
         <mdb-modal-body>
             <mdb-row>
                 <mdb-col class="col-sm-3">
-                    <img :src="transaction.company_logo" :alt="$t('dashboard.pages.general.logo')">
+                    <img :src="transaction.service_logo" :alt="$t('dashboard.pages.general.logo')">
                 </mdb-col>
                 <mdb-col class="col-sm-9">
-                    <strong>{{transaction.company}}</strong>
+                    <strong>{{transaction.service}}</strong>
                     <!--<mdb-card-text>{{ service.description }}</mdb-card-text>-->
                 </mdb-col>
             </mdb-row>
@@ -115,12 +115,24 @@
 
 <script>
     import { currency} from "../../helpers/currency";
+    import {mdbModalFooter, mdbModal, mdbBtn, mdbCol, mdbRow, mdbInput, mdbModalBody, mdbModalHeader, mdbModalTitle} from 'mdbvue';
 
     export default {
         name: "Transaction",
         props: [
             'transaction',
         ],
+        components: {
+            mdbModalFooter,
+            mdbModal,
+            mdbBtn,
+            mdbCol,
+            mdbInput,
+            mdbModalBody,
+            mdbModalHeader,
+            mdbModalTitle,
+            mdbRow
+        },
         methods: {
             currencyFormat(amount) {
                 return currency.format(amount, this.transaction.currency_code)

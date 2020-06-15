@@ -46,9 +46,20 @@
 </template>
 <script>
     import {BUSINESS_CONFIG} from "../../config/business";
+    import {mdbModalFooter, mdbModal, mdbBtn, mdbCol, mdbInput, mdbModalBody, mdbModalHeader, mdbModalTitle} from 'mdbvue';
 
     export default {
         name: "TopupModal",
+        components: {
+            mdbModalFooter,
+            mdbModal,
+            mdbBtn,
+            mdbCol,
+            mdbInput,
+            mdbModalBody,
+            mdbModalHeader,
+            mdbModalTitle
+        },
         data() {
             return {
                 invalid_text: '',

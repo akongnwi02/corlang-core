@@ -4,8 +4,8 @@ return [
     
     'company' => [
         'type' => [
-            'formal'   => 'formal company',
-            'informal' => 'informal company',
+            'internal' => 'internal',
+            'merchant' => 'merchant',
         ]
     ],
     

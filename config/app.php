@@ -140,7 +140,7 @@ return [
         
         'status_uri' => env('APP_MICRO_SERVICE_STATUS_URI', '/status'),
     
-        'cache_expiration' => env('APP_CACHE_EXPIRATION', 1),
+        'cache_expiration' => env('APP_CACHE_EXPIRATION', 15),
 
         'cache_store' => env('APP_CACHE_STORE', 'database'),
 

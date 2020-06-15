@@ -21,11 +21,10 @@ class PayoutRequest extends FormRequest
     
     public function rules(PaymentMethodRepository $paymentMethodRepository)
     {
-        $defaultMethod = $paymentMethodRepository->defaultPaymentMethod();
         return [
             'amount'             => ['required', 'numeric', 'min:50',],
-            'account'            => ["required_unless:paymentmethod_code,$defaultMethod->code",],
-            'name'               => ["required_unless:paymentmethod_code,$defaultMethod->code",],
+            'name'               => ['required', 'string', 'max:50',],
+            'account'            => ['required', 'string', 'max:50',],
             'currency_code'      => ['required', Rule::exists('currencies', 'code')],
             'paymentmethod_code' => ['required', Rule::exists('paymentmethods', 'code')],
         ];

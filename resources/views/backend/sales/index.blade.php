@@ -37,6 +37,7 @@
                                 <th>@lang('labels.backend.sales.table.payment_account')</th>
                                 <th>@lang('labels.backend.sales.table.company_commission')</th>
                                 <th>@lang('labels.backend.sales.table.agent_commission')</th>
+                                <th>@lang('labels.backend.sales.table.external_commission')</th>
                                 <th>@lang('labels.backend.sales.table.actual_status')</th>
 
                                 {{--<th>@lang('labels.general.actions')</th>--}}
@@ -55,6 +56,7 @@
                                     <td>{{ $sale->paymentaccount}}</td>
                                     <td>{{ number_format($sale->company_commission, 2) . ' ' . $sale->currency_code }}</td>
                                     <td>{{ number_format($sale->agent_commission, 2) . ' ' . $sale->currency_code }}</td>
+                                    <td>{{ number_format($sale->external_commission, 2) . ' ' . $sale->currency_code }}</td>
                                     <td><span class="badge badge-{{ $sale->status_class_label }}">{{ __($sale->status) }}</span></td>
                                 </tr>
                             @endforeach

@@ -136,15 +136,15 @@ class CompanyRepository
             }
         }
         
-        if ($logo) {
-            // delete previous logo
-            if (strlen($company->logo_url)) {
-                Storage::disk('public')->delete($company->logo_url);
-            }
-            
-            $company->logo_url = $logo->store('/logos', 'public');
-            
-        }
+//        if ($logo) {
+//            // delete previous logo
+//            if (strlen($company->logo_url)) {
+//                Storage::disk('public')->delete($company->logo_url);
+//            }
+//
+//            $company->logo_url = $logo->store('/logos', 'public');
+//
+//        }
     
         if ($company->update()) {
             

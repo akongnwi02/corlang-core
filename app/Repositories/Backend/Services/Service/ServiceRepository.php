@@ -33,11 +33,11 @@ class ServiceRepository
             $service = (new Service)->fill($data);
             $service->has_items = request()->has('has_items') ? 1 : 0;
             
-            if ($logo) {
-
-                $service->logo_url = $logo->store('/logos', 'public');
-        
-            }
+//            if ($logo) {
+//
+//                $service->logo_url = $logo->store('/logos', 'public');
+//
+//            }
     
             if ($service->save()) {
                 event(new ServiceCreated($service));
@@ -118,15 +118,15 @@ class ServiceRepository
             $service->requires_auth = request()->has('requires_auth') ? 1 : 0;
             $service->is_money_withdrawal = request()->has('is_money_withdrawal') ? 1 : 0;
     
-            if ($logo) {
-                // delete previous logo
-                if (strlen($service->logo_url)) {
+//            if ($logo) {
+//                // delete previous logo
+//                if (strlen($service->logo_url)) {
 //                Storage::disk('public')->delete($service->logo_url);
-                }
-        
-                $service->logo_url = $logo->store('/logos', 'public');
-        
-            }
+//                }
+//
+//                $service->logo_url = $logo->store('/logos', 'public');
+//
+//            }
     
             if ($service->update()) {
         
@@ -149,14 +149,19 @@ class ServiceRepository
         return Service::where('code', $code)->first();
     }
     
-    public function getAgentServiceRate($service, $user)
+    public function getAgentServiceRate($service, $company)
     {
-        return $user->company->services()->where('uuid', $service->uuid)->first()->specific->agent_rate ?: $service->agent_rate;
+        return $company->services()->where('uuid', $service->uuid)->first()->specific->agent_rate ?: $service->agent_rate;
     }
     
     public function getCompanyServiceRate($service, $company)
     {
         return $company->services()->where('uuid', $service->uuid)->first()->specific->company_rate ?: $service->company_rate;
+    }
+    
+    public function getExternalServiceRate($service, $company)
+    {
+        return $company->services()->where('uuid', $service->uuid)->first()->specific->external_rate ?: $service->external_rate;
     }
     
 }

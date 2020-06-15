@@ -37,6 +37,7 @@
 
 <script>
     import { ChangeLanguage }from '../mixins/local/ChangeLanguage'
+    import {mdbContainer, mdbTab, mdbTabItem, mdbIcon, mdbTabContent, mdbTabPane} from 'mdbvue';
 
     import Purchase from '../pages/Purchase';
     import Transactions from '../pages/Transactions';
@@ -53,6 +54,12 @@
             Loader,
             Purchase,
             Transactions,
+            mdbContainer,
+            mdbTab,
+            mdbTabItem,
+            mdbIcon,
+            mdbTabContent,
+            mdbTabPane
         },
         data() {
             return{

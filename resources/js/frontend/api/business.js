@@ -59,6 +59,9 @@ export default {
 
     transaction: function (uuid) {
         return axios.get('/api/transaction/' + uuid);
-    }
+    },
 
+    deleteTransaction: function (uuid) {
+        return axios.delete('/api/transaction/' + uuid);
+    }
 }

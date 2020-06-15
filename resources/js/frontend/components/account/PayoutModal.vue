@@ -23,12 +23,12 @@
             </div>
             <div class="row">
                 <mdb-col class="col-sm-6">
-                    <mdb-input v-if="!selectedMethod.is_default" key="name"
+                    <mdb-input key="name"
                                :label="$t('dashboard.pages.account.name')"
                                v-model="name"></mdb-input>
                 </mdb-col>
                 <mdb-col class="col-sm-6">
-                    <mdb-input v-if="!selectedMethod.is_default" key="amount"
+                    <mdb-input key="amount"
                                :label="$t('dashboard.pages.general.account')"
                                v-model="paymentaccount"></mdb-input>
                 </mdb-col>
@@ -45,12 +45,23 @@
 
 <script>
     import {BUSINESS_CONFIG} from "../../config/business";
+    import {mdbModalFooter, mdbModal, mdbBtn, mdbCol, mdbInput, mdbModalBody, mdbModalHeader, mdbModalTitle} from 'mdbvue';
 
     export default {
         name: "PayoutModal",
         props: [
             'account',
         ],
+        components: {
+            mdbModalFooter,
+            mdbModal,
+            mdbBtn,
+            mdbCol,
+            mdbInput,
+            mdbModalBody,
+            mdbModalHeader,
+            mdbModalTitle
+        },
         data() {
             return {
                 invalid_text: '',

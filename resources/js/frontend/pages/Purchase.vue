@@ -29,11 +29,21 @@
 </template>
 
 <script>
-    import Search from '../components/prepaid-bill/Search'
+    import Search from '../components/prepaid-bill/Search';
+    import {mdbContainer, mdbTab, mdbTabItem, mdbIcon, mdbTabContent, mdbTabPane, mdbCol, mdbRow} from 'mdbvue';
+
     export default {
         name: "Purchase",
         components: {
-            Search
+            Search,
+            mdbContainer,
+            mdbTab,
+            mdbTabItem,
+            mdbIcon,
+            mdbTabContent,
+            mdbTabPane,
+            mdbCol,
+            mdbRow,
         },
         data() {
             return {

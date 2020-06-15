@@ -29,7 +29,7 @@ class SeedDefaultCompany extends Migration
             'is_active'         => true,
             'is_default'        => true,
             'size'              => 5,
-            'type_id'           => CompanyType::where('name', config('business.company.type.formal'))->first()->uuid,
+            'type_id'           => CompanyType::where('name', config('business.company.type.internal'))->first()->uuid,
             'owner_id'          => User::find(1)->uuid,
             'deactivated_by_id' => null,
             'logo_url'          => null,

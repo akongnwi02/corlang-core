@@ -35,11 +35,9 @@ class UserController extends Controller
     }
 
     /**
-     * @param ShowUserRequest $request
-     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(ShowUserRequest $request)
+    public function index()
     {
         return view('backend.auth.user.index')
             ->withUsers($this->userRepository->getUsers()

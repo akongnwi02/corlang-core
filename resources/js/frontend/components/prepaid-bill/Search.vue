@@ -57,6 +57,7 @@
     import TransactionModal from '../../components/global/TransactionModal'
     import Spinner from "../global/Spinner";
     import {Navigation} from "../../mixins/transaction/NavigateToTransactionDetails"
+    import {mdbInput, mdbRow} from 'mdbvue';
 
     export default {
         name: "Search",
@@ -66,6 +67,8 @@
             SearchButton,
             Services,
             TransactionModal,
+            mdbInput,
+            mdbRow
         },
         mixins: [
             ConfigurationLoad,
@@ -136,10 +139,19 @@
                 let invalid = 0;
 
                 // this validation needs to be handled properly
-                if (this.destination.length < 6) {
-                    ++invalid;
-                    this.invalid_text = this.$t('validations.purchase.electricity.meter_code');
-                    console.log('Invalid meter code');
+                if (this.selectedService) {
+                    if (this.selectedService.destination_regex) {
+                        let re = new RegExp(this.selectedService.destination_regex);
+                        if (!re.test(this.destination)) {
+                            ++invalid;
+                            this.invalid_text = this.$t('validations.purchase.electricity.meter_code', {format: this.selectedService.destination_placeholder});
+                            console.log('Invalid meter code');
+                        }
+                    } else if (this.destination.length < 6) {
+                        ++invalid;
+                        this.invalid_text = this.$t('validations.purchase.electricity.meter_code');
+                        console.log('Invalid meter code');
+                    }
                 }
 
                 if (!BUSINESS_CONFIG.APP_REGEX_AMOUNT.test(this.amount)) {
@@ -211,6 +223,11 @@
                 }
                 this.spinner_status = this.transactionLoadStatus;
             }
+        },
+        deactivated() {
+            this.$store.commit('setQuoteLoadStatus', 0);
+            this.$store.commit('setTransactionLoadStatus', 0);
+            this.$store.commit('setPaymentStatus', 0);
         }
     }
 </script>

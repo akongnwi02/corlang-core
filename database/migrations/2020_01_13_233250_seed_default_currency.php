@@ -15,7 +15,7 @@ class SeedDefaultCurrency extends Migration
     {
         \DB::table('currencies')->insert([
             'uuid'       => Uuid::generate(4)->string,
-            'name'       => 'Central Africa',
+            'name'       => 'Central African CFA Franc',
             'code'       => 'XAF',
             'rate'       => 1,
             'is_default' => true,

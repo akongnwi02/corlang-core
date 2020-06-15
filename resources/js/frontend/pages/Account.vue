@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div v-if="!accountIsEmpty" class="btn-group float-right" @click="showTopupModal" >
-                                <span style="cursor: pointer" class="fa fa-arrow-circle-up fa-lg"></span>
+                                <span style="cursor: pointer" class="fa fa-arrow-circle-up fa-lg" :title="$t('dashboard.hover.topup')"></span>
                             </div>
                             <div v-if="!accountIsEmpty" class="text-value-lg"><h4><strong>{{ currency(account.balance)}}</strong></h4></div>
                             <div>{{ $t('dashboard.pages.account.account_balance')}}</div>
@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div v-if="!accountIsEmpty" class="btn-group float-right" @click="showPayoutModal" >
-                                <span style="cursor: pointer" class="fa fa-arrow-circle-down fa-lg"></span>
+                                <span style="cursor: pointer" class="fa fa-arrow-circle-down fa-lg" :title="$t('dashboard.hover.payout')"></span>
                             </div>
                             <div v-if="!accountIsEmpty" class="text-value-lg"><h4><strong>{{currency(account.commission)}}</strong></h4></div>
                             <div>{{ $t('dashboard.pages.account.commission_balance')}}</div>
@@ -123,8 +123,6 @@
     import QuoteModal from "../components/mobile-money/QuoteModal";
     import Spinner from '../components/global/Spinner';
     import {PusherNotification} from "../mixins/pusher/Notification";
-    import {Reset} from '../mixins/Configuration/Reset'
-
 
     export default {
         name: "Account",
@@ -136,7 +134,6 @@
         },
         mixins: [
             PusherNotification,
-            Reset,
         ],
         data() {
             return {
@@ -279,12 +276,11 @@
                 }
                 this.spinner_status = this.quoteLoadStatus;
             },
-            paymentStatus() {
-                if (this.paymentStatus == 2) {
-                    this.$store.dispatch('getAccount');
-                    this.refresh();
-                }
-            },
+        },
+        deactivated() {
+            this.$store.commit('setQuoteLoadStatus', 0);
+            this.$store.commit('setAccountLoadStatus', 0);
+            this.$store.commit('setPaymentStatus', 0);
         }
     }
 </script>

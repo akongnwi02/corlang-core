@@ -67,7 +67,7 @@ class CommissionRepository
                 $pricings = $data['pricings'];
     
                 foreach ($pricings as $pricing) {
-                $commission->pricings()->save(new Pricing($pricing));
+                    $commission->pricings()->save(new Pricing($pricing));
                 }
     
             if ($commission->save()) {

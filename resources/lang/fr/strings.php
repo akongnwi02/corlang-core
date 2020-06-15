@@ -16,11 +16,11 @@ return [
     'backend' => [
         'access' => [
             'users' => [
-                'delete_user_confirm'  => 'Êtes-vous sûr de vouloir supprimer cet utilisateur de façon permanente ? Toutes les références à cet utilisateur dans cette application peuvent provoquer des erreurs et cette opération ne peut être annullée.',
-                'if_confirmed_off'     => '(pour le mode sans confirmation)',
-                'no_deactivated'       => 'There are no deactivated users.',
-                'no_deleted'           => 'There are no deleted users.',
-                'restore_user_confirm' => 'Restaurer cet utilisateur à son statut original ?',
+                'delete_user_confirm'  => 'Êtes-vous sûr de vouloir supprimer cet utilisateur de façon permanente ? Toutes les références à cet utilisateur dans cette application peuvent provoquer des erreurs et cette opération ne peut être annulée.',
+                'if_confirmed_off'     => '(Si confirmé est désactivé)',
+                'no_deactivated'       => 'Il n\'y a aucun utilisateur désactivé.',
+                'no_deleted'           => 'Il y a aucun utilisateur supprimé.',
+                'restore_user_confirm' => 'Remettre cet utilisateur dans son statut d\'origine ?',
             ],
         ],
 
@@ -29,32 +29,32 @@ return [
             'welcome' => 'Bienvenue',
             'company' => [
                 'agents'                  => 'Agents',
-                'users'                   => 'User|Users',
-                'balance'                 => 'Account Balance',
-                'number'                  => 'Company Account Number',
-                'commission'              => 'Commission Balance',
-                'system_commission'       => 'System Commission',
-                'commission_today'        => 'Today\'s Commission',
-                'commission_today_help'   => 'Commission earned today',
-                'agents_balance'          => 'Agents\' Balance',
-                'agents_commission'       => 'Agents\' Commission',
-                'total_balance'           => 'Total Balance',
-                'total_commission'        => 'Total Commission',
-                'balance_help'            => 'The company\'s account balance',
-                'agents_balance_help'     => 'The balance in all agents account',
-                'agents_commission_help'  => 'The commission for all the agents',
-                'total_balance_help'      => 'Total agent plus company balance',
-                'commission_help'         => 'The company\'s commission balance',
-                'strong_box_balance'      => 'Strong Box',
-                'strong_box_balance_help' => 'The company\'s strongbox balance',
-                'total_commission_help'   => 'Total agent plus company commission',
-                'system_commission_help'  => 'System commission balance',
+                'users'                   => 'Utilisateur|Utilisateurs',
+                'balance'                 => 'Solde du compte',
+                'number'                  => 'Numéro de compte de l\'entreprise',
+                'commission'              => 'Solde de commission',
+                'system_commission'       => 'Commission du système',
+                'commission_today'        => 'Commission du jour',
+                'commission_today_help'   => 'Commission gagné aujourd\'hui',
+                'agents_balance'          => 'Solde des agents',
+                'agents_commission'       => 'Commission des agents',
+                'total_balance'           => 'Solde total',
+                'total_commission'        => 'Commission Total ',
+                'balance_help'            => 'Le solde du compte de l\'entreprise',
+                'agents_balance_help'     => 'Le solde du compte de tous les agents',
+                'agents_commission_help'  => 'Le commissions de tous les agents',
+                'total_balance_help'      => 'Solde total de l\'agent et de l\'entreprise',
+                'commission_help'         => 'Solde de commission de l\'entreprise',
+                'strong_box_balance'      => 'Coffre-fort',
+                'strong_box_balance_help' => 'Le solde du coffre-fort de l\'entreprise',
+                'total_commission_help'   => 'commissions totales de l\'agent et l\'entreprise',
+                'system_commission_help'  => 'Solde de commission du système',
             ],
             'user'    => [
-                'balance'         => 'Your balance',
-                'balance_help'    => 'Your available balance',
-                'commission'      => 'Your commission',
-                'commission_help' => 'Your available commission'
+                'balance'         => 'Votre solde',
+                'balance_help'    => 'Votre solde disponible',
+                'commission'      => 'Vos commissions',
+                'commission_help' => 'Vos commissions disponibles'
             ]
         ],
         'general' => [
@@ -66,12 +66,12 @@ return [
             'member_since'        => 'Membre depuis',
             'minutes'             => ' minutes.',
             'search_placeholder'  => 'Rechercher...',
-            'timeout'             => 'Vous avez été automatiquement déconnecté pour cause d\'inactivité pendant ',
+            'timeout'             => 'Pour des raisons de sécurité, vous avez été automatiquement déconnecté pour cause d\'inactivité. ',
 
             'see_all' => [
                 'messages'      => 'Voir tous les messages',
                 'notifications' => 'Voir toutes les notifications',
-                'tasks'         => 'Voir les nouvelles tâches',
+                'tasks'         => 'Voir toutes les tâches',
             ],
             'status' => [
                 'online'  => 'En ligne',
@@ -85,11 +85,11 @@ return [
         ],
         'search' => [
             'empty'      => 'Veuillez entrer un terme de recherche.',
-            'incomplete' => 'Vous devez mettre en place votre propre logique pour ce système.',
+            'incomplete' => 'Vous devez mettre en place votre protocole pour ce système.',
             'title'      => 'Résultats de recherche',
             'results'    => 'Résultats de la recherche :query',
         ],
-        'welcome' => 'Welcome to the Dashboard',
+        'welcome' => 'Bienvenue à la page d\'accueil',
     ],
     'emails' => [
         'auth' => [
@@ -98,42 +98,42 @@ return [
             'greeting'                => 'Bonjour !',
             'user_greeting'           => 'Hello :first_name!',
             'regards'                 => 'Salutations,',
-            'trouble_clicking_button' => "Si vous ne pouvez pas cliquer sur le bouton ':action_text', copiez et collez l'URL ci-dessous dans un navigateur:",
+            'trouble_clicking_button' => "Si vous avez des difficultés à cliquer sur le bouton ':action_text', copiez et collez l'URL ci-dessous dans un navigateur:",
             'thank_you_for_using_app' => "Merci d'utiliser notre application !",
 
-            'password_reset_subject'    => 'Votre lien de réinitialisation',
+            'password_reset_subject'    => 'Réinitialisation du mot de passe',
             'password_cause_of_email'   => 'Vous recevez cet email car nous avons reçu une demande de réinitialisation de mot de passe pour ce compte.',
             'password_if_not_requested' => "Si vous n'avez pas effectué cette demande, aucune autre action n'est requise.",
             'reset_password'            => 'Cliquez ici pour réinitialiser votre mot de passe',
 
             'click_to_confirm' => 'Cliquez ici pour confirmer votre compte :',
-            'use_code_to_confirm'     => 'Use the code below to confirm your account:',
-            'use_code_to_reset_email' => 'Use the code below to reset your password:',
-            'use_code_to_confirm_sms' => 'Hello :first_name! Use the code :code to confirm your account on :app_name.',
-            'use_code_to_reset_sms'   => 'Hello :first_name! Use the code :code to reset your password on :app_name.',
+            'use_code_to_confirm'     => 'Utilisez le code ci-dessous pour confirmer votre compte:',
+            'use_code_to_reset_email' => 'Utilisez le code ci-dessous pour réinitialiser votre mot de passe:',
+            'use_code_to_confirm_sms' => 'Hello :first_name! Utilisez le code :code de confirmation de votre compte sur :nom_de_l\'application.',
+            'use_code_to_reset_sms'   => 'Hello :first_name! Utilisez le code :code de réinitialisation de votre mot de passe sur :nom_de_l\'application.',
 
-            'login_sms' => 'Visit our website to log into your account.'
+            'login_sms' => 'Visitez notre site web pour vous connecter à votre compte.'
         ],
         'companies' => [
             'companies' => [
                 'sms'  => [
-                    'company_created' => 'Hello :first_name! your companies :account has been created successfully on :app_name. ',
-                    'login'           => 'Visit our website to log into your account.'
+                    'company_created' => 'Hello :first_name! vos entreprises :le compte a été créé avec succès sur :app_name. ',
+                    'login'           => 'Visitez notre site web pour vous connecter à votre compte.'
                 ],
                 'mail' => [
-                    'company_created'         => 'Company Created',
-                    'company_account_created' => 'Your companies :account has been created successfully on :app_name.',
+                    'company_created'         => 'Entreprise créé',
+                    'company_account_created' => 'votre entreprise :account a été créé avec succès sur :app_nme.',
                 ],
             ]
         ],
         'contact' => [
-            'email_body_title' => 'Vous avez une nouvelle prise de contact dont voici les détails :',
-            'subject' => 'Nouvelle soumission du formulaire de contact sur :app_name !',
+            'email_body_title' => 'Vous avez une nouvelle demande de formulaire de contact : Vous trouverez les détails ci-dessous :',
+            'subject' => 'Un nouveau formulaire de contact :app_name !',
         ],
         'general' => [
             'user_greeting' => 'Hello :first_name!',
-            'login'         => 'Click here to login to your account:',
-            'regards'       => 'Regards,',
+            'login'         => 'Cliquez ici pour vous connecter à votre compte:',
+            'regards'       => 'Salutations,',
             'greeting'      => 'Hello!',
         ],
     ],
@@ -141,93 +141,93 @@ return [
         'test' => 'Test',
         'tests' => [
             'based_on' => [
-                'permission' => 'Helper sur la base de la permissions : ',
-                'role'       => 'Helper sur la base du rôle : ',
+                'permission' => 'Sur la base d\'une autorisation : ',
+                'role'       => 'Sur la base du rôle : ',
             ],
-            'js_injected_from_controller' => 'Javascript injecté depuis un contrôleur',
+            'js_injected_from_controller' => 'Javascript injecté depuis un lgiciel de contrôle',
             'using_blade_extensions' => 'Utilisation des extensions Blade',
             'using_access_helper' => [
-                'array_permissions'     => "L'utilisateur doit disposer de toutes les permissions d'un tableau, identifiées soit par leur ID, soit par leur nom.",
-                'array_permissions_not' => "L'utilisateur doit disposer d'au moins une des permissions d'un tableau, identifiées soit par leur ID, soit par leur nom.",
-                'array_roles'           => "L'utilisateur doit disposer de tous les rôles d'un tableau, identifiés soit par leur ID, soit par leur nom.",
-                'array_roles_not'       => "L'utilisateur doit disposer d'au moins un des rôles d'un tableau, identifiés soit par leur ID, soit par leur nom.",
-                'permission_id'         => "L'utilisateur doit disposer d'une permission identifiée par son ID",
-                'permission_name'       => "L'utilisateur doit disposer d'une permission identifiée par son nom",
-                'role_id'               => "L'utilisateur doit disposer d'un rôle identifié par son ID",
-                'role_name'             => "L'utilisateur doit disposer d'un rôle identifié par son nom",
+                'array_permissions'     => "L'utilisateur doit disposer de toutes les permissions identifiées soit par son ID, soit par son nom.",
+                'array_permissions_not' => "L'utilisateur doit disposer d'au moins une permission identifiée soit par son ID, soit par son nom.",
+                'array_roles'           => "L'utilisateur doit disposer de tous les rôles identifiés soit par son ID, soit par son nom.",
+                'array_roles_not'       => "L'utilisateur doit disposer d'au moins un des rôles, identifiés soit par son ID, soit par son nom.",
+                'permission_id'         => "L'utilisateur doit avoir une permission identifiée par son ID",
+                'permission_name'       => "L'utilisateur doit avoir une permission identifiée par son nom",
+                'role_id'               => "L'utilisateur doit avoir un rôle identifié par son ID",
+                'role_name'             => "L'utilisateur doit avoir un rôle identifié par son nom",
             ],
-            'view_console_it_works'          => 'Sur la console du navigateur, vous devriez voir \'it works!\', ce qui est produit depuis le FrontendController@index',
+            'view_console_it_works'          => 'Sur la commande du navigateur, vous devriez voir \'ça marche!\', ce qui est produit depuis le FrontendController@index',
             'you_can_see_because'            => 'Vous voyez ce message car vous disposez du rôle \':role\' !',
-            'you_can_see_because_permission' => 'Vous voyez ce message car vous disposez de la permission \':permission\' !',
+            'you_can_see_because_permission' => 'Vous voyez ce message car vous avez la permission \':permission\' !',
         ],
         'general' => [
-            'joined'        => 'Membre depuis',
+            'joined'        => 'A rejoint',
         ],
         'user' => [
-            'change_email_notice' => "Si vous changez votre adresse email vous serez déconnecté jusqu'à que vous confirmiez votre nouvelle adresse email.",
-            'change_phone_notice'         => 'If you change your phone number, you will have to confirm your new phone number',
-            'email_changed_notice' => 'Vous devez confirmer votre nouvelle adresse email avant de pouvoir vous connecter de nouveau.',
-            'cannot_change_email_notice'  => 'You cannot change your e-mail address. This is your default notification means',
-            'cannot_change_phone_notice'  => 'You cannot change your phone number. This is your default notification means',
+            'change_email_notice' => "Si vous changez d'adresse e-mail, vous devez confirmer votre nouvelle adresse e-mail.",
+            'change_phone_notice'         => 'Si vous changez de numéro de téléphone, vous devez confirmer votre nouveau numéro de téléphone',
+            'email_changed_notice' => 'Vous devez confirmer votre nouvelle adresse e-mail pour vous connecter à nouveau.',
+            'cannot_change_email_notice'  => 'Vous ne pouvez pas changer votre adresse email. Il s\'agit de votre option de notification par défaut',
+            'cannot_change_phone_notice'  => 'Vous ne pouvez pas changer votre numéro de téléphone. Il s\'agit de votre option de notification par défaut',
             'profile_updated'  => 'Profil modifié avec succès.',
             'password_updated' => 'Mot de passe modifié avec succès.',
-            'pin_changed'                 => 'Your pin code was changed successfully.',
-            'pin_created'                 => 'Your pin code was created successfully.',
-            'topup_updated'               => 'Your Topup configuration has been updated successfully.',
-            'topup_account_change_notice' => 'Once a topup account is confirmed by the system. It cannot be changed except you contact support.'
+            'pin_changed'                 => 'Votre code pin a été changé avec succès.',
+            'pin_created'                 => 'Votre code pin a été crée avec succès.',
+            'topup_updated'               => 'Votre paramétrage de recharge a été mis à jour avec succès.',
+            'topup_account_change_notice' => 'Une fois qu\'un compte de recharge est confirmé par le système. Il ne peut pas être modifié, à moins que vous ne contactiez le support.'
         ],
         'welcome_to' => 'Bienvenue sur :place',
-        'what_we_do'              => 'What We Do',
-        'our_services'            => 'Our Services',
-        'how_to_become_a_partner' => 'How To Become A Partner',
-        'our_partners'            => 'Our Partners',
+        'what_we_do'              => 'Ce que nous faisons',
+        'our_services'            => 'Nos services',
+        'how_to_become_a_partner' => 'Comment devenir partenaire',
+        'our_partners'            => 'Nos partenaires',
         'services' => [
             'prepaid_bills'    => [
-                'title'       => 'Prepaid Utility Bills',
-                'description' => 'Our platform facilitates prepayment of utility services through purchasing credits affiliated with a meter in customer\'s home',
+                'title'       => 'Factures de services publics prépayées',
+                'description' => 'Notre plateforme facilite le prépaiement des services publics par le biais de la souscription d\'un compteur au domicile du client',
             ],
             'postpaid_bills'   => [
-                'title'       => 'Postpaid Utility Bills',
-                'description' => 'We facilitate payment of postpaid utility bills such as Electricity and Water bills.',
+                'title'       => 'Factures de services publics postpayées',
+                'description' => 'Nous facilitons le paiement des factures de services publics post-payées, telles que les factures d\'électricité et d\'eau.',
             ],
             'mobile_money'     => [
-                'title'       => 'Mobile Money Services',
-                'description' => 'Store, send, and receive money through our platform.',
+                'title'       => 'Services Mobile Money',
+                'description' => 'Gardez, envoyez et recevez de l\'argent grâce à notre plateforme.',
             ],
             'airtime_recharge' => [
-                'title'       => 'Mobile Airtime Recharge',
-                'description' => 'We facilitate the purchase of airtime, mobile data, sms etc. with your network provider.'
+                'title'       => 'Recharge de crédit de communication',
+                'description' => 'Nous facilitons l\'achat de crédit d\'appels, de données mobiles, de sms, etc. auprès de votre fournisseur de services.'
             ],
             'ticket' => [
-                'title' => 'Ticket',
-                'description' => 'Buy your tickets easily at our points of sale. Cinema, Travel, Concert etc.'
+                'title' => 'Tickets',
+                'description' => 'Achetez vos billets facilement dans nos points de vente. Cinéma, voyage, concert, etc..'
             ],
             'ecommerce' => [
                 'title' => 'E-commerce',
-                'description' => 'Purchase goods online from your favorite online shop integrated with us.'
+                'description' => 'Achetez des marchandises en ligne à partir de votre boutique en ligne préférée intégrée à notre site.'
             ]
         ],
         'partner'  => [
             'steps' => [
-                '1' => 'Contact us',
-                '2' => 'Submit KYC documents',
-                '3' => 'Get integrated',
-                '4' => 'Start selling and earning',
+                '1' => 'Contactez-nous',
+                '2' => 'Soumettre les documents KYC',
+                '3' => 'Soyez intégré',
+                '4' => 'Commencez à vendre et à gagner',
             ]
         ],
         'what_we_do_details' => [
-            'tagline' => 'We help businesses sell to their customers through our large network of agents.',
+            'tagline' => 'Nous aidons les entreprises à vendre à leurs clients grâce à notre vaste réseau d\'agents.',
             'agent' => [
                 'title' => 'Agents',
-                'description' => 'Join our fast growing network of agents and start earning commissions with a single capital and single platform for all the services.'
+                'description' => 'Rejoignez notre réseau d\'agents en pleine expansion et commencez à gagner des commissions avec un seul capital et une seule plateforme pour tous les service.'
             ],
             'biller' => [
-                'title' => 'Billers / Merchants',
-                'description' => 'With our simple APIs, plugins, platform, we can integrate your business very easily and start collecting your payments and improving on your processes.',
+                'title' => 'Fournisseurs de service/ Marchants',
+                'description' => 'Grâce à nos API simples, nos plugins et notre plateforme, nous pouvons intégrer votre entreprise très facilement et commencer à encaisser vos paiements et à améliorer vos processus.',
             ],
             'distributor' => [
-                'title' => 'Distributors',
-                'description' => 'With our SIMPLE but POWERFUL API, you can sell over our platform or create your agents\' accounts directly in our platform and start selling and earning commissions'
+                'title' => 'Distributeurs',
+                'description' => 'Avec notre API SIMPLE mais PUISSANTE, vous pouvez vendre sur notre plateforme ou créer les comptes de vos agents directement dans notre plateforme et commencer à vendre et gagner des commissions'
             ]
         ]
     ],
