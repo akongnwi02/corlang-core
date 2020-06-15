@@ -53441,6 +53441,7 @@ var PusherNotification = {
                 if (transaction.status == __WEBPACK_IMPORTED_MODULE_0__config_business__["a" /* BUSINESS_CONFIG */].TRANSACTION_SUCCESSFUL) {
                     this.$store.commit('setPaymentStatus', 2);
                     this.$store.dispatch('getAccount');
+                    this.$store.dispatch('loadTransactions');
                     this.$buefy.toast.open({
                         message: this.$t('notifications.successful'),
                         type: 'is-success'

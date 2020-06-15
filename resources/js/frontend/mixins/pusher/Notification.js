@@ -9,6 +9,7 @@ export const PusherNotification = {
                     if (transaction.status == BUSINESS_CONFIG.TRANSACTION_SUCCESSFUL) {
                         this.$store.commit('setPaymentStatus', 2);
                         this.$store.dispatch('getAccount');
+                        this.$store.dispatch('loadTransactions');
                         this.$buefy.toast.open({
                             message: this.$t('notifications.successful'),
                             type: 'is-success'
