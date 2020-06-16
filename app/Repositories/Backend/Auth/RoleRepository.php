@@ -116,10 +116,15 @@ class RoleRepository extends BaseRepository
             ->whereNotIn('name', [
                 config('access.users.branch_admin_role'),
             ]);
-
+    
+        if (auth()->user()->id == 1) {
+            return $roles;
+        }
+        
         if (auth()->user()->isAdmin() && auth()->user()->company->isDefault()) {
             return $roles->whereNotIn('name', [config('access.users.admin_role')]);
         }
+        
         
         if (auth()->user()->isCompanyAdmin()) {
             return $roles->whereNotIn('name', [
