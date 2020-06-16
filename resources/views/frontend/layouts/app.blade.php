@@ -56,5 +56,11 @@
             position: absolute !important;
             margin-top: 0;
         }
+
+        @media (min-width: 1200px) {
+            .container, .container-lg, .container-md, .container-sm, .container-xl {
+                max-width: 1200px;
+            }
+        }
     </style>
 </html>
