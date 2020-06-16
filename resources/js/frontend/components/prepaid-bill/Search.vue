@@ -209,17 +209,21 @@
             quoteLoadStatus() {
                 if (this.quoteLoadStatus == 2) {
                     this.show_quote_modal = true;
+                } else {
+                    this.show_quote_modal = false;
                 }
                 this.spinner_status = this.quoteLoadStatus;
             },
-            paymentStatus() {
-                if (this.paymentStatus == 2) {
-                    this.$store.dispatch('loadTransaction', this.transaction.uuid)
-                }
-            },
+            // paymentStatus() {
+            //     if (this.paymentStatus == 2) {
+            //         this.$store.dispatch('loadTransaction', this.transaction.uuid)
+            //     }
+            // },
             transactionLoadStatus() {
                 if (this.transactionLoadStatus == 2 && this.paymentStatus == 2) {
                     this.show_transaction_modal = true;
+                } else {
+                    this.show_transaction_modal = false;
                 }
                 this.spinner_status = this.transactionLoadStatus;
             }

@@ -72,7 +72,6 @@ abstract class AbstractCategory
      * @param $transaction
      * @return bool
      * @throws ServerErrorException
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function status($transaction)
     {

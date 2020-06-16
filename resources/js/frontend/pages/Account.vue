@@ -273,6 +273,8 @@
             quoteLoadStatus() {
                 if (this.quoteLoadStatus == 2) {
                     this.show_quote_modal = true;
+                } else {
+                    this.show_quote_modal = false;
                 }
                 this.spinner_status = this.quoteLoadStatus;
             },

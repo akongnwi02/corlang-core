@@ -269,6 +269,7 @@ return [
                 'method'     => [
                     'name'               => 'Name',
                     'code'               => 'Code',
+                    'placeholder_text'   => 'Account Placeholder',
                     'description_en'     => 'English Description',
                     'description_fr'     => 'French Description',
                     'customercommission' => 'Customer Service Charge',

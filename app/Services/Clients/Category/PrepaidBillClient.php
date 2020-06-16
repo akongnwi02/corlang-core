@@ -44,7 +44,6 @@ class PrepaidBillClient extends AbstractCategory
      * @param $data
      * @return PrepaidBill
      * @throws ServerErrorException
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function quote($data): ModelInterface
     {
@@ -97,7 +96,6 @@ class PrepaidBillClient extends AbstractCategory
     /**
      * @param $transaction
      * @throws BadRequestException
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function confirm($transaction)
     {

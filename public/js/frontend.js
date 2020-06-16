@@ -1060,17 +1060,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         quoteLoadStatus: function quoteLoadStatus() {
             if (this.quoteLoadStatus == 2) {
                 this.show_quote_modal = true;
+            } else {
+                this.show_quote_modal = false;
             }
             this.spinner_status = this.quoteLoadStatus;
         },
-        paymentStatus: function paymentStatus() {
-            if (this.paymentStatus == 2) {
-                this.$store.dispatch('loadTransaction', this.transaction.uuid);
-            }
-        },
+
+        // paymentStatus() {
+        //     if (this.paymentStatus == 2) {
+        //         this.$store.dispatch('loadTransaction', this.transaction.uuid)
+        //     }
+        // },
         transactionLoadStatus: function transactionLoadStatus() {
             if (this.transactionLoadStatus == 2 && this.paymentStatus == 2) {
                 this.show_transaction_modal = true;
+            } else {
+                this.show_transaction_modal = false;
             }
             this.spinner_status = this.transactionLoadStatus;
         }
@@ -1420,17 +1425,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         quoteLoadStatus: function quoteLoadStatus() {
             if (this.quoteLoadStatus == 2) {
                 this.show_quote_modal = true;
+            } else {
+                this.show_quote_modal = false;
             }
             this.spinner_status = this.quoteLoadStatus;
         },
-        paymentStatus: function paymentStatus() {
-            if (this.paymentStatus == 2) {
-                this.$store.dispatch('loadTransaction', this.transaction.uuid);
-            }
-        },
+
+        // paymentStatus() {
+        //     if (this.paymentStatus == 2) {
+        //         this.$store.dispatch('loadTransaction', this.transaction.uuid)
+        //     }
+        // },
         transactionLoadStatus: function transactionLoadStatus() {
             if (this.transactionLoadStatus == 2 && this.paymentStatus == 2) {
                 this.show_transaction_modal = true;
+            } else {
+                this.show_transaction_modal = false;
             }
             this.spinner_status = this.transactionLoadStatus;
         }
@@ -1786,17 +1796,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         quoteLoadStatus: function quoteLoadStatus() {
             if (this.quoteLoadStatus == 2) {
                 this.show_quote_modal = true;
+            } else {
+                this.show_quote_modal = false;
             }
             this.spinner_status = this.quoteLoadStatus;
         },
-        paymentStatus: function paymentStatus() {
-            if (this.paymentStatus == 2) {
-                this.$store.dispatch('loadTransaction', this.transaction.uuid);
-            }
-        },
+
+        // paymentStatus() {
+        //     if (this.paymentStatus == 2) {
+        //         this.$store.dispatch('loadTransaction', this.transaction.uuid)
+        //     }
+        // },
         transactionLoadStatus: function transactionLoadStatus() {
             if (this.transactionLoadStatus == 2 && this.paymentStatus == 2) {
                 this.show_transaction_modal = true;
+            } else {
+                this.show_transaction_modal = false;
             }
             this.spinner_status = this.transactionLoadStatus;
         }
@@ -2222,6 +2237,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         quoteLoadStatus: function quoteLoadStatus() {
             if (this.quoteLoadStatus == 2) {
                 this.show_quote_modal = true;
+            } else {
+                this.show_quote_modal = false;
             }
             this.spinner_status = this.quoteLoadStatus;
         }
@@ -19283,7 +19300,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -19328,7 +19345,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 

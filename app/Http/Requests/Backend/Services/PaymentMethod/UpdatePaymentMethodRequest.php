@@ -8,7 +8,6 @@
 
 namespace App\Http\Requests\Backend\Services\PaymentMethod;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -27,6 +26,7 @@ class UpdatePaymentMethodRequest extends FormRequest
             'name'                  => __('validation.attributes.backend.services.method.name'),
             'description_en'        => __('validation.attributes.backend.services.method.description_en'),
             'description_fr'        => __('validation.attributes.backend.services.method.description_fr'),
+            'placeholder_text'      => __('validation.attributes.backend.services.method.placeholder_text'),
             'service_id'            => __('validation.attributes.backend.services.method.service'),
         ];
     }
@@ -39,6 +39,7 @@ class UpdatePaymentMethodRequest extends FormRequest
             'name'                  => ['required', 'string', 'max:191', Rule::unique('paymentmethods', 'name')->ignore(request()->route('method'), 'uuid')],
             'description_en'        => ['required', 'string', 'max:191'],
             'description_fr'        => ['required', 'string', 'max:191'],
+            'placeholder_text'      => ['nullable', 'string', 'max:191'],
             'service_id'            => ['nullable', Rule::exists('services', 'uuid')],
         ];
     }

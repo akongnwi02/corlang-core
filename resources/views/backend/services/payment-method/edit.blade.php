@@ -49,6 +49,17 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.method.placeholder_text'))->class('col-md-2 form-control-label')->for('placeholder_text') }}
+
+                        <div class="col-md-10">
+                            {{ html()->text('placeholder_text')
+                                ->class('form-control')
+                                ->attribute('maxlength', 191)
+                                ->placeholder(__('validation.attributes.backend.services.method.placeholder_text'))}}
+                        </div><!--col-->
+                    </div><!--form-group-->
+
+                    <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.services.method.customercommission'))->class('col-md-2 form-control-label')->for('customercommission_id') }}
 
                         <div class="col-md-10">

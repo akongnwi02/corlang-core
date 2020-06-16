@@ -87,7 +87,6 @@ class ReceiveMoneyClient extends AbstractCategory
     /**
      * @param $transaction
      * @throws BadRequestException
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function confirm($transaction)
     {
