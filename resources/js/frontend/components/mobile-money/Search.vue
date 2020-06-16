@@ -62,6 +62,7 @@
     import Spinner from "../global/Spinner";
     import {Navigation} from "../../mixins/transaction/NavigateToTransactionDetails"
     import {mdbBtn, mdbCol, mdbRow, mdbInput} from 'mdbvue';
+    import {helper} from "../../helpers/helpers";
 
     export default {
         name: "Search",
@@ -158,7 +159,9 @@
                 // this validation needs to be handled properly
                 if (this.selectedService) {
                     if (this.selectedService.destination_regex) {
-                        let re = new RegExp(this.selectedService.destination_regex);
+                        let re = new RegExp(helper.formatRegex(this.selectedService.destination_regex));
+                        console.log('js regex', re);
+                        console.log('php regex', this.selectedService.destination_regex);
                         if (!re.test(this.destination)) {
                             ++invalid;
                             this.invalid_text = this.$t('validations.purchase.mobile_money.account_number', {format: this.selectedService.destination_placeholder});
@@ -184,18 +187,8 @@
                 }
 
                 if (!this.selectedService) {
-                    if (this.services.length === 1) {
-                        this.selectedService = this.services[0];
-                        console.log('Only one service in list. Hence selected');
-                    } else if (this.services.length === 0) {
-                        console.log('No services available');
-                        ++invalid;
-                        this.invalid_text = this.$t('validations.purchase.empty_service');
-                    } else {
-                        console.log('No service selected');
-                        this.invalid_text = this.$t('validations.purchase.service');
-                        ++invalid;
-                    }
+                    console.log('No service selected');
+                    this.invalid_text = this.$t('validations.purchase.service');
                 }
 
                 if (this.auth_payload.length < 3) {

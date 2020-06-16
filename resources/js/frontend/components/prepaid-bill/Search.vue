@@ -58,6 +58,7 @@
     import Spinner from "../global/Spinner";
     import {Navigation} from "../../mixins/transaction/NavigateToTransactionDetails"
     import {mdbInput, mdbRow} from 'mdbvue';
+    import {helper} from "../../helpers/helpers";
 
     export default {
         name: "Search",
@@ -141,7 +142,7 @@
                 // this validation needs to be handled properly
                 if (this.selectedService) {
                     if (this.selectedService.destination_regex) {
-                        let re = new RegExp(this.selectedService.destination_regex);
+                        let re = new RegExp(helper.formatRegex(this.selectedService.destination_regex));
                         if (!re.test(this.destination)) {
                             ++invalid;
                             this.invalid_text = this.$t('validations.purchase.electricity.meter_code', {format: this.selectedService.destination_placeholder});

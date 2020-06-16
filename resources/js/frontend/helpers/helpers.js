@@ -50,4 +50,8 @@ export const helper = {
         }
 
     },
+
+    formatRegex(regex) {
+        return regex.slice(1,-1);
+    }
 };

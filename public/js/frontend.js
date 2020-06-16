@@ -822,6 +822,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mixins_transaction_NavigateToTransactionDetails__ = __webpack_require__("./resources/js/frontend/mixins/transaction/NavigateToTransactionDetails.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_mdbvue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__helpers_helpers__ = __webpack_require__("./resources/js/frontend/helpers/helpers.js");
 //
 //
 //
@@ -875,6 +876,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -978,7 +980,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // this validation needs to be handled properly
             if (this.selectedService) {
                 if (this.selectedService.destination_regex) {
-                    var re = new RegExp(this.selectedService.destination_regex);
+                    var re = new RegExp(__WEBPACK_IMPORTED_MODULE_10__helpers_helpers__["a" /* helper */].formatRegex(this.selectedService.destination_regex));
+                    console.log('js regex', re);
+                    console.log('php regex', this.selectedService.destination_regex);
                     if (!re.test(this.destination)) {
                         ++invalid;
                         this.invalid_text = this.$t('validations.purchase.mobile_money.account_number', { format: this.selectedService.destination_placeholder });
@@ -1004,18 +1008,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             if (!this.selectedService) {
-                if (this.services.length === 1) {
-                    this.selectedService = this.services[0];
-                    console.log('Only one service in list. Hence selected');
-                } else if (this.services.length === 0) {
-                    console.log('No services available');
-                    ++invalid;
-                    this.invalid_text = this.$t('validations.purchase.empty_service');
-                } else {
-                    console.log('No service selected');
-                    this.invalid_text = this.$t('validations.purchase.service');
-                    ++invalid;
-                }
+                console.log('No service selected');
+                this.invalid_text = this.$t('validations.purchase.service');
             }
 
             if (this.auth_payload.length < 3) {
@@ -1240,6 +1234,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mixins_transaction_NavigateToTransactionDetails__ = __webpack_require__("./resources/js/frontend/mixins/transaction/NavigateToTransactionDetails.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_mdbvue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__helpers_helpers__ = __webpack_require__("./resources/js/frontend/helpers/helpers.js");
 //
 //
 //
@@ -1270,6 +1265,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -1357,7 +1353,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // this validation needs to be handled properly
             if (this.selectedService) {
                 if (this.selectedService.destination_regex) {
-                    var re = new RegExp(this.selectedService.destination_regex);
+                    var re = new RegExp(__WEBPACK_IMPORTED_MODULE_10__helpers_helpers__["a" /* helper */].formatRegex(this.selectedService.destination_regex));
                     if (!re.test(this.destination)) {
                         ++invalid;
                         this.invalid_text = this.$t('validations.purchase.electricity.bill_number', { format: this.selectedService.destination_placeholder });
@@ -1589,6 +1585,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mixins_transaction_NavigateToTransactionDetails__ = __webpack_require__("./resources/js/frontend/mixins/transaction/NavigateToTransactionDetails.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_mdbvue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__helpers_helpers__ = __webpack_require__("./resources/js/frontend/helpers/helpers.js");
 //
 //
 //
@@ -1637,6 +1634,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -1728,7 +1726,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // this validation needs to be handled properly
             if (this.selectedService) {
                 if (this.selectedService.destination_regex) {
-                    var re = new RegExp(this.selectedService.destination_regex);
+                    var re = new RegExp(__WEBPACK_IMPORTED_MODULE_10__helpers_helpers__["a" /* helper */].formatRegex(this.selectedService.destination_regex));
                     if (!re.test(this.destination)) {
                         ++invalid;
                         this.invalid_text = this.$t('validations.purchase.electricity.meter_code', { format: this.selectedService.destination_placeholder });
@@ -19345,7 +19343,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -53312,6 +53310,9 @@ var helper = {
                 type: 'is-danger'
             });
         }
+    },
+    formatRegex: function formatRegex(regex) {
+        return regex.slice(1, -1);
     }
 };
 
