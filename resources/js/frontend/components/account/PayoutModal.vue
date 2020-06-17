@@ -1,5 +1,5 @@
 <template>
-    <mdb-modal @close="$emit('closed')" class="text-center">
+    <mdb-modal scrollable centered fullHeight elegant @close="$emit('closed')" class="text-center">
         <mdb-modal-header>
             <mdb-modal-title>{{ $t('dashboard.pages.account.request_payout') }}</mdb-modal-title>
             <br>

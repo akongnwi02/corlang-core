@@ -1,5 +1,5 @@
 <template>
-    <mdb-modal @close="$emit('closed')" class="text-center">
+    <mdb-modal scrollable centered fullHeight elegant @close="$emit('closed')" class="text-center">
         <mdb-modal-header>
             <mdb-modal-title>{{ $t('dashboard.pages.account.topup_account') }}</mdb-modal-title>
             <br>
@@ -7,30 +7,30 @@
         </mdb-modal-header>
         <mdb-modal-body>
             <div class="row">
-                <mdb-col class="col-sm-6">
+                <div class="col-lg-6">
                     <label for="paymentMethod"><strong>{{ $t('dashboard.pages.account.topup_method') }}</strong></label>
                     <select v-model="selectedMethod" class="custom-select" id="paymentMethod" required>
                         <option v-for="method in methods" :value="method">
                             {{ method.name }}
                         </option>
                     </select>
-                </mdb-col>
-                <mdb-col class="col-sm-6">
+                </div>
+                <div class="col-lg-6">
                     <label v-if="!topupAccount(selectedMethod)" class="alert alert-danger">{{ $t('validations.account.topup_account_not_configured') }}</label>
                     <mdb-input v-if="topupAccount(selectedMethod) && accountLoadStatus==2" id="account" key="account" :label="$t('dashboard.pages.general.account')" :value="topupAccount(selectedMethod)" disabled></mdb-input>
-                </mdb-col>
+                </div>
             </div>
             <div class="row">
-                <mdb-col class="col-sm-6">
+                <div class="col-lg-6">
                     <mdb-input key="amount"
                                :label="$t('dashboard.pages.general.amount') +' '+ currency.code"
                                v-model="amount"></mdb-input>
-                </mdb-col>
-                <mdb-col v-if ="selectedMethod.service" class="col-sm-6">
+                </div>
+                <div v-if ="selectedMethod.service" class="col-lg-6">
                     <mdb-input v-if="selectedMethod.service.requires_auth" :key="selectedMethod.service.auth_type"
                                :label="$t('dashboard.pages.general.' + selectedMethod.service.auth_type)"
                                v-model="auth_payload"></mdb-input>
-                </mdb-col>
+                </div>
             </div>
             <div>
                 <small>{{ $i18n.locale == 'en' ? selectedMethod.description_en : selectedMethod.description_fr }}</small>
@@ -63,7 +63,7 @@
         data() {
             return {
                 invalid_text: '',
-                amount: 0,
+                amount: 15000,
                 auth_payload: '',
                 selectedMethod: {}
             }

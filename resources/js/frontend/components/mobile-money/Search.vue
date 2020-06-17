@@ -2,29 +2,29 @@
     <div class="text-center card-body" @keyup.enter="requestQuote">
         <div class="card-text text-danger"> {{ invalid_text }}</div>
         <div class="row">
-            <mdb-col class="col-sm-6">
+            <div class="col-lg-6">
                 <mdb-input id="account" key="account" :label="$t('dashboard.pages.general.account')" v-model="destination"></mdb-input>
-            </mdb-col>
-            <mdb-col class="col-sm-6">
+            </div>
+            <div class="col-lg-6">
                 <mdb-input key="amount"
                            :label="$t('dashboard.pages.general.amount') +' '+ currency.code"
                            v-model="amount"></mdb-input>
-            </mdb-col>
+            </div>
         </div>
 
         <mdb-row>
 
-            <div class="col-6">
+            <div class="col-lg-6">
                 <!--put a v-if on the configuration.currency.code to avoid code not found error-->
                 <mdb-input key="phone"
                            :label="$t(`dashboard.pages.general.phone`)"
                            v-model="phone"></mdb-input>
             </div>
-            <mdb-col v-if ="selectedService" class="col-sm-6">
+            <div v-if ="selectedService" class="col-lg-6">
                 <mdb-input v-if="selectedService.requires_auth" :key="selectedService.auth_type"
                            :label="$t('dashboard.pages.general.' + selectedService.auth_type)"
                            v-model="auth_payload"></mdb-input>
-            </mdb-col>
+            </div>
             <!--</mdb-col>-->
             <!--<mdb-col class="col-6">-->
             <!--<mdb-input type="password" key="pincode"-->
@@ -33,14 +33,20 @@
             <!--</mdb-col>-->
 
         </mdb-row>
-        <label class="text-muted float-left">{{ $t('dashboard.pages.tabs.content.mobile_money.cashout') }}</label>
-        <br>
-        <services v-on:selected="selectService" :services="cashoutServices"></services>
+        <strong><label class="text-muted float-left">{{ $t('dashboard.pages.tabs.content.mobile_money.cashout') }}</label></strong>
+        <br />
+        <hr />
+        <div>
+            <services v-on:selected="selectService" :services="cashoutServices"></services>
 
-        <label class="text-muted float-left">{{ $t('dashboard.pages.tabs.content.mobile_money.cashin') }}</label>
-        <br>
-        <services v-on:selected="selectService" :services="cashinServices"></services>
+        </div>
 
+        <strong><label class="text-muted float-left">{{ $t('dashboard.pages.tabs.content.mobile_money.cashin') }}</label></strong>
+        <br/>
+        <hr/>
+        <div>
+            <services v-on:selected="selectService" :services="cashinServices"></services>
+        </div>
         <search-button v-on:clicked="requestQuote"></search-button>
 
         <quote-modal v-on:confirmed="confirm" :service="selectedService" :quote="quote"

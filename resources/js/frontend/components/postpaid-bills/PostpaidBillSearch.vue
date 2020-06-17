@@ -2,12 +2,12 @@
     <div class="text-center card-body" @keyup.enter="requestQuote">
         <div class="card-text text-danger"> {{ invalid_text }}</div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6">
                 <mdb-input key="meter_code"
                            :label="$t(`dashboard.pages.tabs.content.electricity.bill_number`)"
                            v-model="destination"></mdb-input>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6">
                 <!--put a v-if on the configuration.currency.code to avoid code not found error-->
                 <mdb-input key="phone"
                            :label="$t(`dashboard.pages.general.phone`)"

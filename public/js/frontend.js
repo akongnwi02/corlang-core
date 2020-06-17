@@ -347,7 +347,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             invalid_text: '',
-            amount: 0,
+            amount: 15000,
             auth_payload: '',
             selectedMethod: {}
         };
@@ -823,6 +823,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_mdbvue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__helpers_helpers__ = __webpack_require__("./resources/js/frontend/helpers/helpers.js");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -19343,7 +19350,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -33201,137 +33208,148 @@ var render = function() {
         _vm._v(" " + _vm._s(_vm.invalid_text))
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-lg-6" },
+          [
+            _c("mdb-input", {
+              key: "account",
+              attrs: {
+                id: "account",
+                label: _vm.$t("dashboard.pages.general.account")
+              },
+              model: {
+                value: _vm.destination,
+                callback: function($$v) {
+                  _vm.destination = $$v
+                },
+                expression: "destination"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-lg-6" },
+          [
+            _c("mdb-input", {
+              key: "amount",
+              attrs: {
+                label:
+                  _vm.$t("dashboard.pages.general.amount") +
+                  " " +
+                  _vm.currency.code
+              },
+              model: {
+                value: _vm.amount,
+                callback: function($$v) {
+                  _vm.amount = $$v
+                },
+                expression: "amount"
+              }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("mdb-row", [
+        _c(
+          "div",
+          { staticClass: "col-lg-6" },
+          [
+            _c("mdb-input", {
+              key: "phone",
+              attrs: { label: _vm.$t("dashboard.pages.general.phone") },
+              model: {
+                value: _vm.phone,
+                callback: function($$v) {
+                  _vm.phone = $$v
+                },
+                expression: "phone"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm.selectedService
+          ? _c(
+              "div",
+              { staticClass: "col-lg-6" },
+              [
+                _vm.selectedService.requires_auth
+                  ? _c("mdb-input", {
+                      key: _vm.selectedService.auth_type,
+                      attrs: {
+                        label: _vm.$t(
+                          "dashboard.pages.general." +
+                            _vm.selectedService.auth_type
+                        )
+                      },
+                      model: {
+                        value: _vm.auth_payload,
+                        callback: function($$v) {
+                          _vm.auth_payload = $$v
+                        },
+                        expression: "auth_payload"
+                      }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("strong", [
+        _c("label", { staticClass: "text-muted float-left" }, [
+          _vm._v(
+            _vm._s(_vm.$t("dashboard.pages.tabs.content.mobile_money.cashout"))
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
       _c(
         "div",
-        { staticClass: "row" },
         [
-          _c(
-            "mdb-col",
-            { staticClass: "col-sm-6" },
-            [
-              _c("mdb-input", {
-                key: "account",
-                attrs: {
-                  id: "account",
-                  label: _vm.$t("dashboard.pages.general.account")
-                },
-                model: {
-                  value: _vm.destination,
-                  callback: function($$v) {
-                    _vm.destination = $$v
-                  },
-                  expression: "destination"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "mdb-col",
-            { staticClass: "col-sm-6" },
-            [
-              _c("mdb-input", {
-                key: "amount",
-                attrs: {
-                  label:
-                    _vm.$t("dashboard.pages.general.amount") +
-                    " " +
-                    _vm.currency.code
-                },
-                model: {
-                  value: _vm.amount,
-                  callback: function($$v) {
-                    _vm.amount = $$v
-                  },
-                  expression: "amount"
-                }
-              })
-            ],
-            1
-          )
+          _c("services", {
+            attrs: { services: _vm.cashoutServices },
+            on: { selected: _vm.selectService }
+          })
         ],
         1
       ),
+      _vm._v(" "),
+      _c("strong", [
+        _c("label", { staticClass: "text-muted float-left" }, [
+          _vm._v(
+            _vm._s(_vm.$t("dashboard.pages.tabs.content.mobile_money.cashin"))
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("hr"),
       _vm._v(" "),
       _c(
-        "mdb-row",
+        "div",
         [
-          _c(
-            "div",
-            { staticClass: "col-6" },
-            [
-              _c("mdb-input", {
-                key: "phone",
-                attrs: { label: _vm.$t("dashboard.pages.general.phone") },
-                model: {
-                  value: _vm.phone,
-                  callback: function($$v) {
-                    _vm.phone = $$v
-                  },
-                  expression: "phone"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm.selectedService
-            ? _c(
-                "mdb-col",
-                { staticClass: "col-sm-6" },
-                [
-                  _vm.selectedService.requires_auth
-                    ? _c("mdb-input", {
-                        key: _vm.selectedService.auth_type,
-                        attrs: {
-                          label: _vm.$t(
-                            "dashboard.pages.general." +
-                              _vm.selectedService.auth_type
-                          )
-                        },
-                        model: {
-                          value: _vm.auth_payload,
-                          callback: function($$v) {
-                            _vm.auth_payload = $$v
-                          },
-                          expression: "auth_payload"
-                        }
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            : _vm._e()
+          _c("services", {
+            attrs: { services: _vm.cashinServices },
+            on: { selected: _vm.selectService }
+          })
         ],
         1
       ),
-      _vm._v(" "),
-      _c("label", { staticClass: "text-muted float-left" }, [
-        _vm._v(
-          _vm._s(_vm.$t("dashboard.pages.tabs.content.mobile_money.cashout"))
-        )
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("services", {
-        attrs: { services: _vm.cashoutServices },
-        on: { selected: _vm.selectService }
-      }),
-      _vm._v(" "),
-      _c("label", { staticClass: "text-muted float-left" }, [
-        _vm._v(
-          _vm._s(_vm.$t("dashboard.pages.tabs.content.mobile_money.cashin"))
-        )
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("services", {
-        attrs: { services: _vm.cashinServices },
-        on: { selected: _vm.selectService }
-      }),
       _vm._v(" "),
       _c("search-button", { on: { clicked: _vm.requestQuote } }),
       _vm._v(" "),
@@ -33432,6 +33450,7 @@ var render = function() {
     "mdb-modal",
     {
       staticClass: "text-center",
+      attrs: { scrollable: "", centered: "", fullHeight: "", elegant: "" },
       on: {
         close: function($event) {
           return _vm.$emit("closed")
@@ -33456,152 +33475,141 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("mdb-modal-body", [
-        _c(
-          "div",
-          { staticClass: "row" },
-          [
-            _c("mdb-col", { staticClass: "col-sm-6" }, [
-              _c("label", { attrs: { for: "paymentMethod" } }, [
-                _c("strong", [
-                  _vm._v(_vm._s(_vm.$t("dashboard.pages.account.topup_method")))
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.selectedMethod,
-                      expression: "selectedMethod"
-                    }
-                  ],
-                  staticClass: "custom-select",
-                  attrs: { id: "paymentMethod", required: "" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.selectedMethod = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                _vm._l(_vm.methods, function(method) {
-                  return _c("option", { domProps: { value: method } }, [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(method.name) +
-                        "\n                    "
-                    )
-                  ])
-                }),
-                0
-              )
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-6" }, [
+            _c("label", { attrs: { for: "paymentMethod" } }, [
+              _c("strong", [
+                _vm._v(_vm._s(_vm.$t("dashboard.pages.account.topup_method")))
+              ])
             ]),
             _vm._v(" "),
             _c(
-              "mdb-col",
-              { staticClass: "col-sm-6" },
-              [
-                !_vm.topupAccount(_vm.selectedMethod)
-                  ? _c("label", { staticClass: "alert alert-danger" }, [
-                      _vm._v(
-                        _vm._s(
-                          _vm.$t(
-                            "validations.account.topup_account_not_configured"
-                          )
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selectedMethod,
+                    expression: "selectedMethod"
+                  }
+                ],
+                staticClass: "custom-select",
+                attrs: { id: "paymentMethod", required: "" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.selectedMethod = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              _vm._l(_vm.methods, function(method) {
+                return _c("option", { domProps: { value: method } }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(method.name) +
+                      "\n                    "
+                  )
+                ])
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-lg-6" },
+            [
+              !_vm.topupAccount(_vm.selectedMethod)
+                ? _c("label", { staticClass: "alert alert-danger" }, [
+                    _vm._v(
+                      _vm._s(
+                        _vm.$t(
+                          "validations.account.topup_account_not_configured"
                         )
                       )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.topupAccount(_vm.selectedMethod) &&
-                _vm.accountLoadStatus == 2
-                  ? _c("mdb-input", {
-                      key: "account",
-                      attrs: {
-                        id: "account",
-                        label: _vm.$t("dashboard.pages.general.account"),
-                        value: _vm.topupAccount(_vm.selectedMethod),
-                        disabled: ""
-                      }
-                    })
-                  : _vm._e()
-              ],
-              1
-            )
-          ],
-          1
-        ),
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.topupAccount(_vm.selectedMethod) && _vm.accountLoadStatus == 2
+                ? _c("mdb-input", {
+                    key: "account",
+                    attrs: {
+                      id: "account",
+                      label: _vm.$t("dashboard.pages.general.account"),
+                      value: _vm.topupAccount(_vm.selectedMethod),
+                      disabled: ""
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "row" },
-          [
-            _c(
-              "mdb-col",
-              { staticClass: "col-sm-6" },
-              [
-                _c("mdb-input", {
-                  key: "amount",
-                  attrs: {
-                    label:
-                      _vm.$t("dashboard.pages.general.amount") +
-                      " " +
-                      _vm.currency.code
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-lg-6" },
+            [
+              _c("mdb-input", {
+                key: "amount",
+                attrs: {
+                  label:
+                    _vm.$t("dashboard.pages.general.amount") +
+                    " " +
+                    _vm.currency.code
+                },
+                model: {
+                  value: _vm.amount,
+                  callback: function($$v) {
+                    _vm.amount = $$v
                   },
-                  model: {
-                    value: _vm.amount,
-                    callback: function($$v) {
-                      _vm.amount = $$v
-                    },
-                    expression: "amount"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm.selectedMethod.service
-              ? _c(
-                  "mdb-col",
-                  { staticClass: "col-sm-6" },
-                  [
-                    _vm.selectedMethod.service.requires_auth
-                      ? _c("mdb-input", {
-                          key: _vm.selectedMethod.service.auth_type,
-                          attrs: {
-                            label: _vm.$t(
-                              "dashboard.pages.general." +
-                                _vm.selectedMethod.service.auth_type
-                            )
+                  expression: "amount"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm.selectedMethod.service
+            ? _c(
+                "div",
+                { staticClass: "col-lg-6" },
+                [
+                  _vm.selectedMethod.service.requires_auth
+                    ? _c("mdb-input", {
+                        key: _vm.selectedMethod.service.auth_type,
+                        attrs: {
+                          label: _vm.$t(
+                            "dashboard.pages.general." +
+                              _vm.selectedMethod.service.auth_type
+                          )
+                        },
+                        model: {
+                          value: _vm.auth_payload,
+                          callback: function($$v) {
+                            _vm.auth_payload = $$v
                           },
-                          model: {
-                            value: _vm.auth_payload,
-                            callback: function($$v) {
-                              _vm.auth_payload = $$v
-                            },
-                            expression: "auth_payload"
-                          }
-                        })
-                      : _vm._e()
-                  ],
-                  1
-                )
-              : _vm._e()
-          ],
-          1
-        ),
+                          expression: "auth_payload"
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
+            : _vm._e()
+        ]),
         _vm._v(" "),
         _c("div", [
           _c("small", [
@@ -33721,6 +33729,7 @@ var render = function() {
     "mdb-modal",
     {
       staticClass: "text-center",
+      attrs: { scrollable: "", centered: "", fullHeight: "", elegant: "" },
       on: {
         close: function($event) {
           return _vm.$emit("closed")
@@ -34006,6 +34015,7 @@ var render = function() {
     "mdb-modal",
     {
       staticClass: "text-center",
+      attrs: { scrollable: "", centered: "", fullHeight: "", elegant: "" },
       on: {
         close: function($event) {
           return _vm.$emit("closed")
@@ -34365,6 +34375,7 @@ var render = function() {
     "mdb-modal",
     {
       staticClass: "text-center",
+      attrs: { scrollable: "", centered: "", fullHeight: "", elegant: "" },
       on: {
         close: function($event) {
           return _vm.$emit("closed")
@@ -34583,6 +34594,7 @@ var render = function() {
     "mdb-modal",
     {
       staticClass: "text-center",
+      attrs: { scrollable: "", centered: "", fullHeight: "", elegant: "" },
       on: {
         close: function($event) {
           return _vm.$emit("closed")
@@ -34838,7 +34850,7 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-6" },
+          { staticClass: "col-lg-6" },
           [
             _c("mdb-input", {
               key: "meter_code",
@@ -34861,7 +34873,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col-6" },
+          { staticClass: "col-lg-6" },
           [
             _c("mdb-input", {
               key: "amount",
@@ -34887,7 +34899,7 @@ var render = function() {
       _c("mdb-row", [
         _c(
           "div",
-          { staticClass: "col-6" },
+          { staticClass: "col-lg-6" },
           [
             _c("mdb-input", {
               key: "phone",
@@ -34963,6 +34975,7 @@ var render = function() {
     "mdb-modal",
     {
       staticClass: "text-center",
+      attrs: { scrollable: "", centered: "", fullHeight: "", elegant: "" },
       on: {
         close: function($event) {
           return _vm.$emit("closed")
@@ -35214,7 +35227,7 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-6" },
+          { staticClass: "col-lg-6" },
           [
             _c("mdb-input", {
               key: "meter_code",
@@ -35237,7 +35250,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col-6" },
+          { staticClass: "col-lg-6" },
           [
             _c("mdb-input", {
               key: "phone",
