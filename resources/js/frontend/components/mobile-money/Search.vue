@@ -33,20 +33,25 @@
             <!--</mdb-col>-->
 
         </mdb-row>
-        <strong><label class="text-muted float-left">{{ $t('dashboard.pages.tabs.content.mobile_money.cashout') }}</label></strong>
-        <br />
-        <hr />
-        <div>
-            <services v-on:selected="selectService" :services="cashoutServices"></services>
+        <div v-if="cashoutServices.length >= 1">
+            <strong><label class="text-muted float-left">{{ $t('dashboard.pages.tabs.content.mobile_money.cashout') }}</label></strong>
+            <br />
+            <hr />
+            <div>
+                <services v-on:selected="selectService" :services="cashoutServices"></services>
 
+            </div>
         </div>
 
-        <strong><label class="text-muted float-left">{{ $t('dashboard.pages.tabs.content.mobile_money.cashin') }}</label></strong>
-        <br/>
-        <hr/>
-        <div>
-            <services v-on:selected="selectService" :services="cashinServices"></services>
+        <div v-if="cashinServices.length >= 1">
+            <strong><label class="text-muted float-left">{{ $t('dashboard.pages.tabs.content.mobile_money.cashin') }}</label></strong>
+            <br/>
+            <hr/>
+            <div>
+                <services v-on:selected="selectService" :services="cashinServices"></services>
+            </div>
         </div>
+
         <search-button v-on:clicked="requestQuote"></search-button>
 
         <quote-modal v-on:confirmed="confirm" :service="selectedService" :quote="quote"

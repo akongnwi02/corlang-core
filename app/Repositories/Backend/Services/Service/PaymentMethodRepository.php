@@ -117,7 +117,7 @@ class PaymentMethodRepository
             $paymentMethod = $this->findById($topupAccount['method_id']);
             $userTopupAccount = $user->getTopupAccount($paymentMethod);
     
-            if ($userTopupAccount->is_confirmed) {
+            if (isset($userTopupAccount) && $userTopupAccount->is_confirmed) {
                 if (isset($topupAccount['account']) &&  $topupAccount['account'] != $userTopupAccount->account) {
                     throw new GeneralException(__('exceptions.backend.services.topup.update_error', ['method' => $userTopupAccount->method->name]));
                 }

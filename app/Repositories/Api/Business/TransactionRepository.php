@@ -80,7 +80,16 @@ class TransactionRepository
                 $topupAccount = @auth()->user()->getTopupAccount($service->payment_method)->account;
                 if ($topupAccount == $model->getDestination()) {
                     $accountTopUp = true;
+                    
                 }
+            }
+            
+            // public users should not withdraw money if it is not a top up
+            if (! $accountTopUp
+                && $service->is_money_withdrawal
+                && ! auth()->user()->company_id
+            ) {
+                throw new ForbiddenException(BusinessErrorCodes::SERVICE_NOT_ALLOWED, 'Users without companies are not allowed to perform cash out');
             }
             
             /*

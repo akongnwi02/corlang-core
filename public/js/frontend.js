@@ -882,6 +882,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -19349,7 +19354,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -33304,51 +33309,63 @@ var render = function() {
           : _vm._e()
       ]),
       _vm._v(" "),
-      _c("strong", [
-        _c("label", { staticClass: "text-muted float-left" }, [
-          _vm._v(
-            _vm._s(_vm.$t("dashboard.pages.tabs.content.mobile_money.cashout"))
-          )
-        ])
-      ]),
+      _vm.cashoutServices.length >= 1
+        ? _c("div", [
+            _c("strong", [
+              _c("label", { staticClass: "text-muted float-left" }, [
+                _vm._v(
+                  _vm._s(
+                    _vm.$t("dashboard.pages.tabs.content.mobile_money.cashout")
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _c("services", {
+                  attrs: { services: _vm.cashoutServices },
+                  on: { selected: _vm.selectService }
+                })
+              ],
+              1
+            )
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c(
-        "div",
-        [
-          _c("services", {
-            attrs: { services: _vm.cashoutServices },
-            on: { selected: _vm.selectService }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("strong", [
-        _c("label", { staticClass: "text-muted float-left" }, [
-          _vm._v(
-            _vm._s(_vm.$t("dashboard.pages.tabs.content.mobile_money.cashin"))
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c(
-        "div",
-        [
-          _c("services", {
-            attrs: { services: _vm.cashinServices },
-            on: { selected: _vm.selectService }
-          })
-        ],
-        1
-      ),
+      _vm.cashinServices.length >= 1
+        ? _c("div", [
+            _c("strong", [
+              _c("label", { staticClass: "text-muted float-left" }, [
+                _vm._v(
+                  _vm._s(
+                    _vm.$t("dashboard.pages.tabs.content.mobile_money.cashin")
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _c("services", {
+                  attrs: { services: _vm.cashinServices },
+                  on: { selected: _vm.selectService }
+                })
+              ],
+              1
+            )
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("search-button", { on: { clicked: _vm.requestQuote } }),
       _vm._v(" "),
@@ -35546,33 +35563,6 @@ var render = function() {
                   _vm._v(
                     " " +
                       _vm._s(_vm.$t("dashboard.pages.tabs.titles.momo")) +
-                      "\n            "
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "mdb-tab-item",
-                {
-                  key: "recharge-tab",
-                  staticClass: "mt-4",
-                  attrs: { active: _vm.tab == "airtime" },
-                  nativeOn: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.gotoTab("airtime")
-                    }
-                  }
-                },
-                [
-                  _c("mdb-icon", {
-                    staticClass: "ml-2",
-                    attrs: { icon: "address-card" }
-                  }),
-                  _vm._v(
-                    "  " +
-                      _vm._s(_vm.$t("dashboard.pages.tabs.titles.airtime")) +
                       "\n            "
                   )
                 ],

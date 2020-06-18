@@ -11,9 +11,9 @@
                 <mdb-tab-item class="mt-4" key="momo-tab" :active="tab=='momo'" @click.native.prevent="gotoTab('momo')">
                     <mdb-icon icon="mobile-alt" class="ml-2"/> {{ $t(`dashboard.pages.tabs.titles.momo`) }}
                 </mdb-tab-item>
-                <mdb-tab-item class="mt-4" key="recharge-tab" :active="tab=='airtime'" @click.native.prevent="gotoTab('airtime')">
-                    <mdb-icon icon="address-card" class="ml-2"/>  {{ $t(`dashboard.pages.tabs.titles.airtime`) }}
-                </mdb-tab-item>
+                <!--<mdb-tab-item class="mt-4" key="recharge-tab" :active="tab=='airtime'" @click.native.prevent="gotoTab('airtime')">-->
+                    <!--<mdb-icon icon="address-card" class="ml-2"/>  {{ $t(`dashboard.pages.tabs.titles.airtime`) }}-->
+                <!--</mdb-tab-item>-->
             </mdb-tab>
         </mdb-col>
         <mdb-col md="9">
