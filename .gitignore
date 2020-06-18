@@ -1,7 +1,6 @@
 /node_modules
 /public/hot
 logs
-public
 /vendor
 /tests/_output
 /tests/_support/_generated

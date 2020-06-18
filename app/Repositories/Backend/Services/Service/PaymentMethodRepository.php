@@ -105,12 +105,25 @@ class PaymentMethodRepository
         return PaymentMethod::where('is_default', true)->first();
     }
     
+    /**
+     * @param $user
+     * @param $topupConfig
+     * @throws GeneralException
+     */
     public function setTopupMethods($user, $topupConfig)
     {
-        //TODO  there is a security hole here.
-        // make sure the 'is_confirmed' flag is set to false before updating
-        // otherwise skip that particular topup account
         foreach ($topupConfig as $topupAccount) {
+            //make sure this topup configuration is not yet confirmed
+            $paymentMethod = $this->findById($topupAccount['method_id']);
+            $userTopupAccount = $user->getTopupAccount($paymentMethod);
+    
+            if ($userTopupAccount->is_confirmed) {
+                if (isset($topupAccount['account']) &&  $topupAccount['account'] != $userTopupAccount->account) {
+                    throw new GeneralException(__('exceptions.backend.services.topup.update_error', ['method' => $userTopupAccount->method->name]));
+                }
+                continue;
+            }
+            
             TopupAccount::updateOrCreate([
                 'paymentmethod_id' => $topupAccount['method_id'],
                 'user_id' => $user->uuid,
@@ -120,5 +133,25 @@ class PaymentMethodRepository
                 'account'          => $topupAccount['account'],
             ]);
         }
+    }
+    
+    public function confirmTopupMethod($user, $paymentMethod)
+    {
+        $userTopupAccount = $user->getTopupAccount($paymentMethod);
+        if ($userTopupAccount->is_confirmed) {
+            return true;
+        }
+        
+        $userTopupAccount->is_confirmed = true;
+        
+        if ($userTopupAccount->save()) {
+            return true;
+        }
+        return false;
+    }
+    
+    public function findById($id)
+    {
+        return PaymentMethod::where('uuid', $id)->first();
     }
 }

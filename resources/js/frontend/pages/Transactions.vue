@@ -176,7 +176,7 @@
                         type: 'is-success'
                     });
                 }
-                this.spinner_status = this.transactionLoadStatus;
+                this.spinner_status = this.transactionsLoadStatus;
             },
             transactionLoadStatus() {
                 if (this.transactionLoadStatus == 2) {

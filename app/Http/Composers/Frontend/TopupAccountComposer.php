@@ -23,6 +23,6 @@ class TopupAccountComposer
     
     public function compose(View $view)
     {
-        $view->with('topup_methods', $this->paymentMethodRepository->getPaymentMethods()->get());
+        $view->with('topup_methods', $this->paymentMethodRepository->getPaymentMethods()->where('is_default', false)->get());
     }
 }

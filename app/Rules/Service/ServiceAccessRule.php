@@ -47,6 +47,14 @@ class ServiceAccessRule implements Rule
                 && auth()->user()->company->services()->where('services.code', $value)->first()->specific->is_active) {
                 return true;
             }
+            
+            if ($service->is_money_withdrawal) {
+                // there's a hole here
+                // we shall not return money withdrawal services to the public bucause
+                // but if they send the service, we accept. Especially they want to top up their account
+                return true;
+            }
+            
             throw new ForbiddenException(BusinessErrorCodes::SERVICE_NOT_ALLOWED, 'You are not allowed to use this service at the moment');
         }
         return true;

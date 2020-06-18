@@ -2548,7 +2548,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     type: 'is-success'
                 });
             }
-            this.spinner_status = this.transactionLoadStatus;
+            this.spinner_status = this.transactionsLoadStatus;
         },
         transactionLoadStatus: function transactionLoadStatus() {
             if (this.transactionLoadStatus == 2) {
@@ -32715,7 +32715,7 @@ var render = function() {
     [
       _c("div", { staticClass: "cols-sm-12 col-lg-12" }, [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-4 col-lg-4" }, [
+          _c("div", { staticClass: "col-lg-4" }, [
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-body" }, [
                 !_vm.accountIsEmpty
@@ -32743,7 +32743,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-lg-4" }, [
+          _c("div", { staticClass: "col-lg-4" }, [
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-body" }, [
                 !_vm.accountIsEmpty
@@ -32790,7 +32790,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-lg-4" }, [
+          _c("div", { staticClass: "col-lg-4" }, [
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-body" }, [
                 !_vm.accountIsEmpty
@@ -34403,31 +34403,7 @@ var render = function() {
           "div",
           { staticClass: "row" },
           [
-            _c(
-              "mdb-col",
-              { staticClass: "col-sm-6" },
-              [
-                _c("mdb-input", {
-                  key: "amount",
-                  attrs: {
-                    label:
-                      _vm.$t("dashboard.pages.general.amount") +
-                      " " +
-                      _vm.account.currency_code
-                  },
-                  model: {
-                    value: _vm.amount,
-                    callback: function($$v) {
-                      _vm.amount = $$v
-                    },
-                    expression: "amount"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("mdb-col", { staticClass: "col-sm-6" }, [
+            _c("divl", { staticClass: "col-lg-6" }, [
               _c("label", { attrs: { for: "paymentMethod" } }, [
                 _c("strong", [
                   _vm._v(
@@ -34476,47 +34452,26 @@ var render = function() {
                 }),
                 0
               )
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "row" },
-          [
-            _c(
-              "mdb-col",
-              { staticClass: "col-sm-6" },
-              [
-                _c("mdb-input", {
-                  key: "name",
-                  attrs: { label: _vm.$t("dashboard.pages.account.name") },
-                  model: {
-                    value: _vm.name,
-                    callback: function($$v) {
-                      _vm.name = $$v
-                    },
-                    expression: "name"
-                  }
-                })
-              ],
-              1
-            ),
+            ]),
             _vm._v(" "),
             _c(
-              "mdb-col",
-              { staticClass: "col-sm-6" },
+              "mdiv",
+              { staticClass: "col-lg-6" },
               [
                 _c("mdb-input", {
                   key: "amount",
-                  attrs: { label: _vm.$t("dashboard.pages.general.account") },
+                  attrs: {
+                    label:
+                      _vm.$t("dashboard.pages.general.amount") +
+                      " " +
+                      _vm.account.currency_code
+                  },
                   model: {
-                    value: _vm.paymentaccount,
+                    value: _vm.amount,
                     callback: function($$v) {
-                      _vm.paymentaccount = $$v
+                      _vm.amount = $$v
                     },
-                    expression: "paymentaccount"
+                    expression: "amount"
                   }
                 })
               ],
@@ -34524,7 +34479,47 @@ var render = function() {
             )
           ],
           1
-        )
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-lg-6" },
+            [
+              _c("mdb-input", {
+                key: "name",
+                attrs: { label: _vm.$t("dashboard.pages.account.name") },
+                model: {
+                  value: _vm.name,
+                  callback: function($$v) {
+                    _vm.name = $$v
+                  },
+                  expression: "name"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-lg-6" },
+            [
+              _c("mdb-input", {
+                key: "amount",
+                attrs: { label: _vm.$t("dashboard.pages.general.account") },
+                model: {
+                  value: _vm.paymentaccount,
+                  callback: function($$v) {
+                    _vm.paymentaccount = $$v
+                  },
+                  expression: "paymentaccount"
+                }
+              })
+            ],
+            1
+          )
+        ])
       ]),
       _vm._v(" "),
       _c(
@@ -53225,7 +53220,7 @@ module.exports = Component.exports
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BUSINESS_CONFIG; });
 var BUSINESS_CONFIG = {
 
-    CACHE_EXPIRATION: 24 * 60 * 60 * 1000, // 24 hours
+    CACHE_EXPIRATION: 8 * 60 * 60 * 1000, // 8 hours
 
     CATEGORY_PREPAID_BILLS_CODE: 'CORPREPAID001',
     CATEGORY_POSTPAID_BILLS_CODE: 'CORPOSTPAID001',

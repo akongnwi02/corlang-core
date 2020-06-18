@@ -47,8 +47,13 @@ class ConfigurationController extends Controller
                                 $query->where('companies.uuid', auth()->user()->company_id)
                                     // which are active
                                     ->where('company_service.is_active', true);
-                        });
-                    })
+                            });
+                        })
+                        // when the use does not belong to any company
+                        ->when(! auth()->user()->company_id, function ($query) {
+                            // do not get the money withdrawal services
+                            $query->where('is_money_withdrawal', false);
+                        })
                     // get the related service items
                     ->with(['items' => function ($query) {
                         // which are active

@@ -38,6 +38,7 @@ class CreateTransactionsTable extends Migration
                 config('business.transaction.status.failed'),
                 config('business.transaction.status.reversed'),
             ])->nullable();
+            $table->boolean('is_account_topup')->default(false);
             $table->boolean('to_be_verified')->default(false);
             $table->string('error_code')->nullable();
             $table->text('error')->nullable();

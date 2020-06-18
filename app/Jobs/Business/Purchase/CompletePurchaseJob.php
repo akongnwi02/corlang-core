@@ -51,23 +51,11 @@ class CompletePurchaseJob extends Job
     }
     
     /**
-     * @param MovementRepository $movementRepository
      * @throws ServerErrorException
      * @throws \Pusher\PusherException
      */
-    public function handle(MovementRepository $movementRepository)
+    public function handle()
     {
-        if ($this->transaction->status != config('business.transaction.status.success')) {
-            \Log::warning("{$this->getJobName()}: Transaction is not successful. Reversing movements...", [
-                'transaction.status' => $this->transaction->status,
-                'transaction.code'   => $this->transaction->code,
-                'movement.code'      => $this->transaction->movement_code
-            ]);
-            
-            $movementRepository->reverseMovements($this->transaction->movement_code);
-        }
-    
-        $movementRepository->completeMovements($this->transaction->movement_code);
         
         \Log::info("{$this->getJobName()}: Transaction is terminated. Sending event to pusher...", [
             'transaction.status'       => $this->transaction->status,
@@ -81,9 +69,6 @@ class CompletePurchaseJob extends Job
             'transaction.error_code'   => $this->transaction->error_code,
             'transaction.service_code' => $this->transaction->service_code,
         ]);
-        
-        $this->transaction->completed_at = now();
-        $this->transaction->save();
         
         $pusher = new Pusher(
             config('broadcasting.connections.pusher.key'),

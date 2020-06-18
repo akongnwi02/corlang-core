@@ -133,15 +133,16 @@ class TransactionRepository
             // Transaction creation
             $transaction = new Transaction();
             
-            $transaction->code          = Transaction::generateCode();
-            $transaction->items         = $model->getItems();
-            $transaction->amount        = $model->getAmount();
-            $transaction->user_id       = auth()->user()->uuid;
-            $transaction->company_id    = auth()->user()->company_id;
-            $transaction->service_code  = $model->getServiceCode();
-            $transaction->currency_code = $model->getCurrencyCode();
-            $transaction->destination   = $model->getDestination();
-            $transaction->status        = config('business.transaction.status.created');
+            $transaction->code             = Transaction::generateCode();
+            $transaction->items            = $model->getItems();
+            $transaction->amount           = $model->getAmount();
+            $transaction->user_id          = auth()->user()->uuid;
+            $transaction->company_id       = auth()->user()->company_id;
+            $transaction->service_code     = $model->getServiceCode();
+            $transaction->currency_code    = $model->getCurrencyCode();
+            $transaction->destination      = $model->getDestination();
+            $transaction->is_account_topup = $accountTopUp;
+            $transaction->status           = config('business.transaction.status.created');
             
             $transaction->customer_service_fee  = $customerServiceFee;
             $transaction->provider_service_fee  = $providerServiceFee;

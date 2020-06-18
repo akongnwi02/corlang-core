@@ -110,6 +110,9 @@ return [
             'category' => [
                 'update_error' => 'There was a problem updating this category. Please try again.',
                 'mark_error'   => 'There was a problem updating the status of this category. Please try again.',
+            ],
+            'topup' => [
+                'update_error' => 'They was a problem updating the :method payment method. It has already been confirmed by the system. Please contact support.'
             ]
         ],
         'payout'   => [

@@ -7,31 +7,31 @@
         </mdb-modal-header>
         <mdb-modal-body>
             <div class="row">
-                <mdb-col class="col-sm-6">
-                    <mdb-input key="amount"
-                               :label="$t('dashboard.pages.general.amount') + ' ' + account.currency_code"
-                               v-model="amount"></mdb-input>
-                </mdb-col>
-                <mdb-col class="col-sm-6">
+                <divl class="col-lg-6">
                     <label for="paymentMethod"><strong>{{ $t('dashboard.pages.account.payout_method') }}</strong></label>
                     <select v-model="selectedMethod" class="custom-select" id="paymentMethod" required>
                         <option v-for="method in methods" :value="method">
                             {{ method.name }}
                         </option>
                     </select>
-                </mdb-col>
+                </divl>
+                <mdiv class="col-lg-6">
+                    <mdb-input key="amount"
+                               :label="$t('dashboard.pages.general.amount') + ' ' + account.currency_code"
+                               v-model="amount"></mdb-input>
+                </mdiv>
             </div>
             <div class="row">
-                <mdb-col class="col-sm-6">
+                <div class="col-lg-6">
                     <mdb-input key="name"
                                :label="$t('dashboard.pages.account.name')"
                                v-model="name"></mdb-input>
-                </mdb-col>
-                <mdb-col class="col-sm-6">
+                </div>
+                <div class="col-lg-6">
                     <mdb-input key="amount"
                                :label="$t('dashboard.pages.general.account')"
                                v-model="paymentaccount"></mdb-input>
-                </mdb-col>
+                </div>
             </div>
         </mdb-modal-body>
         <mdb-modal-footer>

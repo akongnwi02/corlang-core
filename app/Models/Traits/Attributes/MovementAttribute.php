@@ -37,6 +37,11 @@ trait MovementAttribute
         if ($this->is_reversed) {
             return 'dark';
         }
+        
+        if (! $this->is_complete) {
+            return 'warning';
+        }
+        
         if (in_array($this->type->name, [
             config('business.movement.type.deposit'),
             config('business.movement.type.sale'),

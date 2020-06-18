@@ -2,7 +2,7 @@
     <div class="justify-content-center card-body">
         <div class="cols-sm-12 col-lg-12">
             <div class="row">
-                <div class="col-sm-4 col-lg-4">
+                <div class="col-lg-4">
                     <div class="card">
                         <div class="card-body">
                             <div v-if="!accountIsEmpty" class="text-value-lg"><h4><strong>{{account.code}}</strong></h4></div>
@@ -11,7 +11,7 @@
                         </div>
                     </div>
                 </div><!--col-->
-                <div class="col-sm-4 col-lg-4">
+                <div class="col-lg-4">
                     <div class="card">
                         <div class="card-body">
                             <div v-if="!accountIsEmpty" class="btn-group float-right" @click="showTopupModal" >
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                 </div><!--col-->
-                <div class="col-sm-4 col-lg-4">
+                <div class="col-lg-4">
                     <div class="card">
                         <div class="card-body">
                             <div v-if="!accountIsEmpty" class="btn-group float-right" @click="showPayoutModal" >

@@ -9,6 +9,7 @@
 namespace App\Models\Service;
 
 
+use App\Models\Traits\Relationships\TopupAccountRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Wildside\Userstamps\Userstamps;
@@ -16,6 +17,7 @@ use Wildside\Userstamps\Userstamps;
 class TopupAccount extends Model
 {
     use Uuid,
+        TopupAccountRelationship,
         Userstamps;
     
     /**
