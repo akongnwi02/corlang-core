@@ -59,7 +59,7 @@
 
         @media (min-width: 1200px) {
             .container, .container-lg, .container-md, .container-sm, .container-xl {
-                max-width: 1200px;
+                max-width: 90%;
             }
         }
     </style>
