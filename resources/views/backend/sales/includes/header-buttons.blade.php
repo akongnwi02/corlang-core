@@ -1,8 +1,8 @@
 @can(config('permission.permissions.read_sales'))
     <div class="btn-toolbar float-right" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
-        <span id="addPOIbutton" onclick="showFilterPopup()" class="btn btn-{{ count(array_filter(request()->input('filter'), function($filter){return $filter !== null && $filter !== '';})) ?'primary':'dark'}} ml-1" data-toggle="tooltip" title="@lang('labels.backend.sales.filter.title')"><i class="fas fa-filter"></i>
-            @if(count(array_filter(request()->input('filter'), function($filter){return $filter !== null && $filter !== '';})) && count(@request()->input()['filter']) > 0)
-                <span class="badge badge-danger">{{ count(array_filter(request()->input('filter'), function($filter){return $filter !== null && $filter !== '';})) }}</span>
+        <span id="addPOIbutton" onclick="showFilterPopup()" class="btn btn-{{ count(array_filter(request()->input('filter') ?: [], function($filter){return $filter !== null && $filter !== '';})) ?'primary':'dark'}} ml-1" data-toggle="tooltip" title="@lang('labels.backend.sales.filter.title')"><i class="fas fa-filter"></i>
+            @if(count(array_filter(request()->input('filter')?:[], function($filter){return $filter !== null && $filter !== '';})) && count(@request()->input()['filter']) > 0)
+                <span class="badge badge-danger">{{ count(array_filter(request()->input('filter')?:[], function($filter){return $filter !== null && $filter !== '';})) }}</span>
             @endif
         </span>
     </div><!--btn-toolbar-->
