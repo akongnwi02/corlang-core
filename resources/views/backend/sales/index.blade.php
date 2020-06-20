@@ -34,7 +34,7 @@
                                 <th>@lang('labels.backend.sales.table.items')</th>
                                 <th>@lang('labels.backend.sales.table.asset')</th>
                                 <th>@lang('labels.backend.sales.table.service')</th>
-                                <th>@lang('labels.backend.sales.table.total')</th>
+                                <th>@lang('labels.backend.sales.table.total_customer_amount')</th>
                                 <th>@lang('labels.backend.sales.table.destination')</th>
                                 <th>@lang('labels.backend.sales.table.payment_account')</th>
                                 <th>@lang('labels.backend.sales.table.company_commission')</th>
