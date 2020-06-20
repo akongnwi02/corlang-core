@@ -78,6 +78,7 @@ class ReceiveMoneyClient extends AbstractCategory
             $receiveMoney = new ReceiveMoney;
             $receiveMoney->setDestination($data['destination'])
                 ->setServiceCode($data['service_code'])
+                ->setItems($data['service_code'])
                 ->setCurrencyCode($data['currency_code'])
                 ->setAmount($data['amount'])
                 ->setItems($data['auth_payload']);

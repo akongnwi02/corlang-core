@@ -68,6 +68,15 @@ class Service extends Model
         'max_amount',
     ];
     
+    protected $hidden = [
+        'providercommission_id',
+        'customercommission_id',
+        'providercompany_id',
+        'company_rate',
+        'agent_rate',
+        'external_rate',
+    ];
+    
     /**
      * The attributes that should be cast to native types.
      *

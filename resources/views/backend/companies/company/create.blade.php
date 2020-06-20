@@ -144,7 +144,7 @@
                         {{ html()->label(__('validation.attributes.backend.companies.company.country'))->class('col-md-2 form-control-label required')->for('country_id') }}
 
                         <div class="col-md-10">
-                            {{ html()->select('country_id', $countries)
+                            {{ html()->select('country_id', array_map(function($country){return __($country);}, $countries))
                                 ->class('form-control')
                                 ->required() }}
                         </div><!--col-->

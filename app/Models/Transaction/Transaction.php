@@ -11,6 +11,7 @@ namespace App\Models\Transaction;
 use App\Models\Traits\Attributes\TransactionAttribute;
 use App\Models\Traits\Methods\TransactionMethod;
 use App\Models\Traits\Relationships\TransactionRelationship;
+use App\Models\Traits\Scopes\TransactionScope;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Wildside\Userstamps\Userstamps;
@@ -20,6 +21,7 @@ class Transaction extends Model
     use Uuid,
         TransactionMethod,
         TransactionRelationship,
+        TransactionScope,
         TransactionAttribute,
         Userstamps;
     /**
@@ -45,9 +47,9 @@ class Transaction extends Model
         'amount'             => 'double',
         'customer_fee'       => 'double',
         'agent_commission'   => 'double',
+        'external_commission'=> 'double',
         'company_commission' => 'double',
         'system_commission'  => 'double',
         'total_commission'   => 'double',
     ];
-    
 }

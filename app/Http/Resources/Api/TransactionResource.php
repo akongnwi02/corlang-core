@@ -20,7 +20,7 @@ class TransactionResource extends JsonResource
             'code'                  => $this->code,
             'items'                 => $this->items,
             'asset'                 => $this->asset,
-            'amount'                => $this->amount,
+            'amount'                => number_format((double)$this->amount, 2),
             'user'                  => $this->user->full_name,
             'company'               => $this->company ? $this->company->name : null,
             'company_logo'          => $this->company ? $this->company->logo_url : Company::where('is_default', true)->first()->logo_url,

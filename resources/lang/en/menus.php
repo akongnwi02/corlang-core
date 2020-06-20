@@ -89,6 +89,8 @@ return [
         ],
         'sales' => [
             'management' => 'Sales',
+            'clear' => 'Clear Filters',
+            'reset' => 'Reset Filters',
         ],
         'accounts' => [
             'title' => 'Accounts',

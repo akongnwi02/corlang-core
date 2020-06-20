@@ -18,6 +18,7 @@ use App\Services\Business\Models\ModelInterface;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
 use App\Services\Constants\BusinessErrorCodes;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class TransactionRepository
@@ -234,6 +235,15 @@ class TransactionRepository
     public function getAllSales()
     {
         $sales = QueryBuilder::for(Transaction::class)
+            ->allowedFilters([
+                AllowedFilter::exact('company_id'),
+                AllowedFilter::exact('service_id'),
+                AllowedFilter::exact('status'),
+                AllowedFilter::partial('user.username'),
+                AllowedFilter::partial('code'),
+                AllowedFilter::scope('start_date'),
+                AllowedFilter::scope('end_date'),
+            ])
             ->allowedSorts('transactions.created_at', 'transactions.updated_at')
             ->defaultSort('-transactions.created_at', 'transactions.updated_at');
         

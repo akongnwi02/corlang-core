@@ -13,7 +13,7 @@ return [
     |
     */
     
-    'general' => [
+    'general'  => [
         'all'                => 'All',
         'yes'                => 'Yes',
         'no'                 => 'No',
@@ -41,13 +41,13 @@ return [
         'more'               => 'More',
         'select'             => 'Select One'
     ],
-    'backend' => [
+    'backend'  => [
         'access'     => [
             'roles' => [
                 'create'     => 'Create Role',
                 'edit'       => 'Edit Role',
                 'management' => 'Role Management',
-                'table' => [
+                'table'      => [
                     'number_of_users' => 'Number of Users',
                     'permissions'     => 'Permissions',
                     'role'            => 'Role',
@@ -71,7 +71,7 @@ return [
                 'no_roles'            => 'No Roles to set.',
                 'permissions'         => 'Permissions',
                 'user_actions'        => 'User Actions',
-                'table' => [
+                'table'               => [
                     'confirmed'         => 'Confirmed',
                     'created'           => 'Created',
                     'email'             => 'E-mail',
@@ -91,8 +91,8 @@ return [
                     'social'            => 'Social',
                     'total'             => 'user total|users total',
                 ],
-                'tabs' => [
-                    'titles' => [
+                'tabs'                => [
+                    'titles'  => [
                         'overview' => 'Overview',
                         'history'  => 'History',
                     ],
@@ -117,7 +117,7 @@ return [
                         ],
                     ],
                 ],
-                'view' => 'View User',
+                'view'                => 'View User',
             ],
         ],
         'companies'  => [
@@ -127,7 +127,7 @@ return [
                 'edit'            => 'Edit Company',
                 'active'          => 'Active Companies',
                 'company_actions' => 'Company Actions',
-                'table' => [
+                'table'           => [
                     'name'         => 'Company Name',
                     'address'      => 'Address',
                     'country'      => 'Country',
@@ -144,7 +144,7 @@ return [
                     'active'       => 'Active',
                     'total'        => 'company|companies',
                 ],
-                'tabs'  => [
+                'tabs'            => [
                     'titles'  => [
                         'profile'  => 'Profile',
                         'services' => 'Services'
@@ -192,7 +192,7 @@ return [
                     'category'           => 'Category',
                     'agent_rate'         => 'Default Agent Rate',
                     'company_rate'       => 'Default Company Rate',
-                    'external_rate'       => 'Default External Rate',
+                    'external_rate'      => 'Default External Rate',
                     'min_amount'         => 'Min Amount',
                     'max_amount'         => 'Max Amount',
                     'customercommission' => 'Default Customer Service Charge',
@@ -258,22 +258,35 @@ return [
         ],
         'sales'      => [
             'management' => 'Sales',
+            'filter'     => [
+                'title'   => 'Filter Sales',
+                'service' => 'Service',
+                'company' => 'Company',
+                'status'  => 'Status',
+                'agent'   => 'Agent',
+                'reference' => 'Reference',
+                'from'    => 'From',
+                'to'      => 'To',
+            ],
             'table'      => [
-                'code'               => 'Reference',
-                'company'            => 'Company',
-                'user'               => 'Agent',
-                'items'              => 'Items',
-                'service'            => 'Service',
-                'total'              => 'Total',
-                'destination'        => 'Destination',
-                'payment_account'    => 'Payment Account',
-                'company_commission' => 'Company Commission',
-                'agent_commission'   => 'Agent Commission',
+                'code'                => 'Reference',
+                'company'             => 'Company',
+                'date'                => 'Date',
+                'user'                => 'Agent',
+                'items'               => 'Items',
+                'asset'               => 'Asset',
+                'service'             => 'Service',
+                'total'               => 'Total',
+                'destination'         => 'Destination',
+                'payment_account'     => 'Payment Account',
+                'company_commission'  => 'Company Commission',
+                'agent_commission'    => 'Agent Commission',
                 'external_commission' => 'External Commission',
-                'completed_at'       => 'Completed At',
-                'user_status'        => 'User\'s Status',
-                'actual_status'      => 'Actual Status',
-                'total_sales'        => 'sales|sales',
+                'completed_at'        => 'Completed At',
+                'user_status'         => 'User\'s Status',
+                'actual_status'       => 'Actual Status',
+                'to_be_verified'      => 'To be verified',
+                'total_sales'         => 'sales|sales',
             ]
         ],
         'account'    => [
@@ -460,7 +473,7 @@ return [
         ]
     ],
     'frontend' => [
-        'auth' => [
+        'auth'      => [
             'login_box_title'    => 'Login',
             'login_to_account'   => 'Sign in to your account',
             'create_account'     => 'Create your account',
@@ -473,7 +486,7 @@ return [
             'register_button'    => 'Register',
             'remember_me'        => 'Remember Me',
         ],
-        'contact' => [
+        'contact'   => [
             'box_title' => 'Contact Us',
             'button'    => 'Send Information',
         ],
@@ -491,7 +504,7 @@ return [
             'send_password_reset_code'        => 'Send Password Reset Code',
             'confirm_code_button'             => 'Confirm Code',
         ],
-        'user' => [
+        'user'      => [
             'passwords' => [
                 'change' => 'Change Password',
             ],

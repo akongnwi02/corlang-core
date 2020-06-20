@@ -41,6 +41,11 @@ class Category extends Model
         'api_url',
     ];
     
+    protected $hidden = [
+        'api_key',
+        'api_url'
+    ];
+    
     /**
      * The attributes that should be cast to native types.
      *

@@ -94,6 +94,12 @@ return [
             'update' => 'Update',
             'view'   => 'View',
         ],
+        
+        'filter' => [
+            'filter' => 'Filter',
+            'reset' => 'Reset',
+            'clear' => 'Clear',
+        ],
 
         'save' => 'Save',
         'view' => 'View',
