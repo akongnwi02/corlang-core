@@ -19,7 +19,7 @@
                 <tr>
                     <td style="height: 50px; width: 50px;">{!! @$method->logo_label !!}</td>
                     <td>{{$method->name}}</td>
-                    <td><input placeholder="{{$method->placeholder_text}}" id="account-{{$method->uuid}}" type="text" name="topup_config[{{ $key }}][account]" value="{{@$logged_in_user->getTopupAccount($method)->account}}" class="form-control" {{@$logged_in_user->getTopupAccount($method)->is_confirmed? 'disabled': ''}}/></td>
+                    <td  class="row"><input style="width: 100%;" placeholder="{{$method->placeholder_text}}" id="account-{{$method->uuid}}" type="text" name="topup_config[{{ $key }}][account]" value="{{@$logged_in_user->getTopupAccount($method)->account}}" class="form-control" {{@$logged_in_user->getTopupAccount($method)->is_confirmed? 'disabled': ''}}/></td>
                     <td><input type="hidden" id="uuid" name="topup_config[{{$key}}][method_id]" value="{{$method->uuid}}"/></td>
                     @if(@$logged_in_user->getTopupAccount($method)->is_confirmed)
                         <td><i class='badge badge-success'>@lang('labels.general.yes')</i></td>
