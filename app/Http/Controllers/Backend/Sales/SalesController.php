@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Backend\Sales;
 
+use App\Exports\Sales\SalesExport;
 use App\Models\Company\Company;
 use App\Models\Service\Service;
 use App\Repositories\Api\Business\TransactionRepository;
@@ -26,5 +27,12 @@ class SalesController
             ->withStatuses(config('business.transaction.status'))
             ->withServices($services->pluck('name', 'uuid')->toArray())
             ->withCompanies(auth()->user()->company->is_default ? Company::all()->pluck('name', 'uuid')->toArray() : auth()->user()->company()->pluck('name', 'uuid')->toArray());
+    }
+    
+    public function download(TransactionRepository $transactionRepository)
+    {
+        $sales = $transactionRepository->getAllSales()->get();
+        
+        return (new SalesExport($sales));
     }
 }

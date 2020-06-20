@@ -15,4 +15,7 @@ Route::group([
         ->name('index')
         ->middleware('permission:' . config('permission.permissions.read_sales'));
     
+    Route::get('/download', [SalesController::class, 'download'])
+        ->name('download')
+        ->middleware('permission:' . config('permission.permissions.read_sales'));
 });

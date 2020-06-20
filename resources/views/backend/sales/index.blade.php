@@ -55,7 +55,7 @@
                                     <td>{{ $sale->user->username }}</td>
                                     <td>{{ $sale->items }}</td>
                                     <td>{{ $sale->asset }}</td>
-                                    <td>{!! @$sale->service->logo_label !!}<span>{{ $sale->service->name }}</span></td>
+                                    <td>{!! @$sale->service->logo_label !!} <span> {{ $sale->service->name }}</span></td>
                                     <td>{{ number_format($sale->total_customer_amount, 2) . ' ' . $sale->currency_code }}</td>
                                     <td>{{ $sale->destination }}</td>
                                     <td>{{ $sale->paymentaccount}}</td>
