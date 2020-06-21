@@ -4,7 +4,7 @@
         <i class="fas fa-info-circle"></i> @lang('strings.frontend.user.topup_account_change_notice')
     </div>
 </div>
-<table class="table">
+<table class="table table-responsive">
     <thead>
     <tr>
         <th></th>
@@ -16,9 +16,9 @@
     <tbody>
     @foreach($topup_methods as $key => $method)
         <tr>
-            <td scope="row">{!! @$method->logo_label !!}</td>
+            <td>{!! @$method->logo_label !!}</td>
             <td>{{$method->name}}</td>
-            <td><input placeholder="{{$method->placeholder_text}}" id="account-{{$method->uuid}}" type="text" name="topup_config[{{ $key }}][account]" value="{{@$logged_in_user->getTopupAccount($method)->account}}" class="form-control" {{@$logged_in_user->getTopupAccount($method)->is_confirmed? 'disabled': ''}}/></td>
+            <td><input style="min-width: 100px" placeholder="{{$method->placeholder_text}}" id="account-{{$method->uuid}}" type="text" name="topup_config[{{ $key }}][account]" value="{{@$logged_in_user->getTopupAccount($method)->account}}" class="form-control" {{@$logged_in_user->getTopupAccount($method)->is_confirmed? 'disabled': ''}}/></td>
             @if(@$logged_in_user->getTopupAccount($method)->is_confirmed)<td><i class='badge badge-success'>@lang('labels.general.yes')</i></td>
             @else<td><i class='badge badge-danger'>@lang('labels.general.no')</i></td>
             @endif

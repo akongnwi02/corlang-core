@@ -71,7 +71,7 @@ trait ServiceAttribute
      */
     public function getLogoLabelAttribute()
     {
-        $url =$this->service_logo ?:  url('img/backend/brand/logo/logo-company-profile.png');
+        $url = $this->service_logo ?:  url('img/backend/brand/logo/logo-company-profile.png');
     
         return "<img class='navbar-brand-full img-fluid' src='$url' width='30' height='30' style='border-radius: 50%' alt='$this->name'>";
     }
