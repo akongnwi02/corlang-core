@@ -59,4 +59,24 @@
     {!! script(mix('js/backend.js')) !!}
     @stack('after-scripts')
 </body>
+        <script>
+        /* Recover sidebar state */
+        if (Boolean(sessionStorage.getItem('sidebar-collapsed'))) {
+            let body = document.getElementsByTagName('body')[0];
+            body.className = body.className.replace('sidebar-lg-show', '');
+        }
+
+        /* Store sidebar state */
+        let navbarToggler = document.getElementsByClassName("navbar-toggler");
+        for (let i = 0; i < navbarToggler.length; i++) {
+            navbarToggler[i].addEventListener('click', function(event) {
+                event.preventDefault();
+                if (Boolean(sessionStorage.getItem('sidebar-collapsed'))) {
+                    sessionStorage.setItem('sidebar-collapsed', '');
+                } else {
+                    sessionStorage.setItem('sidebar-collapsed', '1');
+                }
+            });
+        }
+    </script>
 </html>

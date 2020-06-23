@@ -134,11 +134,39 @@ class TransactionRepository
             /*
              * share the commissions
              */
-            $company_commission  = $totalFee * $company_commission_rate;
-            $agent_commission    = $totalFee * $agent_commission_rate;
-            $external_commission = $totalFee * $external_commission_rate;
+            $company_commission  = $totalFee * $company_commission_rate / 100;
+            $agent_commission    = $totalFee * $agent_commission_rate / 100;
+            $external_commission = $totalFee * $external_commission_rate / 100;
             
             $system_commission = $totalFee - ($company_commission + $agent_commission + $external_commission);
+    
+            \Log::info('Total fee calculated for the service calculated', [
+                'service name' => $service->name,
+                'service code' => $service->code,
+                'destination' => $model->getDestination(),
+                'amount' => $model->getAmount(),
+                'is top up' => $accountTopUp,
+                'provider commission name' => $providerServiceCommission->name,
+                'provider commission id' => $providerServiceCommission->uuid,
+                'customer commission name' => $customerServiceCommission->name,
+                'customer commission id' => $customerServiceCommission->uuid,
+                'customer fee' => $customerServiceFee,
+                'provider fee' => $providerServiceFee,
+                'total fee' => $totalFee,
+            ]);
+            
+            \Log::info('Commissions for the service calculated', [
+                'agent name' => auth()->user()->full_name,
+                'agent id' => auth()->user()->uuid,
+                'company name' => auth()->user()->company_id ? auth()->user()->company->name : null,
+                'company id' => auth()->user()->company_id ? auth()->user()->company->uuid : null,
+                'company commission rate' => $company_commission_rate,
+                'agent commission rate' => $agent_commission_rate,
+                'external commission rate' => $external_commission_rate,
+                'company commission' => $company_commission,
+                'agent commission' => $agent_commission,
+                'external commission' => $external_commission,
+            ]);
             
             // Transaction creation
             $transaction = new Transaction();

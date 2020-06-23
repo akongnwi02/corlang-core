@@ -42,7 +42,7 @@
                             <td>{{ currency(transaction.total_customer_fee, transaction.currency_code) }}</td>
                             <td>{{ currency(transaction.total_customer_amount, transaction.currency_code) }}</td>
                             <td>{{ currency(transaction.agent_commission, transaction.currency_code) }}</td>
-                            <td>{{ transaction.service }}</td>
+                            <td><img width="30" height="30" style="border-radius: 50%" :src="transaction.service_logo" :alt="$t('dashboard.pages.general.logo')"/> {{ transaction.service }}</td>
                             <td>{{ transaction.asset }}</td>
                             <td>{{ transaction.completed_at }}</td>
                             <td><span class="badge" :class="badge(transaction.status)">{{ $t('dashboard.pages.transactions.table.status.'+transaction.status) }}</span></td>

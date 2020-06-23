@@ -6,7 +6,7 @@
         <mdb-modal-body>
             <mdb-row>
                 <mdb-col class="col-sm-3">
-                    <img :src="transaction.service_logo" :alt="$t('dashboard.pages.general.logo')">
+                    <img :src="transaction.service_logo" :alt="$t('dashboard.pages.general.logo')"/>
                 </mdb-col>
                 <mdb-col class="col-sm-9">
                     <strong>{{transaction.service}}</strong>

@@ -32522,7 +32522,18 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(transaction.service))]),
+                          _c("td", [
+                            _c("img", {
+                              staticStyle: { "border-radius": "50%" },
+                              attrs: {
+                                width: "30",
+                                height: "30",
+                                src: transaction.service_logo,
+                                alt: _vm.$t("dashboard.pages.general.logo")
+                              }
+                            }),
+                            _vm._v(" " + _vm._s(transaction.service))
+                          ]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(transaction.asset))]),
                           _vm._v(" "),
