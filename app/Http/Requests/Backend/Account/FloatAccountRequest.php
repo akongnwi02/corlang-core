@@ -22,7 +22,10 @@ class FloatAccountRequest extends FormRequest
             // all other accounts obey double entry.
             && (Company::where('is_default', true)->first()->account == request()->account)
             && request()->account->company->is_active
-            && request()->account->is_active) {
+            && request()->account->is_active
+            && auth()->user()->id == 1
+        )
+        {
             return true;
         }
         \Log::error('The request could not be performed', [
