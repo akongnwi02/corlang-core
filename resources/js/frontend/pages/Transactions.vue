@@ -20,13 +20,13 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
+                            <th>{{ $t('dashboard.pages.transactions.table.header.service') }}</th>
                             <th>{{ $t('dashboard.pages.transactions.table.header.code') }}</th>
                             <th>{{ $t('dashboard.pages.transactions.table.header.destination') }}</th>
                             <th>{{ $t('dashboard.pages.transactions.table.header.items') }}</th>
                             <th>{{ $t('dashboard.pages.transactions.table.header.fee') }}</th>
                             <th>{{ $t('dashboard.pages.transactions.table.header.total') }}</th>
                             <th>{{ $t('dashboard.pages.transactions.table.header.commission') }}</th>
-                            <th>{{ $t('dashboard.pages.transactions.table.header.service') }}</th>
                             <th>{{ $t('dashboard.pages.transactions.table.header.asset') }}</th>
                             <th>{{ $t('dashboard.pages.transactions.table.header.completed_at') }}</th>
                             <th>{{ $t('dashboard.pages.transactions.table.header.status') }}</th>
@@ -36,13 +36,13 @@
                         </thead>
                         <tbody>
                         <tr v-if="transactionsLoadStatus==2" v-for="transaction in transactions">
+                            <td><img width="30" height="30" style="border-radius: 50%" :src="transaction.service_logo" :alt="$t('dashboard.pages.general.logo')"/> {{ transaction.service }}</td>
                             <td>{{ transaction.code }}</td>
                             <td>{{ transaction.destination }}</td>
                             <td>{{ transaction.items }}</td>
                             <td>{{ currency(transaction.total_customer_fee, transaction.currency_code) }}</td>
                             <td>{{ currency(transaction.total_customer_amount, transaction.currency_code) }}</td>
                             <td>{{ currency(transaction.agent_commission, transaction.currency_code) }}</td>
-                            <td><img width="30" height="30" style="border-radius: 50%" :src="transaction.service_logo" :alt="$t('dashboard.pages.general.logo')"/> {{ transaction.service }}</td>
                             <td>{{ transaction.asset }}</td>
                             <td>{{ transaction.completed_at }}</td>
                             <td><span class="badge" :class="badge(transaction.status)">{{ $t('dashboard.pages.transactions.table.status.'+transaction.status) }}</span></td>

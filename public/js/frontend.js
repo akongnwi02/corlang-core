@@ -32376,6 +32376,16 @@ var render = function() {
                       _vm._v(
                         _vm._s(
                           _vm.$t(
+                            "dashboard.pages.transactions.table.header.service"
+                          )
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [
+                      _vm._v(
+                        _vm._s(
+                          _vm.$t(
                             "dashboard.pages.transactions.table.header.code"
                           )
                         )
@@ -32436,16 +32446,6 @@ var render = function() {
                       _vm._v(
                         _vm._s(
                           _vm.$t(
-                            "dashboard.pages.transactions.table.header.service"
-                          )
-                        )
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("th", [
-                      _vm._v(
-                        _vm._s(
-                          _vm.$t(
                             "dashboard.pages.transactions.table.header.asset"
                           )
                         )
@@ -32483,6 +32483,19 @@ var render = function() {
                   _vm._l(_vm.transactions, function(transaction) {
                     return _vm.transactionsLoadStatus == 2
                       ? _c("tr", [
+                          _c("td", [
+                            _c("img", {
+                              staticStyle: { "border-radius": "50%" },
+                              attrs: {
+                                width: "30",
+                                height: "30",
+                                src: transaction.service_logo,
+                                alt: _vm.$t("dashboard.pages.general.logo")
+                              }
+                            }),
+                            _vm._v(" " + _vm._s(transaction.service))
+                          ]),
+                          _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(transaction.code))]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(transaction.destination))]),
@@ -32520,19 +32533,6 @@ var render = function() {
                                 )
                               )
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("img", {
-                              staticStyle: { "border-radius": "50%" },
-                              attrs: {
-                                width: "30",
-                                height: "30",
-                                src: transaction.service_logo,
-                                alt: _vm.$t("dashboard.pages.general.logo")
-                              }
-                            }),
-                            _vm._v(" " + _vm._s(transaction.service))
                           ]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(transaction.asset))]),

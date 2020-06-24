@@ -27,13 +27,13 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
+                                <th>@lang('labels.backend.sales.table.service')</th>
                                 <th>@lang('labels.backend.sales.table.code')</th>
                                 <th>@lang('labels.backend.sales.table.date')</th>
                                 <th>@lang('labels.backend.sales.table.company')</th>
                                 <th>@lang('labels.backend.sales.table.user')</th>
                                 <th>@lang('labels.backend.sales.table.items')</th>
                                 <th>@lang('labels.backend.sales.table.asset')</th>
-                                <th>@lang('labels.backend.sales.table.service')</th>
                                 <th>@lang('labels.backend.sales.table.total_customer_amount')</th>
                                 <th>@lang('labels.backend.sales.table.destination')</th>
                                 <th>@lang('labels.backend.sales.table.payment_account')</th>
@@ -49,13 +49,13 @@
                             <tbody>
                             @foreach($sales as $sale)
                                 <tr>
+                                    <td>{!! @$sale->service->logo_label !!} <span> {{ $sale->service->name }}</span></td>
                                     <td>{{ $sale->code }}</td>
                                     <td>{{ $sale->created_at->diffForHumans() }}</td>
                                     <td>{{ @$sale->company->name }}</td>
                                     <td>{{ $sale->user->username }}</td>
                                     <td>{{ $sale->items }}</td>
                                     <td>{{ $sale->asset }}</td>
-                                    <td>{!! @$sale->service->logo_label !!} <span> {{ $sale->service->name }}</span></td>
                                     <td>{{ number_format($sale->total_customer_amount, 2) . ' ' . $sale->currency_code }}</td>
                                     <td>{{ $sale->destination }}</td>
                                     <td>{{ $sale->paymentaccount}}</td>
