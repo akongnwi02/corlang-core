@@ -119,13 +119,23 @@ class CommissionRepository
         }
     }
     
-    public function getCompanyCustomerCommission($service, $company)
+    public function getCompanyServiceCustomerCommission($service, $company)
     {
         return $company->services()->where('uuid', $service->uuid)->first()->specific->customer_commission ?: $service->customer_commission;
     }
     
-    public function getCompanyProviderCommission($service, $company)
+    public function getCompanyServiceProviderCommission($service, $company)
     {
         return $company->services()->where('uuid', $service->uuid)->first()->specific->provider_commission ?: $service->provider_commission;
+    }
+    
+    public function getCompanyMethodProviderCommission($method, $company)
+    {
+        return $company->methods()->where('uuid', $method->uuid)->first()->specific->provider_commission ?: $method->provider_commission;
+    }
+    
+    public function getCompanyMethodCustomerCommission($method, $company)
+    {
+        return $company->methods()->where('uuid', $method->uuid)->first()->specific->customer_commission ?: $method->customer_commission;
     }
 }

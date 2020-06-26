@@ -19,7 +19,7 @@ trait PaymentMethodAttribute
         if ($this->is_default) {
             return "<img class='navbar-brand-full img-fluid' src='/img/backend/brand/logo/logo-company-profile.png' width='50' height='50' style='border-radius: 50%' alt='$this->name'>";
         } else {
-            return $this->service->logo_label;
+            return @$this->service->logo_label;
         }
     }
     

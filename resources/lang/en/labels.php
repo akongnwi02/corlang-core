@@ -147,12 +147,13 @@ return [
                 'tabs'            => [
                     'titles'  => [
                         'profile'  => 'Profile',
-                        'services' => 'Services'
+                        'services' => 'Services',
+                        'paymentmethods' => 'Payment Methods',
                     ],
                     'content' => [
                         'service' => [
-                            'management' => 'Service Rate',
-                            'edit'       => 'Update service rate for :company',
+                            'management' => 'Service Commission Rate',
+                            'edit'       => 'Update commission rate for :company',
                             'add'        => 'Add services for :company',
                             'default'    => 'Use service default',
                             'custom'     => 'Set custom',
@@ -169,6 +170,22 @@ return [
                                 'customercommission' => 'Customer Service Charge',
                                 'providercommission' => 'Provider Service Charge',
                                 'total'              => 'service|services'
+                            ]
+                        ],
+                        'paymentmethod' => [
+                            'management' => 'Configure Payment Method',
+                            'edit'       => 'Update service rate for :company',
+                            'add'        => 'Add payment methods for :company',
+                            'default'    => 'Use payment method default',
+                            'custom'     => 'Set custom',
+                            'table'      => [
+                                'name'               => 'Payment Method Name',
+                                'active'             => 'Active',
+                                'code'               => 'Code',
+                                'logo'               => 'Logo',
+                                'customercommission' => 'Customer Service Charge',
+                                'providercommission' => 'Provider Service Charge',
+                                'total'              => 'method|methods'
                             ]
                         ]
                     ]

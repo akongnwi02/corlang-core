@@ -11,6 +11,7 @@ namespace App\Models\Traits\Relationships;
 use App\Models\Account\Account;
 use App\Models\Account\Strongbox;
 use App\Models\Auth\User;
+use App\Models\Service\PaymentMethod;
 use App\Models\System\Country;
 use App\Models\Service\Service;
 use App\Models\Company\CompanyType;
@@ -49,6 +50,19 @@ trait CompanyRelationship
                 'company_rate',
                 'agent_rate',
                 'external_rate',
+                'customercommission_id',
+                'providercommission_id',
+            ]);
+    }
+    
+    public function methods()
+    {
+        return $this->belongsToMany(PaymentMethod::class, 'company_paymentmethod', 'company_id', 'paymentmethod_id', 'uuid')
+            ->withTimestamps()
+            ->using(CompanyService::class)
+            ->as('specific')
+            ->withPivot([
+                'is_active',
                 'customercommission_id',
                 'providercommission_id',
             ]);

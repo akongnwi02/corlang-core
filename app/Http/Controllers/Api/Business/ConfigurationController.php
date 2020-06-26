@@ -30,6 +30,16 @@ class ConfigurationController extends Controller
             'country' => $countryRepository->get()->where('is_default', true)->get()[0],
             // get all payout methods
             'payout_methods' => $paymentMethodRepository->getPayoutMethods()
+                // when the user belongs to a company
+                ->when(auth()->user()->company_id, function ($query) {
+                    // get only the company payment methods
+                    $query->whereHas('companies', function ($query) {
+                        // which the company has access to
+                        $query->where('companies.uuid', auth()->user()->company_id)
+                            // which are active
+                            ->where('company_paymentmethod.is_active', true);
+                    });
+                })
                 ->with('service')->get(),
             // get all categories
             'categories' => $categoryRepository->get()

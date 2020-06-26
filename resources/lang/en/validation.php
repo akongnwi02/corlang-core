@@ -123,7 +123,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-    'custom' => [
+    'custom'               => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
@@ -141,8 +141,8 @@ return [
     
     'attributes' => [
         
-        'backend' => [
-            'access'    => [
+        'backend'  => [
+            'access'     => [
                 'permissions' => [
                     'associated_roles' => 'Associated Roles',
                     'dependencies'     => 'Dependencies',
@@ -188,8 +188,8 @@ return [
                     'company'                   => 'Company'
                 ],
             ],
-            'companies' => [
-                'company' => [
+            'companies'  => [
+                'company'       => [
                     'name'             => 'Company Name',
                     'address'          => 'Address',
                     'country'          => 'Country',
@@ -207,44 +207,53 @@ return [
                     'direct_polling'   => 'Direct Polling',
                     'agent_self_topup' => 'Agent Self Topup',
                 ],
-                'service' => [
-                    'company_rate' => 'Company Rate (%)',
-                    'agent_rate'   => 'Agent Rate (%)',
-                    'external_rate'   => 'External Rate (%)',
+                'service'       => [
+                    'company_rate'       => 'Company Rate (%)',
+                    'agent_rate'         => 'Agent Rate (%)',
+                    'external_rate'      => 'External Rate (%)',
                     'customercommission' => 'Customer Commission',
-                    'providercommission'   => 'Provider Commission',
-                    'default'      => 'Use service default value',
-                    'custom'       => 'Set custom value',
-                    'services'     => 'Services',
-                    'default_setting' => 'Use Default Service Charge'
+                    'providercommission' => 'Provider Commission',
+                    'default'            => 'Use service default value',
+                    'custom'             => 'Set custom value',
+                    'services'           => 'Services',
+                    'default_setting'    => 'Use Default Service Charge'
+                ],
+                'paymentmethod' => [
+                    'customercommission' => 'Customer Commission',
+                    'providercommission' => 'Provider Commission',
+                    'default'            => 'Use method default value',
+                    'custom'             => 'Set custom value',
+                    'methods'            => 'Payment methods',
+                    'default_setting'    => 'Use Default Service Charge'
                 ]
             ],
-            'services'  => [
+            'services'   => [
                 'service'    => [
-                    'name'               => 'Service Name',
-                    'description_en'     => 'English Description',
-                    'description_fr'     => 'French Description',
-                    'category'           => 'Service Category',
-                    'gateway'            => 'Gateway Configuration',
-                    'active'             => 'Active',
-                    'code'               => 'Code',
-                    'destination_placeholder'  => 'Service Number Example',
-                    'destination_regex' => 'Service Number Regex',
-                    'providercommission' => 'Service Provider Service Charge',
-                    'companycommission'  => 'Company Service Charge',
-                    'customercommission' => 'Customer Service Charge',
-                    'logo'               => 'Logo',
-                    'logo_url'           => 'Logo URL',
-                    'prepaid'            => 'Prepaid',
-                    'items'              => 'Items',
-                    'requires_auth'      => 'Authorization Required',
-                    'withdrawal'         => 'Money Withdrawal',
-                    'company_rate'       => 'Default Company Rate (%)',
-                    'agent_rate'         => 'Default Agent Rate (%)',
-                    'external_rate'      => 'Default External Rate (%)',
-                    'min_amount'         => 'Minimum Amount',
-                    'max_amount'         => 'Maximum Amount',
-                    'providercompany'    => 'Provider Company',
+                    'name'                    => 'Service Name',
+                    'description_en'          => 'English Description',
+                    'description_fr'          => 'French Description',
+                    'category'                => 'Service Category',
+                    'gateway'                 => 'Gateway Configuration',
+                    'active'                  => 'Active',
+                    'code'                    => 'Code',
+                    'destination_placeholder' => 'Service Number Example',
+                    'destination_regex'       => 'Service Number Regex',
+                    'providercommission'      => 'Service Provider Service Charge',
+                    'companycommission'       => 'Company Service Charge',
+                    'customercommission'      => 'Customer Service Charge',
+                    'logo'                    => 'Logo',
+                    'logo_url'                => 'Logo URL',
+                    'prepaid'                 => 'Prepaid',
+                    'items'                   => 'Items',
+                    'requires_auth'           => 'Authorization Required',
+                    'withdrawal'              => 'Money Withdrawal',
+                    'company_rate'            => 'Default Company Rate (%)',
+                    'agent_rate'              => 'Default Agent Rate (%)',
+                    'external_rate'           => 'Default External Rate (%)',
+                    'min_amount'              => 'Minimum Amount',
+                    'max_amount'              => 'Maximum Amount',
+                    'step_amount'             => 'Step Amount',
+                    'providercompany'         => 'Provider Company',
                 ],
                 'item'       => [
                     'active'         => 'Active',
@@ -277,27 +286,27 @@ return [
                     'service'            => 'Service',
                     'realtime'           => 'Realtime',
                 ],
-                'category' => [
-                    'name' => 'Name',
-                    'code' => 'Code',
-                    'active' => 'Active',
+                'category'   => [
+                    'name'    => 'Name',
+                    'code'    => 'Code',
+                    'active'  => 'Active',
                     'api_key' => 'Micro Service API Key',
                     'api_url' => 'Micro Service URL'
                 ]
             ],
             'accounting' => [
                 'collection' => [
-                    'amount' => 'Amount',
+                    'amount'   => 'Amount',
                     'currency' => 'Currency',
-                    'comment' => 'comment',
+                    'comment'  => 'comment',
                 ],
-                'provision' => [
-                    'amount' => 'Amount',
+                'provision'  => [
+                    'amount'   => 'Amount',
                     'currency' => 'Currency',
-                    'comment' => 'comment',
+                    'comment'  => 'comment',
                 ]
             ],
-            'account'   => [
+            'account'    => [
                 'amount'         => 'Amount',
                 'currency'       => 'Currency',
                 'comment'        => 'Comment (Optional)',
@@ -329,12 +338,12 @@ return [
             'timezone'                  => 'Timezone',
             'language'                  => 'Language',
             'location'                  => 'Location',
-            'topup' => [
-                'service' => 'Service',
+            'topup'                     => [
+                'service'   => 'Service',
                 'confirmed' => 'Confirmed',
-                'account' => 'Account',
-                'config'  => 'Topup Configuration',
-                'otp'     => 'OTP',
+                'account'   => 'Account',
+                'config'    => 'Topup Configuration',
+                'otp'       => 'OTP',
             ]
         ]
     ],

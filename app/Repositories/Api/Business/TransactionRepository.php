@@ -64,7 +64,6 @@ class TransactionRepository
      */
     public function create(ModelInterface $model)
     {
-        
         return \DB::transaction(function () use ($model) {
             // is user trying to top up his account balance ?
             $accountTopUp = false;
@@ -97,11 +96,11 @@ class TransactionRepository
              * get the commissions
              */
             if ($accountTopUp) {
-                $customerServiceCommission = $service->payment_method->customer_commission;
-                $providerServiceCommission = $service->payment_method->provider_commission;
+                $customerServiceCommission = auth()->user()->company ? $this->commissionRepository->getCompanyMethodCustomerCommission($service->payment_method, auth()->user()->company) : $service->payment_method->customer_commission;
+                $providerServiceCommission = auth()->user()->company ? $this->commissionRepository->getCompanyMethodProviderCommission($service->payment_method, auth()->user()->company) : $service->payment_method->provider_commission;
             } else {
-                $customerServiceCommission = auth()->user()->company ? $this->commissionRepository->getCompanyCustomerCommission($service, auth()->user()->company) : $service->customer_commission;
-                $providerServiceCommission = auth()->user()->company ? $this->commissionRepository->getCompanyProviderCommission($service, auth()->user()->company) : $service->provider_commission;
+                $customerServiceCommission = auth()->user()->company ? $this->commissionRepository->getCompanyServiceCustomerCommission($service, auth()->user()->company) : $service->customer_commission;
+                $providerServiceCommission = auth()->user()->company ? $this->commissionRepository->getCompanyServiceProviderCommission($service, auth()->user()->company) : $service->provider_commission;
             }
             
             /*

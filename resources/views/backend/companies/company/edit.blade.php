@@ -27,6 +27,9 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#services" role="tab" aria-controls="services" aria-expanded="true"><i class="fas fa-cog"></i> @lang('labels.backend.companies.company.tabs.titles.services')</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#paymentmethods" role="tab" aria-controls="paymentmethods" aria-expanded="true"><i class="fas fa-cog"></i> @lang('labels.backend.companies.company.tabs.titles.paymentmethods')</a>
+                        </li>
                     </ul>
 
                     <div class="tab-content">
@@ -34,6 +37,9 @@
                             @include('backend.companies.company.edit.tabs.profile')
                         </div><!--tab--><div class="tab-pane fade" id="services" role="tabpanel" aria-expanded="true">
                             @include('backend.companies.company.edit.tabs.services')
+                        </div><!--tab-->
+                        <div class="tab-pane fade" id="paymentmethods" role="tabpanel" aria-expanded="true">
+                            @include('backend.companies.company.edit.tabs.payment-methods')
                         </div><!--tab-->
                     </div><!--tab-content-->
                 </div><!--col-->

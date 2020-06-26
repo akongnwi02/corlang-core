@@ -66,6 +66,7 @@ class Service extends Model
         'has_items',
         'min_amount',
         'max_amount',
+        'step_amount',
     ];
     
     protected $hidden = [
@@ -89,6 +90,7 @@ class Service extends Model
         'external_rate'       => 'double',
         'min_amount'          => 'double',
         'max_amount'          => 'double',
+        'step_amount'         => 'double',
         'has_items'           => 'boolean',
         'requires_auth'       => 'boolean',
         'is_money_withdrawal' => 'boolean',

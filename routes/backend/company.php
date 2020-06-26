@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\Company\Company\CompanyController;
 use App\Http\Controllers\Backend\Company\Company\ChangeCompanyController;
 use App\Http\Controllers\Backend\Company\Company\CompanyStatusController;
 use App\Http\Controllers\Backend\Company\Company\CompanyServiceController;
+use App\Http\Controllers\Backend\Company\Company\CompanyPaymentMethodController;
 
 Route::group([
     'prefix'     => 'companies',
@@ -103,6 +104,45 @@ Route::group([
                 Route::get('mark/{status}', [CompanyServiceController::class, 'mark'])
                     ->where(['status' => '[0,1]'])
                     ->name('company.service.mark')
+                    ->middleware('permission:'.config('permission.permissions.deactivate_company_services'));
+            });
+            
+        });
+        
+        // Company Payment Method
+        Route::group(['namespace' => 'CompanyPaymentMethod'], function () {
+            /*
+             * CRUD
+             */
+//            Route::get('service', [CompanyServiceController::class, 'index',])
+//                ->name('company.service.index')
+//                ->middleware('permission:'.config('permission.permissions.read_company_services'));
+//
+//            Route::get('service/create', [CompanyServiceController::class, 'create'])
+//                ->name('company.service.create')
+//                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+//
+            Route::post('method', [CompanyPaymentMethodController::class, 'store'])
+                ->name('company.method.store')
+                ->middleware('permission:'.config('permission.permissions.create_company_services'));
+
+            /*
+             * Specific Company Service
+             */
+            Route::group(['prefix' => 'method/{method}'], function () {
+            
+//                Route::get('edit', [CompanyServiceController::class, 'edit'])
+//                    ->name('company.service.edit')
+//                    ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+
+                Route::put('update', [CompanyPaymentMethodController::class, 'update'])
+                    ->name('company.method.update')
+                    ->middleware('permission:'.config('permission.permissions.update_company_services'));
+                
+                // Status
+                Route::get('mark/{status}', [CompanyPaymentMethodController::class, 'mark'])
+                    ->where(['status' => '[0,1]'])
+                    ->name('company.method.mark')
                     ->middleware('permission:'.config('permission.permissions.deactivate_company_services'));
             });
             

@@ -159,6 +159,11 @@ class CompanyRepository
         return $company->services()->where('services.is_active', true);
     }
     
+    public function getAvailablePaymentMethods($company)
+    {
+        return $company->methods()->where('paymentmethods.is_active', true);
+    }
+    
     /**
      * @param User $user
      * @param $company

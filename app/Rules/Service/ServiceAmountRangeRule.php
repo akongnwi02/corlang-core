@@ -36,6 +36,9 @@ class ServiceAmountRangeRule implements Rule
         if ($value > $service->max_amount) {
             throw new BadRequestException(BusinessErrorCodes::MAXIMUM_AMOUNT_ERROR, 'The amount is greater than the maximum amount required');
         }
+        if ($value % $service->step_amount != 0) {
+            throw new BadRequestException(BusinessErrorCodes::STEP_AMOUNT_ERROR, 'The amount is not a multiple of the step amount');
+        }
         return true;
     }
     

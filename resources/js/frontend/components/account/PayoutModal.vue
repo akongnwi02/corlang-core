@@ -15,11 +15,11 @@
                         </option>
                     </select>
                 </divl>
-                <mdiv class="col-lg-6">
+                <div class="col-lg-6">
                     <mdb-input key="amount"
                                :label="$t('dashboard.pages.general.amount') + ' ' + account.currency_code"
                                v-model="amount"></mdb-input>
-                </mdiv>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">

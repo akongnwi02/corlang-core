@@ -66,12 +66,17 @@ return [
                 'cant_change_attribute' => 'You are not permitted to change the :attribute',
                 'cant_change_check_box' => 'You are not allowed to change one of the checkbox values',
                 'invalid_service'       => 'An invalid service has been provided',
+                'invalid_method'       => 'An invalid payment method has been provided',
                 'login_error'           => 'There was a problem logging into this company. Please try again.',
                 'inactive'              => 'There was a problem processing the request. This company is inactive',
             ],
             'service' => [
                 'mark_error'   => 'There was a problem updating the status of this service for this company. Please try again.',
-                'update_error' => 'There was a problem updating the this service for this company. Please try again.',
+                'update_error' => 'There was a problem updating this service for this company. Please try again.',
+            ],
+            'method' => [
+                'mark_error'   => 'There was a problem updating the status of this payment method for this company. Please try again.',
+                'update_error' => 'There was a problem updating this payment method for this company. Please try again.',
             ]
         ],
         'account' => [

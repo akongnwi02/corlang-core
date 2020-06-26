@@ -17,6 +17,7 @@ use App\Models\Company\CompanyType;
 use App\Models\System\Setting;
 use App\Repositories\Backend\Company\Company\CompanyRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
+use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Repositories\Backend\System\CountryRepository;
 
@@ -64,13 +65,16 @@ class CompanyController extends Controller
         CountryRepository $countryRepository,
         CompanyRepository $companyRepository,
         ServiceRepository $serviceRepository,
-        CommissionRepository $commissionRepository
+        CommissionRepository $commissionRepository,
+        PaymentMethodRepository $paymentMethodRepository
     )
     {
 //        dd($serviceRepository->getAllActiveServices()->pluck('name', 'uuid'));
         return view('backend.companies.company.edit')
             ->withCompanyServices($companyRepository->getAvailableServices($company)->get())
+            ->withCompanyMethods($companyRepository->getAvailablePaymentMethods($company)->get())
             ->withServices($serviceRepository->getAllActiveServices()->get())
+            ->withPaymentMethods($paymentMethodRepository->getPaymentMethods()->get())
             ->withCompany($company)
             ->withCommissions($commissionRepository->getAllCommissions()
                 ->pluck('name', 'uuid')

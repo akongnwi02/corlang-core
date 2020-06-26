@@ -244,6 +244,7 @@
         "10043": "No bill was found",
         "10044": "The amount provided is more than the maximum amount required for this service",
         "10045": "The service number provided is not in the required format",
-        "10046": "There is a commission distribution error with this service. Please contact support"
+        "10046": "There is a commission distribution error with this service. Please contact support",
+        "10047": "The amount is not a multiple of the step amount"
     }
 }

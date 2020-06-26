@@ -58,4 +58,5 @@ class BusinessErrorCodes
     const MAXIMUM_AMOUNT_ERROR              = '10044';
     const REGEX_VALIDATION_ERROR            = '10045';
     const COMMISSION_DISTRIBUTION_ERROR     = '10046';
+    const STEP_AMOUNT_ERROR                 = '10047';
 }

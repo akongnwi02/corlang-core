@@ -48,6 +48,10 @@ return [
             'service' => [
                 'status_updated' => 'The status was successfully updated.',
                 'updated' => 'The service was updated for this company successfully.',
+            ],
+            'method' => [
+                'status_updated' => 'The status was successfully updated.',
+                'updated' => 'The payment method was updated for this company successfully.',
             ]
         ],
         'services' => [

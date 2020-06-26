@@ -45,11 +45,11 @@
                     <td>{{ ! is_null($service->specific->external_rate) ? $service->specific->external_rate_label : $service->external_rate_label }}</td>
                     <td>{{ ! is_null($service->specific->customercommission_id) ? @$service->specific->customer_commission->name : @$service->customer_commission->name }}</td>
                     <td>{{ ! is_null($service->specific->providercommission_id) ? @$service->specific->provider_commission->name : @$service->provider_commission->name }}</td>
-                    <td></td>
                     <td>
                         @can(config('permission.permissions.update_company_services'))
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#service-{{ $service->uuid }}" data-placement="top" title="@lang('buttons.general.crud.edit')"><i class="fas fa-edit"></i></button></td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#service-{{ $service->uuid }}" data-placement="top" title="@lang('buttons.general.crud.edit')"><i class="fas fa-edit"></i></button>
                         @endcan
+                    </td>
                 </tr>
                 <div class="modal fade" id="service-{{ $service->uuid }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
