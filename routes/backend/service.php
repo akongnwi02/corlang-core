@@ -11,6 +11,7 @@
  * All route names are prefixed with 'admin.services'.
  */
 
+use App\Http\Controllers\Backend\Company\Company\CompanyServiceController;
 use App\Http\Controllers\Backend\Services\Commission\CommissionController;
 use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodController;
 use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodStatusController;
@@ -65,6 +66,25 @@ Route::group([
         Route::get('mark/{status}', [ServiceStatusController::class, 'mark'])
             ->name('service.mark')
             ->middleware('permission:'.config('permission.permissions.deactivate_services'));
+    
+        // Company Service
+        Route::group(['namespace' => 'ServiceCompany'], function () {
+            /*
+             * CRUD
+             */
+//            Route::get('service', [CompanyServiceController::class, 'index',])
+//                ->name('company.service.index')
+//                ->middleware('permission:'.config('permission.permissions.read_company_services'));
+//
+//            Route::get('service/create', [CompanyServiceController::class, 'create'])
+//                ->name('company.service.create')
+//                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+//
+//            Route::post('company', [CompanyServiceController::class, 'store'])
+//                ->name('company.service.store')
+//                ->middleware('permission:'.config('permission.permissions.create_company_services'));
+        
+        });
     });
     
     /*
