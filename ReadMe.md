@@ -32,3 +32,15 @@ Run the following command on project's root directory
 * Change stack `heroku stack:set heroku-18 -a corlang`
 * Heroku log in `heroku login --browser=firefox`
 * Heroku logs `heroku logs -t -a corpay`
+
+### HOW TO TRANSLATE DICTIONARY FILES
+
+1. unzip lang.zip
+2. Translate the files in the 'fr' folder to french
+3. N.B Only translate the values not the keys.
+4. transalate the content of the file fr.json (we have english on the left and french on the right)
+5. unzip locales.zip
+6. Translate content of fr.json to english. N.B Only translate the keys
+7. files in lang.zip have words starting with ':' e.g :attribute These words are variables and should not be translated
+8. files in locales.zip have words enclosed with '{}' e.g {attribute} These words are variables and should not be translated
+
