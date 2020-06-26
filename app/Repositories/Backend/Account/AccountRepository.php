@@ -101,7 +101,8 @@ class AccountRepository
     
     public function getSystemTotalCommission()
     {
-        return Transaction::sum('system_commission');
+        return Transaction::where('status', config('business.transaction.status.success'))
+            ->sum('system_commission');
     }
     
     public function getSystemTotalPayout()
