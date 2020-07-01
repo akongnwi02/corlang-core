@@ -111,7 +111,7 @@ return [
              *
              * false for no expiration
              */
-            'expiration_time' => 1,
+            'expiration_time' => 5,
         ],
     ],
 
