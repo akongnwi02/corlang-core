@@ -5,7 +5,7 @@
 
 ## Deployment Guide
 
-## I Clone the project and checkout develop branch
+## I. Clone the project and checkout develop branch
 
 ## II. Installing Docker and Docker-compose
 
