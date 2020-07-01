@@ -34,7 +34,7 @@ class ResetPasswordRequest extends FormRequest
                 'required',
                 'confirmed',
                 new ChangePassword(),
-                new PasswordExposed(),
+//                new PasswordExposed(),
                 new UnusedPassword($this->route('uuid')),
             ],
         ];
