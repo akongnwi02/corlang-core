@@ -36,7 +36,8 @@
                     },
                     "airtime": {
                         "airtime": "Airtime",
-                        "data": "Data"
+                        "data": "Data",
+                        "plan": "Plan"
                     }
                 }
             },

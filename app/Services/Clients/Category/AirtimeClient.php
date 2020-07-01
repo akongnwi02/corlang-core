@@ -8,7 +8,6 @@
 
 namespace App\Services\Clients\Category;
 
-
 use App\Exceptions\Api\BadRequestException;
 use App\Http\Resources\Api\Business\AirtimeResource;
 use App\Rules\Service\ServiceAccessRule;
@@ -32,6 +31,13 @@ class AirtimeClient extends AbstractCategory
             'amount'        => ['required', 'nullable', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/', new ServiceAmountRangeRule()],
             'currency_code' => ['required', Rule::exists('currencies', 'code')],
         ])->validate();
+    
+        if ($this->category->code == config('business.service.category.data.code')) {
+            validator($request, [
+                'item'   => ['required', Rule::exists('items', 'code')],
+            ])->validate();
+        }
+        
         Log::info("{$this->getCategoryClientName()}: Input data valid");
     }
     

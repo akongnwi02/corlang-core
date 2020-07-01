@@ -33,6 +33,14 @@
                             {{ currencyFormat(quote.amount) }}
                         </td>
                     </tr>
+                    <tr v-if="quote.item">
+                        <th>
+                            {{ $t('dashboard.pages.tabs.content.airtime.plan')}}
+                        </th>
+                        <td>
+                            {{ quote.item }}
+                        </td>
+                    </tr>
                     <tr v-if="quote.name">
                         <th>
                             {{ $t('dashboard.pages.general.customer.name')}}
