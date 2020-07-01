@@ -5,15 +5,15 @@
                 <mdb-tab-item class="mt-4" key="prepaidbills-tab" :active="tab=='prepaid.bill.search'" @click.native.prevent="gotoTab('prepaid.bill.search')">
                     <mdb-icon icon="plug" class="ml-2"/> {{ $t(`dashboard.pages.tabs.titles.prepaid`) }}
                 </mdb-tab-item>
-                <mdb-tab-item class="mt-4" key="postpaidbills-tab" :active="tab=='postpaid.bill.search'" @click.native.prevent="gotoTab('postpaid.bill.search')">
-                    <mdb-icon icon="tint" class="ml-2"/> {{ $t(`dashboard.pages.tabs.titles.postpaid`) }}
-                </mdb-tab-item>
+                <!--<mdb-tab-item class="mt-4" key="postpaidbills-tab" :active="tab=='postpaid.bill.search'" @click.native.prevent="gotoTab('postpaid.bill.search')">-->
+                    <!--<mdb-icon icon="tint" class="ml-2"/> {{ $t(`dashboard.pages.tabs.titles.postpaid`) }}-->
+                <!--</mdb-tab-item>-->
                 <mdb-tab-item class="mt-4" key="momo-tab" :active="tab=='momo'" @click.native.prevent="gotoTab('momo')">
                     <mdb-icon icon="mobile-alt" class="ml-2"/> {{ $t(`dashboard.pages.tabs.titles.momo`) }}
                 </mdb-tab-item>
-                <!--<mdb-tab-item class="mt-4" key="recharge-tab" :active="tab=='airtime'" @click.native.prevent="gotoTab('airtime')">-->
-                    <!--<mdb-icon icon="address-card" class="ml-2"/>  {{ $t(`dashboard.pages.tabs.titles.airtime`) }}-->
-                <!--</mdb-tab-item>-->
+                <mdb-tab-item class="mt-4" key="recharge-tab" :active="tab=='airtime'" @click.native.prevent="gotoTab('airtime')">
+                    <mdb-icon icon="address-card" class="ml-2"/>  {{ $t(`dashboard.pages.tabs.titles.airtime`) }}
+                </mdb-tab-item>
             </mdb-tab>
         </mdb-col>
         <mdb-col md="9">

@@ -10,6 +10,7 @@ namespace App\Services\Business\Validators;
 
 use App\Exceptions\Api\ServerErrorException;
 use App\Services\Clients\AbstractCategory;
+use App\Services\Clients\Category\AirtimeClient;
 use App\Services\Clients\Category\PrepaidBillClient;
 use App\Services\Clients\Category\PostpaidBillClient;
 use App\Services\Clients\Category\ReceiveMoneyClient;
@@ -42,6 +43,8 @@ trait CategoryProvider
                 return new PostpaidBillClient($category, $config);
             case config('business.service.category.sendmoney.code'):
                 return new SendMoneyClient($category, $config);
+            case config('business.service.category.airtime.code'):
+                return new AirtimeClient($category, $config);
             default:
                 throw new ServerErrorException(BusinessErrorCodes::UNKNOWN_SERVICE_CATEGORY, "Service category $category->code is not implemented");
         }

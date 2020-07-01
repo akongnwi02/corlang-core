@@ -27,7 +27,7 @@ class PostpaidBillClient extends AbstractCategory
     {
         Log::info("{$this->getCategoryClientName()}: Validating input data");
         validator($request, [
-            'destination'   => ['required', 'regex:/(^[A-Za-z0-9 ]+$)+/'],
+            'destination'   => ['required', 'string'],
             'service_code'  => ['required', new ServiceAccessRule(),],
             'phone'         => ['sometimes', 'nullable', 'string', 'min:9'],
             //            'pincode'       => ['required', new CorrectPinCode()],

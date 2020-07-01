@@ -81,7 +81,7 @@ class ReceiveMoneyClient extends AbstractCategory
                 ->setItems($data['service_code'])
                 ->setCurrencyCode($data['currency_code'])
                 ->setAmount($data['amount'])
-                ->setItems($data['auth_payload']);
+                ->setItems($data['service_code']);
             return $receiveMoney;
     }
     

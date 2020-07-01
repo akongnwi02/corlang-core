@@ -54,6 +54,12 @@ return [
             'postpaidbills' => [
                 'code' => 'CORPOSTPAID001',
             ],
+            'airtime' => [
+                'code' => 'CORAIRTIME001',
+            ],
+            'data' => [
+                'code' => 'CORDATA001',
+            ],
         ],
         'endpoints' => [
             'search'  => '/search',

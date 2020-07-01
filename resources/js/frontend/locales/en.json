@@ -33,6 +33,10 @@
                         "name": "Account Holder",
                         "cashin": "Cash In",
                         "cashout": "Cash Out"
+                    },
+                    "airtime": {
+                        "airtime": "Airtime",
+                        "data": "Data"
                     }
                 }
             },

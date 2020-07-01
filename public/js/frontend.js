@@ -432,18 +432,359 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/components/airtime/AirtimeQuoteModal.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mdbvue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "AirtimeQuoteModal",
+    props: ['quote', 'service'],
+    components: {
+        mdbModalFooter: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalFooter"],
+        mdbModal: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModal"],
+        mdbBtn: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbBtn"],
+        mdbCol: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbCol"],
+        mdbInput: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbInput"],
+        mdbModalBody: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalBody"],
+        mdbModalHeader: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalHeader"],
+        mdbModalTitle: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbModalTitle"],
+        mdbRow: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbRow"]
+    },
+    methods: {
+        currencyFormat: function currencyFormat(amount) {
+            return __WEBPACK_IMPORTED_MODULE_0__helpers_currency__["a" /* currency */].format(amount, this.quote.currency_code);
+        },
+        confirm: function confirm() {
+            this.$emit('confirmed');
+        }
+    }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/components/airtime/AirtimeSearch.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_Services__ = __webpack_require__("./resources/js/frontend/components/services/Services.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_Services___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__services_Services__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_Configuration_ConfigurationLoad__ = __webpack_require__("./resources/js/frontend/mixins/Configuration/ConfigurationLoad.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_pusher_Notification__ = __webpack_require__("./resources/js/frontend/mixins/pusher/Notification.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config_business__ = __webpack_require__("./resources/js/frontend/config/business.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__global_SearchButton__ = __webpack_require__("./resources/js/frontend/components/global/SearchButton.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__global_SearchButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__global_SearchButton__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__AirtimeQuoteModal__ = __webpack_require__("./resources/js/frontend/components/airtime/AirtimeQuoteModal.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__AirtimeQuoteModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__AirtimeQuoteModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal__ = __webpack_require__("./resources/js/frontend/components/global/TransactionModal.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__global_Spinner__ = __webpack_require__("./resources/js/frontend/components/global/Spinner.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__global_Spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__global_Spinner__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mixins_transaction_NavigateToTransactionDetails__ = __webpack_require__("./resources/js/frontend/mixins/transaction/NavigateToTransactionDetails.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_mdbvue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__helpers_helpers__ = __webpack_require__("./resources/js/frontend/helpers/helpers.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 //
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "AirtimeSearch"
+    name: "AirtimeSearch",
+    components: {
+        Spinner: __WEBPACK_IMPORTED_MODULE_7__global_Spinner___default.a,
+        QuoteModal: __WEBPACK_IMPORTED_MODULE_5__AirtimeQuoteModal___default.a,
+        SearchButton: __WEBPACK_IMPORTED_MODULE_4__global_SearchButton___default.a,
+        Services: __WEBPACK_IMPORTED_MODULE_0__services_Services___default.a,
+        TransactionModal: __WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal___default.a,
+        mdbBtn: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbBtn"],
+        mdbCol: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbCol"],
+        mdbInput: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbInput"],
+        mdbRow: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbRow"]
+    },
+    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_Configuration_ConfigurationLoad__["a" /* ConfigurationLoad */], __WEBPACK_IMPORTED_MODULE_2__mixins_pusher_Notification__["a" /* PusherNotification */], __WEBPACK_IMPORTED_MODULE_8__mixins_transaction_NavigateToTransactionDetails__["a" /* Navigation */]],
+    data: function data() {
+        return {
+            // Models Fields
+            pincode: '',
+            phone: '',
+            destination: '',
+            amount: '',
+            selectedService: null,
+            items: [], // not applicable
+
+            // Component Data
+            invalid_text: '',
+            show_quote_modal: false,
+            show_transaction_modal: false,
+            spinner_status: 0
+        };
+    },
+
+    computed: {
+        quoteLoadStatus: function quoteLoadStatus() {
+            return this.$store.getters.getQuoteLoadStatus;
+        },
+        configuration: function configuration() {
+            return this.$store.getters.getConfiguration;
+        },
+        airtimeServices: function airtimeServices() {
+            var cashinCategory = this.configuration.categories.filter(function (obj) {
+                return obj.code == __WEBPACK_IMPORTED_MODULE_3__config_business__["a" /* BUSINESS_CONFIG */].CATEGORY_AIRTIME_CODE;
+            });
+            return cashinCategory[0].services;
+        },
+        dataServices: function dataServices() {
+            var cashoutCategory = this.configuration.categories.filter(function (obj) {
+                return obj.code == __WEBPACK_IMPORTED_MODULE_3__config_business__["a" /* BUSINESS_CONFIG */].CATEGORY_DATA_CODE;
+            });
+            return cashoutCategory[0].services;
+        },
+        quote: function quote() {
+            return this.$store.getters.getQuote;
+        },
+        paymentStatus: function paymentStatus() {
+            return this.$store.getters.getPaymentStatus;
+        },
+        transaction: function transaction() {
+            return this.$store.getters.getTransaction;
+        },
+        transactionLoadStatus: function transactionLoadStatus() {
+            return this.$store.getters.getTransactionLoadStatus;
+        },
+        currency: function currency() {
+            return this.$store.getters.getConfiguration.currency;
+        }
+    },
+    methods: {
+        selectService: function selectService(service) {
+            console.log('selected service', service);
+            this.selectedService = service;
+        },
+        requestQuote: function requestQuote() {
+            if (this.validateData()) {
+                this.$store.dispatch('loadQuote', {
+                    destination: this.destination,
+                    service_code: this.selectedService.code,
+                    amount: this.amount,
+                    currency_code: this.configuration.currency.code,
+                    phone: this.phone
+                });
+            }
+        },
+        validateData: function validateData() {
+            var invalid = 0;
+
+            if (!this.selectedService) {
+                ++invalid;
+                console.log('No service selected');
+                this.invalid_text = this.$t('validations.purchase.service');
+            }
+
+            // this validation needs to be handled properly
+            if (this.selectedService) {
+                if (this.selectedService.destination_regex) {
+                    var re = new RegExp(__WEBPACK_IMPORTED_MODULE_10__helpers_helpers__["a" /* helper */].formatRegex(this.selectedService.destination_regex));
+
+                    if (!re.test(this.destination)) {
+                        ++invalid;
+                        this.invalid_text = this.$t('validations.purchase.phone', { format: this.selectedService.destination_placeholder });
+                        console.log('Invalid account number');
+                    }
+                } else if (this.destination.length < 6) {
+                    ++invalid;
+                    this.invalid_text = this.$t('validations.purchase.phone');
+                    console.log('Invalid account number');
+                }
+            }
+
+            if (this.destination.length < 6) {
+                ++invalid;
+                this.invalid_text = this.$t('validations.purchase.phone');
+                console.log('Invalid account number');
+            }
+
+            if (!__WEBPACK_IMPORTED_MODULE_3__config_business__["a" /* BUSINESS_CONFIG */].APP_REGEX_AMOUNT.test(this.amount)) {
+                ++invalid;
+                console.log('Invalid amount');
+                this.invalid_text = this.$t('validations.purchase.amount');
+            }
+
+            if (invalid === 0) {
+                this.invalid_text = '';
+                console.log('Validation complete. All inputs valid');
+                return true;
+            }
+            return false;
+        },
+        confirm: function confirm() {
+            console.log('transaction confirmed');
+            this.show_quote_modal = false;
+            this.$store.dispatch('confirmPayment', {
+                id: this.quote.uuid
+            });
+
+            this.waitForNotification(this.quote.uuid);
+            console.log('waiting for callback notification on channel', this.quote.uuid);
+        }
+    },
+    watch: {
+        quoteLoadStatus: function quoteLoadStatus() {
+            this.show_quote_modal = this.quoteLoadStatus == 2;
+            this.spinner_status = this.quoteLoadStatus;
+        },
+
+        // paymentStatus() {
+        //     if (this.paymentStatus == 2) {
+        //         this.$store.dispatch('loadTransaction', this.transaction.uuid)
+        //     }
+        // },
+        transactionLoadStatus: function transactionLoadStatus() {
+            this.show_transaction_modal = this.transactionLoadStatus == 2 && this.paymentStatus == 2;
+            this.spinner_status = this.transactionLoadStatus;
+        }
+    },
+    deactivated: function deactivated() {
+        this.$store.commit('setQuoteLoadStatus', 0);
+        this.$store.commit('setTransactionLoadStatus', 0);
+        this.$store.commit('setPaymentStatus', 0);
+    }
 });
 
 /***/ }),
@@ -19339,7 +19680,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -19460,6 +19801,21 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "\n.table > tbody > tr > td[data-v-881d2d1e] {\n    vertical-align: middle;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cc6190f4\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/airtime/AirtimeQuoteModal.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -33181,7 +33537,158 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    {
+      staticClass: "text-center card-body",
+      on: {
+        keyup: function($event) {
+          if (
+            !$event.type.indexOf("key") &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.requestQuote($event)
+        }
+      }
+    },
+    [
+      _c("div", { staticClass: "card-text text-danger" }, [
+        _vm._v(" " + _vm._s(_vm.invalid_text))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-lg-6" },
+          [
+            _c("mdb-input", {
+              key: "phone",
+              attrs: {
+                id: "phone",
+                label: _vm.$t("dashboard.pages.general.phone")
+              },
+              model: {
+                value: _vm.destination,
+                callback: function($$v) {
+                  _vm.destination = $$v
+                },
+                expression: "destination"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-lg-6" },
+          [
+            _c("mdb-input", {
+              key: "amount",
+              attrs: {
+                label:
+                  _vm.$t("dashboard.pages.general.amount") +
+                  " " +
+                  _vm.currency.code
+              },
+              model: {
+                value: _vm.amount,
+                callback: function($$v) {
+                  _vm.amount = $$v
+                },
+                expression: "amount"
+              }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _vm.airtimeServices.length >= 1
+        ? _c("div", [
+            _c("strong", [
+              _c("label", { staticClass: "text-muted float-left" }, [
+                _vm._v(
+                  _vm._s(_vm.$t("dashboard.pages.tabs.content.airtime.airtime"))
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _c("services", {
+                  attrs: { services: _vm.airtimeServices },
+                  on: { selected: _vm.selectService }
+                })
+              ],
+              1
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.dataServices.length >= 1
+        ? _c("div", [
+            _c("strong", [
+              _c("label", { staticClass: "text-muted float-left" }, [
+                _vm._v(
+                  _vm._s(_vm.$t("dashboard.pages.tabs.content.airtime.data"))
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _c("services", {
+                  attrs: { services: _vm.dataServices },
+                  on: { selected: _vm.selectService }
+                })
+              ],
+              1
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("search-button", { on: { clicked: _vm.requestQuote } }),
+      _vm._v(" "),
+      _vm.show_quote_modal
+        ? _c("quote-modal", {
+            attrs: { service: _vm.selectedService, quote: _vm.quote },
+            on: {
+              confirmed: _vm.confirm,
+              closed: function($event) {
+                _vm.show_quote_modal = false
+              }
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.show_transaction_modal
+        ? _c("transaction-modal", {
+            attrs: { transaction: _vm.transaction },
+            on: {
+              closed: function($event) {
+                _vm.show_transaction_modal = false
+              }
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _c("spinner", { attrs: { status: _vm.spinner_status } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -35477,6 +35984,238 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-cc6190f4\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/components/airtime/AirtimeQuoteModal.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "mdb-modal",
+    {
+      staticClass: "text-center",
+      attrs: { scrollable: "", centered: "", fullHeight: "", elegant: "" },
+      on: {
+        close: function($event) {
+          return _vm.$emit("closed")
+        }
+      }
+    },
+    [
+      _c(
+        "mdb-modal-header",
+        [
+          _c("mdb-modal-title", [
+            _vm._v(_vm._s(_vm.$t("dashboard.pages.general.summary")))
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "mdb-modal-body",
+        [
+          _c(
+            "mdb-row",
+            [
+              _c("mdb-col", { staticClass: "col-sm-3" }, [
+                _c("img", {
+                  attrs: {
+                    src: _vm.service.logo_url,
+                    alt: _vm.$t("dashboard.pages.general.logo")
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("mdb-col", { staticClass: "col-sm-9" }, [
+                _c("strong", [_vm._v(_vm._s(_vm.service.name))])
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("mdb-row", { staticClass: "justify-content-center" }, [
+            _c(
+              "table",
+              {
+                staticClass:
+                  "table table-sm dataTable table-borderless text-sm-center"
+              },
+              [
+                _c("tr", [
+                  _c("th", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.$t("dashboard.pages.general.phone")) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.quote.phone_number) +
+                        "\n                    "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.$t("dashboard.pages.general.amount")) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.currencyFormat(_vm.quote.amount)) +
+                        "\n                    "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.quote.name
+                  ? _c("tr", [
+                      _c("th", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(
+                              _vm.$t("dashboard.pages.general.customer.name")
+                            ) +
+                            "\n                    "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.quote.name) +
+                            "\n                    "
+                        )
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.quote.address
+                  ? _c("tr", [
+                      _c("th", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(
+                              _vm.$t("dashboard.pages.general.customer.address")
+                            ) +
+                            "\n                    "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.quote.address) +
+                            "\n                    "
+                        )
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.$t("dashboard.pages.general.fee")) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.currencyFormat(_vm.quote.fee)) +
+                        "\n                    "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.$t("dashboard.pages.general.total")) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(
+                          _vm.currencyFormat(_vm.quote.amount + _vm.quote.fee)
+                        ) +
+                        "\n                    "
+                    )
+                  ])
+                ])
+              ]
+            )
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "mdb-modal-footer",
+        [
+          _c(
+            "mdb-btn",
+            {
+              attrs: { size: "sm", color: "secondary" },
+              nativeOn: {
+                click: function($event) {
+                  return _vm.$emit("closed")
+                }
+              }
+            },
+            [_vm._v(_vm._s(_vm.$t("dashboard.pages.general.close")))]
+          ),
+          _vm._v(" "),
+          _c(
+            "mdb-btn",
+            {
+              attrs: { size: "sm", color: "primary" },
+              nativeOn: {
+                click: function($event) {
+                  return _vm.confirm()
+                }
+              }
+            },
+            [_vm._v(_vm._s(_vm.$t("dashboard.pages.general.confirm")))]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-cc6190f4", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-dada6bca\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/pages/Purchase.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35529,33 +36268,6 @@ var render = function() {
               _c(
                 "mdb-tab-item",
                 {
-                  key: "postpaidbills-tab",
-                  staticClass: "mt-4",
-                  attrs: { active: _vm.tab == "postpaid.bill.search" },
-                  nativeOn: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.gotoTab("postpaid.bill.search")
-                    }
-                  }
-                },
-                [
-                  _c("mdb-icon", {
-                    staticClass: "ml-2",
-                    attrs: { icon: "tint" }
-                  }),
-                  _vm._v(
-                    " " +
-                      _vm._s(_vm.$t("dashboard.pages.tabs.titles.postpaid")) +
-                      "\n            "
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "mdb-tab-item",
-                {
                   key: "momo-tab",
                   staticClass: "mt-4",
                   attrs: { active: _vm.tab == "momo" },
@@ -35574,6 +36286,33 @@ var render = function() {
                   _vm._v(
                     " " +
                       _vm._s(_vm.$t("dashboard.pages.tabs.titles.momo")) +
+                      "\n            "
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "mdb-tab-item",
+                {
+                  key: "recharge-tab",
+                  staticClass: "mt-4",
+                  attrs: { active: _vm.tab == "airtime" },
+                  nativeOn: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.gotoTab("airtime")
+                    }
+                  }
+                },
+                [
+                  _c("mdb-icon", {
+                    staticClass: "ml-2",
+                    attrs: { icon: "address-card" }
+                  }),
+                  _vm._v(
+                    "  " +
+                      _vm._s(_vm.$t("dashboard.pages.tabs.titles.airtime")) +
                       "\n            "
                   )
                 ],
@@ -38885,6 +39624,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-881d2d1e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./QuoteModal.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-881d2d1e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./QuoteModal.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cc6190f4\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/airtime/AirtimeQuoteModal.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cc6190f4\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/airtime/AirtimeQuoteModal.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("7ee0fef6", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cc6190f4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AirtimeQuoteModal.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cc6190f4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AirtimeQuoteModal.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -52602,6 +53368,58 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/js/frontend/components/airtime/AirtimeQuoteModal.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cc6190f4\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/airtime/AirtimeQuoteModal.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/components/airtime/AirtimeQuoteModal.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-cc6190f4\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/components/airtime/AirtimeQuoteModal.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-cc6190f4"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/frontend/components/airtime/AirtimeQuoteModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-cc6190f4", Component.options)
+  } else {
+    hotAPI.reload("data-v-cc6190f4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/js/frontend/components/airtime/AirtimeSearch.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -53227,6 +54045,8 @@ var BUSINESS_CONFIG = {
     CATEGORY_POSTPAID_BILLS_CODE: 'CORPOSTPAID001',
     CATEGORY_RECEIVE_MONEY_CODE: 'CORRECEIVEMONEY001',
     CATEGORY_SEND_MONEY_CODE: 'CORSENDMONEY001',
+    CATEGORY_AIRTIME_CODE: 'CORAIRTIME001',
+    CATEGORY_DATA_CODE: 'CORDATA001',
 
     SERVER_STORAGE_PATH: '/storage',
 
@@ -53404,7 +54224,7 @@ module.exports = Component.exports
 /***/ "./resources/js/frontend/locales/en.json":
 /***/ (function(module, exports) {
 
-module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Purchase","transactions":"Transactions","account":"Account"},"tabs":{"titles":{"prepaid":"Prepaid Bills","postpaid":"Postpaid Bills","momo":"Mobile Money","airtime":"Airtime Recharge"},"content":{"electricity":{"title":"Purchase Electricity","prepaid":"Prepaid","postpaid":"Postpaid","vendor":"Vendor","meter_code":"Meter Code","bill_number":"Bill Number","bill_due_date":"Bill Due Date","asset":"Units","contract_number":"Contract Number","quote":{"title":"Meter Details"}},"mobile_money":{"source_account":"Account Identifier","name":"Account Holder","cashin":"Cash In","cashout":"Cash Out"}}},"transactions":{"table":{"entriesTitle":"Recent transactions","showingText":"Showing","noFoundMessage":"No matching transaction records found","header":{"code":"Reference","items":"Item","destination":"Service Number","amount":"Amount","fee":"Fee","service":"Service","total":"Total","commission":"Commission","paymentmethod":"Payment Method","status":"Status","asset":"Asset","completed_at":"Completed At"},"total":"Total","status":{"created":"Created","pending":"Pending","processing":"In Processing","success":"Successful","failed":"Failed","reversed":"Reversed","cancelled":"Cancelled","errored":"Error"}},"transaction":{"modal":{"code":"Reference","destination":"Service Number","agent":"Agent","company":"Company","amount":"Amount","fee":"Fee","service":"Service","asset":"Asset","items":"Items","status":"Status","completed_at":"Completed At","total":"Total"}}},"account":{"account_number":"Account Number","account_number_help":"Your deposit account number.","account_balance":"Account Balance","account_balance_help":"Your current account balance.","commission_balance":"Commission Balance","commission_balance_help":"Your commission balance","payout_method":"Payout method","topup_method":"Top up Method","name":"Account Name","request_payout":"Request Payout","topup_account":"Top up Account","table":{"entriesTitle":"Recent Requests","header":{"code":"Ref","amount":"Amount","method":"Payout Method","account_number":"Account Number","account_name":"Account Name","user":"Requested By","date":"Requested At","status":"Status","decision_at":"Decision At"},"status":{"pending":"Pending","approved":"Approved","rejected":"Rejected","cancelled":"Cancelled"},"actions":{"cancel":"Cancel","action":"Payout action"}}},"general":{"actions":"Actions","close":"Close","confirm":"Confirm","next":"Next","loading":"Loading","refresh":"Refresh","search":"Search","summary":"Order Details","amount":"Amount","otp":"OTP","pin":"PIN","method":"Payment Method","account":"Account Number","reference":"Reference","pincode":"Pin Code","phone":"Phone Number","fee":"Fee","destination":"Destination identifier","total":"Total","logo":"Logo","description":"Payment Description","customer":{"name":"Customer Name","address":"Address"}}},"hover":{"view":"View","execute":"Execute","topup":"Top Up Your Account","payout":"Request Commission Payout","delete":"Delete"}},"validations":{"purchase":{"electricity":{"meter_code":"Please enter the meter code in the required format {format}","bill_number":"Please enter a bill number in the valid format {format}"},"mobile_money":{"account_number":"Please enter an account number in the valid format {format}"},"reference":"The reference is invalid","pincode":"The pin code is invalid","otp":"The OTP field is invalid","phone":"The phone number is invalid","account":"The payment account number is invalid","amount":"Please enter a valid amount","paymentmethod":"Select a payment method from the list","empty_paymentmethod":"No payment method is currently available for you","service":"Please select a service from the list","empty_service":"No services available for this category at the moment"},"account":{"insufficient_balance":"Your balance is insufficient","empty_payout_method":"Please select a payout method","topup_account_not_configured":"You have not set an account for this topup method","account_number":"Please configure account identifier for this top up method under your profile setting","invalid_amount":"Please enter a valid amount","account_name":"Please enter a valid name"},"general":{"maintenance":"We're currently maintaining our system. Please check back later","network":"Network error. Please check your internet connection","unexpected":"An unexpected error occurred"}},"notifications":{"successful":"Transaction successful","transactions_loaded":"Transactions updated successfully","payouts_loaded":"Recent payouts updated successfully","failed":"Transaction failed","late_bill":"Warning! Bill is late"},"exceptions":{"10000":"The service you requested is not available","10001":"The payment method you requested is not available","10002":"The request sent contains some validation errors","10003":"You have been logged out. Login to continue.","10004":"You are not authorized to make this request","10006":"The path requested was not found","10007":"You are making too many requests to the server","10008":"Transaction could not be saved to cache","10009":"There was an error creating this transaction","10010":"This transaction was not found. The transaction may have been processed already or expired","10011":"There was a problem connecting to one of our servers","10012":"There was a problem calculating the fee for this transaction. A fee has not been set for this amount","10013":"The service category is currently unavailable","10014":"An invalid key was provided with the request","10015":"The language selected is currently not supported","10016":"The accept header parameter does not contain application/json","10018":"This transaction could not be found","10019":"There was a problem connecting to the service provider","10020":"The meter code does not exist","10021":"There was a problem sending a callback request","10022":"This service does not exist yet","10023":"Your account balance is insufficient","10024":"You are not authorized to perform this transaction. Your account has been limited","10025":"Your session has expired. Please refresh your browser","10026":"The payment method is not active","10027":"There was an error requesting the payout. Please try again later","10028":"Your commission balance is insufficient","10029":"There was an error cancelling the payout. Please try again later","10030":"Warning! You have entered an incorrect pin code","10031":"The meter with the provided has been deactivated","10032":"The meter code provided is invalid","10033":"The transaction status cannot be updated","10034":"The amount provided is less than the minimum amount required for this service","10035":"The customer cannot perform this transaction with service provider","10036":"The customer is not found","10037":"Insufficient funds in customer's wallet","10038":"Transaction canceled by customer","10039":"The customer has not authorized the transaction","10040":"The service is not properly configured","10041":"Customer has reached transaction limit","10042":"You are not allowed to use this service at the moment","10043":"No bill was found","10044":"The amount provided is more than the maximum amount required for this service","10045":"The service number provided is not in the required format","10046":"There is a commission distribution error with this service. Please contact support","10047":"The amount is not a multiple of the step amount","00000":"An unexpected error occurred"}}
+module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Purchase","transactions":"Transactions","account":"Account"},"tabs":{"titles":{"prepaid":"Prepaid Bills","postpaid":"Postpaid Bills","momo":"Mobile Money","airtime":"Airtime Recharge"},"content":{"electricity":{"title":"Purchase Electricity","prepaid":"Prepaid","postpaid":"Postpaid","vendor":"Vendor","meter_code":"Meter Code","bill_number":"Bill Number","bill_due_date":"Bill Due Date","asset":"Units","contract_number":"Contract Number","quote":{"title":"Meter Details"}},"mobile_money":{"source_account":"Account Identifier","name":"Account Holder","cashin":"Cash In","cashout":"Cash Out"},"airtime":{"airtime":"Airtime","data":"Data"}}},"transactions":{"table":{"entriesTitle":"Recent transactions","showingText":"Showing","noFoundMessage":"No matching transaction records found","header":{"code":"Reference","items":"Item","destination":"Service Number","amount":"Amount","fee":"Fee","service":"Service","total":"Total","commission":"Commission","paymentmethod":"Payment Method","status":"Status","asset":"Asset","completed_at":"Completed At"},"total":"Total","status":{"created":"Created","pending":"Pending","processing":"In Processing","success":"Successful","failed":"Failed","reversed":"Reversed","cancelled":"Cancelled","errored":"Error"}},"transaction":{"modal":{"code":"Reference","destination":"Service Number","agent":"Agent","company":"Company","amount":"Amount","fee":"Fee","service":"Service","asset":"Asset","items":"Items","status":"Status","completed_at":"Completed At","total":"Total"}}},"account":{"account_number":"Account Number","account_number_help":"Your deposit account number.","account_balance":"Account Balance","account_balance_help":"Your current account balance.","commission_balance":"Commission Balance","commission_balance_help":"Your commission balance","payout_method":"Payout method","topup_method":"Top up Method","name":"Account Name","request_payout":"Request Payout","topup_account":"Top up Account","table":{"entriesTitle":"Recent Requests","header":{"code":"Ref","amount":"Amount","method":"Payout Method","account_number":"Account Number","account_name":"Account Name","user":"Requested By","date":"Requested At","status":"Status","decision_at":"Decision At"},"status":{"pending":"Pending","approved":"Approved","rejected":"Rejected","cancelled":"Cancelled"},"actions":{"cancel":"Cancel","action":"Payout action"}}},"general":{"actions":"Actions","close":"Close","confirm":"Confirm","next":"Next","loading":"Loading","refresh":"Refresh","search":"Search","summary":"Order Details","amount":"Amount","otp":"OTP","pin":"PIN","method":"Payment Method","account":"Account Number","reference":"Reference","pincode":"Pin Code","phone":"Phone Number","fee":"Fee","destination":"Destination identifier","total":"Total","logo":"Logo","description":"Payment Description","customer":{"name":"Customer Name","address":"Address"}}},"hover":{"view":"View","execute":"Execute","topup":"Top Up Your Account","payout":"Request Commission Payout","delete":"Delete"}},"validations":{"purchase":{"electricity":{"meter_code":"Please enter the meter code in the required format {format}","bill_number":"Please enter a bill number in the valid format {format}"},"mobile_money":{"account_number":"Please enter an account number in the valid format {format}"},"reference":"The reference is invalid","pincode":"The pin code is invalid","otp":"The OTP field is invalid","phone":"The phone number is invalid","account":"The payment account number is invalid","amount":"Please enter a valid amount","paymentmethod":"Select a payment method from the list","empty_paymentmethod":"No payment method is currently available for you","service":"Please select a service from the list","empty_service":"No services available for this category at the moment"},"account":{"insufficient_balance":"Your balance is insufficient","empty_payout_method":"Please select a payout method","topup_account_not_configured":"You have not set an account for this topup method","account_number":"Please configure account identifier for this top up method under your profile setting","invalid_amount":"Please enter a valid amount","account_name":"Please enter a valid name"},"general":{"maintenance":"We're currently maintaining our system. Please check back later","network":"Network error. Please check your internet connection","unexpected":"An unexpected error occurred"}},"notifications":{"successful":"Transaction successful","transactions_loaded":"Transactions updated successfully","payouts_loaded":"Recent payouts updated successfully","failed":"Transaction failed","late_bill":"Warning! Bill is late"},"exceptions":{"10000":"The service you requested is not available","10001":"The payment method you requested is not available","10002":"The request sent contains some validation errors","10003":"You have been logged out. Login to continue.","10004":"You are not authorized to make this request","10006":"The path requested was not found","10007":"You are making too many requests to the server","10008":"Transaction could not be saved to cache","10009":"There was an error creating this transaction","10010":"This transaction was not found. The transaction may have been processed already or expired","10011":"There was a problem connecting to one of our servers","10012":"There was a problem calculating the fee for this transaction. A fee has not been set for this amount","10013":"The service category is currently unavailable","10014":"An invalid key was provided with the request","10015":"The language selected is currently not supported","10016":"The accept header parameter does not contain application/json","10018":"This transaction could not be found","10019":"There was a problem connecting to the service provider","10020":"The meter code does not exist","10021":"There was a problem sending a callback request","10022":"This service does not exist yet","10023":"Your account balance is insufficient","10024":"You are not authorized to perform this transaction. Your account has been limited","10025":"Your session has expired. Please refresh your browser","10026":"The payment method is not active","10027":"There was an error requesting the payout. Please try again later","10028":"Your commission balance is insufficient","10029":"There was an error cancelling the payout. Please try again later","10030":"Warning! You have entered an incorrect pin code","10031":"The meter with the provided has been deactivated","10032":"The meter code provided is invalid","10033":"The transaction status cannot be updated","10034":"The amount provided is less than the minimum amount required for this service","10035":"The customer cannot perform this transaction with service provider","10036":"The customer is not found","10037":"Insufficient funds in customer's wallet","10038":"Transaction canceled by customer","10039":"The customer has not authorized the transaction","10040":"The service is not properly configured","10041":"Customer has reached transaction limit","10042":"You are not allowed to use this service at the moment","10043":"No bill was found","10044":"The amount provided is more than the maximum amount required for this service","10045":"The service number provided is not in the required format","10046":"There is a commission distribution error with this service. Please contact support","10047":"The amount is not a multiple of the step amount","00000":"An unexpected error occurred"}}
 
 /***/ }),
 

@@ -41,7 +41,7 @@
                             <tbody>
                             @foreach($services as $service)
                                 <tr>
-                                    <td>{{ $service->name }}</td>
+                                    <td>{!! @$service->logo_label !!} {{ $service->name }}</td>
                                     <td>{{ $service->collected_amount_label }}</td>
                                     <td>{{ @$service->collections()->get()->last()->created_at ? @$service->collections()->get()->last()->created_at->diffForHumans() : 'N/A' }}</td>
                                     <td>{{ $service->collections()->count() }}</td>

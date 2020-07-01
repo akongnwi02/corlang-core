@@ -2,42 +2,42 @@
 /**
  * Created by PhpStorm.
  * User: devert
- * Date: 6/1/20
- * Time: 11:01 PM
+ * Date: 7/1/20
+ * Time: 12:06 AM
  */
 
 namespace App\Services\Clients\Category;
 
 
 use App\Exceptions\Api\BadRequestException;
-use App\Http\Resources\Api\Business\ReceiveMoneyResource;
+use App\Http\Resources\Api\Business\AirtimeResource;
 use App\Rules\Service\ServiceAccessRule;
 use App\Rules\Service\ServiceAmountRangeRule;
+use App\Services\Business\Models\Airtime;
 use App\Services\Business\Models\ModelInterface;
-use App\Services\Business\Models\ReceiveMoney;
 use App\Services\Clients\AbstractCategory;
 use GuzzleHttp\Exception\ClientException;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
+use Log;
 
-class SendMoneyClient extends AbstractCategory
+class AirtimeClient extends AbstractCategory
 {
     
     public function validate($request)
     {
+        Log::info("{$this->getCategoryClientName()}: Validating input data");
         validator($request, [
             'destination'   => ['required', 'regex:/(^[A-Za-z0-9 ]+$)+/'],
             'service_code'  => ['required', new ServiceAccessRule(),],
             'amount'        => ['required', 'nullable', 'regex:/^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$/', new ServiceAmountRangeRule()],
             'currency_code' => ['required', Rule::exists('currencies', 'code')],
-            'auth_payload'  => ['sometimes', 'nullable', 'min:3'],
         ])->validate();
+        Log::info("{$this->getCategoryClientName()}: Input data valid");
     }
     
     /**
      * @param $transaction
      * @throws BadRequestException
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function confirm($transaction)
     {
@@ -46,7 +46,7 @@ class SendMoneyClient extends AbstractCategory
             'service_code' => $transaction->service_code,
             'amount'       => $transaction->amount,
             'external_id'  => $transaction->uuid,
-            'auth_payload' => $transaction->items,
+            'phone'        => $transaction->phone,
             'callback_url' => $this->callbackUrl
         ];
     
@@ -58,7 +58,7 @@ class SendMoneyClient extends AbstractCategory
         $httpClient = $this->httpClient();
         try {
             $response = $httpClient->request('POST', $this->executeEndpoint, [
-                'json' => $json,
+                'json' => $json
             ]);
             $content = $response->getBody()->getContents();
         
@@ -78,24 +78,36 @@ class SendMoneyClient extends AbstractCategory
         }
     }
     
+    /**
+     * @return string
+     */
     public function getCategoryClientName(): string
     {
         return class_basename($this);
     }
     
+    /**
+     * @param $data
+     * @return ModelInterface
+     */
     public function quote($data): ModelInterface
     {
-        $receiveMoney = new ReceiveMoney;
-        $receiveMoney->setDestination($data['destination'])
+        $airtime = new Airtime();
+        $airtime->setDestination($data['destination'])
             ->setServiceCode($data['service_code'])
             ->setCurrencyCode($data['currency_code'])
             ->setAmount($data['amount'])
             ->setItems($data['service_code']);
-        return $receiveMoney;
+        
+        return $airtime;
     }
     
-    public function response(ModelInterface $receiveMoney)
+    /**
+     * @param ModelInterface $model
+     * @return AirtimeResource
+     */
+    public function response(ModelInterface $model)
     {
-        return new ReceiveMoneyResource($receiveMoney);
+        return new AirtimeResource($model);
     }
 }
