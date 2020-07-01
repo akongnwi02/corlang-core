@@ -31,7 +31,7 @@ Run the following command on project's root directory
 ### HEROKU COMMANDS
 * Change stack `heroku stack:set heroku-18 -a corlang`
 * Heroku log in `heroku login --browser=firefox`
-* Heroku logs `heroku logs -t -a corpay`
+* Heroku logs `heroku logs -t -n 1000 -a corpay`
 
 ### HOW TO TRANSLATE DICTIONARY FILES
 
