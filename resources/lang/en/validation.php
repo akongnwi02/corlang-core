@@ -318,6 +318,7 @@ return [
         'frontend' => [
             'avatar'                    => 'Avatar Location',
             'email'                     => 'E-mail Address',
+            'subject'                   => 'Subject',
             'code'                      => 'Confirmation Code',
             'phone_or_email'            => 'Phone or Email',
             'username'                  => 'Username',

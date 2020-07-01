@@ -30,6 +30,7 @@ class SendContactRequest extends FormRequest
             'name' => 'required',
             'email' => 'nullable',
             'phone' => 'required',
+            'subject' => 'string|nullable',
             'message' => 'required',
         ];
     }

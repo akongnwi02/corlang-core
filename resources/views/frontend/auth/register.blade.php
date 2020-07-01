@@ -39,7 +39,7 @@
                                 </div>
                                 {{ html()->text('username')
                                     ->class('form-control')
-                                    ->placeholder(__('validation.attributes.frontend.phone_or_email'))
+                                    ->placeholder(__('validation.attributes.frontend.email'))
                                     ->attribute('maxlength', 191)
                                     ->required() }}
                             </div>

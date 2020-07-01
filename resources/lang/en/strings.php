@@ -229,6 +229,17 @@ return [
                 'title'       => 'Distributors',
                 'description' => 'With our SIMPLE but POWERFUL API, you can sell over our platform or create your agents\' accounts directly in our platform and start selling and earning commissions'
             ]
+        ],
+        'contact_us' => [
+            'title' => 'Love to Hear From You',
+            'text' => 'We are now available twenty-four hours a day, seven days a week. Call us today and find out how we can help your business.',
+            'company' => 'Company',
+            'address' => 'Address',
+            'website' => 'Website',
+            'work_hours' => 'Work Hours',
+            'monday' => 'Monday',
+            'saturday' => 'Saturday',
+            'to' => 'to',
         ]
     ],
 ];
