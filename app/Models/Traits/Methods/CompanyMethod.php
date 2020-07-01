@@ -44,6 +44,7 @@ trait CompanyMethod
     {
         $commission = Transaction::where('company_id', $this->uuid)
             ->where('created_at', '>=', Carbon::today())
+            ->where('status', config('business.transaction.status.success'))
             ->sum('company_commission');
         return $commission;
     }
