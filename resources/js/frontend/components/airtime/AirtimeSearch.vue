@@ -8,7 +8,18 @@
             <div class="col-lg-6">
                 <mdb-input key="amount"
                            :label="$t('dashboard.pages.general.amount') +' '+ currency.code"
+                           :disabled="selectedService && selectedService.has_items"
                            v-model="amount"></mdb-input>
+            </div>
+        </div>
+        <div class="row">
+            <div v-if="selectedService && selectedService.has_items" class="col-lg-6">
+                <label for="plan"><strong>{{ $t('dashboard.pages.tabs.content.airtime.plan') }}</strong></label>
+                <select v-model="selectedItem" class="custom-select" id="plan" required>
+                    <option v-for="item in selectedService.items" :value="item">
+                        {{ item.name }}
+                    </option>
+                </select>
             </div>
         </div>
 
@@ -80,6 +91,7 @@
                 destination: '',
                 amount: '',
                 selectedService: null,
+                selectedItem: null,
                 items: [], // not applicable
 
                 // Component Data
@@ -97,16 +109,16 @@
                 return this.$store.getters.getConfiguration;
             },
             airtimeServices() {
-                let cashinCategory = this.configuration.categories.filter(obj => {
+                let airtimeCategory = this.configuration.categories.filter(obj => {
                     return obj.code == BUSINESS_CONFIG.CATEGORY_AIRTIME_CODE;
                 });
-                return cashinCategory[0].services
+                return airtimeCategory[0].services
             },
             dataServices() {
-                let cashoutCategory = this.configuration.categories.filter(obj => {
+                let dataCategory = this.configuration.categories.filter(obj => {
                     return obj.code == BUSINESS_CONFIG.CATEGORY_DATA_CODE;
                 });
-                return cashoutCategory[0].services
+                return dataCategory[0].services
             },
             quote() {
                 return this.$store.getters.getQuote;
@@ -137,6 +149,7 @@
                         amount: this.amount,
                         currency_code: this.configuration.currency.code,
                         phone: this.phone,
+                        item: this.selectedItem.code,
                     });
                 }
             },
@@ -210,6 +223,11 @@
             transactionLoadStatus() {
                 this.show_transaction_modal = this.transactionLoadStatus == 2 && this.paymentStatus == 2;
                 this.spinner_status = this.transactionLoadStatus;
+            },
+            selectedItem() {
+                if (this.selectedItem) {
+                    this.amount = this.selectedItem.amount;
+                }
             }
         },
         deactivated() {

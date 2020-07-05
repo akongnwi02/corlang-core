@@ -103,5 +103,18 @@ class ServiceTableSeeder extends Seeder
             'customercommission_id' => Commission::first()->uuid,
             'providercommission_id' => Commission::first()->uuid,
         ]);
+        
+        Service::create([
+            'name' => 'MTN Data',
+            'description' => 'Some quick example text to serve as the service description and make up the bulk of the service\'s content.',
+            'code' => 'CORAPMTNDATA',
+            'country_id' => Country::first()->uuid,
+            'is_active' => true,
+            'category_id' => Category::where('code', config('business.service.category.data.code'))->first()->uuid,
+            'company_rate' => 10,
+            'agent_rate' => 10,
+            'customercommission_id' => Commission::first()->uuid,
+            'providercommission_id' => Commission::first()->uuid,
+        ]);
     }
 }

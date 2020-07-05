@@ -6,7 +6,7 @@ export default {
         params.service_code = data.service_code; // identifier of destination
         params.amount = data.amount; // amount
         params.currency_code = data.currency_code; // currency code
-        params.items = data.items; // optional array of items
+        params.item = data.item; // optional item
 
         params.auth_payload = data.auth_payload;
 

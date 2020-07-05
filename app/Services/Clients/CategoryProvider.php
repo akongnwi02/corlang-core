@@ -45,6 +45,8 @@ trait CategoryProvider
                 return new SendMoneyClient($category, $config);
             case config('business.service.category.airtime.code'):
                 return new AirtimeClient($category, $config);
+            case config('business.service.category.data.code'):
+                return new AirtimeClient($category, $config);
             default:
                 throw new ServerErrorException(BusinessErrorCodes::UNKNOWN_SERVICE_CATEGORY, "Service category $category->code is not implemented");
         }

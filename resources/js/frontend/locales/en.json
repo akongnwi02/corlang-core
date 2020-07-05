@@ -37,7 +37,7 @@
                     "airtime": {
                         "airtime": "Airtime",
                         "data": "Data",
-                        "plan": "Plan"
+                        "plan": "Data Plan"
                     }
                 }
             },
@@ -69,7 +69,8 @@
                         "failed": "Failed",
                         "reversed": "Reversed",
                         "cancelled": "Cancelled",
-                        "errored": "Error"
+                        "errored": "Error",
+                        "verification": "In Verification"
                     }
                 },
                 "transaction": {

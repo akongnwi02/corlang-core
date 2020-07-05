@@ -50,6 +50,7 @@ class AirtimeClient extends AbstractCategory
         $json = [
             'destination'  => $transaction->destination,
             'service_code' => $transaction->service_code,
+            'item'         => $transaction->items,
             'amount'       => $transaction->amount,
             'external_id'  => $transaction->uuid,
             'phone'        => $transaction->phone,
@@ -103,7 +104,7 @@ class AirtimeClient extends AbstractCategory
             ->setServiceCode($data['service_code'])
             ->setCurrencyCode($data['currency_code'])
             ->setAmount($data['amount'])
-            ->setItems($data['service_code']);
+            ->setItems($this->category->code == config('business.service.category.data.code') ? $data['item'] : $data['service_code']);
         
         return $airtime;
     }
