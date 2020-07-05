@@ -164,4 +164,8 @@ class ServiceRepository
         return $company->services()->where('uuid', $service->uuid)->first()->specific->external_rate ?: $service->external_rate;
     }
     
+    public function getAvailableCompanies($service)
+    {
+        return $service->companies()->where('companies.is_active', true);
+    }
 }

@@ -195,6 +195,7 @@ return [
         'services'   => [
             'service'    => [
                 'management'      => 'Service Management',
+                'assign' => 'Assign :service to companies',
                 'create'          => 'Create Service',
                 'edit'            => 'Edit Service',
                 'active'          => 'Active Services',
@@ -216,6 +217,12 @@ return [
                     'providercommission' => 'Default Provider Service Charge',
                     'total'              => 'service|services',
                 ],
+                'tabs' => [
+                    'titles' => [
+                        'profile' => 'Profile',
+                        'companies' => 'Companies'
+                    ]
+                ]
             ],
             'category'   => [
                 'management' => 'Service Category',

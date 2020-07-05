@@ -254,6 +254,7 @@ return [
                     'max_amount'              => 'Maximum Amount',
                     'step_amount'             => 'Step Amount',
                     'providercompany'         => 'Provider Company',
+                    'companies'               => 'Companies',
                 ],
                 'item'       => [
                     'active'         => 'Active',

@@ -101,6 +101,7 @@ return [
                 'update_error'  => 'There was a problem updating this service. Please try again.',
                 'mark_error'    => 'There was a problem updating the status of this service. Please try again.',
                 'invalid_items' => 'The :attribute contain some invalid values',
+                'invalid_company' => 'An invalid company has been provided',
             ],
             'commission' => [
                 'create_error'     => 'There was a problem creating this commission. Please try again.',
@@ -111,6 +112,9 @@ return [
                 'create_error' => 'There was a problem creating this payment method. Please try again.',
                 'update_error' => 'There was a problem updating this payment method. Please try again.',
                 'mark_error'   => 'There was a problem updating the status of this payment method. Please try again.',
+            ],
+            'company' => [
+                'update_error' => 'The was a problem updating the assignments of this service'
             ],
             'category' => [
                 'update_error' => 'There was a problem updating this category. Please try again.',

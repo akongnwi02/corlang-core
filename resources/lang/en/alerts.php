@@ -60,6 +60,9 @@ return [
                 'updated' => 'The service was successfully updated.',
                 'status_updated' => 'The status was successfully updated.',
             ],
+            'company' => [
+                'updated' => 'The companies for this service was updated successfully'
+            ],
             'category' => [
                 'created' => 'The category was successfully created.',
                 'updated' => 'The category was successfully updated.',

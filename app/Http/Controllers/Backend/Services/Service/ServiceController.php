@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Services\Service\UpdateServiceRequest;
 use App\Http\Requests\Backend\Services\Service\StoreServiceRequest;
 use App\Models\Service\Service;
+use App\Repositories\Backend\Company\Company\CompanyRepository;
 use App\Repositories\Backend\Services\Category\CategoryRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
@@ -76,12 +77,21 @@ class ServiceController extends Controller
      * @param Service $service
      * @param CommissionRepository $commissionRepository
      * @param CategoryRepository $categoryRepository
+     * @param ServiceRepository $serviceRepository
+     * @param CompanyRepository $companyRepository
      * @return mixed
      */
-    public function edit(Service $service, CommissionRepository $commissionRepository, CategoryRepository $categoryRepository)
+    public function edit(
+        Service $service,
+        CommissionRepository $commissionRepository,
+        CategoryRepository $categoryRepository,
+        ServiceRepository $serviceRepository,
+        CompanyRepository $companyRepository)
     {
         return view('backend.services.service.edit')
+            ->withServiceCompanies($serviceRepository->getAvailableCompanies($service)->get())
             ->withService($service)
+            ->withCompanies($companyRepository->getCompaniesForCurrentUser()->get())
             ->withCommissions($commissionRepository->getAllCommissions()
                 ->pluck('name', 'uuid')
                 ->toArray())

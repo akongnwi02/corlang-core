@@ -11,10 +11,10 @@
  * All route names are prefixed with 'admin.services'.
  */
 
-use App\Http\Controllers\Backend\Company\Company\CompanyServiceController;
 use App\Http\Controllers\Backend\Services\Commission\CommissionController;
 use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodController;
 use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodStatusController;
+use App\Http\Controllers\Backend\Services\Service\ServiceCompanyController;
 use App\Http\Controllers\Backend\Services\Service\ServiceController;
 use App\Http\Controllers\Backend\Services\Service\ServiceStatusController;
 use App\Http\Controllers\Backend\Services\Category\CategoryController;
@@ -75,14 +75,14 @@ Route::group([
 //            Route::get('service', [CompanyServiceController::class, 'index',])
 //                ->name('company.service.index')
 //                ->middleware('permission:'.config('permission.permissions.read_company_services'));
-//
+
 //            Route::get('service/create', [CompanyServiceController::class, 'create'])
 //                ->name('company.service.create')
 //                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
-//
-//            Route::post('company', [CompanyServiceController::class, 'store'])
-//                ->name('company.service.store')
-//                ->middleware('permission:'.config('permission.permissions.create_company_services'));
+
+            Route::post('company', [ServiceCompanyController::class, 'store'])
+                ->name('service.company.store')
+                ->middleware('permission:'.config('permission.permissions.create_company_services'));
         
         });
     });
