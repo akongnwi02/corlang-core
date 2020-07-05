@@ -172,12 +172,19 @@
             "mobile_money": {
                 "account_number": "Please enter an account number in the valid format {format}"
             },
+            "airtime": {
+                "plan": "Please select a tariff plan from the list",
+                "phone": "Please enter  valid phone number in the required format {format}"
+            },
             "reference": "The reference is invalid",
             "pincode": "The pin code is invalid",
             "otp": "The OTP field is invalid",
             "phone": "The phone number is invalid",
             "account": "The payment account number is invalid",
             "amount": "Please enter a valid amount",
+            "min_amount": "The minimum amount required for this service is {min_amount}",
+            "max_amount": "The maximum amount required for this service is {max_amount}",
+            "step_amount": "The amount required for this service must be multiples of {step_amount}",
             "paymentmethod": "Select a payment method from the list",
             "empty_paymentmethod": "No payment method is currently available for you",
             "service": "Please select a service from the list",

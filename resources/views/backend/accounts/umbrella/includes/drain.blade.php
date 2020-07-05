@@ -18,7 +18,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">{{ $default_currency->code }}</span>
                     </div>
-                    <input name="amount" type="number" step="0.01" min="0" class="form-control" placeholder="@lang('validation.attributes.backend.account.amount')" required>
+                    <input name="amount" type="number" step="0.01" class="form-control" placeholder="@lang('validation.attributes.backend.account.amount')" required>
                     <input name="currency_id" type="hidden" value="{{ $default_currency->uuid }}">
                 </div>
                 <div>

@@ -17,6 +17,7 @@ use App\Events\Frontend\Auth\UserConfirmed;
 use App\Events\Frontend\Auth\UserResetConfirmed;
 use App\Events\Frontend\Auth\UserProviderRegistered;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
+use JD\Cloudder\Facades\Cloudder;
 
 /**
  * Class UserRepository.
@@ -177,10 +178,15 @@ class UserRepository extends BaseRepository
         // Upload profile image if necessary
         if ($image) {
             // delete previous image
-            if (strlen(auth()->user()->avatar_location)) {
-                Storage::disk('public')->delete(auth()->user()->avatar_location);
+//            if (strlen(auth()->user()->avatar_location)) {
+//                Storage::disk('public')->delete(auth()->user()->avatar_location);
+//            }
+    
+            $uploaded = Cloudder::upload($image);
+    
+            if ($uploaded) {
+                $user->avatar_location = Cloudder::secureShow(Cloudder::getPublicId());
             }
-            $user->avatar_location = $image->store('/avatars', 'public');
         } else {
             // No image being passed
             if ($input['avatar_type'] == 'storage') {
@@ -190,10 +196,9 @@ class UserRepository extends BaseRepository
                 }
             } else {
                 // If there is a current image, and they are not using it anymore, get rid of it
-                if (strlen(auth()->user()->avatar_location)) {
-                    Storage::disk('public')->delete(auth()->user()->avatar_location);
-                }
-
+//                if (strlen(auth()->user()->avatar_location)) {
+//                    Storage::disk('public')->delete(auth()->user()->avatar_location);
+//                }
                 $user->avatar_location = null;
             }
         }

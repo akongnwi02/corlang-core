@@ -56,7 +56,6 @@ class Service extends Model
         'is_money_withdrawal',
         'auth_type',
         'code',
-        'logo_url',
         'providercommission_id',
         'customercommission_id',
         'providercompany_id',

@@ -49,7 +49,7 @@ class DrainAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'amount'      => ['required', 'numeric', 'min:100', new SufficientDrainAmountRule()],
+            'amount'      => ['required', 'numeric',],
             'comment'   => ['max:191', 'string', 'nullable'],
             'currency_id' => ['required', Rule::exists('currencies', 'uuid')]
         ];

@@ -131,16 +131,16 @@
                         </div><!--col-->
                     </div><!--form-group-->
 
-                    {{--<div class="form-group row">--}}
-                        {{--{{ html()->label(__('validation.attributes.backend.services.service.logo'))->class('col-md-2 form-control-label')->for('logo') }}--}}
+                    <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.service.logo'))->class('col-md-2 form-control-label')->for('logo') }}
 
-                        {{--<div class="col-md-10">--}}
-                            {{--{{ html()->file('logo')->id('logo')->class('form-control-file') }}--}}
-                            {{--<div class="preview">--}}
-                                {{--{{ html()->img('#', __('validation.attributes.backend.services.service.logo'))->style('width:100px;height:100px;')->id('preview') }}--}}
-                            {{--</div>--}}
-                        {{--</div><!--col-->--}}
-                    {{--</div><!--form-group-->--}}
+                        <div class="col-md-10">
+                            {{ html()->file('logo')->id('logo')->class('form-control-file') }}
+                            <div class="preview">
+                                {{ html()->img('#', __('validation.attributes.backend.services.service.logo'))->style('width:100px;height:100px;')->id('preview') }}
+                            </div>
+                        </div><!--col-->
+                    </div><!--form-group-->
                 </div><!--col-->
             </div><!--row-->
         </div><!--card-body-->

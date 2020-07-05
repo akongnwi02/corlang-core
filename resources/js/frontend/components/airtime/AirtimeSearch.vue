@@ -149,7 +149,7 @@
                         amount: this.amount,
                         currency_code: this.configuration.currency.code,
                         phone: this.phone,
-                        item: this.selectedItem.code,
+                        item: this.selectedItem ? this.selectedItem.code : null,
                     });
                 }
             },
@@ -165,19 +165,42 @@
 
                 // this validation needs to be handled properly
                 if (this.selectedService) {
+                    if (this.selectedService.has_items) {
+                        if (!this.selectedItem) {
+                            ++invalid;
+                            console.log('No item selected');
+                            this.invalid_text = this.$t('validations.purchase.airtime.plan');
+                        }
+                    }
                     if (this.selectedService.destination_regex) {
                         let re = new RegExp(helper.formatRegex(this.selectedService.destination_regex));
 
                         if (!re.test(this.destination)) {
                             ++invalid;
-                            this.invalid_text = this.$t('validations.purchase.phone', {format: this.selectedService.destination_placeholder});
-                            console.log('Invalid account number');
+                            this.invalid_text = this.$t('validations.purchase.airtime.phone', {format: this.selectedService.destination_placeholder});
+                            console.log('Invalid phone number');
                         }
                     } else if (this.destination.length < 6) {
                         ++invalid;
                         this.invalid_text = this.$t('validations.purchase.phone');
                         console.log('Invalid account number');
                     }
+                    if (this.amount < this.selectedService.min_amount) {
+                        ++invalid;
+                        console.log('Amount is small');
+                        this.invalid_text = this.$t('validations.purchase.min_amount', {min_amount: this.selectedService.min_amount});
+                    }
+                    if (this.amount > this.selectedService.max_amount) {
+                        ++invalid;
+                        console.log('Amount is big');
+                        this.invalid_text = this.$t('validations.purchase.max_amount', {max_amount: this.selectedService.max_amount});
+                    }
+                    if (this.amount % this.selectedService.step_amount !== 0) {
+                        ++invalid;
+                        console.log('Invalid amount multiple');
+                        this.invalid_text = this.$t('validations.purchase.step_amount', {step_amount: this.selectedService.step_amount});
+                    }
+
                 }
 
                 if (this.destination.length < 6) {

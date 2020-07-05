@@ -56,10 +56,7 @@ trait UserMethod
                 return gravatar()->get($this->email, ['size' => $size]);
 
             case 'storage':
-                // return a hard corded image for now
-                // TODO return the image from the url
-                return url('img/backend/avatars/default.png');
-//                return url('storage/'.$this->avatar_location);
+                return $this->avatar_location ?: url('img/backend/avatars/default.png');
         }
 
         $social_avatar = $this->providers()->where('provider', $this->avatar_type)->first();

@@ -38,9 +38,7 @@ trait CompanyAttribute
     
     public function getFullLogoAttribute()
     {
-        // TODO change the logo to return the logo of the company. Logo is hardcoded for now
-        return url('img/backend/brand/logo/logo-company-profile.png');
-//        return $this->getCompanyLogo() ?: url('img/backend/brand/logo/logo-company-profile.png');
+        return $this->getCompanyLogo() ?: url('img/backend/brand/logo/logo-company-profile.png');
     }
     
     public function getCompanyLogo()

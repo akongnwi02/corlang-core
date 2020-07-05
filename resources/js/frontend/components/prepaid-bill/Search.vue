@@ -153,6 +153,21 @@
                         this.invalid_text = this.$t('validations.purchase.electricity.meter_code');
                         console.log('Invalid meter code');
                     }
+                    if (this.amount < this.selectedService.min_amount) {
+                        ++invalid;
+                        console.log('Amount is small');
+                        this.invalid_text = this.$t('validations.purchase.min_amount', {min_amount: this.selectedService.min_amount});
+                    }
+                    if (this.amount > this.selectedService.max_amount) {
+                        ++invalid;
+                        console.log('Amount is big');
+                        this.invalid_text = this.$t('validations.purchase.max_amount', {max_amount: this.selectedService.max_amount});
+                    }
+                    if (this.amount % this.selectedService.step_amount !== 0) {
+                        ++invalid;
+                        console.log('Invalid amount multiple');
+                        this.invalid_text = this.$t('validations.purchase.step_amount', {step_amount: this.selectedService.step_amount});
+                    }
                 }
 
                 if (!BUSINESS_CONFIG.APP_REGEX_AMOUNT.test(this.amount)) {

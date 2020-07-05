@@ -49,17 +49,6 @@
                     </div><!--form-group-->
 
                     <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.service.logo_url'))->class('col-md-2 form-control-label required')->for('logo_url') }}
-
-                        <div class="col-md-10">
-                            {{ html()->text('logo_url')
-                                ->class('form-control')
-                                ->attribute('maxlength', 191)
-                                ->placeholder(__('validation.attributes.backend.services.service.logo_url'))}}
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
                         {{ html()->label(__('validation.attributes.backend.services.service.destination_placeholder'))->class('col-md-2 form-control-label required')->for('destination_placeholder') }}
 
                         <div class="col-md-10">
@@ -228,16 +217,16 @@
                         </div><!--col-->
                     </div><!--form-group-->
 
-                    {{--<div class="form-group row">--}}
-                        {{--{{ html()->label(__('validation.attributes.backend.services.service.logo'))->class('col-md-2 form-control-label')->for('logo') }}--}}
+                    <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.service.logo'))->class('col-md-2 form-control-label')->for('logo') }}
 
-                        {{--<div class="col-md-10">--}}
-                            {{--{{ html()->file('logo')->id('logo')->class('form-control-file') }}--}}
-                            {{--<div class="preview">--}}
-                                {{--{{ html()->img(url($service->service_logo), __('validation.attributes.backend.services.service.logo'))->style('width:100px;height:100px;')->id('preview') }}--}}
-                            {{--</div>--}}
-                        {{--</div><!--col-->--}}
-                    {{--</div><!--form-group-->--}}
+                        <div class="col-md-10">
+                            {{ html()->file('logo')->id('logo')->class('form-control-file') }}
+                            <div class="preview">
+                                {{ html()->img(url($service->service_logo), __('validation.attributes.backend.services.service.logo'))->style('width:100px;height:100px;')->id('preview') }}
+                            </div>
+                        </div><!--col-->
+                    </div><!--form-group-->
 
                     @if($service->has_items)
                         <div id="POItablediv">

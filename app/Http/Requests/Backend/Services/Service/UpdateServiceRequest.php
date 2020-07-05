@@ -42,7 +42,6 @@ class UpdateServiceRequest extends FormRequest
             'max_amount'              => __('validation.attributes.backend.services.service.max_amount'),
             'step_amount'              => __('validation.attributes.backend.services.service.step_amount'),
             'logo'                    => __('validation.attributes.backend.services.service.logo'),
-            'logo_url'                    => __('validation.attributes.backend.services.service.logo_url'),
             'items'                   => __('validation.attributes.backend.services.service.items'),
         ];
     }
@@ -67,7 +66,6 @@ class UpdateServiceRequest extends FormRequest
             'max_amount'              => ['required', 'numeric', 'min:0'],
             'step_amount'              => ['required', 'numeric', 'gt:0'],
             'logo'                    => 'sometimes|image|max:191',
-            'logo_rul'                => 'nullable|string|max:256',
             'items'                   => ['sometimes', 'array', new ItemRule(),]
         ];
     }

@@ -18,6 +18,7 @@ use App\Models\Account\AccountType;
 use App\Models\Account\Strongbox;
 use App\Models\Auth\User;
 use App\Models\Company\Company;
+use JD\Cloudder\Facades\Cloudder;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -134,15 +135,14 @@ class CompanyRepository
             }
         }
         
-//        if ($logo) {
-//            // delete previous logo
-//            if (strlen($company->logo_url)) {
-//                Storage::disk('public')->delete($company->logo_url);
-//            }
-//
-//            $company->logo_url = $logo->store('/logos', 'public');
-//
-//        }
+        if ($logo) {
+            $uploaded = Cloudder::upload($logo);
+    
+            if ($uploaded) {
+                $company->logo_url = Cloudder::secureShow(Cloudder::getPublicId());
+            }
+
+        }
     
         if ($company->update()) {
             

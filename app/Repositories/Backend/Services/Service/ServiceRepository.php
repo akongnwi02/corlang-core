@@ -16,6 +16,7 @@ use App\Exceptions\GeneralException;
 use App\Models\Service\Item;
 use App\Models\Service\Service;
 use Illuminate\Support\Facades\Storage;
+use JD\Cloudder\Facades\Cloudder;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -33,11 +34,12 @@ class ServiceRepository
             $service = (new Service)->fill($data);
             $service->has_items = request()->has('has_items') ? 1 : 0;
             
-//            if ($logo) {
-//
-//                $service->logo_url = $logo->store('/logos', 'public');
-//
-//            }
+            if ($logo) {
+                $uploaded = Cloudder::upload($logo);
+                if ($uploaded) {
+                    $service->logo_url = Cloudder::secureShow(Cloudder::getPublicId());
+                }
+            }
     
             if ($service->save()) {
                 event(new ServiceCreated($service));
@@ -118,15 +120,13 @@ class ServiceRepository
             $service->requires_auth = request()->has('requires_auth') ? 1 : 0;
             $service->is_money_withdrawal = request()->has('is_money_withdrawal') ? 1 : 0;
     
-//            if ($logo) {
-//                // delete previous logo
-//                if (strlen($service->logo_url)) {
-//                Storage::disk('public')->delete($service->logo_url);
-//                }
-//
-//                $service->logo_url = $logo->store('/logos', 'public');
-//
-//            }
+            if ($logo) {
+                $uploaded = Cloudder::upload($logo);
+    
+                if ($uploaded) {
+                    $service->logo_url = Cloudder::secureShow(Cloudder::getPublicId());
+                }
+            }
     
             if ($service->update()) {
         
