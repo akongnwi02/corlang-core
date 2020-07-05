@@ -54644,6 +54644,10 @@ var business = {
                 }
             }
 
+            //TODO Manually set config exist to false
+            // fetch the configuration every time for now
+            configExist = false;
+
             if (!configExist) {
                 // load the config from the API
                 __WEBPACK_IMPORTED_MODULE_0__api_business__["a" /* default */].configuration().then(function (response) {
