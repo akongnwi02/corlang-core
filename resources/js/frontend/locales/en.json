@@ -37,7 +37,7 @@
                     "airtime": {
                         "airtime": "Airtime",
                         "data": "Data",
-                        "plan": "Data Plan"
+                        "plan": "Select Bundle"
                     }
                 }
             },
@@ -173,7 +173,7 @@
                 "account_number": "Please enter an account number in the valid format {format}"
             },
             "airtime": {
-                "plan": "Please select a tariff plan from the list",
+                "plan": "Please select a bundle from the list",
                 "phone": "Please enter  valid phone number in the required format {format}"
             },
             "reference": "The reference is invalid",

@@ -22,6 +22,7 @@
                 </select>
             </div>
         </div>
+        <br>
 
         <div v-if="airtimeServices.length >= 1">
             <strong><label class="text-muted float-left">{{ $t('dashboard.pages.tabs.content.airtime.airtime') }}</label></strong>
@@ -29,7 +30,6 @@
             <hr />
             <div>
                 <services v-on:selected="selectService" :services="airtimeServices"></services>
-
             </div>
         </div>
 

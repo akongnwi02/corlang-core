@@ -316,27 +316,6 @@
     </div><!--card-->
     {{ html()->closeModelForm() }}
 @endsection
-@push('after-scripts')
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                let reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#preview').attr('src', e.target.result);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                $('#preview').hide();
-            }
-        }
-
-        $("#logo").change(function () {
-            readURL(this);
-        });
-    </script>
-@endpush
 
 @push('after-styles')
     <style>
@@ -398,6 +377,22 @@
 
             x.appendChild(new_row);
         }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
 
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                $('#preview').hide();
+            }
+        }
+
+        $("#logo").change(function () {
+            readURL(this);
+        });
     </script>
 @endpush

@@ -100,6 +100,11 @@ export const business = {
                 }
             }
 
+            //TODO Manually set config exist to false
+            // fetch the configuration every time for now
+            configExist = false;
+
+
             if (! configExist) {
                 // load the config from the API
                 BusinessApi.configuration()

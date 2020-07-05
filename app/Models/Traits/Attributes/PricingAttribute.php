@@ -18,16 +18,16 @@ trait PricingAttribute
     
     public function getFromLabelAttribute()
     {
-        return $this->from  . ' ' . $this->commission->currency->code;
+        return number_format($this->from, 2)  . ' ' . $this->commission->currency->code;
     }
     
     public function getToLabelAttribute()
     {
-        return $this->to . ' ' . $this->commission->currency->code;
+        return number_format($this->to, 2) . ' ' . $this->commission->currency->code;
     }
     
     public function getFixedLabelAttribute()
     {
-        return $this->fixed . ' ' . $this->commission->currency->code;
+        return number_format($this->fixed, 2) . ' ' . $this->commission->currency->code;
     }
 }
