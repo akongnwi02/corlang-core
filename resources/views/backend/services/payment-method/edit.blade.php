@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    {{ html()->modelForm($method, 'PUT', route('admin.services.method.update', $method))->class('form-horizontal')->attribute('enctype', 'multipart/form-data')->open() }}
+
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -19,128 +19,30 @@
                 </div><!--col-->
             </div><!--row-->
 
-            <hr>
-
             <div class="row mt-4 mb-4">
                 <div class="col">
+                    <ul class="nav nav-tabs" role="tablist" id="methodTab">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-expanded="true"><i class="fas fa-info"></i> @lang('labels.backend.services.method.tabs.titles.profile')</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#companies" role="tab" aria-controls="services" aria-expanded="true"><i class="fas fa-cog"></i> @lang('labels.backend.services.method.tabs.titles.companies')</a>
+                        </li>
+                    </ul>
 
-                    <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.method.name'))->class('col-md-2 form-control-label required')->for('name') }}
-
-                        <div class="col-md-10">
-                            {{ html()->text('name')
-                                ->class('form-control')
-                                ->required()
-                                ->attribute('maxlength', 191)
-                                ->placeholder(__('validation.attributes.backend.services.method.name'))}}
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.method.code'))->class('col-md-2 form-control-label required')->for('code') }}
-
-                        <div class="col-md-10">
-                            {{ html()->text('code')
-                                ->class('form-control')
-                                ->disabled()
-                                ->attribute('maxlength', 191)
-                                ->placeholder(__('validation.attributes.backend.services.method.code'))}}
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.method.placeholder_text'))->class('col-md-2 form-control-label')->for('placeholder_text') }}
-
-                        <div class="col-md-10">
-                            {{ html()->text('placeholder_text')
-                                ->class('form-control')
-                                ->attribute('maxlength', 191)
-                                ->placeholder(__('validation.attributes.backend.services.method.placeholder_text'))}}
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.method.customercommission'))->class('col-md-2 form-control-label')->for('customercommission_id') }}
-
-                        <div class="col-md-10">
-                            {{ html()->select('customercommission_id', [null => null] + $commissions)
-                                ->class('form-control')
-                                }}
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.method.providercommission'))->class('col-md-2 form-control-label')->for('providercommission_id') }}
-
-                        <div class="col-md-10">
-                            {{ html()->select('providercommission_id', [null => null] + $commissions)
-                                ->class('form-control')
-                                }}
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.method.description_en'))->class('col-md-2 form-control-label required')->for('description_en') }}
-
-                        <div class="col-md-10">
-                            {{ html()->text('description_en')
-                                ->class('form-control')
-                                ->required()
-                                ->attribute('maxlength', 191)
-                                ->placeholder(__('validation.attributes.backend.services.method.description_en'))}}
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-
-                    <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.method.description_fr'))->class('col-md-2 form-control-label required')->for('description_fr') }}
-
-                        <div class="col-md-10">
-                            {{ html()->text('description_fr')
-                                ->class('form-control')
-                                ->required()
-                                ->attribute('maxlength', 191)
-                                ->placeholder(__('validation.attributes.backend.services.method.description_fr'))}}
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.method.realtime'))->class('col-md-2 form-control-label')->for('is_realtime') }}
-
-                        <div class="col-md-10">
-                            <label class="switch switch-label switch-pill switch-primary">
-                                {{ html()->checkbox('is_realtime', null, 1)->class('switch-input') }}
-                                <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
-                            </label>
-                        </div><!--col-->
-                    </div><!--form-group-->
-
-                    <div class="form-group row">
-                        {{ html()->label(__('validation.attributes.backend.services.method.service'))->class('col-md-2 form-control-label')->for('service_id') }}
-
-                        <div class="col-md-10">
-                            {{ html()->select('service_id', [null => null] + $services)
-                                ->class('form-control')}}
-                        </div><!--col-->
-                    </div><!--form-group-->
-
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="profile" role="tabpanel" aria-expanded="true">
+                            @include('backend.services.payment-method.edit.tabs.overview')
+                        </div><!--tab-->
+                        <div class="tab-pane fade" id="companies" role="tabpanel" aria-expanded="true">
+                            @include('backend.services.payment-method.edit.tabs.companies')
+                        </div><!--tab-->
+                    </div><!--tab-content-->
                 </div><!--col-->
             </div><!--row-->
         </div><!--card-body-->
-
-        <div class="card-footer">
-            <div class="row">
-                <div class="col">
-                    {{ form_cancel(route('admin.services.method.index'), __('buttons.general.cancel')) }}
-                </div><!--col-->
-
-                <div class="col text-right">
-                    {{ form_submit(__('buttons.general.continue')) }}
-                </div><!--row-->
-            </div><!--row-->
-        </div><!--card-footer-->
     </div><!--card-->
-    {{ html()->closeModelForm() }}
+
 @endsection
 
 @push('after-styles')
@@ -163,4 +65,24 @@
             text-align: center;
         }
     </style>
+@endpush
+@push('after-scripts')
+    <script>
+        // switch to active tab on page reload
+        $('a[data-toggle="tab"]').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+            let id = $(e.target).attr("href");
+            localStorage.setItem('selectedTab', id)
+        });
+
+        let selectedTab = localStorage.getItem('selectedTab');
+
+        if (selectedTab != null) {
+            $('a[data-toggle="tab"][href="' + selectedTab + '"]').tab('show');
+        }
+    </script>
 @endpush

@@ -75,6 +75,8 @@ return [
                 'created' => 'The payment method was successfully created.',
                 'updated' => 'The payment method was successfully updated.',
                 'status_updated' => 'The status was successfully updated.',
+                'company_updated' => 'The companies for this payment method was updated successfully',
+                
             ]
         ],
         'accounting' => [

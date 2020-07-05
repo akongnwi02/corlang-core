@@ -112,6 +112,7 @@ return [
                 'create_error' => 'There was a problem creating this payment method. Please try again.',
                 'update_error' => 'There was a problem updating this payment method. Please try again.',
                 'mark_error'   => 'There was a problem updating the status of this payment method. Please try again.',
+                'company_update_error' => 'The was a problem updating the assignments of this payment method',
             ],
             'company' => [
                 'update_error' => 'The was a problem updating the assignments of this service'

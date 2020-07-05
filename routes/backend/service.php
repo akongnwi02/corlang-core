@@ -12,6 +12,7 @@
  */
 
 use App\Http\Controllers\Backend\Services\Commission\CommissionController;
+use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodCompanyController;
 use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodController;
 use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodStatusController;
 use App\Http\Controllers\Backend\Services\Service\ServiceCompanyController;
@@ -67,7 +68,7 @@ Route::group([
             ->name('service.mark')
             ->middleware('permission:'.config('permission.permissions.deactivate_services'));
     
-        // Company Service
+        // Service Company
         Route::group(['namespace' => 'ServiceCompany'], function () {
             /*
              * CRUD
@@ -192,6 +193,26 @@ Route::group([
         Route::get('mark/{status}', [PaymentMethodStatusController::class, 'mark'])
             ->name('method.mark')
             ->middleware('permission:'.config('permission.permissions.deactivate_payment_methods'));
+    
+    
+        // Service Company
+        Route::group(['namespace' => 'PaymentMethodCompany'], function () {
+            /*
+             * CRUD
+             */
+//            Route::get('service', [CompanyServiceController::class, 'index',])
+//                ->name('company.service.index')
+//                ->middleware('permission:'.config('permission.permissions.read_company_services'));
+
+//            Route::get('service/create', [CompanyServiceController::class, 'create'])
+//                ->name('company.service.create')
+//                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
+        
+            Route::post('company', [PaymentMethodCompanyController::class, 'store'])
+                ->name('method.company.store')
+                ->middleware('permission:'.config('permission.permissions.create_company_services'));
+        
+        });
     });
     
     

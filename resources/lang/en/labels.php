@@ -264,6 +264,7 @@ return [
             'method'     => [
                 'management' => 'Payment Methods',
                 'create'     => 'Create Payment Method',
+                'assign' => 'Assign :method to companies',
                 'edit'       => 'Edit Payment Method',
                 'table'      => [
                     'name'               => 'Name',
@@ -278,6 +279,12 @@ return [
                     'providercommission' => 'Provider Service Charge',
                     'total'              => 'payment method|payment methods',
                 ],
+                'tabs' => [
+                    'titles' => [
+                        'profile' => 'Profile',
+                        'companies' => 'Companies'
+                    ]
+                ]
             ],
         ],
         'sales'      => [

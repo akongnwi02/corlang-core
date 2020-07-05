@@ -13,9 +13,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Services\PaymentMethod\UpdatePaymentMethodRequest;
 use App\Http\Requests\Backend\Services\PaymentMethod\StorePaymentMethodRequest;
 use App\Models\Service\PaymentMethod;
+use App\Repositories\Backend\Company\Company\CompanyRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
 use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
+use DemeterChain\C;
 
 class PaymentMethodController extends Controller
 {
@@ -51,12 +53,19 @@ class PaymentMethodController extends Controller
      * @param PaymentMethod $method
      * @param CommissionRepository $commissionRepository
      * @param ServiceRepository $serviceRepository
+     * @param CompanyRepository $companyRepository
      * @return mixed
      */
-    public function edit(PaymentMethod $method, CommissionRepository $commissionRepository, ServiceRepository $serviceRepository)
+    public function edit(
+        PaymentMethod $method,
+        CommissionRepository $commissionRepository,
+        ServiceRepository $serviceRepository,
+        CompanyRepository $companyRepository
+    )
     {
         return view('backend.services.payment-method.edit')
             ->withMethod($method)
+            ->withCompanies($companyRepository->getCompaniesForCurrentUser()->get())
             ->withServices($serviceRepository->getAllServices()
                 ->pluck('name', 'uuid')
                 ->toArray())

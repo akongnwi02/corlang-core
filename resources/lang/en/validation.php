@@ -286,6 +286,7 @@ return [
                     'providercommission' => 'Service Provider Fee',
                     'service'            => 'Service',
                     'realtime'           => 'Realtime',
+                    'companies'          => 'Companies',
                 ],
                 'category'   => [
                     'name'    => 'Name',
