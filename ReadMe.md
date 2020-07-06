@@ -29,9 +29,10 @@ Run the following command on project's root directory
 * `make down` to take down containers
 
 ### HEROKU COMMANDS
-* Change stack `heroku stack:set heroku-18 -a corlang`
+* Change stack `heroku stack:set heroku-18 -a corpay`
 * Heroku log in `heroku login --browser=firefox`
 * Heroku logs `heroku logs -t -n 1000 -a corpay`
+* Heroku config env `heroku config:get DATABASE_URL -a corlapay`
 
 ### HOW TO TRANSLATE DICTIONARY FILES
 

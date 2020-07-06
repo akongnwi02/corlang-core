@@ -63,3 +63,7 @@ seed:
 
 worker:
 	docker exec -it $$(docker-compose ps -q workspace) sh -c "php artisan queue:work --queue=process_purchase,verify_purchase,complete_purchase"
+
+deploy:
+	git push heroku develop:master
+	heroku run php artisan migrate --force -a corlapay
