@@ -81,12 +81,12 @@ class MovementRepository
         $movement->currency_id = $data['currency_id'];
         $movement->sourceaccount_id = $data['direction'] == 'IN' ? auth()->user()->company->account->uuid : $account->uuid;
         $movement->destinationaccount_id = $data['direction'] == 'OUT' ? auth()->user()->company->account->uuid : $account->uuid;
-        
+        $movement->is_complete = true;
+    
         $double = clone $movement;
         $double->type_id = MovementType::where('name', config('business.movement.type.withdrawal'))->first()->uuid;
         $double->sourceaccount_id = $movement->destinationaccount_id;
         $double->destinationaccount_id = $movement->sourceaccount_id;
-        $movement->is_complete = true;
     
         return \DB::transaction(function () use ($movement, $double) {
     
@@ -148,6 +148,7 @@ class MovementRepository
         if ($movements) {
             foreach ($movements as $movement) {
                 $movement->is_reversed = true;
+                $movement->reversed_at   = now();
                 $movement->save();
             }
         }

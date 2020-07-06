@@ -10,6 +10,9 @@ namespace App\Jobs\Business\Purchase;
 
 use App\Jobs\Job;
 use App\Models\Transaction\Transaction;
+use App\Repositories\Backend\Movement\MovementRepository;
+use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
+use App\Repositories\Backend\System\CurrencyRepository;
 use App\Services\Business\Validators\CategoryProvider;
 
 class VerifyPurchaseJob extends Job
@@ -116,10 +119,27 @@ class VerifyPurchaseJob extends Job
     
     public function failed(\Exception $exception = null)
     {
+        $movementRepository = new MovementRepository(new CurrencyRepository());
+        
+        \Log::warning("{$this->getJobName()}: Transaction failed during status check with micro service. Reversing movements...", [
+            'transaction.status' => $this->transaction->status,
+            'transaction.code'   => $this->transaction->code,
+            'movement.code'      => $this->transaction->movement_code
+        ]);
+        
+        $movementRepository->reverseMovements($this->transaction->movement_code);
+    
+        \Log::info("{$this->getJobName()}: Completing movement for this transaction. To be counted in the balance for withdrawals");
+    
+        $movementRepository->completeMovements($this->transaction->movement_code);
+    
+        
         $this->transaction->status  = config('business.transaction.status.failed');
         $this->transaction->message = 'Transaction failed unexpectedly while verifying status';
         $this->transaction->to_be_verified = true;
+        $this->transaction->completed_at   = now();
         $this->transaction->save();
+        
         \Log::emergency("{$this->getJobName()}: Transaction failed unexpectedly during status check. Inserted into COMPLETE queue", [
             'transaction.status'      => $this->transaction->status,
             'transaction.code'        => $this->transaction->code,

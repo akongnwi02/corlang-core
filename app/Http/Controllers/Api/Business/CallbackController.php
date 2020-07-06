@@ -85,13 +85,16 @@ class CallbackController extends Controller
             $movementRepository->reverseMovements($transaction->movement_code);
         }
     
-        if ($transaction->is_account_topup) {
-            if ($paymentMethodRepository->confirmTopupMethod($transaction->user, $transaction->service->payment_method)) {
-                \Log::info("{$this->getClassName()}: The account top up method has been successfully confirmed for this topup transaction");
-            } else {
-                \Log::error("{$this->getClassName()}: There was an error confirming the top up account method for this top up transaction");
+        if ($transaction->status == config('business.transaction.status.success')) {
+            if ($transaction->is_account_topup) {
+                if ($paymentMethodRepository->confirmTopupMethod($transaction->user, $transaction->service->payment_method)) {
+                    \Log::info("{$this->getClassName()}: The account top up method has been successfully confirmed for this topup transaction");
+                } else {
+                    \Log::error("{$this->getClassName()}: There was an error confirming the top up account method for this top up transaction");
+                }
             }
         }
+
     
         \Log::info("{$this->getClassName()}: Completing movement for this transaction. To be counted in the balance for withdrawals");
         
