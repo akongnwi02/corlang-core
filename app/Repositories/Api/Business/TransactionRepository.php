@@ -232,7 +232,7 @@ class TransactionRepository
             return true;
         }
         
-        if (($userAccount->getBalance() > $transaction->total_customer_amount)) {
+        if (($userAccount->getBalance() >= $transaction->total_customer_amount)) {
             $this->movementRepository->registerSale($userAccount, $transaction);
             return true;
             
