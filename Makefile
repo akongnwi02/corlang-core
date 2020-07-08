@@ -66,4 +66,4 @@ worker:
 
 deploy:
 	git push heroku develop:master
-	heroku run php artisan migrate --force -a corlapay
+#	heroku run php artisan migrate --force -a corlapay
