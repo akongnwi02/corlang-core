@@ -9,12 +9,14 @@
 namespace App\Models\Merchant;
 
 
+use App\Models\Traits\Relationships\MerchantItemRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 class MerchantItem extends Model
 {
-    use Uuid;
+    use Uuid,
+        MerchantItemRelationship;
     
     /**
      * The database table used by the model.
@@ -28,4 +30,12 @@ class MerchantItem extends Model
     protected $keyType = 'string';
     
     public $incrementing = false;
+    
+    protected $fillable = [
+        'order_id',
+        'quantity',
+        'unit_cost',
+        'sub_total',
+        'code',
+    ];
 }

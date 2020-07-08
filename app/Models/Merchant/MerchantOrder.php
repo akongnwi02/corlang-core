@@ -9,12 +9,14 @@
 namespace App\Models\Merchant;
 
 
+use App\Models\Traits\Relationships\MerchantOrderRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 class MerchantOrder extends Model
 {
-    use Uuid;
+    use Uuid,
+        MerchantOrderRelationship;
     
     /**
      * The database table used by the model.
@@ -29,4 +31,18 @@ class MerchantOrder extends Model
     
     public $incrementing = false;
     
+    protected $fillable = [
+        'customer_name',
+        'customer_email',
+        'customer_address',
+        'customer_phone',
+        'external_id',
+        'total_amount',
+        'currency_id',
+        'company_id',
+        'code',
+        'notification_url',
+        'return_url',
+        'description',
+    ];
 }

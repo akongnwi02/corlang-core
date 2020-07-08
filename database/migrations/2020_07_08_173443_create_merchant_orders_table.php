@@ -27,7 +27,6 @@ class CreateMerchantOrdersTable extends Migration
             $table->uuid('paymentmethod_id')->nullable();
             $table->uuid('payment_transaction_id')->nullable();
             $table->dateTime('completed_at')->nullable();
-            $table->dateTime('expires_at')->nullable();
             $table->string('notification_url')->nullable();
             $table->string('return_url')->nullable();
             $table->string('description')->nullable();
