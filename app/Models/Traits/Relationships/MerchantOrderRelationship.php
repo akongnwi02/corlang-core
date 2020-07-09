@@ -9,6 +9,7 @@
 namespace App\Models\Traits\Relationships;
 
 
+use App\Models\Auth\User;
 use App\Models\Merchant\MerchantItem;
 
 trait MerchantOrderRelationship
@@ -16,5 +17,10 @@ trait MerchantOrderRelationship
     public function items()
     {
         return $this->hasMany(MerchantItem::class, 'order_id', 'uuid');
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'uuid');
     }
 }

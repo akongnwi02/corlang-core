@@ -38,11 +38,13 @@ class MerchantOrder extends Model
         'customer_phone',
         'external_id',
         'total_amount',
-        'currency_id',
+        'currency_code',
         'company_id',
+        'user_id',
         'code',
         'notification_url',
         'return_url',
         'description',
+        'language',
     ];
 }

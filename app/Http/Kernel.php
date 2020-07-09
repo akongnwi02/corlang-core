@@ -90,6 +90,7 @@ class Kernel extends HttpKernel
         'accept' => \App\Http\Middleware\AcceptHeaderMiddleware::class,
         'cors' => \Barryvdh\Cors\HandleCors::class,
         'api_key' => \App\Http\Middleware\APIKeyMiddleware::class,
+        'active.confirmed' => \App\Http\Middleware\ActiveAndConfirmedMiddleware::class
     ];
 
     /**

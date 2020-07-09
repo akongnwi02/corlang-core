@@ -13,12 +13,13 @@ use App\Events\Api\Auth\UserLoggedIn;
 use App\Events\Api\Auth\UserLoggedOut;
 use App\Exceptions\Api\UnauthorizedException;
 use App\Helpers\Auth\Auth;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Models\Auth\User;
 use App\Repositories\Api\Auth\UserRepository;
 use Illuminate\Http\Request;
 
-class LoginController
+class LoginController extends Controller
 {
 
     /**
@@ -136,21 +137,5 @@ class LoginController
     protected function loggedOut(Request $request)
     {
         //
-    }
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
-        ]);
     }
 }

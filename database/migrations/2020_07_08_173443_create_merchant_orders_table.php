@@ -18,8 +18,9 @@ class CreateMerchantOrdersTable extends Migration
             $table->string('external_id')->unique();
             $table->string('code')->unique();
             $table->double('total_amount');
-            $table->uuid('currency_id');
+            $table->string('currency_code');
             $table->uuid('company_id');
+            $table->uuid('user_id');
             $table->string('customer_name')->nullable();
             $table->string('customer_phone')->nullable();
             $table->string('customer_address')->nullable();
@@ -29,6 +30,7 @@ class CreateMerchantOrdersTable extends Migration
             $table->dateTime('completed_at')->nullable();
             $table->string('notification_url')->nullable();
             $table->string('return_url')->nullable();
+            $table->string('language')->nullable();
             $table->string('description')->nullable();
             
             $table->enum('status', [
@@ -41,10 +43,11 @@ class CreateMerchantOrdersTable extends Migration
             
             $table->timestamps();
     
-            $table->foreign('currency_id')->references('uuid')->on('currencies');
+            $table->foreign('currency_code')->references('code')->on('currencies');
             $table->foreign('paymentmethod_id')->references('uuid')->on('paymentmethods');
             $table->foreign('payment_transaction_id')->references('uuid')->on('transactions');
             $table->foreign('company_id')->references('uuid')->on('companies');
+            $table->foreign('user_id')->references('uuid')->on('users');
     
         });
     }
