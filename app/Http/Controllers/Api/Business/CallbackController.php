@@ -52,7 +52,7 @@ class CallbackController extends Controller
             config('business.transaction.status.failed'),
             config('business.transaction.status.success'),
         ])) {
-            \Log::emergency('Transaction in final status received a status update',[
+            \Log::warning('Transaction in final status received a status update',[
                 'status received'                   => $request->input('status'),
                 'transaction.status'                => $transaction->status,
                 'transaction.uuid'                  => $transaction->uuid,
@@ -64,8 +64,24 @@ class CallbackController extends Controller
                 'transaction.destination'           => $transaction->destination,
                 'transaction.total_customer_amount' => $transaction->total_customer_amount,
             ]);
+    
+            if ($transaction->status != $request->input('status')) {
+                \Log::emergency("Transaction $transaction->uuid in final state $transaction->status received a status update of {$request->input('status')}", [
+                    'status received'                   => $request->input('status'),
+                    'transaction.status'                => $transaction->status,
+                    'transaction.uuid'                  => $transaction->uuid,
+                    'transaction.code'                  => $transaction->code,
+                    'transaction.service_code'          => $transaction->service_code,
+                    'transaction.movement_code'         => $transaction->movement_code,
+                    'transaction.paymentaccount'        => $transaction->paymentaccount,
+                    'transaction.created_at'            => $transaction->created_at->toDatetimeString(),
+                    'transaction.destination'           => $transaction->destination,
+                    'transaction.total_customer_amount' => $transaction->total_customer_amount,
+                ]);
+            }
+            
             throw new ServerErrorException(BusinessErrorCodes::TRANSACTION_IN_FINAL_STATUS, "Transaction $transaction->code in final state received a status update");
-        };
+        }
         
         $transaction->status         = $request->input('status');
         $transaction->asset          = $request->input('asset');
