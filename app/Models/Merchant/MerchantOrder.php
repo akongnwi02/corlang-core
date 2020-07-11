@@ -9,6 +9,7 @@
 namespace App\Models\Merchant;
 
 
+use App\Models\Traits\Methods\MerchantOrderMethod;
 use App\Models\Traits\Relationships\MerchantOrderRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 class MerchantOrder extends Model
 {
     use Uuid,
+        MerchantOrderMethod,
         MerchantOrderRelationship;
     
     /**
@@ -46,5 +48,6 @@ class MerchantOrder extends Model
         'return_url',
         'description',
         'language',
+        'status',
     ];
 }

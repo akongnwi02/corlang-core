@@ -131,6 +131,11 @@ class Handler extends ExceptionHandler
                 $error['error_code'] = BusinessErrorCodes::TOKEN_EXPIRED;
             }
     
+            if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+                $error['message'] = 'Resource Not Found';
+                $error['error_code'] = BusinessErrorCodes::RESOURCE_NOT_ERROR;
+            }
+    
             \Log::error('ExceptionHandler', array_merge($error, [
                 'exception' => (string)$exception,
                 'trace'     => $exception->getTrace(),

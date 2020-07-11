@@ -10,13 +10,24 @@ namespace App\Http\Controllers\Api\Merchant\V1;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Merchant\V1\OrderRequest;
+use App\Http\Requests\Api\Merchant\V1\StoreOrderRequest;
+use App\Http\Requests\Api\Merchant\V1\ShowOrderRequest;
+use App\Http\Resources\Api\Merchant\V1\MerchantOrderResource;
 use App\Repositories\Api\Merchant\V1\OrderRepository;
 
 class OrderController extends Controller
 {
-    public function order(OrderRequest $request, OrderRepository $orderRepository)
+    public function order(StoreOrderRequest $request, OrderRepository $orderRepository)
     {
-        $orderRepository->create($request->input());
+        $order = $orderRepository->create($request->input(), auth()->user());
+        
+        return new MerchantOrderResource($order) ;
+    }
+    
+    public function show(ShowOrderRequest $request, OrderRepository $orderRepository, $external_id)
+    {
+        $order = $orderRepository->show($external_id);
+
+        return new MerchantOrderResource($order);
     }
 }

@@ -15,6 +15,7 @@ Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant'], function () {
         
     Route::group(['middleware' => ['jwt.auth', 'active.confirmed'], 'namespace' => 'VersionOne', 'prefix' => 'v1'], function () {
         Route::post('order', [OrderController::class, 'order']);
+        Route::get('order/{external_id}', [OrderController::class, 'show']);
     });
 
 //    Route::group(['namespace' => 'VersionTwo', 'prefix' => 'v2'], function () {

@@ -12,7 +12,7 @@ namespace App\Http\Requests\Api\Merchant\V1;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class OrderRequest extends FormRequest
+class StoreOrderRequest extends FormRequest
 {
     public function authorize()
     {
@@ -32,7 +32,7 @@ class OrderRequest extends FormRequest
             'external_id' => ['required', Rule::unique('merchant_orders')],
             'total_amount' => 'required|numeric|min:0',
             'currency_code' => 'required|in:XAF',
-            'description' => 'string|min',
+            'description' => 'string',
             'language' => 'in:en,fr',
             
             'items.*.quantity' => 'numeric',
