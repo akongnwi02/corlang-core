@@ -34,7 +34,6 @@ class CreateMerchantOrdersTable extends Migration
             
             $table->enum('status', [
                 config('business.transaction.status.created'),
-                config('business.transaction.status.pending'),
                 config('business.transaction.status.processing'),
                 config('business.transaction.status.success'),
                 config('business.transaction.status.failed'),

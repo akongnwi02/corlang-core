@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', app_name() . ' | ' . __('navs.frontend.dashboard') )
+@section('title', app_name() . ' | ' . __('navs.frontend.merchant_dashboard') )
 
 @section('content')
     <div class="row">

@@ -3,9 +3,10 @@
         <div class="col">
             <p class="text-muted space mb-0 shop"> {{$t('dashboard.merchant.shop')}}: <strong>{{order.company}}</strong></p>
             <p class="text-muted space mb-0 shop">{{$t('dashboard.merchant.address')}}: <strong>{{order.company_address}}</strong></p>
+            <p>{{order.description}}</p>
         </div>
         <div class="col">
-            <div class="row justify-content-start ">
+            <div class="row justify-content-start" v-if="order.company_logo">
                 <div class="col"> <a :href="order.company_website"><img class="irc_mi img-fluid cursor-pointer " :src="order.company_logo" width="70" height="70" :alt="order.company"></a> </div>
             </div>
         </div>

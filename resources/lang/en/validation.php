@@ -281,6 +281,7 @@ return [
                     'name'               => 'Name',
                     'code'               => 'Code',
                     'placeholder_text'   => 'Account Placeholder',
+                    'accountregex'       => 'Account Regex',
                     'description_en'     => 'English Description',
                     'description_fr'     => 'French Description',
                     'customercommission' => 'Customer Service Charge',

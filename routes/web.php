@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\LanguageController;
 
+Log::info('Incoming Request', ['input' => request()->input(), 'path' => request()->getRequestUri(), 'headers' => request()->header()]);
+
 /*
  * Global Routes
  * Routes that are used between both frontend and backend.

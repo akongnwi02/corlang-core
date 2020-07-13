@@ -176,8 +176,11 @@
                 "method": "PAYMENT METHOD",
                 "details": "PAYMENT DETAILS",
                 "checkout": "CHECKOUT",
-                "account_number": "Account Number"
-
+                "account_number": "Account Number",
+                "thank_you": "Thank you for trusting CorlaPay. We have sent a request to your payment provider.",
+                "return": "Return to Shop",
+                "success": "Success",
+                "dear": "Dear"
             }
         }
     },
@@ -192,7 +195,7 @@
             },
             "airtime": {
                 "plan": "Please select a bundle from the list",
-                "phone": "Please enter  valid phone number in the required format {format}"
+                "phone": "Please enter valid phone number in the required format {format}"
             },
             "reference": "The reference is invalid",
             "pincode": "The pin code is invalid",
@@ -220,6 +223,11 @@
             "maintenance": "We're currently maintaining our system. Please check back later",
             "network": "Network error. Please check your internet connection",
             "unexpected": "An unexpected error occurred"
+        },
+        "merchant": {
+            "account_number_format": "Please enter account number in the required format {format}",
+            "account_number_invalid": "Please enter a valid account number",
+            "no_method": "Please select a payment method from the list"
         }
     },
     "notifications": {
@@ -236,6 +244,7 @@
         "10002": "The request sent contains some validation errors",
         "10003": "You have been logged out. Login to continue.",
         "10004": "You are not authorized to make this request",
+        "10005": "Wrong HTTP Method has been provided",
         "10006": "The path requested was not found",
         "10007": "You are making too many requests to the server",
         "10008": "Transaction could not be saved to cache",

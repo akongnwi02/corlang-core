@@ -7,7 +7,7 @@
         </div>
         <div class="row justify-content-around">
             <checkout :order="order" :methods="methods"></checkout>
-            <order-summary :order="order"></order-summary>
+            <order-summary v-if="order.items" :order="order"></order-summary>
         </div>
     </div>
 </template>
@@ -32,6 +32,11 @@
             Checkout,
             ShopDetails,
         },
+        computed: {
+            triggerLoadStatus() {
+                return this.$store.getters.getTriggerLoadStatus;
+            }
+        }
     }
 </script>
 
