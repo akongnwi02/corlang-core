@@ -36,6 +36,9 @@ class MerchantItem extends Model
         'quantity',
         'unit_cost',
         'sub_total',
+        'logo_url',
         'code',
+        'name',
+        'description',
     ];
 }

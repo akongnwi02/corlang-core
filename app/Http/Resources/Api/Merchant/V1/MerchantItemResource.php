@@ -19,7 +19,10 @@ class MerchantItemResource extends JsonResource
             'quantity' => $this->quantity,
             'unit_cost' => $this->unit_cost,
             'sub_total' => $this->sub_total,
-            'code' => $this->code
+            'code' => $this->code,
+            'name' => $this->name,
+            'description' => $this->description,
+            'item_logo' => $this->logo_url
         ];
     }
 }

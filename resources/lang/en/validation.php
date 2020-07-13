@@ -205,6 +205,7 @@ return [
                     'logo'             => 'Company Logo',
                     'provider'         => 'Provider',
                     'direct_polling'   => 'Direct Polling',
+                    'merchant'         => 'Merchant',
                     'agent_self_topup' => 'Agent Self Topup',
                 ],
                 'service'       => [
@@ -286,6 +287,7 @@ return [
                     'providercommission' => 'Service Provider Fee',
                     'service'            => 'Service',
                     'realtime'           => 'Realtime',
+                    'logo' => 'Logo',
                     'companies'          => 'Companies',
                 ],
                 'category'   => [

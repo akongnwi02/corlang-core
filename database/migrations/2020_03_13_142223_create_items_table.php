@@ -19,7 +19,7 @@ class CreateItemsTable extends Migration
             $table->string('name')->unique()->nullable();
             $table->string('description_en')->nullable();
             $table->string('description_fr')->nullable();
-            $table->string('code')->unique()->nullable();
+            $table->string('code')->nullable();
             $table->double('amount')->nullable();
             $table->boolean('is_active')->nullable()->default(true);
         

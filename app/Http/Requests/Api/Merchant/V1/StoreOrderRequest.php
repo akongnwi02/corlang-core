@@ -33,17 +33,19 @@ class StoreOrderRequest extends FormRequest
             'total_amount' => 'required|numeric|min:0',
             'currency_code' => 'required|in:XAF',
             'description' => 'string',
-            'language' => 'in:en,fr',
             
+            'items' => 'array',
             'items.*.quantity' => 'numeric',
             'items.*.unit_cost' => 'numeric|min:0',
             'items.*.sub_total' => 'numeric|min:0',
             'items.*.code' => 'string',
+            'items.*.name' => 'string',
+            'items.*.description' => 'string',
+            'items.*.logo_url' => 'url',
 
             // developer
             'notification_url' => 'required|url',
             'return_url' => 'required|url',
-            
         ];
     }
 }

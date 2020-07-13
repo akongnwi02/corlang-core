@@ -47,7 +47,6 @@ class MerchantOrder extends Model
         'notification_url',
         'return_url',
         'description',
-        'language',
         'status',
     ];
 }

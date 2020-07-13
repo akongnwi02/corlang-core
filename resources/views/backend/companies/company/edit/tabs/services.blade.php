@@ -23,7 +23,7 @@
             <tr>
                 <th>@lang('labels.backend.companies.company.tabs.content.service.table.name')</th>
                 <th>@lang('labels.backend.companies.company.tabs.content.service.table.code')</th>
-                <th>@lang('labels.backend.companies.company.tabs.content.service.table.logo')</th>
+{{--                <th>@lang('labels.backend.companies.company.tabs.content.service.table.logo')</th>--}}
                 <th>@lang('labels.backend.companies.company.tabs.content.service.table.active')</th>
                 <th>@lang('labels.backend.companies.company.tabs.content.service.table.agent_rate')</th>
                 <th>@lang('labels.backend.companies.company.tabs.content.service.table.company_rate')</th>
@@ -36,9 +36,9 @@
             <tbody>
             @foreach($companyServices as $service)
                 <tr>
-                    <td>{{ $service->name }}</td>
+                    <td>{!! $service->logo_label !!} {{ $service->name }}</td>
                     <td>{{ $service->code }}</td>
-                    <td>{!! $service->logo_label !!}</td>
+                    {{--<td>{!! $service->logo_label !!}</td>--}}
                     <td>{!! $service->specific->active_label !!}</td>
                     <td>{{ ! is_null($service->specific->agent_rate) ? $service->specific->agent_rate_label : $service->agent_rate_label }}</td>
                     <td>{{ ! is_null($service->specific->company_rate) ? $service->specific->company_rate_label : $service->company_rate_label }}</td>

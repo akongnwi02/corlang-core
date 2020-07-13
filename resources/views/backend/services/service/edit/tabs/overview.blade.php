@@ -201,7 +201,7 @@
                 <div class="col-md-10">
                     {{ html()->file('logo')->id('logo')->class('form-control-file') }}
                     <div class="preview">
-                        {{ html()->img(url($service->service_logo), __('validation.attributes.backend.services.service.logo'))->style('width:100px;height:100px;')->id('preview') }}
+                        {{ html()->img($service->logo_url, __('validation.attributes.backend.services.service.logo'))->style('width:100px;height:100px;')->id('preview') }}
                     </div>
                 </div><!--col-->
             </div><!--form-group-->

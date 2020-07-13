@@ -24,10 +24,11 @@ class ServiceRepository
 {
     /**
      * @param array $data
+     * @param null $logo
      * @return mixed
      * @throws \Throwable
      */
-    public function create(array $data, $logo)
+    public function create(array $data, $logo = null)
     {
         return \DB::transaction(function () use ($data, $logo) {
             

@@ -34,6 +34,7 @@ class CompanyRepository
         $company = (new Company())->fill($data);
         
         $company->direct_polling = request()->has('direct_polling') ? 1 : 0;
+        $company->is_merchant = request()->has('is_merchant') ? 1 : 0;
 
         // create account for the company
         $account = new Account();
@@ -120,6 +121,7 @@ class CompanyRepository
     public function update(Company $company, $data, $logo = null)
     {
         $company->direct_polling = request()->has('direct_polling') ? 1 : 0;
+        $company->is_merchant = request()->has('is_merchant') ? 1 : 0;
         
         $company->fill($data);
 

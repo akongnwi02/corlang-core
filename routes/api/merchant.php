@@ -13,14 +13,23 @@ Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant'], function () {
         ->middleware('auth.basic:,username');
     
         
-    Route::group(['middleware' => ['jwt.auth', 'active.confirmed'], 'namespace' => 'VersionOne', 'prefix' => 'v1'], function () {
-        Route::post('order', [OrderController::class, 'order']);
-        Route::get('order/{external_id}', [OrderController::class, 'show']);
+    Route::group(['namespace' => 'VersionOne', 'prefix' => 'v1'], function () {
+        
+        // protected routes
+        Route::group(['middleware' => ['jwt.auth', 'active.confirmed']], function () {
+            Route::post('order', [OrderController::class, 'order']);
+            Route::get('order/{external_id}', [OrderController::class, 'show']);
+            
+        });
+        // public routes
+        Route::get('order/{order}/link', [OrderController::class, 'link']);
+    
     });
+    
+    
+    Route::group(['namespace' => 'VersionTwo', 'prefix' => 'v2'], function () {
 
-//    Route::group(['namespace' => 'VersionTwo', 'prefix' => 'v2'], function () {
-//
-//    });
+    });
 
 
 });

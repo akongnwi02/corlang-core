@@ -33,7 +33,7 @@
                                 <th>@lang('labels.backend.companies.company.table.city')</th>
                                 <th>@lang('labels.backend.companies.company.table.state')</th>
                                 <th>@lang('labels.backend.companies.company.table.country')</th>
-                                <th>@lang('labels.backend.companies.company.table.type')</th>
+                                <th>@lang('labels.backend.companies.company.table.merchant')</th>
                                 <th>@lang('labels.backend.companies.company.table.active')</th>
                                 <th>@lang('labels.backend.access.users.table.last_updated')</th>
                                 <th>@lang('labels.general.actions')</th>
@@ -42,13 +42,14 @@
                             <tbody>
                             @foreach($companies as $company)
                                 <tr>
-                                    <td>{{ $company->name }}</td>
+                                    <td>{!! $company->logo_label !!} {{ $company->name }}</td>
                                     <td>{{ $company->phone }}</td>
                                     <td><address>{{ $company->address }}</address></td>
                                     <td>{{ $company->city }}</td>
                                     <td>{{ $company->state }}</td>
                                     <td>{{ __($company->country->name) }}</td>
-                                    <td>{{ __($company->type->name) }}</td>
+                                    {{--<td>{{ __($company->type->name) }}</td>--}}
+                                    <td>{!! $company->merchant_label !!}</td>
                                     <td>{!! $company->active_label !!}</td>
                                     <td>{{ $company->updated_at->diffForHumans() }}</td>
                                     <td>{!! $company->action_buttons  !!}</td>

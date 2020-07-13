@@ -1075,6 +1075,170 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/components/merchant/Checkout.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_Services__ = __webpack_require__("./resources/js/frontend/components/services/Services.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_Services___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__services_Services__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "Checkout",
+    components: { Services: __WEBPACK_IMPORTED_MODULE_0__services_Services___default.a },
+    props: ['order', 'methods']
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/components/merchant/OrderSummary.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "OrderSummary",
+    props: ['order'],
+    methods: {
+        currencyFormat: function currencyFormat(amount) {
+            return __WEBPACK_IMPORTED_MODULE_0__helpers_currency__["a" /* currency */].format(amount, this.order.currency_code);
+        }
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/components/merchant/ShopDetails.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "ShopDetails",
+    props: ['order']
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/components/mobile-money/QuoteModal.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2367,6 +2531,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             page: 'purchase'
         };
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/layouts/Merchant.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_local_ChangeLanguage__ = __webpack_require__("./resources/js/frontend/mixins/local/ChangeLanguage.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_merchant_ShopDetails__ = __webpack_require__("./resources/js/frontend/components/merchant/ShopDetails.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_merchant_ShopDetails___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_merchant_ShopDetails__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_merchant_Checkout__ = __webpack_require__("./resources/js/frontend/components/merchant/Checkout.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_merchant_Checkout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_merchant_Checkout__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_merchant_OrderSummary__ = __webpack_require__("./resources/js/frontend/components/merchant/OrderSummary.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_merchant_OrderSummary___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_merchant_OrderSummary__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "Merchant",
+    props: ['order', 'methods'],
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_local_ChangeLanguage__["a" /* ChangeLanguage */]],
+    components: {
+        OrderSummary: __WEBPACK_IMPORTED_MODULE_3__components_merchant_OrderSummary___default.a,
+        Checkout: __WEBPACK_IMPORTED_MODULE_2__components_merchant_Checkout___default.a,
+        ShopDetails: __WEBPACK_IMPORTED_MODULE_1__components_merchant_ShopDetails___default.a
     }
 });
 
@@ -19720,6 +19929,36 @@ exports.push([module.i, "\n.loading {\n    position: fixed;\n    height: 2em;\n 
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1a02b3df\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/merchant/ShopDetails.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1b63fefd\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/layouts/Merchant.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.shop[data-v-1b63fefd] {\n    font-size: 10px\n}\n.space[data-v-1b63fefd] {\n    letter-spacing: 0.8px !important\n}\n.second a[data-v-1b63fefd]:hover {\n    color: rgb(92, 92, 92)\n}\n.active-2[data-v-1b63fefd] {\n    color: rgb(92, 92, 92)\n}\n.breadcrumb>li+li[data-v-1b63fefd]:before {\n    content: \"\" !important\n}\n.breadcrumb[data-v-1b63fefd] {\n    padding: 0px;\n    font-size: 10px;\n    color: #aaa !important\n}\n.first[data-v-1b63fefd] {\n    background-color: white\n}\na[data-v-1b63fefd] {\n    text-decoration: none !important;\n    color: #aaa\n}\n.btn-lg[data-v-1b63fefd],\n.form-control-sm[data-v-1b63fefd]:focus,\n.form-control-sm[data-v-1b63fefd]:active,\na[data-v-1b63fefd]:focus,\na[data-v-1b63fefd]:active {\n    outline: none !important;\n    -webkit-box-shadow: none !important;\n            box-shadow: none !important\n}\n.form-control-sm[data-v-1b63fefd]:focus {\n    border: 1.5px solid #4bb8a9\n}\n.btn-group-lg>.btn[data-v-1b63fefd],\n.btn-lg[data-v-1b63fefd] {\n    padding: .5rem 0.1rem;\n    font-size: 1rem;\n    border-radius: 0;\n    color: white !important;\n    background-color: #4bb8a9;\n    height: 2.8rem !important;\n    border-radius: 0.2rem !important\n}\n.btn-group-lg>.btn[data-v-1b63fefd]:hover,\n.btn-lg[data-v-1b63fefd]:hover {\n    background-color: #26A69A\n}\n.btn-outline-primary[data-v-1b63fefd] {\n    background-color: #fff !important;\n    color: #4bb8a9 !important;\n    border-radius: 0.2rem !important;\n    border: 1px solid #4bb8a9\n}\n.btn-outline-primary[data-v-1b63fefd]:hover {\n    background-color: #4bb8a9 !important;\n    color: #fff !important;\n    border: 1px solid #4bb8a9\n}\n.card-2[data-v-1b63fefd] {\n    margin-top: 40px !important\n}\n.card-header[data-v-1b63fefd] {\n    background-color: #fff;\n    border-bottom: 0px solid #aaaa !important\n}\np[data-v-1b63fefd] {\n    font-size: 13px\n}\n.small[data-v-1b63fefd] {\n    font-size: 9px !important\n}\n.form-control-sm[data-v-1b63fefd] {\n    height: calc(2.2em + .5rem + 2px);\n    font-size: .875rem;\n    line-height: 1.5;\n    border-radius: 0\n}\n.cursor-pointer[data-v-1b63fefd] {\n    cursor: pointer\n}\n.boxed[data-v-1b63fefd] {\n    padding: 0px 8px 0 8px;\n    background-color: #4bb8a9;\n    color: white\n}\n.boxed-1[data-v-1b63fefd] {\n    padding: 0px 8px 0 8px;\n    color: black !important;\n    border: 1px solid #aaaa\n}\n.bell[data-v-1b63fefd] {\n    opacity: 0.5;\n    cursor: pointer\n}\n@media (max-width: 767px) {\n.breadcrumb-item+.breadcrumb-item[data-v-1b63fefd] {\n        padding-left: 0\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1cf909fa\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/pages/Account.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19840,6 +20079,21 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5bb6cd95\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/merchant/OrderSummary.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e23f78a\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/account/PayoutModal.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19894,6 +20148,21 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-effcec3a\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/merchant/Checkout.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -33152,6 +33421,102 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1a02b3df\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/components/merchant/ShopDetails.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "row p-2 mt-3 justify-content-between mx-sm-2" },
+    [
+      _c("div", { staticClass: "col" }, [
+        _c("p", { staticClass: "text-muted space mb-0 shop" }, [
+          _vm._v(" " + _vm._s(_vm.$t("dashboard.merchant.shop")) + ": "),
+          _c("strong", [_vm._v(_vm._s(_vm.order.company))])
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-muted space mb-0 shop" }, [
+          _vm._v(_vm._s(_vm.$t("dashboard.merchant.address")) + ": "),
+          _c("strong", [_vm._v(_vm._s(_vm.order.company_address))])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "row justify-content-start " }, [
+          _c("div", { staticClass: "col" }, [
+            _c("a", { attrs: { href: _vm.order.company_website } }, [
+              _c("img", {
+                staticClass: "irc_mi img-fluid cursor-pointer ",
+                attrs: {
+                  src: _vm.order.company_logo,
+                  width: "70",
+                  height: "70",
+                  alt: _vm.order.company
+                }
+              })
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1a02b3df", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1b63fefd\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/layouts/Merchant.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container-fluid" }, [
+    _c("div", { staticClass: "row justify-content-center " }, [
+      _c(
+        "div",
+        { staticClass: "col-xl-10" },
+        [_c("shop-details", { attrs: { order: _vm.order } })],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row justify-content-around" },
+      [
+        _c("checkout", { attrs: { order: _vm.order, methods: _vm.methods } }),
+        _vm._v(" "),
+        _c("order-summary", { attrs: { order: _vm.order } })
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1b63fefd", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1cf909fa\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/pages/Account.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35034,6 +35399,168 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5bb6cd95\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/components/merchant/OrderSummary.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-md-5" }, [
+    _c("div", { staticClass: "card border-0 " }, [
+      _c("div", { staticClass: "card-header card-2" }, [
+        _c("p", { staticClass: "card-text text-muted mt-md-4 mb-2 space" }, [
+          _vm._v(_vm._s(_vm.$t("dashboard.merchant.order.your_order")))
+        ]),
+        _vm._v(" "),
+        _c("hr", { staticClass: "my-2" })
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body pt-0" },
+        [
+          _c("div", { staticClass: "row justify-content-between small" }, [
+            _c("div", [
+              _vm.order.customer && _vm.order.customer.name
+                ? _c("div", [_vm._v(_vm._s(_vm.order.customer.name))])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.order.customer && _vm.order.customer.address
+                ? _c("div", [_vm._v(_vm._s(_vm.order.customer.address))])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.order.customer && _vm.order.customer.phone
+                ? _c("div", [_vm._v(_vm._s(_vm.order.customer.phone))])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.order.customer && _vm.order.customer.email
+                ? _c("div", [_vm._v(_vm._s(_vm.order.customer.email))])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("hr", { staticClass: "my-2" }),
+          _vm._v(" "),
+          _vm._l(_vm.order.items, function(item) {
+            return _c("div", { staticClass: "row justify-content-between" }, [
+              _c("div", { staticClass: "col-auto col-md-7" }, [
+                _c("div", { staticClass: "media flex-column flex-sm-row" }, [
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("img", {
+                    staticClass: "img-fluid",
+                    attrs: {
+                      src: item.logo_url,
+                      width: "62",
+                      height: "62",
+                      alt: item.code
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "media-body my-auto" }, [
+                    _c("div", { staticClass: "row " }, [
+                      _c("div", { staticClass: "col-auto" }, [
+                        _c("p", { staticClass: "mb-0" }, [
+                          _c("b", [_vm._v(_vm._s(item.name))])
+                        ]),
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v(_vm._s(item.description))
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: " pl-0 flex-sm-col col-auto my-auto" }, [
+                _c("p", { staticClass: "boxed-1" }, [
+                  _vm._v(_vm._s(_vm.currencyFormat(item.unit_cost)))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: " pl-0 flex-sm-col col-auto my-auto" }, [
+                _c("p", { staticClass: "boxed-1" }, [
+                  _vm._v(_vm._s(item.quantity))
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: " pl-0 flex-sm-col col-auto my-auto " },
+                [
+                  _c("p", [
+                    _c("b", [
+                      _vm._v(_vm._s(_vm.currencyFormat(item.sub_total)))
+                    ])
+                  ])
+                ]
+              )
+            ])
+          }),
+          _vm._v(" "),
+          _c("hr", { staticClass: "my-2" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "row " }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "row justify-content-between" }, [
+                _c("div", { staticClass: "col" }, [
+                  _c("p", { staticClass: "mb-1" }, [
+                    _c("b", [
+                      _vm._v(
+                        _vm._s(_vm.$t("dashboard.merchant.order.payment_fee"))
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex-sm-col col-auto" }, [
+                  _c("p", { staticClass: "mb-1" }, [
+                    _c("b", [_vm._v(_vm._s(_vm.currencyFormat(0.0)))])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row justify-content-between" }, [
+                _c("div", { staticClass: "col-4" }, [
+                  _c("p", [
+                    _c("b", [
+                      _vm._v(_vm._s(_vm.$t("dashboard.merchant.order.total")))
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex-sm-col col-auto" }, [
+                  _c("p", { staticClass: "mb-1" }, [
+                    _c("b", [
+                      _vm._v(_vm._s(_vm.currencyFormat(_vm.order.total_amount)))
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("hr", { staticClass: "my-0" })
+            ])
+          ])
+        ],
+        2
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5bb6cd95", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5e23f78a\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/components/account/PayoutModal.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36516,6 +37043,172 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-dada6bca", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-effcec3a\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/components/merchant/Checkout.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-md-5" }, [
+    _c("div", { staticClass: "card border-0" }, [
+      _c("div", { staticClass: "card-header pb-0" }, [
+        _c("p", { staticClass: "card-text text-muted mt-4 space" }, [
+          _vm._v(_vm._s(_vm.$t("dashboard.merchant.payment.method")))
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "row mt-4" }, [
+          _c(
+            "div",
+            { staticClass: "col" },
+            [
+              _c("p", { staticClass: "text-muted mb-2" }),
+              _vm._v(" "),
+              _c("Services", { attrs: { services: _vm.methods } }),
+              _vm._v(" "),
+              _c("hr", { staticClass: "mt-0" })
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _vm._m(3)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "label",
+        { staticClass: "small text-muted mb-1", attrs: { for: "NAME" } },
+        [_vm._v("NAME ON CARD")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control form-control-sm",
+        attrs: {
+          type: "text",
+          name: "NAME",
+          id: "NAME",
+          "aria-describedby": "helpId",
+          placeholder: "BBBootstrap Team"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "label",
+        { staticClass: "small text-muted mb-1", attrs: { for: "NAME" } },
+        [_vm._v("CARD NUMBER")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control form-control-sm",
+        attrs: {
+          type: "text",
+          name: "NAME",
+          id: "NAME",
+          "aria-describedby": "helpId",
+          placeholder: "4534 5555 5555 5555"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row no-gutters" }, [
+      _c("div", { staticClass: "col-sm-6 pr-sm-2" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            { staticClass: "small text-muted mb-1", attrs: { for: "NAME" } },
+            [_vm._v("VALID THROUGH")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control form-control-sm",
+            attrs: {
+              type: "text",
+              name: "NAME",
+              id: "NAME",
+              "aria-describedby": "helpId",
+              placeholder: "06/21"
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            { staticClass: "small text-muted mb-1", attrs: { for: "NAME" } },
+            [_vm._v("CVC CODE")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control form-control-sm",
+            attrs: {
+              type: "text",
+              name: "NAME",
+              id: "NAME",
+              "aria-describedby": "helpId",
+              placeholder: "183"
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mb-5 mt-4 " }, [
+      _c("div", { staticClass: "col-md-7 col-lg-6 mx-auto" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-block btn-outline-primary btn-lg",
+            attrs: { type: "button" }
+          },
+          [_vm._v("ADD GIFT CODE")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-effcec3a", module.exports)
   }
 }
 
@@ -39497,6 +40190,60 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1a02b3df\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/merchant/ShopDetails.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1a02b3df\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/merchant/ShopDetails.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("8ae10564", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1a02b3df\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ShopDetails.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1a02b3df\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ShopDetails.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1b63fefd\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/layouts/Merchant.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1b63fefd\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/layouts/Merchant.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("3f378e4b", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1b63fefd\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Merchant.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1b63fefd\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Merchant.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1cf909fa\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/pages/Account.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39713,6 +40460,33 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5bb6cd95\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/merchant/OrderSummary.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5bb6cd95\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/merchant/OrderSummary.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("614a14ef", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5bb6cd95\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./OrderSummary.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5bb6cd95\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./OrderSummary.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e23f78a\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/account/PayoutModal.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39811,6 +40585,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cc6190f4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AirtimeQuoteModal.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cc6190f4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AirtimeQuoteModal.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-effcec3a\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/merchant/Checkout.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-effcec3a\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/merchant/Checkout.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("496fb17a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-effcec3a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Checkout.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-effcec3a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Checkout.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -53375,6 +54176,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_5_buef
    Register the main component
  */
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('layout', __webpack_require__("./resources/js/frontend/layouts/Layout.vue"));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('merchant', __webpack_require__("./resources/js/frontend/layouts/Merchant.vue"));
 
 /*
   Create a new Vue instance and mount the app element.
@@ -53825,6 +54627,162 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-5ab31bde", Component.options)
   } else {
     hotAPI.reload("data-v-5ab31bde", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/frontend/components/merchant/Checkout.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-effcec3a\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/merchant/Checkout.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/components/merchant/Checkout.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-effcec3a\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/components/merchant/Checkout.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-effcec3a"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/frontend/components/merchant/Checkout.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-effcec3a", Component.options)
+  } else {
+    hotAPI.reload("data-v-effcec3a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/frontend/components/merchant/OrderSummary.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5bb6cd95\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/merchant/OrderSummary.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/components/merchant/OrderSummary.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5bb6cd95\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/components/merchant/OrderSummary.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-5bb6cd95"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/frontend/components/merchant/OrderSummary.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5bb6cd95", Component.options)
+  } else {
+    hotAPI.reload("data-v-5bb6cd95", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/frontend/components/merchant/ShopDetails.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1a02b3df\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/merchant/ShopDetails.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/components/merchant/ShopDetails.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1a02b3df\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/components/merchant/ShopDetails.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-1a02b3df"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/frontend/components/merchant/ShopDetails.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1a02b3df", Component.options)
+  } else {
+    hotAPI.reload("data-v-1a02b3df", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -54381,10 +55339,62 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/js/frontend/layouts/Merchant.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1b63fefd\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/layouts/Merchant.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/layouts/Merchant.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1b63fefd\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/layouts/Merchant.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-1b63fefd"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/frontend/layouts/Merchant.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1b63fefd", Component.options)
+  } else {
+    hotAPI.reload("data-v-1b63fefd", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/js/frontend/locales/en.json":
 /***/ (function(module, exports) {
 
-module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Purchase","transactions":"Transactions","account":"Account"},"tabs":{"titles":{"prepaid":"Prepaid Bills","postpaid":"Postpaid Bills","momo":"Mobile Money","airtime":"Airtime Recharge"},"content":{"electricity":{"title":"Purchase Electricity","prepaid":"Prepaid","postpaid":"Postpaid","vendor":"Vendor","meter_code":"Meter Code","bill_number":"Bill Number","bill_due_date":"Bill Due Date","asset":"Units","contract_number":"Contract Number","quote":{"title":"Meter Details"}},"mobile_money":{"source_account":"Account Identifier","name":"Account Holder","cashin":"Cash In","cashout":"Cash Out"},"airtime":{"airtime":"Airtime","data":"Data","plan":"Select Bundle"}}},"transactions":{"table":{"entriesTitle":"Recent transactions","showingText":"Showing","noFoundMessage":"No matching transaction records found","header":{"code":"Reference","items":"Item","destination":"Service Number","amount":"Amount","fee":"Fee","service":"Service","total":"Total","commission":"Commission","paymentmethod":"Payment Method","status":"Status","asset":"Asset","completed_at":"Completed At"},"total":"Total","status":{"created":"Created","pending":"Pending","processing":"In Processing","success":"Successful","failed":"Failed","reversed":"Reversed","cancelled":"Cancelled","errored":"Error","verification":"In Verification"}},"transaction":{"modal":{"code":"Reference","destination":"Service Number","agent":"Agent","company":"Company","amount":"Amount","fee":"Fee","service":"Service","asset":"Asset","items":"Items","status":"Status","completed_at":"Completed At","total":"Total"}}},"account":{"account_number":"Account Number","account_number_help":"Your deposit account number.","account_balance":"Account Balance","account_balance_help":"Your current account balance.","commission_balance":"Commission Balance","commission_balance_help":"Your commission balance","payout_method":"Payout method","topup_method":"Top up Method","name":"Account Name","request_payout":"Request Payout","topup_account":"Top up Account","table":{"entriesTitle":"Recent Requests","header":{"code":"Ref","amount":"Amount","method":"Payout Method","account_number":"Account Number","account_name":"Account Name","user":"Requested By","date":"Requested At","status":"Status","decision_at":"Decision At"},"status":{"pending":"Pending","approved":"Approved","rejected":"Rejected","cancelled":"Cancelled"},"actions":{"cancel":"Cancel","action":"Payout action"}}},"general":{"actions":"Actions","close":"Close","confirm":"Confirm","next":"Next","loading":"Loading","refresh":"Refresh","search":"Search","summary":"Order Details","amount":"Amount","otp":"OTP","pin":"PIN","method":"Payment Method","account":"Account Number","reference":"Reference","pincode":"Pin Code","phone":"Phone Number","fee":"Fee","destination":"Destination identifier","total":"Total","logo":"Logo","description":"Payment Description","customer":{"name":"Customer Name","address":"Address"}}},"hover":{"view":"View","execute":"Execute","topup":"Top Up Your Account","payout":"Request Commission Payout","delete":"Delete"}},"validations":{"purchase":{"electricity":{"meter_code":"Please enter the meter code in the required format {format}","bill_number":"Please enter a bill number in the valid format {format}"},"mobile_money":{"account_number":"Please enter an account number in the valid format {format}"},"airtime":{"plan":"Please select a bundle from the list","phone":"Please enter  valid phone number in the required format {format}"},"reference":"The reference is invalid","pincode":"The pin code is invalid","otp":"The OTP field is invalid","phone":"The phone number is invalid","account":"The payment account number is invalid","amount":"Please enter a valid amount","min_amount":"The minimum amount required for this service is {min_amount}","max_amount":"The maximum amount required for this service is {max_amount}","step_amount":"The amount required for this service must be multiples of {step_amount}","paymentmethod":"Select a payment method from the list","empty_paymentmethod":"No payment method is currently available for you","service":"Please select a service from the list","empty_service":"No services available for this category at the moment"},"account":{"insufficient_balance":"Your balance is insufficient","empty_payout_method":"Please select a payout method","topup_account_not_configured":"You have not set an account for this topup method","account_number":"Please configure account identifier for this top up method under your profile setting","invalid_amount":"Please enter a valid amount","account_name":"Please enter a valid name"},"general":{"maintenance":"We're currently maintaining our system. Please check back later","network":"Network error. Please check your internet connection","unexpected":"An unexpected error occurred"}},"notifications":{"successful":"Transaction successful","transactions_loaded":"Transactions updated successfully","payouts_loaded":"Recent payouts updated successfully","failed":"Transaction failed","late_bill":"Warning! Bill is late"},"exceptions":{"10000":"The service you requested is not available","10001":"The payment method you requested is not available","10002":"The request sent contains some validation errors","10003":"You have been logged out. Login to continue.","10004":"You are not authorized to make this request","10006":"The path requested was not found","10007":"You are making too many requests to the server","10008":"Transaction could not be saved to cache","10009":"There was an error creating this transaction","10010":"This transaction was not found. The transaction may have been processed already or expired","10011":"There was a problem connecting to one of our servers","10012":"There was a problem calculating the fee for this transaction. A fee has not been set for this amount","10013":"The service category is currently unavailable","10014":"An invalid key was provided with the request","10015":"The language selected is currently not supported","10016":"The accept header parameter does not contain application/json","10018":"This transaction could not be found","10019":"There was a problem connecting to the service provider","10020":"The meter code does not exist","10021":"There was a problem sending a callback request","10022":"This service does not exist yet","10023":"Your account balance is insufficient","10024":"You are not authorized to perform this transaction. Your account has been limited","10025":"Your session has expired. Please refresh your browser","10026":"The payment method is not active","10027":"There was an error requesting the payout. Please try again later","10028":"Your commission balance is insufficient","10029":"There was an error cancelling the payout. Please try again later","10030":"Warning! You have entered an incorrect pin code","10031":"The meter with the provided has been deactivated","10032":"The meter code provided is invalid","10033":"The transaction status cannot be updated","10034":"The amount provided is less than the minimum amount required for this service","10035":"The customer cannot perform this transaction with service provider","10036":"The customer is not found","10037":"Insufficient funds in customer's wallet","10038":"Transaction canceled by customer","10039":"The customer has not authorized the transaction","10040":"The service is not properly configured","10041":"Customer has reached transaction limit","10042":"You are not allowed to use this service at the moment","10043":"No bill was found","10044":"The amount provided is more than the maximum amount required for this service","10045":"The service number provided is not in the required format","10046":"There is a commission distribution error with this service. Please contact support","10047":"The amount is not a multiple of the step amount","00000":"An unexpected error occurred"}}
+module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Purchase","transactions":"Transactions","account":"Account"},"tabs":{"titles":{"prepaid":"Prepaid Bills","postpaid":"Postpaid Bills","momo":"Mobile Money","airtime":"Airtime Recharge"},"content":{"electricity":{"title":"Purchase Electricity","prepaid":"Prepaid","postpaid":"Postpaid","vendor":"Vendor","meter_code":"Meter Code","bill_number":"Bill Number","bill_due_date":"Bill Due Date","asset":"Units","contract_number":"Contract Number","quote":{"title":"Meter Details"}},"mobile_money":{"source_account":"Account Identifier","name":"Account Holder","cashin":"Cash In","cashout":"Cash Out"},"airtime":{"airtime":"Airtime","data":"Data","plan":"Select Bundle"}}},"transactions":{"table":{"entriesTitle":"Recent transactions","showingText":"Showing","noFoundMessage":"No matching transaction records found","header":{"code":"Reference","items":"Item","destination":"Service Number","amount":"Amount","fee":"Fee","service":"Service","total":"Total","commission":"Commission","paymentmethod":"Payment Method","status":"Status","asset":"Asset","completed_at":"Completed At"},"total":"Total","status":{"created":"Created","pending":"Pending","processing":"In Processing","success":"Successful","failed":"Failed","reversed":"Reversed","cancelled":"Cancelled","errored":"Error","verification":"In Verification"}},"transaction":{"modal":{"code":"Reference","destination":"Service Number","agent":"Agent","company":"Company","amount":"Amount","fee":"Fee","service":"Service","asset":"Asset","items":"Items","status":"Status","completed_at":"Completed At","total":"Total"}}},"account":{"account_number":"Account Number","account_number_help":"Your deposit account number.","account_balance":"Account Balance","account_balance_help":"Your current account balance.","commission_balance":"Commission Balance","commission_balance_help":"Your commission balance","payout_method":"Payout method","topup_method":"Top up Method","name":"Account Name","request_payout":"Request Payout","topup_account":"Top up Account","table":{"entriesTitle":"Recent Requests","header":{"code":"Ref","amount":"Amount","method":"Payout Method","account_number":"Account Number","account_name":"Account Name","user":"Requested By","date":"Requested At","status":"Status","decision_at":"Decision At"},"status":{"pending":"Pending","approved":"Approved","rejected":"Rejected","cancelled":"Cancelled"},"actions":{"cancel":"Cancel","action":"Payout action"}}},"general":{"actions":"Actions","close":"Close","confirm":"Confirm","next":"Next","loading":"Loading","refresh":"Refresh","search":"Search","summary":"Order Details","amount":"Amount","otp":"OTP","pin":"PIN","method":"Payment Method","account":"Account Number","reference":"Reference","pincode":"Pin Code","phone":"Phone Number","fee":"Fee","destination":"Destination identifier","total":"Total","logo":"Logo","description":"Payment Description","customer":{"name":"Customer Name","address":"Address"}}},"hover":{"view":"View","execute":"Execute","topup":"Top Up Your Account","payout":"Request Commission Payout","delete":"Delete"},"merchant":{"title":"Secure Checkout","shop":"Shop","address":"Address","order":{"your_order":"YOUR ORDER","subtotal":"Subtotal","payment_fee":"Payment Fee","total":"Total"},"payment":{"method":"PAYMENT METHOD","details":"PAYMENT DETAILS"}}},"validations":{"purchase":{"electricity":{"meter_code":"Please enter the meter code in the required format {format}","bill_number":"Please enter a bill number in the valid format {format}"},"mobile_money":{"account_number":"Please enter an account number in the valid format {format}"},"airtime":{"plan":"Please select a bundle from the list","phone":"Please enter  valid phone number in the required format {format}"},"reference":"The reference is invalid","pincode":"The pin code is invalid","otp":"The OTP field is invalid","phone":"The phone number is invalid","account":"The payment account number is invalid","amount":"Please enter a valid amount","min_amount":"The minimum amount required for this service is {min_amount}","max_amount":"The maximum amount required for this service is {max_amount}","step_amount":"The amount required for this service must be multiples of {step_amount}","paymentmethod":"Select a payment method from the list","empty_paymentmethod":"No payment method is currently available for you","service":"Please select a service from the list","empty_service":"No services available for this category at the moment"},"account":{"insufficient_balance":"Your balance is insufficient","empty_payout_method":"Please select a payout method","topup_account_not_configured":"You have not set an account for this topup method","account_number":"Please configure account identifier for this top up method under your profile setting","invalid_amount":"Please enter a valid amount","account_name":"Please enter a valid name"},"general":{"maintenance":"We're currently maintaining our system. Please check back later","network":"Network error. Please check your internet connection","unexpected":"An unexpected error occurred"}},"notifications":{"successful":"Transaction successful","transactions_loaded":"Transactions updated successfully","payouts_loaded":"Recent payouts updated successfully","failed":"Transaction failed","late_bill":"Warning! Bill is late"},"exceptions":{"10000":"The service you requested is not available","10001":"The payment method you requested is not available","10002":"The request sent contains some validation errors","10003":"You have been logged out. Login to continue.","10004":"You are not authorized to make this request","10006":"The path requested was not found","10007":"You are making too many requests to the server","10008":"Transaction could not be saved to cache","10009":"There was an error creating this transaction","10010":"This transaction was not found. The transaction may have been processed already or expired","10011":"There was a problem connecting to one of our servers","10012":"There was a problem calculating the fee for this transaction. A fee has not been set for this amount","10013":"The service category is currently unavailable","10014":"An invalid key was provided with the request","10015":"The language selected is currently not supported","10016":"The accept header parameter does not contain application/json","10018":"This transaction could not be found","10019":"There was a problem connecting to the service provider","10020":"The meter code does not exist","10021":"There was a problem sending a callback request","10022":"This service does not exist yet","10023":"Your account balance is insufficient","10024":"You are not authorized to perform this transaction. Your account has been limited","10025":"Your session has expired. Please refresh your browser","10026":"The payment method is not active","10027":"There was an error requesting the payout. Please try again later","10028":"Your commission balance is insufficient","10029":"There was an error cancelling the payout. Please try again later","10030":"Warning! You have entered an incorrect pin code","10031":"The meter with the provided has been deactivated","10032":"The meter code provided is invalid","10033":"The transaction status cannot be updated","10034":"The amount provided is less than the minimum amount required for this service","10035":"The customer cannot perform this transaction with service provider","10036":"The customer is not found","10037":"Insufficient funds in customer's wallet","10038":"Transaction canceled by customer","10039":"The customer has not authorized the transaction","10040":"The service is not properly configured","10041":"Customer has reached transaction limit","10042":"You are not allowed to use this service at the moment","10043":"No bill was found","10044":"The amount provided is more than the maximum amount required for this service","10045":"The service number provided is not in the required format","10046":"There is a commission distribution error with this service. Please contact support","10047":"The amount is not a multiple of the step amount","00000":"An unexpected error occurred"}}
 
 /***/ }),
 

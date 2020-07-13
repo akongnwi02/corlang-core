@@ -30,7 +30,6 @@ class OrderRepository
                 'total_amount'     => $data['total_amount'],
                 'currency_code'    => $data['currency_code'],
                 'description'      => $data['description'],
-                'language'         => $data['language'],
                 'notification_url' => $data['notification_url'],
                 'return_url'       => $data['return_url'],
                 'company_id'       => @$user->company->uuid,

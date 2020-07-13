@@ -131,6 +131,7 @@ return [
                     'name'         => 'Company Name',
                     'address'      => 'Address',
                     'country'      => 'Country',
+                    'merchant'     => 'Merchant',
                     'state'        => 'State',
                     'city'         => 'City',
                     'phone'        => 'Company Phone',

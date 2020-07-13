@@ -17,7 +17,6 @@ use App\Repositories\Backend\Company\Company\CompanyRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
 use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
-use DemeterChain\C;
 
 class PaymentMethodController extends Controller
 {
@@ -83,7 +82,9 @@ class PaymentMethodController extends Controller
      */
     public function update(UpdatePaymentMethodRequest $request, PaymentMethod $method, PaymentMethodRepository $paymentMethodRepository)
     {
-        $paymentMethodRepository->update($method, $request->input());
+        $logo = $request->has('logo') ? $request->file('logo') : null;
+    
+        $paymentMethodRepository->update($method, $request->input(), $logo);
         
         return redirect()->route('admin.services.method.index')
             ->withFlashSuccess(__('alerts.backend.services.method.updated'));
@@ -97,7 +98,9 @@ class PaymentMethodController extends Controller
      */
     public function store(StorePaymentMethodRequest $request, PaymentMethodRepository $paymentMethodRepository)
     {
-        $paymentMethodRepository->create($request->input());
+        $logo = $request->has('logo') ? $request->file('logo') : null;
+    
+        $paymentMethodRepository->create($request->input(), $logo);
     
         return redirect()->route('admin.services.method.index')
             ->withFlashSuccess(__('alerts.backend.services.method.created'));

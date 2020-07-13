@@ -161,6 +161,24 @@
             "topup": "Top Up Your Account",
             "payout": "Request Commission Payout",
             "delete": "Delete"
+        },
+        "merchant": {
+            "title": "Secure Checkout",
+            "shop": "Shop",
+            "address": "Address",
+            "order": {
+                "your_order": "YOUR ORDER",
+                "subtotal": "Subtotal",
+                "payment_fee": "Payment Fee",
+                "total": "Total"
+            },
+            "payment": {
+                "method": "PAYMENT METHOD",
+                "details": "PAYMENT DETAILS",
+                "checkout": "CHECKOUT",
+                "account_number": "Account Number"
+
+            }
         }
     },
     "validations": {

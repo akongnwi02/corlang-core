@@ -36,6 +36,24 @@ trait CompanyAttribute
         return '<span class="badge badge-danger">'.__('labels.general.no').'</span>';
     }
     
+    public function getMerchantLabelAttribute()
+    {
+        if ($this->is_merchant) {
+            return '<span class="badge badge-success">'.__('labels.general.yes').'</span>';
+        }
+        return '<span class="badge badge-danger">'.__('labels.general.no').'</span>';
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLogoLabelAttribute()
+    {
+        $url = $this->logo_url ?:  url('img/backend/brand/logo/logo-company-profile.png');
+        
+        return "<img class='navbar-brand-full img-fluid' src='$url' width='30' height='30' style='border-radius: 50%' alt='$this->name'>";
+    }
+    
     public function getFullLogoAttribute()
     {
         return $this->getCompanyLogo() ?: url('img/backend/brand/logo/logo-company-profile.png');
@@ -48,6 +66,7 @@ trait CompanyAttribute
         }
         return false;
     }
+    
     /**
      * @return string
      */

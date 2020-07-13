@@ -30,7 +30,6 @@ class CreateMerchantOrdersTable extends Migration
             $table->dateTime('completed_at')->nullable();
             $table->string('notification_url')->nullable();
             $table->string('return_url')->nullable();
-            $table->string('language')->nullable();
             $table->string('description')->nullable();
             
             $table->enum('status', [

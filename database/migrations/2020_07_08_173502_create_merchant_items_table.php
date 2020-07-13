@@ -20,6 +20,9 @@ class CreateMerchantItemsTable extends Migration
             $table->double('unit_cost')->nullable();
             $table->double('sub_total')->nullable();
             $table->string('code')->nullable();
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
+            $table->string('logo_url')->nullable();
             
             $table->timestamps();
             
