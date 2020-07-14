@@ -175,7 +175,7 @@
             "payment": {
                 "method": "PAYMENT METHOD",
                 "details": "PAYMENT DETAILS",
-                "checkout": "CHECKOUT",
+                "checkout": "PAY NOW",
                 "account_number": "Account Number",
                 "thank_you": "Thank you for trusting CorlaPay. We have sent a request to your payment provider.",
                 "return": "Return to Shop",

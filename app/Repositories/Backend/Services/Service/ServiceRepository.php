@@ -66,6 +66,11 @@ class ServiceRepository
         return $services;
     }
     
+    public function getMoneyWithDrawalServices()
+    {
+        return $this->getAllServices()->where('is_money_withdrawal', true);
+    }
+    
     /**
      * @param $service
      * @param $status

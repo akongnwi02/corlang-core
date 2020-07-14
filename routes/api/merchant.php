@@ -5,6 +5,7 @@
  */
 
 use App\Http\Controllers\Api\Merchant\AuthController;
+use App\Http\Controllers\Api\Merchant\CallbackController;
 use App\Http\Controllers\Api\Merchant\PayController;
 use App\Http\Controllers\Api\Merchant\V1\OrderController;
 
@@ -14,6 +15,7 @@ Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant'], function () {
     Route::post('token', [AuthController::class, 'auth'])
         ->middleware('auth.basic:,username');
     Route::patch('pay/{order}', [PayController::class, 'pay']);
+    Route::patch('callback/{order}', [CallbackController::class, 'callback']);
     
     // API VERSION 1
     Route::group(['namespace' => 'VersionOne', 'prefix' => 'v1'], function () {
@@ -28,7 +30,7 @@ Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant'], function () {
     
     
     Route::group(['namespace' => 'VersionTwo', 'prefix' => 'v2'], function () {
-
+    
     });
 
 

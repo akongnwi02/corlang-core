@@ -13,6 +13,7 @@ use App\Models\Auth\User;
 use App\Models\Company\Company;
 use App\Models\Merchant\MerchantItem;
 use App\Models\Service\PaymentMethod;
+use App\Models\Transaction\Transaction;
 
 trait MerchantOrderRelationship
 {
@@ -34,5 +35,10 @@ trait MerchantOrderRelationship
     public function payment_method()
     {
         return $this->belongsTo(PaymentMethod::class, 'paymentmethod_id', 'uuid');
+    }
+    
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'payment_transaction_id', 'uuid');
     }
 }

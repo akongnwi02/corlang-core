@@ -285,7 +285,7 @@ return [
                     'description_en'     => 'English Description',
                     'description_fr'     => 'French Description',
                     'customercommission' => 'Customer Service Charge',
-                    'providercommission' => 'Service Provider Fee',
+                    'providercommission' => 'Merchant Fee',
                     'service'            => 'Service',
                     'realtime'           => 'Realtime',
                     'logo' => 'Logo',

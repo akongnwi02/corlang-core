@@ -16,6 +16,7 @@ use App\Http\Requests\Api\Merchant\V1\ShowLinkRequest;
 use App\Http\Resources\Api\Merchant\V1\MerchantOrderResource;
 use App\Models\Merchant\MerchantOrder;
 use App\Repositories\Api\Merchant\V1\OrderRepository;
+use App\Repositories\Backend\Company\Company\CompanyRepository;
 use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 
 class OrderController extends Controller
@@ -34,10 +35,10 @@ class OrderController extends Controller
         return new MerchantOrderResource($order);
     }
     
-    public function link(ShowLinkRequest $request, MerchantOrder $order, PaymentMethodRepository $paymentMethodRepository)
+    public function link(ShowLinkRequest $request, MerchantOrder $order, CompanyRepository $companyRepository)
     {
         return view('frontend.merchant.dashboard')
             ->withOrder(new MerchantOrderResource($order))
-            ->withMethods($paymentMethodRepository->getPaymentMethods()->where('is_realtime', true)->get());
+            ->withMethods($companyRepository->getAvailablePaymentMethods($order->company)->where('is_realtime', true)->get());
     }
 }

@@ -185,7 +185,7 @@ return [
                                 'code'               => 'Code',
                                 'logo'               => 'Logo',
                                 'customercommission' => 'Customer Service Charge',
-                                'providercommission' => 'Provider Service Charge',
+                                'providercommission' => 'Merchant Fee',
                                 'total'              => 'method|methods'
                             ]
                         ]
@@ -277,7 +277,7 @@ return [
                     'service'            => 'Service',
                     'logo'               => 'Logo',
                     'customercommission' => 'Customer Service Charge',
-                    'providercommission' => 'Provider Service Charge',
+                    'providercommission' => 'Merchant Fee',
                     'total'              => 'payment method|payment methods',
                 ],
                 'tabs' => [

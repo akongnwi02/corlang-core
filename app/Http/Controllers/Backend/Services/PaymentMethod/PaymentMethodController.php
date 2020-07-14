@@ -40,7 +40,7 @@ class PaymentMethodController extends Controller
     public function create(CommissionRepository $commissionRepository, ServiceRepository $serviceRepository)
     {
         return view('backend.services.payment-method.create')
-            ->withServices($serviceRepository->getAllServices()
+            ->withServices($serviceRepository->getMoneyWithDrawalServices()
                 ->pluck('name', 'uuid')
                 ->toArray())
             ->withCommissions($commissionRepository->getAllCommissions()
@@ -65,7 +65,7 @@ class PaymentMethodController extends Controller
         return view('backend.services.payment-method.edit')
             ->withMethod($method)
             ->withCompanies($companyRepository->getCompaniesForCurrentUser()->get())
-            ->withServices($serviceRepository->getAllServices()
+            ->withServices($serviceRepository->getMoneyWithDrawalServices()
                 ->pluck('name', 'uuid')
                 ->toArray())
             ->withCommissions($commissionRepository->getAllCommissions()
