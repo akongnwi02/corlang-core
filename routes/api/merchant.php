@@ -22,6 +22,7 @@ Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant'], function () {
         // protected routes
         Route::group(['middleware' => ['jwt.auth', 'active.confirmed']], function () {
             Route::post('order', [OrderController::class, 'order']);
+            Route::get('order', [OrderController::class, 'index']);
             Route::get('order/{external_id}', [OrderController::class, 'show']);
             Route::delete('order/{external_id}', [OrderController::class, 'destroy']);
         });

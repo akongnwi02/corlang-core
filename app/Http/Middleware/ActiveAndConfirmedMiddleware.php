@@ -27,12 +27,18 @@ class ActiveAndConfirmedMiddleware
     
         if ($user) {
             if (! $user->isActiveAndConfirmed()) {
-        
                 auth()->logout();
-        
-                throw new ForbiddenException(BusinessErrorCodes::AUTHORIZATION_ERROR);
+                throw new ForbiddenException(BusinessErrorCodes::AUTHORIZATION_ERROR, 'Account is not active or confirmed');
             }
         }
+        
+        if ($user->company) {
+            if (! $user->company->is_active) {
+                auth()->logout();
+                throw new ForbiddenException(BusinessErrorCodes::AUTHORIZATION_ERROR, 'Company is not active');
+            }
+        }
+        
         return $next($request);
     }
 }

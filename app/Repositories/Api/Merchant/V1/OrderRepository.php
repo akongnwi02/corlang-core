@@ -14,6 +14,7 @@ use App\Exceptions\GeneralException;
 use App\Models\Merchant\MerchantItem;
 use App\Models\Merchant\MerchantOrder;
 use App\Services\Constants\BusinessErrorCodes;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class OrderRepository
 {
@@ -67,8 +68,19 @@ class OrderRepository
             })->firstOrFail();
         if ($order->status == config('business.transaction.status.created')) {
             return $order->delete();
+        } else {
+            throw new ForbiddenException(BusinessErrorCodes::TRANSACTION_DELETE_ERROR, "Order with status $order->status cannot be deleted");
         }
+    }
     
-        throw new ForbiddenException(BusinessErrorCodes::TRANSACTION_DELETE_ERROR, "Order with status $order->status cannot be deleted");
+    public function getAllOrders()
+    {
+        $orders = QueryBuilder::for(MerchantOrder::class);
+        
+        if (!auth()->user()->company->is_default) {
+            $orders->where('company_id', auth()->user()->company_id);
+        }
+        
+        return $orders;
     }
 }

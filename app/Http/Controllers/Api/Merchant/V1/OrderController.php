@@ -35,6 +35,15 @@ class OrderController extends Controller
         return new MerchantOrderResource($order);
     }
     
+    public function index(OrderRepository $orderRepository)
+    {
+        $orders = $orderRepository->getAllOrders()
+            ->paginate()
+            ->appends(request()->query());
+        
+        return MerchantOrderResource::collection($orders);
+    }
+    
     public function link(ShowLinkRequest $request, MerchantOrder $order, CompanyRepository $companyRepository)
     {
         return view('frontend.merchant.dashboard')
@@ -48,4 +57,5 @@ class OrderController extends Controller
         
         return response()->json([], 204);
     }
+    
 }
