@@ -83,6 +83,7 @@ class ProcessPurchaseJob extends Job
                 'transaction.code' => $this->transaction->code,
                 'destination'      => $this->transaction->destination,
                 'message'          => $this->transaction->message,
+                'service'          => $this->transaction->service_code,
                 'exception'        => $exception,
             ]);
             
@@ -105,6 +106,7 @@ class ProcessPurchaseJob extends Job
             'transaction.message'     => $this->transaction->message,
             'transaction.error'       => $this->transaction->error,
             'transaction.error_code'  => $this->transaction->error_code,
+            'service.code'            => $this->transaction->service_code,
             'exception'               => $exception,
         ]);
         
