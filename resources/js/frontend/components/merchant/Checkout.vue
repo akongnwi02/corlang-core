@@ -43,7 +43,7 @@
                     <!--</div>-->
                 <!--</div>-->
                 <div class="row mb-5 mt-4 ">
-                    <div class="col-md-7 col-lg-6 mx-auto"><button @click="triggerPayment" :disabled="triggerLoadStatus==1" type="button" class="btn btn-block btn-outline-primary btn-lg">{{$t('dashboard.merchant.payment.checkout')}}</button></div>
+                    <div class="col-md-7 col-lg-6 mx-auto"><button @click="triggerPayment" :disabled="triggerLoadStatus==1" type="button" class="btn btn-block btn-outline-primary btn-lg">{{$t('dashboard.merchant.payment.checkout') + ' ' + currencyFormat(order.total_amount)}}</button></div>
                 </div>
             </div>
         </div>
@@ -55,6 +55,7 @@
     import Services from "../services/Services";
     import Spinner from "../global/Spinner";
     import {helper} from "../../helpers/helpers";
+    import {currency} from "../../helpers/currency";
 
     export default {
         name: "Checkout",
@@ -117,6 +118,9 @@
                     return true;
                 }
                 return false;
+            },
+            currencyFormat(amount) {
+                return currency.format(amount, this.order.currency_code);
             }
         },
         watch: {

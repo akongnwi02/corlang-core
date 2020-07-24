@@ -9,6 +9,7 @@
 namespace App\Repositories\Api\Merchant\V1;
 
 
+use App\Exceptions\Api\ForbiddenException;
 use App\Exceptions\GeneralException;
 use App\Models\Merchant\MerchantItem;
 use App\Models\Merchant\MerchantOrder;
@@ -56,5 +57,18 @@ class OrderRepository
             ->when(! auth()->user()->company->is_default, function ($query) {
                 $query->where('company_id', auth()->user()->compny_id);
             })->firstOrFail();
+    }
+    
+    public function destroy($external_id)
+    {
+        $order = MerchantOrder::where('external_id', $external_id)
+            ->when(! auth()->user()->company->is_default, function ($query) {
+                $query->where('company_id', auth()->user()->compny_id);
+            })->firstOrFail();
+        if ($order->status == config('business.transaction.status.created')) {
+            return $order->delete();
+        }
+    
+        throw new ForbiddenException(BusinessErrorCodes::TRANSACTION_DELETE_ERROR, "Order with status $order->status cannot be deleted");
     }
 }

@@ -13,10 +13,14 @@ use App\Models\Traits\Methods\MerchantOrderMethod;
 use App\Models\Traits\Relationships\MerchantOrderRelationship;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Wildside\Userstamps\Userstamps;
 
 class MerchantOrder extends Model
 {
     use Uuid,
+        Userstamps,
+        SoftDeletes,
         MerchantOrderMethod,
         MerchantOrderRelationship;
     

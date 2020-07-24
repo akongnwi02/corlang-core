@@ -38,8 +38,12 @@ class CreateMerchantOrdersTable extends Migration
                 config('business.transaction.status.success'),
                 config('business.transaction.status.failed'),
             ])->nullable();
-            
+    
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('deleted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
     
             $table->foreign('currency_code')->references('code')->on('currencies');
             $table->foreign('paymentmethod_id')->references('uuid')->on('paymentmethods');

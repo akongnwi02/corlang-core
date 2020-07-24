@@ -8,8 +8,6 @@
 
 namespace App\Http\Resources\Api\Merchant\V1;
 
-
-use App\Models\Merchant\MerchantItem;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MerchantOrderResource extends JsonResource

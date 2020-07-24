@@ -61,4 +61,5 @@ class BusinessErrorCodes
     const STEP_AMOUNT_ERROR                 = '10047';
     const RESOURCE_NOT_ERROR                = '10048';
     const SERVICE_NOT_ACTIVE                = '10049';
+    const TRANSACTION_DELETE_ERROR          = '10049';
 }
