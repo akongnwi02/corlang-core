@@ -67,7 +67,7 @@
                                     <td>{{ number_format($order->total_amount - $order->merchant_fee, 2) . ' ' . $order->currency_code }}</td>
                                     <td><span class="badge badge-{{ $order->status_class_label }}">{{ __($order->status) }}</span></td>
                                     <td>{{ @$order->transaction->code }}</td>
-                                    <td>{{ @$order->completed_at ? @$order->completed_at->toDatetimeString() : null}}</td>
+                                    <td>{{ $order->completed_at }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
