@@ -38,6 +38,17 @@ class PayController extends Controller
         $movementRepository->registerOrderSale($order->company->account, $transaction);
     
         $order->refresh();
+    
+        \Log::info('Dispatching job to process order queue',[
+            'uuid'            => $order->uuid,
+            'external_id'     => $order->external_id,
+            'status'          => $order->status,
+            'error_code'      => $order->transaction ? $order->transaction->error_code : null,
+            'partner_ref'     => $order->transaction ? $order->transaction->merchant_id : null,
+            'payment_ref'     => $order->code,
+            'payment_method'  => $order->paymentmethod,
+            'payment_account' => $order->account,
+        ]);
         
         dispatch(new ProcessOrderJob($order))->onQueue(config('business.transaction.queue.merchant.process'));
         

@@ -24,6 +24,19 @@ class ProcessOrderJob extends Job
     
     public function handle(MerchantNotificationClient $notificationClient)
     {
+        $order = $this->order;
+        
+        \Log::info("{$this->getJobName()}: Processing new order job", [
+            'uuid'            => $order->uuid,
+            'external_id'     => $order->external_id,
+            'status'          => $order->status,
+            'error_code'      => $order->transaction ? $order->transaction->error_code : null,
+            'partner_ref'     => $order->transaction ? $order->transaction->merchant_id : null,
+            'payment_ref'     => $order->code,
+            'payment_method'  => $order->paymentmethod,
+            'payment_account' => $order->account,
+        ]);
+        
         $config['callback_url'] = config('app.merchant.callback_url');
         
         $notificationClient->send($this->order);

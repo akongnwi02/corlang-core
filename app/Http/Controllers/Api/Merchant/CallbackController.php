@@ -67,7 +67,7 @@ class CallbackController extends Controller
                 'partner_ref'     => $order->transaction ? $order->transaction->merchant_id : null,
                 'payment_ref'     => $order->code,
                 'payment_method'  => $order->paymentmethod,
-                'payment_account' => $order->paymentmethod,
+                'payment_account' => $order->paymentaccount,
             ]);
     
             $notificationClient->send($order);
