@@ -47,7 +47,7 @@ class PayController extends Controller
             'partner_ref'     => $order->transaction ? $order->transaction->merchant_id : null,
             'payment_ref'     => $order->code,
             'payment_method'  => $order->paymentmethod,
-            'payment_account' => $order->account,
+            'payment_account' => $order->paymentaccount,
         ]);
         
         dispatch(new ProcessOrderJob($order))->onQueue(config('business.transaction.queue.merchant.process'));

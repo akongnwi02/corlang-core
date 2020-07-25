@@ -34,14 +34,14 @@ class ProcessOrderJob extends Job
             'partner_ref'     => $order->transaction ? $order->transaction->merchant_id : null,
             'payment_ref'     => $order->code,
             'payment_method'  => $order->paymentmethod,
-            'payment_account' => $order->account,
+            'payment_account' => $order->paymentaccount,
         ]);
         
         $config['callback_url'] = config('app.merchant.callback_url');
         
         $notificationClient->send($this->order);
     
-        dispatch(new ProcessPurchaseJob($this->order->transaction, $config));
+        dispatch(new ProcessPurchaseJob($this->order->transaction, $config))->onQueue(config('business.transaction.queue.purchase.process'));
     }
     
     public function getJobName()
