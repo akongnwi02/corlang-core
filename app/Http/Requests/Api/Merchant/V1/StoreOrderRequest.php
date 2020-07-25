@@ -16,7 +16,7 @@ class StoreOrderRequest extends FormRequest
 {
     public function authorize()
     {
-        return true;
+        return auth()->user()->company->is_merchant;
     }
     
     public function rules()

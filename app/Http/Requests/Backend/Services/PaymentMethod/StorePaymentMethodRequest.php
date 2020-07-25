@@ -28,6 +28,7 @@ class StorePaymentMethodRequest extends FormRequest
             'description_en'        => __('validation.attributes.backend.services.method.description_en'),
             'description_fr'        => __('validation.attributes.backend.services.method.description_fr'),
             'service_id'            => __('validation.attributes.backend.services.method.service'),
+            'is_realtime'           => __('validation.attributes.backend.services.method.realtime'),
         ];
     }
     
@@ -39,7 +40,8 @@ class StorePaymentMethodRequest extends FormRequest
             'name'                  => ['required', 'string', 'max:191', Rule::unique('paymentmethods', 'name')],
             'description_en'        => ['required', 'string', 'max:191'],
             'description_fr'        => ['required', 'string', 'max:191'],
-            'service_id'            => ['nullable', Rule::exists('services', 'uuid')],
+            'service_id'            => ['nullable', 'required_if:is_realtime,1', Rule::exists('services', 'uuid')],
+            'is_realtime'           => ['sometimes', 'boolean'],
         ];
     }
 }

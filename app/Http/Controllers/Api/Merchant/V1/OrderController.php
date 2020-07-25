@@ -18,6 +18,7 @@ use App\Http\Resources\Api\Merchant\V1\MerchantOrderResource;
 use App\Models\Merchant\MerchantOrder;
 use App\Repositories\Api\Merchant\V1\OrderRepository;
 use App\Repositories\Backend\Company\Company\CompanyRepository;
+use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 
 class OrderController extends Controller
 {
@@ -44,11 +45,21 @@ class OrderController extends Controller
         return MerchantOrderResource::collection($orders);
     }
     
-    public function link(ShowLinkRequest $request, MerchantOrder $order, CompanyRepository $companyRepository)
-    {
+    public function link(
+        ShowLinkRequest $request,
+        MerchantOrder $order,
+        CompanyRepository $companyRepository,
+        PaymentMethodRepository $paymentMethodRepository
+    ) {
+        $methods = $companyRepository->getAvailablePaymentMethods($order->company)->where('is_realtime', true)->get();
+        
+        foreach ($methods as $method) {
+            $method->customer_fee = $paymentMethodRepository->getCustomerOrderFee($method, $order);
+        }
+        
         return view('frontend.merchant.dashboard')
             ->withOrder(new MerchantOrderResource($order))
-            ->withMethods($companyRepository->getAvailablePaymentMethods($order->company)->where('is_realtime', true)->get());
+            ->withMethods($methods);
     }
     
     public function destroy(DeleteOrderRequest $request, OrderRepository $orderRepository, $external_id)

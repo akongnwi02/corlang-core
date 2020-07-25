@@ -141,6 +141,31 @@ class MovementRepository
         });
     }
     
+    public function registerOrderSale($account, $transaction)
+    {
+        $movement = new Movement();
+        $movement->code = Movement::generateCode();
+        // deduct provider fee from order amount
+        $movement->amount = $transaction->amount - $transaction->provider_service_fee;
+        $movement->type_id = MovementType::where('name', config('business.movement.type.sale'))->first()->uuid;
+        $movement->user_id = $transaction->user->uuid;
+        $movement->company_id = @$transaction->company->uuid;
+        $movement->service_id = $transaction->service_id;
+        $movement->is_complete = false;
+        $movement->currency_id = $this->currencyRepository->findByCode($transaction->currency_code)->uuid;
+        $movement->destinationaccount_id = $account->uuid;
+    
+        $transaction->paymentaccount = $account->code;
+        $transaction->movement_code = $movement->code;
+        return \DB::transaction(function () use ($movement, $transaction) {
+            if ($movement->save() && $transaction->save()) {
+//                event(Accountfdfs($movement));
+                return true;
+            }
+            throw new ServerErrorException(BusinessErrorCodes::GENERAL_CODE, 'Error creating sale');
+        });
+    }
+    
     public function reverseMovements($code)
     {
         $movements = Movement::where('code', $code)->get();

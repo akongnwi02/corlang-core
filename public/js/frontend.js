@@ -1086,6 +1086,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__global_Spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__global_Spinner__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_helpers__ = __webpack_require__("./resources/js/frontend/helpers/helpers.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__event_bus__ = __webpack_require__("./resources/js/frontend/event-bus.js");
 //
 //
 //
@@ -1139,6 +1140,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -1167,6 +1169,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         selectMethod: function selectMethod(method) {
             this.selectedMethod = method;
+            __WEBPACK_IMPORTED_MODULE_4__event_bus__["a" /* EventBus */].$emit('customer-fee', {
+                customerFee: this.selectedMethod.customer_fee
+            });
         },
         triggerPayment: function triggerPayment() {
             if (this.validateData()) {
@@ -1224,6 +1229,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus__ = __webpack_require__("./resources/js/frontend/event-bus.js");
 //
 //
 //
@@ -1290,12 +1296,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "OrderSummary",
     props: ['order'],
+    data: function data() {
+        return {
+            customerFee: 0
+        };
+    },
+    mounted: function mounted() {
+        __WEBPACK_IMPORTED_MODULE_1__event_bus__["a" /* EventBus */].$on('customer-fee', function (data) {
+            this.customerFee = data.customerFee;
+        }.bind(this));
+    },
+
     methods: {
         currencyFormat: function currencyFormat(amount) {
             return __WEBPACK_IMPORTED_MODULE_0__helpers_currency__["a" /* currency */].format(amount, this.order.currency_code);
@@ -20187,7 +20214,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -20262,7 +20289,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -35625,7 +35652,29 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "flex-sm-col col-auto" }, [
                   _c("p", { staticClass: "mb-1" }, [
-                    _c("b", [_vm._v(_vm._s(_vm.currencyFormat(0.0)))])
+                    _c("b", [
+                      _vm._v(_vm._s(_vm.currencyFormat(_vm.customerFee)))
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row justify-content-between" }, [
+                _c("div", { staticClass: "col-4" }, [
+                  _c("p", [
+                    _c("b", [
+                      _vm._v(
+                        _vm._s(_vm.$t("dashboard.merchant.order.subtotal"))
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex-sm-col col-auto" }, [
+                  _c("p", { staticClass: "mb-1" }, [
+                    _c("b", [
+                      _vm._v(_vm._s(_vm.currencyFormat(_vm.order.total_amount)))
+                    ])
                   ])
                 ])
               ]),
@@ -35642,7 +35691,13 @@ var render = function() {
                 _c("div", { staticClass: "flex-sm-col col-auto" }, [
                   _c("p", { staticClass: "mb-1" }, [
                     _c("b", [
-                      _vm._v(_vm._s(_vm.currencyFormat(_vm.order.total_amount)))
+                      _vm._v(
+                        _vm._s(
+                          _vm.currencyFormat(
+                            _vm.order.total_amount + _vm.customerFee
+                          )
+                        )
+                      )
                     ])
                   ])
                 ])
@@ -37288,11 +37343,9 @@ var render = function() {
                     type: "text",
                     name: "account_number",
                     id: "account_number",
-                    placeholder: _vm.$t(
-                      _vm.selectedMethod
-                        ? _vm.selectedMethod.placeholder_text
-                        : "dashboard.merchant.payment.account_number"
-                    )
+                    placeholder: _vm.selectedMethod
+                      ? _vm.selectedMethod.placeholder_text
+                      : _vm.$t("dashboard.merchant.payment.account_number")
                   },
                   domProps: { value: _vm.destination },
                   on: {
@@ -37311,7 +37364,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row mb-5 mt-4 " }, [
-                _c("div", { staticClass: "col-md-7 col-lg-6 mx-auto" }, [
+                _c("div", { staticClass: "col-md-12 mx-auto" }, [
                   _c(
                     "button",
                     {
@@ -37324,11 +37377,18 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(
-                          _vm.$t("dashboard.merchant.payment.checkout") +
-                            " " +
-                            _vm.currencyFormat(_vm.order.total_amount)
-                        )
+                        _vm._s(_vm.$t("dashboard.merchant.payment.checkout")) +
+                          " (" +
+                          _vm._s(
+                            _vm.selectedMethod
+                              ? _vm.currencyFormat(_vm.order.total_amount) +
+                                  " + " +
+                                  _vm.currencyFormat(
+                                    _vm.selectedMethod.customer_fee
+                                  )
+                              : _vm.currencyFormat(_vm.order.total_amount)
+                          ) +
+                          ")"
                       )
                     ]
                   )
@@ -55341,6 +55401,21 @@ var BUSINESS_CONFIG = {
     TRANSACTION_SUCCESSFUL: 'success',
     TRANSACTION_FAILED: 'failed'
 };
+
+/***/ }),
+
+/***/ "./resources/js/frontend/event-bus.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventBus; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/*
+  The event bus handles the communication between components.
+*/
+
+var EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 /***/ }),
 

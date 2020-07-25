@@ -28,8 +28,9 @@ Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant'], function () {
         });
         // public routes
         Route::get('order/{order}/link', [OrderController::class, 'link']);
+        // callback route
+        Route::patch('merchant-callback/{transaction}', [CallbackController::class, 'callback']);
     });
-    
     
     Route::group(['namespace' => 'VersionTwo', 'prefix' => 'v2'], function () {
     

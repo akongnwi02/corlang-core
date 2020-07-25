@@ -9,6 +9,7 @@
 namespace App\Models\Merchant;
 
 
+use App\Models\Traits\Attributes\MerchantOrderAttribute;
 use App\Models\Traits\Methods\MerchantOrderMethod;
 use App\Models\Traits\Relationships\MerchantOrderRelationship;
 use App\Models\Traits\Uuid;
@@ -22,6 +23,7 @@ class MerchantOrder extends Model
         Userstamps,
         SoftDeletes,
         MerchantOrderMethod,
+        MerchantOrderAttribute,
         MerchantOrderRelationship;
     
     /**

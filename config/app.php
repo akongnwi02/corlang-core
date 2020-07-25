@@ -145,6 +145,10 @@ return [
         'cache_store' => env('APP_CACHE_STORE', 'database'),
 
     ],
+    
+    'merchant' => [
+        'callback_url' => env('APP_MERCHANT_CALLBACK_URL'),
+    ],
 
     /*
     |--------------------------------------------------------------------------

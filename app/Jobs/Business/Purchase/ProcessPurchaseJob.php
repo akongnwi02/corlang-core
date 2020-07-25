@@ -8,7 +8,6 @@
 
 namespace App\Jobs\Business\Purchase;
 
-use App\Events\TransactionComplete;
 use App\Exceptions\Api\BadRequestException;
 use App\Jobs\Job;
 use App\Models\Transaction\Transaction;
@@ -25,6 +24,8 @@ class ProcessPurchaseJob extends Job
      * @var Transaction
      */
     public $transaction;
+    
+    public $config;
     
     /**
      * Avoid processing deleted jobs
@@ -43,9 +44,10 @@ class ProcessPurchaseJob extends Job
      */
     public $timeout = 300;
     
-    public function __construct($transaction)
+    public function __construct($transaction, $config = [])
     {
         $this->transaction = $transaction;
+        $this->config = $config;
     }
     
     /**
@@ -55,7 +57,7 @@ class ProcessPurchaseJob extends Job
     public function handle(ServiceRepository $serviceRepository)
     {
         $service        = $serviceRepository->findByCode($this->transaction->service_code);
-        $categoryClient = $this->category($service->category);
+        $categoryClient = $this->category($service->category, $this->config);
         
         Log::info("{$this->getJobName()}: Processing new purchase job", [
             'status'        => $this->transaction->status,

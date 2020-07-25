@@ -13,11 +13,19 @@ use App\Exceptions\Api\ForbiddenException;
 use App\Exceptions\GeneralException;
 use App\Models\Merchant\MerchantItem;
 use App\Models\Merchant\MerchantOrder;
+use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 use App\Services\Constants\BusinessErrorCodes;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class OrderRepository
 {
+    public $paymentMethodRepository;
+    
+    public function __construct(PaymentMethodRepository $paymentMethodRepository)
+    {
+        $this->paymentMethodRepository = $paymentMethodRepository;
+    }
+    
     public function create($data, $user)
     {
     

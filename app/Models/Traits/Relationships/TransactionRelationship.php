@@ -11,6 +11,7 @@ namespace App\Models\Traits\Relationships;
 
 use App\Models\Auth\User;
 use App\Models\Company\Company;
+use App\Models\Merchant\MerchantOrder;
 use App\Models\Service\Category;
 use App\Models\Service\PaymentMethod;
 use App\Models\Service\Service;
@@ -35,5 +36,10 @@ trait TransactionRelationship
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'uuid');
+    }
+    
+    public function merchant_order()
+    {
+        return $this->belongsTo(MerchantOrder::class, 'uuid', 'payment_transaction_id');
     }
 }

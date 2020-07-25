@@ -27,12 +27,14 @@ class CreateMerchantOrdersTable extends Migration
             $table->string('customer_email')->nullable();
             $table->uuid('payment_transaction_id')->nullable();
             $table->uuid('paymentmethod_id')->nullable();
-            $table->uuid('paymentmethod_account')->nullable();
+            $table->string('paymentaccount')->nullable();
+            $table->string('paymentmethod')->nullable();
             $table->dateTime('completed_at')->nullable();
             $table->string('notification_url')->nullable();
             $table->string('return_url')->nullable();
             $table->string('description')->nullable();
-            
+            $table->double('merchant_fee')->nullable();
+            $table->double('customer_fee')->nullable();
             $table->enum('status', [
                 config('business.transaction.status.created'),
                 config('business.transaction.status.processing'),

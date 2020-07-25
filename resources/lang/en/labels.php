@@ -147,12 +147,12 @@ return [
                 ],
                 'tabs'            => [
                     'titles'  => [
-                        'profile'  => 'Profile',
-                        'services' => 'Services',
+                        'profile'        => 'Profile',
+                        'services'       => 'Services',
                         'paymentmethods' => 'Payment Methods',
                     ],
                     'content' => [
-                        'service' => [
+                        'service'       => [
                             'management' => 'Service Commission Rate',
                             'edit'       => 'Update commission rate for :company',
                             'add'        => 'Add services for :company',
@@ -196,7 +196,7 @@ return [
         'services'   => [
             'service'    => [
                 'management'      => 'Service Management',
-                'assign' => 'Assign :service to companies',
+                'assign'          => 'Assign :service to companies',
                 'create'          => 'Create Service',
                 'edit'            => 'Edit Service',
                 'active'          => 'Active Services',
@@ -218,9 +218,9 @@ return [
                     'providercommission' => 'Default Provider Service Charge',
                     'total'              => 'service|services',
                 ],
-                'tabs' => [
+                'tabs'  => [
                     'titles' => [
-                        'profile' => 'Profile',
+                        'profile'   => 'Profile',
                         'companies' => 'Companies'
                     ]
                 ]
@@ -265,7 +265,7 @@ return [
             'method'     => [
                 'management' => 'Payment Methods',
                 'create'     => 'Create Payment Method',
-                'assign' => 'Assign :method to companies',
+                'assign'     => 'Assign :method to companies',
                 'edit'       => 'Edit Payment Method',
                 'table'      => [
                     'name'               => 'Name',
@@ -280,9 +280,9 @@ return [
                     'providercommission' => 'Merchant Fee',
                     'total'              => 'payment method|payment methods',
                 ],
-                'tabs' => [
+                'tabs'       => [
                     'titles' => [
-                        'profile' => 'Profile',
+                        'profile'   => 'Profile',
                         'companies' => 'Companies'
                     ]
                 ]
@@ -291,39 +291,76 @@ return [
         'sales'      => [
             'management' => 'Sales',
             'filter'     => [
-                'title'   => 'Filter Sales',
-                'download' => 'Download',
-                'service' => 'Service',
-                'company' => 'Company',
-                'status'  => 'Status',
-                'agent'   => 'Agent',
+                'title'     => 'Filter Sales',
+                'download'  => 'Download',
+                'service'   => 'Service',
+                'company'   => 'Company',
+                'status'    => 'Status',
+                'agent'     => 'Agent',
                 'reference' => 'Reference',
-                'from'    => 'From',
-                'to'      => 'To',
+                'from'      => 'From',
+                'to'        => 'To',
             ],
             'table'      => [
-                'code'                => 'Reference',
-                'company'             => 'Company',
-                'date'                => 'Date',
-                'user'                => 'Agent',
-                'items'               => 'Items',
-                'asset'               => 'Asset',
-                'service'             => 'Service',
-                'amount'               => 'Amount',
-                'total_customer_amount'               => 'Total Customer Amount',
-                'customer_fee'               => 'Customer Fee',
-                'provider_fee'               => 'Provider Fee',
-                'currency'               => 'Currency',
-                'destination'         => 'Destination',
-                'payment_account'     => 'Payment Account',
-                'company_commission'  => 'Company Commission',
-                'agent_commission'    => 'Agent Commission',
-                'external_commission' => 'External Commission',
-                'completed_at'        => 'Completed At',
-                'user_status'         => 'User\'s Status',
-                'actual_status'       => 'Actual Status',
-                'to_be_verified'      => 'To be verified',
-                'total_sales'         => 'sales|sales',
+                'code'                  => 'Reference',
+                'company'               => 'Company',
+                'date'                  => 'Date',
+                'user'                  => 'Agent',
+                'items'                 => 'Items',
+                'asset'                 => 'Asset',
+                'service'               => 'Service',
+                'amount'                => 'Amount',
+                'total_customer_amount' => 'Total Customer Amount',
+                'customer_fee'          => 'Customer Fee',
+                'provider_fee'          => 'Provider Fee',
+                'currency'              => 'Currency',
+                'destination'           => 'Destination',
+                'payment_account'       => 'Payment Account',
+                'company_commission'    => 'Company Commission',
+                'agent_commission'      => 'Agent Commission',
+                'external_commission'   => 'External Commission',
+                'completed_at'          => 'Completed At',
+                'user_status'           => 'User\'s Status',
+                'actual_status'         => 'Actual Status',
+                'to_be_verified'        => 'To be verified',
+                'total_sales'           => 'sale|sales',
+            ]
+        ],
+        'orders'     => [
+            'management' => 'Orders',
+            'filter'     => [
+                'title'     => 'Filter Orders',
+                'download'  => 'Download',
+                'company'   => 'Company',
+                'status'    => 'Status',
+                'customer'  => 'Customer',
+                'reference' => 'Reference',
+                'method'    => 'Payment Method',
+                'from'      => 'From',
+                'to'        => 'To',
+            ],
+            'table'      => [
+                'code'                  => 'Reference',
+                'description'           => 'Description',
+                'external_id'           => 'External ID',
+                'company'               => 'Company',
+                'date'                  => 'Date',
+                'user'                  => 'Agent',
+                'partner_ref'           => 'Partner Ref',
+                'method'                => 'Payment Method',
+                'amount'                => 'Amount',
+                'customer_name'         => 'Customer Name',
+                'total_customer_amount' => 'Total Customer Amount',
+                'customer_fee'          => 'Customer Fee',
+                'merchant_fee'          => 'Merchant Fee',
+                'merchant_amount_net'   => 'Net Merchant Amount',
+                'currency'              => 'Currency',
+                'credited_account'      => 'Credited Account',
+                'transaction_ref'       => 'Transaction Ref',
+                'payment_account'       => 'Payment Account',
+                'completed_at'          => 'Completed At',
+                'status'                => 'Status',
+                'total_orders'           => 'order|orders',
             ]
         ],
         'account'    => [

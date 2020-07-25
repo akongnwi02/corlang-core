@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label for="account_number" class="small text-muted mb-1">{{$t('dashboard.merchant.payment.account_number')}}</label>
-                    <input type="text" class="form-control form-control-sm" name="account_number" id="account_number" v-model="destination" :placeholder="$t(selectedMethod ? selectedMethod.placeholder_text : 'dashboard.merchant.payment.account_number')">
+                    <input type="text" class="form-control form-control-sm" name="account_number" id="account_number" v-model="destination" :placeholder="selectedMethod ? selectedMethod.placeholder_text : $t('dashboard.merchant.payment.account_number')">
                     <div class="text text-danger">{{invalid_text}}</div>
                 </div>
                 <!--<div class="form-group"> <label for="NAME" class="small text-muted mb-1">NAME ON CARD</label> <input type="text" class="form-control form-control-sm" name="NAME" id="NAME" aria-describedby="helpId" placeholder="BBBootstrap Team"> </div>-->
@@ -43,7 +43,7 @@
                     <!--</div>-->
                 <!--</div>-->
                 <div class="row mb-5 mt-4 ">
-                    <div class="col-md-7 col-lg-6 mx-auto"><button @click="triggerPayment" :disabled="triggerLoadStatus==1" type="button" class="btn btn-block btn-outline-primary btn-lg">{{$t('dashboard.merchant.payment.checkout') + ' ' + currencyFormat(order.total_amount)}}</button></div>
+                    <div class="col-md-12 mx-auto"><button @click="triggerPayment" :disabled="triggerLoadStatus==1" type="button" class="btn btn-block btn-outline-primary btn-lg">{{$t('dashboard.merchant.payment.checkout') }} ({{selectedMethod ? currencyFormat(order.total_amount) + ' + ' + currencyFormat(selectedMethod.customer_fee) : currencyFormat(order.total_amount)}})</button></div>
                 </div>
             </div>
         </div>
@@ -56,6 +56,7 @@
     import Spinner from "../global/Spinner";
     import {helper} from "../../helpers/helpers";
     import {currency} from "../../helpers/currency";
+    import {EventBus} from "../../event-bus";
 
     export default {
         name: "Checkout",
@@ -81,6 +82,10 @@
         methods: {
             selectMethod(method) {
                 this.selectedMethod = method;
+                EventBus.$emit('customer-fee', {
+                    customerFee: this.selectedMethod.customer_fee
+                });
+
             },
             triggerPayment() {
                 if (this.validateData()) {
