@@ -15,7 +15,7 @@ Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant'], function () {
     Route::post('token', [AuthController::class, 'auth'])
         ->middleware('auth.basic:,username');
     Route::patch('pay/{order}', [PayController::class, 'pay']);
-    Route::patch('callback/{order}', [CallbackController::class, 'callback']);
+    Route::patch('callback/{transaction}', [CallbackController::class, 'callback']);
     
     // API VERSION 1
     Route::group(['namespace' => 'VersionOne', 'prefix' => 'v1'], function () {
@@ -28,8 +28,6 @@ Route::group(['namespace' => 'Merchant', 'prefix' => 'merchant'], function () {
         });
         // public routes
         Route::get('order/{order}/link', [OrderController::class, 'link']);
-        // callback route
-        Route::patch('merchant-callback/{transaction}', [CallbackController::class, 'callback']);
     });
     
     Route::group(['namespace' => 'VersionTwo', 'prefix' => 'v2'], function () {
