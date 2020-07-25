@@ -39,7 +39,7 @@ class PayController extends Controller
     
         $order->refresh();
         
-        dispatch(new ProcessOrderJob($order));
+        dispatch(new ProcessOrderJob($order))->onQueue(config('business.transaction.queue.merchant.process'));
         
         return new TransactionResource($order->transaction);
     }
