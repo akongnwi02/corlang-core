@@ -8,10 +8,10 @@
 
 namespace App\Http\Controllers\Api\Merchant;
 
+use App\Events\Api\Merchant\OrderPaymentCompleted;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction\Transaction;
 
-use App\Services\Clients\Merchant\V1\MerchantNotificationClient;
 use Illuminate\Http\Request;
 
 class CallbackController extends Controller
@@ -19,14 +19,12 @@ class CallbackController extends Controller
     /**
      * @param Request $request
      * @param Transaction $transaction
-     * @param MerchantNotificationClient $notificationClient
      * @return \Illuminate\Http\JsonResponse
      * @throws \App\Exceptions\Api\ServerErrorException
      */
     public function callback(
         Request $request,
-        Transaction $transaction,
-        MerchantNotificationClient $notificationClient
+        Transaction $transaction
     )
     {
         \Log::info('New merchant callback request received', [
@@ -70,7 +68,7 @@ class CallbackController extends Controller
                 'payment_account' => $order->paymentaccount,
             ]);
     
-            $notificationClient->send($order);
+            event(new OrderPaymentCompleted($order));
         }
     
         return $this->callbackSuccessResponse();

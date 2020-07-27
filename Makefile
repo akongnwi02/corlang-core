@@ -62,7 +62,7 @@ seed:
 	docker exec $$(docker-compose ps -q workspace) sh -c "php artisan db:seed --force"
 
 worker:
-	docker exec -it $$(docker-compose ps -q workspace) sh -c "php artisan queue:work --queue=process_purchase,verify_purchase,complete_purchase"
+	docker exec -it $$(docker-compose ps -q workspace) sh -c "php artisan queue:work --queue=process_purchase,verify_purchase,complete_purchase,process_order"
 
 deploy:
 	git push heroku develop:master

@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Api\Merchant;
 
+use App\Events\Api\Merchant\OrderPaymentInitiated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Merchant\V1\PayRequest;
 use App\Http\Resources\Api\TransactionResource;
@@ -49,6 +50,8 @@ class PayController extends Controller
             'payment_method'  => $order->paymentmethod,
             'payment_account' => $order->paymentaccount,
         ]);
+    
+        event(new OrderPaymentInitiated($order));
         
         dispatch(new ProcessOrderJob($order))->onQueue(config('business.transaction.queue.merchant.process'));
         

@@ -11,7 +11,6 @@ namespace App\Jobs\Merchant\Order;
 
 use App\Jobs\Business\Purchase\ProcessPurchaseJob;
 use App\Jobs\Job;
-use App\Services\Clients\Merchant\V1\MerchantNotificationClient;
 
 class ProcessOrderJob extends Job
 {
@@ -22,7 +21,7 @@ class ProcessOrderJob extends Job
         $this->order = $order;
     }
     
-    public function handle(MerchantNotificationClient $notificationClient)
+    public function handle()
     {
         $order = $this->order;
         
@@ -38,8 +37,6 @@ class ProcessOrderJob extends Job
         ]);
         
         $config['callback_url'] = config('app.merchant.callback_url');
-        
-        $notificationClient->send($this->order);
     
         dispatch(new ProcessPurchaseJob($this->order->transaction, $config))->onQueue(config('business.transaction.queue.purchase.process'));
     }
