@@ -19,8 +19,8 @@ class CompanyEventListener
     {
         \Log::info('Company Created', [
             'name' => $event->company->name,
-            'by' => $event->company->creator->username,
-            'type' => $event->company->type->name,
+            'by' => @$event->company->creator->username,
+            'type' => @$event->company->type->name,
         ]);
     }
     
@@ -28,8 +28,8 @@ class CompanyEventListener
     {
         \Log::info('Company Updated', [
             'name' => $event->company->name,
-            'by' => $event->company->editor->username,
-            'type' => $event->company->type->name,
+            'by' => @$event->company->editor->username,
+            'type' => @$event->company->type->name,
         ]);
     }
     
@@ -37,7 +37,7 @@ class CompanyEventListener
     {
         \Log::info('Company Reactivated', [
             'name' => $event->company->name,
-            'by' => $event->company->editor->username,
+            'by' => @$event->company->editor->username,
         ]);
     }
     
@@ -50,7 +50,7 @@ class CompanyEventListener
         
         \Log::info('Company Deactivated', [
             'name' => $event->company->name,
-            'by' => $event->company->editor->username,
+            'by' => @$event->company->editor->username,
         ]);
     }
     
