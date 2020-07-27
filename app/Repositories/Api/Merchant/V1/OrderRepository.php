@@ -83,7 +83,9 @@ class OrderRepository
     
     public function getAllOrders()
     {
-        $orders = QueryBuilder::for(MerchantOrder::class);
+        $orders = QueryBuilder::for(MerchantOrder::class)
+            ->allowedSorts('merchant_orders.created_at', 'merchant_orders.updated_at')
+            ->defaultSort('-merchant_orders.created_at', 'merchant_orders.updated_at');
         
         if (!auth()->user()->company->is_default) {
             $orders->where('company_id', auth()->user()->company_id);
