@@ -32,7 +32,7 @@ class TransactionResource extends JsonResource
             'currency_code'         => $this->currency_code,
             'destination'           => $this->destination,
             'paymentaccount'        => $this->paymentaccount,
-            'agent_commission'      => $this->agent_commission,
+            'agent_commission'      => number_format((double)$this->agent_commission, 2),
             'status'                => $this->status,
             'error_code'            => $this->error_code,
             'total_customer_fee'    => number_format((double)$this->total_customer_fee, 2),
