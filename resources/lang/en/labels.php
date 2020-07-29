@@ -262,6 +262,18 @@ return [
                     ],
                 ],
             ],
+            'distribution' => [
+                'management'         => 'Commission Distribution',
+                'create'             => 'Create Commission Distribution',
+                'edit'               => 'Edit Commission Distribution',
+                'table' => [
+                    'agent_rate'         => 'Default Agent Rate',
+                    'company_rate'       => 'Default Company Rate',
+                    'external_rate'      => 'Default External Rate',
+                    'name'        => 'Name',
+                    'description' => 'Description',
+                ]
+            ],
             'method'     => [
                 'management' => 'Payment Methods',
                 'create'     => 'Create Payment Method',

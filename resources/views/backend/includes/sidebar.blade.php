@@ -66,7 +66,10 @@
                 </li>
             @endcan
 
-            @if(Gate::check(config('permission.permissions.read_services')) || Gate::check(config('permission.permissions.read_commissions')) || Gate::check(config('permission.permissions.read_payment_methods')))
+            @if(Gate::check(config('permission.permissions.read_services'))
+            || Gate::check(config('permission.permissions.read_commissions'))
+            || Gate::check(config('permission.permissions.read_distributions'))
+            || Gate::check(config('permission.permissions.read_payment_methods')))
                 <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/services*'), 'open') }}">
                     <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/services*')) }}" href="{{ route('admin.services.service.index') }}">
                         <i class="nav-icon icon-grid"></i> @lang('menus.backend.services.title')
@@ -77,6 +80,13 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ active_class(Active::checkUriPattern('admin/services/commission*')) }}" href="{{ route('admin.services.commission.index') }}">
                                     @lang('labels.backend.services.commission.management')
+                                </a>
+                            </li>
+                        @endcan
+                        @can(config('permission.permissions.read_distributions'))
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/services/distribution*')) }}" href="{{ route('admin.services.distribution.index') }}">
+                                    @lang('labels.backend.services.distribution.management')
                                 </a>
                             </li>
                         @endcan

@@ -71,6 +71,10 @@ return [
             'commission' => [
                 'created' => 'The service charge was updated successfully.',
             ],
+            'distribution' => [
+                'created' => 'The commission distribution was created successfully',
+                'updated' => 'The commission distribution was updated successfully',
+            ],
             'method' => [
                 'created' => 'The payment method was successfully created.',
                 'updated' => 'The payment method was successfully updated.',

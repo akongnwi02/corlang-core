@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommissionsTable extends Migration
+class CreateCommissionDistributionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,19 @@ class CreateCommissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('commissions', function (Blueprint $table) {
+        Schema::create('commission_distributions', function (Blueprint $table) {
             $table->uuid('uuid')->primary()->unique();
             $table->string('name')->unique();
             $table->string('description')->nullable();
-            $table->uuid('currency_id');
+            $table->double('company_rate')->nullable();
+            $table->double('agent_rate')->nullable();
+            $table->double('external_rate')->nullable();
     
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
-    
-            $table->foreign('currency_id')->references('uuid')->on('currencies');
         });
     }
 
@@ -36,6 +36,6 @@ class CreateCommissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commissions');
+        Schema::dropIfExists('commission_distributions');
     }
 }

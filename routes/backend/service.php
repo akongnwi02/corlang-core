@@ -12,6 +12,7 @@
  */
 
 use App\Http\Controllers\Backend\Services\Commission\CommissionController;
+use App\Http\Controllers\Backend\Services\Commission\CommissionDistributionController;
 use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodCompanyController;
 use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodController;
 use App\Http\Controllers\Backend\Services\PaymentMethod\PaymentMethodStatusController;
@@ -150,6 +151,43 @@ Route::group([
         Route::delete('/', [CommissionController::class, 'destroy'])
             ->name('commission.destroy')
             ->middleware('permission:'.config('permission.permissions.delete_commissions'));
+    });
+    /*
+     * Distribution CRUD
+     */
+    Route::get('distribution', [CommissionDistributionController::class, 'index'])
+        ->name('distribution.index')
+        ->middleware('permission:'.config('permission.permissions.read_distributions'));
+    
+    Route::get('distribution/create', [CommissionDistributionController::class, 'create'])
+        ->name('distribution.create')
+        ->middleware('permission:'.config('permission.permissions.create_distributions'));
+    
+    Route::post('distribution', [CommissionDistributionController::class, 'store'])
+        ->name('distribution.store')
+        ->middleware('permission:'.config('permission.permissions.create_distributions'));
+    
+    /*
+     * Specific Commission
+     */
+    Route::group(['prefix' => 'distribution/{distribution}'], function () {
+        
+        // Company
+        Route::get('/', [CommissionController::class, 'show'])
+            ->name('distribution.show')
+            ->middleware('permission:'.config('permission.permissions.read_distributions'));
+        
+        Route::get('edit', [CommissionController::class, 'edit'])
+            ->name('distribution.edit')
+            ->middleware('permission:'.config('permission.permissions.update_distributions'));
+        
+        Route::put('/', [CommissionController::class, 'update'])
+            ->name('distribution.update')
+            ->middleware('permission:'.config('permission.permissions.update_distributions'));
+        
+        Route::delete('/', [CommissionController::class, 'destroy'])
+            ->name('distribution.destroy')
+            ->middleware('permission:'.config('permission.permissions.delete_distributions'));
     });
     
     /*

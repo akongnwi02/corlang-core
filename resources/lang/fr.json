@@ -81,5 +81,9 @@
     "read sales": "lire les ventes",
     "read accounting" : "lire la comptabilité",
     "request provision" : "demande de provision",
-    "pay collection" : "payer les collections"
+    "pay collection" : "payer les collections",
+    "create distributions": "create distributions",
+    "read distributions": "read distributions",
+    "update distributions": "update distributions",
+    "delete distributions": "delete distributions"
 }

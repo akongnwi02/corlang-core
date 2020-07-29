@@ -59,6 +59,7 @@ class Service extends Model
         'providercommission_id',
         'customercommission_id',
         'providercompany_id',
+        'commission_distribution_id',
         'company_rate',
         'agent_rate',
         'external_rate',

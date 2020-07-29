@@ -255,6 +255,7 @@ return [
                     'max_amount'              => 'Maximum Amount',
                     'step_amount'             => 'Step Amount',
                     'providercompany'         => 'Provider Company',
+                    'commission_distribution_id' => 'Commission Distribution',
                     'companies'               => 'Companies',
                 ],
                 'item'       => [
@@ -276,6 +277,13 @@ return [
                         'fixed'      => 'Fixed',
                         'percentage' => 'Percentage',
                     ]
+                ],
+                'commission_distribution' => [
+                    'name'        => 'Name',
+                    'description' => 'Description',
+                    'company_rate'            => 'Default Company Rate (%)',
+                    'agent_rate'              => 'Default Agent Rate (%)',
+                    'external_rate'           => 'Default External Rate (%)',
                 ],
                 'method'     => [
                     'name'               => 'Name',

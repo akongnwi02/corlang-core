@@ -52,6 +52,7 @@ trait CompanyRelationship
                 'external_rate',
                 'customercommission_id',
                 'providercommission_id',
+                'commission_distributions_id',
             ]);
     }
     
