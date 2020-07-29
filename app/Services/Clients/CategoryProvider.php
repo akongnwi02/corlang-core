@@ -21,18 +21,17 @@ trait CategoryProvider
 {
     /**
      * @param $category
+     * @param array $config
      * @return AbstractCategory
      * @throws ServerErrorException
      */
-    public function category($category)
+    public function category($category, $config = [])
     {
-        $config['callback_url'] = config('app.micro_services.callback_url');
-        $config['status_endpoint'] = config('business.service.endpoints.status');
-        $config['execute_endpoint'] = config('business.service.endpoints.execute');
-        $config['search_endpoint'] = config('business.service.endpoints.search');
+        $config = $this->getDefaultConfig($config);
+        
         $config['api_url'] = $category->api_url;
         $config['api_key'] = $category->api_key;
-        $config['name'] = $category->name;
+        $config['name']    = $category->name;
         
         switch ($category->code) {
             case config('business.service.category.prepaidbills.code'):
@@ -50,5 +49,15 @@ trait CategoryProvider
             default:
                 throw new ServerErrorException(BusinessErrorCodes::UNKNOWN_SERVICE_CATEGORY, "Service category $category->code is not implemented");
         }
+    }
+    
+    public function getDefaultConfig($config = [])
+    {
+        return array_merge([
+            'callback_url'     => config('app.micro_services.callback_url'),
+            'status_endpoint'  => config('business.service.endpoints.status'),
+            'execute_endpoint' => config('business.service.endpoints.execute'),
+            'search_endpoint'  => config('business.service.endpoints.search'),
+        ], $config);
     }
 }

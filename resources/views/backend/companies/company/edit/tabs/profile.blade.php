@@ -139,24 +139,35 @@
                     </div><!--col-->
                 </div><!--form-group-->
 
-                <div class="form-group row ">
-                    {{ html()->label(__('validation.attributes.backend.companies.company.type'))->class('col-md-2 form-control-label required')->for('type_id') }}
+                <div class="form-group row">
+                    {{ html()->label(__('validation.attributes.backend.companies.company.merchant'))->class('col-md-2 form-control-label')->for('is_merchant') }}
 
                     <div class="col-md-10">
-                        @foreach($types as $type)
-                            <div class="custom-control custom-radio custom-control-inline">
-
-                                {{ html()->radio('type_id', $type->name == config('business.company.type.informal'), $type->uuid)
-                                    ->class('custom-control-input')
-                                    ->id($type->uuid)
-                                    ->checked()
-                                    ->required()
-                                 }}
-                                {{ html()->label(__($type->name))->for($type->uuid)->class('custom-control-label') }}
-                            </div>
-                        @endforeach
-                    </div>
+                        <label class="switch switch-label switch-pill switch-primary">
+                            {{ html()->checkbox('is_merchant', null, 1)->class('switch-input') }}
+                            <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
+                        </label>
+                    </div><!--col-->
                 </div><!--form-group-->
+
+                {{--<div class="form-group row ">--}}
+                    {{--{{ html()->label(__('validation.attributes.backend.companies.company.type'))->class('col-md-2 form-control-label required')->for('type_id') }}--}}
+
+                    {{--<div class="col-md-10">--}}
+                        {{--@foreach($types as $type)--}}
+                            {{--<div class="custom-control custom-radio custom-control-inline">--}}
+
+                                {{--{{ html()->radio('type_id', $type->name == config('business.company.type.informal'), $type->uuid)--}}
+                                    {{--->class('custom-control-input')--}}
+                                    {{--->id($type->uuid)--}}
+                                    {{--->checked()--}}
+                                    {{--->required()--}}
+                                 {{--}}--}}
+                                {{--{{ html()->label(__($type->name))->for($type->uuid)->class('custom-control-label') }}--}}
+                            {{--</div>--}}
+                        {{--@endforeach--}}
+                    {{--</div>--}}
+                {{--</div><!--form-group-->--}}
 
                 <div class="form-group row">
                     {{ html()->label(__('validation.attributes.backend.companies.company.logo'))->class('col-md-2 form-control-label')->for('logo') }}

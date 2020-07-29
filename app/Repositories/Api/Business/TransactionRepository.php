@@ -14,6 +14,7 @@ use App\Exceptions\Api\NotFoundException;
 use App\Exceptions\Api\ServerErrorException;
 use App\Models\Transaction\Transaction;
 use App\Repositories\Backend\Movement\MovementRepository;
+use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 use App\Services\Business\Models\ModelInterface;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
@@ -32,13 +33,14 @@ class TransactionRepository
     (
         ServiceRepository $serviceRepository,
         CommissionRepository $commissionRepository,
-        MovementRepository $movementRepository
+        MovementRepository $movementRepository,
+        PaymentMethodRepository $paymentMethodRepository
     )
     {
         $this->serviceRepository    = $serviceRepository;
         $this->commissionRepository = $commissionRepository;
         $this->movementRepository   = $movementRepository;
-        
+        $this->paymentMethodRepository = $paymentMethodRepository;
     }
     
     /**
@@ -205,7 +207,7 @@ class TransactionRepository
                 return $transaction;
             }
             
-            throw new ServerErrorException(BusinessErrorCodes::TRANSACTION_CREATION_ERROR);
+            throw new ServerErrorException(BusinessErrorCodes::TRANSACTION_CREATION_ERROR, 'Error creating transaction');
         });
     }
     
@@ -279,5 +281,84 @@ class TransactionRepository
         }
         
         return $sales;
+    }
+    
+    public function createTransactionForOrder($order, $data)
+    {
+        $paymentMethod = $this->paymentMethodRepository->findByCode($data['paymentmethod_code']);
+    
+        /*
+         * Get the applied
+         */
+        $customerServiceCommission = $this->commissionRepository->getCompanyMethodCustomerCommission($paymentMethod, $order->company);
+        $providerServiceCommission = $this->commissionRepository->getCompanyMethodProviderCommission($paymentMethod, $order->company);
+        
+        /*
+         * calculate the fees
+         */
+        $customerServiceFee = $this->paymentMethodRepository->getCustomerOrderFee($paymentMethod, $order);
+        $merchantOrderFee = $this->paymentMethodRepository->getMerchantOrderFee($paymentMethod, $order);
+    
+        $totalCustomerFee = $customerServiceFee;
+    
+        /*
+         * calculate the provider payment method fee
+         */
+        $totalFee = $totalCustomerFee + $merchantOrderFee;
+        
+        
+        $transaction = new Transaction;
+    
+        $transaction->code             = Transaction::generateCode();
+        $transaction->items            = $paymentMethod->service->code;
+        $transaction->amount           = $order->total_amount;
+        $transaction->user_id          = $order->user_id;
+        $transaction->company_id       = $order->company_id;
+        $transaction->service_code     = $paymentMethod->service->code;
+        $transaction->currency_code    = $order->currency_code;
+        $transaction->destination      = $data['destination'];
+        $transaction->is_account_topup = false;
+        $transaction->status           = config('business.transaction.status.created');
+    
+        $transaction->customer_service_fee  = $customerServiceFee;
+        $transaction->provider_service_fee  = $merchantOrderFee;
+        $transaction->total_customer_fee    = $totalCustomerFee;
+        $transaction->total_customer_amount = $order->total_amount + $totalCustomerFee;
+        $transaction->total_fee             = $totalFee;
+    
+        $transaction->customer_servicecommission_id = @$customerServiceCommission->uuid;
+        $transaction->provider_servicecommission_id = @$providerServiceCommission->uuid;
+    
+        $transaction->service_id    = $paymentMethod->service->uuid;
+        $transaction->category_id   = $paymentMethod->service->category->uuid;
+        $transaction->category_code = $paymentMethod->service->category->code;
+    
+        $transaction->agent_commission    = null;
+        $transaction->company_commission  = null;
+        $transaction->external_commission = null;
+        $transaction->system_commission   = null;
+    
+        $transaction->customer_phone = $order->customer_phone;
+    
+        
+        
+        return \DB::transaction(function () use ($order, $transaction, $paymentMethod) {
+            if ($transaction->save()) {
+    
+                $order->status = config('business.transaction.status.processing');
+                $order->paymentaccount = $transaction->destination;
+                $order->paymentmethod = $paymentMethod->name;
+                $order->paymentmethod_id = $paymentMethod->uuid;
+                $order->customer_fee = $transaction->total_customer_fee;
+                $order->merchant_fee = $transaction->provider_service_fee;
+                $order->payment_transaction_id = $transaction->uuid;
+                
+                if ($order->save()) {
+                    return $transaction;
+                }
+                throw new ServerErrorException(BusinessErrorCodes::TRANSACTION_CREATION_ERROR, 'Error updating order');
+            }
+            throw new ServerErrorException(BusinessErrorCodes::TRANSACTION_CREATION_ERROR, 'Error creating transaction');
+        });
     }
 }

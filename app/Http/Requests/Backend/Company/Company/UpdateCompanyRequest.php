@@ -70,7 +70,7 @@ class UpdateCompanyRequest extends FormRequest
             'postal_code'      => 'max:191',
             'country_id'       => ['required', Rule::exists('countries', 'uuid')],
             'size'             => 'max:5',
-            'type_id'          => ['required', new RestrictedAttribute()],
+//            'type_id'          => ['required', new RestrictedAttribute()],
             'logo'             => 'sometimes|image|max:191',
             'is_provider'      => ['sometimes', 'boolean'],
             'direct_polling'   => ['sometimes', 'boolean'],

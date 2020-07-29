@@ -205,6 +205,7 @@ return [
                     'logo'             => 'Company Logo',
                     'provider'         => 'Provider',
                     'direct_polling'   => 'Direct Polling',
+                    'merchant'         => 'Merchant',
                     'agent_self_topup' => 'Agent Self Topup',
                 ],
                 'service'       => [
@@ -280,12 +281,14 @@ return [
                     'name'               => 'Name',
                     'code'               => 'Code',
                     'placeholder_text'   => 'Account Placeholder',
+                    'accountregex'       => 'Account Regex',
                     'description_en'     => 'English Description',
                     'description_fr'     => 'French Description',
                     'customercommission' => 'Customer Service Charge',
-                    'providercommission' => 'Service Provider Fee',
+                    'providercommission' => 'Merchant Fee',
                     'service'            => 'Service',
                     'realtime'           => 'Realtime',
+                    'logo' => 'Logo',
                     'companies'          => 'Companies',
                 ],
                 'category'   => [

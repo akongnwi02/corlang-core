@@ -32,6 +32,7 @@ class CompanyTableSeeder extends Seeder
             'website' => $faker->url,
             'email' => $faker->companyEmail,
             'is_active' => true,
+            'is_merchant' => true,
             'is_default' => true,
             'size' => $faker->randomDigit,
             'type_id' => CompanyType::first()->uuid,

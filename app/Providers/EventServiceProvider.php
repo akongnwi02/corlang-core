@@ -43,6 +43,11 @@ class EventServiceProvider extends ServiceProvider
         \App\Listeners\Backend\Movement\MovementEventListener::class,
         
         /*
+         * Api Subscribers
+         */
+        \App\Listeners\Api\Merchant\OrderEventListener::class,
+        
+        /*
          * Auth Subscribers
          */
         \App\Listeners\Backend\Auth\User\UserEventListener::class,

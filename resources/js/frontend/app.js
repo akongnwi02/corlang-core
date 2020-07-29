@@ -20,6 +20,7 @@ Vue.use(Buefy);
    Register the main component
  */
 Vue.component('layout', require('./layouts/Layout'));
+Vue.component('merchant', require('./layouts/Merchant'));
 
 /*
   Create a new Vue instance and mount the app element.

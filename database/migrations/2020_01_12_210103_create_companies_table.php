@@ -26,10 +26,11 @@ class CreateCompaniesTable extends Migration
             $table->string('email')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_default')->default(false);
+            $table->boolean('is_merchant')->default(false);
             $table->boolean('direct_polling')->default(true);
             $table->smallInteger('size')->nullable();
             $table->uuid('country_id')->nullable();
-            $table->uuid('type_id');
+            $table->uuid('type_id')->nullable();
             $table->uuid('deactivated_by_id')->nullable();
             $table->uuid('owner_id')->nullable();
             $table->double('agentcommission_rate')->nullable();

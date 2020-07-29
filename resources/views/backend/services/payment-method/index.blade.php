@@ -29,7 +29,7 @@
                             <tr>
                                 <th>@lang('labels.backend.services.method.table.name')</th>
                                 <th>@lang('labels.backend.services.method.table.code')</th>
-                                <th>@lang('labels.backend.services.method.table.logo')</th>
+                                {{--<th>@lang('labels.backend.services.method.table.logo')</th>--}}
                                 <th>@lang('labels.backend.services.method.table.service')</th>
                                 <th>@lang('labels.backend.services.method.table.active')</th>
                                 <th>@lang('labels.backend.services.method.table.description_en')</th>
@@ -43,9 +43,9 @@
                             <tbody>
                             @foreach($methods as $method)
                                 <tr>
-                                    <td>{{ $method->name }}</td>
+                                    <td>{!! @$method->logo_label !!} {{ $method->name }}</td>
                                     <td>{{ $method->code }}</td>
-                                    <td>{!! @$method->logo_label !!}</td>
+                                    {{--<td>{!! @$method->logo_label !!}</td>--}}
                                     <td>{{ @$method->service_name }}</td>
                                     <td>{!! $method->active_label !!}</td>
                                     <td>{{ $method->description_en }}</td>

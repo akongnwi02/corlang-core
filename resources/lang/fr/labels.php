@@ -152,8 +152,8 @@ return [
                     'content' => [
                         'service' => [
                             'management' => 'Frais de service',
-                            'edit'       => 'Mettre à jour les frais de service pour :entreprise',
-                            'add'        => 'Ajouter les services pour:entreprise',
+                            'edit'       => 'Mettre à jour les frais de service pour :company',
+                            'add'        => 'Ajouter les services pour :company',
                             'default'    => 'Utiliser le service par défaut',
                             'custom'     => 'Personnalisation',
                             'table'      => [

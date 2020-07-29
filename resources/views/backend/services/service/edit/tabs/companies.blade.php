@@ -46,7 +46,7 @@
         </div><!--row-->
     </div><!--modal-body-->
     <div class="modal-footer">
-        <button type="button" class="'btn btn-secondary btn-sm" data-dismiss="modal">@lang('buttons.general.cancel')</button>
+        {{ form_cancel(route('admin.services.service.index'), __('buttons.general.cancel')) }}
         {{ form_submit(__('buttons.general.crud.update')) }}
     </div>
     {{ html()->form()->close() }}

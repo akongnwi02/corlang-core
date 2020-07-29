@@ -12,11 +12,20 @@ namespace App\Repositories\Backend\Services\Service;
 use App\Exceptions\GeneralException;
 use App\Models\Service\PaymentMethod;
 use App\Models\Service\TopupAccount;
+use App\Repositories\Backend\Services\Commission\CommissionRepository;
+use JD\Cloudder\Facades\Cloudder;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class PaymentMethodRepository
 {
+    public $commissionRepository;
+    
+    public function __construct(CommissionRepository $commissionRepository)
+    {
+        $this->commissionRepository = $commissionRepository;
+    }
+    
     public function getPaymentMethods()
     {
         return PaymentMethod::orderBy('is_default', 'desc');
@@ -36,10 +45,18 @@ class PaymentMethodRepository
      * @return mixed
      * @throws GeneralException
      */
-    public function update($method, $data)
+    public function update($method, $data, $logo = null)
     {
         $method->fill($data);
         $method->is_realtime = request()->has('is_realtime') ? 1 : 0;
+    
+        if ($logo) {
+            $uploaded = Cloudder::upload($logo);
+        
+            if ($uploaded) {
+                $method->logo_url = Cloudder::secureShow(Cloudder::getPublicId());
+            }
+        }
         
         if ($method->save()) {
 //            event(new PaymentMethodUpdated($method));
@@ -54,10 +71,17 @@ class PaymentMethodRepository
      * @return PaymentMethod
      * @throws GeneralException
      */
-    public function create($data)
+    public function create($data, $logo = null)
     {
-        $method                     = (new PaymentMethod())->fill($data);
+        $method = (new PaymentMethod())->fill($data);
         $method->is_realtime = request()->has('is_realtime') ? 1 : 0;
+    
+        if ($logo) {
+            $uploaded = Cloudder::upload($logo);
+            if ($uploaded) {
+                $method->logo_url = Cloudder::secureShow(Cloudder::getPublicId());
+            }
+        }
         
         if ($method->save()) {
 //            event(new PaymentMethodCreated($method));
@@ -153,5 +177,29 @@ class PaymentMethodRepository
     public function findById($id)
     {
         return PaymentMethod::where('uuid', $id)->first();
+    }
+    
+    public function getCustomerOrderFee($method, $order)
+    {
+    
+        $customerServiceCommission = $this->commissionRepository->getCompanyMethodCustomerCommission($method, $order->company);
+    
+        /*
+         * calculate the customer fees for each method
+         */
+        return $this->commissionRepository->calculateFee($customerServiceCommission, $order->total_amount);
+        
+    }
+    
+    public function getMerchantOrderFee($method, $order)
+    {
+    
+        $merchantServiceCommission = $this->commissionRepository->getCompanyMethodProviderCommission($method, $order->company);
+    
+        /*
+         * calculate the merchant fees for each method
+         */
+        return $this->commissionRepository->calculateFee($merchantServiceCommission, $order->total_amount);
+        
     }
 }

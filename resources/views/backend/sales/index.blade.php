@@ -91,38 +91,3 @@
         </div><!--card-body-->
     </div><!--card-->
 @endsection
-
-@push('after-scripts')
-    <script>
-
-        $(function () {
-            $("button[name='creditPopup']").click(function () {
-                let title = this.title;
-                let direction = "IN";
-                let id = this.id;
-
-                $("#creditModal .title-text").html(title);
-                $("#creditModal button[type='submit']").html(title);
-                $("#creditModal input[name='direction']").val(direction);
-                $("#creditModal form").attr('action', `/admin/account/${id}/credit`);
-
-                $("#creditModal").modal("show");
-            });
-
-            $("button[name='debitPopup']").click(function () {
-                let title = this.title;
-                let direction = "OUT";
-                let id = this.id;
-
-                $("#creditModal .title-text").html(title);
-                $("#creditModal button[type='submit']").html(title);
-                $("#creditModal input[name='direction']").val(direction);
-                $("#creditModal form").attr('action', `/admin/account/${id}/credit`);
-
-                $("#creditModal").modal("show");
-            });
-
-        });
-
-    </script>
-@endpush

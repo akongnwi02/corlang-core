@@ -48,6 +48,7 @@ class PaymentMethod extends Model
         'customercommission_id',
         'providercommission_id',
         'placeholder_text',
+        'accountregex',
         'service_id',
     ];
     

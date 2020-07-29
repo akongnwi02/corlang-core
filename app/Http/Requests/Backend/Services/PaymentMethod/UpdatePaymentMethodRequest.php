@@ -27,7 +27,9 @@ class UpdatePaymentMethodRequest extends FormRequest
             'description_en'        => __('validation.attributes.backend.services.method.description_en'),
             'description_fr'        => __('validation.attributes.backend.services.method.description_fr'),
             'placeholder_text'      => __('validation.attributes.backend.services.method.placeholder_text'),
+            'accountregex'          => __('validation.attributes.backend.services.method.accountregex'),
             'service_id'            => __('validation.attributes.backend.services.method.service'),
+            'is_realtime'           => __('validation.attributes.backend.services.method.realtime')
         ];
     }
     
@@ -40,7 +42,9 @@ class UpdatePaymentMethodRequest extends FormRequest
             'description_en'        => ['required', 'string', 'max:191'],
             'description_fr'        => ['required', 'string', 'max:191'],
             'placeholder_text'      => ['nullable', 'string', 'max:191'],
-            'service_id'            => ['nullable', Rule::exists('services', 'uuid')],
+            'accountregex'          => ['nullable', 'string', 'max:191'],
+            'service_id'            => ['nullable', 'required_if:is_realtime,1', Rule::exists('services', 'uuid')],
+            'is_realtime'           => ['sometimes', 'boolean'],
         ];
     }
 }

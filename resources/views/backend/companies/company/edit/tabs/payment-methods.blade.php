@@ -24,7 +24,7 @@
                 <tr>
                     <th>@lang('labels.backend.companies.company.tabs.content.paymentmethod.table.name')</th>
                     <th>@lang('labels.backend.companies.company.tabs.content.paymentmethod.table.code')</th>
-                    <th>@lang('labels.backend.companies.company.tabs.content.paymentmethod.table.logo')</th>
+                    {{--<th>@lang('labels.backend.companies.company.tabs.content.paymentmethod.table.logo')</th>--}}
                     <th>@lang('labels.backend.companies.company.tabs.content.paymentmethod.table.active')</th>
                     <th>@lang('labels.backend.companies.company.tabs.content.paymentmethod.table.customercommission')</th>
                     <th>@lang('labels.backend.companies.company.tabs.content.paymentmethod.table.providercommission')</th>
@@ -34,9 +34,9 @@
                 <tbody>
                 @foreach($companyMethods as $method)
                     <tr>
-                        <td>{{ $method->name }}</td>
+                        <td>{!! @$method->logo_label !!} {{ $method->name }}</td>
                         <td>{{ $method->code }}</td>
-                        <td>{!! @$method->logo_label !!}</td>
+                        {{--<td>{!! @$method->logo_label !!}</td>--}}
                         <td>{!! $method->specific->active_label !!}</td>
                         <td>{{ ! is_null($method->specific->customercommission_id) ? @$method->specific->customer_commission->name : @$method->customer_commission->name }}</td>
                         <td>{{ ! is_null($method->specific->providercommission_id) ? @$method->specific->provider_commission->name : @$method->provider_commission->name }}</td>

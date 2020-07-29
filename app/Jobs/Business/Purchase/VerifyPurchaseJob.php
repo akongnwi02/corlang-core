@@ -8,10 +8,10 @@
 
 namespace App\Jobs\Business\Purchase;
 
+use App\Events\Api\Merchant\OrderPaymentCompleted;
 use App\Jobs\Job;
 use App\Models\Transaction\Transaction;
 use App\Repositories\Backend\Movement\MovementRepository;
-use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
 use App\Repositories\Backend\System\CurrencyRepository;
 use App\Services\Business\Validators\CategoryProvider;
 
@@ -132,7 +132,6 @@ class VerifyPurchaseJob extends Job
         \Log::info("{$this->getJobName()}: Completing movement for this transaction. To be counted in the balance for withdrawals");
     
         $movementRepository->completeMovements($this->transaction->movement_code);
-    
         
         $this->transaction->status  = config('business.transaction.status.failed');
         $this->transaction->message = 'Transaction failed unexpectedly while verifying status';
@@ -151,6 +150,29 @@ class VerifyPurchaseJob extends Job
             'transaction.error_code'  => $this->transaction->error_code,
             'exception'               => $exception,
         ]);
+        
+        // set any merchant order to failed
+        if ($this->transaction->merchant_order) {
+            \Log::info("{$this->getJobName()}: Updating the merchant order status");
+            $order = $this->transaction->merchant_order;
+            
+            $order->status = $this->transaction->status;
+            $order->completed_at = $this->transaction->completed_at;
+            $order->save();
+    
+            \Log::info('Order updated successfully', [
+                'uuid'            => $order->uuid,
+                'external_id'     => $order->external_id,
+                'status'          => $order->status,
+                'error_code'      => $order->transaction ? $order->transaction->error_code : null,
+                'partner_ref'     => $order->transaction ? $order->transaction->merchant_id : null,
+                'payment_ref'     => $order->code,
+                'payment_method'  => $order->paymentmethod,
+                'payment_account' => $order->paymentaccount,
+            ]);
+    
+            event(new OrderPaymentCompleted($order));
+        }
         
         /*
          * Transaction Status cannot be determined after several retries. Send to callback queue

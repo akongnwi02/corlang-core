@@ -20,6 +20,7 @@ class PaymentMethodCompanyController extends Controller
      * @param PaymentMethod $method
      * @param PaymentMethodCompanyRepository $paymentMethodCompanyRepository
      * @return mixed
+     * @throws \App\Exceptions\GeneralException
      */
     public function store(PaymentMethodCompanyStoreRequest $request, PaymentMethod $method, PaymentMethodCompanyRepository $paymentMethodCompanyRepository)
     {

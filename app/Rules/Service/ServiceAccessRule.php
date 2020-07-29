@@ -38,7 +38,7 @@ class ServiceAccessRule implements Rule
         
         // service is deactivated for everybody
         if (! $service->is_active || ! $service->category->is_active) {
-            return false;
+            throw new ForbiddenException(BusinessErrorCodes::SERVICE_NOT_ACTIVE, 'This service is not activated for you at the moment');
         }
     
         // service should be active for the company

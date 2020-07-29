@@ -25,6 +25,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('placeholder_text')->nullable();
             $table->string('name')->nullable();
             $table->string('code')->unique();
+            $table->string('logo_url')->nullable();
             $table->text('description_en')->nullable();
             $table->text('description_fr')->nullable();
     

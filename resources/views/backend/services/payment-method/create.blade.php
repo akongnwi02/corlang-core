@@ -113,6 +113,17 @@
                         </div><!--col-->
                     </div><!--form-group-->
 
+                    <div class="form-group row">
+                        {{ html()->label(__('validation.attributes.backend.services.method.logo'))->class('col-md-2 form-control-label')->for('logo') }}
+
+                        <div class="col-md-10">
+                            {{ html()->file('logo')->id('logo')->class('form-control-file') }}
+                            <div class="preview">
+                                {{ html()->img('#', __('validation.attributes.backend.services.service.logo'))->style('width:100px;height:100px;')->id('preview') }}
+                            </div>
+                        </div><!--col-->
+                    </div><!--form-group-->
+
                 </div><!--col-->
             </div><!--row-->
         </div><!--card-body-->
@@ -131,7 +142,27 @@
     </div><!--card-->
     {{ html()->closeModelForm() }}
 @endsection
+@push('after-scripts')
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
 
+            reader.onload = function (e) {
+                $('#preview').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            $('#preview').hide();
+        }
+    }
+
+    $("#logo").change(function(){
+        readURL(this);
+    });
+</script>
+@endpush
 @push('after-styles')
     <style>
         .required:after {

@@ -156,6 +156,13 @@
                     <i class="nav-icon icon-basket-loaded"></i> @lang('menus.backend.sidebar.sales')
                 </a>
             </li>
+            @if($logged_in_user->company->is_merchant)
+                <li class="nav-item">
+                    <a class="nav-link {{ active_class(Active::checkUriPattern('admin/orders')) }}" href="{{ route('admin.orders.index') }}">
+                        <i class="nav-icon icon-basket-loaded"></i> @lang('menus.backend.sidebar.orders')
+                    </a>
+                </li>
+            @endif
             <li class="nav-title">
                 <h6><b>@lang('menus.backend.sidebar.system')</b></h6>
             </li>
