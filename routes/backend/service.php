@@ -173,21 +173,21 @@ Route::group([
     Route::group(['prefix' => 'distribution/{distribution}'], function () {
         
         // Company
-        Route::get('/', [CommissionController::class, 'show'])
-            ->name('distribution.show')
-            ->middleware('permission:'.config('permission.permissions.read_distributions'));
+//        Route::get('/', [CommissionDistributionController::class, 'show'])
+//            ->name('distribution.show')
+//            ->middleware('permission:'.config('permission.permissions.read_distributions'));
         
-        Route::get('edit', [CommissionController::class, 'edit'])
+        Route::get('edit', [CommissionDistributionController::class, 'edit'])
             ->name('distribution.edit')
             ->middleware('permission:'.config('permission.permissions.update_distributions'));
         
-        Route::put('/', [CommissionController::class, 'update'])
+        Route::put('/', [CommissionDistributionController::class, 'update'])
             ->name('distribution.update')
             ->middleware('permission:'.config('permission.permissions.update_distributions'));
-        
-        Route::delete('/', [CommissionController::class, 'destroy'])
-            ->name('distribution.destroy')
-            ->middleware('permission:'.config('permission.permissions.delete_distributions'));
+//
+//        Route::delete('/', [CommissionDistributionController::class, 'destroy'])
+//            ->name('distribution.destroy')
+//            ->middleware('permission:'.config('permission.permissions.delete_distributions'));
     });
     
     /*

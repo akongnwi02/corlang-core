@@ -9,6 +9,7 @@
 namespace App\Models\Business;
 
 
+use App\Models\Traits\Attributes\CommissionDistributionAttribute;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Wildside\Userstamps\Userstamps;
@@ -16,7 +17,8 @@ use Wildside\Userstamps\Userstamps;
 class CommissionDistribution extends Model
 {
     use Uuid,
-        Userstamps;
+        Userstamps,
+        CommissionDistributionAttribute;
     
     /**
      * The database table used by the model.

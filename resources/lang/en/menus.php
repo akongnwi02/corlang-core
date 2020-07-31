@@ -82,6 +82,11 @@ return [
                 'create'     => 'Create Service Charge',
                 'edit'       => 'Edit Service Charge',
             ],
+            'distribution' => [
+                'management' => 'Commission Distribution Strategy',
+                'create'     => 'Create Distribution Strategy',
+                'edit'       => 'Edit Distribution Strategy',
+            ],
             'method' => [
                 'management' => 'Payment Methods',
                 'create'     => 'Create Payment Method',

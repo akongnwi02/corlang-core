@@ -110,6 +110,7 @@ return [
             ],
             'distribution' => [
                 'create_error' => 'There was an error creating the distribution',
+                'sum_error'    => 'The sum of the commission distributions must not be greater than 100%',
                 'update_error' => 'There was an error updating the distribution',
             ],
             'method'     => [

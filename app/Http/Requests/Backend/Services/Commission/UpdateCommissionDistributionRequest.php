@@ -9,6 +9,7 @@
 namespace App\Http\Requests\Backend\Services\Commission;
 
 
+use App\Exceptions\GeneralException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -32,8 +33,11 @@ class UpdateCommissionDistributionRequest extends FormRequest
     
     public function rules()
     {
+        if (request('external_rate') + request('company_rate') + request('agent_rate') > 100) {
+            throw new GeneralException(__('exceptions.backend.services.distribution.sum_error'));
+        }
         return [
-            'name'          => ['required', 'string', Rule::unique('commission_distributions', 'name')],
+            'name'          => ['required', 'string', Rule::unique('commission_distributions', 'name')->ignore(request()->distribution, 'uuid')],
             'description'   => 'required|string|max:191',
             'agent_rate'    => ['required', 'numeric', 'between:0,100'],
             'company_rate'  => ['required', 'numeric', 'between:0,100'],

@@ -45,12 +45,9 @@ trait ServiceRelationship
             ->as('specific')
             ->withPivot([
                 'is_active',
-                'company_rate',
-                'agent_rate',
-                'external_rate',
                 'customercommission_id',
                 'providercommission_id',
-                'commission_distributions_id',
+                'commission_distribution_id',
             ]);
     }
     

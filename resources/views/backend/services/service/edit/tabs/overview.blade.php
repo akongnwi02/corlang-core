@@ -59,48 +59,6 @@
             </div><!--form-group-->
 
             <div class="form-group row">
-                {{ html()->label(__('validation.attributes.backend.services.service.agent_rate'))->class('col-md-2 form-control-label required')->for('agent_rate') }}
-
-                <div class="col-md-10">
-                    {{ html()->text('agent_rate')
-                        ->class('form-control')
-                        ->required()
-                        ->attribute('min', 0)
-                        ->attribute('step', 0.01)
-                        ->attribute('max', 100)
-                        ->placeholder(__('validation.attributes.backend.services.service.agent_rate'))}}
-                </div><!--col-->
-            </div><!--form-group-->
-
-            <div class="form-group row">
-                {{ html()->label(__('validation.attributes.backend.services.service.company_rate'))->class('col-md-2 form-control-label required')->for('company_rate') }}
-
-                <div class="col-md-10">
-                    {{ html()->text('company_rate')
-                        ->class('form-control')
-                        ->required()
-                         ->attribute('min', 0)
-                         ->attribute('step', 0.01)
-                        ->attribute('max', 100)
-                        ->placeholder(__('validation.attributes.backend.services.service.company_rate'))}}
-                </div><!--col-->
-            </div><!--form-group-->
-
-            <div class="form-group row">
-                {{ html()->label(__('validation.attributes.backend.services.service.external_rate'))->class('col-md-2 form-control-label required')->for('external_rate') }}
-
-                <div class="col-md-10">
-                    {{ html()->text('external_rate')
-                        ->class('form-control')
-                        ->required()
-                         ->attribute('min', 0)
-                         ->attribute('step', 0.01)
-                        ->attribute('max', 100)
-                        ->placeholder(__('validation.attributes.backend.services.service.external_rate'))}}
-                </div><!--col-->
-            </div><!--form-group-->
-
-            <div class="form-group row">
                 {{ html()->label(__('validation.attributes.backend.services.service.min_amount'))->class('col-md-2 form-control-label required')->for('min_amount') }}
 
                 <div class="col-md-10">
@@ -157,6 +115,16 @@
 
                 <div class="col-md-10">
                     {{ html()->select('customercommission_id', [null => null] + $commissions)
+                        ->class('form-control')
+                        }}
+                </div><!--col-->
+            </div><!--form-group-->
+
+            <div class="form-group row">
+                {{ html()->label(__('validation.attributes.backend.services.service.commission_distribution_id'))->class('col-md-2 form-control-label')->for('commission_distribution_id') }}
+
+                <div class="col-md-10">
+                    {{ html()->select('commission_distribution_id', [null => null] + $distributions)
                         ->class('form-control')
                         }}
                 </div><!--col-->

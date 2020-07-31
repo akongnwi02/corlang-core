@@ -36,20 +36,4 @@ trait CompanyServiceAttribute
         }
         return '<span class="badge badge-danger">'.__('labels.general.no').'</span>';
     }
-    
-    public function getAgentRateLabelAttribute()
-    {
-        return $this->agent_rate . '%';
-    }
-    
-    public function getCompanyRateLabelAttribute()
-    {
-        return $this->company_rate . '%';
-    }
-    
-    public function getExternalRateLabelAttribute()
-    {
-        return $this->external_rate . '%';
-    }
-
 }
