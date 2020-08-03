@@ -71,7 +71,7 @@ class UpdateCompanyRequest extends FormRequest
             'country_id'       => ['required', Rule::exists('countries', 'uuid')],
             'size'             => 'max:5',
 //            'type_id'          => ['required', new RestrictedAttribute()],
-            'logo'             => 'sometimes|image|max:191',
+            'logo'             => 'sometimes|image|max:1024',
             'is_provider'      => ['sometimes', 'boolean'],
             'direct_polling'   => ['sometimes', 'boolean'],
         ];

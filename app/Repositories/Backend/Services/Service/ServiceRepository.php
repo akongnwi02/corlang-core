@@ -155,21 +155,6 @@ class ServiceRepository
         return Service::where('code', $code)->first();
     }
     
-    public function getAgentServiceRate($service, $company)
-    {
-        return $company->services()->where('uuid', $service->uuid)->first()->specific->agent_rate ?: $service->agent_rate;
-    }
-    
-    public function getCompanyServiceRate($service, $company)
-    {
-        return $company->services()->where('uuid', $service->uuid)->first()->specific->company_rate ?: $service->company_rate;
-    }
-    
-    public function getExternalServiceRate($service, $company)
-    {
-        return $company->services()->where('uuid', $service->uuid)->first()->specific->external_rate ?: $service->external_rate;
-    }
-    
     public function getAvailableCompanies($service)
     {
         return $service->companies()->where('companies.is_active', true);

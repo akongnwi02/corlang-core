@@ -121,14 +121,33 @@ class TransactionRepository
             /*
              * get the commission rates
              */
-            $agent_commission_rate    = auth()->user()->company && !$accountTopUp ? $this->serviceRepository->getAgentServiceRate($service, auth()->user()->company) : 0;
-            $company_commission_rate  = auth()->user()->company && !$accountTopUp ? $this->serviceRepository->getCompanyServiceRate($service, auth()->user()->company) : 0;
-            $external_commission_rate = auth()->user()->company && !$accountTopUp ? $this->serviceRepository->getExternalServiceRate($service, auth()->user()->company) : 0;
+            $agent_commission_rate = 0;
+            $company_commission_rate = 0;
+            $external_commission_rate = 0;
+            
+            
+            if (auth()->user()->company && !$accountTopUp) {
+                
+                $commission_distribution = @auth()->user()->company->services()->where('uuid', $service->uuid)->first()->specific->commission_distribution ?: @$service->commission_distribution;
+    
+                if ($commission_distribution) {
+                    $agent_commission_rate = $commission_distribution->agent_rate;
+                    $company_commission_rate = $commission_distribution->company_rate;
+                    $external_commission_rate = $commission_distribution->external_rate;
+                }
+            }
+            
+            \Log::debug('The following distribution strategy was applied for this transaction', [
+                'agent_rate' => $agent_commission_rate,
+                'company_rate' => $company_commission_rate,
+                'external_rate' => $external_commission_rate,
+            ]);
             
             /*
              * Verify if the commission distribution amongst the stakeholders is not greater than 100
              */
             if (($agent_commission_rate + $company_commission_rate + $external_commission_rate) > 100) {
+                dd($agent_commission_rate, $company_commission_rate, $external_commission_rate);
                 throw new ServerErrorException(BusinessErrorCodes::COMMISSION_DISTRIBUTION_ERROR, 'The commission for this service is not properly distributed amongst the stakeholders');
             }
             

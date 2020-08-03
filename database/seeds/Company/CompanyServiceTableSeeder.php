@@ -24,8 +24,6 @@ class CompanyServiceTableSeeder extends Seeder
                 'company_id'   => Company::first()->uuid,
                 'service_id'   => $service->uuid,
                 'is_active'    => true,
-                'agent_rate'   => 10,
-                'company_rate' => 50,
             ]);
         }
     }
