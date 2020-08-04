@@ -17,7 +17,7 @@
                 <hr class="my-2">
                 <div v-for="item in order.items" class="row justify-content-between">
                     <div class="col-auto col-md-7">
-                        <div class="media flex-column flex-sm-row"><br><br> <img v-if="item.logo_url" class="img-fluid" :src="item.logo_url" width="62" height="62" :alt="item.code">
+                        <div class="media flex-column flex-sm-row"><br><br> <img v-if="item.item_logo" class="img-fluid" :src="item.item_logo" width="62" height="62" :alt="item.code">
                             <div class="media-body my-auto">
                                 <div class="row ">
                                     <div class="col-auto">
