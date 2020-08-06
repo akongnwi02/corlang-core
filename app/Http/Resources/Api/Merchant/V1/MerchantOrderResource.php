@@ -33,7 +33,7 @@ class MerchantOrderResource extends JsonResource
             'payment_account' => $this->paymentaccount,
             'completed_at' => $this->completed ? $this->completed_at->toDatetimeString() : null,
             'notification_url' => $this->notification_url,
-            'return_url' => $this->return_url,
+            'return_url' => $this->return_url . '?external_id=' . $this->external_id,
             'description' => $this->description,
             'status' => $this->status,
             'created_at' => $this->created_at->toDatetimeString(),
