@@ -9,7 +9,7 @@
                         <h3 v-if="order.customer && order.customer.name">{{$t('dashboard.merchant.payment.dear')}}, {{order.customer.name}}</h3>
                         <p style="font-size:20px;color:#5C5C5C;">{{$t('dashboard.merchant.payment.thank_you')}}</p>
                         <p>{{ $i18n.locale == 'en' ? selectedMethod.description_en : selectedMethod.description_fr }}</p>
-                        <a :href="order.return_url" class="btn btn-success col-md-7 col-lg-6 mx-auto">     {{$t('dashboard.merchant.payment.return')}}      </a>
+                        <a :href="order.return_url+'?external_id='+order.external_id" class="btn btn-success col-md-7 col-lg-6 mx-auto">     {{$t('dashboard.merchant.payment.return')}}      </a>
                         <br><br>
                     </div>
                 </div>

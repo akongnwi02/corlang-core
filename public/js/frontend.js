@@ -35582,11 +35582,11 @@ var render = function() {
                   _c("br"),
                   _c("br"),
                   _vm._v(" "),
-                  item.logo_url
+                  item.item_logo
                     ? _c("img", {
                         staticClass: "img-fluid",
                         attrs: {
-                          src: item.logo_url,
+                          src: item.item_logo,
                           width: "62",
                           height: "62",
                           alt: item.code
@@ -37270,7 +37270,12 @@ var render = function() {
                     "a",
                     {
                       staticClass: "btn btn-success col-md-7 col-lg-6 mx-auto",
-                      attrs: { href: _vm.order.return_url }
+                      attrs: {
+                        href:
+                          _vm.order.return_url +
+                          "?external_id=" +
+                          _vm.order.external_id
+                      }
                     },
                     [
                       _vm._v(
