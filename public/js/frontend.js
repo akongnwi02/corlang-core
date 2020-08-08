@@ -37270,12 +37270,7 @@ var render = function() {
                     "a",
                     {
                       staticClass: "btn btn-success col-md-7 col-lg-6 mx-auto",
-                      attrs: {
-                        href:
-                          _vm.order.return_url +
-                          "?external_id=" +
-                          _vm.order.external_id
-                      }
+                      attrs: { href: _vm.order.return_url }
                     },
                     [
                       _vm._v(
