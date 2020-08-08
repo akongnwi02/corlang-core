@@ -35582,11 +35582,11 @@ var render = function() {
                   _c("br"),
                   _c("br"),
                   _vm._v(" "),
-                  item.logo_url
+                  item.item_logo
                     ? _c("img", {
                         staticClass: "img-fluid",
                         attrs: {
-                          src: item.logo_url,
+                          src: item.item_logo,
                           width: "62",
                           height: "62",
                           alt: item.code
