@@ -21,38 +21,34 @@ class StoreServiceRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name'                    => __('validation.attributes.backend.services.service.name'),
-            'description_en'          => __('validation.attributes.backend.services.service.description_en'),
-            'description_fr'          => __('validation.attributes.backend.services.service.description_fr'),
-            'category_id'             => __('validation.attributes.backend.services.service.category'),
-            'code'                    => __('validation.attributes.backend.services.service.code'),
-            'providercommission_id'   => __('validation.attributes.backend.services.service.providercommission'),
-            'customercommission_id'   => __('validation.attributes.backend.services.service.customercommission'),
-            'providercompany_id'      => __('validation.attributes.backend.services.service.providercompany'),
-            'agent_rate'              => __('validation.attributes.backend.services.service.agent_rate'),
-            'company_rate'            => __('validation.attributes.backend.services.service.company_rate'),
-            'external_rate'           => __('validation.attributes.backend.services.service.external_rate'),
-            'is_prepaid'              => __('validation.attributes.backend.services.service.prepaid'),
-            'logo'                    => __('validation.attributes.backend.services.service.logo'),
+            'name'                       => __('validation.attributes.backend.services.service.name'),
+            'description_en'             => __('validation.attributes.backend.services.service.description_en'),
+            'description_fr'             => __('validation.attributes.backend.services.service.description_fr'),
+            'category_id'                => __('validation.attributes.backend.services.service.category'),
+            'code'                       => __('validation.attributes.backend.services.service.code'),
+            'providercommission_id'      => __('validation.attributes.backend.services.service.providercommission'),
+            'customercommission_id'      => __('validation.attributes.backend.services.service.customercommission'),
+            'providercompany_id'         => __('validation.attributes.backend.services.service.providercompany'),
+            'commission_distribution_id' => __('validation.attributes.backend.services.service.commission_distribution_id'),
+            'is_prepaid'                 => __('validation.attributes.backend.services.service.prepaid'),
+            'logo'                       => __('validation.attributes.backend.services.service.logo'),
         ];
     }
     
     public function rules()
     {
         return [
-            'name'                    => ['required', 'string', 'max:191', Rule::unique('services', 'name')],
-            'description_en'          => ['nullable', 'string', 'max:191',],
-            'description_fr'          => ['nullable', 'string', 'max:191',],
-            'category_id'             => ['required', Rule::exists('categories', 'uuid'), 'nullable'],
-            'code'                    => ['required', 'string', 'max:191', Rule::unique('services', 'code')],
-            'providercommission_id'   => ['sometimes', Rule::exists('commissions', 'uuid'), 'nullable'],
-            'customercommission_id'   => ['sometimes', Rule::exists('commissions', 'uuid'), 'nullable'],
-            'providercompany_id'      => ['sometimes', Rule::exists('companies', 'uuid'), 'nullable'],
-            'agent_rate'              => ['required', 'numeric', 'between:0,100'],
-            'company_rate'            => ['required', 'numeric', 'between:0,100'],
-            'external_rate'           => ['required', 'numeric', 'between:0,100'],
-            'is_prepaid'              => ['sometimes', 'boolean'],
-            'logo'                    => 'sometimes|image|max:191',
+            'name'                       => ['required', 'string', 'max:191', Rule::unique('services', 'name')],
+            'description_en'             => ['nullable', 'string', 'max:191',],
+            'description_fr'             => ['nullable', 'string', 'max:191',],
+            'category_id'                => ['required', Rule::exists('categories', 'uuid'), 'nullable'],
+            'code'                       => ['required', 'string', 'max:191', Rule::unique('services', 'code')],
+            'providercommission_id'      => ['sometimes', Rule::exists('commissions', 'uuid'), 'nullable'],
+            'customercommission_id'      => ['sometimes', Rule::exists('commissions', 'uuid'), 'nullable'],
+            'providercompany_id'         => ['sometimes', Rule::exists('companies', 'uuid'), 'nullable'],
+            'commission_distribution_id' => ['nullable', Rule::exists('commission_distributions', 'uuid')],
+            'is_prepaid'                 => ['sometimes', 'boolean'],
+            'logo'                       => 'sometimes|image|max:191',
         ];
     }
 }

@@ -14,6 +14,7 @@ use App\Http\Requests\Backend\Services\Service\StoreServiceRequest;
 use App\Models\Service\Service;
 use App\Repositories\Backend\Company\Company\CompanyRepository;
 use App\Repositories\Backend\Services\Category\CategoryRepository;
+use App\Repositories\Backend\Services\Commission\CommissionDistributionRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 
@@ -36,13 +37,16 @@ class ServiceController extends Controller
      * @param CategoryRepository $categoryRepository
      * @return mixed
      */
-    public function create(CommissionRepository $commissionRepository, CategoryRepository $categoryRepository)
+    public function create(CommissionRepository $commissionRepository, CategoryRepository $categoryRepository, CommissionDistributionRepository $commissionDistributionRepository)
     {
         return view('backend.services.service.create')
             ->withCommissions($commissionRepository->getAllCommissions()
                 ->pluck('name', 'uuid')
                 ->toArray())
             ->withCategories($categoryRepository->get()
+                ->pluck('name', 'uuid')
+                ->toArray())
+            ->withDistributions($commissionDistributionRepository->getAllCommissionDistributions()
                 ->pluck('name', 'uuid')
                 ->toArray());
     }
@@ -78,6 +82,7 @@ class ServiceController extends Controller
      * @param CommissionRepository $commissionRepository
      * @param CategoryRepository $categoryRepository
      * @param ServiceRepository $serviceRepository
+     * @param CommissionDistributionRepository $commissionDistributionRepository
      * @param CompanyRepository $companyRepository
      * @return mixed
      */
@@ -86,12 +91,16 @@ class ServiceController extends Controller
         CommissionRepository $commissionRepository,
         CategoryRepository $categoryRepository,
         ServiceRepository $serviceRepository,
+        CommissionDistributionRepository $commissionDistributionRepository,
         CompanyRepository $companyRepository)
     {
         return view('backend.services.service.edit')
             ->withServiceCompanies($serviceRepository->getAvailableCompanies($service)->get())
             ->withService($service)
             ->withCompanies($companyRepository->getCompaniesForCurrentUser()->get())
+            ->withDistributions($commissionDistributionRepository->getAllCommissionDistributions()
+                ->pluck('name', 'uuid')
+                ->toArray())
             ->withCommissions($commissionRepository->getAllCommissions()
                 ->pluck('name', 'uuid')
                 ->toArray())

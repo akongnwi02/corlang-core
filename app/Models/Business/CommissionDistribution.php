@@ -2,31 +2,30 @@
 /**
  * Created by PhpStorm.
  * User: devert
- * Date: 1/21/20
- * Time: 10:16 PM
+ * Date: 7/29/20
+ * Time: 11:24 PM
  */
 
 namespace App\Models\Business;
 
-use App\Models\Traits\Attributes\CommissionAttribute;
-use App\Models\Traits\Relationships\CommissionRelationship;
+
+use App\Models\Traits\Attributes\CommissionDistributionAttribute;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Wildside\Userstamps\Userstamps;
 
-class Commission extends Model
+class CommissionDistribution extends Model
 {
     use Uuid,
         Userstamps,
-        CommissionAttribute,
-        CommissionRelationship;
+        CommissionDistributionAttribute;
     
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'commissions';
+    protected $table = 'commission_distributions';
     
     protected $primaryKey = 'uuid';
     
@@ -37,7 +36,8 @@ class Commission extends Model
     protected $fillable = [
         'name',
         'description',
-        'currency_id',
+        'company_rate',
+        'agent_rate',
+        'external_rate',
     ];
-
 }

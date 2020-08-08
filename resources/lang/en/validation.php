@@ -209,11 +209,9 @@ return [
                     'agent_self_topup' => 'Agent Self Topup',
                 ],
                 'service'       => [
-                    'company_rate'       => 'Company Rate (%)',
-                    'agent_rate'         => 'Agent Rate (%)',
-                    'external_rate'      => 'External Rate (%)',
                     'customercommission' => 'Customer Commission',
                     'providercommission' => 'Provider Commission',
+                    'commissiondistribution' => 'Commission Distribution Strategy',
                     'default'            => 'Use service default value',
                     'custom'             => 'Set custom value',
                     'services'           => 'Services',
@@ -248,13 +246,11 @@ return [
                     'items'                   => 'Items',
                     'requires_auth'           => 'Authorization Required',
                     'withdrawal'              => 'Money Withdrawal',
-                    'company_rate'            => 'Default Company Rate (%)',
-                    'agent_rate'              => 'Default Agent Rate (%)',
-                    'external_rate'           => 'Default External Rate (%)',
                     'min_amount'              => 'Minimum Amount',
                     'max_amount'              => 'Maximum Amount',
                     'step_amount'             => 'Step Amount',
                     'providercompany'         => 'Provider Company',
+                    'commission_distribution_id' => 'Commission Distribution',
                     'companies'               => 'Companies',
                 ],
                 'item'       => [
@@ -276,6 +272,13 @@ return [
                         'fixed'      => 'Fixed',
                         'percentage' => 'Percentage',
                     ]
+                ],
+                'commission_distribution' => [
+                    'name'        => 'Name',
+                    'description' => 'Description',
+                    'company_rate'            => 'Default Company Rate (%)',
+                    'agent_rate'              => 'Default Agent Rate (%)',
+                    'external_rate'           => 'Default External Rate (%)',
                 ],
                 'method'     => [
                     'name'               => 'Name',

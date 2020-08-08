@@ -10,6 +10,7 @@ namespace App\Models\Traits\Relationships;
 
 
 use App\Models\Business\Commission;
+use App\Models\Business\CommissionDistribution;
 
 trait CompanyServiceRelationship
 {
@@ -21,5 +22,10 @@ trait CompanyServiceRelationship
     public function provider_commission()
     {
         return $this->belongsTo(Commission::class, 'providercommission_id', 'uuid');
+    }
+    
+    public function commission_distribution()
+    {
+        return $this->belongsTo(CommissionDistribution::class, 'commission_distribution_id', 'uuid');
     }
 }

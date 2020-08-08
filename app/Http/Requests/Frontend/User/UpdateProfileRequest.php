@@ -35,7 +35,7 @@ class UpdateProfileRequest extends FormRequest
             'phone'           => ['sometimes', 'required', 'max:191', 'regex:/^(237|00237|\+237)?[6|2|3]{1}\d{8}$/'],
             'username'        => 'sometimes|required|max:191',
             'avatar_type'     => ['required', 'max:191', Rule::in(array_merge(['gravatar', 'storage'], (new Socialite)->getAcceptedProviders()))],
-            'avatar_location' => 'sometimes|image|max:191',
+            'avatar_location' => 'sometimes|image|max:1024',
         ];
     }
 }

@@ -75,21 +75,6 @@ trait ServiceAttribute
     
         return "<img class='navbar-brand-full img-fluid' src='$url' width='30' height='30' style='border-radius: 50%' alt='$this->name'>";
     }
-
-    public function getAgentRateLabelAttribute()
-    {
-        return $this->agent_rate . '%';
-    }
-    
-    public function getCompanyRateLabelAttribute()
-    {
-        return $this->company_rate . '%';
-    }
-    
-    public function getExternalRateLabelAttribute()
-    {
-        return $this->external_rate . '%';
-    }
     
     public function getCollectedAmountLabelAttribute()
     {

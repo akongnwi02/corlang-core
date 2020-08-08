@@ -31,6 +31,7 @@ class CompanyService extends Pivot
         'external_rate',
         'providercommission_id',
         'customercommission_id',
+        'commission_distribution_id',
     ];
     
     protected $casts = [

@@ -165,11 +165,9 @@ return [
                                 'active'             => 'Active',
                                 'code'               => 'Code',
                                 'logo'               => 'Logo',
-                                'company_rate'       => 'Specific Company Rate (%)',
-                                'agent_rate'         => 'Specific Agent Rate (%)',
-                                'external_rate'      => 'Specific External Rate(%)',
                                 'customercommission' => 'Customer Service Charge',
                                 'providercommission' => 'Provider Service Charge',
+                                'commissiondistribution' => 'Commission Distribution Strategy',
                                 'total'              => 'service|services'
                             ]
                         ],
@@ -216,6 +214,7 @@ return [
                     'max_amount'         => 'Max Amount',
                     'customercommission' => 'Default Customer Service Charge',
                     'providercommission' => 'Default Provider Service Charge',
+                    'commissionditribution' => 'Commission Distribution',
                     'total'              => 'service|services',
                 ],
                 'tabs'  => [
@@ -261,6 +260,19 @@ return [
                         'empty'      => 'Empty',
                     ],
                 ],
+            ],
+            'distribution' => [
+                'management'         => 'Commission Distribution',
+                'create'             => 'Create Commission Distribution',
+                'edit'               => 'Edit Commission Distribution',
+                'table' => [
+                    'agent_rate'         => 'Default Agent Rate',
+                    'company_rate'       => 'Default Company Rate',
+                    'external_rate'      => 'Default External Rate',
+                    'name'        => 'Name',
+                    'description' => 'Description',
+                    'total' => 'distribution|distributions'
+                ]
             ],
             'method'     => [
                 'management' => 'Payment Methods',

@@ -12,6 +12,7 @@ use App\Models\Account\BillerPayment;
 use App\Models\Account\PayoutType;
 use App\Models\Auth\User;
 use App\Models\Business\Commission;
+use App\Models\Business\CommissionDistribution;
 use App\Models\Company\Company;
 use App\Models\Company\CompanyService;
 use App\Models\Service\Category;
@@ -44,11 +45,9 @@ trait ServiceRelationship
             ->as('specific')
             ->withPivot([
                 'is_active',
-                'company_rate',
-                'agent_rate',
-                'external_rate',
                 'customercommission_id',
                 'providercommission_id',
+                'commission_distribution_id',
             ]);
     }
     
@@ -81,5 +80,11 @@ trait ServiceRelationship
     {
         return $this->hasMany(BillerPayment::class, 'service_id', 'uuid')->where('type_id', PayoutType::where('name', config('business.payout.type.provision'))->first()->uuid);
     }
+    
+    public function commission_distribution()
+    {
+        return $this->belongsTo(CommissionDistribution::class, 'commission_distribution_id', 'uuid');
+    }
+    
 }
 

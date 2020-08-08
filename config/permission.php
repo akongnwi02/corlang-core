@@ -116,6 +116,12 @@ return [
         'update_commissions'          => 'update commissions',
         'delete_commissions'          => 'delete commissions',
         
+        // distributions
+        'create_distributions'          => 'create distributions',
+        'read_distributions'            => 'read distributions',
+        'update_distributions'          => 'update distributions',
+        'delete_distributions'          => 'delete distributions',
+        
         // services
         'create_services'             => 'create services',
         'read_services'               => 'read services',
