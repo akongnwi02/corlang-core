@@ -46,12 +46,12 @@
                             <td>{{ $sale->destination }}</td>
                             <td>{{ $sale->paymentaccount}}</td>
                             <td>{{ number_format($sale->amount, 2)}}</td>
-                            <td>{{ number_format($sale->customer_service_fee, 2)}}</td>
-                            <td>{{ number_format($sale->total_customer_amount, 2)}}</td>
-                            <td>{{ number_format($sale->provider_service_fee, 2)}}</td>
-                            <td>{{ number_format($sale->company_commission, 2) . ' ' . $sale->currency_code }}</td>
-                            <td>{{ number_format($sale->agent_commission, 2) . ' ' . $sale->currency_code }}</td>
-                            <td>{{ number_format($sale->external_commission, 2) . ' ' . $sale->currency_code }}</td>
+                            <td>{{ number_format($sale->customer_service_fee, 2) }}</td>
+                            <td>{{ number_format($sale->total_customer_amount, 2) }}</td>
+                            <td>{{ number_format($sale->provider_service_fee, 2) }}</td>
+                            <td>{{ number_format($sale->company_commission, 2) }}</td>
+                            <td>{{ number_format($sale->agent_commission, 2) }}</td>
+                            <td>{{ number_format($sale->external_commission, 2) }}</td>
                             <td>{{  $sale->currency_code  }}</td>
                             <td><span class="badge badge-{{ $sale->status_class_label }}">{{ __($sale->status) }}</span></td>
                         </tr>
