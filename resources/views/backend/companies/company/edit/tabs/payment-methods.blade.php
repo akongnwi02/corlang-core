@@ -66,11 +66,9 @@
                                         <div class="form-check mb-2 mr-sm-2">
                                             <label class="form-check-label" ><input type="checkbox" name="customer-default" class="form-check-input" id="{{ $method->uuid }}"/> @lang('validation.attributes.backend.companies.paymentmethod.default_setting') ({{ @$method->customer_commission->name ?: '-'.__('labels.general.none'). '-' }})</label>
                                         </div>
-                                        {{ html()->select('customercommission_id' , $commissions)
+                                        {{ html()->select('customercommission_id' , [null => null ] + $commissions)
                                             ->class('form-control')
                                             ->value($method->specific->customercommission_id)
-                                            ->required()
-
                                          }}
                                     </div>
 
@@ -79,10 +77,9 @@
                                         <div class="form-check mb-2 mr-sm-2">
                                             <label class="form-check-label" ><input type="checkbox" name="provider-default" class="form-check-input" id="{{ $method->uuid }}"/> @lang('validation.attributes.backend.companies.paymentmethod.default_setting') ({{ @$method->provider_commission->name ?: '-'.__('labels.general.none'). '-' }})</label>
                                         </div>
-                                        {{ html()->select('providercommission_id' , $commissions)
+                                        {{ html()->select('providercommission_id' , [null => null ] + $commissions)
                                             ->class('form-control')
                                             ->value($method->specific->providercommission_id)
-                                            ->required()
                                         }}
                                     </div>
 

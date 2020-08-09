@@ -67,11 +67,9 @@
                                         <div class="form-check mb-2 mr-sm-2">
                                             <label class="form-check-label" ><input type="checkbox" name="customer-default" class="form-check-input" id="{{ $service->uuid }}"/> @lang('validation.attributes.backend.companies.service.default_setting') ({{ @$service->customer_commission->name ?: '-'.__('labels.general.none'). '-' }})</label>
                                         </div>
-                                        {{ html()->select('customercommission_id' , $commissions)
+                                        {{ html()->select('customercommission_id' , [null => null ] + $commissions)
                                             ->class('form-control')
                                             ->value($service->specific->customercommission_id)
-                                            ->required()
-
                                          }}
                                     </div>
 
@@ -80,10 +78,9 @@
                                         <div class="form-check mb-2 mr-sm-2">
                                             <label class="form-check-label" ><input type="checkbox" name="provider-default" class="form-check-input" id="{{ $service->uuid }}"/> @lang('validation.attributes.backend.companies.service.default_setting') ({{ @$service->provider_commission->name ?: '-'.__('labels.general.none'). '-' }})</label>
                                         </div>
-                                        {{ html()->select('providercommission_id' , $commissions)
+                                        {{ html()->select('providercommission_id' , [null => null ] + $commissions)
                                             ->class('form-control')
                                             ->value($service->specific->providercommission_id)
-                                            ->required()
                                         }}
                                     </div>
 
@@ -92,10 +89,9 @@
                                         <div class="form-check mb-2 mr-sm-2">
                                             <label class="form-check-label" ><input type="checkbox" name="distribution-default" class="form-check-input" id="{{ $service->uuid }}"/> @lang('validation.attributes.backend.companies.service.default_setting') ({{ @$service->commission_distribution->name ?: '-'.__('labels.general.none'). '-' }})</label>
                                         </div>
-                                        {{ html()->select('commission_distribution_id' , $distributions)
+                                        {{ html()->select('commission_distribution_id' , [null => null ] + $distributions)
                                             ->class('form-control')
                                             ->value($service->specific->commission_distribution_id)
-                                            ->required()
                                         }}
                                     </div>
 
