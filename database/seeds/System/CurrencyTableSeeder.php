@@ -25,6 +25,22 @@ class CurrencyTableSeeder extends Seeder
             'is_default' => true,
         ]);
         
+        Currency::create([
+            'name' => 'United State Dollar',
+            'code' => 'USD',
+            'rate' => 550,
+            'is_active' => true,
+            'is_default' => false,
+        ]);
+        
+        Currency::create([
+            'name' => 'European Euro',
+            'code' => 'EUR',
+            'rate' => 650,
+            'is_active' => true,
+            'is_default' => false,
+        ]);
+        
         Country::reguard();
     
     }
