@@ -38,6 +38,14 @@ return [
             ],
         ],
 
+        'administration' => [
+            'main' => 'Administration',
+            'currency' => [
+                'management' => 'Currency',
+                'create' => 'Create Currency',
+                'edit' => 'Edit Currency',
+            ],
+        ],
         'log-viewer' => [
             'main'      => 'Log Viewer',
             'dashboard' => 'Dashboard',
@@ -93,6 +101,7 @@ return [
                 'edit'       => 'Edit Payment Method',
             ]
         ],
+        
         'sales' => [
             'management' => 'Sales',
             'clear' => 'Clear Filters',

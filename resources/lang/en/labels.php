@@ -556,7 +556,23 @@ return [
                     'total'   => 'payment|payments',
                 ]
             ],
-        ]
+        ],
+        'administration' => [
+            'currency'   => [
+                'management' => 'Currency',
+                'edit'       => 'Edit Currency',
+                'create'     => 'Create Currency',
+                'active'     => 'Active Currencies',
+                'table'      => [
+                    'name'    => 'Currency Name',
+                    'code'    => 'Currency Code',
+                    'active'  => 'Active',
+                    'default' => 'Default',
+                    'rate'    => 'Exchange Rate',
+                    'total'   => 'currency|currencies',
+                ]
+            ],
+        ],
     ],
     'frontend' => [
         'auth'      => [

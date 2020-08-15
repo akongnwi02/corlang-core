@@ -79,11 +79,16 @@
     "drain accounts": "décharger les comptes",
     "read provisions": "lire les provisions",
     "read sales": "lire les ventes",
-    "read accounting" : "lire la comptabilité",
-    "request provision" : "demande de provision",
-    "pay collection" : "payer les collections",
+    "read accounting": "lire la comptabilité",
+    "request provision": "demande de provision",
+    "pay collection": "payer les collections",
     "create distributions": "create distributions",
     "read distributions": "read distributions",
     "update distributions": "update distributions",
-    "delete distributions": "delete distributions"
+    "delete distributions": "delete distributions",
+    "read currencies": "read currencies",
+    "create currencies": "create currencies",
+    "update currencies": "update currencies",
+    "delete currencies": "delete currencies",
+    "deactivate currencies": "deactivate currencies"
 }

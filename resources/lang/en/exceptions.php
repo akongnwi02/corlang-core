@@ -130,6 +130,13 @@ return [
                 'update_error' => 'They was a problem updating the :method payment method. It has already been confirmed by the system. Please contact support.'
             ]
         ],
+        'administration' => [
+            'currency' => [
+                'create_error' => 'There was a problem creating this currency. Please try again.',
+                'update_error' => 'There was a problem updating this currency. Please try again.',
+                'mark_error'   => 'There was a problem updating the status of this currency. Please try again.',
+            ]
+        ],
         'payout'   => [
             'drain_error'      => 'There was an error draining the amount',
             'transfer_error'   => 'There was a problem transferring the amount to the strongbox.',

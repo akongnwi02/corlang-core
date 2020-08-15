@@ -177,6 +177,28 @@
                 <h6><b>@lang('menus.backend.sidebar.system')</b></h6>
             </li>
             @if ($logged_in_user->isAdmin() && $logged_in_user->company->isDefault())
+                <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/administration*'), 'open') }}">
+                    <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/administration*')) }}" href="{{ route('admin.administration.currency.index') }}">
+                        <i class="nav-icon icon-list"></i> @lang('menus.backend.administration.main')
+                    </a>
+
+                    <ul class="nav-dropdown-items">
+                        @can(config('permission.permissions.read_currencies'))
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/administration/currency*')) }}" href="{{ route('admin.administration.currency.index') }}">
+                                    @lang('menus.backend.administration.currency.management')
+                                </a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ active_class(Active::checkUriPattern('admin/horizon')) }}" href="{{ route('admin.horizon') }}">
+                        <i class="nav-icon icon-speedometer"></i> @lang('menus.backend.sidebar.horizon')
+                    </a>
+                </li>
+            @endif
+            @if ($logged_in_user->isAdmin() && $logged_in_user->company->isDefault())
                 <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'open') }}">
                     <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/log-viewer*')) }}" href="#">
                         <i class="nav-icon icon-list"></i> @lang('menus.backend.log-viewer.main')

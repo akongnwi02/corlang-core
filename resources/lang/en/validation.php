@@ -314,6 +314,14 @@ return [
                     'comment'  => 'comment',
                 ]
             ],
+            'administration' => [
+                'currency'   => [
+                    'name'    => 'Currency Name',
+                    'code'    => 'Currency Code',
+                    'active'  => 'Active',
+                    'rate'    => 'Exchange Rate',
+                ]
+            ],
             'account'    => [
                 'amount'         => 'Amount',
                 'currency'       => 'Currency',

@@ -2,6 +2,7 @@
 
 namespace App\Models\System;
 
+use App\Models\Traits\Attributes\CurrencyAttribute;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Currency extends Model
 {
-    use Uuid;
+    use Uuid,
+        CurrencyAttribute;
     
     /**
      * The database table used by the model.
