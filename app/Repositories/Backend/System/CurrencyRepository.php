@@ -33,6 +33,21 @@ class CurrencyRepository
         return Currency::where('code', $code)->first();
     }
     
+    public function getDefaultCurrency()
+    {
+        return Currency::where('is_default', true)->first();
+    }
+    
+    public function convertAmount($amount, $currencyCode, $reverse = false)
+    {
+        $currency = $this->findByCode($currencyCode);
+        
+        $convertedAmount = $reverse ? $amount / $currency->rate : $amount * $currency->rate;
+        
+        return ceil(($convertedAmount * 100)) / 100;
+        
+    }
+    
     /**
      * @param $currency
      * @param $status

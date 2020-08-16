@@ -47,6 +47,8 @@ class MerchantOrder extends Model
         'external_id',
         'total_amount',
         'currency_code',
+        'payment_total_amount',
+        'payment_currency_code',
         'company_id',
         'user_id',
         'code',

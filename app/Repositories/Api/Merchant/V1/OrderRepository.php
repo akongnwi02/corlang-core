@@ -14,16 +14,19 @@ use App\Exceptions\GeneralException;
 use App\Models\Merchant\MerchantItem;
 use App\Models\Merchant\MerchantOrder;
 use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
+use App\Repositories\Backend\System\CurrencyRepository;
 use App\Services\Constants\BusinessErrorCodes;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class OrderRepository
 {
     public $paymentMethodRepository;
+    public $currencyRepository;
     
-    public function __construct(PaymentMethodRepository $paymentMethodRepository)
+    public function __construct(PaymentMethodRepository $paymentMethodRepository, CurrencyRepository $currencyRepository)
     {
         $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->currencyRepository = $currencyRepository;
     }
     
     public function create($data, $user)
@@ -35,10 +38,14 @@ class OrderRepository
                 'customer_phone'   => $data['customer']['phone'],
                 'customer_email'   => $data['customer']['email'],
                 'customer_address' => $data['customer']['address'],
-        
                 'external_id'      => $data['external_id'],
-                'total_amount'     => $data['total_amount'],
-                'currency_code'    => $data['currency_code'],
+
+                'payment_total_amount' => $data['total_amount'],
+                'payment_currency_code' => $data['currency_code'],
+                
+                'total_amount'     => $this->currencyRepository->convertAmount($data['total_amount'], $data['currency_code']),
+                'currency_code'    => $this->currencyRepository->getDefaultCurrency()->code,
+                
                 'description'      => $data['description'],
                 'notification_url' => $data['notification_url'],
                 'return_url'       => $data['return_url'],

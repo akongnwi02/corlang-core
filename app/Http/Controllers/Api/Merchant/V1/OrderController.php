@@ -19,6 +19,7 @@ use App\Models\Merchant\MerchantOrder;
 use App\Repositories\Api\Merchant\V1\OrderRepository;
 use App\Repositories\Backend\Company\Company\CompanyRepository;
 use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
+use App\Repositories\Backend\System\CurrencyRepository;
 
 class OrderController extends Controller
 {
@@ -49,12 +50,17 @@ class OrderController extends Controller
         ShowLinkRequest $request,
         MerchantOrder $order,
         CompanyRepository $companyRepository,
-        PaymentMethodRepository $paymentMethodRepository
+        PaymentMethodRepository $paymentMethodRepository,
+        CurrencyRepository $currencyRepository
     ) {
         $methods = $companyRepository->getAvailablePaymentMethods($order->company)->where('is_realtime', true)->get();
         
         foreach ($methods as $method) {
-            $method->customer_fee = $paymentMethodRepository->getCustomerOrderFee($method, $order);
+            $customerFee = $paymentMethodRepository->getCustomerOrderFee($method, $order);
+            $paymentCustomerFee = $currencyRepository->convertAmount($customerFee, $order->payment_currency_code, true);
+            
+            $method->customer_fee = (float) $customerFee;
+            $method->payment_customer_fee = (float) $paymentCustomerFee;
         }
         
         return view('frontend.merchant.dashboard')

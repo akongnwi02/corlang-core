@@ -43,7 +43,7 @@
                     <!--</div>-->
                 <!--</div>-->
                 <div class="row mb-5 mt-4 ">
-                    <div class="col-md-12 mx-auto"><button @click="triggerPayment" :disabled="triggerLoadStatus==1" type="button" class="btn btn-block btn-outline-primary btn-lg">{{$t('dashboard.merchant.payment.checkout') }} ({{selectedMethod ? currencyFormat(order.total_amount) + ' + ' + currencyFormat(selectedMethod.customer_fee) : currencyFormat(order.total_amount)}})</button></div>
+                    <div class="col-md-12 mx-auto"><button @click="triggerPayment" :disabled="triggerLoadStatus==1" type="button" class="btn btn-block btn-outline-primary btn-lg">{{$t('dashboard.merchant.payment.checkout') }} ({{selectedMethod ? currencyFormat(order.total_amount) + ' + ' + currencyFormat(selectedMethod.payment_customer_fee) : currencyFormat(order.total_amount)}})</button></div>
                 </div>
             </div>
         </div>
@@ -83,9 +83,9 @@
             selectMethod(method) {
                 this.selectedMethod = method;
                 EventBus.$emit('customer-fee', {
-                    customerFee: this.selectedMethod.customer_fee
+                    customerFee: this.selectedMethod.customer_fee,
+                    paymentCustomerFee: this.selectedMethod.payment_customer_fee,
                 });
-
             },
             triggerPayment() {
                 if (this.validateData()) {

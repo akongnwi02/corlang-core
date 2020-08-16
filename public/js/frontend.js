@@ -1170,7 +1170,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         selectMethod: function selectMethod(method) {
             this.selectedMethod = method;
             __WEBPACK_IMPORTED_MODULE_4__event_bus__["a" /* EventBus */].$emit('customer-fee', {
-                customerFee: this.selectedMethod.customer_fee
+                customerFee: this.selectedMethod.customer_fee,
+                paymentCustomerFee: this.selectedMethod.payment_customer_fee
             });
         },
         triggerPayment: function triggerPayment() {
@@ -1228,8 +1229,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus__ = __webpack_require__("./resources/js/frontend/event-bus.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus__ = __webpack_require__("./resources/js/frontend/event-bus.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
 //
 //
 //
@@ -1314,18 +1315,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['order'],
     data: function data() {
         return {
-            customerFee: 0
+            customerFee: 0,
+            paymentCustomerFee: 0
         };
     },
     mounted: function mounted() {
-        __WEBPACK_IMPORTED_MODULE_1__event_bus__["a" /* EventBus */].$on('customer-fee', function (data) {
+        __WEBPACK_IMPORTED_MODULE_0__event_bus__["a" /* EventBus */].$on('customer-fee', function (data) {
             this.customerFee = data.customerFee;
+            this.paymentCustomerFee = data.paymentCustomerFee;
         }.bind(this));
     },
 
     methods: {
         currencyFormat: function currencyFormat(amount) {
-            return __WEBPACK_IMPORTED_MODULE_0__helpers_currency__["a" /* currency */].format(amount, this.order.currency_code);
+            var currencyCode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.order.currency_code;
+
+            return __WEBPACK_IMPORTED_MODULE_1__helpers_currency__["a" /* currency */].format(amount, currencyCode);
         }
     }
 });
@@ -20214,7 +20219,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -20289,7 +20294,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -35653,7 +35658,7 @@ var render = function() {
                 _c("div", { staticClass: "flex-sm-col col-auto" }, [
                   _c("p", { staticClass: "mb-1" }, [
                     _c("b", [
-                      _vm._v(_vm._s(_vm.currencyFormat(_vm.customerFee)))
+                      _vm._v(_vm._s(_vm.currencyFormat(_vm.paymentCustomerFee)))
                     ])
                   ])
                 ])
@@ -35694,10 +35699,26 @@ var render = function() {
                       _vm._v(
                         _vm._s(
                           _vm.currencyFormat(
-                            _vm.order.total_amount + _vm.customerFee
+                            parseFloat(_vm.order.total_amount) +
+                              parseFloat(_vm.paymentCustomerFee)
                           )
-                        )
-                      )
+                        ) + " "
+                      ),
+                      _vm.order.system_currency_code != _vm.order.currency_code
+                        ? _c("span", [
+                            _vm._v(
+                              "(" +
+                                _vm._s(
+                                  _vm.currencyFormat(
+                                    parseFloat(_vm.order.system_total_amount) +
+                                      parseFloat(_vm.customerFee),
+                                    _vm.order.system_currency_code
+                                  )
+                                ) +
+                                ")"
+                            )
+                          ])
+                        : _vm._e()
                     ])
                   ])
                 ])
@@ -37384,7 +37405,7 @@ var render = function() {
                               ? _vm.currencyFormat(_vm.order.total_amount) +
                                   " + " +
                                   _vm.currencyFormat(
-                                    _vm.selectedMethod.customer_fee
+                                    _vm.selectedMethod.payment_customer_fee
                                   )
                               : _vm.currencyFormat(_vm.order.total_amount)
                           ) +
