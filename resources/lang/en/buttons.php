@@ -46,6 +46,12 @@ return [
                 'deactivate' => 'Deactivate Category',
             ]
         ],
+        'administration' => [
+            'currency' => [
+                'activate' => 'Activate Currency',
+                'deactivate' => 'Deactivate Currency'
+            ],
+        ],
         'companies' => [
             'company' => [
                 'activate'   => 'Activate Company',

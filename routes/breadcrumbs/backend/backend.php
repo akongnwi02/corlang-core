@@ -12,3 +12,4 @@ require __DIR__.'/account.php';
 require __DIR__.'/sales.php';
 require __DIR__.'/orders.php';
 require __DIR__.'/accounting.php';
+require __DIR__.'/administration.php';

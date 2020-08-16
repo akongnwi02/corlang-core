@@ -117,10 +117,10 @@ return [
         'delete_commissions'          => 'delete commissions',
         
         // distributions
-        'create_distributions'          => 'create distributions',
-        'read_distributions'            => 'read distributions',
-        'update_distributions'          => 'update distributions',
-        'delete_distributions'          => 'delete distributions',
+        'create_distributions'        => 'create distributions',
+        'read_distributions'          => 'read distributions',
+        'update_distributions'        => 'update distributions',
+        'delete_distributions'        => 'delete distributions',
         
         // services
         'create_services'             => 'create services',
@@ -163,17 +163,24 @@ return [
         
         'transfer_money' => 'transfer money',
         
-        'read_accounts'   => 'read accounts',
-        'update_accounts' => 'update accounts',
-        'drain_accounts'  => 'drain accounts',
+        'read_accounts'         => 'read accounts',
+        'update_accounts'       => 'update accounts',
+        'drain_accounts'        => 'drain accounts',
         
         // provisions
-        'read_accounting' => 'read accounting',
-        'request_provision' => 'request provision',
-        'pay_collection' => 'pay collection',
+        'read_accounting'       => 'read accounting',
+        'request_provision'     => 'request provision',
+        'pay_collection'        => 'pay collection',
         
         //sales
-        'read_sales'      => 'read sales',
+        'read_sales'            => 'read sales',
+        
+        // currency
+        'read_currencies'       => 'read currencies',
+        'create_currencies'     => 'create currencies',
+        'update_currencies'     => 'update currencies',
+        'delete_currencies'     => 'delete currencies',
+        'deactivate_currencies' => 'deactivate currencies'
     ],
 
 ];

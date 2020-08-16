@@ -15,6 +15,7 @@ use App\Exceptions\Api\ServerErrorException;
 use App\Models\Transaction\Transaction;
 use App\Repositories\Backend\Movement\MovementRepository;
 use App\Repositories\Backend\Services\Service\PaymentMethodRepository;
+use App\Repositories\Backend\System\CurrencyRepository;
 use App\Services\Business\Models\ModelInterface;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Repositories\Backend\Services\Commission\CommissionRepository;
@@ -28,19 +29,22 @@ class TransactionRepository
     public $paymentMethodRepository;
     public $commissionRepository;
     public $movementRepository;
+    public $currencyRepository;
     
     public function __construct
     (
         ServiceRepository $serviceRepository,
         CommissionRepository $commissionRepository,
         MovementRepository $movementRepository,
-        PaymentMethodRepository $paymentMethodRepository
+        PaymentMethodRepository $paymentMethodRepository,
+        CurrencyRepository $currencyRepository
     )
     {
         $this->serviceRepository    = $serviceRepository;
         $this->commissionRepository = $commissionRepository;
         $this->movementRepository   = $movementRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->currencyRepository = $currencyRepository;
     }
     
     /**
@@ -319,6 +323,7 @@ class TransactionRepository
         $merchantOrderFee = $this->paymentMethodRepository->getMerchantOrderFee($paymentMethod, $order);
     
         $totalCustomerFee = $customerServiceFee;
+        $paymentTotalCustomerFee = $this->currencyRepository->convertAmount($totalCustomerFee, $order->payment_currency_code, true);
     
         /*
          * calculate the provider payment method fee
@@ -361,7 +366,7 @@ class TransactionRepository
     
         
         
-        return \DB::transaction(function () use ($order, $transaction, $paymentMethod) {
+        return \DB::transaction(function () use ($order, $transaction, $paymentMethod, $paymentTotalCustomerFee) {
             if ($transaction->save()) {
     
                 $order->status = config('business.transaction.status.processing');
@@ -369,6 +374,7 @@ class TransactionRepository
                 $order->paymentmethod = $paymentMethod->name;
                 $order->paymentmethod_id = $paymentMethod->uuid;
                 $order->customer_fee = $transaction->total_customer_fee;
+                $order->payment_customer_fee = $paymentTotalCustomerFee;
                 $order->merchant_fee = $transaction->provider_service_fee;
                 $order->payment_transaction_id = $transaction->uuid;
                 

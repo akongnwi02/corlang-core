@@ -45,7 +45,7 @@
                                 <p class="mb-1"><b>{{$t('dashboard.merchant.order.payment_fee')}}</b></p>
                             </div>
                             <div class="flex-sm-col col-auto">
-                                <p class="mb-1"><b>{{currencyFormat(customerFee)}}</b></p>
+                                <p class="mb-1"><b>{{currencyFormat(paymentCustomerFee)}}</b></p>
                             </div>
                         </div>
                         <div class="row justify-content-between">
@@ -61,7 +61,7 @@
                                 <p><b>{{$t('dashboard.merchant.order.total')}}</b></p>
                             </div>
                             <div class="flex-sm-col col-auto">
-                                <p class="mb-1"><b>{{currencyFormat(order.total_amount + customerFee)}}</b></p>
+                                <p class="mb-1"><b>{{currencyFormat(parseFloat(order.total_amount) + parseFloat(paymentCustomerFee))}} <span v-if="order.system_currency_code != order.currency_code">({{ currencyFormat(parseFloat(order.system_total_amount) + parseFloat(customerFee), order.system_currency_code) }})</span></b></p>
                             </div>
                         </div>
                         <hr class="my-0">
@@ -73,9 +73,9 @@
 </template>
 
 <script>
-    import {currency} from "../../helpers/currency";
 
     import {EventBus} from "../../event-bus";
+    import {currency} from "../../helpers/currency";
 
     export default {
         name: "OrderSummary",
@@ -84,17 +84,19 @@
         ],
         data() {
             return {
-                customerFee: 0
+                customerFee: 0,
+                paymentCustomerFee: 0,
             }
         },
         mounted() {
             EventBus.$on('customer-fee', function (data) {
                 this.customerFee = data.customerFee;
+                this.paymentCustomerFee = data.paymentCustomerFee;
             }.bind(this));
         },
         methods: {
-            currencyFormat(amount) {
-                return currency.format(amount, this.order.currency_code);
+            currencyFormat(amount, currencyCode = this.order.currency_code) {
+                return currency.format(amount, currencyCode);
             }
         }
     }

@@ -31,7 +31,7 @@ class StoreOrderRequest extends FormRequest
             // order details
             'external_id' => ['required', Rule::unique('merchant_orders')],
             'total_amount' => 'required|numeric|min:0',
-            'currency_code' => Rule::exists('currencies', 'code'),
+            'currency_code' => Rule::exists('currencies', 'code')->where('is_active', true),
             'description' => 'nullable|string',
             
             'items' => 'array',
