@@ -14,8 +14,8 @@ class AddSystemCurrencyToMerchantOrder extends Migration
     public function up()
     {
         Schema::table('merchant_orders', function (Blueprint $table) {
-            $table->string('payment_currency_code');
-            $table->double('payment_total_amount');
+            $table->string('payment_currency_code')->nullable();
+            $table->double('payment_total_amount')->nullable();
             $table->double('payment_customer_fee')->nullable();
             
             $table->foreign('payment_currency_code')->references('code')->on('currencies');
