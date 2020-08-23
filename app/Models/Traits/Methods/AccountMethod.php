@@ -76,6 +76,7 @@ trait AccountMethod
     public function getSales()
     {
         $credit = Movement::where('is_reversed', false)
+            ->where('is_complete', true)
             ->where('user_id', $this->user->uuid)
             ->where(function ($query) {
                 $query->where('type_id', MovementType::where('name', config('business.movement.type.purchase'))->first()->uuid);
@@ -83,6 +84,7 @@ trait AccountMethod
             ->sum('amount');
         
         $debit = Movement::where('is_reversed', false)
+            ->where('is_complete', true)
             ->where('user_id', $this->user->uuid)
             ->where(function ($query) {
                 $query->where('type_id', MovementType::where('name', config('business.movement.type.sale'))->first()->uuid);
