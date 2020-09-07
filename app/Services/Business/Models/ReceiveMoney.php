@@ -25,6 +25,7 @@ class ReceiveMoney implements ModelInterface
     public $state;
     public $amount;
     public $customer_fee;
+    public $auth_payload;
     
     public function setServiceCode($code)
     {
@@ -123,5 +124,16 @@ class ReceiveMoney implements ModelInterface
     public function getPhone()
     {
         return $this->phone;
+    }
+    
+    public function getAuthPayload()
+    {
+        return $this->auth_payload;
+    }
+    
+    public function setAuthPayload($auth_payload)
+    {
+        $this->auth_payload = $auth_payload;
+        return $this;
     }
 }

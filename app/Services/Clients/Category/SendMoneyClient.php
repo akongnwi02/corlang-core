@@ -46,7 +46,10 @@ class SendMoneyClient extends AbstractCategory
             'service_code' => $transaction->service_code,
             'amount'       => $transaction->amount,
             'external_id'  => $transaction->uuid,
-            'auth_payload' => $transaction->items,
+            // needs to be injected with the proper payload
+            // need to save it in tx table first before retrieving it from here
+            // not currently used anyway
+            'auth_payload' => '',
             'callback_url' => $this->callbackUrl
         ];
     
@@ -90,6 +93,7 @@ class SendMoneyClient extends AbstractCategory
             ->setServiceCode($data['service_code'])
             ->setCurrencyCode($data['currency_code'])
             ->setAmount($data['amount'])
+            ->setAuthPayload($data['auth_payload'])
             ->setItems($data['service_code']);
         return $receiveMoney;
     }
