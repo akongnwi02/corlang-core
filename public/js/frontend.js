@@ -1941,6 +1941,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue__ = __webpack_require__("./node_modules/mdbvue/lib/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_mdbvue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_mdbvue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__helpers_helpers__ = __webpack_require__("./resources/js/frontend/helpers/helpers.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
 //
 //
 //
@@ -1971,6 +1972,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -1993,7 +2014,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         SearchButton: __WEBPACK_IMPORTED_MODULE_4__global_SearchButton___default.a,
         Services: __WEBPACK_IMPORTED_MODULE_0__services_Services___default.a,
         TransactionModal: __WEBPACK_IMPORTED_MODULE_6__components_global_TransactionModal___default.a,
-        mdbInput: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbInput"]
+        mdbInput: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbInput"],
+        mdbBtn: __WEBPACK_IMPORTED_MODULE_9_mdbvue__["mdbBtn"]
     },
     mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_Configuration_ConfigurationLoad__["a" /* ConfigurationLoad */], __WEBPACK_IMPORTED_MODULE_2__mixins_pusher_Notification__["a" /* PusherNotification */], __WEBPACK_IMPORTED_MODULE_8__mixins_transaction_NavigateToTransactionDetails__["a" /* Navigation */]],
     data: function data() {
@@ -2003,8 +2025,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             phone: '',
             destination: '',
             selectedService: null,
-            items: [], // not applicable
-
+            selectedBill: null,
             // Component Data
             invalid_text: '',
             show_quote_modal: false,
@@ -2037,6 +2058,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         transactionLoadStatus: function transactionLoadStatus() {
             return this.$store.getters.getTransactionLoadStatus;
+        },
+        billsLoadStatus: function billsLoadStatus() {
+            return this.$store.getters.getBillsSearchStatus;
+        },
+        bills: function bills() {
+            return this.$store.getters.getBills;
         }
     },
     methods: {
@@ -2046,10 +2073,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         requestQuote: function requestQuote() {
             if (this.validateData()) {
+                if (this.bills.length == 0) {
+                    this.invalid_text = this.$t('validations.purchase.postpaid.search_bills');
+                    return;
+                }
+                if (!this.selectedBill) {
+                    this.invalid_text = this.$t('validations.purchase.postpaid.select_bill');
+                    return;
+                }
+
                 this.$store.dispatch('loadQuote', {
                     destination: this.destination,
+                    item: this.selectedBill.bill_number,
                     service_code: this.selectedService.code,
                     phone: this.phone
+                });
+            }
+        },
+        searchBills: function searchBills() {
+            if (this.validateData()) {
+                this.$store.dispatch('searchBills', {
+                    destination: this.destination,
+                    service_code: this.selectedService.code
                 });
             }
         },
@@ -2062,20 +2107,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     var re = new RegExp(__WEBPACK_IMPORTED_MODULE_10__helpers_helpers__["a" /* helper */].formatRegex(this.selectedService.destination_regex));
                     if (!re.test(this.destination)) {
                         ++invalid;
-                        this.invalid_text = this.$t('validations.purchase.electricity.bill_number', { format: this.selectedService.destination_placeholder });
-                        console.log('Invalid bill number');
+                        this.invalid_text = this.$t('validations.purchase.postpaid.bill_contract');
+                        console.log('Invalid bill or contract number');
                     }
                 } else if (this.destination.length < 6) {
                     ++invalid;
-                    this.invalid_text = this.$t('validations.purchase.electricity.bill_number');
-                    console.log('Invalid bill number');
+                    this.invalid_text = this.$t('validations.purchase.postpaid.bill_contract');
+                    console.log('Invalid bill or contract number. Too short');
                 }
             }
 
             if (this.destination.length < 6) {
                 ++invalid;
-                this.invalid_text = this.$t('validations.purchase.electricity.bill_number');
-                console.log('Invalid bill number. Too short');
+                this.invalid_text = this.$t('validations.purchase.postpaid.bill_contract');
+                console.log('Invalid bill or contract number. Too short');
             }
 
             if (!this.selectedService) {
@@ -2121,6 +2166,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.waitForNotification(this.quote.uuid);
             console.log('waiting for callback notification on channel', this.quote.uuid);
+        },
+        currencyFormat: function currencyFormat(amount) {
+            return __WEBPACK_IMPORTED_MODULE_11__helpers_currency__["a" /* currency */].format(amount, this.quote.currency_code);
         }
     },
     watch: {
@@ -2145,6 +2193,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.show_transaction_modal = false;
             }
             this.spinner_status = this.transactionLoadStatus;
+        },
+        billsLoadStatus: function billsLoadStatus() {
+            this.spinner_status = this.billsLoadStatus;
         }
     },
     deactivated: function deactivated() {
@@ -36591,7 +36642,7 @@ var render = function() {
           ) {
             return null
           }
-          return _vm.requestQuote($event)
+          return _vm.searchBills()
         }
       }
     },
@@ -36606,10 +36657,10 @@ var render = function() {
           { staticClass: "col-lg-6" },
           [
             _c("mdb-input", {
-              key: "meter_code",
+              key: "destination",
               attrs: {
                 label: _vm.$t(
-                  "dashboard.pages.tabs.content.electricity.bill_number"
+                  "dashboard.pages.tabs.content.postpaid.bill_contract"
                 )
               },
               model: {
@@ -36641,8 +36692,90 @@ var render = function() {
             })
           ],
           1
-        )
+        ),
+        _vm._v(" "),
+        _vm.bills.length > 0
+          ? _c("div", { staticClass: "col-lg-6" }, [
+              _c("label", { attrs: { for: "plan" } }, [
+                _c("strong", [
+                  _vm._v(
+                    _vm._s(
+                      _vm.$t(
+                        "dashboard.pages.tabs.content.postpaid.select_bill"
+                      )
+                    )
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selectedBill,
+                      expression: "selectedBill"
+                    }
+                  ],
+                  staticClass: "custom-select",
+                  attrs: { id: "plan", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.selectedBill = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.bills, function(bill) {
+                  return _c("option", { domProps: { value: bill } }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(bill.bill_number) +
+                        "\n                "
+                    )
+                  ])
+                }),
+                0
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.selectedBill
+          ? _c(
+              "div",
+              { staticClass: "col-lg-6" },
+              [
+                _c("mdb-input", {
+                  key: "amount",
+                  attrs: {
+                    label:
+                      _vm.$t("dashboard.pages.general.amount") +
+                      " " +
+                      _vm.selectedBill.currency_code,
+                    value: _vm.selectedBill.amount,
+                    disabled: ""
+                  }
+                })
+              ],
+              1
+            )
+          : _vm._e()
       ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("hr"),
       _vm._v(" "),
       _c("services", {
         attrs: { services: _vm.services },
@@ -36650,6 +36783,20 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("search-button", { on: { clicked: _vm.requestQuote } }),
+      _vm._v(" "),
+      _c(
+        "mdb-btn",
+        {
+          staticClass: "float-right",
+          attrs: { size: "sm", color: "secondary" },
+          nativeOn: {
+            click: function($event) {
+              return _vm.searchBills()
+            }
+          }
+        },
+        [_vm._v(_vm._s(_vm.$t("dashboard.pages.tabs.content.postpaid.search")))]
+      ),
       _vm._v(" "),
       _vm.show_quote_modal
         ? _c("quote-modal", {
@@ -37130,6 +37277,33 @@ var render = function() {
                   _vm._v(
                     " " +
                       _vm._s(_vm.$t("dashboard.pages.tabs.titles.prepaid")) +
+                      "\n            "
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "mdb-tab-item",
+                {
+                  key: "postpaidbills-tab",
+                  staticClass: "mt-4",
+                  attrs: { active: _vm.tab == "postpaid.bill.search" },
+                  nativeOn: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.gotoTab("postpaid.bill.search")
+                    }
+                  }
+                },
+                [
+                  _c("mdb-icon", {
+                    staticClass: "ml-2",
+                    attrs: { icon: "tint" }
+                  }),
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.$t("dashboard.pages.tabs.titles.postpaid")) +
                       "\n            "
                   )
                 ],
@@ -54352,6 +54526,14 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_10_laravel_echo__["a" /* default */]
 
     deleteTransaction: function deleteTransaction(uuid) {
         return axios.delete('/api/transaction/' + uuid);
+    },
+
+    searchBills: function searchBills(data) {
+        var params = {};
+        params.service_code = data.service_code;
+        params.destination = data.destination;
+
+        return axios.get('/api/search', { params: params });
     }
 });
 
@@ -55649,7 +55831,7 @@ module.exports = Component.exports
 /***/ "./resources/js/frontend/locales/en.json":
 /***/ (function(module, exports) {
 
-module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Purchase","transactions":"Transactions","account":"Account"},"tabs":{"titles":{"prepaid":"Prepaid Bills","postpaid":"Postpaid Bills","momo":"Mobile Money","airtime":"Airtime Recharge"},"content":{"electricity":{"title":"Purchase Electricity","prepaid":"Prepaid","postpaid":"Postpaid","vendor":"Vendor","meter_code":"Meter Code","bill_number":"Bill Number","bill_due_date":"Bill Due Date","asset":"Units","contract_number":"Contract Number","quote":{"title":"Meter Details"}},"mobile_money":{"source_account":"Account Identifier","name":"Account Holder","cashin":"Cash In","cashout":"Cash Out"},"airtime":{"airtime":"Airtime","data":"Data","plan":"Select Bundle"}}},"transactions":{"table":{"entriesTitle":"Recent transactions","showingText":"Showing","noFoundMessage":"No matching transaction records found","header":{"code":"Reference","items":"Item","destination":"Service Number","amount":"Amount","fee":"Fee","service":"Service","total":"Total","commission":"Commission","paymentmethod":"Payment Method","status":"Status","asset":"Asset","completed_at":"Completed At"},"total":"Total","status":{"created":"Created","pending":"Pending","processing":"In Processing","success":"Successful","failed":"Failed","reversed":"Reversed","cancelled":"Cancelled","errored":"Error","verification":"In Verification"}},"transaction":{"modal":{"code":"Reference","destination":"Service Number","agent":"Agent","company":"Company","amount":"Amount","fee":"Fee","service":"Service","asset":"Asset","items":"Items","status":"Status","completed_at":"Completed At","total":"Total"}}},"account":{"account_number":"Account Number","account_number_help":"Your deposit account number.","account_balance":"Account Balance","account_balance_help":"Your current account balance.","commission_balance":"Commission Balance","commission_balance_help":"Your commission balance","payout_method":"Payout method","topup_method":"Top up Method","name":"Account Name","request_payout":"Request Payout","topup_account":"Top up Account","table":{"entriesTitle":"Recent Requests","header":{"code":"Ref","amount":"Amount","method":"Payout Method","account_number":"Account Number","account_name":"Account Name","user":"Requested By","date":"Requested At","status":"Status","decision_at":"Decision At"},"status":{"pending":"Pending","approved":"Approved","rejected":"Rejected","cancelled":"Cancelled"},"actions":{"cancel":"Cancel","action":"Payout action"}}},"general":{"actions":"Actions","close":"Close","confirm":"Confirm","next":"Next","loading":"Loading","refresh":"Refresh","search":"Search","summary":"Order Details","amount":"Amount","otp":"OTP","pin":"PIN","method":"Payment Method","account":"Account Number","reference":"Reference","pincode":"Pin Code","phone":"Phone Number","fee":"Fee","destination":"Destination identifier","total":"Total","logo":"Logo","description":"Payment Description","customer":{"name":"Customer Name","address":"Address"}}},"hover":{"view":"View","execute":"Execute","topup":"Top Up Your Account","payout":"Request Commission Payout","delete":"Delete"},"merchant":{"title":"Secure Checkout","shop":"Shop","address":"Address","order":{"your_order":"YOUR ORDER","subtotal":"Subtotal","payment_fee":"Payment Fee","total":"Total"},"payment":{"method":"PAYMENT METHOD","details":"PAYMENT DETAILS","checkout":"PAY NOW","account_number":"Account Number","thank_you":"Thank you for trusting CorlaPay. We have sent a request to your payment provider.","return":"Return to Shop","success":"Success","dear":"Dear"}}},"validations":{"purchase":{"electricity":{"meter_code":"Please enter the meter code in the required format {format}","bill_number":"Please enter a bill number in the valid format {format}"},"mobile_money":{"account_number":"Please enter an account number in the valid format {format}"},"airtime":{"plan":"Please select a bundle from the list","phone":"Please enter valid phone number in the required format {format}"},"reference":"The reference is invalid","pincode":"The pin code is invalid","otp":"The OTP field is invalid","phone":"The phone number is invalid","account":"The payment account number is invalid","amount":"Please enter a valid amount","min_amount":"The minimum amount required for this service is {min_amount}","max_amount":"The maximum amount required for this service is {max_amount}","step_amount":"The amount required for this service must be multiples of {step_amount}","paymentmethod":"Select a payment method from the list","empty_paymentmethod":"No payment method is currently available for you","service":"Please select a service from the list","empty_service":"No services available for this category at the moment"},"account":{"insufficient_balance":"Your balance is insufficient","empty_payout_method":"Please select a payout method","topup_account_not_configured":"You have not set an account for this topup method","account_number":"Please configure account identifier for this top up method under your profile setting","invalid_amount":"Please enter a valid amount","account_name":"Please enter a valid name"},"general":{"maintenance":"We're currently maintaining our system. Please check back later","network":"Network error. Please check your internet connection","unexpected":"An unexpected error occurred"},"merchant":{"account_number_format":"Please enter account number in the required format {format}","account_number_invalid":"Please enter a valid account number","no_method":"Please select a payment method from the list"}},"notifications":{"successful":"Transaction successful","transactions_loaded":"Transactions updated successfully","payouts_loaded":"Recent payouts updated successfully","failed":"Transaction failed","late_bill":"Warning! Bill is late"},"exceptions":{"10000":"The service you requested is not available","10001":"The payment method you requested is not available","10002":"The request sent contains some validation errors","10003":"You have been logged out. Login to continue.","10004":"You are not authorized to make this request","10005":"Wrong HTTP Method has been provided","10006":"The path requested was not found","10007":"You are making too many requests to the server","10008":"Transaction could not be saved to cache","10009":"There was an error creating this transaction","10010":"This transaction was not found. The transaction may have been processed already or expired","10011":"There was a problem connecting to one of our servers","10012":"There was a problem calculating the fee for this transaction. A fee has not been set for this amount","10013":"The service category is currently unavailable","10014":"An invalid key was provided with the request","10015":"The language selected is currently not supported","10016":"The accept header parameter does not contain application/json","10018":"This transaction could not be found","10019":"There was a problem connecting to the service provider","10020":"The meter code does not exist","10021":"There was a problem sending a callback request","10022":"This service does not exist yet","10023":"Your account balance is insufficient","10024":"You are not authorized to perform this transaction. Your account has been limited","10025":"Your session has expired. Please refresh your browser","10026":"The payment method is not active","10027":"There was an error requesting the payout. Please try again later","10028":"Your commission balance is insufficient","10029":"There was an error cancelling the payout. Please try again later","10030":"Warning! You have entered an incorrect pin code","10031":"The meter with the provided has been deactivated","10032":"The meter code provided is invalid","10033":"The transaction status cannot be updated","10034":"The amount provided is less than the minimum amount required for this service","10035":"The customer cannot perform this transaction with service provider","10036":"The customer is not found","10037":"Insufficient funds in customer's wallet","10038":"Transaction canceled by customer","10039":"The customer has not authorized the transaction","10040":"The service is not properly configured","10041":"Customer has reached transaction limit","10042":"You are not allowed to use this service at the moment","10043":"No bill was found","10044":"The amount provided is more than the maximum amount required for this service","10045":"The service number provided is not in the required format","10046":"There is a commission distribution error with this service. Please contact support","10047":"The amount is not a multiple of the step amount","00000":"An unexpected error occurred"}}
+module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Purchase","transactions":"Transactions","account":"Account"},"tabs":{"titles":{"prepaid":"Prepaid Bills","postpaid":"Postpaid Bills","momo":"Mobile Money","airtime":"Airtime Recharge"},"content":{"electricity":{"title":"Purchase Electricity","prepaid":"Prepaid","postpaid":"Postpaid","vendor":"Vendor","meter_code":"Meter Code","bill_number":"Bill Number","bill_due_date":"Bill Due Date","asset":"Units","contract_number":"Contract Number","quote":{"title":"Meter Details"}},"mobile_money":{"source_account":"Account Identifier","name":"Account Holder","cashin":"Cash In","cashout":"Cash Out"},"airtime":{"airtime":"Airtime","data":"Data","plan":"Select Bundle"},"postpaid":{"search":"Search","bill_contract":"Bill or Contract Number","select_bill":"Select Bill"}}},"transactions":{"table":{"entriesTitle":"Recent transactions","showingText":"Showing","noFoundMessage":"No matching transaction records found","header":{"code":"Reference","items":"Item","destination":"Service Number","amount":"Amount","fee":"Fee","service":"Service","total":"Total","commission":"Commission","paymentmethod":"Payment Method","status":"Status","asset":"Asset","completed_at":"Completed At"},"total":"Total","status":{"created":"Created","pending":"Pending","processing":"In Processing","success":"Successful","failed":"Failed","reversed":"Reversed","cancelled":"Cancelled","errored":"Error","verification":"In Verification"}},"transaction":{"modal":{"code":"Reference","destination":"Service Number","agent":"Agent","company":"Company","amount":"Amount","fee":"Fee","service":"Service","asset":"Asset","items":"Items","status":"Status","completed_at":"Completed At","total":"Total"}}},"account":{"account_number":"Account Number","account_number_help":"Your deposit account number.","account_balance":"Account Balance","account_balance_help":"Your current account balance.","commission_balance":"Commission Balance","commission_balance_help":"Your commission balance","payout_method":"Payout method","topup_method":"Top up Method","name":"Account Name","request_payout":"Request Payout","topup_account":"Top up Account","table":{"entriesTitle":"Recent Requests","header":{"code":"Ref","amount":"Amount","method":"Payout Method","account_number":"Account Number","account_name":"Account Name","user":"Requested By","date":"Requested At","status":"Status","decision_at":"Decision At"},"status":{"pending":"Pending","approved":"Approved","rejected":"Rejected","cancelled":"Cancelled"},"actions":{"cancel":"Cancel","action":"Payout action"}}},"general":{"actions":"Actions","close":"Close","confirm":"Confirm","next":"Next","loading":"Loading","refresh":"Refresh","search":"Search","summary":"Order Details","amount":"Amount","otp":"OTP","pin":"PIN","method":"Payment Method","account":"Account Number","reference":"Reference","pincode":"Pin Code","phone":"Phone Number","fee":"Fee","destination":"Destination identifier","total":"Total","logo":"Logo","description":"Payment Description","customer":{"name":"Customer Name","address":"Address"}}},"hover":{"view":"View","execute":"Execute","topup":"Top Up Your Account","payout":"Request Commission Payout","delete":"Delete"},"merchant":{"title":"Secure Checkout","shop":"Shop","address":"Address","order":{"your_order":"YOUR ORDER","subtotal":"Subtotal","payment_fee":"Payment Fee","total":"Total"},"payment":{"method":"PAYMENT METHOD","details":"PAYMENT DETAILS","checkout":"PAY NOW","account_number":"Account Number","thank_you":"Thank you for trusting CorlaPay. We have sent a request to your payment provider.","return":"Return to Shop","success":"Success","dear":"Dear"}}},"validations":{"purchase":{"electricity":{"meter_code":"Please enter the meter code in the required format {format}","bill_number":"Please enter a bill number in the valid format {format}"},"mobile_money":{"account_number":"Please enter an account number in the valid format {format}"},"airtime":{"plan":"Please select a bundle from the list","phone":"Please enter valid phone number in the required format {format}"},"postpaid":{"bill_contract":"Please enter a valid bill number or contract number.","select_bill":"Please select a bill from the list","search_bills":"Click the search button to search for bills before paying"},"reference":"The reference is invalid","pincode":"The pin code is invalid","otp":"The OTP field is invalid","phone":"The phone number is invalid","account":"The payment account number is invalid","amount":"Please enter a valid amount","min_amount":"The minimum amount required for this service is {min_amount}","max_amount":"The maximum amount required for this service is {max_amount}","step_amount":"The amount required for this service must be multiples of {step_amount}","paymentmethod":"Select a payment method from the list","empty_paymentmethod":"No payment method is currently available for you","service":"Please select a service from the list","empty_service":"No services available for this category at the moment"},"account":{"insufficient_balance":"Your balance is insufficient","empty_payout_method":"Please select a payout method","topup_account_not_configured":"You have not set an account for this topup method","account_number":"Please configure account identifier for this top up method under your profile setting","invalid_amount":"Please enter a valid amount","account_name":"Please enter a valid name"},"general":{"maintenance":"We're currently maintaining our system. Please check back later","network":"Network error. Please check your internet connection","unexpected":"An unexpected error occurred"},"merchant":{"account_number_format":"Please enter account number in the required format {format}","account_number_invalid":"Please enter a valid account number","no_method":"Please select a payment method from the list"}},"notifications":{"successful":"Transaction successful","transactions_loaded":"Transactions updated successfully","payouts_loaded":"Recent payouts updated successfully","failed":"Transaction failed","late_bill":"Warning! Bill is late"},"exceptions":{"10000":"The service you requested is not available","10001":"The payment method you requested is not available","10002":"The request sent contains some validation errors","10003":"You have been logged out. Login to continue.","10004":"You are not authorized to make this request","10005":"Wrong HTTP Method has been provided","10006":"The path requested was not found","10007":"You are making too many requests to the server","10008":"Transaction could not be saved to cache","10009":"There was an error creating this transaction","10010":"This transaction was not found. The transaction may have been processed already or expired","10011":"There was a problem connecting to one of our servers","10012":"There was a problem calculating the fee for this transaction. A fee has not been set for this amount","10013":"The service category is currently unavailable","10014":"An invalid key was provided with the request","10015":"The language selected is currently not supported","10016":"The accept header parameter does not contain application/json","10018":"This transaction could not be found","10019":"There was a problem connecting to the service provider","10020":"The meter code does not exist","10021":"There was a problem sending a callback request","10022":"This service does not exist yet","10023":"Your account balance is insufficient","10024":"You are not authorized to perform this transaction. Your account has been limited","10025":"Your session has expired. Please refresh your browser","10026":"The payment method is not active","10027":"There was an error requesting the payout. Please try again later","10028":"Your commission balance is insufficient","10029":"There was an error cancelling the payout. Please try again later","10030":"Warning! You have entered an incorrect pin code","10031":"The meter with the provided has been deactivated","10032":"The meter code provided is invalid","10033":"The transaction status cannot be updated","10034":"The amount provided is less than the minimum amount required for this service","10035":"The customer cannot perform this transaction with service provider","10036":"The customer is not found","10037":"Insufficient funds in customer's wallet","10038":"Transaction canceled by customer","10039":"The customer has not authorized the transaction","10040":"The service is not properly configured","10041":"Customer has reached transaction limit","10042":"You are not allowed to use this service at the moment","10043":"No bill was found","10044":"The amount provided is more than the maximum amount required for this service","10045":"The service number provided is not in the required format","10046":"There is a commission distribution error with this service. Please contact support","10047":"The amount is not a multiple of the step amount","10048":"The requested resource was not found","10049":"The requested service is not active","10050":"The transaction could not be deleted due to some technical reasons","10051":"The bill you are trying to pay was deleted from cache. Please search again","10052":"No bill was found. Please change the search value","00000":"An unexpected error occurred"}}
 
 /***/ }),
 
@@ -55834,6 +56016,9 @@ var business = {
         transactions: [],
         transactionsLoadStatus: 0,
 
+        bills: [],
+        billsSearchStatus: 0,
+
         account: {},
         accountLoadStatus: 0,
 
@@ -56000,6 +56185,18 @@ var business = {
                 commit('setTransactionLoadStatus', 3);
                 __WEBPACK_IMPORTED_MODULE_1__helpers_helpers__["a" /* helper */].handleException(error);
             });
+        },
+        searchBills: function searchBills(_ref11, data) {
+            var commit = _ref11.commit;
+
+            commit('setBillsSearchStatus', 1);
+            __WEBPACK_IMPORTED_MODULE_0__api_business__["a" /* default */].searchBills(data).then(function (response) {
+                commit('setBillsSearchStatus', 2);
+                commit('setBills', response.data);
+            }).catch(function (error) {
+                commit('setBillsSearchStatus', 3);
+                __WEBPACK_IMPORTED_MODULE_1__helpers_helpers__["a" /* helper */].handleException(error);
+            });
         }
     },
 
@@ -56057,6 +56254,12 @@ var business = {
         },
         setDeleteTransactionStatus: function setDeleteTransactionStatus(state, status) {
             state.deleteTransactionStatus = status;
+        },
+        setBillsSearchStatus: function setBillsSearchStatus(state, status) {
+            state.billsSearchStatus = status;
+        },
+        setBills: function setBills(state, bills) {
+            state.bills = bills;
         }
     },
 
@@ -56114,6 +56317,12 @@ var business = {
         },
         getDeleteTransactionStatus: function getDeleteTransactionStatus(state) {
             return state.deleteTransactionStatus;
+        },
+        getBillsSearchStatus: function getBillsSearchStatus(state) {
+            return state.billsSearchStatus;
+        },
+        getBills: function getBills(state) {
+            return state.bills;
         }
     }
 };

@@ -133,7 +133,7 @@ class Handler extends ExceptionHandler
     
             if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
                 $error['message'] = 'Resource Not Found';
-                $error['error_code'] = BusinessErrorCodes::RESOURCE_NOT_ERROR;
+                $error['error_code'] = BusinessErrorCodes::RESOURCE_NOT_FOUND_ERROR;
             }
     
             \Log::error('ExceptionHandler', array_merge($error, [

@@ -38,6 +38,11 @@
                         "airtime": "Airtime",
                         "data": "Data",
                         "plan": "Select Bundle"
+                    },
+                    "postpaid": {
+                        "search": "Search",
+                        "bill_contract": "Bill or Contract Number",
+                        "select_bill": "Select Bill"
                     }
                 }
             },
@@ -197,6 +202,11 @@
                 "plan": "Please select a bundle from the list",
                 "phone": "Please enter valid phone number in the required format {format}"
             },
+            "postpaid": {
+                "bill_contract": "Please enter a valid bill number or contract number.",
+                "select_bill": "Please select a bill from the list",
+                "search_bills": "Click the search button to search for bills before paying"
+            },
             "reference": "The reference is invalid",
             "pincode": "The pin code is invalid",
             "otp": "The OTP field is invalid",
@@ -285,6 +295,11 @@
         "10044": "The amount provided is more than the maximum amount required for this service",
         "10045": "The service number provided is not in the required format",
         "10046": "There is a commission distribution error with this service. Please contact support",
-        "10047": "The amount is not a multiple of the step amount"
+        "10047": "The amount is not a multiple of the step amount",
+        "10048": "The requested resource was not found",
+        "10049": "The requested service is not active",
+        "10050": "The transaction could not be deleted due to some technical reasons",
+        "10051": "The bill you are trying to pay was deleted from cache. Please search again",
+        "10052": "No bill was found. Please change the search value"
     }
 }

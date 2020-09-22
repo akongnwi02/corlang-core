@@ -63,5 +63,13 @@ export default {
 
     deleteTransaction: function (uuid) {
         return axios.delete('/api/transaction/' + uuid);
+    },
+
+    searchBills: function (data) {
+        let params = {};
+        params.service_code = data.service_code;
+        params.destination = data.destination;
+
+        return axios.get('/api/search', {params})
     }
 }

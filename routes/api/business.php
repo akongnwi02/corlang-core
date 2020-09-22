@@ -30,6 +30,12 @@ Route::group(['middleware' => request()->hasHeader('authorization') ? 'jwt.auth'
     Route::post('confirm', [TransactionController::class, 'confirm']);
     
     /*
+     * Search
+     */
+    Route::get('search', [TransactionController::class, 'search']);
+    
+    
+    /*
      * Transaction
      */
     Route::get('transaction', [TransactionController::class, 'index']);

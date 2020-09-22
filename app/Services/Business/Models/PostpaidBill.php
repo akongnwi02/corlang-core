@@ -13,6 +13,7 @@ namespace App\Services\Business\Models;
 class PostpaidBill implements ModelInterface
 {
     public $transaction_id;
+    public $destination;
     public $bill_number;
     public $bill_due_date;
     public $bill_is_late;
@@ -164,13 +165,13 @@ class PostpaidBill implements ModelInterface
     
     public function setDestination($destination)
     {
-        $this->bill_number = $destination;
+        $this->destination = $destination;
         return $this;
     }
     
     public function getDestination()
     {
-        return $this->bill_number;
+        return $this->destination;
     }
     
     public function setItems($items)

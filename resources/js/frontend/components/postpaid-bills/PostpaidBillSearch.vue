@@ -1,10 +1,10 @@
 <template>
-    <div class="text-center card-body" @keyup.enter="requestQuote">
+    <div class="text-center card-body" @keyup.enter="searchBills()">
         <div class="card-text text-danger"> {{ invalid_text }}</div>
         <div class="row">
             <div class="col-lg-6">
-                <mdb-input key="meter_code"
-                           :label="$t(`dashboard.pages.tabs.content.electricity.bill_number`)"
+                <mdb-input key="destination"
+                           :label="$t(`dashboard.pages.tabs.content.postpaid.bill_contract`)"
                            v-model="destination"></mdb-input>
             </div>
             <div class="col-lg-6">
@@ -13,11 +13,29 @@
                            :label="$t(`dashboard.pages.general.phone`)"
                            v-model="phone"></mdb-input>
             </div>
-        </div>
 
+            <div v-if="bills.length > 0" class="col-lg-6">
+                <label for="plan"><strong>{{ $t('dashboard.pages.tabs.content.postpaid.select_bill') }}</strong></label>
+                <select v-model="selectedBill" class="custom-select" id="plan" required>
+                    <option v-for="bill in bills" :value="bill">
+                        {{ bill.bill_number }}
+                    </option>
+                </select>
+            </div>
+            <div class="col-lg-6" v-if="selectedBill">
+                <mdb-input key="amount"
+                   :label="$t('dashboard.pages.general.amount') +' '+ selectedBill.currency_code"
+                           :value="selectedBill.amount"
+                   disabled>
+                </mdb-input>
+            </div>
+        </div>
+        <br/>
+        <hr/>
         <services v-on:selected="selectService" :services="services"></services>
 
         <search-button v-on:clicked="requestQuote"></search-button>
+        <mdb-btn class="float-right" size="sm" color="secondary" @click.native="searchBills()">{{ $t('dashboard.pages.tabs.content.postpaid.search') }}</mdb-btn>
 
         <quote-modal v-on:confirmed="confirm" :service="selectedService" :quote="quote"
                      v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
@@ -40,8 +58,9 @@
     import Spinner from "../global/Spinner";
     import {Navigation} from "../../mixins/transaction/NavigateToTransactionDetails"
     import {mdbInput} from 'mdbvue';
+    import {mdbBtn} from 'mdbvue';
     import {helper} from "../../helpers/helpers";
-
+    import {currency} from "../../helpers/currency";
 
     export default {
         name: "PostpaidBillSearch",
@@ -51,7 +70,8 @@
             SearchButton,
             Services,
             TransactionModal,
-            mdbInput
+            mdbInput,
+            mdbBtn
         },
         mixins: [
             ConfigurationLoad,
@@ -65,8 +85,7 @@
                 phone: '',
                 destination: '',
                 selectedService: null,
-                items: [], // not applicable
-
+                selectedBill: null,
                 // Component Data
                 invalid_text: '',
                 show_quote_modal: false,
@@ -98,6 +117,12 @@
             },
             transactionLoadStatus() {
                 return this.$store.getters.getTransactionLoadStatus;
+            },
+            billsLoadStatus() {
+                return this.$store.getters.getBillsSearchStatus;
+            },
+            bills() {
+                return this.$store.getters.getBills;
             }
         },
         methods: {
@@ -107,14 +132,31 @@
             },
             requestQuote() {
                 if (this.validateData()) {
+                    if (this.bills.length == 0) {
+                        this.invalid_text = this.$t('validations.purchase.postpaid.search_bills');
+                        return;
+                    }
+                    if (!this.selectedBill) {
+                        this.invalid_text = this.$t('validations.purchase.postpaid.select_bill');
+                        return;
+                    }
+
                     this.$store.dispatch('loadQuote', {
                         destination: this.destination,
+                        item: this.selectedBill.bill_number,
                         service_code: this.selectedService.code,
                         phone: this.phone,
                     });
                 }
             },
-
+            searchBills() {
+                if(this.validateData()) {
+                    this.$store.dispatch('searchBills', {
+                        destination: this.destination,
+                        service_code: this.selectedService.code,
+                    });
+                }
+            },
             validateData() {
                 let invalid = 0;
 
@@ -124,20 +166,20 @@
                         let re = new RegExp(helper.formatRegex(this.selectedService.destination_regex));
                         if (!re.test(this.destination)) {
                             ++invalid;
-                            this.invalid_text = this.$t('validations.purchase.electricity.bill_number', {format: this.selectedService.destination_placeholder});
-                            console.log('Invalid bill number');
+                            this.invalid_text = this.$t('validations.purchase.postpaid.bill_contract');
+                            console.log('Invalid bill or contract number');
                         }
                     } else if (this.destination.length < 6) {
                         ++invalid;
-                        this.invalid_text = this.$t('validations.purchase.electricity.bill_number');
-                        console.log('Invalid bill number');
+                        this.invalid_text = this.$t('validations.purchase.postpaid.bill_contract');
+                        console.log('Invalid bill or contract number. Too short');
                     }
                 }
 
                 if (this.destination.length < 6) {
                     ++invalid;
-                    this.invalid_text = this.$t('validations.purchase.electricity.bill_number');
-                    console.log('Invalid bill number. Too short');
+                    this.invalid_text = this.$t('validations.purchase.postpaid.bill_contract');
+                    console.log('Invalid bill or contract number. Too short');
                 }
 
                 if (!this.selectedService) {
@@ -183,7 +225,10 @@
 
                 this.waitForNotification(this.quote.uuid);
                 console.log('waiting for callback notification on channel', this.quote.uuid);
-            }
+            },
+            currencyFormat(amount) {
+                return currency.format(amount, this.quote.currency_code)
+            },
         },
         watch: {
             quoteLoadStatus() {
@@ -206,6 +251,9 @@
                     this.show_transaction_modal = false;
                 }
                 this.spinner_status = this.transactionLoadStatus;
+            },
+            billsLoadStatus() {
+                this.spinner_status = this.billsLoadStatus;
             }
         },
         deactivated() {

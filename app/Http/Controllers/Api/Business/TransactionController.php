@@ -15,12 +15,14 @@ use App\Http\Requests\Api\Business\ConfirmPaymentRequest;
 use App\Http\Requests\Api\Business\DeleteTransactionRequest;
 use App\Http\Requests\Api\Business\ShowTransactionRequest;
 use App\Http\Requests\Api\Business\GeneralRequest;
+use App\Http\Resources\Api\Business\PostpaidBillResource;
 use App\Http\Resources\Api\TransactionResource;
 use App\Jobs\Business\Purchase\ProcessPurchaseJob;
 use App\Models\Transaction\Transaction;
 use App\Repositories\Api\Business\TransactionRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Services\Business\Models\ModelInterface;
+use App\Services\Business\Models\PostpaidBill;
 use App\Services\Business\Validators\CategoryProvider;
 use App\Services\Constants\BusinessErrorCodes;
 use Illuminate\Support\Carbon;
@@ -100,6 +102,29 @@ class TransactionController extends Controller
         }
         
         throw new NotFoundException(BusinessErrorCodes::TRANSACTION_NOT_IN_CACHE, 'This transaction is no longer in cache. May have expired or already processed');
+    }
+    
+    /**
+     * @param ServiceRepository $serviceRepository
+     * @param GeneralRequest $request
+     * @return mixed
+     * @throws ServerErrorException
+     */
+    public function search(ServiceRepository $serviceRepository, GeneralRequest $request)
+    {
+        \Log::info('New search request received. Processing the search request... ');
+    
+        $service = $serviceRepository->findByCode($request->input('service_code'));
+    
+        $categoryClient = $this->category($service->category);
+    
+        $result = $categoryClient->search($request->input());
+    
+        $ttl = Carbon::now()->addMinutes(config('app.micro_services.cache_expiration'));
+    
+        \Cache::store(config('app.micro_services.cache_store'))->put($request->input('destination'), $result, $ttl);
+        
+        return $categoryClient->resultResponse($result);
     }
     
     /**

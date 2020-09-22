@@ -26,6 +26,9 @@ export const business = {
         transactions: [],
         transactionsLoadStatus: 0,
 
+        bills: [],
+        billsSearchStatus: 0,
+
         account:{},
         accountLoadStatus: 0,
 
@@ -197,6 +200,18 @@ export const business = {
                     commit('setTransactionLoadStatus', 3);
                     helper.handleException(error);
                 })
+        },
+        searchBills({commit}, data) {
+            commit('setBillsSearchStatus', 1);
+            BusinessApi.searchBills(data)
+                .then(function (response) {
+                    commit('setBillsSearchStatus', 2);
+                    commit('setBills', response.data);
+                })
+                .catch(function (error) {
+                    commit('setBillsSearchStatus', 3);
+                    helper.handleException(error);
+                })
         }
     },
 
@@ -254,6 +269,12 @@ export const business = {
         },
         setDeleteTransactionStatus(state, status) {
             state.deleteTransactionStatus = status;
+        },
+        setBillsSearchStatus(state, status) {
+            state.billsSearchStatus = status;
+        },
+        setBills(state, bills) {
+            state.bills = bills;
         }
     },
 
@@ -312,6 +333,12 @@ export const business = {
         },
         getDeleteTransactionStatus(state) {
             return state.deleteTransactionStatus;
+        },
+        getBillsSearchStatus(state) {
+            return state.billsSearchStatus;
+        },
+        getBills(state) {
+            return state.bills;
         }
     }
 };

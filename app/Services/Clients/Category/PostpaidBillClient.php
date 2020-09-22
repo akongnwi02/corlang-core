@@ -10,6 +10,7 @@ namespace App\Services\Clients\Category;
 
 
 use App\Exceptions\Api\BadRequestException;
+use App\Exceptions\Api\NotFoundException;
 use App\Exceptions\Api\ServerErrorException;
 use App\Http\Resources\Api\Business\PostpaidBillResource;
 use App\Rules\Service\ServiceAccessRule;
@@ -30,6 +31,7 @@ class PostpaidBillClient extends AbstractCategory
             'destination'   => ['required', 'string'],
             'service_code'  => ['required', new ServiceAccessRule(),],
             'phone'         => ['sometimes', 'nullable', 'string', 'min:9'],
+            'item'          => ['required',],
             //            'pincode'       => ['required', new CorrectPinCode()],
         ])->validate();
         Log::info("{$this->getCategoryClientName()}: Input data valid");
@@ -38,12 +40,12 @@ class PostpaidBillClient extends AbstractCategory
     /**
      * @param $transaction
      * @throws BadRequestException
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function confirm($transaction)
     {
         $json = [
             'destination'  => $transaction->destination,
+            'item'         => $transaction->items,
             'service_code' => $transaction->service_code,
             'amount'       => $transaction->amount,
             'external_id'  => $transaction->uuid,
@@ -82,10 +84,31 @@ class PostpaidBillClient extends AbstractCategory
     /**
      * @param $data
      * @return PostpaidBill
-     * @throws ServerErrorException
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws NotFoundException
      */
     public function quote($data): ModelInterface
+    {
+        $bills = \Cache::store(config('app.micro_services.cache_store'))->pull($data['destination']);
+    
+        if (!$bills) {
+            throw new NotFoundException(BusinessErrorCodes::BILL_NOT_IN_CACHE, 'The bill is not found in cache. Please search again');
+        }
+        
+        foreach ($bills as $bill) {
+            if ($bill->getBillNumber() == $data['item']) {
+                return $bill;
+            }
+        }
+    
+        throw new NotFoundException(BusinessErrorCodes::BILL_NOT_IN_CACHE, 'The bill is not found in cache. Please search again');
+    }
+    
+    /**
+     * @param $data
+     * @return array
+     * @throws ServerErrorException
+     */
+    public function search($data)
     {
         $json = [
             'destination'  => $data['destination'],
@@ -117,21 +140,30 @@ class PostpaidBillClient extends AbstractCategory
         $body = json_decode($content);
     
         if ($response->getStatusCode() == 200) {
-            $postpaidBill = new PostpaidBill();
-            $postpaidBill->setServiceCode($data['service_code'])
-                ->setItems($body->bill_number)
-                ->setAmount($body->amount)
-                ->setCurrencyCode($body->currency)
-                ->setName($body->name)
-                ->setContractNumber($body->contract_number)
-                ->setBillNumber($body->bill_number)
-                ->setBillDueDate($body->bill_due_date)
-                ->setBillIsLate($body->bill_is_late)
-                ->setBillIsPaid($body->bill_is_paid)
-                ->setAddress($body->address)
-                ->setPhone($body->phone)
-                ->setDestination($body->bill_number);
-            return $postpaidBill;
+            $results = collect($body);
+            
+            $bills = [];
+            
+            foreach ($results as $result) {
+                $postpaidBill = new PostpaidBill();
+                $postpaidBill->setDestination($result->contract_number)
+                    ->setItems($result->bill_number)
+                    ->setContractNumber($result->contract_number)
+                    ->setBillNumber($result->bill_number)
+                    ->setBillDueDate($result->bill_due_date)
+                    ->setBillIsLate($result->bill_is_late)
+                    ->setAddress($result->address)
+                    ->setCurrencyCode($result->currency_code)
+                    ->setPhone($result->phone)
+                    ->setName($result->name)
+                    ->setBillIsPaid($result->bill_is_paid)
+                    ->setAmount($result->amount)
+                    ->setCustomerFee($result->fee)
+                    ->setServiceCode($data['service_code']);
+                
+                $bills[] = $postpaidBill;
+            }
+            return $bills;
         } else {
             throw new ServerErrorException($body->error_code, $body->message);
         }
@@ -145,5 +177,10 @@ class PostpaidBillClient extends AbstractCategory
     public function response(ModelInterface $model)
     {
         return new PostpaidBillResource($model);
+    }
+    
+    public function resultResponse($result)
+    {
+        return PostpaidBillResource::collection($result);
     }
 }
