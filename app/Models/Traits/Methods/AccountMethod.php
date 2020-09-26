@@ -14,6 +14,7 @@ use App\Models\Account\Movement;
 use App\Models\Account\MovementType;
 use App\Models\Account\Payout;
 use App\Models\Account\PayoutType;
+use App\Repositories\Backend\Account\AccountRepository;
 
 trait AccountMethod
 {
@@ -106,6 +107,10 @@ trait AccountMethod
     
     public function getCommissionBalance()
     {
+        if ($this->is_default) {
+            $accountRepository = new AccountRepository();
+            return $accountRepository->getSystemCommissionBalance();
+        }
         if ($this->type->name == config('business.account.type.company')) {
 
             return $this->company->getCompanyCommissionBalance();
