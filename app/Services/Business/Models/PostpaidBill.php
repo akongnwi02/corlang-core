@@ -30,6 +30,7 @@ class PostpaidBill implements ModelInterface
     public $currency_code;
     public $items;
     public $customer_fee;
+    public $type;
     
     public function getBillNumber()
     {
@@ -194,5 +195,16 @@ class PostpaidBill implements ModelInterface
     public function getCustomerFee()
     {
         return $this->customer_fee;
+    }
+    
+    public function getType()
+    {
+        return $this->type;
+    }
+    
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
     }
 }

@@ -24,6 +24,7 @@
                         "bill_due_date": "Bill Due Date",
                         "asset": "Units",
                         "contract_number": "Contract Number",
+                        "type": "Bill Type",
                         "quote": {
                             "title": "Meter Details"
                         }

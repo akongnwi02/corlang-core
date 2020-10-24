@@ -35,6 +35,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ $t('dashboard.pages.tabs.content.electricity.type') }}
+                        </th>
+                        <td>
+                            {{ quote.type }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ $t('dashboard.pages.tabs.content.electricity.bill_due_date') }}
                         </th>
                         <td>
