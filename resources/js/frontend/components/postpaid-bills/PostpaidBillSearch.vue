@@ -18,7 +18,7 @@
                 <label for="plan"><strong>{{ $t('dashboard.pages.tabs.content.postpaid.select_bill') }}</strong></label>
                 <select v-model="selectedBill" class="custom-select" id="plan" required>
                     <option v-for="bill in bills" :value="bill">
-                        {{ bill.bill_number }}
+                        {{ bill.bill_gen_date }} - {{ bill.bill_number }}
                     </option>
                 </select>
             </div>
@@ -29,8 +29,12 @@
                    disabled>
                 </mdb-input>
             </div>
+            <div class="col-lg-12" v-if="selectedBill">
+                <label>{{ selectedBill.type }}</label>
+            </div>
         </div>
         <br/>
+
         <hr/>
         <services v-on:selected="selectService" :services="services"></services>
 
@@ -151,6 +155,7 @@
             },
             searchBills() {
                 if(this.validateData()) {
+                    this.selectedBill = null;
                     this.$store.dispatch('searchBills', {
                         destination: this.destination,
                         service_code: this.selectedService.code,
@@ -254,6 +259,11 @@
             },
             billsLoadStatus() {
                 this.spinner_status = this.billsLoadStatus;
+                if (this.billsLoadStatus == 2) {
+                    if (this.bills.length == 1) {
+                        this.selectedBill = this.bills[0];
+                    }
+                }
             }
         },
         deactivated() {

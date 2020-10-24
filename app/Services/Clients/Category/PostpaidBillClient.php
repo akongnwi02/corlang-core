@@ -149,11 +149,12 @@ class PostpaidBillClient extends AbstractCategory
             
             foreach ($results as $result) {
                 $postpaidBill = new PostpaidBill();
-                $postpaidBill->setDestination($result->contract_number)
-                    ->setItems($result->bill_number)
+                $postpaidBill->setDestination($result->bill_number)
+                    ->setItems($result->contract_number)
                     ->setContractNumber($result->contract_number)
                     ->setBillNumber($result->bill_number)
                     ->setBillDueDate($result->bill_due_date)
+                    ->setBillGenDate($result->bill_gen_date)
                     ->setBillIsLate($result->bill_is_late)
                     ->setAddress($result->address)
                     ->setCurrencyCode($result->currency_code)

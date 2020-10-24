@@ -49,6 +49,14 @@
                             {{ quote.bill_due_date }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ $t('dashboard.pages.tabs.content.electricity.bill_gen_date') }}
+                        </th>
+                        <td>
+                            {{ quote.bill_gen_date }}
+                        </td>
+                    </tr>
                     <tr v-if="quote.name">
                         <th>
                             {{ $t('dashboard.pages.general.customer.name')}}

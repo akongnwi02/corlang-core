@@ -16,6 +16,7 @@ class PostpaidBill implements ModelInterface
     public $destination;
     public $bill_number;
     public $bill_due_date;
+    public $bill_gen_date;
     public $bill_is_late;
     public $bill_is_paid;
     public $service_code;
@@ -205,6 +206,17 @@ class PostpaidBill implements ModelInterface
     public function setType($type)
     {
         $this->type = $type;
+        return $this;
+    }
+    
+    public function getBillGenDate()
+    {
+        return $this->bill_gen_date;
+    }
+    
+    public function setBillGenDate($bill_gen_date)
+    {
+        $this->bill_gen_date = $bill_gen_date;
         return $this;
     }
 }

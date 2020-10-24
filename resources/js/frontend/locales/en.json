@@ -22,6 +22,7 @@
                         "meter_code": "Meter Code",
                         "bill_number": "Bill Number",
                         "bill_due_date": "Bill Due Date",
+                        "bill_gen_date": "Bill Generation Date",
                         "asset": "Units",
                         "contract_number": "Contract Number",
                         "type": "Bill Type",
