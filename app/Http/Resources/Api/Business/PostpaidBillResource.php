@@ -28,6 +28,7 @@ class PostpaidBillResource extends Resource
             'phone'           => $this->phone,
             'name'            => $this->name,
             'bill_is_paid'    => $this->bill_is_paid,
+            'type'            => $this->type,
             'amount'             => (float)$this->amount,
             'fee'                => (float)$this->customer_fee,
         ];

@@ -66,6 +66,7 @@ class PostpaidBillClient extends AbstractCategory
             $content = $response->getBody()->getContents();
         
             Log::info("{$this->getCategoryClientName()}: Purchase request sent successfully to micro service", [
+                "status" => $response->getStatusCode(),
                 "body" => json_decode($content),
                 "response" => $content,
             ]);
@@ -107,6 +108,7 @@ class PostpaidBillClient extends AbstractCategory
      * @param $data
      * @return array
      * @throws ServerErrorException
+     * @throws NotFoundException
      */
     public function search($data)
     {
@@ -133,6 +135,7 @@ class PostpaidBillClient extends AbstractCategory
         $content = $response->getBody()->getContents();
     
         Log::debug("{$this->getCategoryClientName()}: Response from micro service", [
+            'status' => $response->getStatusCode(),
             'service' => $this->name,
             'response' => $content
         ]);
@@ -140,7 +143,7 @@ class PostpaidBillClient extends AbstractCategory
         $body = json_decode($content);
     
         if ($response->getStatusCode() == 200) {
-            $results = collect($body);
+            $results = $body;
             
             $bills = [];
             
@@ -156,6 +159,7 @@ class PostpaidBillClient extends AbstractCategory
                     ->setCurrencyCode($result->currency_code)
                     ->setPhone($result->phone)
                     ->setName($result->name)
+                    ->setType($result->type)
                     ->setBillIsPaid($result->bill_is_paid)
                     ->setAmount($result->amount)
                     ->setCustomerFee($result->fee)
@@ -163,7 +167,9 @@ class PostpaidBillClient extends AbstractCategory
                 
                 $bills[] = $postpaidBill;
             }
-            return $bills;
+            return collect($bills);
+        } else if($response->getStatusCode() == 404){
+            throw new NotFoundException($body->error_code, $body->message);
         } else {
             throw new ServerErrorException($body->error_code, $body->message);
         }
