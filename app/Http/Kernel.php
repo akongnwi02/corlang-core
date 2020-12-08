@@ -79,6 +79,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password_expires' => \App\Http\Middleware\PasswordExpires::class,
+        'force_topup_configuration' => \App\Http\Middleware\ForceTopupConfiguration::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,

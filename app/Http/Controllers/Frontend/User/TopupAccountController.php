@@ -21,6 +21,11 @@ class TopupAccountController extends Controller
     
         $paymentMethodRepository->setTopupMethods(auth()->user(), $topupConfig);
     
-        return redirect()->route('frontend.user.account')->withFlashSuccess(__('strings.frontend.user.topup_updated'));
+        return redirect()->route('frontend.user.dashboard')->withFlashSuccess(__('strings.frontend.user.topup_updated'));
+    }
+    
+    public function forceTopup()
+    {
+        return view('frontend.user.force-topup');
     }
 }

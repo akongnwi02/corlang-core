@@ -20,18 +20,19 @@ Route::post('contact/send', [ContactController::class, 'send'])->name('contact.s
  * All route names are prefixed with 'frontend.'
  * These routes can not be hit if the password is expired
  */
-Route::group(['middleware' => ['auth', 'password_expires', ]], function () {
+Route::group(['middleware' => ['auth', 'password_expires']], function () {
     Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
         /*
          * User Dashboard Specific
          */
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('force_topup_configuration');
 
         /*
          * User Account Specific
          */
         Route::get('account', [AccountController::class, 'index'])->name('account');
-
+        Route::get('force-topup', [TopupAccountController::class, 'forceTopup'])->name('force_topup');
+        
         /*
          * User Profile Specific
          */
@@ -40,6 +41,8 @@ Route::group(['middleware' => ['auth', 'password_expires', ]], function () {
         /*
          * Set Topup Accounts
          */
+        Route::get('force-topup', [TopupAccountController::class, 'forceTopup'])->name('force-topup');
+    
         Route::post('topup', [TopupAccountController::class, 'setup'])->name('topup');
     });
 });

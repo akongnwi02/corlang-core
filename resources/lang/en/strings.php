@@ -173,8 +173,9 @@ return [
             'password_updated'            => 'Password successfully updated.',
             'pin_changed'                 => 'Your pin code was changed successfully.',
             'pin_created'                 => 'Your pin code was created successfully.',
-            'topup_updated'               => 'Your Topup configuration has been updated successfully.',
-            'topup_account_change_notice' => 'Once a topup account is confirmed by the system, it cannot be changed except you contact support.'
+            'topup_updated'               => 'Your Topup configuration has been updated successfully. You can now recharge your account',
+            'topup_account_change_notice' => 'Once a topup account is confirmed by the system, it cannot be changed except you contact support.',
+            'configure_topup'             => 'Please configure your account recharge methods'
         ],
         'welcome_to'              => 'Welcome to :place',
         'what_we_do'              => 'What We Do',
