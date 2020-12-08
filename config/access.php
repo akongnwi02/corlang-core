@@ -113,6 +113,15 @@ return [
              */
             'expiration_time' => 5,
         ],
+        
+        /*
+         * Top 0up Configuration
+         * Force the user to configure their top up methods
+         *
+         * At least one method needs to be set if enabled
+         */
+        'force_topup_configuration' => env('APP_FORCE_TOPUP_CONFIG', true),
+        
     ],
 
     /*

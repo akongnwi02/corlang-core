@@ -2113,6 +2113,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         searchBills: function searchBills() {
             if (this.validateData()) {
                 this.selectedBill = null;
+                this.bills = [];
                 this.$store.dispatch('searchBills', {
                     destination: this.destination,
                     service_code: this.selectedService.code

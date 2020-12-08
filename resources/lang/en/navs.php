@@ -25,6 +25,7 @@ return [
         'login'     => 'Login',
         'macros'    => 'Macros',
         'register'  => 'Register',
+        'force_topup' => 'Configure Topup',
 
         'user' => [
             'account'         => 'My Account',
