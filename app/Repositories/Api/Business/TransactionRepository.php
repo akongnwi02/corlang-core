@@ -279,6 +279,7 @@ class TransactionRepository
     {
         $transactions = QueryBuilder::for(Transaction::class)
             ->where('user_id', auth()->user()->uuid)
+            ->whereNotIn('status', [config('business.transaction.status.created')])
             ->allowedSorts('transactions.created_at', 'transactions.updated_at')
             ->defaultSort('-transactions.created_at', 'transactions.updated_at');
         return $transactions;
