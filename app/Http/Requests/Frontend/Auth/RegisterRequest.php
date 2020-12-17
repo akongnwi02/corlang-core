@@ -38,11 +38,10 @@ class RegisterRequest extends FormRequest
             'username'             => [
                 'bail',
                 'required',
-                'email',
                 'max:191',
                 Rule::unique('users', 'username'),
-//                new PhoneOrEmail(),
-//                new UniquePhoneOrEmail()
+                new PhoneOrEmail(),
+                new UniquePhoneOrEmail()
             ],
         ];
     }

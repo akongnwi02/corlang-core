@@ -186,6 +186,9 @@ return [
                 'change_error' => 'There was a problem changing your pin code. Please try again later.'
             ],
             'registration_disabled' => 'Registration is currently closed.',
+            'sms' => [
+                'send_error' => 'Oops! Sorry we are currently facing a problem with the SMS gateway'
+            ]
         ],
     ],
     'api' => [

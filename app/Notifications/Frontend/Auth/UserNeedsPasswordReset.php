@@ -73,7 +73,7 @@ class UserNeedsPasswordReset extends Notification
     public function toSms($notifiable)
     {
         return (new SmsMessage())
-            ->content(__('use_code_to_reset_sms', [
+            ->content(__('strings.emails.auth.use_code_to_reset_sms', [
                 'first_name' => $notifiable->first_name,
                 'code' => $notifiable->confirmation_code,
                 'app_name' => app_name(),

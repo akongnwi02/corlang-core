@@ -46,7 +46,7 @@ class SendMoneyClient extends AbstractCategory
             'service_code' => $transaction->service_code,
             'amount'       => $transaction->amount,
             'external_id'  => $transaction->uuid,
-            // needs to be injected with the proper payload
+            // auth_payload needs to be injected with the proper payload
             // need to save it in tx table first before retrieving it from here
             // not currently used anyway
             'auth_payload' => '',

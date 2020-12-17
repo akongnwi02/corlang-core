@@ -122,5 +122,6 @@ return [
         'secret'  => env('SMS_CLIENT_SECRET'),
         'from'    => env('SMS_CLIENT_SMS_FROM'),
         'api_url' => env('SMS_CLIENT_API_URL'),
+        'api_version' => env('SMS_CLIENT_API_VERSION'),
     ],
 ];
