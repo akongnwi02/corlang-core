@@ -109,8 +109,8 @@ return [
             'click_to_confirm' => 'Cliquez ici pour confirmer votre compte :',
             'use_code_to_confirm'     => 'Utilisez le code ci-dessous pour confirmer votre compte:',
             'use_code_to_reset_email' => 'Utilisez le code ci-dessous pour réinitialiser votre mot de passe:',
-            'use_code_to_confirm_sms' => 'Hello :first_name! Utilisez le code :code de confirmation de votre compte sur :nom_de_l\'application.',
-            'use_code_to_reset_sms'   => 'Hello :first_name! Utilisez le code :code de réinitialisation de votre mot de passe sur :nom_de_l\'application.',
+            'use_code_to_confirm_sms' => 'Hello :first_name! Utilisez le code :code de confirmation de votre compte sur :app_name.',
+            'use_code_to_reset_sms'   => 'Hello :first_name! Utilisez le code :code de réinitialisation de votre mot de passe sur :app_name.',
 
             'login_sms' => 'Visitez notre site web pour vous connecter à votre compte.'
         ],

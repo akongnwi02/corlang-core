@@ -304,7 +304,7 @@ return [
             'avatar'                    => 'Avatar',
             'email'                     => 'Adresse email',
             'code'                      => 'Code de confirmation',
-            'phone_or_email'            => 'Numéro de téléphone ou adresse email',
+            'phone_or_email'            => 'Téléphone ou Email',
             'username'                  => 'Nom d\'utilisateur',
             'phone'                     => 'Numéro de téléphone',
             'first_name'                => 'Prénom',
