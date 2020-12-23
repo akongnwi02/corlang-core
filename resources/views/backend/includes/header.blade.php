@@ -13,7 +13,7 @@
 
     <ul class="nav navbar-nav">
         <li class="nav-item px-3">
-            <a class="nav-link" href="{{ route('frontend.index') }}"><i class="icon-home"></i></a>
+            <a class="nav-link" href="{{ route('frontend.user.dashboard') }}"><i class="icon-basket"></i></a>
         </li>
     </ul>
 
