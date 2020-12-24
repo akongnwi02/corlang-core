@@ -7,14 +7,14 @@
         </mdb-modal-header>
         <mdb-modal-body>
             <div class="row">
-                <divl class="col-lg-6">
+                <div class="col-lg-6">
                     <label for="paymentMethod"><strong>{{ $t('dashboard.pages.account.payout_method') }}</strong></label>
                     <select v-model="selectedMethod" class="custom-select" id="paymentMethod" required>
                         <option v-for="method in methods" :value="method">
                             {{ method.name }}
                         </option>
                     </select>
-                </divl>
+                </div>
                 <div class="col-lg-6">
                     <mdb-input key="amount"
                                :label="$t('dashboard.pages.general.amount') + ' ' + account.currency_code"

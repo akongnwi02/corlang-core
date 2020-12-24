@@ -63,13 +63,20 @@
         data() {
             return {
                 invalid_text: '',
-                amount: 15000,
+                amount: '',
                 auth_payload: '',
                 selectedMethod: {}
             }
         },
         mounted() {
-            this.selectedMethod = this.methods[0]
+            let i, methods = this.methods;
+            for (i = 0; i < methods.length; i++) {
+                if (this.topupAccount(methods[i])) {
+                    this.selectedMethod = methods[i];
+                    break;
+                }
+                this.selectedMethod = methods[0];
+            }
         },
         computed: {
             methods() {
