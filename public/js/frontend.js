@@ -353,16 +353,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
-        var i = void 0,
-            methods = this.methods;
-        for (i = 0; i < methods.length; i++) {
-            if (this.topupAccount(methods[i])) {
-                this.selectedMethod = methods[i];
-                alert(this.selectedMethod);
-                break;
-            }
-            this.selectedMethod = methods[0];
-        }
+        this.selectedMethod = methods[0];
     },
 
     computed: {
@@ -422,12 +413,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return false;
         },
         topupAccount: function topupAccount(method) {
-            var myAccount = this.topupAccounts.filter(function (obj) {
-                return obj.paymentmethod_id == method.uuid;
-            })[0];
+            if (this.accountLoadStatus == 2) {
+                var myAccount = this.topupAccounts.filter(function (obj) {
+                    return obj.paymentmethod_id == method.uuid;
+                })[0];
 
-            if (myAccount) {
-                return myAccount.account;
+                if (myAccount) {
+                    return myAccount.account;
+                }
+                return null;
             }
             return null;
         }
@@ -20382,7 +20376,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
