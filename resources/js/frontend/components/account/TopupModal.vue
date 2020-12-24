@@ -69,6 +69,14 @@
             }
         },
         mounted() {
+            let i, methods = this.methods;
+            for (i = 0; i < methods.length; i++) {
+                if (this.topupAccount(methods[i])) {
+                    this.selectedMethod = methods[i];
+                    break;
+                }
+                this.selectedMethod = methods[0];
+            }
             this.selectedMethod = methods[0];
         },
         computed: {

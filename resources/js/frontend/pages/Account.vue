@@ -14,7 +14,7 @@
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-body">
-                            <div v-if="!accountIsEmpty" class="btn-group float-right" @click="showTopupModal" >
+                            <div v-if="!accountIsEmpty" class="btn-group float-right" @click="toggleTopupModal(true)" >
                                 <span style="cursor: pointer" class="fa fa-arrow-circle-up fa-lg" :title="$t('dashboard.hover.topup')"></span>
                             </div>
                             <div v-if="!accountIsEmpty" class="text-value-lg"><h4><strong>{{ currency(account.balance)}}</strong></h4></div>
@@ -109,7 +109,7 @@
             </div><!--col-->
         </div><!--row-->
         <payout-modal v-on:payout="requestPayout" v-on:closed="show_payout_modal=false" v-show="show_payout_modal==true" :account="account"></payout-modal>
-        <topup-modal v-on:topup="quoteTopup" v-on:closed="show_topup_modal=false" v-show="show_topup_modal==true"></topup-modal>
+        <topup-modal v-on:topup="quoteTopup" v-on:closed="toggleTopupModal(false)" v-show="showTopupModalState==true"></topup-modal>
 
         <quote-modal v-on:confirmed="confirmTopup" :service="topup_method" :quote="quote"
                      v-on:closed="show_quote_modal=false" v-if="show_quote_modal"></quote-modal>
@@ -138,10 +138,8 @@
         data() {
             return {
                 show_payout_modal: false,
-                show_topup_modal: false,
                 spinner_status: false,
                 show_quote_modal: false,
-
                 topup_method: {}
             }
         },
@@ -182,6 +180,9 @@
             quote() {
                 return this.$store.getters.getQuote;
             },
+            showTopupModalState() {
+                return this.$store.getters.getShowTopupModal;
+            }
         },
         methods: {
             currency(amount) {
@@ -190,8 +191,8 @@
             showPayoutModal() {
                 this.show_payout_modal = true;
             },
-            showTopupModal() {
-                this.show_topup_modal = true;
+            toggleTopupModal(state) {
+                this.$store.commit('setShowTopupModal', state);
             },
             requestPayout(payout) {
                 this.show_payout_modal = false;
@@ -208,7 +209,7 @@
             quoteTopup(data) {
                 console.log('topup data', data);
                 this.topup_method = data.selectedMethod.service;
-                this.show_topup_modal = false;
+                this.toggleTopupModal(false);
 
                 this.$store.dispatch('loadQuote', {
                     destination: data.paymentaccount,

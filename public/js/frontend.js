@@ -353,6 +353,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
+        var i = void 0,
+            methods = this.methods;
+        for (i = 0; i < methods.length; i++) {
+            if (this.topupAccount(methods[i])) {
+                this.selectedMethod = methods[i];
+                break;
+            }
+            this.selectedMethod = methods[0];
+        }
         this.selectedMethod = methods[0];
     },
 
@@ -841,11 +850,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_account_TopupModal__ = __webpack_require__("./resources/js/frontend/components/account/TopupModal.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_account_TopupModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_account_TopupModal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mobile_money_QuoteModal__ = __webpack_require__("./resources/js/frontend/components/mobile-money/QuoteModal.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mobile_money_QuoteModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_mobile_money_QuoteModal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_Configuration_ConfigurationLoad__ = __webpack_require__("./resources/js/frontend/mixins/Configuration/ConfigurationLoad.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_Configuration_ConfigurationLoad__ = __webpack_require__("./resources/js/frontend/mixins/Configuration/ConfigurationLoad.js");
 //
 //
 //
@@ -855,29 +860,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-
-
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "BalanceBar",
-    components: {
-        TopupModal: __WEBPACK_IMPORTED_MODULE_1__components_account_TopupModal___default.a,
-        QuoteModal: __WEBPACK_IMPORTED_MODULE_2__components_mobile_money_QuoteModal___default.a
-    },
-    mixins: [__WEBPACK_IMPORTED_MODULE_3__mixins_Configuration_ConfigurationLoad__["a" /* ConfigurationLoad */]],
-    data: function data() {
-        return {
-            show_topup_modal: false,
-            show_quote_modal: false,
-            topup_method: {}
-        };
-    },
+    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_Configuration_ConfigurationLoad__["a" /* ConfigurationLoad */]],
     created: function created() {
         this.$store.dispatch('getAccount');
     },
@@ -888,58 +877,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         accountIsEmpty: function accountIsEmpty() {
             return Object.keys(this.account).length === 0;
-        },
-        quoteLoadStatus: function quoteLoadStatus() {
-            return this.$store.getters.getQuoteLoadStatus;
-        },
-        quote: function quote() {
-            return this.$store.getters.getQuote;
-        },
-        paymentMethods: function paymentMethods() {
-            return this.$store.getters.getConfiguration.payout_methods;
         }
     },
     methods: {
         currency: function currency(amount) {
             return __WEBPACK_IMPORTED_MODULE_0__helpers_currency__["a" /* currency */].format(amount, this.account.currency_code);
         },
-        showTopupModal: function showTopupModal() {
-            this.show_topup_modal = true;
-        },
-        showPayoutModal: function showPayoutModal() {
-            this.show_payout_modal = true;
-        },
-        quoteTopup: function quoteTopup(data) {
-            console.log('topup data', data);
-            this.topup_method = data.selectedMethod.service;
-            this.show_topup_modal = false;
-
-            this.$store.dispatch('loadQuote', {
-                destination: data.paymentaccount,
-                service_code: data.selectedMethod.service.code,
-                amount: data.amount,
-                currency_code: data.currency_code,
-                auth_payload: data.auth_payload,
-                phone: this.phone
-            });
-        },
-        confirmTopup: function confirmTopup(data) {
-            console.log('transaction confirmed');
-            this.show_quote_modal = false;
-            this.$store.dispatch('confirmPayment', {
-                id: this.quote.uuid
-            });
-            this.waitForNotification(this.quote.uuid);
-            console.log('waiting for callback notification on channel', this.quote.uuid);
-        }
-    },
-    watch: {
-        quoteLoadStatus: function quoteLoadStatus() {
-            if (this.quoteLoadStatus == 2) {
-                this.show_quote_modal = true;
-            } else {
-                this.show_quote_modal = false;
-            }
+        navigateToTopUp: function navigateToTopUp() {
+            this.$store.commit('setPage', 'account');
+            this.$store.commit('setShowTopupModal', true);
         }
     }
 });
@@ -2841,11 +2787,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         mdbTabContent: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbTabContent"],
         mdbTabPane: __WEBPACK_IMPORTED_MODULE_1_mdbvue__["mdbTabPane"]
     },
-    data: function data() {
-        return {
-            page: 'purchase'
-        };
+    computed: {
+        page: function page() {
+            return this.$store.getters.getPage;
+        }
+    },
+    methods: {
+        changePage: function changePage(page) {
+            this.$store.commit('setPage', page);
+        }
     }
+    // created() {
+    //     this.$store.dispatch('loadUser')
+    // },
 });
 
 /***/ }),
@@ -3053,10 +3007,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             show_payout_modal: false,
-            show_topup_modal: false,
             spinner_status: false,
             show_quote_modal: false,
-
             topup_method: {}
         };
     },
@@ -3097,6 +3049,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         quote: function quote() {
             return this.$store.getters.getQuote;
+        },
+        showTopupModalState: function showTopupModalState() {
+            return this.$store.getters.getShowTopupModal;
         }
     },
     methods: {
@@ -3106,8 +3061,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         showPayoutModal: function showPayoutModal() {
             this.show_payout_modal = true;
         },
-        showTopupModal: function showTopupModal() {
-            this.show_topup_modal = true;
+        toggleTopupModal: function toggleTopupModal(state) {
+            this.$store.commit('setShowTopupModal', state);
         },
         requestPayout: function requestPayout(payout) {
             this.show_payout_modal = false;
@@ -3124,7 +3079,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         quoteTopup: function quoteTopup(data) {
             console.log('topup data', data);
             this.topup_method = data.selectedMethod.service;
-            this.show_topup_modal = false;
+            this.toggleTopupModal(false);
 
             this.$store.dispatch('loadQuote', {
                 destination: data.paymentaccount,
@@ -20286,7 +20241,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -20316,7 +20271,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -20376,7 +20331,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -33906,7 +33861,11 @@ var render = function() {
                       "div",
                       {
                         staticClass: "btn-group float-right",
-                        on: { click: _vm.showTopupModal }
+                        on: {
+                          click: function($event) {
+                            return _vm.toggleTopupModal(true)
+                          }
+                        }
                       },
                       [
                         _c("span", {
@@ -34238,14 +34197,14 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.show_topup_modal == true,
-            expression: "show_topup_modal==true"
+            value: _vm.showTopupModalState == true,
+            expression: "showTopupModalState==true"
           }
         ],
         on: {
           topup: _vm.quoteTopup,
           closed: function($event) {
-            _vm.show_topup_modal = false
+            return _vm.toggleTopupModal(false)
           }
         }
       }),
@@ -34320,55 +34279,21 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row" },
-    [
-      _c("div", [
-        _c("a", { attrs: { href: "#" }, on: { click: _vm.showTopupModal } }, [
-          _vm._v(" " + _vm._s(_vm.$t("dashboard.pages.general.add_money")))
-        ])
-      ]),
-      _vm._v(" "),
-      !_vm.accountIsEmpty
-        ? _c("div", { staticClass: "text-value-lg ml-3" }, [
-            _c("h4", [
-              _c("strong", [_vm._v(_vm._s(_vm.currency(_vm.account.balance)))])
-            ])
+  return _c("div", { staticClass: "row" }, [
+    _c("div", [
+      _c("a", { attrs: { href: "#" }, on: { click: _vm.navigateToTopUp } }, [
+        _vm._v(" " + _vm._s(_vm.$t("dashboard.pages.general.add_money")))
+      ])
+    ]),
+    _vm._v(" "),
+    !_vm.accountIsEmpty
+      ? _c("div", { staticClass: "text-value-lg ml-3" }, [
+          _c("h4", [
+            _c("strong", [_vm._v(_vm._s(_vm.currency(_vm.account.balance)))])
           ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("topup-modal", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.show_topup_modal == true,
-            expression: "show_topup_modal==true"
-          }
-        ],
-        on: {
-          topup: _vm.quoteTopup,
-          closed: function($event) {
-            _vm.show_topup_modal = false
-          }
-        }
-      }),
-      _vm._v(" "),
-      _vm.show_quote_modal
-        ? _c("quote-modal", {
-            attrs: { service: _vm.topup_method, quote: _vm.quote },
-            on: {
-              confirmed: _vm.confirmTopup,
-              closed: function($event) {
-                _vm.show_quote_modal = false
-              }
-            }
-          })
-        : _vm._e()
-    ],
-    1
-  )
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -37125,7 +37050,7 @@ var render = function() {
               nativeOn: {
                 click: function($event) {
                   $event.preventDefault()
-                  _vm.page = "purchase"
+                  return _vm.changePage("purchase")
                 }
               }
             },
@@ -37151,7 +37076,7 @@ var render = function() {
               nativeOn: {
                 click: function($event) {
                   $event.preventDefault()
-                  _vm.page = "transactions"
+                  return _vm.changePage("transactions")
                 }
               }
             },
@@ -37174,7 +37099,7 @@ var render = function() {
               nativeOn: {
                 click: function($event) {
                   $event.preventDefault()
-                  _vm.page = "account"
+                  return _vm.changePage("account")
                 }
               }
             },
@@ -56244,6 +56169,7 @@ var PusherNotification = {
                         message: this.$t('notifications.successful'),
                         type: 'is-success'
                     });
+                    this.$store.dispatch('loadTransaction', transaction.uuid);
                 } else {
                     this.$store.commit('setPaymentStatus', 3);
                     this.$buefy.toast.open({
@@ -56716,6 +56642,38 @@ var merchant = {
 
 /***/ }),
 
+/***/ "./resources/js/frontend/modules/navigation.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return navigation; });
+var navigation = {
+    state: {
+        page: 'purchase',
+        show_topup_modal: false
+    },
+
+    actions: {},
+    mutations: {
+        setPage: function setPage(state, page) {
+            state.page = page;
+        },
+        setShowTopupModal: function setShowTopupModal(state, show_topup_modal) {
+            state.show_topup_modal = show_topup_modal;
+        }
+    },
+    getters: {
+        getPage: function getPage(state) {
+            return state.page;
+        },
+        getShowTopupModal: function getShowTopupModal(state) {
+            return state.show_topup_modal;
+        }
+    }
+};
+
+/***/ }),
+
 /***/ "./resources/js/frontend/pages/Account.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -56932,6 +56890,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_business__ = __webpack_require__("./resources/js/frontend/modules/business.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_auth__ = __webpack_require__("./resources/js/frontend/modules/auth.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_merchant__ = __webpack_require__("./resources/js/frontend/modules/merchant.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_navigation__ = __webpack_require__("./resources/js/frontend/modules/navigation.js");
 /*
 |-------------------------------------------------------------------------------
 | VUEX store.js
@@ -56961,6 +56920,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 
 
+
 /*
   Exports our data store.
 */
@@ -56968,7 +56928,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
   modules: {
     business: __WEBPACK_IMPORTED_MODULE_2__modules_business__["a" /* business */],
     auth: __WEBPACK_IMPORTED_MODULE_3__modules_auth__["a" /* auth */],
-    merchant: __WEBPACK_IMPORTED_MODULE_4__modules_merchant__["a" /* merchant */]
+    merchant: __WEBPACK_IMPORTED_MODULE_4__modules_merchant__["a" /* merchant */],
+    navigation: __WEBPACK_IMPORTED_MODULE_5__modules_navigation__["a" /* navigation */]
   }
 }));
 

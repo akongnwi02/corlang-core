@@ -26,6 +26,7 @@ Vue.use( Vuex );
 import { business } from "./modules/business";
 import { auth } from "./modules/auth";
 import { merchant } from "./modules/merchant";
+import { navigation } from "./modules/navigation";
 
 /*
   Exports our data store.
@@ -34,6 +35,7 @@ export default new Vuex.Store({
     modules: {
         business,
         auth,
-        merchant
+        merchant,
+        navigation
     }
 });

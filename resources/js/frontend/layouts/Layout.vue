@@ -1,15 +1,15 @@
 <template>
     <mdb-container>
         <mdb-tab tabs color="primary" justify key="page">
-            <mdb-tab-item key="purchase-tab" :active="page=='purchase'" @click.native.prevent="page='purchase'">
+            <mdb-tab-item key="purchase-tab" :active="page=='purchase'" @click.native.prevent="changePage('purchase')">
                 <mdb-icon icon="shopping-bag" class="ml-2"/> {{ $t(`dashboard.pages.titles.purchase`) }}
             </mdb-tab-item>
 
-            <mdb-tab-item key="transactions-tab" :active="page=='transactions'" @click.native.prevent="page='transactions'">
+            <mdb-tab-item key="transactions-tab" :active="page=='transactions'" @click.native.prevent="changePage('transactions')">
                 <mdb-icon icon="list" class="ml-2"/> {{ $t(`dashboard.pages.titles.transactions`) }}
             </mdb-tab-item>
 
-            <mdb-tab-item key="account-tab" :active="page=='account'" @click.native.prevent="page='account'">
+            <mdb-tab-item key="account-tab" :active="page=='account'" @click.native.prevent="changePage('account')">
                 <mdb-icon icon="inbox" class="ml-2"/> {{ $t(`dashboard.pages.titles.account`) }}
             </mdb-tab-item>
         </mdb-tab>
@@ -61,11 +61,16 @@
             mdbTabContent,
             mdbTabPane
         },
-        data() {
-            return{
-                page: 'purchase',
+        computed: {
+            page(){
+                return this.$store.getters.getPage;
             }
         },
+        methods: {
+            changePage(page) {
+                this.$store.commit('setPage', page)
+            }
+        }
         // created() {
         //     this.$store.dispatch('loadUser')
         // },

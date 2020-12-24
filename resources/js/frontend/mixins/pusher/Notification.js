@@ -14,7 +14,7 @@ export const PusherNotification = {
                             message: this.$t('notifications.successful'),
                             type: 'is-success'
                         });
-
+                        this.$store.dispatch('loadTransaction', transaction.uuid);
                     } else {
                         this.$store.commit('setPaymentStatus', 3);
                         this.$buefy.toast.open({
