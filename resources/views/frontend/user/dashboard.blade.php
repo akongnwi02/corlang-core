@@ -7,9 +7,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <strong>
-                        <i class="fas fa-tachometer-alt"></i> @lang('navs.frontend.dashboard')
-                    </strong>
+                    <balance-bar></balance-bar>
                 </div><!--card-header-->
 
                 <div class="card-body">

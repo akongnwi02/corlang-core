@@ -347,20 +347,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             invalid_text: '',
-            amount: 15000,
+            amount: '',
             auth_payload: '',
             selectedMethod: {}
         };
     },
     mounted: function mounted() {
-        this.selectedMethod = this.methods[0];
+        var i = void 0,
+            methods = this.methods;
+        for (i = 0; i < methods.length; i++) {
+            if (this.topupAccount(methods[i])) {
+                this.selectedMethod = methods[i];
+                alert(this.selectedMethod);
+                break;
+            }
+            this.selectedMethod = methods[0];
+        }
     },
 
     computed: {
         methods: function methods() {
-            return this.$store.getters.getConfiguration.payout_methods.filter(function (obj) {
-                return obj.is_realtime == true && obj.is_default == false;
-            });
+            return this.$store.getters.getConfiguration.payout_methods;
         },
         topupAccounts: function topupAccounts() {
             return this.$store.getters.getAccount.topup_accounts;
@@ -415,15 +422,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return false;
         },
         topupAccount: function topupAccount(method) {
-            if (this.accountLoadStatus == 2) {
-                var myAccount = this.topupAccounts.filter(function (obj) {
-                    return obj.paymentmethod_id == method.uuid;
-                })[0];
+            var myAccount = this.topupAccounts.filter(function (obj) {
+                return obj.paymentmethod_id == method.uuid;
+            })[0];
 
-                if (myAccount) {
-                    return myAccount.account;
-                }
-                return null;
+            if (myAccount) {
+                return myAccount.account;
             }
             return null;
         }
@@ -832,6 +836,117 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.$store.commit('setQuoteLoadStatus', 0);
         this.$store.commit('setTransactionLoadStatus', 0);
         this.$store.commit('setPaymentStatus', 0);
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/components/global/BalanceBar.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_currency__ = __webpack_require__("./resources/js/frontend/helpers/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_account_TopupModal__ = __webpack_require__("./resources/js/frontend/components/account/TopupModal.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_account_TopupModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_account_TopupModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mobile_money_QuoteModal__ = __webpack_require__("./resources/js/frontend/components/mobile-money/QuoteModal.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_mobile_money_QuoteModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_mobile_money_QuoteModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_Configuration_ConfigurationLoad__ = __webpack_require__("./resources/js/frontend/mixins/Configuration/ConfigurationLoad.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "BalanceBar",
+    components: {
+        TopupModal: __WEBPACK_IMPORTED_MODULE_1__components_account_TopupModal___default.a,
+        QuoteModal: __WEBPACK_IMPORTED_MODULE_2__components_mobile_money_QuoteModal___default.a
+    },
+    mixins: [__WEBPACK_IMPORTED_MODULE_3__mixins_Configuration_ConfigurationLoad__["a" /* ConfigurationLoad */]],
+    data: function data() {
+        return {
+            show_topup_modal: false,
+            show_quote_modal: false,
+            topup_method: {}
+        };
+    },
+    created: function created() {
+        this.$store.dispatch('getAccount');
+    },
+
+    computed: {
+        account: function account() {
+            return this.$store.getters.getAccount;
+        },
+        accountIsEmpty: function accountIsEmpty() {
+            return Object.keys(this.account).length === 0;
+        },
+        quoteLoadStatus: function quoteLoadStatus() {
+            return this.$store.getters.getQuoteLoadStatus;
+        },
+        quote: function quote() {
+            return this.$store.getters.getQuote;
+        },
+        paymentMethods: function paymentMethods() {
+            return this.$store.getters.getConfiguration.payout_methods;
+        }
+    },
+    methods: {
+        currency: function currency(amount) {
+            return __WEBPACK_IMPORTED_MODULE_0__helpers_currency__["a" /* currency */].format(amount, this.account.currency_code);
+        },
+        showTopupModal: function showTopupModal() {
+            this.show_topup_modal = true;
+        },
+        showPayoutModal: function showPayoutModal() {
+            this.show_payout_modal = true;
+        },
+        quoteTopup: function quoteTopup(data) {
+            console.log('topup data', data);
+            this.topup_method = data.selectedMethod.service;
+            this.show_topup_modal = false;
+
+            this.$store.dispatch('loadQuote', {
+                destination: data.paymentaccount,
+                service_code: data.selectedMethod.service.code,
+                amount: data.amount,
+                currency_code: data.currency_code,
+                auth_payload: data.auth_payload,
+                phone: this.phone
+            });
+        },
+        confirmTopup: function confirmTopup(data) {
+            console.log('transaction confirmed');
+            this.show_quote_modal = false;
+            this.$store.dispatch('confirmPayment', {
+                id: this.quote.uuid
+            });
+            this.waitForNotification(this.quote.uuid);
+            console.log('waiting for callback notification on channel', this.quote.uuid);
+        }
+    },
+    watch: {
+        quoteLoadStatus: function quoteLoadStatus() {
+            if (this.quoteLoadStatus == 2) {
+                this.show_quote_modal = true;
+            } else {
+                this.show_quote_modal = false;
+            }
+        }
     }
 });
 
@@ -20199,6 +20314,21 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Absolute Center Sp
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1df8d2b9\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/global/BalanceBar.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-225e92c6\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/airtime/AirtimeSearch.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20252,7 +20382,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -34189,6 +34319,75 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1df8d2b9\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/components/global/BalanceBar.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "row" },
+    [
+      _c("div", [
+        _c("a", { attrs: { href: "#" }, on: { click: _vm.showTopupModal } }, [
+          _vm._v(" " + _vm._s(_vm.$t("dashboard.pages.general.add_money")))
+        ])
+      ]),
+      _vm._v(" "),
+      !_vm.accountIsEmpty
+        ? _c("div", { staticClass: "text-value-lg ml-3" }, [
+            _c("h4", [
+              _c("strong", [_vm._v(_vm._s(_vm.currency(_vm.account.balance)))])
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("topup-modal", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.show_topup_modal == true,
+            expression: "show_topup_modal==true"
+          }
+        ],
+        on: {
+          topup: _vm.quoteTopup,
+          closed: function($event) {
+            _vm.show_topup_modal = false
+          }
+        }
+      }),
+      _vm._v(" "),
+      _vm.show_quote_modal
+        ? _c("quote-modal", {
+            attrs: { service: _vm.topup_method, quote: _vm.quote },
+            on: {
+              confirmed: _vm.confirmTopup,
+              closed: function($event) {
+                _vm.show_quote_modal = false
+              }
+            }
+          })
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1df8d2b9", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-225e92c6\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/components/airtime/AirtimeSearch.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35903,87 +36102,80 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("mdb-modal-body", [
-        _c(
-          "div",
-          { staticClass: "row" },
-          [
-            _c("divl", { staticClass: "col-lg-6" }, [
-              _c("label", { attrs: { for: "paymentMethod" } }, [
-                _c("strong", [
-                  _vm._v(
-                    _vm._s(_vm.$t("dashboard.pages.account.payout_method"))
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.selectedMethod,
-                      expression: "selectedMethod"
-                    }
-                  ],
-                  staticClass: "custom-select",
-                  attrs: { id: "paymentMethod", required: "" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.selectedMethod = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                _vm._l(_vm.methods, function(method) {
-                  return _c("option", { domProps: { value: method } }, [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(method.name) +
-                        "\n                    "
-                    )
-                  ])
-                }),
-                0
-              )
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-6" }, [
+            _c("label", { attrs: { for: "paymentMethod" } }, [
+              _c("strong", [
+                _vm._v(_vm._s(_vm.$t("dashboard.pages.account.payout_method")))
+              ])
             ]),
             _vm._v(" "),
             _c(
-              "div",
-              { staticClass: "col-lg-6" },
-              [
-                _c("mdb-input", {
-                  key: "amount",
-                  attrs: {
-                    label:
-                      _vm.$t("dashboard.pages.general.amount") +
-                      " " +
-                      _vm.account.currency_code
-                  },
-                  model: {
-                    value: _vm.amount,
-                    callback: function($$v) {
-                      _vm.amount = $$v
-                    },
-                    expression: "amount"
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selectedMethod,
+                    expression: "selectedMethod"
                   }
-                })
-              ],
-              1
+                ],
+                staticClass: "custom-select",
+                attrs: { id: "paymentMethod", required: "" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.selectedMethod = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              _vm._l(_vm.methods, function(method) {
+                return _c("option", { domProps: { value: method } }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(method.name) +
+                      "\n                    "
+                  )
+                ])
+              }),
+              0
             )
-          ],
-          1
-        ),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-lg-6" },
+            [
+              _c("mdb-input", {
+                key: "amount",
+                attrs: {
+                  label:
+                    _vm.$t("dashboard.pages.general.amount") +
+                    " " +
+                    _vm.account.currency_code
+                },
+                model: {
+                  value: _vm.amount,
+                  callback: function($$v) {
+                    _vm.amount = $$v
+                  },
+                  expression: "amount"
+                }
+              })
+            ],
+            1
+          )
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c(
@@ -40762,6 +40954,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1d732235\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Loader.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1d732235\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Loader.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1df8d2b9\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/global/BalanceBar.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1df8d2b9\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/global/BalanceBar.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("d2504eb0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1df8d2b9\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./BalanceBar.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1df8d2b9\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./BalanceBar.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -54677,6 +54896,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_5_buef
    Register the main component
  */
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('layout', __webpack_require__("./resources/js/frontend/layouts/Layout.vue"));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('balance-bar', __webpack_require__("./resources/js/frontend/components/global/BalanceBar.vue"));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('merchant', __webpack_require__("./resources/js/frontend/layouts/Merchant.vue"));
 
 /*
@@ -54924,6 +55144,58 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-225e92c6", Component.options)
   } else {
     hotAPI.reload("data-v-225e92c6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/frontend/components/global/BalanceBar.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1df8d2b9\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/frontend/components/global/BalanceBar.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]},\"development\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]},\"production\":{\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":\"> 2%\",\"uglify\":true}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/frontend/components/global/BalanceBar.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1df8d2b9\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/frontend/components/global/BalanceBar.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-1df8d2b9"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/frontend/components/global/BalanceBar.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1df8d2b9", Component.options)
+  } else {
+    hotAPI.reload("data-v-1df8d2b9", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -55910,14 +56182,14 @@ module.exports = Component.exports
 /***/ "./resources/js/frontend/locales/en.json":
 /***/ (function(module, exports) {
 
-module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Purchase","transactions":"Transactions","account":"Account"},"tabs":{"titles":{"prepaid":"Prepaid Bills","postpaid":"Postpaid Bills","momo":"Mobile Money","airtime":"Airtime Recharge"},"content":{"electricity":{"title":"Purchase Electricity","prepaid":"Prepaid","postpaid":"Postpaid","vendor":"Vendor","meter_code":"Meter Code","bill_number":"Bill Number","bill_due_date":"Bill Due Date","bill_gen_date":"Bill Generation Date","asset":"Units","contract_number":"Contract Number","type":"Bill Type","quote":{"title":"Meter Details"}},"mobile_money":{"source_account":"Account Identifier","name":"Account Holder","cashin":"Cash In","cashout":"Cash Out"},"airtime":{"airtime":"Airtime","data":"Data","plan":"Select Bundle"},"postpaid":{"search":"Search","bill_contract":"Bill or Contract Number","select_bill":"Select Bill"}}},"transactions":{"table":{"entriesTitle":"Recent transactions","showingText":"Showing","noFoundMessage":"No matching transaction records found","header":{"code":"Reference","items":"Item","destination":"Service Number","amount":"Amount","fee":"Fee","service":"Service","total":"Total","commission":"Commission","paymentmethod":"Payment Method","status":"Status","asset":"Asset","completed_at":"Completed At"},"total":"Total","status":{"created":"Created","pending":"Pending","processing":"In Processing","success":"Successful","failed":"Failed","reversed":"Reversed","cancelled":"Cancelled","errored":"Error","verification":"In Verification"}},"transaction":{"modal":{"code":"Reference","destination":"Service Number","agent":"Agent","company":"Company","amount":"Amount","fee":"Fee","service":"Service","asset":"Asset","items":"Items","status":"Status","completed_at":"Completed At","total":"Total"}}},"account":{"account_number":"Account Number","account_number_help":"Your deposit account number.","account_balance":"Account Balance","account_balance_help":"Your current account balance.","commission_balance":"Commission Balance","commission_balance_help":"Your commission balance","payout_method":"Payout method","topup_method":"Top up Method","name":"Account Name","request_payout":"Request Payout","topup_account":"Top up Account","table":{"entriesTitle":"Recent Requests","header":{"code":"Ref","amount":"Amount","method":"Payout Method","account_number":"Account Number","account_name":"Account Name","user":"Requested By","date":"Requested At","status":"Status","decision_at":"Decision At"},"status":{"pending":"Pending","approved":"Approved","rejected":"Rejected","cancelled":"Cancelled"},"actions":{"cancel":"Cancel","action":"Payout action"}}},"general":{"actions":"Actions","close":"Close","confirm":"Confirm","next":"Next","loading":"Loading","refresh":"Refresh","search":"Search","summary":"Order Details","amount":"Amount","otp":"OTP","pin":"PIN","method":"Payment Method","account":"Account Number","reference":"Reference","pincode":"Pin Code","phone":"Phone Number","fee":"Fee","destination":"Destination identifier","total":"Total","logo":"Logo","description":"Payment Description","customer":{"name":"Customer Name","address":"Address"}}},"hover":{"view":"View","execute":"Execute","topup":"Top Up Your Account","payout":"Request Commission Payout","delete":"Delete"},"merchant":{"title":"Secure Checkout","shop":"Shop","address":"Address","order":{"your_order":"YOUR ORDER","subtotal":"Subtotal","payment_fee":"Payment Fee","total":"Total"},"payment":{"method":"PAYMENT METHOD","details":"PAYMENT DETAILS","checkout":"PAY NOW","account_number":"Account Number","thank_you":"Thank you for trusting CorlaPay. We have sent a request to your payment provider.","return":"Return to Shop","success":"Success","dear":"Dear"}}},"validations":{"purchase":{"electricity":{"meter_code":"Please enter the meter code in the required format {format}","bill_number":"Please enter a bill number in the valid format {format}"},"mobile_money":{"account_number":"Please enter an account number in the valid format {format}"},"airtime":{"plan":"Please select a bundle from the list","phone":"Please enter valid phone number in the required format {format}"},"postpaid":{"bill_contract":"Please enter a valid bill number or contract number.","select_bill":"Please select a bill from the list","search_bills":"Click the search button to search for bills before paying"},"reference":"The reference is invalid","pincode":"The pin code is invalid","otp":"The OTP field is invalid","phone":"The phone number is invalid","account":"The payment account number is invalid","amount":"Please enter a valid amount","min_amount":"The minimum amount required for this service is {min_amount}","max_amount":"The maximum amount required for this service is {max_amount}","step_amount":"The amount required for this service must be multiples of {step_amount}","paymentmethod":"Select a payment method from the list","empty_paymentmethod":"No payment method is currently available for you","service":"Please select a service from the list","empty_service":"No services available for this category at the moment"},"account":{"insufficient_balance":"Your balance is insufficient","empty_payout_method":"Please select a payout method","topup_account_not_configured":"You have not set an account for this topup method","account_number":"Please configure account identifier for this top up method under your profile setting","invalid_amount":"Please enter a valid amount","account_name":"Please enter a valid name"},"general":{"maintenance":"We're currently maintaining our system. Please check back later","network":"Network error. Please check your internet connection","unexpected":"An unexpected error occurred"},"merchant":{"account_number_format":"Please enter account number in the required format {format}","account_number_invalid":"Please enter a valid account number","no_method":"Please select a payment method from the list"}},"notifications":{"successful":"Transaction successful","transactions_loaded":"Transactions updated successfully","payouts_loaded":"Recent payouts updated successfully","failed":"Transaction failed","late_bill":"Warning! Bill is late"},"exceptions":{"10000":"The service you requested is not available","10001":"The payment method you requested is not available","10002":"The request sent contains some validation errors","10003":"You have been logged out. Login to continue.","10004":"You are not authorized to make this request","10005":"Wrong HTTP Method has been provided","10006":"The path requested was not found","10007":"You are making too many requests to the server","10008":"Transaction could not be saved to cache","10009":"There was an error creating this transaction","10010":"This transaction was not found. The transaction may have been processed already or expired","10011":"There was a problem connecting to one of our servers","10012":"There was a problem calculating the fee for this transaction. A fee has not been set for this amount","10013":"The service category is currently unavailable","10014":"An invalid key was provided with the request","10015":"The language selected is currently not supported","10016":"The accept header parameter does not contain application/json","10018":"This transaction could not be found","10019":"There was a problem connecting to the service provider","10020":"The meter code does not exist","10021":"There was a problem sending a callback request","10022":"This service does not exist yet","10023":"Your account balance is insufficient","10024":"You are not authorized to perform this transaction. Your account has been limited","10025":"Your session has expired. Please refresh your browser","10026":"The payment method is not active","10027":"There was an error requesting the payout. Please try again later","10028":"Your commission balance is insufficient","10029":"There was an error cancelling the payout. Please try again later","10030":"Warning! You have entered an incorrect pin code","10031":"The meter with the provided has been deactivated","10032":"The meter code provided is invalid","10033":"The transaction status cannot be updated","10034":"The amount provided is less than the minimum amount required for this service","10035":"The customer cannot perform this transaction with service provider","10036":"The customer is not found","10037":"Insufficient funds in customer's wallet","10038":"Transaction canceled by customer","10039":"The customer has not authorized the transaction","10040":"The service is not properly configured","10041":"Customer has reached transaction limit","10042":"You are not allowed to use this service at the moment","10043":"No bill was found","10044":"The amount provided is more than the maximum amount required for this service","10045":"The service number provided is not in the required format","10046":"There is a commission distribution error with this service. Please contact support","10047":"The amount is not a multiple of the step amount","10048":"The requested resource was not found","10049":"The requested service is not active","10050":"The transaction could not be deleted due to some technical reasons","10051":"The bill you are trying to pay was deleted from cache. Please search again","10052":"No bill was found. Please change the search value","00000":"An unexpected error occurred"}}
+module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Purchase","transactions":"Transactions","account":"Account"},"tabs":{"titles":{"prepaid":"Prepaid Bills","postpaid":"Postpaid Bills","momo":"Mobile Money","airtime":"Airtime Recharge"},"content":{"electricity":{"title":"Purchase Electricity","prepaid":"Prepaid","postpaid":"Postpaid","vendor":"Vendor","meter_code":"Meter Code","bill_number":"Bill Number","bill_due_date":"Bill Due Date","bill_gen_date":"Bill Generation Date","asset":"Units","contract_number":"Contract Number","type":"Bill Type","quote":{"title":"Meter Details"}},"mobile_money":{"source_account":"Account Identifier","name":"Account Holder","cashin":"Cash In","cashout":"Cash Out"},"airtime":{"airtime":"Airtime","data":"Data","plan":"Select Bundle"},"postpaid":{"search":"Search","bill_contract":"Bill or Contract Number","select_bill":"Select Bill"}}},"transactions":{"table":{"entriesTitle":"Recent transactions","showingText":"Showing","noFoundMessage":"No matching transaction records found","header":{"code":"Reference","items":"Item","destination":"Service Number","amount":"Amount","fee":"Fee","service":"Service","total":"Total","commission":"Commission","paymentmethod":"Payment Method","status":"Status","asset":"Asset","completed_at":"Completed At"},"total":"Total","status":{"created":"Created","pending":"Pending","processing":"In Processing","success":"Successful","failed":"Failed","reversed":"Reversed","cancelled":"Cancelled","errored":"Error","verification":"In Verification"}},"transaction":{"modal":{"code":"Reference","destination":"Service Number","agent":"Agent","company":"Company","amount":"Amount","fee":"Fee","service":"Service","asset":"Asset","items":"Items","status":"Status","completed_at":"Completed At","total":"Total"}}},"account":{"account_number":"Account Number","account_number_help":"Your deposit account number.","account_balance":"Account Balance","account_balance_help":"Your current account balance.","commission_balance":"Commission Balance","commission_balance_help":"Your commission balance","payout_method":"Payout method","topup_method":"Top up Method","name":"Account Name","request_payout":"Request Payout","topup_account":"Top up Account","table":{"entriesTitle":"Recent Requests","header":{"code":"Ref","amount":"Amount","method":"Payout Method","account_number":"Account Number","account_name":"Account Name","user":"Requested By","date":"Requested At","status":"Status","decision_at":"Decision At"},"status":{"pending":"Pending","approved":"Approved","rejected":"Rejected","cancelled":"Cancelled"},"actions":{"cancel":"Cancel","action":"Payout action"}}},"general":{"actions":"Actions","close":"Close","confirm":"Confirm","next":"Next","loading":"Loading","refresh":"Refresh","search":"Search","summary":"Order Details","amount":"Amount","otp":"OTP","pin":"PIN","method":"Payment Method","account":"Account Number","reference":"Reference","pincode":"Pin Code","phone":"Phone Number","fee":"Fee","destination":"Destination identifier","total":"Total","logo":"Logo","description":"Payment Description","customer":{"name":"Customer Name","address":"Address"},"add_money":"ADD MONEY"}},"hover":{"view":"View","execute":"Execute","topup":"Top Up Your Account","payout":"Request Commission Payout","delete":"Delete"},"merchant":{"title":"Secure Checkout","shop":"Shop","address":"Address","order":{"your_order":"YOUR ORDER","subtotal":"Subtotal","payment_fee":"Payment Fee","total":"Total"},"payment":{"method":"PAYMENT METHOD","details":"PAYMENT DETAILS","checkout":"PAY NOW","account_number":"Account Number","thank_you":"Thank you for trusting CorlaPay. We have sent a request to your payment provider.","return":"Return to Shop","success":"Success","dear":"Dear"}}},"validations":{"purchase":{"electricity":{"meter_code":"Please enter the meter code in the required format {format}","bill_number":"Please enter a bill number in the valid format {format}"},"mobile_money":{"account_number":"Please enter an account number in the valid format {format}"},"airtime":{"plan":"Please select a bundle from the list","phone":"Please enter valid phone number in the required format {format}"},"postpaid":{"bill_contract":"Please enter a valid bill number or contract number.","select_bill":"Please select a bill from the list","search_bills":"Click the search button to search for bills before paying"},"reference":"The reference is invalid","pincode":"The pin code is invalid","otp":"The OTP field is invalid","phone":"The phone number is invalid","account":"The payment account number is invalid","amount":"Please enter a valid amount","min_amount":"The minimum amount required for this service is {min_amount}","max_amount":"The maximum amount required for this service is {max_amount}","step_amount":"The amount required for this service must be multiples of {step_amount}","paymentmethod":"Select a payment method from the list","empty_paymentmethod":"No payment method is currently available for you","service":"Please select a service from the list","empty_service":"No services available for this category at the moment"},"account":{"insufficient_balance":"Your balance is insufficient","empty_payout_method":"Please select a payout method","topup_account_not_configured":"You have not set an account for this topup method","account_number":"Please configure account identifier for this top up method under your profile setting","invalid_amount":"Please enter a valid amount","account_name":"Please enter a valid name"},"general":{"maintenance":"We're currently maintaining our system. Please check back later","network":"Network error. Please check your internet connection","unexpected":"An unexpected error occurred"},"merchant":{"account_number_format":"Please enter account number in the required format {format}","account_number_invalid":"Please enter a valid account number","no_method":"Please select a payment method from the list"}},"notifications":{"successful":"Transaction successful","transactions_loaded":"Transactions updated successfully","payouts_loaded":"Recent payouts updated successfully","failed":"Transaction failed","late_bill":"Warning! Bill is late"},"exceptions":{"10000":"The service you requested is not available","10001":"The payment method you requested is not available","10002":"The request sent contains some validation errors","10003":"You have been logged out. Login to continue.","10004":"You are not authorized to make this request","10005":"Wrong HTTP Method has been provided","10006":"The path requested was not found","10007":"You are making too many requests to the server","10008":"Transaction could not be saved to cache","10009":"There was an error creating this transaction","10010":"This transaction was not found. The transaction may have been processed already or expired","10011":"There was a problem connecting to one of our servers","10012":"There was a problem calculating the fee for this transaction. A fee has not been set for this amount","10013":"The service category is currently unavailable","10014":"An invalid key was provided with the request","10015":"The language selected is currently not supported","10016":"The accept header parameter does not contain application/json","10018":"This transaction could not be found","10019":"There was a problem connecting to the service provider","10020":"The meter code does not exist","10021":"There was a problem sending a callback request","10022":"This service does not exist yet","10023":"Your account balance is insufficient","10024":"You are not authorized to perform this transaction. Your account has been limited","10025":"Your session has expired. Please refresh your browser","10026":"The payment method is not active","10027":"There was an error requesting the payout. Please try again later","10028":"Your commission balance is insufficient","10029":"There was an error cancelling the payout. Please try again later","10030":"Warning! You have entered an incorrect pin code","10031":"The meter with the provided has been deactivated","10032":"The meter code provided is invalid","10033":"The transaction status cannot be updated","10034":"The amount provided is less than the minimum amount required for this service","10035":"The customer cannot perform this transaction with service provider","10036":"The customer is not found","10037":"Insufficient funds in customer's wallet","10038":"Transaction canceled by customer","10039":"The customer has not authorized the transaction","10040":"The service is not properly configured","10041":"Customer has reached transaction limit","10042":"You are not allowed to use this service at the moment","10043":"No bill was found","10044":"The amount provided is more than the maximum amount required for this service","10045":"The service number provided is not in the required format","10046":"There is a commission distribution error with this service. Please contact support","10047":"The amount is not a multiple of the step amount","10048":"The requested resource was not found","10049":"The requested service is not active","10050":"The transaction could not be deleted due to some technical reasons","10051":"The bill you are trying to pay was deleted from cache. Please search again","10052":"No bill was found. Please change the search value","00000":"An unexpected error occurred"}}
 
 /***/ }),
 
 /***/ "./resources/js/frontend/locales/fr.json":
 /***/ (function(module, exports) {
 
-module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Achat","transactions":"Transactions","account":"Compte"},"tabs":{"titles":{"prepaid":"Factures prépayées","postpaid":"Factures postpayées","momo":"Mobile Money","airtime":"Recharge de crédit"},"content":{"electricity":{"title":"Achat d'électricité","prepaid":"Prepayée","postpaid":"Postpayée","vendor":"Fournisseur","meter_code":"Indicatif du compteur","bill_number":"Numéro de facture","bill_due_date":"Date limite de paiement de la facture","asset":"Atout","contract_number":"Numéro de contrat","quote":{"title":"Détails du compteur"}},"mobile_money":{"source_account":"Identifiant du compte","name":"Détenteur de compte","cashin":"Dépôt","cashout":"Retrait"}}},"transactions":{"table":{"entriesTitle":"Transactions récentes","showingText":"Afficher","noFoundMessage":"Aucune transaction correspondante trouvée","header":{"code":"Reférence","items":"Article","destination":"Numéro de service","amount":"Montant","fee":"Frais","service":"Service","total":"Total","commission":"Commissions","paymentmethod":"Mode de paiement","status":"Statut","asset":"Ressource","completed_at":"Terminée à"},"total":"Total","status":{"created":"Crée","pending":"En attente","processing":"En cours de traitement","success":"Succès","failed":"Echouée","reversed":"Reversée","cancelled":"Annulée","errored":"Erreur"}},"transaction":{"modal":{"code":"Reférence","destination":"Numéro de service","agent":"Agent","company":"Entreprise","amount":"Montant","fee":"Frais","service":"Service","asset":"Ressource","items":"Articles","status":"Statut","completed_at":"Terminée à","total":"Total"}}},"account":{"account_number":"Numéro de compte","account_number_help":"Votre numéro de compte de dépôt.","account_balance":"Solde du compte","account_balance_help":"Le solde de votre compte actuel.","commission_balance":"Solde de commissions","commission_balance_help":"Votre solde de commissions","payout_method":"Mode de paiement","topup_method":"Mode de recharge","name":"Nom du compte","request_payout":"Demande de paiement","topup_account":"Recharge du compte","table":{"entriesTitle":"Dernières requêtes","header":{"code":"Ref","amount":"Montant","method":"Mode de paiement","account_number":"Numéro de compte","account_name":"Nom du compte","user":"Demandé par","date":"Demandé le","status":"Statut","decision_at":"Décision à"},"status":{"pending":"En attente","approved":"Approuvée","rejected":"Rejettée","cancelled":"Annulée"},"actions":{"cancel":"Annuler","action":"Procédure de paiement"}}},"general":{"actions":"Actions","close":"Fermer","confirm":"Confirmer","next":"Suivant","loading":"Chargement","refresh":"Actualiser","search":"Rechercher","summary":"Détails de la demande","amount":"Montant","otp":"OTP","pin":"PIN","method":"Mode de paiement","account":"Numéro de compte","reference":"Reférence","pincode":"Code Pin","phone":"Numéro de téléphone","fee":"Frais","destination":"Identifiants","total":"Total","logo":"Logo","description":"Informations sur le paiement","customer":{"name":"Nom du client","address":"Adresse"}}}},"validations":{"purchase":{"electricity":{"meter_code":"Veuillez entrer un numéro de compteur au format valid {format}","bill_number":"Veuillez entrer un numéro de facture au format valid {format}"},"mobile_money":{"account_number":"Veuillez entrer un numéro de compte au format valid {format}"},"reference":"La reférence n'est valide","pincode":"Le code PIN n'est pas valide","otp":"Le domaine OTP n'est pas valide","phone":"Le numéro de téléphone n'est pas valide","account":"Le numéro de compte de paiement n'est pas valide","amount":"Veuillez entrer un montant valide","paymentmethod":"Sélectionnez un mode de paiement dans la liste","empty_paymentmethod":"Aucun mode de paiement n'est actuellement disponible pour vous","service":"Veuillez sélectionner un service dans la liste","empty_service":"Aucun service disponible pour cette catégorie pour le moment"},"account":{"insufficient_balance":"Votre solde est insuffisant","empty_payout_method":"Veuillez sélectionner un mode de paiement","topup_account_not_configured":"Vous n'avez pas défini de compte pour cette méthode de recharge","account_number":"Veuillez configurer un numéro de compte pour cette méthode de recharge dans les paramètres de votre profil","invalid_amount":"Veuillez entrer un montant valide","account_name":"Veuillez entrer un nom valide"},"general":{"maintenance":"Nous assurons actuellement la maintenance de notre système. Veuillez revenir plus tard","network":"Erreur réseau. Veuillez vérifier votre connexion internet","unexpected":"Une erreur inattendue s'est produite"}},"notifications":{"successful":"Transaction réussie","transactions_loaded":"Transactions mises à jour avec succès","payouts_loaded":"Les derniers paiements ont été mis à jour avec succès","failed":"L'opération a échoué","late_bill":"Attention ! La facture a du retard"},"exceptions":{"10000":"Le service demandé n'est pas disponible","10001":"Le mode de paiement demandé n'est pas disponible","10002":"La demande envoyée contient quelques erreurs de saisie","10003":"Vous avez été déconnecté. Connectez-vous pour continuer","10004":"Vous n'êtes pas autorisé à soumettre cette requête","10006":"Le lien recherché n'a pas été trouvé","10007":"Vous envoyez un trop grand nombre de demandes au serveur","10008":"La transaction n'a pas pu être enregistrée dans la mémoire cache","10009":"Il y a eu une erreur pendant de la transaction","10010":"Cette transaction n'a pas été trouvée. La transaction a peut-être déjà été traitée ou expirée","10011":"Une erreur de cconnexion est survenue à l'un de nos serveurs","10012":"Un problème s'est produit lors du calcul des frais pour cette transaction. Aucun frais n'a été fixé pour ce montant","10013":"La liste des services n'est pas disponible pour le moment","10014":"Une clé non valide a été transmise avec la requête","10015":"The language selected is currently not supported","10016":"Le paramètre acceptance en-tête ne contient pas l'application/json","10018":"Cette transaction n'a pas été trouvée","10019":"Un problème de connexion avec le fournisseur de services s'est produit","10020":"Le numéro de compteur n'existe pas","10021":"Un problème est survenu lors de l'envoi d'une demande de relance","10022":"Ce service est indisponible pour le moment","10023":"Votre solde est insuffisant","10024":"Vous n'êtes pas autorisé à effectuer cette transaction. Votre compte a été soumis à des restrictions","10025":"Votre session a expiré. Veuillez actualiser votre navigateur","10026":"Le mode de paiement n'est pas activé","10027":"Une erreur s'est produite lors de la demande de paiement. Veuillez réessayer plus tard","10028":"Votre solde de commission est insuffisant","10029":"Une erreur a annulé le paiement. Veuillez réessayer plus tard","10030":"Attention ! Vous avez saisi un code pin incorrect","10031":"The meter with the provided has been deactivated","10032":"Le numéro de compteur fourni n'est pas valide","10033":"Le statut de la transaction ne peut pas être mis à jour","10034":"The amount provided is less than the minimum amount required for this service","10035":"Le client ne peut effectuer cette transaction avec le fournisseur de services","10036":"Le client n'a pas été trouvé","10037":"Solde insuffisant dans le compte du client","10038":"Transaction annulée par le client","10039":"Le client n'a pas approuvé la transaction","10040":"Le service n'est pas convenablement configuré","10041":"Le client a atteint la limite de transaction","10042":"Vous n'êtes pas autorisé à utiliser ce service pour le moment","10043":"Aucucne facture n'a été trouvée","10044":"Le montant indiqué est supérieur au montant maximum requis pour ce service","10045":"Le numéro de service fourni n'est pas dans le format requis","00000":"Une erreur inattendue s'est produite"}}
+module.exports = {"dashboard":{"pages":{"titles":{"purchase":"Achat","transactions":"Transactions","account":"Compte"},"tabs":{"titles":{"prepaid":"Factures prépayées","postpaid":"Factures postpayées","momo":"Mobile Money","airtime":"Recharge de crédit"},"content":{"electricity":{"title":"Achat d'électricité","prepaid":"Prepayée","postpaid":"Postpayée","vendor":"Fournisseur","meter_code":"Indicatif du compteur","bill_number":"Numéro de facture","bill_due_date":"Date limite de paiement de la facture","asset":"Atout","contract_number":"Numéro de contrat","quote":{"title":"Détails du compteur"}},"mobile_money":{"source_account":"Identifiant du compte","name":"Détenteur de compte","cashin":"Dépôt","cashout":"Retrait"}}},"transactions":{"table":{"entriesTitle":"Transactions récentes","showingText":"Afficher","noFoundMessage":"Aucune transaction correspondante trouvée","header":{"code":"Reférence","items":"Article","destination":"Numéro de service","amount":"Montant","fee":"Frais","service":"Service","total":"Total","commission":"Commissions","paymentmethod":"Mode de paiement","status":"Statut","asset":"Ressource","completed_at":"Terminée à"},"total":"Total","status":{"created":"Crée","pending":"En attente","processing":"En cours de traitement","success":"Succès","failed":"Echouée","reversed":"Reversée","cancelled":"Annulée","errored":"Erreur"}},"transaction":{"modal":{"code":"Reférence","destination":"Numéro de service","agent":"Agent","company":"Entreprise","amount":"Montant","fee":"Frais","service":"Service","asset":"Ressource","items":"Articles","status":"Statut","completed_at":"Terminée à","total":"Total"}}},"account":{"account_number":"Numéro de compte","account_number_help":"Votre numéro de compte de dépôt.","account_balance":"Solde du compte","account_balance_help":"Le solde de votre compte actuel.","commission_balance":"Solde de commissions","commission_balance_help":"Votre solde de commissions","payout_method":"Mode de paiement","topup_method":"Mode de recharge","name":"Nom du compte","request_payout":"Demande de paiement","topup_account":"Recharge du compte","table":{"entriesTitle":"Dernières requêtes","header":{"code":"Ref","amount":"Montant","method":"Mode de paiement","account_number":"Numéro de compte","account_name":"Nom du compte","user":"Demandé par","date":"Demandé le","status":"Statut","decision_at":"Décision à"},"status":{"pending":"En attente","approved":"Approuvée","rejected":"Rejettée","cancelled":"Annulée"},"actions":{"cancel":"Annuler","action":"Procédure de paiement"}}},"general":{"actions":"Actions","close":"Fermer","confirm":"Confirmer","next":"Suivant","loading":"Chargement","refresh":"Actualiser","search":"Rechercher","summary":"Détails de la demande","amount":"Montant","otp":"OTP","pin":"PIN","method":"Mode de paiement","account":"Numéro de compte","reference":"Reférence","pincode":"Code Pin","phone":"Numéro de téléphone","fee":"Frais","destination":"Identifiants","total":"Total","logo":"Logo","description":"Informations sur le paiement","customer":{"name":"Nom du client","address":"Adresse"},"add_money":"AUGMENTER L'ARGENT"}}},"validations":{"purchase":{"electricity":{"meter_code":"Veuillez entrer un numéro de compteur au format valid {format}","bill_number":"Veuillez entrer un numéro de facture au format valid {format}"},"mobile_money":{"account_number":"Veuillez entrer un numéro de compte au format valid {format}"},"reference":"La reférence n'est valide","pincode":"Le code PIN n'est pas valide","otp":"Le domaine OTP n'est pas valide","phone":"Le numéro de téléphone n'est pas valide","account":"Le numéro de compte de paiement n'est pas valide","amount":"Veuillez entrer un montant valide","paymentmethod":"Sélectionnez un mode de paiement dans la liste","empty_paymentmethod":"Aucun mode de paiement n'est actuellement disponible pour vous","service":"Veuillez sélectionner un service dans la liste","empty_service":"Aucun service disponible pour cette catégorie pour le moment"},"account":{"insufficient_balance":"Votre solde est insuffisant","empty_payout_method":"Veuillez sélectionner un mode de paiement","topup_account_not_configured":"Vous n'avez pas défini de compte pour cette méthode de recharge","account_number":"Veuillez configurer un numéro de compte pour cette méthode de recharge dans les paramètres de votre profil","invalid_amount":"Veuillez entrer un montant valide","account_name":"Veuillez entrer un nom valide"},"general":{"maintenance":"Nous assurons actuellement la maintenance de notre système. Veuillez revenir plus tard","network":"Erreur réseau. Veuillez vérifier votre connexion internet","unexpected":"Une erreur inattendue s'est produite"}},"notifications":{"successful":"Transaction réussie","transactions_loaded":"Transactions mises à jour avec succès","payouts_loaded":"Les derniers paiements ont été mis à jour avec succès","failed":"L'opération a échoué","late_bill":"Attention ! La facture a du retard"},"exceptions":{"10000":"Le service demandé n'est pas disponible","10001":"Le mode de paiement demandé n'est pas disponible","10002":"La demande envoyée contient quelques erreurs de saisie","10003":"Vous avez été déconnecté. Connectez-vous pour continuer","10004":"Vous n'êtes pas autorisé à soumettre cette requête","10006":"Le lien recherché n'a pas été trouvé","10007":"Vous envoyez un trop grand nombre de demandes au serveur","10008":"La transaction n'a pas pu être enregistrée dans la mémoire cache","10009":"Il y a eu une erreur pendant de la transaction","10010":"Cette transaction n'a pas été trouvée. La transaction a peut-être déjà été traitée ou expirée","10011":"Une erreur de cconnexion est survenue à l'un de nos serveurs","10012":"Un problème s'est produit lors du calcul des frais pour cette transaction. Aucun frais n'a été fixé pour ce montant","10013":"La liste des services n'est pas disponible pour le moment","10014":"Une clé non valide a été transmise avec la requête","10015":"The language selected is currently not supported","10016":"Le paramètre acceptance en-tête ne contient pas l'application/json","10018":"Cette transaction n'a pas été trouvée","10019":"Un problème de connexion avec le fournisseur de services s'est produit","10020":"Le numéro de compteur n'existe pas","10021":"Un problème est survenu lors de l'envoi d'une demande de relance","10022":"Ce service est indisponible pour le moment","10023":"Votre solde est insuffisant","10024":"Vous n'êtes pas autorisé à effectuer cette transaction. Votre compte a été soumis à des restrictions","10025":"Votre session a expiré. Veuillez actualiser votre navigateur","10026":"Le mode de paiement n'est pas activé","10027":"Une erreur s'est produite lors de la demande de paiement. Veuillez réessayer plus tard","10028":"Votre solde de commission est insuffisant","10029":"Une erreur a annulé le paiement. Veuillez réessayer plus tard","10030":"Attention ! Vous avez saisi un code pin incorrect","10031":"The meter with the provided has been deactivated","10032":"Le numéro de compteur fourni n'est pas valide","10033":"Le statut de la transaction ne peut pas être mis à jour","10034":"The amount provided is less than the minimum amount required for this service","10035":"Le client ne peut effectuer cette transaction avec le fournisseur de services","10036":"Le client n'a pas été trouvé","10037":"Solde insuffisant dans le compte du client","10038":"Transaction annulée par le client","10039":"Le client n'a pas approuvé la transaction","10040":"Le service n'est pas convenablement configuré","10041":"Le client a atteint la limite de transaction","10042":"Vous n'êtes pas autorisé à utiliser ce service pour le moment","10043":"Aucucne facture n'a été trouvée","10044":"Le montant indiqué est supérieur au montant maximum requis pour ce service","10045":"Le numéro de service fourni n'est pas dans le format requis","00000":"Une erreur inattendue s'est produite"}}
 
 /***/ }),
 

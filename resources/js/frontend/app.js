@@ -20,6 +20,7 @@ Vue.use(Buefy);
    Register the main component
  */
 Vue.component('layout', require('./layouts/Layout'));
+Vue.component('balance-bar', require('./components/global/BalanceBar'));
 Vue.component('merchant', require('./layouts/Merchant'));
 
 /*

@@ -146,7 +146,8 @@
                 "customer": {
                     "name": "Nom du client",
                     "address": "Adresse"
-                }
+                },
+                "add_money": "AUGMENTER L'ARGENT"
             }
         }
     },
