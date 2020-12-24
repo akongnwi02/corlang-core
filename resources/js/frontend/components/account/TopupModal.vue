@@ -73,16 +73,16 @@
             for (i = 0; i < methods.length; i++) {
                 if (this.topupAccount(methods[i])) {
                     this.selectedMethod = methods[i];
+                    alert(this.selectedMethod);
                     break;
                 }
                 this.selectedMethod = methods[0];
+
             }
         },
         computed: {
             methods() {
-                return this.$store.getters.getConfiguration.payout_methods.filter(obj => {
-                    return obj.is_realtime == true && obj.is_default == false
-                });
+                return this.$store.getters.getConfiguration.payout_methods;
             },
             topupAccounts() {
                 return this.$store.getters.getAccount.topup_accounts;

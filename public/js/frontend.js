@@ -358,6 +358,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         for (i = 0; i < methods.length; i++) {
             if (this.topupAccount(methods[i])) {
                 this.selectedMethod = methods[i];
+                alert(this.selectedMethod);
                 break;
             }
             this.selectedMethod = methods[0];
@@ -366,9 +367,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         methods: function methods() {
-            return this.$store.getters.getConfiguration.payout_methods.filter(function (obj) {
-                return obj.is_realtime == true && obj.is_default == false;
-            });
+            return this.$store.getters.getConfiguration.payout_methods;
         },
         topupAccounts: function topupAccounts() {
             return this.$store.getters.getAccount.topup_accounts;
@@ -423,15 +422,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return false;
         },
         topupAccount: function topupAccount(method) {
-            if (this.accountLoadStatus == 2) {
-                var myAccount = this.topupAccounts.filter(function (obj) {
-                    return obj.paymentmethod_id == method.uuid;
-                })[0];
+            var myAccount = this.topupAccounts.filter(function (obj) {
+                return obj.paymentmethod_id == method.uuid;
+            })[0];
 
-                if (myAccount) {
-                    return myAccount.account;
-                }
-                return null;
+            if (myAccount) {
+                return myAccount.account;
             }
             return null;
         }
@@ -20386,7 +20382,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
