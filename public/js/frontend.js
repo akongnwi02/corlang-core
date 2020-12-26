@@ -56169,7 +56169,9 @@ var PusherNotification = {
                         message: this.$t('notifications.successful'),
                         type: 'is-success'
                     });
-                    this.$store.dispatch('loadTransaction', transaction.uuid);
+                    if (transaction.category_code == __WEBPACK_IMPORTED_MODULE_0__config_business__["a" /* BUSINESS_CONFIG */].CATEGORY_PREPAID_BILLS_CODE) {
+                        this.$store.dispatch('loadTransaction', transaction.uuid);
+                    }
                 } else {
                     this.$store.commit('setPaymentStatus', 3);
                     this.$buefy.toast.open({
