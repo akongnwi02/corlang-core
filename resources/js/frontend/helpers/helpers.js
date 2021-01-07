@@ -7,7 +7,8 @@ export const helper = {
         if (!error.response) {
             Toast.open({
                 message: i18n.t('validations.general.network'),
-                type: 'is-danger'
+                type: 'is-danger',
+                duration: 7000
             });
         } else {
 
@@ -45,7 +46,8 @@ export const helper = {
 
             Toast.open({
                 message: errorMessage + ' ' + errorFieldsString,
-                type: 'is-danger'
+                type: 'is-danger',
+                duration: 7000
             });
         }
 

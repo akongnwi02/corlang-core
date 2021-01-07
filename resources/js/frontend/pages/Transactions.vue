@@ -171,10 +171,10 @@
         watch: {
             transactionsLoadStatus() {
                 if (this.transactionsLoadStatus == 2) {
-                    this.$buefy.toast.open({
-                        message: this.$t('notifications.transactions_loaded'),
-                        type: 'is-success'
-                    });
+                    // this.$buefy.toast.open({
+                    //     message: this.$t('notifications.transactions_loaded'),
+                    //     type: 'is-success'
+                    // });
                 }
                 this.spinner_status = this.transactionsLoadStatus;
             },

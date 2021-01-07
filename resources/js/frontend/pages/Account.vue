@@ -247,10 +247,10 @@
         watch: {
             payoutsLoadStatus() {
                 if (this.payoutsLoadStatus == 2) {
-                    this.$buefy.toast.open({
-                        message: this.$t('notifications.payouts_loaded'),
-                        type: 'is-success'
-                    });
+                    // this.$buefy.toast.open({
+                    //     message: this.$t('notifications.payouts_loaded'),
+                    //     type: 'is-success'
+                    // });
                 }
                 this.spinner_status = this.payoutsLoadStatus;
             },

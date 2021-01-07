@@ -147,7 +147,8 @@
                     "name": "Nom du client",
                     "address": "Adresse"
                 },
-                "add_money": "AUGMENTER L'ARGENT"
+                "add_money": "AUGMENTER L'ARGENT",
+                "balance": "Solde"
             }
         }
     },
@@ -215,7 +216,7 @@
         "10020": "Le numéro de compteur n'existe pas",
         "10021": "Un problème est survenu lors de l'envoi d'une demande de relance",
         "10022": "Ce service est indisponible pour le moment",
-        "10023": "Votre solde est insuffisant",
+        "10023": "Le solde de votre compte CorlaPay est insuffisant pour effectuer cette transaction",
         "10024": "Vous n'êtes pas autorisé à effectuer cette transaction. Votre compte a été soumis à des restrictions",
         "10025": "Votre session a expiré. Veuillez actualiser votre navigateur",
         "10026": "Le mode de paiement n'est pas activé",

@@ -160,7 +160,8 @@
                     "name": "Customer Name",
                     "address": "Address"
                 },
-                "add_money": "ADD MONEY"
+                "add_money": "ADD MONEY",
+                "balance": "Balance"
             }
         },
         "hover": {
@@ -274,7 +275,7 @@
         "10020": "The meter code does not exist",
         "10021": "There was a problem sending a callback request",
         "10022": "This service does not exist yet",
-        "10023": "Your account balance is insufficient",
+        "10023": "Your CorlaPay account balance is insufficient to perform this transaction",
         "10024": "You are not authorized to perform this transaction. Your account has been limited",
         "10025": "Your session has expired. Please refresh your browser",
         "10026": "The payment method is not active",

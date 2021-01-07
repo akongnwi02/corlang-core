@@ -12,7 +12,8 @@ export const PusherNotification = {
                         this.$store.dispatch('loadTransactions');
                         this.$buefy.toast.open({
                             message: this.$t('notifications.successful'),
-                            type: 'is-success'
+                            type: 'is-success',
+                            duration: 7000
                         });
                         if (transaction.category_code == BUSINESS_CONFIG.CATEGORY_PREPAID_BILLS_CODE) {
                             this.$store.dispatch('loadTransaction', transaction.uuid);
@@ -21,7 +22,8 @@ export const PusherNotification = {
                         this.$store.commit('setPaymentStatus', 3);
                         this.$buefy.toast.open({
                             message: this.$t('exceptions.' + transaction.error_code),
-                            type: 'is-danger'
+                            type: 'is-danger',
+                            duration: 7000
                         });
                     }
                 }.bind(this));

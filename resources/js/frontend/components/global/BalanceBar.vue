@@ -1,9 +1,9 @@
 <template>
-    <div class="row">
+    <div>
         <div>
             <a href="#" @click="navigateToTopUp"> {{$t('dashboard.pages.general.add_money')}}</a>
         </div>
-        <div v-if="!accountIsEmpty" class="text-value-lg ml-3"><h4><strong>{{ currency(account.balance)}}</strong></h4></div>
+        <div v-if="!accountIsEmpty" class="text-value-lg"><h4>{{$t('dashboard.pages.general.balance')}}: <strong>{{ currency(account.balance)}}</strong></h4></div>
     </div>
 </template>
 
