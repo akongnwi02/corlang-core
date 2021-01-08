@@ -3,7 +3,7 @@
         <div>
             <a href="#" @click="navigateToTopUp"> {{$t('dashboard.pages.general.add_money')}}</a>
         </div>
-        <div v-if="!accountIsEmpty" class="text-value-lg"><h4>{{$t('dashboard.pages.general.balance')}}: <strong>{{ currency(account.balance)}}</strong></h4></div>
+        <div class="text-value-lg"><h4>{{$t('dashboard.pages.general.balance')}}: <strong v-if="!accountIsEmpty">{{ currency(account.balance)}}</strong></h4></div>
     </div>
 </template>
 

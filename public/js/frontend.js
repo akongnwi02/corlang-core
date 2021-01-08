@@ -34286,14 +34286,14 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    !_vm.accountIsEmpty
-      ? _c("div", { staticClass: "text-value-lg" }, [
-          _c("h4", [
-            _vm._v(_vm._s(_vm.$t("dashboard.pages.general.balance")) + ": "),
-            _c("strong", [_vm._v(_vm._s(_vm.currency(_vm.account.balance)))])
-          ])
-        ])
-      : _vm._e()
+    _c("div", { staticClass: "text-value-lg" }, [
+      _c("h4", [
+        _vm._v(_vm._s(_vm.$t("dashboard.pages.general.balance")) + ": "),
+        !_vm.accountIsEmpty
+          ? _c("strong", [_vm._v(_vm._s(_vm.currency(_vm.account.balance)))])
+          : _vm._e()
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
