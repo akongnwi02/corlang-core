@@ -13,7 +13,7 @@ use App\Jobs\Job;
 use App\Models\Transaction\Transaction;
 use App\Repositories\Backend\Movement\MovementRepository;
 use App\Repositories\Backend\System\CurrencyRepository;
-use App\Services\Business\Validators\CategoryProvider;
+use App\Services\Clients\CategoryProvider;
 
 class VerifyPurchaseJob extends Job
 {

@@ -23,7 +23,7 @@ use App\Repositories\Api\Business\TransactionRepository;
 use App\Repositories\Backend\Services\Service\ServiceRepository;
 use App\Services\Business\Models\ModelInterface;
 use App\Services\Business\Models\PostpaidBill;
-use App\Services\Business\Validators\CategoryProvider;
+use App\Services\Clients\CategoryProvider;
 use App\Services\Constants\BusinessErrorCodes;
 use Illuminate\Support\Carbon;
 

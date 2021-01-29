@@ -6,10 +6,9 @@
  * Time: 9:23 PM
  */
 
-namespace App\Services\Business\Validators;
+namespace App\Services\Clients;
 
 use App\Exceptions\Api\ServerErrorException;
-use App\Services\Clients\AbstractCategory;
 use App\Services\Clients\Category\AirtimeClient;
 use App\Services\Clients\Category\PrepaidBillClient;
 use App\Services\Clients\Category\PostpaidBillClient;
