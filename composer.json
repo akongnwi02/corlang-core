@@ -29,7 +29,6 @@
         "hieu-le/active": "^3.5",
         "jrm2k6/cloudder": "^0.6.0",
         "laravel/framework": "5.7.*",
-        "laravel/horizon": "^3.7",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
