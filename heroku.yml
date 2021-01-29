@@ -6,3 +6,5 @@ setup:
 build:
   docker:
     web: Dockerfile_Deploy
+
+    views, sessions, cache
