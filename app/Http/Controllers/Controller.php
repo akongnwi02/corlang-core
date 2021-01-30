@@ -98,7 +98,7 @@ class Controller extends BaseController
                 ]);
                 throw new ServerErrorException(BusinessErrorCodes::TRANSACTION_IN_FINAL_STATUS, "Transaction $transaction->code in final state received a status update");
             }
-        };
+        }
     
         $transaction->status         = $request->input('status');
         $transaction->asset          = $request->input('asset');
