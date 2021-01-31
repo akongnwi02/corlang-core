@@ -12,7 +12,7 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Events\Api\Auth\UserRegistered;
 use App\Exceptions\Api\NotFoundException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\Repositories\Api\Auth\UserRepository;
 
 class RegisterController extends Controller

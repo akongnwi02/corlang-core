@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Frontend;
+namespace App\Http\Requests\Frontend\Auth;
 
 use App\Rules\Auth\PhoneOrEmail;
 use App\Rules\Auth\UniquePhoneOrEmail;

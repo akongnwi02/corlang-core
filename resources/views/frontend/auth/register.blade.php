@@ -63,16 +63,6 @@
                                     ->placeholder(__('validation.attributes.frontend.password_confirmation'))
                                     ->required() }}
                             </div>
-                        @if(config('access.captcha.registration'))
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"></span>
-                                </div>
-                                {!! Captcha::display() !!}
-                                {{ html()->hidden('captcha_status', 'true') }}
-                            </div>
-                        @endif
-
                         {{ form_submit(__('labels.frontend.auth.register_button'), 'btn btn-block btn-success') }}
                     </div>
                         {{--<div class="card-footer p-4">--}}
@@ -87,6 +77,10 @@
                                 {{--</div>--}}
                             {{--</div>--}}
                         {{--</div>--}}
+                    @if(config('access.captcha.registration'))
+                        {!! Captcha::display() !!}
+                        {{ html()->hidden('captcha_status', 'true') }}
+                    @endif
                     {{ html()->form()->close() }}
                 </div>
             </div>
