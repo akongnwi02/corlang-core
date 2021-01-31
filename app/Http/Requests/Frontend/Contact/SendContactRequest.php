@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Frontend\Contact;
 
+use Arcanedev\NoCaptcha\Rules\CaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -32,6 +33,17 @@ class SendContactRequest extends FormRequest
             'phone' => 'required',
             'subject' => 'string|nullable',
             'message' => 'required',
+            'g-recaptcha-response' => ['required_if:captcha_status,true', new CaptchaRule()],
+        ];
+    }
+    
+    /**
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'g-recaptcha-response.required_if' => __('validation.required', ['attribute' => 'captcha']),
         ];
     }
 }
