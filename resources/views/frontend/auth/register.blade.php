@@ -64,6 +64,10 @@
                                     ->required() }}
                             </div>
                         {{ form_submit(__('labels.frontend.auth.register_button'), 'btn btn-block btn-success') }}
+                        @if(config('access.captcha.registration'))
+                            {!! Captcha::display() !!}
+                            {{ html()->hidden('captcha_status', 'true') }}
+                        @endif
                     </div>
                         {{--<div class="card-footer p-4">--}}
                             {{--<div class="row">--}}
@@ -77,10 +81,6 @@
                                 {{--</div>--}}
                             {{--</div>--}}
                         {{--</div>--}}
-                    @if(config('access.captcha.registration'))
-                        {!! Captcha::display() !!}
-                        {{ html()->hidden('captcha_status', 'true') }}
-                    @endif
                     {{ html()->form()->close() }}
                 </div>
             </div>
