@@ -139,7 +139,18 @@ class UserRepository extends BaseRepository
                 if (!count($data['roles'])) {
                     throw new GeneralException(__('exceptions.backend.access.users.role_needed_create'));
                 }
-
+    
+                // Only central users can create guest users
+                if (!auth()->user()->company->is_default && !$data['company_id']) {
+                    throw new GeneralException(__('exceptions.backend.access.users.no_company'));
+                }
+    
+                // Guest user must not belong to a company
+                if (in_array(config('access.users.guest_role'), $data['roles']) && $data['company_id']) {
+                    throw new GeneralException(__('exceptions.backend.access.users.guest_in_company'));
+                }
+                
+                
                 // Add selected roles/permissions
                 $user->syncRoles($data['roles']);
                 $user->syncPermissions($data['permissions']);
@@ -422,6 +433,11 @@ class UserRepository extends BaseRepository
             ])) {
                 // Add selected roles/permissions
                 $user->syncRoles($data['roles']);
+    
+                // Guest user must not belong to a company
+                if (in_array(config('access.users.guest_role'), $data['roles']) && $data['company_id']) {
+                    throw new GeneralException(__('exceptions.backend.access.users.guest_in_company'));
+                }
             
                 event(new UserTransferred($user));
             

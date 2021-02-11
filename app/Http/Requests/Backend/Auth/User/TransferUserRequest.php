@@ -32,7 +32,7 @@ class TransferUserRequest extends FormRequest
     {
         return [
             'roles'      => ['required', 'array', new RightRoleRule()],
-            'company_id' => ['required', Rule::exists('companies','uuid')],
+            'company_id' => ['nullable', Rule::exists('companies','uuid')],
         ];
     }
 }

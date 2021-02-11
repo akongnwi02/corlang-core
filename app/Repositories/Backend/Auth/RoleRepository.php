@@ -125,13 +125,21 @@ class RoleRepository extends BaseRepository
             return $roles->whereNotIn('name', [config('access.users.admin_role')]);
         }
         
-        
+        // if company admin belongs to central company, create all roles except the admin role
         if (auth()->user()->isCompanyAdmin()) {
-            return $roles->whereNotIn('name', [
-                config('access.users.guest_role'),
-                config('access.users.admin_role'),
-                config('access.users.company_admin_role'),
-            ]);
+            if (auth()->user()->company->is_default) {
+                return $roles->whereNotIn('name', [
+                    config('access.users.admin_role'),
+                    config('access.users.company_admin_role'),
+                ]);
+            } else {
+                // else do not create roles equal or higher
+                return $roles->whereNotIn('name', [
+                    config('access.users.guest_role'),
+                    config('access.users.admin_role'),
+                    config('access.users.company_admin_role'),
+                ]);
+            }
         }
         
         if (auth()->user()->isBranchAdmin()) {

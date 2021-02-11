@@ -49,7 +49,7 @@ class StoreUserRequest extends FormRequest
             'notification_channel' => ['in:sms,mail', 'required',],
             'password'             => 'required|min:6|confirmed',
             'roles'                => ['required', 'array', new RightRoleRule()],
-            'company_id'           => ['required', Rule::exists('companies','uuid'), new RightCompanyRule()],
+            'company_id'           => ['nullable', Rule::exists('companies','uuid'), new RightCompanyRule()],
         ];
     }
 }

@@ -42,9 +42,8 @@
                         {{ html()->label(__('validation.attributes.backend.access.users.company'))->class('col-md-2 form-control-label required')->for('company_id') }}
 
                         <div class="col-md-10">
-                            {{ html()->select('company_id', $companies)
-                                ->class('form-control')
-                                ->required() }}
+                            {{ html()->select('company_id', [null => null] + $companies)
+                                ->class('form-control') }}
                         </div><!--col-->
                     </div><!--form-group-->
 

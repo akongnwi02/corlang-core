@@ -17,13 +17,24 @@ use App\Repositories\Backend\Company\Company\CompanyRepository;
 
 class TransferUserController
 {
+    
     protected $userRepository;
     
+    /**
+     * TransferUserController constructor.
+     * @param UserRepository $userRepository
+     */
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
     
+    /**
+     * @param User $user
+     * @param RoleRepository $roleRepository
+     * @param CompanyRepository $companyRepository
+     * @return mixed
+     */
     public function transfer(User $user, RoleRepository $roleRepository, CompanyRepository $companyRepository)
     {
         return view('backend.auth.user.transfer')
@@ -35,6 +46,12 @@ class TransferUserController
                 ->toArray());
     }
     
+    /**
+     * @param TransferUserRequest $request
+     * @param User $user
+     * @return mixed
+     * @throws \Throwable
+     */
     public function send(TransferUserRequest $request, User $user)
     {
         $this->userRepository->transfer($user, $request->only(
