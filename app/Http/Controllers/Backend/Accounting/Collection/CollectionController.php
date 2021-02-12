@@ -35,6 +35,7 @@ class CollectionController extends Controller
     {
         return view('backend.accounting.collection.show')
             ->withMovements($service->collections()
+                ->orderByDesc('created_at')
                 ->paginate());
     }
     
