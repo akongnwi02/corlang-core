@@ -249,30 +249,34 @@ class TransactionRepository
         // verify if user has sufficient balance
         $userAccount = $transaction->user->account;
         
+        // user's account must be active
         if (!$userAccount->is_active) {
             throw new ForbiddenException(BusinessErrorCodes::ACCOUNT_LIMITED, 'Your account has been limited.');
         }
+        
+        // if the service instead credits the user's internal account from external source
         if ($transaction->service->is_money_withdrawal) {
             $this->movementRepository->registerSale($userAccount, $transaction);
             return true;
         }
         
+        // if the user has sufficient balance
         if (($userAccount->getBalance() >= $transaction->total_customer_amount)) {
             $this->movementRepository->registerSale($userAccount, $transaction);
             return true;
-            
-        } elseif (
-            $transaction->company->direct_polling
-            && $transaction->company->account->is_active
-            && $transaction->company->account->getBalance() > $transaction->total_customer_amount
-        ) {
-            $companyAccount = $transaction->company->account;
-            
-            $this->movementRepository->registerSale($companyAccount, $transaction);
-            return true;
-        } else {
-            throw new BadRequestException(BusinessErrorCodes::INSUFFICIENT_ACCOUNT_BALANCE, 'Your account balance is insufficient for this transaction');
         }
+        
+        // if the user belongs to a company and direct polling is enabled and company's balance is sufficient
+        if (auth()->user()->company_id) {
+            if ($transaction->company->direct_polling && $transaction->company->account->is_active && $transaction->company->account->getBalance() > $transaction->total_customer_amount) {
+                $companyAccount = $transaction->company->account;
+                $this->movementRepository->registerSale($companyAccount, $transaction);
+                return true;
+            }
+        }
+        
+        // else return balance insufficient error
+        throw new BadRequestException(BusinessErrorCodes::INSUFFICIENT_ACCOUNT_BALANCE, 'Your account balance is insufficient for this transaction');
     }
     
     public function getAgentTransactions()
