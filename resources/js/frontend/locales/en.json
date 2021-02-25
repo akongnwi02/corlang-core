@@ -283,7 +283,7 @@
         "10028": "Your commission balance is insufficient",
         "10029": "There was an error cancelling the payout. Please try again later",
         "10030": "Warning! You have entered an incorrect pin code",
-        "10031": "The meter with the provided has been deactivated",
+        "10031": "The meter with the provided meter code is inactive",
         "10032": "The meter code provided is invalid",
         "10033": "The transaction status cannot be updated",
         "10034": "The amount provided is less than the minimum amount required for this service",
