@@ -46,6 +46,7 @@ class ProvisionController extends Controller
     {
         return view('backend.accounting.provision.show')
             ->withMovements($service->provisions()
+                ->orderByDesc('created_at')
                 ->paginate());
     }
 }
