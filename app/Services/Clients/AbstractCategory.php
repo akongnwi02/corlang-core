@@ -8,30 +8,34 @@
 
 namespace App\Services\Clients;
 
+use App\Exceptions\Api\BadRequestException;
 use App\Exceptions\Api\ServerErrorException;
 use App\Services\Business\Models\ModelInterface;
 use App\Services\Constants\BusinessErrorCodes;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Log;
 
 abstract class AbstractCategory
 {
     public $category;
-    
+
     public $url;
-    
+
     public $key;
-    
+
     public $callbackUrl;
-    
+
     public $statusEndpoint;
-    
+
     public $executeEndpoint;
-    
+
     public $searchEndpoint;
-    
+
+    public $balanceEndpoint;
+
     public $name;
-    
+
     public function __construct($category, $config)
     {
         $this->category        = $category;
@@ -41,19 +45,20 @@ abstract class AbstractCategory
         $this->statusEndpoint  = $config['status_endpoint'];
         $this->executeEndpoint = $config['execute_endpoint'];
         $this->searchEndpoint  = $config['search_endpoint'];
+        $this->balanceEndpoint = $config['balance_endpoint'];
         $this->name  = $config['name'];
     }
-    
+
     public abstract function validate($request);
-    
+
     public abstract function confirm($transaction);
-    
+
     public abstract function getCategoryClientName(): string;
-    
+
     public abstract function quote($data): ModelInterface;
-    
+
     public abstract function response(ModelInterface $model);
-    
+
     /**
      * @return Client
      */
@@ -67,7 +72,7 @@ abstract class AbstractCategory
             'headers'         => ['x-api-key' => $this->key],
         ]);
     }
-    
+
     /**
      * @param $transaction
      * @return bool
@@ -83,7 +88,7 @@ abstract class AbstractCategory
             'status'       => $transaction->status,
             'code'         => $transaction->code,
         ]);
-        
+
         $httpClient = $this->httpClient();
         try {
             $response = $httpClient->request('GET', $this->statusEndpoint . "/$transaction->uuid");
@@ -107,4 +112,45 @@ abstract class AbstractCategory
             throw new ServerErrorException(BusinessErrorCodes::GENERAL_CODE, $exception->getMessage());
         }
     }
+
+    /**
+     * @param $service
+     * @throws BadRequestException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function balance($service)
+    {
+        $query = [
+            'service_code' => $service->code,
+        ];
+
+        Log::debug("{$this->getCategoryClientName()}: Sending balance request to micro service", [
+            'query' => $query,
+            'host' => $this->url,
+        ]);
+
+        $httpClient = $this->httpClient();
+        try {
+            $response = $httpClient->request('GET', $this->balanceEndpoint, [
+                'query' => $query,
+            ]);
+            $content = $response->getBody()->getContents();
+            $balance = json_decode($content);;
+            Log::info("{$this->getCategoryClientName()}: Balance request sent to micro service", [
+                "body" => $balance,
+                "response" => $content,
+            ]);
+            return $balance;
+
+        } catch (ClientException $exception) {
+            $content = $exception->getResponse()->getBody()->getContents();
+            $body = json_decode($content);
+            Log::error("{$this->getCategoryClientName()}: Balance check request failed with client errors", [
+                'body' => $body,
+                'response' => $content,
+            ]);
+            throw new BadRequestException($body->error_code, $body->message);
+        }
+    }
+
 }

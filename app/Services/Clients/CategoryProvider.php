@@ -27,11 +27,11 @@ trait CategoryProvider
     public function category($category, $config = [])
     {
         $config = $this->getDefaultConfig($config);
-        
+
         $config['api_url'] = $category->api_url;
         $config['api_key'] = $category->api_key;
         $config['name']    = $category->name;
-        
+
         switch ($category->code) {
             case config('business.service.category.prepaidbills.code'):
                 return new PrepaidBillClient($category, $config);
@@ -49,7 +49,7 @@ trait CategoryProvider
                 throw new ServerErrorException(BusinessErrorCodes::UNKNOWN_SERVICE_CATEGORY, "Service category $category->code is not implemented");
         }
     }
-    
+
     public function getDefaultConfig($config = [])
     {
         return array_merge([
@@ -57,6 +57,7 @@ trait CategoryProvider
             'status_endpoint'  => config('business.service.endpoints.status'),
             'execute_endpoint' => config('business.service.endpoints.execute'),
             'search_endpoint'  => config('business.service.endpoints.search'),
+            'balance_endpoint'  => config('business.service.endpoints.balance'),
         ], $config);
     }
 }

@@ -15,10 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->disableForeignKeys();
+
         $this->truncateMultiple([
             'cache',
             'jobs',
             'sessions',
+            'company_paymentmethod',
+            'users',
             'commissions',
             'companies',
             'company_service',
@@ -32,15 +36,13 @@ class DatabaseSeeder extends Seeder
             'payouts',
             'paymentmethods',
         ]);
-    
+
         Model::unguard();
-        
-        $this->disableForeignKeys();
-    
+
         $this->call(DumpTableSeeder::class);
-    
+
         $this->enableForeignKeys();
-    
+
         Model::reguard();
     }
 }

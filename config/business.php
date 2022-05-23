@@ -1,21 +1,21 @@
 <?php
 
 return [
-    
+
     'company' => [
         'type' => [
             'internal' => 'internal',
             'merchant' => 'merchant',
         ]
     ],
-    
+
     'account' => [
         'type' => [
             'user'    => 'user account',
             'company' => 'company account',
         ]
     ],
-    
+
     'movement' => [
         'type' => [
             'sale'       => 'sale',
@@ -25,7 +25,7 @@ return [
             'float'      => 'float',
         ]
     ],
-    
+
     'payout'      => [
         'type'   => [
             'commission' => 'commission',
@@ -65,6 +65,7 @@ return [
             'search'  => '/search',
             'execute' => '/execute',
             'status'  => '/status',
+            'balance' => '/balance',
         ]
     ],
     'system'      => [

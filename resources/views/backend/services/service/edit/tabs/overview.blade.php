@@ -164,6 +164,17 @@
             </div><!--form-group-->
 
             <div class="form-group row">
+                {{ html()->label(__('validation.attributes.backend.services.service.balance_check'))->class('col-md-2 form-control-label')->for('is_balance_check_supported') }}
+
+                <div class="col-md-10">
+                    <label class="switch switch-label switch-pill switch-primary">
+                        {{ html()->checkbox('is_balance_check_supported', null, 1)->class('switch-input') }}
+                        <span class="switch-slider" data-checked="yes" data-unchecked="no"></span>
+                    </label>
+                </div><!--col-->
+            </div><!--form-group-->
+
+            <div class="form-group row">
                 {{ html()->label(__('validation.attributes.backend.services.service.logo'))->class('col-md-2 form-control-label')->for('logo') }}
 
                 <div class="col-md-10">

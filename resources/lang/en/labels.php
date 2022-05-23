@@ -1,7 +1,7 @@
 <?php
 
 return [
-    
+
     /*
     |--------------------------------------------------------------------------
     | Labels Language Lines
@@ -12,7 +12,7 @@ return [
     | found in a intuitive way.
     |
     */
-    
+
     'general'  => [
         'all'                => 'All',
         'yes'                => 'Yes',
@@ -199,7 +199,7 @@ return [
                 'edit'            => 'Edit Service',
                 'active'          => 'Active Services',
                 'service_actions' => 'Service Actions',
-                
+
                 'table' => [
                     'name'               => 'Service Name',
                     'code'               => 'Service Code',
@@ -212,9 +212,12 @@ return [
                     'external_rate'      => 'Default External Rate',
                     'min_amount'         => 'Min Amount',
                     'max_amount'         => 'Max Amount',
+                    'current_balance'    => 'Current Balance',
+                    'balance_requested_at' => 'Lastly checked at',
                     'customercommission' => 'Default Customer Service Charge',
                     'providercommission' => 'Default Provider Service Charge',
                     'commissionditribution' => 'Commission Distribution',
+                    'balance_error' => 'Error checking for the balance',
                     'total'              => 'service|services',
                 ],
                 'tabs'  => [
@@ -243,13 +246,13 @@ return [
                 'create'             => 'Create Service Charge',
                 'edit'               => 'Edit Service Charge',
                 'commission_actions' => 'Service Charge Actions',
-                
+
                 'table' => [
                     'name'        => 'Name',
                     'description' => 'Description',
                     'currency'    => 'Currency',
                     'view'        => 'View Stack',
-                    
+
                     'total' => 'service charge|service charges',
                     'stack' => [
                         'title'      => 'Stack',
@@ -297,6 +300,14 @@ return [
                         'profile'   => 'Profile',
                         'companies' => 'Companies'
                     ]
+                ]
+            ],
+            'balance' => [
+                'management' => 'Service Balance',
+                'table' => [
+                    'service' => 'Service Name',
+                    'balance' => 'Balance',
+                    'time' => 'Retrieved at'
                 ]
             ],
         ],
@@ -610,7 +621,7 @@ return [
             'passwords' => [
                 'change' => 'Change Password',
             ],
-            
+
             'profile' => [
                 'avatar'             => 'Avatar',
                 'created_at'         => 'Created At',

@@ -27,7 +27,7 @@ trait ServiceAttribute
             }
             return '<span class="badge badge-success">'.__('labels.general.yes').'</span>';
         }
-        
+
         if (auth()->user()->canDeactivateServices()) {
             return '<a href="'.route('admin.services.service.mark', [
                 $this,
@@ -36,7 +36,7 @@ trait ServiceAttribute
         }
         return '<span class="badge badge-danger">'.__('labels.general.no').'</span>';
     }
-    
+
     /**
      * @return string
      */
@@ -46,7 +46,7 @@ trait ServiceAttribute
 //            return '<a href="'.route('admin.services.service.show', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.view').'" class="btn btn-info"><i class="fas fa-eye"></i></a>';
 //        }
     }
-    
+
     /**
      * @return string
      */
@@ -56,7 +56,7 @@ trait ServiceAttribute
             return '<a href="'.route('admin.services.service.edit', $this).'" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.edit').'" class="btn btn-primary"><i class="fas fa-edit"></i></a>';
         }
     }
-    
+
     public function getActionButtonsAttribute()
     {
         return '
@@ -65,34 +65,39 @@ trait ServiceAttribute
 		  '.$this->edit_button.'
 		</div>';
     }
-    
+
     /**
      * @return string
      */
     public function getLogoLabelAttribute()
     {
         $url = $this->logo_url ?:  url('img/backend/brand/logo/logo-company-profile.png');
-    
+
         return "<img class='navbar-brand-full img-fluid' src='$url' width='30' height='30' style='border-radius: 50%' alt='$this->name'>";
     }
-    
+
     public function getCollectedAmountLabelAttribute()
     {
         return number_format($this->getCollectedAmount(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
     }
-    
+
     public function getCommissionAmountLabelAttribute()
     {
         return number_format($this->getCommissionAmount(), 2) . ' ' . Currency::where('is_default', true)->first()->code;
     }
-    
+
     public function getMinAmountLabelAttribute()
     {
         return number_format($this->min_amount, 2) . ' '. Currency::where('is_default', true)->first()->code;
     }
-    
+
     public function getMaxAmountLabelAttribute()
     {
         return number_format($this->max_amount, 2) . ' '. Currency::where('is_default', true)->first()->code;
+    }
+
+    public function getCurrentBalanceLabelAttribute()
+    {
+        return number_format($this->current_balance, 2) . ' '. Currency::where('is_default', true)->first()->code;
     }
 }

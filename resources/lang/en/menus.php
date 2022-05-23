@@ -65,7 +65,7 @@ return [
         ],
         'companies' => [
             'title' => 'Companies',
-    
+
             'company' => [
                 'management' => 'Companies',
                 'create'     => 'Create Company',
@@ -75,7 +75,7 @@ return [
 
         'services' => [
             'title' => 'Services',
-    
+
             'service'   => [
                 'management' => 'Services',
                 'create'     => 'Create Service',
@@ -84,6 +84,9 @@ return [
             'category' => [
                 'management' => 'Categories',
                 'edit' => 'Edit Category',
+            ],
+            'balance' => [
+                'management' => 'Service Balance',
             ],
             'commission' => [
                 'management' => 'Service Charges',
@@ -101,7 +104,7 @@ return [
                 'edit'       => 'Edit Payment Method',
             ]
         ],
-        
+
         'sales' => [
             'management' => 'Sales',
             'clear' => 'Clear Filters',
@@ -114,7 +117,7 @@ return [
         ],
         'accounts' => [
             'title' => 'Accounts',
-            
+
             'deposit' => [
                 'management' => 'Deposit Account',
                 'view' => 'View Account'

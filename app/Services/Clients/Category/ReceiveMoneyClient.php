@@ -27,14 +27,14 @@ use Log;
 class ReceiveMoneyClient extends AbstractCategory
 {
     public $serviceRepository;
-    
+
     public function __construct(Category $category, $config)
     {
         $this->serviceRepository = new ServiceRepository;
 
         return parent::__construct($category, $config);
     }
-    
+
     /**
      * @param $request
      * @throws BadRequestException
@@ -49,26 +49,26 @@ class ReceiveMoneyClient extends AbstractCategory
             'currency_code' => ['required', Rule::exists('currencies', 'code')],
             'auth_payload'  => ['sometimes', 'nullable', 'min:3'],
         ])->validate();
-    
+
         $service = $this->serviceRepository->findByCode($request['service_code']);
-        
+
         // verify if the auth field has been provided
         if ($service->requires_auth) {
             if (empty($request['auth_payload'])) {
                 throw new BadRequestException(BusinessErrorCodes::CUSTOMER_PAYMENT_AUTH_ERROR, 'The payment authorization token was not provided by the customer');
             }
         }
-    
+
         if (!$service->is_money_withdrawal) {
             throw new ServerErrorException(BusinessErrorCodes::SERVICE_MAL_CONFIGURED, 'Service misconfigured. is_money_withdrawal flag must be set to true');
         }
     }
-    
+
     public function response(ModelInterface $receiveMoney)
     {
         return new ReceiveMoneyResource($receiveMoney);
     }
-    
+
     /**
      * @param $data
      * @return ReceiveMoney
@@ -84,7 +84,7 @@ class ReceiveMoneyClient extends AbstractCategory
                 ->setItems($data['service_code']);
             return $receiveMoney;
     }
-    
+
     /**
      * @param $transaction
      * @throws BadRequestException
@@ -99,24 +99,24 @@ class ReceiveMoneyClient extends AbstractCategory
             'auth_payload' => $transaction->items,
             'callback_url' => $this->callbackUrl
         ];
-    
+
         Log::debug("{$this->getCategoryClientName()}: Sending purchase request to micro service", [
             'json' => $json,
             'host' => $this->url,
         ]);
-    
+
         $httpClient = $this->httpClient();
         try {
             $response = $httpClient->request('POST', $this->executeEndpoint, [
                 'json' => $json,
             ]);
             $content = $response->getBody()->getContents();
-        
+
             Log::info("{$this->getCategoryClientName()}: Purchase request sent successfully to micro service", [
                 "body" => json_decode($content),
                 "response" => $content,
             ]);
-        
+
         } catch (ClientException $exception) {
             $content = $exception->getResponse()->getBody()->getContents();
             $body = json_decode($content);
@@ -127,7 +127,7 @@ class ReceiveMoneyClient extends AbstractCategory
             throw new BadRequestException($body->error_code, $body->message);
         }
     }
-    
+
     public function getCategoryClientName(): string
     {
         return class_basename($this);

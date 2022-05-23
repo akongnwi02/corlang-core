@@ -20,55 +20,56 @@ use App\Http\Controllers\Backend\Services\Service\ServiceCompanyController;
 use App\Http\Controllers\Backend\Services\Service\ServiceController;
 use App\Http\Controllers\Backend\Services\Service\ServiceStatusController;
 use App\Http\Controllers\Backend\Services\Category\CategoryController;
+use App\Http\Controllers\Backend\Services\Balance\BalanceController;
 
 Route::group([
     'prefix'     => 'services',
     'as'         => 'services.',
     'namespace'  => 'Services',
 ], function () {
-    
+
     /*
      * Service CRUD
      */
     Route::get('service', [ServiceController::class, 'index'])
         ->name('service.index')
         ->middleware('permission:'.config('permission.permissions.read_services'));
-    
+
     Route::get('service/create', [ServiceController::class, 'create'])
         ->name('service.create')
         ->middleware('permission:'.config('permission.permissions.create_services'));
-    
+
     Route::post('service', [ServiceController::class, 'store'])
         ->name('service.store')
         ->middleware('permission:'.config('permission.permissions.create_services'));
-    
+
     /*
      * Specific Service
      */
     Route::group(['prefix' => 'service/{service}'], function () {
-        
+
         // Company
         Route::get('/', [ServiceController::class, 'show'])
             ->name('service.show')
             ->middleware('permission:'.config('permission.permissions.read_services'));
-        
+
         Route::get('edit', [ServiceController::class, 'edit'])
             ->name('service.edit')
             ->middleware('permission:'.config('permission.permissions.update_services'));
-        
+
         Route::put('/', [ServiceController::class, 'update'])
             ->name('service.update')
             ->middleware('permission:'.config('permission.permissions.update_services'));
-        
+
         Route::delete('/', [ServiceController::class, 'destroy'])
             ->name('service.destroy')
             ->middleware('permission:'.config('permission.permissions.delete_services'));
-        
+
         // Status
         Route::get('mark/{status}', [ServiceStatusController::class, 'mark'])
             ->name('service.mark')
             ->middleware('permission:'.config('permission.permissions.deactivate_services'));
-    
+
         // Service Company
         Route::group(['namespace' => 'ServiceCompany'], function () {
             /*
@@ -85,69 +86,69 @@ Route::group([
             Route::post('company', [ServiceCompanyController::class, 'store'])
                 ->name('service.company.store')
                 ->middleware('permission:'.config('permission.permissions.create_company_services'));
-        
+
         });
     });
-    
+
     /*
      * Category CRUD
      */
     Route::get('category', [CategoryController::class, 'index'])
         ->name('category.index')
         ->middleware('permission:'.config('permission.permissions.read_categories'));
-    
+
     /*
      * Specific Category
      */
     Route::group(['prefix' => 'category/{category}'], function () {
-        
+
         Route::get('edit', [CategoryController::class, 'edit'])
             ->name('category.edit')
             ->middleware('permission:'.config('permission.permissions.update_categories'));
-        
+
         Route::put('/', [CategoryController::class, 'update'])
             ->name('category.update')
             ->middleware('permission:'.config('permission.permissions.update_categories'));
-        
+
         // Status
         Route::get('mark/{status}', [CategoryController::class, 'mark'])
             ->name('category.mark')
             ->middleware('permission:'.config('permission.permissions.deactivate_categories'));
     });
-    
+
     /*
      * Commission CRUD
      */
     Route::get('commission', [CommissionController::class, 'index'])
         ->name('commission.index')
         ->middleware('permission:'.config('permission.permissions.read_commissions'));
-    
+
     Route::get('commission/create', [CommissionController::class, 'create'])
         ->name('commission.create')
         ->middleware('permission:'.config('permission.permissions.create_commissions'));
-    
+
     Route::post('commission', [CommissionController::class, 'store'])
         ->name('commission.store')
         ->middleware('permission:'.config('permission.permissions.create_commissions'));
-    
+
     /*
      * Specific Commission
      */
     Route::group(['prefix' => 'commission/{commission}'], function () {
-        
+
         // Company
         Route::get('/', [CommissionController::class, 'show'])
             ->name('commission.show')
             ->middleware('permission:'.config('permission.permissions.read_commissions'));
-        
+
         Route::get('edit', [CommissionController::class, 'edit'])
             ->name('commission.edit')
             ->middleware('permission:'.config('permission.permissions.update_commissions'));
-        
+
         Route::put('/', [CommissionController::class, 'update'])
             ->name('commission.update')
             ->middleware('permission:'.config('permission.permissions.update_commissions'));
-        
+
         Route::delete('/', [CommissionController::class, 'destroy'])
             ->name('commission.destroy')
             ->middleware('permission:'.config('permission.permissions.delete_commissions'));
@@ -158,29 +159,29 @@ Route::group([
     Route::get('distribution', [CommissionDistributionController::class, 'index'])
         ->name('distribution.index')
         ->middleware('permission:'.config('permission.permissions.read_distributions'));
-    
+
     Route::get('distribution/create', [CommissionDistributionController::class, 'create'])
         ->name('distribution.create')
         ->middleware('permission:'.config('permission.permissions.create_distributions'));
-    
+
     Route::post('distribution', [CommissionDistributionController::class, 'store'])
         ->name('distribution.store')
         ->middleware('permission:'.config('permission.permissions.create_distributions'));
-    
+
     /*
      * Specific Commission
      */
     Route::group(['prefix' => 'distribution/{distribution}'], function () {
-        
+
         // Company
 //        Route::get('/', [CommissionDistributionController::class, 'show'])
 //            ->name('distribution.show')
 //            ->middleware('permission:'.config('permission.permissions.read_distributions'));
-        
+
         Route::get('edit', [CommissionDistributionController::class, 'edit'])
             ->name('distribution.edit')
             ->middleware('permission:'.config('permission.permissions.update_distributions'));
-        
+
         Route::put('/', [CommissionDistributionController::class, 'update'])
             ->name('distribution.update')
             ->middleware('permission:'.config('permission.permissions.update_distributions'));
@@ -189,14 +190,14 @@ Route::group([
 //            ->name('distribution.destroy')
 //            ->middleware('permission:'.config('permission.permissions.delete_distributions'));
     });
-    
+
     /*
      * Payment Method CRUD
      */
     Route::get('method', [PaymentMethodController::class, 'index'])
         ->name('method.index')
         ->middleware('permission:'.config('permission.permissions.read_payment_methods'));
-    
+
     Route::get('method/create', [PaymentMethodController::class, 'create'])
         ->name('method.create')
         ->middleware('permission:'.config('permission.permissions.create_payment_methods'));
@@ -204,35 +205,35 @@ Route::group([
     Route::post('method', [PaymentMethodController::class, 'store'])
         ->name('method.store')
         ->middleware('permission:'.config('permission.permissions.create_payment_methods'));
-    
+
     /*
      * Specific Payment Method
      */
     Route::group(['prefix' => 'method/{method}'], function () {
-        
+
 //        // Payment Method
 //        Route::get('/', [CommissionController::class, 'show'])
 //            ->name('method.show')
 //            ->middleware('permission:'.config('permission.permissions.read_payment_methods'));
-        
+
         Route::get('edit', [PaymentMethodController::class, 'edit'])
             ->name('method.edit')
             ->middleware('permission:'.config('permission.permissions.update_payment_methods'));
-        
+
         Route::put('/', [PaymentMethodController::class, 'update'])
             ->name('method.update')
             ->middleware('permission:'.config('permission.permissions.update_payment_methods'));
-        
+
 //        Route::delete('/', [CommissionController::class, 'destroy'])
 //            ->name('method.destroy')
 //            ->middleware('permission:'.config('permission.permissions.deactivate_payment_methods'));
-        
+
         // Status
         Route::get('mark/{status}', [PaymentMethodStatusController::class, 'mark'])
             ->name('method.mark')
             ->middleware('permission:'.config('permission.permissions.deactivate_payment_methods'));
-    
-    
+
+
         // Service Company
         Route::group(['namespace' => 'PaymentMethodCompany'], function () {
             /*
@@ -245,13 +246,18 @@ Route::group([
 //            Route::get('service/create', [CompanyServiceController::class, 'create'])
 //                ->name('company.service.create')
 //                ->middleware('permission:'.config('permission.permissions.manage_company_services'));
-        
+
             Route::post('company', [PaymentMethodCompanyController::class, 'store'])
                 ->name('method.company.store')
                 ->middleware('permission:'.config('permission.permissions.create_company_services'));
-        
+
         });
     });
-    
-    
+
+    /*
+     * Balance Read
+     */
+    Route::get('balance', [BalanceController::class, 'index'])
+        ->name('balance.index')
+        ->middleware('permission:'.config('permission.permissions.read_service_balance'));
 });

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    
+
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
@@ -12,7 +12,7 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-    
+
     'accepted'             => 'The :attribute must be accepted.',
     'active_url'           => 'The :attribute is not a valid URL.',
     'after'                => 'The :attribute must be a date after :date.',
@@ -112,7 +112,7 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
-    
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -138,9 +138,9 @@ return [
     | of "email". This simply helps us make messages a little cleaner.
     |
     */
-    
+
     'attributes' => [
-        
+
         'backend'  => [
             'access'     => [
                 'permissions' => [
@@ -149,23 +149,23 @@ return [
                     'display_name'     => 'Display Name',
                     'group'            => 'Group',
                     'group_sort'       => 'Group Sort',
-                    
+
                     'groups' => [
                         'name' => 'Group Name',
                     ],
-                    
+
                     'name'       => 'Name',
                     'first_name' => 'First Name',
                     'last_name'  => 'Last Name',
                     'system'     => 'System',
                 ],
-                
+
                 'roles' => [
                     'associated_permissions' => 'Associated Permissions',
                     'name'                   => 'Name',
                     'sort'                   => 'Sort',
                 ],
-                
+
                 'users' => [
                     'active'                    => 'Active',
                     'associated_roles'          => 'Associated Roles',
@@ -246,6 +246,7 @@ return [
                     'items'                   => 'Items',
                     'requires_auth'           => 'Authorization Required',
                     'withdrawal'              => 'Money Withdrawal',
+                    'balance_check'           => 'Balance Check Supported',
                     'min_amount'              => 'Minimum Amount',
                     'max_amount'              => 'Maximum Amount',
                     'step_amount'             => 'Step Amount',

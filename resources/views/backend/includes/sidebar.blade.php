@@ -69,7 +69,8 @@
             @if(Gate::check(config('permission.permissions.read_services'))
             || Gate::check(config('permission.permissions.read_commissions'))
             || Gate::check(config('permission.permissions.read_distributions'))
-            || Gate::check(config('permission.permissions.read_payment_methods')))
+            || Gate::check(config('permission.permissions.read_payment_methods'))
+            || Gate::check(config('permission.permissions.read_service_balance')))
                 <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/services*'), 'open') }}">
                     <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/services*')) }}" href="{{ route('admin.services.service.index') }}">
                         <i class="nav-icon icon-grid"></i> @lang('menus.backend.services.title')
@@ -94,6 +95,13 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ active_class(Active::checkUriPattern('admin/services/service*')) }}" href="{{ route('admin.services.service.index') }}">
                                     @lang('labels.backend.services.service.management')
+                                </a>
+                            </li>
+                        @endcan
+                        @can(config('permission.permissions.read_service_balance'))
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/services/balance*')) }}" href="{{ route('admin.services.balance.index') }}">
+                                    @lang('labels.backend.services.balance.management')
                                 </a>
                             </li>
                         @endcan

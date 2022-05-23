@@ -25,20 +25,20 @@ class Service extends Model
         ServiceRelationship,
         ServiceMethod,
         ServiceAttribute;
-    
+
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'services';
-    
+
     protected $primaryKey = 'uuid';
-    
+
     protected $keyType = 'string';
-    
+
     public $incrementing = false;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -68,7 +68,7 @@ class Service extends Model
         'max_amount',
         'step_amount',
     ];
-    
+
     protected $hidden = [
         'providercommission_id',
         'customercommission_id',
@@ -77,7 +77,7 @@ class Service extends Model
         'agent_rate',
         'external_rate',
     ];
-    
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -94,5 +94,6 @@ class Service extends Model
         'has_items'           => 'boolean',
         'requires_auth'       => 'boolean',
         'is_money_withdrawal' => 'boolean',
+        'is_balance_check_supported' => 'boolean',
     ];
 }
