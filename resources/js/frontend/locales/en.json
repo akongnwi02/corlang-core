@@ -33,8 +33,8 @@
                     "mobile_money": {
                         "source_account": "Account Identifier",
                         "name": "Account Holder",
-                        "cashin": "Cash In",
-                        "cashout": "Cash Out"
+                        "cashin": "Send Money To",
+                        "cashout": "Receive Money From"
                     },
                     "airtime": {
                         "airtime": "Airtime",

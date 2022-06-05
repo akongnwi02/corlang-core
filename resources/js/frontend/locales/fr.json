@@ -31,8 +31,8 @@
                     "mobile_money": {
                         "source_account": "Identifiant du compte",
                         "name": "Détenteur de compte",
-                        "cashin": "Dépôt",
-                        "cashout": "Retrait"
+                        "cashin": "Envoyez de l'argent à",
+                        "cashout": "Recevez de l'argent de"
                     }
                 }
             },
