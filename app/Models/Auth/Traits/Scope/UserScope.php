@@ -2,6 +2,8 @@
 
 namespace App\Models\Auth\Traits\Scope;
 
+use Carbon\Carbon;
+
 /**
  * Class UserScope.
  */
@@ -27,5 +29,15 @@ trait UserScope
     public function scopeActive($query, $status = true)
     {
         return $query->where('active', $status);
+    }
+
+    public function scopeCreatedAtStart($query, $date)
+    {
+        return $query->where('created_at', '>=', Carbon::parse($date));
+    }
+
+    public function scopeCreatedAtEnd($query, $date)
+    {
+        return $query->where('created_at', '<', Carbon::parse($date)->addDay());
     }
 }

@@ -14,6 +14,7 @@ use App\Exceptions\GeneralException;
 use App\Models\Account\Account;
 use App\Models\Account\Payout;
 use App\Models\Account\PayoutType;
+use App\Models\Filters\Account\FiltersOwner;
 use App\Models\Transaction\Transaction;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -52,8 +53,11 @@ class AccountRepository
     {
         $accounts = QueryBuilder::for(Account::class)
             ->allowedFilters([
+                AllowedFilter::partial('code'),
                 AllowedFilter::scope('is_active'),
                 AllowedFilter::scope('type_id'),
+                AllowedFilter::custom('owner', new FiltersOwner()),
+
             ])
             ->where('is_default', false)
             ->defaultSort('-accounts.is_active', '-accounts.created_at')
@@ -77,6 +81,8 @@ class AccountRepository
             ->allowedFilters([
                 AllowedFilter::scope('is_active'),
                 AllowedFilter::scope('type_id'),
+                AllowedFilter::partial('code'),
+                AllowedFilter::custom('owner', new FiltersOwner()),
             ])
             ->where('is_default', false)
             ->defaultSort('-accounts.is_active', '-accounts.created_at')

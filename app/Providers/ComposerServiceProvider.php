@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Http\Composers\Backend\DashboardComposer;
+use App\Http\Composers\Backend\Sales\FilterSaleComposer;
+use App\Http\Composers\Backend\User\FilterUserComposer;
 use App\Http\Composers\Frontend\TopupAccountComposer;
 use Illuminate\Support\Facades\View;
 use App\Http\Composers\GlobalComposer;
@@ -46,11 +48,17 @@ class ComposerServiceProvider extends ServiceProvider
             'backend.includes.sidebar',
             SidebarComposer::class
         );
-        
+
         View::composer(
         // This binds items like number of users pending approval when account approval is set to true
             'backend.dashboard',
             DashboardComposer::class
+        );
+
+        // This binds the company list on the users filter modal
+        View::composer(
+            ['backend.auth.user.includes.header-buttons'],
+            FilterUserComposer::class
         );
     }
 

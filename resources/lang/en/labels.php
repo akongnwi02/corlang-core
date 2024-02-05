@@ -57,6 +57,7 @@ return [
             ],
             'users' => [
                 'active'              => 'Active Users',
+                'confirmed'           => 'Is Confirmed',
                 'all_permissions'     => 'All Permissions',
                 'change_password'     => 'Change Password',
                 'change_password_for' => 'Change Password for :user',
@@ -71,6 +72,8 @@ return [
                 'no_roles'            => 'No Roles to set.',
                 'permissions'         => 'Permissions',
                 'user_actions'        => 'User Actions',
+                'filter'              => 'Filter',
+                'registered_at'    => 'Registered At',
                 'table'               => [
                     'confirmed'         => 'Confirmed',
                     'created'           => 'Created',
@@ -78,7 +81,7 @@ return [
                     'username'          => 'Username',
                     'id'                => 'ID',
                     'last_updated'      => 'Last Updated',
-                    'name'              => 'Name',
+                    'name'              => 'User\'s Name',
                     'first_name'        => 'First Name',
                     'last_name'         => 'Last Name',
                     'no_deactivated'    => 'No Deactivated Users',
@@ -397,6 +400,7 @@ return [
             'drain'                 => 'Drain Account',
             'float'                 => 'Add Float',
             'request_payout'        => 'Request Payout',
+            'filter' => 'Filter',
             'deposit'               => [
                 'management' => 'Deposit Accounts',
                 'actions'    => 'Account Actions',

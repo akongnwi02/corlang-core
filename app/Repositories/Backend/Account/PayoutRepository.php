@@ -36,22 +36,22 @@ class PayoutRepository
         $drain->company_id = auth()->user()->company->uuid;
         $drain->currency_id = $data['currency_id'];
         $drain->account_id = $account->uuid;
-        
+
         if(! $account->user->company){
             throw new GeneralException(__('exceptions.backend.payout.no_company_error'));
         }
-        
+
         $strongbox = $account->user->company->strongbox;
         $strongbox->balance += $data['amount'];
-        
+
         if ($drain->save() && $strongbox->save()) {
 //            event(new AccountDrained());
             return true;
         }
-    
+
         throw new GeneralException(__('exceptions.backend.payout.transfer_error'));
     }
-    
+
     /**
      * @param $account
      * @param $data
@@ -72,15 +72,15 @@ class PayoutRepository
         $payout->company_id = auth()->user()->company->uuid;
         $payout->account_id = $account->uuid;
         $payout->status = $account->is_default ? config('business.payout.status.approved') : config('business.payout.status.pending');
-    
+
         if ($payout->save()) {
             // event(new PayoutRequest());
             return true;
         }
-    
+
         throw new GeneralException(__('exceptions.backend.payout.payout_error'));
     }
-    
+
     /**
      * @param $account
      * @param $data
@@ -101,14 +101,14 @@ class PayoutRepository
         $payout->company_id = auth()->user()->company->uuid;
         $payout->account_id = $account->uuid;
         $payout->status = config('business.payout.status.pending');
-        
+
         if ($payout->save()) {
 //            event(new PayoutRequest());
             return $payout;
         }
         throw new ServerErrorException(BusinessErrorCodes::PAYOUT_REQUEST_ERROR, 'Error requesting payout');
     }
-    
+
     /**
      * @param $payout
      * @param $status
@@ -120,9 +120,9 @@ class PayoutRepository
         $payout->status = $status;
         $payout->decisor_id = auth()->user()->uuid;
         $payout->decision_at = now()->toDateTimeString();
-    
+
         if ($payout->update()) {
-        
+
 //            switch ($status) {
 //                case config('business.payout.status.approved'):
 //                    event(new PayoutApproved($payout));
@@ -136,13 +136,13 @@ class PayoutRepository
 //                    event(new PayoutCancelled($payout));
 //                    break;
 //            }
-        
+
             return $payout;
         }
-    
+
         throw new GeneralException(__('exceptions.backend.payout.status_error'));
     }
-    
+
     public function getAccountDrains($account)
     {
         return QueryBuilder::for(Payout::class)
@@ -150,7 +150,7 @@ class PayoutRepository
             ->where('type_id', PayoutType::where('name', config('business.payout.type.drain'))->first()->uuid)
             ->defaultSort('-payouts.created_at');
     }
-    
+
     public function getAllPayouts($account)
     {
         return QueryBuilder::for(Payout::class)
@@ -158,7 +158,7 @@ class PayoutRepository
             ->where('type_id', PayoutType::where('name', config('business.payout.type.commission'))->first()->uuid)
             ->defaultSort('-payouts.created_at');
     }
-    
+
     /**
      * @param $payout
      * @return mixed

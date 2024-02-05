@@ -33,7 +33,7 @@ Run the following command on project's root directory
 * Heroku log in `heroku login --browser=firefox`
 * Heroku logs `heroku logs -t -n 1000 -a corlapay`
 * Heroku config env `heroku config:get DATABASE_URL -a corlapay`
-* Add heroku app as a git remove `heroku git:remote -a corlapay`
+* Add heroku app as a git remote `heroku git:remote -a corlapay`
 * Keep app in maintenance mode `heroku maintenance:on -a corlapay`
 
 ### HOW TO TRANSLATE DICTIONARY FILES

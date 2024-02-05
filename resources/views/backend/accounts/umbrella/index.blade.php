@@ -19,9 +19,9 @@
                     </h4>
                 </div><!--col-->
 
-                {{--<div class="col-sm-7">--}}
-                {{--@include('backend.services.service.includes.header-buttons')--}}
-                {{--</div><!--col-->--}}
+                <div class="col-sm-7">
+                    @include('backend.accounts.umbrella.includes.header-buttons')
+                </div><!--col-->
             </div><!--row-->
 
             <div class="row mt-4">

@@ -30,13 +30,18 @@ class PaymentMethodRepository
     {
         return PaymentMethod::orderBy('is_default', 'desc');
     }
-    
-    public function getPayoutMethods()
+
+    public function getPayoutMethods($allowedFilters = true)
     {
-        return QueryBuilder::for(PaymentMethod::class)
-            ->allowedFilters([AllowedFilter::exact('is_active')])
-            ->allowedSorts('paymentmethods.is_active', 'paymentmethods.name')
+        $methods = QueryBuilder::for(PaymentMethod::class);
+
+        if ($allowedFilters) {
+            $methods->allowedFilters([AllowedFilter::exact('is_active')]);
+        }
+        
+        $methods->allowedSorts('paymentmethods.is_active', 'paymentmethods.name')
             ->defaultSort('-paymentmethods.is_active', 'paymentmethods.name');
+        return $methods;
     }
     
     /**

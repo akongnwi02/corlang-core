@@ -5,6 +5,7 @@ namespace App\Repositories\Backend\Auth;
 use App\Models\Account\Account;
 use App\Models\Account\AccountType;
 use App\Models\Auth\User;
+use App\Models\Filters\User\FiltersUserName;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
@@ -58,19 +59,25 @@ class UserRepository extends BaseRepository
     {
         $users = QueryBuilder::for(User::class)
             ->allowedFilters([
+                AllowedFilter::exact('confirmed'),
+                AllowedFilter::exact('username'),
+                AllowedFilter::exact('company_id'),
                 AllowedFilter::scope('active'),
+                AllowedFilter::scope('created_at_start'),
+                AllowedFilter::scope('created_at_end'),
+                AllowedFilter::custom('full_name', new FiltersUserName()),
             ])
             ->allowedSorts('users.active', 'users.created_at', 'users.username')
             ->defaultSort('-users.active', '-users.confirmed', '-users.created_at', 'users.username')
             ->whereNotIn('username', ['system'])
             ->with('roles');
-    
+
         if (! auth()->user()->company->isDefault()) {
             return $users->select('users.*')
                 ->where('users.company_id', auth()->user()->company->uuid)
                 ->join('companies', 'users.company_id', '=', 'companies.uuid');
         }
-    
+
         return $users;
     }
 
@@ -139,36 +146,36 @@ class UserRepository extends BaseRepository
                 if (!count($data['roles'])) {
                     throw new GeneralException(__('exceptions.backend.access.users.role_needed_create'));
                 }
-    
+
                 // Only central users can create guest users
                 if (!auth()->user()->company->is_default && !$data['company_id']) {
                     throw new GeneralException(__('exceptions.backend.access.users.no_company'));
                 }
-    
+
                 // Guest user must not belong to a company
                 if (in_array(config('access.users.guest_role'), $data['roles']) && $data['company_id']) {
                     throw new GeneralException(__('exceptions.backend.access.users.guest_in_company'));
                 }
-                
-                
+
+
                 // Add selected roles/permissions
                 $user->syncRoles($data['roles']);
                 $user->syncPermissions($data['permissions']);
-    
-    
+
+
                 // create account for the user
                 $account = new Account();
                 $account->code = Account::generateCode();
                 $account->type_id = AccountType::where('name', config('business.account.type.user'))->first()->uuid;
                 $account->owner_id = $user->uuid;
-    
+
                 if ($account->save()) {
-                    
+
                     //Send confirmation email if requested and account approval is off
                     if (isset($data['confirmation_message']) && $user->confirmed == 0 && !config('access.users.requires_approval')) {
                         $user->notify(new UserNeedsConfirmation());
                     }
-                    
+
                     event(new UserCreated($user));
 
                     return $user;
@@ -418,7 +425,7 @@ class UserRepository extends BaseRepository
             }
         }
     }
-    
+
     /**
      * @param User $user
      * @param $data
@@ -433,21 +440,21 @@ class UserRepository extends BaseRepository
             ])) {
                 // Add selected roles/permissions
                 $user->syncRoles($data['roles']);
-    
+
                 // Guest user must not belong to a company
                 if (in_array(config('access.users.guest_role'), $data['roles']) && $data['company_id']) {
                     throw new GeneralException(__('exceptions.backend.access.users.guest_in_company'));
                 }
-            
+
                 event(new UserTransferred($user));
-            
+
                 return $user;
             }
-        
+
             throw new GeneralException(__('exceptions.backend.access.users.transfer_error'));
         });
     }
-    
+
     /**
      * @param User $user
      * @return mixed
@@ -460,12 +467,12 @@ class UserRepository extends BaseRepository
             if ($user->save()) {
                 return $user;
             }
-            
+
             throw new GeneralException(__('exceptions.backend.access.users.reset_pin_error'));
         });
 
     }
-    
+
     /**
      * @param User $user
      * @return mixed

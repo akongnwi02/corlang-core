@@ -23,18 +23,18 @@ class PayoutAccountController extends Controller
     {
         return view('backend.accounts.payout.index')
             ->withAccounts($accountRepository->getAllAccounts()->paginate())
-            ->withPaymentMethods($paymentMethodRepository->getPayoutMethods()->get()
+            ->withPaymentMethods($paymentMethodRepository->getPayoutMethods(false)->get()
                 ->pluck('name', 'uuid')
                 ->toArray());
     }
-    
+
     public function show(ShowAccountRequest $request, Account $account, PayoutRepository $payoutRepository)
     {
         return view('backend.accounts.payout.show')
             ->withAccount($account)
             ->withPayouts($payoutRepository->getAllPayouts($account)->paginate());
     }
-    
+
     /**
      * @param RequestPayoutRequest $request
      * @param PayoutRepository $payoutRepository
@@ -45,9 +45,9 @@ class PayoutAccountController extends Controller
     public function payout(RequestPayoutRequest $request ,PayoutRepository $payoutRepository, Account $account)
     {
         $payoutRepository->payout($account, $request->only(['amount', 'currency_id', 'name', 'account_number', 'paymentmethod_id']));
-    
+
         return redirect()->route('admin.account.payout.index')
             ->withFlashSuccess(__('alerts.backend.account.paid_out'));
     }
-    
+
 }
